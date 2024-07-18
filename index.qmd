@@ -1,0 +1,69 @@
+---
+title: "Introductory R for Social Sciences (A/Y 24/25 Term 1)"
+---
+
+## Welcome!
+
+This site serves as a repository for the slides and codes developed for the 'Introductory R for Social Sciences' workshop tailored for undergraduate students at [SMU](https://www.smu.edu.sg/). Comprising five sessions, this resource is designed for individuals with fundamental statistics knowledge who are venturing into R programming or coding for the first time.
+
+## Schedule
+
+*Slides will be progressively made available below.*
+
+```{=html5}
+<style type="text/css">
+    .table-schedule table {width: 100%;}
+    .table-schedule table th:nth-child(1),
+    .table-schedule table td:nth-child(1) {width: 10%;}
+    .table-schedule table td:nth-child(2) {width: 25%;}
+    .table-schedule table td:nth-child(3) {width: 25%;}
+    .table-schedule table td:nth-child(4) {width: 40%;}
+</style>
+```
+::: table-schedule
+| Session | Date and Time                       | Venue                  | Topic                                               |
+|---------|-------------------|-------------------|-------------------------|
+| 1       | Fri, 23 Aug 2024, 3.30 PM - 5.30 PM | YPHSL seminar room 2.1 | Introduction to R and RStudio                       |
+| 2       | Fri, 30 Aug 2024, 3.30 PM - 5.30 PM | YPHSL seminar room 2.1 | Data wrangling with tidyverse                       |
+| 3       | Fri, 6 Sep 2024, 3.30 PM - 5.30 PM  | YPHSL seminar room 2.1 | Data visualization and Descriptive Statistics       |
+| 4       | Fri, 13 Sep 2024, 3.30 PM - 5.30 PM | YPHSL seminar room 2.2 | Basic Inferential Tests                             |
+| 5       | Fri, 20 Sep 2024, 3.30 PM - 5.30 PM | YPHSL seminar room 2.1 | Correlation, Regression, and Introduction to Quarto |
+:::
+
+## Pre-workshop activities
+
+### R and RStudio
+
+**R** and **RStudio** are two different but complementary tools used in data analysis and statistical computing. Understanding the difference between them is crucial (especially for beginners).
+
+**R** is a programming language and software environment specifically designed for statistical computing and graphics. It's the core tool that actually processes your data and performs analyses.
+
+**RStudio** is an Integrated Development Environment (IDE) for R. Think of it as a user-friendly interface that makes it easier to write R code, manage projects, and visualize output. RStudio is not required to use R, but it significantly enhances the R programming experience!
+
+### Install R and R Studio
+
+**Install R:**
+
+1.  Go to <https://cran.rstudio.com/>
+
+2.  Choose your operating system (Windows, Mac, or Linux)
+
+3.  Download and install the latest version of R
+
+**Install RStudio:**
+
+1.  Visit <https://posit.co/download/rstudio-desktop/>
+
+2.  Scroll down to "Download RStudio Desktop"
+
+3.  Click "Download" and install the latest version of RStudio
+
+::: callout-important
+Always install R before installing RStudio, as RStudio requires R to function.
+:::
+
+### Get the workshop materials
+
+#### Easy way: Download from this GitHub Repo
+
+#### Sophisticated way: Clone from this GitHub Repo
