@@ -2,30 +2,590 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Introductory R for Social Sciences (A/Y 24/25 Term 1)",
+    "title": "Introductory R for Social Sciences (AY 24/25 Term 1)",
     "section": "",
     "text": "This site serves as a repository for the slides and codes developed for the ‘Introductory R for Social Sciences’ workshop tailored for undergraduate students at SMU. Comprising five sessions, this resource is designed for individuals with fundamental statistics knowledge who are venturing into R programming or coding for the first time."
   },
   {
     "objectID": "index.html#welcome",
     "href": "index.html#welcome",
-    "title": "Introductory R for Social Sciences (A/Y 24/25 Term 1)",
+    "title": "Introductory R for Social Sciences (AY 24/25 Term 1)",
     "section": "",
     "text": "This site serves as a repository for the slides and codes developed for the ‘Introductory R for Social Sciences’ workshop tailored for undergraduate students at SMU. Comprising five sessions, this resource is designed for individuals with fundamental statistics knowledge who are venturing into R programming or coding for the first time."
   },
   {
     "objectID": "index.html#schedule",
     "href": "index.html#schedule",
-    "title": "Introductory R for Social Sciences (A/Y 24/25 Term 1)",
+    "title": "Introductory R for Social Sciences (AY 24/25 Term 1)",
     "section": "Schedule",
-    "text": "Schedule\nSlides will be progressively made available below.\n\n\n\n\n\n\n\n\n\n\n\nSession\nDate and Time\nVenue\nTopic\n\n\n\n\n1\nFri, 23 Aug 2024, 3.30 PM - 5.30 PM\nYPHSL seminar room 2.1\nIntroduction to R and RStudio\n\n\n2\nFri, 30 Aug 2024, 3.30 PM - 5.30 PM\nYPHSL seminar room 2.1\nData wrangling with tidyverse\n\n\n3\nFri, 6 Sep 2024, 3.30 PM - 5.30 PM\nYPHSL seminar room 2.1\nData visualization and Descriptive Statistics\n\n\n4\nFri, 13 Sep 2024, 3.30 PM - 5.30 PM\nYPHSL seminar room 2.2\nBasic Inferential Tests\n\n\n5\nFri, 20 Sep 2024, 3.30 PM - 5.30 PM\nYPHSL seminar room 2.1\nCorrelation, Regression, and Introduction to Quarto"
+    "text": "Schedule\nSlides will be progressively made available below.\n\n\n\n\n\n\n\n\n\n\nSession\nDate and Time\nVenue\nTopic\n\n\n\n\n1\nFri, 23 Aug 2024, 3.30 - 5.30 PM\nYPHSL seminar room 2.1\nIntroduction to R and RStudio\n\n\n2\nFri, 30 Aug 2024, 3.30 - 5.30 PM\nYPHSL seminar room 2.1\nData wrangling with tidyverse\n\n\n3\nFri, 6 Sep 2024, 3.30 - 5.30 PM\nYPHSL seminar room 2.1\nData visualization and Descriptive Statistics\n\n\n4\nFri, 13 Sep 2024, 3.30 - 5.30 PM\nYPHSL seminar room 2.2\nBasic Inferential Tests\n\n\n5\nFri, 20 Sep 2024, 3.30 - 5.30 PM\nYPHSL seminar room 2.1\nRegression and Introduction to Quarto"
   },
   {
     "objectID": "index.html#pre-workshop-activities",
     "href": "index.html#pre-workshop-activities",
-    "title": "Introductory R for Social Sciences (A/Y 24/25 Term 1)",
+    "title": "Introductory R for Social Sciences (AY 24/25 Term 1)",
     "section": "Pre-workshop activities",
-    "text": "Pre-workshop activities\n\nR and RStudio\nR and RStudio are two different but complementary tools used in data analysis and statistical computing. Understanding the difference between them is crucial (especially for beginners).\nR is a programming language and software environment specifically designed for statistical computing and graphics. It’s the core tool that actually processes your data and performs analyses.\nRStudio is an Integrated Development Environment (IDE) for R. Think of it as a user-friendly interface that makes it easier to write R code, manage projects, and visualize output. RStudio is not required to use R, but it significantly enhances the R programming experience!\n\n\nInstall R and R Studio\nInstall R:\n\nGo to https://cran.rstudio.com/\nChoose your operating system (Windows, Mac, or Linux)\nDownload and install the latest version of R\n\nInstall RStudio:\n\nVisit https://posit.co/download/rstudio-desktop/\nScroll down to “Download RStudio Desktop”\nClick “Download” and install the latest version of RStudio\n\n\n\n\n\n\n\nImportant\n\n\n\nAlways install R before installing RStudio, as RStudio requires R to function.\n\n\n\n\nGet the workshop materials\n\nEasy way: Download from this GitHub Repo\n\n\nSophisticated way: Clone from this GitHub Repo"
+    "text": "Pre-workshop activities\n\nR and RStudio\nR and RStudio are two different but complementary tools used in data analysis and statistical computing. Understanding the difference between them is crucial (especially for beginners).\nR is a programming language and software environment specifically designed for statistical computing and graphics. It’s the core tool that actually processes your data and performs analyses.\nRStudio is an Integrated Development Environment (IDE) for R. Think of it as a user-friendly interface that makes it easier to write R code, manage projects, and visualize output. RStudio is not required to use R, but it significantly enhances the R programming experience!\n\n\n\n\n\n\nImportant\n\n\n\nAlways install R before installing RStudio, as RStudio requires R to function.\n\n\n\n\nStep 1: Install R\n\nGo to https://cran.rstudio.com/\nChoose your operating system (Windows, Mac, or Linux)\nDownload and install the latest version of R\n\n\n\nStep 2: Install RStudio\n\nVisit https://posit.co/download/rstudio-desktop/\nScroll down to “Download RStudio Desktop”\nClick “Download” and install the latest version of RStudio\n\n\n\nStep 3: Install the required packages\n\n\n\n\n\n\nNote\n\n\n\nPackages in R are collections of additional tools, functions, and datasets that extend R’s capabilities. Packages are created by contributors in the R community.\nThink of R as a smartphone, and packages as apps you download to add new features. Each package is designed to help with specific tasks or analyses, like creating graphs, analyzing particular types of data, or performing advanced statistical tests.\nPackages can save us time and leverage expert-created tools without having to write complex code from scratch. It’s very handy!\n\n\n\nOpen RStudio\nCopy the following code: install.packages(c( \"car\", \"rmarkdown\", \"huxtable\", \"gt\", \"gtsummary\", \"tidyverse\"))\nPaste it in the Console tab (see image below)\nPress Enter. Rstudio should proceed with installing the packages that we need."
+  },
+  {
+    "objectID": "05-stats-quarto.html#todays-outline",
+    "href": "05-stats-quarto.html#todays-outline",
+    "title": "Regression and Introduction to Quarto",
+    "section": "Today’s Outline",
+    "text": "Today’s Outline\n\nLinear Regression\nLogistic Regression\nCreate your manuscript with Quarto"
+  },
+  {
+    "objectID": "05-stats-quarto.html#load-our-data-for-today",
+    "href": "05-stats-quarto.html#load-our-data-for-today",
+    "title": "Regression and Introduction to Quarto",
+    "section": "Load our data for today!",
+    "text": "Load our data for today!\n\n# import tidyverse library\nlibrary(tidyverse)\n\n# read the CSV with Chile voting data\nchile_data &lt;- read_csv(\"data/chile_voting.csv\")\n\n# Display the first few rows and structure of the data\nhead(chile_data)\nstr(chile_data)"
+  },
+  {
+    "objectID": "05-stats-quarto.html#linear-regression",
+    "href": "05-stats-quarto.html#linear-regression",
+    "title": "Regression and Introduction to Quarto",
+    "section": "Linear Regression",
+    "text": "Linear Regression\nLinear regression is a statistical method used to model the relationship between a dependent variable (outcome) and one or more independent variables (predictors) by fitting a linear equation to the observed data. The math formula looks like this:\n\\[\nY = \\beta_0 + \\beta_1X + \\varepsilon\n\\]\n\n\\(Y\\) - the dependent variable\n\nmust be continuous\n\n\\(X\\) - the independent variable (if there are more than one, there will be \\(X_1\\) , \\(X_2\\) , and so on.\n\ncan be ordinal, nominal, or continuous\n\n\\(\\beta_0\\) - the y-intercept. Represents the expected value of independent variable \\(Y\\) when independent variable(s) \\(X\\) are set to zero.\n\\(\\beta_1\\) - the slope / coefficient for independent variable\n\\(\\varepsilon\\) - the error term. (In some examples you might see this omitted from the formula)."
+  },
+  {
+    "objectID": "05-stats-quarto.html#binary-logistic-regression",
+    "href": "05-stats-quarto.html#binary-logistic-regression",
+    "title": "Regression and Introduction to Quarto",
+    "section": "Binary Logistic Regression",
+    "text": "Binary Logistic Regression\nAlso known as simply logistic regression, it is used to model the relationship between a set of independent variables and a binary outcome. These independent variables can be either categorical or continuous.\nThe formula is:\n\\[\nlogit(P) = \\beta_0 + \\beta_1X_1 + \\beta_2X_2 + … + \\beta_nX_n\n\\]\nIt can also be written like below, in which the \\(logit(P)\\) part is expanded:\n\\[\nP = \\frac{1}{1 + e^{-(\\beta_0 + \\beta_1X)}}\n\\]"
+  },
+  {
+    "objectID": "05-stats-quarto.html#markdown-specifically-r-markdown",
+    "href": "05-stats-quarto.html#markdown-specifically-r-markdown",
+    "title": "Regression and Introduction to Quarto",
+    "section": "Markdown (Specifically, R Markdown)",
+    "text": "Markdown (Specifically, R Markdown)\n\nMarkdown is a lightweight markup language that provides a simple and readable way to write formatted text without using complex HTML or LaTeX. It is designed to make authoring content easy for everyone!\n\nMarkdown files can be converted into HTML or other formats.\nGeneric Markdown file will have .md extension.\n\nR Markdown is an extension of Markdown that incorporates R code chunks and allows you to create dynamic documents that integrate text, code, and output (such as tables and plots).\n\nRMarkdown file will have .Rmd extension."
+  },
+  {
+    "objectID": "05-stats-quarto.html#quarto",
+    "href": "05-stats-quarto.html#quarto",
+    "title": "Regression and Introduction to Quarto",
+    "section": "Quarto",
+    "text": "Quarto\n\nQuarto is a multi-language, next-generation version of R Markdown from Posit and includes dozens of new features and capabilities while at the same being able to render most existing Rmd files without modification.\n\n\nIllustration by Allison Horst (www.allisonhorst.com)"
+  },
+  {
+    "objectID": "05-stats-quarto.html#r-scripts-vs-quarto",
+    "href": "05-stats-quarto.html#r-scripts-vs-quarto",
+    "title": "Regression and Introduction to Quarto",
+    "section": "R Scripts vs Quarto",
+    "text": "R Scripts vs Quarto\n\n\nR Scripts\n\nGreat for quick debugging, experiment\nPreferred format if you are archiving your code to GitHub or data repository\nMore suitable for “production” tasks e.g. automating your data cleaning and processing, custom functions, etc.\n\n\nQuarto\n\nGreat for report and presentation to showcase your research insights/process as it integrates code, narrative text, visualizations, and results.\nVery handy when you need your report in multiple format, e.g. in Word and PPT."
+  },
+  {
+    "objectID": "05-stats-quarto.html#lets-create-our-first-quarto-document",
+    "href": "05-stats-quarto.html#lets-create-our-first-quarto-document",
+    "title": "Regression and Introduction to Quarto",
+    "section": "Let’s create our first Quarto document!",
+    "text": "Let’s create our first Quarto document!\n\nGo to File &gt; New File &gt; Quarto Document\nPut any title you like, and put your name as the author\nCheck HTML as the end result for now\nClick on Create!\nOptional: collapse the console and environment tab (bottom left and top right) to make it easier to view the quarto document and the output.\nQuarto Tour + Hands On! (Open this cheatsheet on another tab if you’d like!). We will explore how to:\n\nAdd narrative text\nAdd code chunks\nAdd math formulas with LaTeX\nAdd citations (you need to have Zotero installed)"
+  },
+  {
+    "objectID": "05-stats-quarto.html#rendering-quarto-to-html-word-and-pdf",
+    "href": "05-stats-quarto.html#rendering-quarto-to-html-word-and-pdf",
+    "title": "Regression and Introduction to Quarto",
+    "section": "Rendering Quarto to HTML, Word, and PDF",
+    "text": "Rendering Quarto to HTML, Word, and PDF\nYou can change the final result of rendering in the YAML section of your document.\n\nRendering to HTML is the default option.\n\nYou can also render as presentation (fun fact: my slides is made from Quarto!)\n\nRendering to Word: You have to have MS Word installed in your laptop\nRendering to PDF: If you encounter an error when converting your result to PDF, the faster (and easier) alternative is to render your doc to Word, and save to PDF from there."
+  },
+  {
+    "objectID": "05-stats-quarto.html#r-best-practices",
+    "href": "05-stats-quarto.html#r-best-practices",
+    "title": "Regression and Introduction to Quarto",
+    "section": "R Best Practices",
+    "text": "R Best Practices\n\nUse &lt;- for assigning values to objects.\n\nOnly use = when passing values to a function parameter.\n\nDo not alter your raw data; save your wrangled/cleaned data into a new file and keep it separate from the raw data.\nMake use of R projects to organize your data and make it easier to send over to your collaborators.\n\nHaving said that, when it comes to coding project, the best way to collaborate is using GitHub or similar platforms.\n\nWhenever possible and makes sense for your project, follow the common convention when naming your objects, scripts, and functions. One guide that you can follow is Hadley Wickham’s tidyverse style guide."
+  },
+  {
+    "objectID": "05-stats-quarto.html#if-youd-like-to-continue-your-learning",
+    "href": "05-stats-quarto.html#if-youd-like-to-continue-your-learning",
+    "title": "Regression and Introduction to Quarto",
+    "section": "If you’d like to continue your learning:",
+    "text": "If you’d like to continue your learning:\nThese are the resources that I would recommend:\n\nR for Data Science by Hadley Wickham (free) - one of the most popular free R resource (I’ve used this myself!)\nStatistical Inference via Data Science: A ModernDive into R and the Tidyverse by Chester Ismay and Albert Y. Kim (free, print book available for purchase) - Very gentle introduction to tidyverse, regression, and statistical inference.\nA Guide on Data Analysis by Mike Nguyen (also free) - covers different kinds of regression and quasi-experimental designs such as Regression Discontinuity Design (RDD), among others.\nBig Book of R by Oscar Baruffa (also vv free) - Aggregation of many free resources on R in various topics (e.g. archaeology, people analytics, sports analytics, etc.)\n\n\n\n\n\nIntroductory R for Social Science"
+  },
+  {
+    "objectID": "03-visualization.html#todays-outline",
+    "href": "03-visualization.html#todays-outline",
+    "title": "Data Visualization and Descriptive Stats",
+    "section": "Today’s Outline",
+    "text": "Today’s Outline\n\nDescriptive Statistics\nData Visualization in ggplot using Chile voting data, including guidelines on how to choose the appropriate visualization."
+  },
+  {
+    "objectID": "03-visualization.html#checklist-when-you-start-rstudio",
+    "href": "03-visualization.html#checklist-when-you-start-rstudio",
+    "title": "Data Visualization and Descriptive Stats",
+    "section": "Checklist when you start RStudio",
+    "text": "Checklist when you start RStudio\n\nLoad the project we created last session and open the R script file.\nMake sure that Environment panel is empty (click on broom icon to clean it up)\nClear the Console and Plots too.\nRe-run the library(tidyverse) and read_csv portion in the previous session"
+  },
+  {
+    "objectID": "03-visualization.html#refresher-loading-from-csv-into-a-dataframe",
+    "href": "03-visualization.html#refresher-loading-from-csv-into-a-dataframe",
+    "title": "Data Visualization and Descriptive Stats",
+    "section": "Refresher: Loading from CSV into a dataframe",
+    "text": "Refresher: Loading from CSV into a dataframe\nUse read_csv from readr package (part of tidyverse) to load our data into a dataframe\n\n# import tidyverse library\nlibrary(tidyverse)\n\n# read the CSV with Chile voting data\nchile_data &lt;- read_csv(\"data/chile_voting.csv\")\n\n# peek at the data, pay attention to the data types!\nglimpse(chile_data)"
+  },
+  {
+    "objectID": "03-visualization.html#introduction-to-descriptive-statistics",
+    "href": "03-visualization.html#introduction-to-descriptive-statistics",
+    "title": "Data Visualization and Descriptive Stats",
+    "section": "Introduction to Descriptive Statistics",
+    "text": "Introduction to Descriptive Statistics\nDescriptive statistics provide summaries about the sample and observations made. These summaries can be quantitative (summary statistics) or visual (graphs). Let’s explore some basic R functions for descriptive statistics using our Chile voting data."
+  },
+  {
+    "objectID": "03-visualization.html#basic-r-functions-for-descriptive-statistics",
+    "href": "03-visualization.html#basic-r-functions-for-descriptive-statistics",
+    "title": "Data Visualization and Descriptive Stats",
+    "section": "Basic R Functions for Descriptive Statistics",
+    "text": "Basic R Functions for Descriptive Statistics\nWe’ll cover the following functions:\n\nmean(): arithmetic average\nmedian(): middle value\nsd(): standard deviation\nvar(): variance\nrange(): range of values\nIQR(): interquartile range\nsummary(): provides a summary of descriptive statistics\nMode() function from DescTools package: the most frequently occuring value\n\nNote: R doesn’t have built-in functions for mode, so we need DescTools package to get this function!"
+  },
+  {
+    "objectID": "03-visualization.html#exploring-income-distribution",
+    "href": "03-visualization.html#exploring-income-distribution",
+    "title": "Data Visualization and Descriptive Stats",
+    "section": "Exploring Income Distribution",
+    "text": "Exploring Income Distribution\nLet’s start by examining the income variable in our dataset.\n\nlibrary(DescTools)\n\n# Basic statistics\nmean_income &lt;- mean(chile_data$income, na.rm = TRUE)\nmedian_income &lt;- median(chile_data$income, na.rm = TRUE)\nsd_income &lt;- sd(chile_data$income, na.rm = TRUE)\nrange_income &lt;- range(chile_data$income, na.rm = TRUE)\niqr_income &lt;- IQR(chile_data$income, na.rm = TRUE)\nmode_income &lt;- DescTools::Mode(chile_data$income, na.rm = TRUE)\n\n# Print results\ncat(\"Mean income:\", mean_income, \"\\n\")\n\nMean income: 33875.86 \n\ncat(\"Median income:\", median_income, \"\\n\")\n\nMedian income: 15000 \n\ncat(\"Standard deviation of income:\", sd_income, \"\\n\")\n\nStandard deviation of income: 39502.87 \n\ncat(\"Range of income:\", range_income[1], \"to\", range_income[2], \"\\n\")\n\nRange of income: 2500 to 2e+05 \n\ncat(\"Interquartile range of income:\", iqr_income, \"\\n\")\n\nInterquartile range of income: 27500 \n\ncat(\"Most frequently occuring income:\", mode_income, \"\\n\")\n\nMost frequently occuring income: 15000 \n\n# Summary statistics\nsummary(chile_data$income)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's \n   2500    7500   15000   33876   35000  200000      98"
+  },
+  {
+    "objectID": "03-visualization.html#interpreting-income-statistics",
+    "href": "03-visualization.html#interpreting-income-statistics",
+    "title": "Data Visualization and Descriptive Stats",
+    "section": "Interpreting Income Statistics",
+    "text": "Interpreting Income Statistics\nSome possible interpretation:\n\nThe mean income is higher than the median, suggesting a right-skewed distribution.\nThe standard deviation indicates the spread of incomes around the mean.\nThe range shows the full spread of incomes from lowest to highest.\nThe IQR represents the middle 50% of incomes, less affected by outliers than the range.\n\nIt’s much easier if we have a graph to visualize these interpretations!"
+  },
+  {
+    "objectID": "03-visualization.html#visualizing-data-with-ggplot",
+    "href": "03-visualization.html#visualizing-data-with-ggplot",
+    "title": "Data Visualization and Descriptive Stats",
+    "section": "Visualizing data with ggplot",
+    "text": "Visualizing data with ggplot\n\nggplot is plotting package that is included inside tidyverse package\nworks best with data in the long format, i.e., a column for all the dimensions/measures and another column for the value for each dimension/measure.\n\n\nggplot documentation link"
+  },
+  {
+    "objectID": "03-visualization.html#anatomy-of-ggplot-code",
+    "href": "03-visualization.html#anatomy-of-ggplot-code",
+    "title": "Data Visualization and Descriptive Stats",
+    "section": "Anatomy of ggplot code",
+    "text": "Anatomy of ggplot code\nCharts built with ggplot must include the following:\n1chile_data |&gt;\n2    ggplot(aes(x = age, y = income)) +\n3    geom_point()\n\n1\n\nData - the dataframe/tibble to visualize.\n\n2\n\nAesthetic mappings (aes) - describes which variables are mapped to the x, y axes, alpha (transparency) and other visual aesthetics.\n\n3\n\nGeometric objects (geom) - describes how values are rendered; as bars, scatterplot, lines, etc."
+  },
+  {
+    "objectID": "03-visualization.html#going-back-to-our-data",
+    "href": "03-visualization.html#going-back-to-our-data",
+    "title": "Data Visualization and Descriptive Stats",
+    "section": "Going back to our data",
+    "text": "Going back to our data\nOur PI has asked us to generate visualizations to address these questions about the Chile voting data. The PI also has asked us to write down our interpretation of the visualizations.\nUnivariate visualizations:\n\nWhat’s the distribution of respondents for each region?\nWhat’s the distribution of age of our respondents?\n\nBivariate/multivariate visualizations:\n\nCompare the distribution of income across different education levels\nVisualize and explore the relationship between age and income. Don’t forget to label the graph!\nAre there any outliers in the statusquo scores?\nExplore the distribution of votes (vote) across different regions (region).\n\n\n\n\n\n\n\nTip\n\n\nA strategy I’d like to recommend: briefly read over the ggplot2 documentation and have them open on a separate tab. Figure out the type of variables you need to visualize (discrete or continuous) to quickly identify which visualization would make sense."
+  },
+  {
+    "objectID": "03-visualization.html#task-1-distribution-of-regions",
+    "href": "03-visualization.html#task-1-distribution-of-regions",
+    "title": "Data Visualization and Descriptive Stats",
+    "section": "Task #1: distribution of regions",
+    "text": "Task #1: distribution of regions\nWhat’s the distribution of respondents for each region?\n\n# simple bar chart \nchile_data |&gt; \n    ggplot(aes(x = region)) +\n    geom_bar(fill = \"skyblue\") +\n    labs(title = \"Distribution of Respondents by Region\",\n         x = \"Region\",\n         y = \"Number of Respondents\")"
+  },
+  {
+    "objectID": "03-visualization.html#task-2-distribution-of-respondent-ages",
+    "href": "03-visualization.html#task-2-distribution-of-respondent-ages",
+    "title": "Data Visualization and Descriptive Stats",
+    "section": "Task #2: distribution of respondent ages",
+    "text": "Task #2: distribution of respondent ages\nWhat’s the distribution of age of our respondents?\n\n# histogram\nchile_data |&gt; \n    ggplot(aes(x = age)) +\n    geom_histogram(color = \"black\", fill = \"lightgreen\", binwidth = 5) +\n    labs(title = \"Distribution of Respondent Ages\",\n         x = \"Age\",\n         y = \"Count\")"
+  },
+  {
+    "objectID": "03-visualization.html#task-3-income-across-education-levels",
+    "href": "03-visualization.html#task-3-income-across-education-levels",
+    "title": "Data Visualization and Descriptive Stats",
+    "section": "Task #3: income across education levels",
+    "text": "Task #3: income across education levels\nCompare the distribution of income across different education levels.\n\n# boxplot layered with jittered points\nchile_data |&gt; \n    ggplot(aes(x = education, y = income)) +\n    geom_boxplot() + \n    geom_jitter(alpha = 0.2, width = 0.2) +\n    labs(title = \"Distribution of Income by Education Level\",\n         x = \"Education Level\",\n         y = \"Income (Pesos)\")"
+  },
+  {
+    "objectID": "03-visualization.html#task-4-relationship-between-age-and-income",
+    "href": "03-visualization.html#task-4-relationship-between-age-and-income",
+    "title": "Data Visualization and Descriptive Stats",
+    "section": "Task #4: relationship between age and income",
+    "text": "Task #4: relationship between age and income\nVisualize and explore the relationship between age and income. Do you see any trend or differences between sex? Don’t forget to label the graph!\n\n# scatterplot with trendline\nchile_data |&gt; \n    ggplot(aes(x = age, y = income, \n               color = sex, \n               shape = sex)) +\n    geom_jitter() +\n    geom_smooth(method = \"lm\") + \n    labs(x = \"Age\", \n         y = \"Income (Pesos)\",\n         title = \"Relationship between Age and Income\",\n         subtitle = \"Comparison between sexes\",\n         caption = \"Data from 1988 Chilean national survey\")"
+  },
+  {
+    "objectID": "03-visualization.html#task-5-outliers-in-statusquo-score",
+    "href": "03-visualization.html#task-5-outliers-in-statusquo-score",
+    "title": "Data Visualization and Descriptive Stats",
+    "section": "Task #5: Outliers in statusquo score",
+    "text": "Task #5: Outliers in statusquo score\nAre there any outliers in the statusquo scores?\n\nchile_data |&gt; \n    ggplot(aes(y = statusquo)) + \n    geom_boxplot() +\n    labs(title = \"Distribution of Status Quo Scores\",\n         y = \"Status Quo Score\")"
+  },
+  {
+    "objectID": "03-visualization.html#task-6-distribution-of-votes-across-regions",
+    "href": "03-visualization.html#task-6-distribution-of-votes-across-regions",
+    "title": "Data Visualization and Descriptive Stats",
+    "section": "Task #6: Distribution of votes across regions",
+    "text": "Task #6: Distribution of votes across regions\nExplore the distribution of votes (vote) across different regions (region).\n\n# Prepare data\nvote_distribution &lt;- chile_data |&gt;\n    group_by(region, vote) |&gt;\n    summarise(count = n(), .groups = 'drop') |&gt;\n    mutate(percentage = count / sum(count) * 100)\n\n# Create stacked bar chart\nggplot(vote_distribution, aes(x = region, y = percentage, fill = vote)) +\n    geom_bar(stat = \"identity\") +\n    labs(title = \"Distribution of Votes Across Regions\",\n         x = \"Region\",\n         y = \"Percentage\",\n         fill = \"Vote\") +\n    theme(axis.text.x = element_text(angle = 45, hjust = 1))"
+  },
+  {
+    "objectID": "03-visualization.html#group-exercises-solo-attempts-ok",
+    "href": "03-visualization.html#group-exercises-solo-attempts-ok",
+    "title": "Data Visualization and Descriptive Stats",
+    "section": "Group Exercises (solo attempts ok)",
+    "text": "Group Exercises (solo attempts ok)\n\nExplore the relationship between age and statusquo. Is there a trend or relationship there and does the trend differ between different education levels?\nVisualize the distribution of income across different sex with a violin plot.\n\nMake sure to give the graph proper title and labels on both axis!"
+  },
+  {
+    "objectID": "03-visualization.html#strategy-for-data-visualization-with-ggplot",
+    "href": "03-visualization.html#strategy-for-data-visualization-with-ggplot",
+    "title": "Data Visualization and Descriptive Stats",
+    "section": "Strategy for data visualization with ggplot",
+    "text": "Strategy for data visualization with ggplot\n\nHave the ggplot documentation/cheatsheet open\nDecide on how many variables are involved. Is it just one? two? more than two?\nDetermine whether the variables are categorical or continuous. If you have more than one, are they both categorical? one categorical + one continuous?\nRefer to the documentation to see which type of visualization would make sense for your variables."
+  },
+  {
+    "objectID": "01-intro.html#preamble",
+    "href": "01-intro.html#preamble",
+    "title": "Introduction to R and RStudio",
+    "section": "Preamble",
+    "text": "Preamble\n\nAbout me:\n\nLibrarian, Research & Data Services team, SMU Libraries.\nBachelor of IT, MSc in Info Studies.\nHave been with SMU since the pandemic era (2021).\n\nAbout this workshop:\n\nLive-coding format; code along with me!\nGoal of workshop: to give you enough fundamentals (at least to the point that ChatGPT can’t bluff you so easily) and confidence to explore R on your own.\nDon’t be afraid to ask for help! We are all here to learn\nComes with quizzes!"
+  },
+  {
+    "objectID": "01-intro.html#what-is-r-what-is-r-studio",
+    "href": "01-intro.html#what-is-r-what-is-r-studio",
+    "title": "Introduction to R and RStudio",
+    "section": "What is R? What is R Studio?",
+    "text": "What is R? What is R Studio?\nR: The programming language and the software that interprets the R script\nRStudio: An IDE (Integrated Development Environment) that we use to interact more easily with R language and scripts.\n\nYou will need to install both for this workshop. Go to https://posit.co/download/rstudio-desktop to download and install both if you have not done so."
+  },
+  {
+    "objectID": "01-intro.html#reasons-to-learn-r",
+    "href": "01-intro.html#reasons-to-learn-r",
+    "title": "Introduction to R and RStudio",
+    "section": "7 Reasons to learn R",
+    "text": "7 Reasons to learn R\n\nR is free, open-source, and cross-platform.\nR does not involve lots of pointing and clicking - you don’t have to remember a complicated sequence of clicks to re-run your analysis.\nR code is great for reproducibility - when someone else (including your future self) can obtain the same results from the same dataset and same analysis.\nR is interdisciplinary and extensible\nR is scalable and works on data of all shapes and sizes (though admittedly, it is not best at some scenarios and other languages such as python would be preferred.)\nR produces high-quality and publication-ready graphics\nR has a large and welcoming community - which means there are lots of help available!"
+  },
+  {
+    "objectID": "01-intro.html#a-tour-of-rstudio",
+    "href": "01-intro.html#a-tour-of-rstudio",
+    "title": "Introduction to R and RStudio",
+    "section": "A Tour of RStudio",
+    "text": "A Tour of RStudio\n\nR Studio layout"
+  },
+  {
+    "objectID": "01-intro.html#working-directory",
+    "href": "01-intro.html#working-directory",
+    "title": "Introduction to R and RStudio",
+    "section": "Working Directory",
+    "text": "Working Directory\n\nWorking directory -&gt; where R will look for files (scripts, data, etc).\n\nBy default, it will be on your Desktop\nBest practice is to use R Project to organize your files and data into projects.\nWhen using R Project, the working directory = project folder."
+  },
+  {
+    "objectID": "01-intro.html#creating-the-project-for-this-workshop",
+    "href": "01-intro.html#creating-the-project-for-this-workshop",
+    "title": "Introduction to R and RStudio",
+    "section": "Creating the project for this workshop",
+    "text": "Creating the project for this workshop\n\nGo to File &gt; New project. Choose New directory, then New project\nEnter intro-r-socsci as the name for this new folder (or “directory”) and choose where you want to put this folder, e.g. Desktop or Documents if you are on Windows. This will be your working directory for the rest of the workshop!\n\n\n\nNext, let’s create 3 folders inside our working directory:\n\ndata - we will save our raw data here. It’s best practice to keep the data here untouched.\ndata-output - if we need to modify raw data, store the modified version here.\nfig-output - we will save all the graphics we created here!\n\n\n\n\n\n\n\n\nWarning\n\n\nDon’t put your R projects inside your OneDrive folder as that may cause issues sometimes."
+  },
+  {
+    "objectID": "01-intro.html#r-objects-and-values",
+    "href": "01-intro.html#r-objects-and-values",
+    "title": "Introduction to R and RStudio",
+    "section": "R Objects and Values",
+    "text": "R Objects and Values\nIn this line of code:\n\nname &lt;- \"Anya Forger\"\n\n\n\"Anya Forger\" is a value. This can be either a character, numeric, or boolean data type. (more on this soon)\nname is the object where we store this value. This is so that we can keep this value to be used later.\n&lt;- is the assignment operator to assign the value to the object.\n\nYou can also use =, but generally in R, &lt;- is the convention.\nKeyboard shortcut: Alt + - in Windows (Option + - in Mac)"
+  },
+  {
+    "objectID": "01-intro.html#refresher-quantitative-data-types",
+    "href": "01-intro.html#refresher-quantitative-data-types",
+    "title": "Introduction to R and RStudio",
+    "section": "Refresher: Quantitative Data Types",
+    "text": "Refresher: Quantitative Data Types\n\nNon-Continuous Data\n\nNominal/Categorical: Non-ordered, non-numerical data, used to represent qualitative attribute.\n\nExample: nationality, neighborhood, employment status\n\nOrdinal: Ordered non-numerical data.\n\nExample: Nutri-grade ratings, frequency of exercise (daily, weekly, bi-weekly)\n\nDiscrete: Numerical data that can only take specific value (usually integers)\n\nExample: Shoe size, clothing size\n\nBinary: Nominal data with only two possible outcome\n\nExample: pass/fail, yes/no, survive/not survive"
+  },
+  {
+    "objectID": "01-intro.html#data-types-in-r",
+    "href": "01-intro.html#data-types-in-r",
+    "title": "Introduction to R and RStudio",
+    "section": "Data Types in R",
+    "text": "Data Types in R\nThe four basic data types are characters, numeric, boolean, and integer.\n\nchara_type &lt;- \"Hello World\" # Character\nnum_type &lt;- 123.45 # Numeric (also sometimes called Double)\nbool_type &lt;- TRUE # Boolean/Logical (true/false)\nint_type &lt;- 25L # Integer (whole numbers)"
+  },
+  {
+    "objectID": "01-intro.html#checking-data-type-of-a-variable",
+    "href": "01-intro.html#checking-data-type-of-a-variable",
+    "title": "Introduction to R and RStudio",
+    "section": "Checking data type of a variable",
+    "text": "Checking data type of a variable\nYou can use str or typeof to check the data type of an R object.\n\ntypeof(chara_type)\n\n[1] \"character\"\n\n\n\nstr(bool_type) \n\n logi TRUE"
+  },
+  {
+    "objectID": "01-intro.html#arithmetic-operations-in-r",
+    "href": "01-intro.html#arithmetic-operations-in-r",
+    "title": "Introduction to R and RStudio",
+    "section": "Arithmetic operations in R",
+    "text": "Arithmetic operations in R\nYou can do arithmetic operations in R, like so:\n\n100 / 3\n\n[1] 33.33333\n\n\n\n11 ** 2\n\n[1] 121"
+  },
+  {
+    "objectID": "01-intro.html#boolean-operations-in-r",
+    "href": "01-intro.html#boolean-operations-in-r",
+    "title": "Introduction to R and RStudio",
+    "section": "Boolean operations in R",
+    "text": "Boolean operations in R\nBoolean operations in R (will be handy for later):\nAND operations (all sides needs to be TRUE for the result to be TRUE)\n\nTRUE & FALSE \n\n[1] FALSE\n\n\nOR operations (only one side needs to be TRUE for the result to be TRUE)\n\nTRUE | FALSE\n\n[1] TRUE\n\n\nNOT operations, which is basically flipping TRUE to FALSE and vice versa\n\n!TRUE\n\n[1] FALSE"
+  },
+  {
+    "objectID": "01-intro.html#functions-in-r",
+    "href": "01-intro.html#functions-in-r",
+    "title": "Introduction to R and RStudio",
+    "section": "Functions in R",
+    "text": "Functions in R\nFunctions is a block of reusable code designed to do specific task. Function take inputs (a.k.a arguments or parameters), do their thing, and then return a result. (this result can either be printed out, or saved into an object!)\n\nround(123.456, digits = 2)\n\n[1] 123.46\n\n\nSaving the result to an object:\n\nrounded_num = round(123.456, digits = 2)\nprint(rounded_num)\n\n[1] 123.46\n\n\nin the example above, round is the function. 123.456 and digits = 2 are the arguments/parameters."
+  },
+  {
+    "objectID": "01-intro.html#how-do-i-find-out-more-about-a-particular-function",
+    "href": "01-intro.html#how-do-i-find-out-more-about-a-particular-function",
+    "title": "Introduction to R and RStudio",
+    "section": "How do I find out more about a particular function?",
+    "text": "How do I find out more about a particular function?\nYou can call the help page / vignette in R by prepending ? to the function name.\nE.g. if you want to find out more about the round function, you can run ?round in your R console (bottom left panel)"
+  },
+  {
+    "objectID": "01-intro.html#data-structures-in-r-vectors",
+    "href": "01-intro.html#data-structures-in-r-vectors",
+    "title": "Introduction to R and RStudio",
+    "section": "Data Structures in R: Vectors",
+    "text": "Data Structures in R: Vectors\n\nBasic objects in R can only contain one value. But quite often you may want to group a bunch of values together and save it in a single object.\nA vector is a data structure that can do this. It is the most common and basic data structure in R. (pretty much the workhorse of R!)\n\n\nt1_courses &lt;- c(\"IDIS110\", \"IDIS100\", \"PLE100\", \"PSYC111\", \"PSYC103\")\nstr(t1_courses)\n\n chr [1:5] \"IDIS110\" \"IDIS100\" \"PLE100\" \"PSYC111\" \"PSYC103\"\n\nprint(t1_courses)\n\n[1] \"IDIS110\" \"IDIS100\" \"PLE100\"  \"PSYC111\" \"PSYC103\"\n\n\nExample of numeric vector:\n\nt1_grades &lt;- c(50, 70, 80, 95, 77)\nstr(t1_grades)\n\n num [1:5] 50 70 80 95 77"
+  },
+  {
+    "objectID": "01-intro.html#data-structures-in-r-factors",
+    "href": "01-intro.html#data-structures-in-r-factors",
+    "title": "Introduction to R and RStudio",
+    "section": "Data Structures in R: Factors",
+    "text": "Data Structures in R: Factors\n\nSpecial data structure in R to deal with categorical data.\nCan be ordered (ordinal) or unordered (nominal).\nMay look like a normal vector at first glance, so use str() to check.\n\nUnordered (Nominal):\n\nunordered_factor &lt;- factor(c(\"SOA\", \"SOSS\", \"SCIS\", \"CIS\", \"YPHSOL\")) \nstr(unordered_factor)\n\n Factor w/ 5 levels \"CIS\",\"SCIS\",\"SOA\",..: 3 4 2 1 5\n\n\nOrdered (Ordinal):\n\nordered_factor &lt;- factor(c(\"Agree\", \"Disagree\", \"Neutral\", \"Disagree\"), \n                         ordered = TRUE, \n                         levels = c(\"Disagree\", \"Neutral\", \"Agree\")) \nstr(ordered_factor)\n\n Ord.factor w/ 3 levels \"Disagree\"&lt;\"Neutral\"&lt;..: 3 1 2 1"
+  },
+  {
+    "objectID": "01-intro.html#data-structures-in-r-dataframe",
+    "href": "01-intro.html#data-structures-in-r-dataframe",
+    "title": "Introduction to R and RStudio",
+    "section": "Data Structures in R: Dataframe",
+    "text": "Data Structures in R: Dataframe\n\nDe facto data structure for tabular data in R, and what we use for data processing, plotting, and statistics.\nSimilar to spreadsheets!\nYou can create it by hand like so:\n\n\nt1_data &lt;- data.frame(\n  course_code = c(\"IDIS110\", \"IDIS100\", \"PLE100\", \"PSYC111\", \"PSYC103\"),\n  grade = c(50, 70, 80, 95, 77)\n)\nprint(t1_data)\n\n  course_code grade\n1     IDIS110    50\n2     IDIS100    70\n3      PLE100    80\n4     PSYC111    95\n5     PSYC103    77"
+  },
+  {
+    "objectID": "01-intro.html#interlude-packages-in-r",
+    "href": "01-intro.html#interlude-packages-in-r",
+    "title": "Introduction to R and RStudio",
+    "section": "[Interlude] Packages in R",
+    "text": "[Interlude] Packages in R\n\nPackages are a collections of R functions, datasets, etc. Packages extend the functionality of R.\n\n(Closest analogy I can think of is that they’re equivalent of browser add-ons, in a way)\n\nPopular packages: tidyverse, caret, shiny, etc.\nInstallation (you only need to do this once): install.packages(\"package name\")\nLoading packages (you need to run this everytime you restart RStudio): library(package name)"
+  },
+  {
+    "objectID": "01-intro.html#loading-data-from-csv",
+    "href": "01-intro.html#loading-data-from-csv",
+    "title": "Introduction to R and RStudio",
+    "section": "Loading data from CSV",
+    "text": "Loading data from CSV\n\nMake sure to download and save chile_voting.csv from this URL into your data folder.\nCheck out the data dictionary/explanatory notes to learn more about the data, including the column names, data type inside each columns, etc in the course website.\nWe need to use readr package, which is part of tidyverse package. So please install tidyverse first if you have not done so."
+  },
+  {
+    "objectID": "01-intro.html#more-ways-to-peek-at-the-data",
+    "href": "01-intro.html#more-ways-to-peek-at-the-data",
+    "title": "Introduction to R and RStudio",
+    "section": "More ways to “peek” at the data",
+    "text": "More ways to “peek” at the data\n\n1dim(chile_data)\n2names(chile_data)\n3str(chile_data)\n4summary(chile_data)\n5head(chile_data, n=5)\n6tail(chile_data, n=5)\n\n\n1\n\nreturn a vector of number of rows and columns\n\n2\n\ninspect columns\n\n3\n\ninspect structure\n\n4\n\nprint the summary stats of the entire dataframe\n\n5\n\nview the first 5 rows\n\n6\n\nview the last 5 rows"
+  },
+  {
+    "objectID": "01-intro.html#basic-dataframe-manipulations-retrieving-values",
+    "href": "01-intro.html#basic-dataframe-manipulations-retrieving-values",
+    "title": "Introduction to R and RStudio",
+    "section": "Basic dataframe manipulations: Retrieving values",
+    "text": "Basic dataframe manipulations: Retrieving values\nSome basic dataframe functions before we move on to data wrangling next week:\n\n1chile_data[\"income\"]\n2chile_data$income\n3chile_data[3]\n4chile_data[1, 4]\n5chile_data[3, ]\n\n\n1\n\nretrieve column by name (returns as tibble/dataframe)\n\n2\n\nanother way to retrieve column by name (returns as vector)\n\n3\n\nget an entire column by index\n\n4\n\nget a cell at this row, column coord\n\n5\n\nget an entire row"
+  },
+  {
+    "objectID": "02-tidyerse.html#todays-outline",
+    "href": "02-tidyerse.html#todays-outline",
+    "title": "Data Wrangling with Tidyverse",
+    "section": "Today’s Outline",
+    "text": "Today’s Outline\n\nLoading our data into RStudio environment\nData wrangling with dplyr and tidyr (part of the tidyverse package)"
+  },
+  {
+    "objectID": "02-tidyerse.html#checklist-when-you-start-rstudio",
+    "href": "02-tidyerse.html#checklist-when-you-start-rstudio",
+    "title": "Data Wrangling with Tidyverse",
+    "section": "Checklist when you start RStudio",
+    "text": "Checklist when you start RStudio\n\nLoad the project we created last session and open the R script file.\nMake sure that Environment panel is empty (click on broom icon to clean it up)\nClear the Console and Plots too.\nRe-run the library(tidyverse) and read_csv portion in the previous session"
+  },
+  {
+    "objectID": "02-tidyerse.html#refresher-loading-from-csv-into-a-dataframe",
+    "href": "02-tidyerse.html#refresher-loading-from-csv-into-a-dataframe",
+    "title": "Data Wrangling with Tidyverse",
+    "section": "Refresher: Loading from CSV into a dataframe",
+    "text": "Refresher: Loading from CSV into a dataframe\nUse read_csv from readr package (part of tidyverse) to load our data into a dataframe\n\n# import tidyverse library\nlibrary(tidyverse)\n\n# read the CSV and save into a dataframe called chile_data\nchile_data &lt;- read_csv(\"data/chile_voting.csv\")\n\n# \"peek at the data, pay attention to the data types!\nglimpse(chile_data)"
+  },
+  {
+    "objectID": "02-tidyerse.html#cleaning-data-for-analysis",
+    "href": "02-tidyerse.html#cleaning-data-for-analysis",
+    "title": "Data Wrangling with Tidyverse",
+    "section": "Cleaning data for analysis",
+    "text": "Cleaning data for analysis\n\n\nWhy do it in R? Because it’s much efficient to do so in R, especially if your data is large (e.g. millions of rows, hundreds of columns) and you have repetitive clean up tasks.\nIncorrect or inconsistent data can lead to false conclusions, so it’s important to clean and prep it correctly.\nHaving a clear understanding of the desired data shape is essential as real data often differs from what you imagine! Refer to codebook, actual questionnaire, appendix for guidance.\nData cleaning techniques differ based on the problems, data type, and the research questions you are trying to answer. Various methods are available, each with its own trade-offs."
+  },
+  {
+    "objectID": "02-tidyerse.html#about-dplyr-and-tidyr",
+    "href": "02-tidyerse.html#about-dplyr-and-tidyr",
+    "title": "Data Wrangling with Tidyverse",
+    "section": "About dplyr and tidyr",
+    "text": "About dplyr and tidyr\n\nPackages from tidyverse. (click here to go to the tidyverse homepage)\nPosit have created cheatsheets here! (you can have this open in another tab for reference for this session!)\n\ndplyr cheatsheet | pdf version (I personally prefer this PDF version since it’s more visual)\ntidyr cheatsheet | pdf version"
+  },
+  {
+    "objectID": "02-tidyerse.html#about-the-data",
+    "href": "02-tidyerse.html#about-the-data",
+    "title": "Data Wrangling with Tidyverse",
+    "section": "About the data",
+    "text": "About the data\nThe data is from a national survey conducted in April and May of 1988 by FLACSO/Chile, capturing voting intentions for the 1988 Chilean plebiscite. The dataset contains information about respondents’ demographic characteristics and their voting intentions. This data can also be found from carData package! (more on this later)\nKey variables in the dataset:"
+  },
+  {
+    "objectID": "02-tidyerse.html#prelim-checks-for-your-data",
+    "href": "02-tidyerse.html#prelim-checks-for-your-data",
+    "title": "Data Wrangling with Tidyverse",
+    "section": "Prelim checks for your data",
+    "text": "Prelim checks for your data\nIt’s good practice to do some preliminary checks on your data to get a better sense of it!\nA few things that you can do:\n\nCheck for duplicates (hint: dplyr has a function for this!)\nCheck for missing values\nCheck on overall distributions of the categorical data\nPlot the distribution of the numerical/continuous data"
+  },
+  {
+    "objectID": "02-tidyerse.html#data-wrangling-activities-specific-to-our-data",
+    "href": "02-tidyerse.html#data-wrangling-activities-specific-to-our-data",
+    "title": "Data Wrangling with Tidyverse",
+    "section": "Data wrangling activities specific to our data",
+    "text": "Data wrangling activities specific to our data\nScenario: Our Principal Investigator (PI) is studying voting patterns in the 1988 Chilean plebiscite. As the Research Assistant (RA), we have been asked to do the following 9 tasks:\n\nSeparate the demographic information (region, sex, age, education) into a separate CSV called chile-demographics.csv\nRetrieve only respondents aged 30 or older, arrange it from oldest to youngest, and save it into a separate CSV called chile-30plus.csv\nMake the character columns such as region, sex, education, and vote to be in uppercase.\nConvert all the categorical columns such as region, sex, education, and vote to Factor. Make sure education is ordered.\nCreate a new column called age_group that categorizes age into groups: “18-29”, “30-44”, “45-59”, “60+”."
+  },
+  {
+    "objectID": "02-tidyerse.html#task-1",
+    "href": "02-tidyerse.html#task-1",
+    "title": "Data Wrangling with Tidyverse",
+    "section": "Task #1",
+    "text": "Task #1\nSeparate the demographic information (region, sex, age, education) into a separate CSV called chile-demographics.csv\nThe first few rows in the CSV:\n\n\n# A tibble: 2,700 × 4\n  region sex     age education\n  &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;    \n1 N      M        65 P        \n2 N      M        29 PS       \n3 N      F        38 P        \n# ℹ 2,697 more rows"
+  },
+  {
+    "objectID": "02-tidyerse.html#task-2",
+    "href": "02-tidyerse.html#task-2",
+    "title": "Data Wrangling with Tidyverse",
+    "section": "Task #2",
+    "text": "Task #2\nRetrieve only respondents aged 30 or older, arrange it from oldest to youngest, and save it into a separate CSV called chile-30plus.csv\nThe first few rows in the resulting CSV:\n\n\n# A tibble: 1,770 × 8\n  region population sex     age education income statusquo vote \n  &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;\n1 N          125000 F        70 P          15000     1.49  Y    \n2 N          250000 F        70 P          75000     1.40  Y    \n3 N          250000 M        70 P           7500    -0.366 N    \n# ℹ 1,767 more rows"
+  },
+  {
+    "objectID": "02-tidyerse.html#group-exercise-1-solo-attempts-ok",
+    "href": "02-tidyerse.html#group-exercise-1-solo-attempts-ok",
+    "title": "Data Wrangling with Tidyverse",
+    "section": "Group exercise 1 (solo attempts ok)",
+    "text": "Group exercise 1 (solo attempts ok)\nTime: 5 minutes!\nRetrieve only respondents from the Metropolitan Santiago area (M), with Secondary education (S), and who are undecided (U) about their vote. Keep only their region, education, vote, and income columns in a new dataframe called santiago_undecided in descending order of income.\nThe first few rows of santiago_undecided:\n\n\n# A tibble: 7 × 4\n  region education vote  income\n  &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;  &lt;dbl&gt;\n1 M      S         U      35000\n2 M      S         U      15000\n3 M      S         U      15000\n# ℹ 4 more rows"
+  },
+  {
+    "objectID": "02-tidyerse.html#task-3",
+    "href": "02-tidyerse.html#task-3",
+    "title": "Data Wrangling with Tidyverse",
+    "section": "Task #3",
+    "text": "Task #3\nMake all character columns such as region, sex, education, and vote to be in uppercase.\nThe end result:\n\n\n# A tibble: 2,700 × 4\n  region sex   education vote \n  &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;\n1 N      M     P         Y    \n2 N      M     PS        N    \n3 N      F     P         Y    \n# ℹ 2,697 more rows"
+  },
+  {
+    "objectID": "02-tidyerse.html#task-4",
+    "href": "02-tidyerse.html#task-4",
+    "title": "Data Wrangling with Tidyverse",
+    "section": "Task #4",
+    "text": "Task #4\nConvert all the categorical columns such as region, sex, education, and vote to Factor. Make sure education is ordered.\nThe education column after the change:\n\n\ntibble [2,700 × 1] (S3: tbl_df/tbl/data.frame)\n $ education: Ord.factor w/ 3 levels \"P\"&lt;\"S\"&lt;\"PS\": 1 3 1 1 2 1 3 2 1 1 ..."
+  },
+  {
+    "objectID": "02-tidyerse.html#task-5",
+    "href": "02-tidyerse.html#task-5",
+    "title": "Data Wrangling with Tidyverse",
+    "section": "Task #5",
+    "text": "Task #5\nCreate a new column called age_group that categorizes age into groups: “18-29”, “30-44”, “45-59”, “60+”.\nThe new age_group column:\n\n\n# A tibble: 2,700 × 2\n    age age_group\n  &lt;dbl&gt; &lt;chr&gt;    \n1    65 60+      \n2    29 18-29    \n3    38 30-44    \n4    49 45-59    \n# ℹ 2,696 more rows"
+  },
+  {
+    "objectID": "02-tidyerse.html#task-6",
+    "href": "02-tidyerse.html#task-6",
+    "title": "Data Wrangling with Tidyverse",
+    "section": "Task #6",
+    "text": "Task #6\nCreate a new column called high_income that is TRUE if income is above the median, FALSE otherwise.\nThe original income column and the new high_income column:\n\n\n# A tibble: 3 × 2\n  income high_income\n   &lt;dbl&gt; &lt;lgl&gt;      \n1  15000 FALSE      \n2  15000 FALSE      \n3  15000 FALSE"
+  },
+  {
+    "objectID": "02-tidyerse.html#task-7",
+    "href": "02-tidyerse.html#task-7",
+    "title": "Data Wrangling with Tidyverse",
+    "section": "Task #7",
+    "text": "Task #7\nCreate a new column called support_level that categorizes statusquo into “Unsupportive” (&lt;= 0) and “Supportive” (&gt; 0). Save all of these changes you made from step 3 onwards into a new CSV called chile_voting_processed.csv\nThe new support_level column:\n\n\n# A tibble: 2,700 × 2\n  statusquo support_level\n      &lt;dbl&gt; &lt;chr&gt;        \n1      1.01 Supportive   \n2     -1.30 Unsupportive \n3      1.23 Supportive   \n# ℹ 2,697 more rows"
+  },
+  {
+    "objectID": "02-tidyerse.html#task-8",
+    "href": "02-tidyerse.html#task-8",
+    "title": "Data Wrangling with Tidyverse",
+    "section": "Task #8",
+    "text": "Task #8\nGenerate summary stats of income grouped by region and education. The summary stats should include mean, median, max, min, std, and n (number of observations).\n\n\n# A tibble: 19 × 8\n# Groups:   region [5]\n   region education observation mean_income median_income highest lowest std_dev\n   &lt;fct&gt;  &lt;ord&gt;           &lt;int&gt;       &lt;dbl&gt;         &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;\n 1 C      P                 261      16161.         15000  200000   2500  18089.\n 2 C      S                 256      36352.         35000  200000   2500  37903.\n 3 C      PS                 81      63766.         35000  200000   7500  49953.\n 4 C      &lt;NA&gt;                2      41250          41250   75000   7500  47730.\n 5 M      P                  52      20700          15000  125000   2500  20541.\n 6 M      S                  42      28919.         15000   75000   7500  21324.\n 7 M      PS                  6      60000          55000  125000  15000  39875.\n 8 N      P                 139      19398.         15000   75000   2500  16375.\n 9 N      S                 117      32345.         35000  125000   2500  26429.\n10 N      PS                 65      52897.         35000  200000   7500  41570.\n11 N      &lt;NA&gt;                1      15000          15000   15000  15000     NA \n12 S      P                 340      15977.          7500  200000   2500  19063.\n13 S      S                 269      29877.         15000  200000   2500  30017.\n14 S      PS                108      56054.         35000  200000   2500  51961.\n15 S      &lt;NA&gt;                1       2500           2500    2500   2500     NA \n16 SA     P                 315      19653.         15000  125000   2500  16151.\n17 SA     S                 436      40962.         35000  200000   2500  41150.\n18 SA     PS                202      81833.         75000  200000   7500  65747.\n19 SA     &lt;NA&gt;                7      10500           7500   15000   7500   4108."
+  },
+  {
+    "objectID": "02-tidyerse.html#task-9",
+    "href": "02-tidyerse.html#task-9",
+    "title": "Data Wrangling with Tidyverse",
+    "section": "Task #9",
+    "text": "Task #9\nReshape the data to have region as rows and vote options as columns, with the values being the count of votes for each option in each region.\n\n\n# A tibble: 5 × 6\n  region     A     N     U     Y  `NA`\n  &lt;fct&gt;  &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;\n1 C         44   210   141   174    31\n2 M          2    18    23    38    19\n3 N         30   102    46   135     9\n4 S         42   214   148   275    39\n5 SA        69   345   230   246    70"
+  },
+  {
+    "objectID": "02-tidyerse.html#group-exercise-3-solo-attempts-ok",
+    "href": "02-tidyerse.html#group-exercise-3-solo-attempts-ok",
+    "title": "Data Wrangling with Tidyverse",
+    "section": "Group exercise 3 (solo attempts ok)",
+    "text": "Group exercise 3 (solo attempts ok)\nTime: 5 minutes\nGenerate a summary stats of age grouped by region and sex. The summary stats should include mean, median, max, min, std, and n (number of observations). It should look something like this:\n\n\n# A tibble: 10 × 8\n# Groups:   region [5]\n   region sex   observation mean_age median_age oldest youngest std_dev\n   &lt;fct&gt;  &lt;fct&gt;       &lt;int&gt;    &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;\n 1 C      F             300     37.9         36     70       18    14.2\n 2 C      M             300     38.8         35     70       18    15.8\n 3 M      F              51     36.6         36     68       18    13.9\n 4 M      M              49     36.8         34     65       18    13.0\n 5 N      F             168     38.8         36     70       18    13.6\n 6 N      M             154     38.6         35     70       18    16.5\n 7 S      F             362     37.3         36     70       18    14.0\n 8 S      M             356     37.9         35     70       18    14.8\n 9 SA     F             498     39.3         38     70       18    14.3\n10 SA     M             462     39.8         38     70       18    15.4"
+  },
+  {
+    "objectID": "02-tidyerse.html#bonus-deleting-columns-from-dataframe",
+    "href": "02-tidyerse.html#bonus-deleting-columns-from-dataframe",
+    "title": "Data Wrangling with Tidyverse",
+    "section": "Bonus: Deleting columns from dataframe",
+    "text": "Bonus: Deleting columns from dataframe\nLet’s say I have this column called wrong_column that I want to remove:\n\n\n# A tibble: 2,700 × 2\n  region wrong_column \n  &lt;fct&gt;  &lt;chr&gt;        \n1 N      random values\n2 N      random values\n3 N      random values\n# ℹ 2,697 more rows\n\n\nRemove the wrong column with subset -:\n\nchile_data &lt;- chile_data |&gt; \n    select(-wrong_column)\n\n\n\n# A tibble: 2,700 × 1\n  region\n  &lt;fct&gt; \n1 N     \n2 N     \n3 N     \n# ℹ 2,697 more rows"
+  },
+  {
+    "objectID": "04-stats.html#todays-outline",
+    "href": "04-stats.html#todays-outline",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "Today’s Outline",
+    "text": "Today’s Outline\n\nRefreshers on data distribution and research variables\nStatistical tests: chi-square, t-test, correlations.\nANOVA"
+  },
+  {
+    "objectID": "04-stats.html#refresher-data-distribution",
+    "href": "04-stats.html#refresher-data-distribution",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "Refresher: Data Distribution",
+    "text": "Refresher: Data Distribution\nThe choice of appropriate statistical tests and methods often depends on the distribution of the data. Understanding the distribution helps in selecting the right and validity of the tests."
+  },
+  {
+    "objectID": "04-stats.html#refresher-research-variables",
+    "href": "04-stats.html#refresher-research-variables",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "Refresher: Research Variables",
+    "text": "Refresher: Research Variables\n\n\nIndependent Variable (IV)\nThe variables that researchers will manipulate.\n\nOther names for it: Predictor, Covariate, Treatment, Regressor, Input, etc.\n\n\nDependent Variable (DV)\nThe variables that will be affected as a result of manipulation/changes in the IVs\n\nOther names for it: Outcome, Response, Output, etc."
+  },
+  {
+    "objectID": "04-stats.html#load-our-data-for-today",
+    "href": "04-stats.html#load-our-data-for-today",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "Load our data for today!",
+    "text": "Load our data for today!\nUse read_csv from readr package (part of tidyverse) to load our data into a dataframe\n\n# import tidyverse library\nlibrary(tidyverse)\n\n# read the CSV with Chile voting data\nchile_data &lt;- read_csv(\"data/chile_voting.csv\")\n\n# peek at the data, pay attention to the data types!\nglimpse(chile_data)"
+  },
+  {
+    "objectID": "04-stats.html#chi-square-test-of-independence",
+    "href": "04-stats.html#chi-square-test-of-independence",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "Chi-square test of independence",
+    "text": "Chi-square test of independence\nThe \\(X^2\\) test of independence evaluates whether there is a statistically significant relationship between two categorical variables.\nThis is done by analyzing the frequency table (i.e., contingency table) formed by two categorical variables.\nExample: Is there any relationship between education and vote in our Chile voting data?"
+  },
+  {
+    "objectID": "04-stats.html#correlation",
+    "href": "04-stats.html#correlation",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "Correlation",
+    "text": "Correlation\nA correlation test evaluates the strength and direction of a linear relationship between two variables. The coefficient is expressed in value between -1 to 1, with 0 being no correlation at all.\n\n\nPearson’s \\(r\\) (r)\n\nAssumes and measures linear relationships\nSensitive to outliers\nAssumes normality\n(most likely the one that you learned in class)\n\n\nKendall’s \\(\\tau\\) (tau)\n\nMeasures monotonic relationship\nless sensitive/more robust to outliers\nnon-parametric, do not assume normality\n\n\nSpearman’s \\(\\rho\\) (rho)\n\nMeasures monotonic relationship\nless sensitive/more robust to outliers\nnon-parametric, do not assume normality"
+  },
+  {
+    "objectID": "04-stats.html#t-tests",
+    "href": "04-stats.html#t-tests",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "T-Tests",
+    "text": "T-Tests\nA t-test is a statistical test used to compare the means of two groups/samples of continuous data type and determine if the differences are statistically significant. More in-depth info here!\n\nThe Student’s t-test is widely used when the sample size is reasonably small (less than approximately 30) or when the population standard deviation is unknown."
+  },
+  {
+    "objectID": "04-stats.html#anova-analysis-of-variance",
+    "href": "04-stats.html#anova-analysis-of-variance",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "ANOVA (Analysis of Variance)",
+    "text": "ANOVA (Analysis of Variance)\nANOVA (Analysis of Variance) is a statistical test used to compare the means of three or more groups or samples and determine if the differences are statistically significant.\nThere are two ‘mainstream’ ANOVA that will be covered in this workshop:\n\n\nOne-Way ANOVA: comparing means across two or more independent groups (levels) of a single independent variable.\nTwo-Way ANOVA: comparing means across two or more independent groups (levels) of two independent variable.\nOther types of ANOVA that you may encounter: Repeated measures ANOVA, Multivariate ANOVA (MANOVA), ANCOVA, etc."
+  },
+  {
+    "objectID": "04-stats.html#anova-assumptions",
+    "href": "04-stats.html#anova-assumptions",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "ANOVA Assumptions",
+    "text": "ANOVA Assumptions\n\nThe Dependent variable should be a continuous variable\nThe Independent variable should be a categorical variable\nThe observations for Independent variable should be independent of each other\nThe Dependent Variable distribution should be approximately normal – even more crucial if sample size is small.\n\nYou can verify this by visualizing your data in histogram, or use Shapiro-Wilk Test, among other things\n\nThe variance for each combination of groups should be approximately equal – also referred to as “homogeneity of variances” or homoskedasticity.\n\nOne way to verify this is using Levene’s Test\n\nNo significant outliers"
+  },
+  {
+    "objectID": "04-stats.html#verifying-the-assumptions",
+    "href": "04-stats.html#verifying-the-assumptions",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "Verifying the assumptions",
+    "text": "Verifying the assumptions\nShapiro-Wilk Test\n\nlibrary(car)\nshapiro.test(chile_data$income)\n\n\n    Shapiro-Wilk normality test\n\ndata:  chile_data$income\nW = 0.65993, p-value &lt; 2.2e-16\n\n\nLevene’s Test\n\nlibrary(car)\nleveneTest(income ~ education, data = chile_data)\n\nLevene's Test for Homogeneity of Variance (center = median)\n        Df F value    Pr(&gt;F)    \ngroup    2  168.03 &lt; 2.2e-16 ***\n      2590                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
   },
   {
     "objectID": "about.html",

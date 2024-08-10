@@ -1,0 +1,1459 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-html/tabby.min.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.5.55">
+
+  <meta name="author" content="Bella Ratmelia">
+  <title>Introductory R for Social Sciences – Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto.css">
+  <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-titled.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-titled) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-titled.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-titled .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-titled .callout-title  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-titled.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-titled.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-title {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-title {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-title {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-titled .callout-body > .callout-content > :last-child {
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
+  }
+
+  .callout.callout-titled .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-titled) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-title {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-title {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-title {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-title {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-title {
+    background-color: #ffe5d0
+  }
+
+  </style>
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA</h1>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Bella Ratmelia 
+</div>
+</div>
+</div>
+
+</section>
+<section id="todays-outline" class="slide level2">
+<h2>Today’s Outline</h2>
+<ol type="1">
+<li>Refreshers on data distribution and research variables</li>
+<li>Statistical tests: chi-square, t-test, correlations.</li>
+<li>ANOVA</li>
+</ol>
+</section>
+<section id="refresher-data-distribution" class="slide level2">
+<h2>Refresher: Data Distribution</h2>
+<p>The choice of appropriate statistical tests and methods often depends on the distribution of the data. Understanding the distribution helps in selecting the right and validity of the tests.</p>
+
+<img data-src="04-stats_files/figure-revealjs/unnamed-chunk-1-1.png" width="960" class="r-stretch"></section>
+<section id="refresher-research-variables" class="slide level2">
+<h2>Refresher: Research Variables</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><u><strong>Independent Variable (IV)</strong></u></p>
+<p>The variables that researchers will manipulate.</p>
+<ul>
+<li>Other names for it: Predictor, Covariate, Treatment, Regressor, Input, etc.</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><u><strong>Dependent Variable (DV)</strong></u></p>
+<p>The variables that will be affected as a result of manipulation/changes in the IVs</p>
+<ul>
+<li>Other names for it: Outcome, Response, Output, etc.</li>
+</ul>
+</div></div>
+</section>
+<section id="load-our-data-for-today" class="slide level2">
+<h2>Load our data for today!</h2>
+<p>Use <code>read_csv</code> from <code>readr</code> package (part of <code>tidyverse</code>) to load our data into a dataframe</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="co"># import tidyverse library</span></span>
+<span id="cb1-2"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a></a></span>
+<span id="cb1-4"><a></a><span class="co"># read the CSV with Chile voting data</span></span>
+<span id="cb1-5"><a></a>chile_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/chile_voting.csv"</span>)</span>
+<span id="cb1-6"><a></a></span>
+<span id="cb1-7"><a></a><span class="co"># peek at the data, pay attention to the data types!</span></span>
+<span id="cb1-8"><a></a><span class="fu">glimpse</span>(chile_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="chi-square-test-of-independence" class="slide level2">
+<h2>Chi-square test of independence</h2>
+<p>The <span class="math inline">\(X^2\)</span> test of independence evaluates whether there is a statistically significant relationship between two categorical variables.</p>
+<p>This is done by analyzing the frequency table (i.e.,&nbsp;contingency table) formed by two categorical variables.</p>
+<p><strong>Example</strong>: Is there any relationship between <code>education</code> and <code>vote</code> in our Chile voting data?</p>
+</section>
+<section class="slide level2">
+
+<h3 id="sample-problem-and-results">Sample problem and results</h3>
+<p>Is there any relationship between <code>education</code> and <code>vote</code> in our Chile voting data?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">print</span>(<span class="fu">chisq.test</span>(<span class="fu">table</span>(chile_data<span class="sc">$</span>education, chile_data<span class="sc">$</span>vote)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's Chi-squared test
+
+data:  table(chile_data$education, chile_data$vote)
+X-squared = 135.85, df = 6, p-value &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<ul>
+<li><strong>X-squared</strong> = the coefficient</li>
+<li><strong>df</strong> = degree of freedom</li>
+<li><strong>p-value</strong> = the probability of getting more extreme results than what was observed. Generally, if this value is less than the pre-determined significance level (also called alpha), the result would be considered “statistically significant”</li>
+</ul>
+<p><em>What if there is a hypothesis? How would you write this in the report?</em></p>
+</section>
+<section id="correlation" class="slide level2">
+<h2>Correlation</h2>
+<p>A correlation test evaluates the strength and direction of a linear relationship between two variables. The coefficient is expressed in value between -1 to 1, with 0 being no correlation at all.</p>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><strong>Pearson’s</strong> <span class="math inline">\(r\)</span> (r)</p>
+<ul>
+<li>Assumes and measures linear relationships</li>
+<li>Sensitive to outliers</li>
+<li>Assumes normality</li>
+<li>(<em>most likely the one that you learned in class)</em></li>
+</ul>
+</div><div class="column" style="width:30%;">
+<p><strong>Kendall’s</strong> <span class="math inline">\(\tau\)</span> (tau)</p>
+<ul>
+<li>Measures monotonic relationship</li>
+<li>less sensitive/more robust to outliers</li>
+<li>non-parametric, do not assume normality</li>
+</ul>
+</div><div class="column" style="width:30%;">
+<p><strong>Spearman’s</strong> <span class="math inline">\(\rho\)</span> (rho)</p>
+<ul>
+<li>Measures monotonic relationship</li>
+<li>less sensitive/more robust to outliers</li>
+<li>non-parametric, do not assume normality</li>
+</ul>
+</div></div>
+</section>
+<section class="slide level2">
+
+<h3 id="what-is-monotonic-relationship">What is monotonic relationship?</h3>
+<p>When a size of one variable increases, the other variables also increase, though at different rate.</p>
+
+<img data-src="04-stats_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2">
+
+<h3 id="sample-problem-and-result">Sample problem and result</h3>
+<p>Is there a significant correlation between a respondent’s age and income?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">cor.test</span>(chile_data<span class="sc">$</span>age, chile_data<span class="sc">$</span>income, <span class="at">method =</span> <span class="st">"pearson"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's product-moment correlation
+
+data:  chile_data$age and chile_data$income
+t = -1.6507, df = 2599, p-value = 0.09891
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ -0.070708808  0.006078618
+sample estimates:
+        cor 
+-0.03236285 </code></pre>
+</div>
+</div>
+<ul>
+<li><strong>t</strong> is the <strong>t-test statistic</strong> (for hypothesis testing)</li>
+<li><strong>df</strong> is the degrees of freedom</li>
+<li><strong>p-value</strong> is the significance level of the <strong>t-test</strong></li>
+<li><strong>conf.int</strong> is the <strong>confidence interval</strong> of the coefficient at 95%</li>
+<li><strong>sample estimates</strong> is the correlation coefficient</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="correlation-exercise-5-mins">Correlation exercise (5 mins)</h3>
+<ul>
+<li><p>Calculate the Kendall correlation coefficient between age and statusquo.</p>
+<ul>
+<li><p>What is the null and alternative hypothesis?</p></li>
+<li><p>How strong is the correlation? i.e.&nbsp;would you say it’s a strong correlation?</p></li>
+<li><p>In which direction is the correlation?</p></li>
+<li><p>Is the correlation coefficient statistically significant?</p></li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="fu">cor.test</span>(chile_data<span class="sc">$</span>age, chile_data<span class="sc">$</span>statusquo, <span class="at">method =</span> <span class="st">"kendall"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Kendall's rank correlation tau
+
+data:  chile_data$age and chile_data$statusquo
+z = 5.4926, p-value = 3.96e-08
+alternative hypothesis: true tau is not equal to 0
+sample estimates:
+      tau 
+0.0717354 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="co"># Interpret the results here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="t-tests" class="slide level2">
+<h2>T-Tests</h2>
+<p>A <strong>t-test</strong> is a statistical test used to compare the means of two groups/samples of continuous data type and determine if the differences are statistically significant. <a href="https://www.sciencedirect.com/topics/mathematics/students-t-test">More in-depth info here!</a></p>
+<ul>
+<li>The Student’s&nbsp;<em>t</em>-test is widely used when the sample size is reasonably small (less than approximately 30) <strong>or</strong> when the population standard deviation is unknown.</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="types-of-t-test">3 types of t-test</h3>
+<div>
+<ul>
+<li class="fragment"><p><strong>One-sample T-test</strong> - Test if a specific sample mean (X̄) is statistically different from a known or hypothesized population mean (μ or mu)</p></li>
+<li class="fragment"><p><strong>Two-samples / Independent Samples T-test</strong> - Used to compare the means of two independent groups (such as between-subjects research) to determine if they are significantly different. Examples: Men vs Women group, Placebo vs Actual drugs.</p></li>
+<li class="fragment"><p><strong>Paired Samples T-Test</strong> - Used to compare the means of two related groups, such as repeated measurements on the same subjects (within-subjects research). Examples: before vs after.</p></li>
+</ul>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="sample-problem-and-result-1">Sample problem and result</h3>
+<p>Is the average age of voters who intend to vote “Yes” significantly different from the overall mean age of voters?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>overall_mean_age <span class="ot">=</span> <span class="fu">mean</span>(chile_data<span class="sc">$</span>age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb9-2"><a></a>yes_voters <span class="ot">=</span> chile_data<span class="sc">$</span>age[chile_data<span class="sc">$</span>vote <span class="sc">==</span> <span class="st">"Y"</span>]</span>
+<span id="cb9-3"><a></a><span class="fu">t.test</span>(<span class="at">x =</span> yes_voters, <span class="at">alternative =</span> <span class="st">"two.sided"</span>, <span class="at">mu =</span> overall_mean_age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One Sample t-test
+
+data:  yes_voters
+t = 3.522, df = 867, p-value = 0.0004507
+alternative hypothesis: true mean is not equal to 38.54872
+95 percent confidence interval:
+ 39.35548 41.38646
+sample estimates:
+mean of x 
+ 40.37097 </code></pre>
+</div>
+</div>
+<p><em>What if there is a hypothesis? How would you write this in the report?</em></p>
+</section>
+<section class="slide level2">
+
+<h3 id="t-tests-exercises-5-mins">T-Tests exercises (5 mins)</h3>
+<ol type="1">
+<li>Is there a significant difference in age between those who intend to vote “Yes” and those who intend to vote “No”?</li>
+<li>Does the income of male voters significantly differ from female voters?</li>
+<li>Is the average statusquo score significantly different from 0 (0 is the neutral point on the scale)?</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">t.test</span>(age <span class="sc">~</span> vote, <span class="at">data =</span> chile_data[chile_data<span class="sc">$</span>vote <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Y"</span>, <span class="st">"N"</span>),])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  age by vote
+t = -6.477, df = 1742, p-value = 1.214e-10
+alternative hypothesis: true difference in means between group N and group Y is not equal to 0
+95 percent confidence interval:
+ -5.956887 -3.187748
+sample estimates:
+mean in group N mean in group Y 
+       35.79865        40.37097 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="fu">t.test</span>(income <span class="sc">~</span> sex, <span class="at">data =</span> chile_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  income by sex
+t = -2.4238, df = 2597.5, p-value = 0.01543
+alternative hypothesis: true difference in means between group F and group M is not equal to 0
+95 percent confidence interval:
+ -6784.5887  -716.2698
+sample estimates:
+mean in group F mean in group M 
+       32041.01        35791.44 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="fu">t.test</span>(chile_data<span class="sc">$</span>statusquo, <span class="at">mu =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One Sample t-test
+
+data:  chile_data$statusquo
+t = -258.94, df = 2682, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 5
+95 percent confidence interval:
+ -0.03786299  0.03786297
+sample estimates:
+    mean of x 
+-1.118151e-08 </code></pre>
+</div>
+</div>
+</section>
+<section id="anova-analysis-of-variance" class="slide level2">
+<h2>ANOVA (Analysis of Variance)</h2>
+<p>ANOVA (Analysis of Variance) is a statistical test used to compare the means of three or more groups or samples and determine if the differences are statistically significant.</p>
+<p>There are two ‘mainstream’ ANOVA that will be covered in this workshop:</p>
+<div>
+<ul>
+<li class="fragment"><strong>One-Way ANOVA</strong>: comparing means across two or more independent groups (levels) of a <u><strong>single</strong></u> independent variable.</li>
+<li class="fragment"><strong>Two-Way ANOVA</strong>: comparing means across two or more independent groups (levels) of <u><strong>two</strong></u> independent variable.</li>
+<li class="fragment">Other types of ANOVA that you may encounter: Repeated measures ANOVA, Multivariate ANOVA (MANOVA), ANCOVA, etc.</li>
+</ul>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="sample-problem-and-result-one-way-anova">Sample problem and result: One-Way ANOVA</h3>
+<p>Is there a significant difference in statusquo scores between different education levels?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a>statusquo_edu_anova <span class="ot">&lt;-</span> <span class="fu">aov</span>(statusquo <span class="sc">~</span> education, <span class="at">data =</span> chile_data)</span>
+<span id="cb17-2"><a></a><span class="fu">summary</span>(statusquo_edu_anova)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              Df Sum Sq Mean Sq F value  Pr(&gt;F)    
+education      2   51.3  25.643   26.13 5.8e-12 ***
+Residuals   2670 2620.6   0.982                    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+27 observations deleted due to missingness</code></pre>
+</div>
+</div>
+<ul>
+<li><strong>F-value</strong>: the coefficient value</li>
+<li><strong>Pr(&gt;F)</strong>: the p-value</li>
+<li><strong>Sum Sq</strong>: Sum of Squares</li>
+<li><strong>Mean Sq</strong> : Mean Squares</li>
+<li><strong>Df</strong>: Degrees of Freedom</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="post-hoc-test-only-when-result-is-significant">Post-hoc test (only when result is significant)</h3>
+<p>If your ANOVA test indicates significant result, the next step is to figure out which category pairings are yielding the significant result. Tukey’s Honest Significant Difference (HSD) can help us figure that out.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a><span class="fu">TukeyHSD</span>(statusquo_edu_anova)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = statusquo ~ education, data = chile_data)
+
+$education
+            diff         lwr        upr     p adj
+PS-P -0.34268849 -0.47190147 -0.2134755 0.0000000
+S-P  -0.24396212 -0.34269216 -0.1452321 0.0000000
+S-PS  0.09872637 -0.03019678  0.2276495 0.1711681</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="sample-problem-and-result-two-way-anova">Sample problem and result: Two-Way ANOVA</h3>
+<p>Is there a significant difference in statusquo scores between different education levels and sexes?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a>statusquo_edu_sex_anova <span class="ot">&lt;-</span> <span class="fu">aov</span>(statusquo <span class="sc">~</span> education <span class="sc">*</span> sex, <span class="at">data =</span> chile_data)</span>
+<span id="cb21-2"><a></a><span class="fu">summary</span>(statusquo_edu_sex_anova)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+education        2   51.3  25.643  26.187 5.46e-12 ***
+sex              1    8.4   8.398   8.576  0.00344 ** 
+education:sex    2    0.6   0.315   0.322  0.72500    
+Residuals     2667 2611.6   0.979                     
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+27 observations deleted due to missingness</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a><span class="fu">TukeyHSD</span>(statusquo_edu_sex_anova)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = statusquo ~ education * sex, data = chile_data)
+
+$education
+            diff         lwr        upr     p adj
+PS-P -0.34268849 -0.47175132 -0.2136257 0.0000000
+S-P  -0.24396212 -0.34257744 -0.1453468 0.0000000
+S-PS  0.09872637 -0.03004698  0.2274997 0.1704709
+
+$sex
+          diff        lwr         upr     p adj
+M-F -0.1117353 -0.1868097 -0.03666085 0.0035479
+
+$`education:sex`
+                 diff         lwr         upr     p adj
+PS:F-P:F  -0.34969549 -0.58182141 -0.11756957 0.0002599
+S:F-P:F   -0.21586575 -0.38130781 -0.05042369 0.0027797
+P:M-P:F   -0.09756257 -0.26856673  0.07344160 0.5806001
+PS:M-P:F  -0.41472874 -0.62364742 -0.20581007 0.0000002
+S:M-P:F   -0.36204920 -0.52841637 -0.19568204 0.0000000
+S:F-PS:F   0.13382974 -0.10016115  0.36782063 0.5779021
+P:M-PS:F   0.25213292  0.01417686  0.49008899 0.0304649
+PS:M-PS:F -0.06503325 -0.33154343  0.20147693 0.9824439
+S:M-PS:F  -0.01235371 -0.24699961  0.22229219 0.9999894
+P:M-S:F    0.11830318 -0.05522411  0.29183047 0.3752949
+PS:M-S:F  -0.19886299 -0.40985188  0.01212589 0.0779562
+S:M-S:F   -0.14618345 -0.31514301  0.02277610 0.1342398
+PS:M-P:M  -0.31716617 -0.53254412 -0.10178823 0.0003965
+S:M-P:M   -0.26448664 -0.43889616 -0.09007712 0.0002291
+S:M-PS:M   0.05267954 -0.15903553  0.26439461 0.9808453</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="anova-exercise">ANOVA exercise</h3>
+<p>Is there a significant difference in income between different regions and education levels?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a>income_region_edu_anova <span class="ot">&lt;-</span> <span class="fu">aov</span>(income <span class="sc">~</span> region <span class="sc">*</span> education, <span class="at">data =</span> chile_data)</span>
+<span id="cb25-2"><a></a><span class="fu">summary</span>(income_region_edu_anova)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   Df    Sum Sq   Mean Sq F value   Pr(&gt;F)    
+region              4 1.134e+11 2.836e+10  23.246  &lt; 2e-16 ***
+education           2 7.527e+11 3.764e+11 308.516  &lt; 2e-16 ***
+region:education    8 4.125e+10 5.157e+09   4.227 4.73e-05 ***
+Residuals        2578 3.145e+12 1.220e+09                     
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+107 observations deleted due to missingness</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a><span class="fu">TukeyHSD</span>(income_region_edu_anova)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = income ~ region * education, data = chile_data)
+
+$region
+           diff        lwr       upr     p adj
+M-C  -4781.4521 -15434.748  5871.844 0.7366937
+N-C   -472.1319  -7164.979  6220.715 0.9996936
+S-C  -4163.9836  -9531.800  1203.833 0.2128058
+SA-C 11330.7865   6261.419 16400.154 0.0000000
+N-M   4309.3201  -6950.342 15568.982 0.8344630
+S-M    617.4685  -9908.653 11143.590 0.9998527
+SA-M 16112.2385   5735.135 26489.342 0.0002258
+S-N  -3691.8517 -10180.359  2796.655 0.5278354
+SA-N 11802.9184   5559.061 18046.776 0.0000026
+SA-S 15494.7701  10698.416 20291.124 0.0000000
+
+$education
+          diff       lwr       upr p adj
+PS-P  48367.00  43748.20  52985.79     0
+S-P   16644.51  13110.02  20179.00     0
+S-PS -31722.49 -36338.77 -27106.21     0
+
+$`region:education`
+                  diff         lwr         upr     p adj
+M:P-C:P      4539.2857 -13816.0579  22894.6294 0.9999550
+N:P-C:P      3237.0959  -9348.0590  15822.2509 0.9999274
+S:P-C:P      -183.4416 -10102.0004   9735.1173 1.0000000
+SA:P-C:P     3492.7511  -6615.3419  13600.8440 0.9978837
+C:PS-C:P    47605.1085  32317.3258  62892.8912 0.0000000
+M:PS-C:P    43839.2857  -5136.1466  92814.7180 0.1394258
+N:PS-C:P    36736.1111  20035.6273  53436.5949 0.0000000
+S:PS-C:P    39893.2073  25979.4124  53807.0021 0.0000000
+SA:PS-C:P   65672.6190  54364.7569  76980.4812 0.0000000
+C:S-C:P     20190.9117   9564.3892  30817.4343 0.0000000
+M:S-C:P     12758.2046  -8115.1432  33631.5524 0.7518309
+N:S-C:P     16184.4185   2761.3668  29607.4701 0.0039748
+S:S-C:P     13716.1797   3274.5824  24157.7769 0.0008269
+SA:S-C:P    24800.8242  15336.5870  34265.0614 0.0000000
+N:P-M:P     -1302.1898 -20891.5313  18287.1518 1.0000000
+S:P-M:P     -4722.7273 -22715.3365  13269.8819 0.9999074
+SA:P-M:P    -1046.5347 -19144.3168  17051.2475 1.0000000
+C:PS-M:P    43065.8228  21639.8461  64491.7995 0.0000000
+M:PS-M:P    39300.0000 -11924.4975  90524.4975 0.3671658
+N:PS-M:P    32196.8254   9741.0391  54652.6116 0.0001206
+S:PS-M:P    35353.9216  14885.6568  55822.1864 0.0000005
+SA:PS-M:P   61133.3333  42339.0809  79927.5857 0.0000000
+C:S-M:P     15651.6260  -2740.7408  34043.9929 0.2020640
+M:S-M:P      8218.9189 -17492.0287  33929.8665 0.9990930
+N:S-M:P     11645.1327  -8492.7542  31783.0197 0.8200135
+S:S-M:P      9176.8939  -9109.2519  27463.0398 0.9323262
+SA:S-M:P    20261.5385   2515.3287  38007.7483 0.0093508
+S:P-N:P     -3420.5375 -15470.4948   8629.4198 0.9997659
+SA:P-N:P      255.6551 -11950.7860  12462.0963 1.0000000
+C:PS-N:P    44368.0126  27618.6853  61117.3398 0.0000000
+M:PS-N:P    40602.1898  -8848.9642  90053.3438 0.2542712
+N:PS-N:P    33499.0152  15451.0286  51547.0018 0.0000000
+S:PS-N:P    36656.1113  21150.7139  52161.5088 0.0000000
+SA:PS-N:P   62435.5231  49218.4354  75652.6109 0.0000000
+C:S-N:P     16953.8158   4314.7239  29592.9077 0.0005386
+M:S-N:P      9521.1087 -12445.2363  31487.4537 0.9801115
+N:S-N:P     12947.3225  -2119.2623  28013.9073 0.1889058
+S:S-N:P     10479.0837  -2004.9307  22963.0981 0.2213325
+SA:S-N:P    21563.7282   9884.8821  33242.5744 0.0000000
+SA:P-S:P     3676.1926  -5757.1996  13109.5848 0.9927210
+C:PS-S:P    47788.5501  32938.2421  62638.8580 0.0000000
+M:PS-S:P    44022.7273  -4817.9148  92863.3693 0.1319211
+N:PS-S:P    36919.5527  20618.5863  53220.5190 0.0000000
+S:PS-S:P    40076.6488  26645.0059  53508.2918 0.0000000
+SA:PS-S:P   65856.0606  55147.0414  76565.0798 0.0000000
+C:S-S:P     20374.3533  10387.4455  30361.2611 0.0000000
+M:S-S:P     12941.6462  -7613.4504  33496.7427 0.7096431
+N:S-S:P     16367.8600   3445.2573  29290.4627 0.0016703
+S:S-S:P     13899.6212   4109.7132  23689.5292 0.0001523
+SA:S-S:P    24984.2657  16244.2926  33724.2389 0.0000000
+C:PS-SA:P   44112.3574  29134.7949  59089.9200 0.0000000
+M:PS-SA:P   40346.5347  -8532.9503  89226.0196 0.2461518
+N:PS-SA:P   33243.3601  16826.3798  49660.3403 0.0000000
+S:PS-SA:P   36400.4562  22828.2505  49972.6619 0.0000000
+SA:PS-SA:P  62179.8680  51295.0700  73064.6659 0.0000000
+C:S-SA:P    16698.1607   6522.9918  26873.3295 0.0000029
+M:S-SA:P     9265.4536 -11381.7673  29912.6744 0.9729412
+N:S-SA:P    12691.6674   -376.9743  25760.3091 0.0675882
+S:S-SA:P    10223.4286    241.5434  20205.3138 0.0384122
+SA:S-SA:P   21308.0731  12353.5845  30262.5617 0.0000000
+M:PS-C:PS   -3765.8228 -53972.8622  46441.2166 1.0000000
+N:PS-C:PS  -10868.9974 -30895.4798   9157.4850 0.8806391
+S:PS-C:PS   -7711.9012 -25481.1872  10057.3848 0.9798782
+SA:PS-C:PS  18067.5105   2255.4397  33879.5814 0.0092426
+C:S-C:PS   -27414.1968 -42746.4118 -12081.9817 0.0000002
+M:S-C:PS   -34846.9039 -58465.7626 -11228.0452 0.0000594
+N:S-C:PS   -31420.6900 -48808.3912 -14032.9889 0.0000001
+S:S-C:PS   -33888.9288 -49093.5594 -18684.2983 0.0000000
+SA:S-C:PS  -22804.2843 -37355.0789  -8253.4898 0.0000116
+N:PS-M:PS   -7103.1746 -57758.2500  43551.9008 1.0000000
+S:PS-M:PS   -3946.0784 -53751.9435  45859.7866 1.0000000
+SA:PS-M:PS  21833.3333 -27308.2809  70974.9476 0.9752068
+C:S-M:PS   -23648.3740 -72637.6941  25340.9462 0.9501109
+M:S-M:PS   -31081.0811 -83260.8392  21098.6770 0.7853465
+N:S-M:PS   -27654.8673 -77325.8731  22016.1386 0.8584247
+S:S-M:PS   -30123.1061 -79072.6460  18826.4339 0.7424906
+SA:S-M:PS  -19038.4615 -67788.8697  29711.9466 0.9925670
+S:PS-N:PS    3157.0962 -15841.2559  22155.4483 0.9999997
+SA:PS-N:PS  28936.5079  11754.7897  46118.2262 0.0000013
+C:S-N:PS   -16545.1994 -33286.3665    195.9678 0.0566021
+M:S-N:PS   -23977.9065 -48534.7863    578.9733 0.0640358
+N:S-N:PS   -20551.6927 -39193.6349  -1909.7504 0.0153546
+S:S-N:PS   -23019.9315 -39644.3307  -6395.5323 0.0002705
+SA:S-N:PS  -11935.2869 -27963.8702   4093.2963 0.4206547
+SA:PS-S:PS  25779.4118  11291.5213  40267.3022 0.0000002
+C:S-S:PS   -19702.2956 -33664.8958  -5739.6953 0.0001759
+M:S-S:PS   -27135.0026 -49888.6369  -4381.3684 0.0047621
+N:S-S:PS   -23708.7888 -39901.6743  -7515.9034 0.0000721
+S:S-S:PS   -26177.0276 -39999.4072 -12354.6481 0.0000000
+SA:S-S:PS  -15092.3831 -28192.1163  -1992.6499 0.0081721
+C:S-SA:PS  -45481.7073 -56849.5684 -34113.8463 0.0000000
+M:S-SA:PS  -52914.4144 -74174.7515 -31654.0774 0.0000000
+N:S-SA:PS  -49488.2006 -63505.4613 -35470.9399 0.0000000
+S:S-SA:PS  -51956.4394 -63151.6275 -40761.2513 0.0000000
+SA:S-SA:PS -40871.7949 -51161.4532 -30582.1365 0.0000000
+M:S-C:S     -7432.7071 -28338.6193  13473.2051 0.9971394
+N:S-C:S     -4006.4933 -17480.1280   9467.1415 0.9995992
+S:S-C:S     -6474.7321 -16981.2763   4031.8121 0.7405335
+SA:S-C:S     4609.9124  -4925.9307  14145.7555 0.9495227
+N:S-M:S      3426.2138 -19030.6894  25883.1170 0.9999999
+S:S-M:S       957.9750 -19854.5486  21770.4986 1.0000000
+SA:S-M:S    12042.6195  -8297.1438  32382.3828 0.7927374
+S:S-N:S     -2468.2388 -15796.5097  10860.0321 0.9999988
+SA:S-N:S     8616.4057  -3960.8610  21193.6724 0.5713037
+SA:S-S:S    11084.6445   1755.3211  20413.9679 0.0050564</code></pre>
+</div>
+</div>
+</section>
+<section id="anova-assumptions" class="slide level2">
+<h2>ANOVA Assumptions</h2>
+<ol type="1">
+<li><p>The Dependent variable should be a continuous variable</p></li>
+<li><p>The Independent variable should be a categorical variable</p></li>
+<li><p>The observations for Independent variable should be independent of each other</p></li>
+<li><p>The Dependent Variable distribution should be approximately normal – even more crucial if sample size is small.</p>
+<ul>
+<li>You can verify this by visualizing your data in histogram, or use Shapiro-Wilk Test, among other things</li>
+</ul></li>
+<li><p>The variance for each combination of groups should be approximately equal – also referred to as “homogeneity of variances” or <u><strong>homoskedasticity</strong></u>.</p>
+<ul>
+<li>One way to verify this is using Levene’s Test</li>
+</ul></li>
+<li><p>No significant outliers</p></li>
+</ol>
+</section>
+<section id="verifying-the-assumptions" class="slide level2">
+<h2>Verifying the assumptions</h2>
+<p><strong>Shapiro-Wilk Test</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a><span class="fu">library</span>(car)</span>
+<span id="cb29-2"><a></a><span class="fu">shapiro.test</span>(chile_data<span class="sc">$</span>income)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  chile_data$income
+W = 0.65993, p-value &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p><strong>Levene’s Test</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a><span class="fu">library</span>(car)</span>
+<span id="cb31-2"><a></a><span class="fu">leveneTest</span>(income <span class="sc">~</span> education, <span class="at">data =</span> chile_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Levene's Test for Homogeneity of Variance (center = median)
+        Df F value    Pr(&gt;F)    
+group    2  168.03 &lt; 2.2e-16 ***
+      2590                      
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+</section>
+<section id="end-of-session-4" class="title-slide slide level1 center">
+<h1>End of Session 4!</h1>
+<p>Next session: Linear and Logistic Regressions!</p>
+
+<div class="quarto-auto-generated-content">
+<p><img src="images/smu logo.png" class="slide-logo"></p>
+<div class="footer footer-default">
+<p><a href="https://bellaratmelia.github.io/introductory-r-socsci/">Introductory R for Social Science</a></p>
+</div>
+</div>
+</section>
+    </div>
+  </div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1600,
+
+        height: 900,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+
+    <script>
+
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+
+      // slide changes (different for each slide format).
+
+      (function () {
+
+        // dispatch for htmlwidgets
+
+        function fireSlideEnter() {
+
+          const event = window.document.createEvent("Event");
+
+          event.initEvent("slideenter", true, true);
+
+          window.document.dispatchEvent(event);
+
+        }
+
+    
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          fireSlideEnter();
+
+    
+
+          // dispatch for shiny
+
+          if (window.jQuery) {
+
+            if (previousSlide) {
+
+              window.jQuery(previousSlide).trigger("hidden");
+
+            }
+
+            if (currentSlide) {
+
+              window.jQuery(currentSlide).trigger("shown");
+
+            }
+
+          }
+
+        }
+
+    
+
+        // hookup for slidy
+
+        if (window.w3c_slidy) {
+
+          window.w3c_slidy.add_observer(function (slide_num) {
+
+            // slide_num starts at position 1
+
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+
+          });
+
+        }
+
+    
+
+      })();
+
+    </script>
+
+    
+
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const onCopySuccess = function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
+      });
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        // For code content inside modals, clipBoardJS needs to be initialized with a container option
+        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp("https:\/\/bellaratmelia\.github\.io\/introductory-r-socsci\/");
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+        const config = {
+          allowHTML: true,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start',
+        };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    
+
+</body></html>
