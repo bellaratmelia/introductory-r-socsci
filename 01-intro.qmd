@@ -1,0 +1,478 @@
+---
+title: "Introduction to R and RStudio"
+author: "Bella Ratmelia"
+format: revealjs
+---
+
+# Welcome!
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+library(tidyverse)
+```
+
+## Preamble
+
+-   About me:
+
+    -   Librarian, Research & Data Services team, SMU Libraries.
+
+    -   Bachelor of IT, MSc in Info Studies.
+
+    -   Have been with SMU since the pandemic era (2021).
+
+-   About this workshop:
+
+    -   Live-coding format; code along with me!
+
+    -   Goal of workshop: to give you enough fundamentals (at least to the point that ChatGPT can't bluff you so easily) and confidence to explore R on your own.
+
+    -   Don't be afraid to ask for help! We are all here to learn
+
+    -   Comes with quizzes!
+
+## What is R? What is R Studio?
+
+**R**: The programming language and the software that interprets the R script
+
+**RStudio:** An IDE (Integrated Development Environment) that we use to interact more easily with R language and scripts.
+
+. . .
+
+You will need to install **both** for this workshop. Go to <https://posit.co/download/rstudio-desktop> to download and install both if you have not done so.
+
+## 7 Reasons to learn R
+
+1.  R is free, open-source, and cross-platform.
+
+2.  R does not involve lots of pointing and clicking - you don't have to remember a complicated sequence of clicks to re-run your analysis.
+
+3.  R code is great for reproducibility - when someone else (including your future self) can obtain the same results from the same dataset and same analysis.
+
+4.  R is interdisciplinary and extensible
+
+5.  R is scalable and works on data of all shapes and sizes (though admittedly, it is not best at some scenarios and other languages such as python would be preferred.)
+
+6.  R produces high-quality and publication-ready graphics
+
+7.  R has a large and welcoming community - which means there are lots of help available!
+
+## A Tour of RStudio
+
+![R Studio layout](images/rstudio-tour.jpg){fig-align="center"}
+
+## Working Directory
+
+-   Working directory -\> where R will look for files (scripts, data, etc).
+
+    -   By default, it will be on your Desktop
+
+    -   Best practice is to use **R Project** to organize your files and data into projects.
+
+    -   When using R Project, the working directory = project folder.
+
+## Creating the project for this workshop
+
+1.  Go to `File` \> `New project`. Choose `New directory`, then `New project`
+
+2.  Enter `intro-r-socsci` as the name for this new folder (or "directory") and choose where you want to put this folder, e.g. `Desktop` or `Documents` if you are on Windows. This will be your working directory for the rest of the workshop!
+
+<!-- -->
+
+4.  Next, let's create 3 folders inside our working directory:
+
+    -   `data` - we will save our raw data here. **It's best practice to keep the data here untouched.**
+
+    -   `data-output` - if we need to modify raw data, store the modified version here.
+
+    -   `fig-output` - we will save all the graphics we created here!
+
+::: callout-warning
+Don't put your R projects inside your OneDrive folder as that may cause issues sometimes.
+:::
+
+# Let's Code!
+
+Create a new R script - `File` \> `New File` \> `R script`.
+
+**Note: RStudio does not autosave your progress, so remember to save from time to time!**
+
+## R Objects and Values
+
+In this line of code:
+
+```{r}
+#| echo: true
+name <- "Anya Forger"
+```
+
+-   `"Anya Forger"` is a value. This can be either a character, numeric, or boolean data type. (more on this soon)
+
+-   `name` is the object where we store this value. This is so that we can keep this value to be used later.
+
+-   `<-` is the assignment operator to assign the value to the object.
+
+    -   You can also use `=`, but generally in R, `<-` is the convention.
+
+    -   Keyboard shortcut: `Alt` + `-` in Windows (`Option` + `-` in Mac)
+
+## Refresher: Quantitative Data Types
+
+-   [**Non-Continuous Data**]{.underline}
+
+    -   **Nominal/Categorical**: Non-ordered, non-numerical data, used to represent qualitative attribute.
+
+        -   Example: nationality, neighborhood, employment status
+
+    -   **Ordinal**: Ordered non-numerical data.
+
+        -   Example: Nutri-grade ratings, frequency of exercise (daily, weekly, bi-weekly)
+
+    -   **Discrete**: Numerical data that can only take specific value (usually integers)
+
+        -   Example: Shoe size, clothing size
+
+    -   **Binary**: Nominal data with only two possible outcome
+
+        -   Example: pass/fail, yes/no, survive/not survive
+
+------------------------------------------------------------------------
+
+-   [**Continuous Data**]{.underline}
+
+    -   **Interval**: Numerical data that can take any value within a range. [It does not have a "true zero".]{.underline}
+
+        -   Example: Celsius scale. Temperature of 0 C does not represent absence of heat.
+
+    -   **Ratio**: Numerical data that can take any value within a range. [it has a "true zero".]{.underline}
+
+        -   Example: Annual income. annual income of 0 represents no income.
+
+## Data Types in R
+
+The four basic data types are characters, numeric, boolean, and integer.
+
+```{r}
+#| echo: true
+#| code-line-numbers: "|1|2|3|4"
+
+chara_type <- "Hello World" # Character
+num_type <- 123.45 # Numeric (also sometimes called Double)
+bool_type <- TRUE # Boolean/Logical (true/false)
+int_type <- 25L # Integer (whole numbers)
+```
+
+## Checking data type of a variable
+
+You can use `str` or `typeof` to check the data type of an R object.
+
+```{r}
+#| echo: true
+typeof(chara_type)
+```
+
+```{r}
+#| echo: true
+str(bool_type) 
+```
+
+## Arithmetic operations in R
+
+You can do arithmetic operations in R, like so:
+
+```{r}
+#| echo: true
+100 / 3
+
+```
+
+```{r}
+#| echo: true
+11 ** 2
+```
+
+## Boolean operations in R
+
+Boolean operations in R (will be handy for later):
+
+**AND** operations (all sides needs to be TRUE for the result to be TRUE)
+
+```{r}
+#| echo: true
+
+TRUE & FALSE 
+```
+
+**OR** operations (only one side needs to be TRUE for the result to be TRUE)
+
+```{r}
+#| echo: true
+
+TRUE | FALSE
+```
+
+**NOT** operations, which is basically flipping TRUE to FALSE and vice versa
+
+```{r}
+#| echo: true
+
+!TRUE
+```
+
+## Functions in R
+
+Functions is a block of reusable code designed to do specific task. Function take inputs (a.k.a arguments or parameters), do their thing, and then return a result. (this result can either be printed out, or saved into an object!)
+
+```{r}
+#| echo: true
+round(123.456, digits = 2)
+```
+
+Saving the result to an object:
+
+```{r}
+#| echo: true
+rounded_num = round(123.456, digits = 2)
+print(rounded_num)
+```
+
+in the example above, `round` is the function. `123.456` and `digits = 2` are the arguments/parameters.
+
+## How do I find out more about a particular function?
+
+You can call the help page / vignette in R by prepending `?` to the function name.
+
+E.g. if you want to find out more about the `round` function, you can run `?round` in your R console (bottom left panel)
+
+## Data Structures in R: Vectors
+
+-   Basic objects in R can only contain one value. But quite often you may want to group a bunch of values together and save it in a single object.
+
+-   A vector is a data structure that can do this. It is the most common and basic data structure in R. (pretty much the workhorse of R!)
+
+```{r}
+#| echo: true
+t1_courses <- c("IDIS110", "IDIS100", "PLE100", "PSYC111", "PSYC103")
+str(t1_courses)
+print(t1_courses)
+```
+
+Example of numeric vector:
+
+```{r}
+#| echo: true
+
+t1_grades <- c(50, 70, 80, 95, 77)
+str(t1_grades)
+```
+
+------------------------------------------------------------------------
+
+### Vector Manipulations: Retrieve and update items
+
+```{r}
+#| echo: true
+
+# retrieve the 1st item in the vector
+t1_grades[1]
+
+# retrieves the 1st item up to the 3rd item
+t1_grades[1:3]
+
+# update the value of the 1st item
+t1_grades[1] <- 65
+print(t1_grades[1])
+```
+
+------------------------------------------------------------------------
+
+### Vector Manipulations: Retrieve items based on criteria
+
+Let's say we want to retrieve items that are larger than 75.
+
+The code below will create a boolean vector called `criteria` that basically keep tracks on whether each items inside `t1_grades` fulfil our condition. The condition is "value must be \> 75". e.g. if item 1 fulfils our condition, then item 1 is 'marked' as `TRUE`. Otherwise, it will be `FALSE`
+
+```{r}
+#| echo: true
+
+criteria <- t1_grades > 75 
+print(criteria)
+```
+
+This line of code applies the boolean vector `criteria` to `t1_grades`, and only retrieve items that fulfils the condition. i.e. items whose position is marked as `TRUE` by `criteria` vector
+
+```{r}
+#| echo: true
+t1_grades[criteria]
+```
+
+You can shorten the code like this too:
+
+```{r}
+#| echo: true
+t1_grades[t1_grades > 75]
+```
+
+------------------------------------------------------------------------
+
+### Vector Manipulations: Handling NA values
+
+-   NA values indicate null values, or the absence of a value (0 is still a value!)
+
+-   Summary functions like `mean` needs you to specify in the arguments how you want it to be handled.
+
+```{r}
+#| echo: true
+missing_vector <- c(21, 22, 23, 24, 25, NA, 27, 28, NA, 30)
+
+# by default it will be confused and return NA
+mean(missing_vector)
+
+# indicate that we want the NA values to be removed entirely
+mean(missing_vector, na.rm = TRUE)
+```
+
+## Data Structures in R: Factors
+
+-   Special data structure in R to deal with categorical data.
+
+-   Can be ordered (ordinal) or unordered (nominal).
+
+-   May look like a normal vector at first glance, so use `str()` to check.
+
+Unordered (Nominal):
+
+```{r}
+#| echo: true 
+unordered_factor <- factor(c("SOA", "SOSS", "SCIS", "CIS", "YPHSOL")) 
+str(unordered_factor)
+```
+
+Ordered (Ordinal):
+
+```{r}
+#| echo: true 
+ordered_factor <- factor(c("Agree", "Disagree", "Neutral", "Disagree"), 
+                         ordered = TRUE, 
+                         levels = c("Disagree", "Neutral", "Agree")) 
+str(ordered_factor)
+```
+
+## Data Structures in R: Dataframe
+
+-   De facto data structure for tabular data in R, and what we use for data processing, plotting, and statistics.
+
+-   Similar to spreadsheets!
+
+-   You can create it by hand like so:
+
+```{r}
+#| echo: true
+t1_data <- data.frame(
+  course_code = c("IDIS110", "IDIS100", "PLE100", "PSYC111", "PSYC103"),
+  grade = c(50, 70, 80, 95, 77)
+)
+print(t1_data)
+```
+
+------------------------------------------------------------------------
+
+Alternatively, here is how to create one using the two vectors that we created earlier:
+
+```{r}
+#| echo: true
+t1_data <- data.frame(course_code = t1_courses, grade = t1_grades)
+print(t1_data)
+```
+
+Most of the time, our dataframe will be generated by loading from external data file such as CSV, SAV, or XLSX file. Let's try loading one from a CSV!
+
+## \[Interlude\] Packages in R
+
+-   Packages are a collections of R functions, datasets, etc. Packages extend the functionality of R.
+
+    -   (Closest analogy I can think of is that they're equivalent of browser add-ons, in a way)
+
+-   Popular packages: `tidyverse`, `caret`, `shiny`, etc.
+
+-   Installation (you only need to do this once): `install.packages("package name")`
+
+-   Loading packages (you need to run this everytime you restart RStudio): `library(package name)`
+
+## Loading data from CSV
+
+-   Make sure to download and save `chile_voting.csv` from this URL into your `data` folder.
+
+-   Check out the data dictionary/explanatory notes to learn more about the data, including the column names, data type inside each columns, etc in the course website.
+
+-   We need to use `readr` package, which is part of `tidyverse` package. So please install `tidyverse` first if you have not done so.
+
+------------------------------------------------------------------------
+
+Load the CSV and save the content into a tibble/dataframe called `chile_data`
+
+```{r}
+#| echo: true
+#| output: false
+library(tidyverse) # <1>
+
+chile_data <- read_csv("data/chile_voting.csv") # <2>
+head(chile_data) # <3>
+
+```
+
+1.  Load the `tidyverse` library (make sure to have it installed first!)
+
+2.  Read the CSV file that we placed inside the the data folder with the help of `read_csv` function, and save it into `chile_data` dataframe.
+
+3.  Print the first few rows of the data to check if it's loaded correctly.
+
+## More ways to "peek" at the data
+
+```{r}
+#| echo: true
+#| output: false
+#| eval: false
+
+dim(chile_data) # <1>
+names(chile_data) # <2>
+str(chile_data) # <3>
+summary(chile_data) # <4> 
+head(chile_data, n=5) # <5>
+tail(chile_data, n=5) # <6>
+```
+
+1.  return a vector of number of rows and columns
+2.  inspect columns
+3.  inspect structure
+4.  print the summary stats of the entire dataframe
+5.  view the first 5 rows
+6.  view the last 5 rows
+
+## Basic dataframe manipulations: Retrieving values
+
+Some basic dataframe functions before we move on to data wrangling next week:
+
+```{r}
+#| echo: true
+#| output: false
+#| eval: false
+
+chile_data["income"] # <1>
+chile_data$income # <2>
+chile_data[3] # <3>
+chile_data[1, 4] # <4> 
+chile_data[3, ] # <5>
+```
+
+1.  retrieve column by name (returns as tibble/dataframe)
+2.  another way to retrieve column by name (returns as vector)
+3.  get an entire column by index
+4.  get a cell at this row, column coord
+5.  get an entire row
+
+# End of Session 1!
+
+Next Session: Data wrangling with `dplyr` and `tidyr` packages

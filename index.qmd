@@ -1,5 +1,6 @@
 ---
-title: "Introductory R for Social Sciences (A/Y 24/25 Term 1)"
+title: "Introductory R for Social Sciences (AY 24/25 Term 1)"
+format: html
 ---
 
 ## Welcome!
@@ -10,26 +11,25 @@ This site serves as a repository for the slides and codes developed for the 'Int
 
 *Slides will be progressively made available below.*
 
-```{=html5}
-<style type="text/css">
-    .table-schedule table {width: 100%;}
-    .table-schedule table th:nth-child(1),
-    .table-schedule table td:nth-child(1) {width: 10%;}
-    .table-schedule table td:nth-child(2) {width: 25%;}
-    .table-schedule table td:nth-child(3) {width: 25%;}
-    .table-schedule table td:nth-child(4) {width: 40%;}
-</style>
-```
 ::: table-schedule
-| Session | Date and Time                       | Venue                  | Topic                                               |
-|---------|-------------------|-------------------|-------------------------|
-| 1       | Fri, 23 Aug 2024, 3.30 PM - 5.30 PM | YPHSL seminar room 2.1 | Introduction to R and RStudio                       |
-| 2       | Fri, 30 Aug 2024, 3.30 PM - 5.30 PM | YPHSL seminar room 2.1 | Data wrangling with tidyverse                       |
-| 3       | Fri, 6 Sep 2024, 3.30 PM - 5.30 PM  | YPHSL seminar room 2.1 | Data visualization and Descriptive Statistics       |
-| 4       | Fri, 13 Sep 2024, 3.30 PM - 5.30 PM | YPHSL seminar room 2.2 | Basic Inferential Tests                             |
-| 5       | Fri, 20 Sep 2024, 3.30 PM - 5.30 PM | YPHSL seminar room 2.1 | Correlation, Regression, and Introduction to Quarto |
+| Session | Date and Time                    | Venue                  | Topic                                         |
+|---------|----------------------------------|------------------------|-----------------------------------------------|
+| 1       | Fri, 23 Aug 2024, 3.30 - 5.30 PM | YPHSL seminar room 2.1 | Introduction to R and RStudio                 |
+| 2       | Fri, 30 Aug 2024, 3.30 - 5.30 PM | YPHSL seminar room 2.1 | Data wrangling with tidyverse                 |
+| 3       | Fri, 6 Sep 2024, 3.30 - 5.30 PM  | YPHSL seminar room 2.1 | Data visualization and Descriptive Statistics |
+| 4       | Fri, 13 Sep 2024, 3.30 - 5.30 PM | YPHSL seminar room 2.2 | Basic Inferential Tests                       |
+| 5       | Fri, 20 Sep 2024, 3.30 - 5.30 PM | YPHSL seminar room 2.1 | Regression and Introduction to Quarto         |
 :::
 
+```{=html5}
+<style type="text/css">
+    .table-schedule {width: 100%;}
+    .table-schedule th:nth-child(1), .table-schedule td:nth-child(1) { width: 8%; }
+    .table-schedule th:nth-child(2), .table-schedule td:nth-child(2) { width: 30%; }
+    .table-schedule th:nth-child(3), .table-schedule td:nth-child(3) { width: 25%; }
+    .table-schedule th:nth-child(4), .table-schedule td:nth-child(4) { width: 35%; }
+</style>
+```
 ## Pre-workshop activities
 
 ### R and RStudio
@@ -40,9 +40,11 @@ This site serves as a repository for the slides and codes developed for the 'Int
 
 **RStudio** is an Integrated Development Environment (IDE) for R. Think of it as a user-friendly interface that makes it easier to write R code, manage projects, and visualize output. RStudio is not required to use R, but it significantly enhances the R programming experience!
 
-### Install R and R Studio
+::: callout-important
+**Always** install R before installing RStudio, as RStudio requires R to function.
+:::
 
-**Install R:**
+### Step 1: Install R
 
 1.  Go to <https://cran.rstudio.com/>
 
@@ -50,7 +52,7 @@ This site serves as a repository for the slides and codes developed for the 'Int
 
 3.  Download and install the latest version of R
 
-**Install RStudio:**
+### **Step 2: Install RStudio**
 
 1.  Visit <https://posit.co/download/rstudio-desktop/>
 
@@ -58,12 +60,24 @@ This site serves as a repository for the slides and codes developed for the 'Int
 
 3.  Click "Download" and install the latest version of RStudio
 
-::: callout-important
-Always install R before installing RStudio, as RStudio requires R to function.
+### Step 3: Install the required packages
+
+::: callout-note
+**Packages** in R are collections of additional tools, functions, and datasets that extend R's capabilities. Packages are created by contributors in the R community.
+
+Think of R as a smartphone, and packages as apps you download to add new features. Each package is designed to help with specific tasks or analyses, like creating graphs, analyzing particular types of data, or performing advanced statistical tests.
+
+Packages can save us time and leverage expert-created tools without having to write complex code from scratch. It's very handy!
 :::
 
-### Get the workshop materials
+1.  Open RStudio
 
-#### Easy way: Download from this GitHub Repo
+2.  Copy the following code: `install.packages(c( "car", "rmarkdown", "huxtable", "gt", "gtsummary", "tidyverse"))`
 
-#### Sophisticated way: Clone from this GitHub Repo
+3.  Paste it in the **Console** tab (see image below)
+
+4.  Press Enter. Rstudio should proceed with installing the packages that we need.
+
+![](images/install-packages.jpg)
+
+------------------------------------------------------------------------

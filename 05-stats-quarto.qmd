@@ -1,0 +1,409 @@
+---
+title: "Regression and Introduction to Quarto"
+author: "Bella Ratmelia"
+format: revealjs
+---
+
+## Today's Outline
+
+1.  Linear Regression
+2.  Logistic Regression
+3.  Create your manuscript with Quarto
+
+## Load our data for today!
+
+```{r}
+#| echo: true
+#| label: load-data
+#| message: false
+#| output: false
+#| warning: false
+
+# import tidyverse library
+library(tidyverse)
+
+# read the CSV with Chile voting data
+chile_data <- read_csv("data/chile_voting.csv")
+
+# Display the first few rows and structure of the data
+head(chile_data)
+str(chile_data)
+```
+
+## Linear Regression
+
+**Linear regression** is a statistical method used to model the relationship between a dependent variable (outcome) and one or more independent variables (predictors) by fitting a linear equation to the observed data. The math formula looks like this:
+
+$$
+Y = \beta_0 + \beta_1X + \varepsilon
+$$
+
+-   $Y$ - the dependent variable
+    -   **must be continuous**
+-   $X$ - the independent variable (if there are more than one, there will be $X_1$ , $X_2$ , and so on.
+    -   **can be ordinal, nominal, or continuous**
+-   $\beta_0$ - the y-intercept. Represents the expected value of independent variable $Y$ when independent variable(s) $X$ are set to zero.
+-   $\beta_1$ - the slope / coefficient for independent variable
+-   $\varepsilon$ - the error term. (In some examples you might see this omitted from the formula).
+
+------------------------------------------------------------------------
+
+### IRL Examples:
+
+-   Does a person's **age** affect their **income**?
+
+-   Do a person's **age** and **education level** affect their **income**?
+
+------------------------------------------------------------------------
+
+### Example: with 1 continuous predictor
+
+**Research Question:** Does a person's age influence their income in Chile?
+
+The outcome/DV ($Y$) here is `income`, while the predictor/IV ($X$) would be `age`
+
+```{r}
+#| echo: true
+income_model1 <- lm(income ~ age, data = chile_data)
+summary(income_model1) #summarize the result
+```
+
+-   **Call**: the formula
+-   **Residuals**: overview on the distribution of residuals (expected value minus observed value) -- we can plot this to check for homoscedasticity -
+-   **Coefficients**: shows the intercept, the regression coefficients for the predictor variables, and their statistical significance
+-   **Residual standard error**: the average difference between observed and expected outcome by the model. Generally the lower, the better.
+-   **R-squared & Adjusted R-squared**: indicates the proportion of variation in the outcome that can be explained by the model i.e., how "accurate" is your model?
+-   **F-statistics**: overall significance
+
+------------------------------------------------------------------------
+
+### Example: with multiple continuous predictors
+
+**Research Question:** Do a person's age and their support for the status quo (statusquo) have an impact on their income?
+
+The outcome/DV ($Y$) here is `income`, while the predictors/IVs ($X_1$ and $X_2$) would be `age` and `statusquo`
+
+```{r}
+#| echo: true
+income_model2 <- lm(income ~ age + statusquo, data = chile_data)
+summary(income_model2)
+```
+
+------------------------------------------------------------------------
+
+### Using huxtable to present both models in your paper
+
+Don't forget to install the library by running this line in your terminal: `install.packages("huxtable")`
+
+```{r}
+#| echo: true
+library(huxtable)
+huxreg("age" = income_model1, "age + statusquo" = income_model2)
+```
+
+------------------------------------------------------------------------
+
+### Heads-up: Multicollinearity
+
+Caution! When doing regression-type of tests, watch out for multicollinearity.
+
+Multicollinearity = a situation in which two or more predictor variables are highly correlated with each other. This makes it difficult to determine the specific contribution of each predictor variable to the relationship.
+
+One way to check for it:
+
+-   Assess the correlation between your predictor variables in your model using Variance Inflation Factor (VIF)
+
+-   If they seem to be highly correlated (\> 5 or so), one of the easiest (and somewhat acceptable) way is to simply remove the less significant predictor from your model :D
+
+```{r}
+#| echo: true
+car::vif(income_model2)
+```
+
+------------------------------------------------------------------------
+
+### Example: with a categorical predictor
+
+**Research question**: Explore the difference of income between different education levels.
+
+::: callout-note
+Before we proceed with analysis, let's ensure that all the categorical variables are cast as factors!
+:::
+
+------------------------------------------------------------------------
+
+### Data Preparation
+
+```{r}
+#| echo: true
+
+chile_data <- chile_data |> 
+    mutate(education = factor(education)) |> 
+    mutate(sex = factor(sex)) |> 
+    mutate(region = factor(region))
+
+glimpse(chile_data)
+```
+
+------------------------------------------------------------------------
+
+### Continuing with the analysis
+
+The analysis summary should look like this:
+
+```{r}
+#| echo: true
+income_modelcat <- lm(income ~ education, data = chile_data)
+summary(income_modelcat)
+```
+
+Interpretation for categorical predictor - one of the category will be used as a reference category. By default, the first category will be used.
+
+------------------------------------------------------------------------
+
+### Categorical predictor: changing the reference
+
+We can use `relevel` to change the reference/baseline category.
+
+```{r}
+#| echo: true
+chile_data <- chile_data |> 
+    mutate(education = relevel(education, ref = "S"))
+
+contrasts(chile_data$education)
+```
+
+------------------------------------------------------------------------
+
+### Re-run the analysis with the new reference category
+
+```{r}
+#| echo: true
+income_modelcat <- lm(income ~ education, data = chile_data)
+summary(income_modelcat)
+```
+
+------------------------------------------------------------------------
+
+### Linear Regression group exercise (solo attempts ok)
+
+Create a regression model called `statusquo_model` that predicts the `statusquo` score based on `age` and `education`. Make sure that the reference category for `education` is set to **P** (Primary).
+
+Optional: Plot the scatterplot with the trend line for each education category. It should look like this:
+
+```{r}
+#| echo: true
+chile_data |> 
+	ggplot(aes(x = age, y = statusquo, color = education)) +
+	geom_point() +
+	geom_smooth(method = "lm")
+```
+
+```{r}
+#| echo: true
+#| output: true
+
+chile_data <- chile_data |> 
+    dplyr::mutate(education = relevel(education, ref = "P"))
+
+statusquo_model <- lm(statusquo ~ age + education, data = chile_data)
+summary(statusquo_model)
+```
+
+## Binary Logistic Regression
+
+Also known as simply logistic regression, it is used to model the relationship between a set of independent variables and a binary outcome. These independent variables can be either categorical or continuous.
+
+The formula is:
+
+$$
+logit(P) = \beta_0 + \beta_1X_1 + \beta_2X_2 + … + \beta_nX_n
+$$
+
+It can also be written like below, in which the $logit(P)$ part is expanded:
+
+$$
+P = \frac{1}{1 + e^{-(\beta_0 + \beta_1X)}}
+$$
+
+------------------------------------------------------------------------
+
+### IRL Examples:
+
+-   Does a person's **age** and **education** affect whether they will **vote Yes or No** in the plebiscite?
+
+-   Does a person's **income** and **region** affect their likelihood of **abstaining from voting**?
+
+In a way, the goal or logistic regression is to determine the probability of a specific event occurring (pass or fail, survived or perished, vote A or vote B)
+
+------------------------------------------------------------------------
+
+### Example: with 1 continuous Predictor
+
+**Research Question**: Does **age** affect the likelihood of voting "Yes" in the plebiscite?
+
+```{r}
+#| echo: true
+# First, we need to create a binary outcome
+chile_data <- chile_data |>
+    mutate(vote_yes = ifelse(vote == "Y", 1, 0))
+
+vote_age <- glm(vote_yes ~ age,
+                family = binomial, 
+                data = chile_data)
+
+summary(vote_age)
+exp(coefficients(vote_age))
+```
+
+------------------------------------------------------------------------
+
+### Example: with 1 categorical Predictor
+
+**Research Question**: Does **education level** affect the likelihood of voting "Yes" in the plebiscite?
+
+```{r}
+#| echo: true
+vote_education <- glm(vote_yes ~ education,
+                      family = "binomial",
+                      data = chile_data)
+
+summary(vote_education)
+exp(coefficients(vote_education))
+```
+
+------------------------------------------------------------------------
+
+### Present both models in a table
+
+```{r}
+#| echo: true
+library(huxtable)
+huxreg("age" = vote_age, "education" = vote_education)
+```
+
+------------------------------------------------------------------------
+
+### Logistic Regression group exercise (solo attempts ok)
+
+Create a regression model called `vote_model` that predicts the likelihood of voting "Yes" based on `age`, `education`, and `income`. Make sure that the reference category for `education` is set to P (Primary).
+
+```{r}
+#| echo: true
+#| output: true
+
+chile_data <- chile_data |> 
+    mutate(education = relevel(education, ref = "P"))
+
+vote_model <- glm(vote_yes ~ age + education + income,
+                  family = "binomial", 
+                  data = chile_data) 
+
+summary(vote_model)
+exp(coefficients(vote_model))
+```
+
+# What is Quarto? What is Markdown?
+
+## **Markdown (Specifically, R Markdown)** {.incremental}
+
+-   **Markdown** is a lightweight markup language that provides a simple and readable way to write formatted text without using complex HTML or LaTeX. It is designed to make authoring content easy for everyone!
+
+    -   Markdown files can be converted into HTML or other formats.
+    -   Generic Markdown file will have `.md` extension.
+
+-   **R Markdown** is an extension of Markdown that incorporates R code chunks and allows you to create dynamic documents that integrate text, code, and output (such as tables and plots).
+
+    -   RMarkdown file will have `.Rmd` extension.
+
+------------------------------------------------------------------------
+
+![](images/rmarkdown.png){fig-align="center"}
+
+------------------------------------------------------------------------
+
+How it all works:
+
+![Illustration by Allison Horst (www.allisonhorst.com)](images/rmarkdown_wizards.png){fig-align="center"}
+
+## Quarto
+
+-   **Quarto** is a [multi-language]{.underline}, [next-generation]{.underline} version of R Markdown from Posit and includes dozens of new features and capabilities while at the same being able to render most existing Rmd files without modification.
+
+![Illustration by Allison Horst (www.allisonhorst.com)](images/quarto-rendering.png){fig-align="center"}
+
+------------------------------------------------------------------------
+
+![](images/quarto.png){fig-align="center"}
+
+## R Scripts vs Quarto
+
+::: columns
+::: {.column width="50%"}
+**R Scripts**
+
+-   Great for quick debugging, experiment
+
+-   Preferred format if you are archiving your code to GitHub or data repository
+
+-   More suitable for "production" tasks e.g. automating your data cleaning and processing, custom functions, etc.
+:::
+
+::: {.column width="50%"}
+**Quarto**
+
+-   Great for report and presentation to showcase your research insights/process as it integrates code, narrative text, visualizations, and results.
+
+-   Very handy when you need your report in multiple format, e.g. in Word and PPT.
+:::
+:::
+
+## Let's create our first Quarto document!
+
+1.  Go to `File` \> `New File` \> `Quarto Document`
+2.  Put any title you like, and put your name as the author
+3.  Check `HTML` as the end result for now
+4.  Click on `Create`!
+5.  *Optional*: collapse the console and environment tab (bottom left and top right) to make it easier to view the quarto document and the output.
+6.  **Quarto Tour + Hands On!** (Open [this cheatsheet](https://rstudio.github.io/cheatsheets/html/quarto.html) on another tab if you'd like!). We will explore how to:
+    1.  Add narrative text
+    2.  Add code chunks
+    3.  Add math formulas with LaTeX
+    4.  Add citations (you need to have Zotero installed)
+
+## Rendering Quarto to HTML, Word, and PDF
+
+You can change the final result of rendering in the `YAML` section of your document.
+
+1.  Rendering to HTML is the default option.
+    -   You can also render as presentation (fun fact: my slides is made from Quarto!)
+2.  Rendering to Word: You have to have MS Word installed in your laptop
+3.  Rendering to PDF: If you encounter an error when converting your result to PDF, the faster (and easier) alternative is to render your doc to Word, and save to PDF from there.
+
+# Best Practices + More Resources
+
+## R Best Practices
+
+-   Use `<-` for assigning values to objects.
+
+    -   Only use `=` when passing values to a function parameter.
+
+-   [**Do not alter your raw data**]{.underline}; save your wrangled/cleaned data into a new file and keep it separate from the raw data.
+
+-   Make use of R projects to organize your data and make it easier to send over to your collaborators.
+
+    -   Having said that, when it comes to coding project, the best way to collaborate is using GitHub or similar platforms.
+
+-   Whenever possible and makes sense for your project, follow the common convention when naming your objects, scripts, and functions. One guide that you can follow is [Hadley Wickham's tidyverse style guide](https://style.tidyverse.org/).
+
+## If you'd like to continue your learning:
+
+These are the resources that I would recommend:
+
+-   [R for Data Science](https://r4ds.hadley.nz/) by Hadley Wickham (free) - one of the most popular free R resource (I've used this myself!)
+
+-   [Statistical Inference via Data Science: A ModernDive into R and the Tidyverse](https://www.tidymodels.org/books/moderndive/) by Chester Ismay and Albert Y. Kim (free, print book available for purchase) - Very gentle introduction to tidyverse, regression, and statistical inference.
+
+-   [A Guide on Data Analysis](https://bookdown.org/mike/data_analysis/) by Mike Nguyen (also free) - covers different kinds of regression and quasi-experimental designs such as Regression Discontinuity Design (RDD), among others.
+
+-   [Big Book of R](https://www.bigbookofr.com/) by Oscar Baruffa (also vv free) - Aggregation of many free resources on R in various topics (e.g. archaeology, people analytics, sports analytics, etc.)
