@@ -1,31 +1,17 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Introductory R for Social Sciences (AY 24/25 Term 1)",
+    "objectID": "resources.html",
+    "href": "resources.html",
+    "title": "Resources",
     "section": "",
-    "text": "This site serves as a repository for the slides and codes developed for the ‘Introductory R for Social Sciences’ workshop tailored for undergraduate students at SMU. Comprising five sessions, this resource is designed for individuals with fundamental statistics knowledge who are venturing into R programming or coding for the first time."
+    "text": "Further readings if you’d like to deepen your knowledge and skill after the workshop:\n\n\nIsmay, C., & Kim, A. Y. (2024). Statistical inference via data science. https://moderndive.com/\n\n\nWickham, H., Çetinkaya-Rundel, M., & Garrett Grolemund. (2024). R for data science (2e) (2nd ed.). https://r4ds.hadley.nz/\n\n\nWilke, C. O. (2024). Fundamentals of data visualization. https://clauswilke.com/dataviz/"
   },
   {
-    "objectID": "index.html#welcome",
-    "href": "index.html#welcome",
-    "title": "Introductory R for Social Sciences (AY 24/25 Term 1)",
+    "objectID": "coc.html",
+    "href": "coc.html",
+    "title": "Code of conduct",
     "section": "",
-    "text": "This site serves as a repository for the slides and codes developed for the ‘Introductory R for Social Sciences’ workshop tailored for undergraduate students at SMU. Comprising five sessions, this resource is designed for individuals with fundamental statistics knowledge who are venturing into R programming or coding for the first time."
-  },
-  {
-    "objectID": "index.html#schedule",
-    "href": "index.html#schedule",
-    "title": "Introductory R for Social Sciences (AY 24/25 Term 1)",
-    "section": "Schedule",
-    "text": "Schedule\nSlides will be progressively made available below.\n\n\n\n\n\n\n\n\n\n\nSession\nDate and Time\nVenue\nTopic\n\n\n\n\n1\nFri, 23 Aug 2024, 3.30 - 5.30 PM\nYPHSL seminar room 2.1\nIntroduction to R and RStudio\n\n\n2\nFri, 30 Aug 2024, 3.30 - 5.30 PM\nYPHSL seminar room 2.1\nData wrangling with tidyverse\n\n\n3\nFri, 6 Sep 2024, 3.30 - 5.30 PM\nYPHSL seminar room 2.1\nData visualization and Descriptive Statistics\n\n\n4\nFri, 13 Sep 2024, 3.30 - 5.30 PM\nYPHSL seminar room 2.2\nBasic Inferential Tests\n\n\n5\nFri, 20 Sep 2024, 3.30 - 5.30 PM\nYPHSL seminar room 2.1\nRegression and Introduction to Quarto"
-  },
-  {
-    "objectID": "index.html#pre-workshop-activities",
-    "href": "index.html#pre-workshop-activities",
-    "title": "Introductory R for Social Sciences (AY 24/25 Term 1)",
-    "section": "Pre-workshop activities",
-    "text": "Pre-workshop activities\n\nR and RStudio\nR and RStudio are two different but complementary tools used in data analysis and statistical computing. Understanding the difference between them is crucial (especially for beginners).\nR is a programming language and software environment specifically designed for statistical computing and graphics. It’s the core tool that actually processes your data and performs analyses.\nRStudio is an Integrated Development Environment (IDE) for R. Think of it as a user-friendly interface that makes it easier to write R code, manage projects, and visualize output. RStudio is not required to use R, but it significantly enhances the R programming experience!\n\n\n\n\n\n\nImportant\n\n\n\nAlways install R before installing RStudio, as RStudio requires R to function.\n\n\n\n\nStep 1: Install R\n\nGo to https://cran.rstudio.com/\nChoose your operating system (Windows, Mac, or Linux)\nDownload and install the latest version of R\n\n\n\nStep 2: Install RStudio\n\nVisit https://posit.co/download/rstudio-desktop/\nScroll down to “Download RStudio Desktop”\nClick “Download” and install the latest version of RStudio\n\n\n\nStep 3: Install the required packages\n\n\n\n\n\n\nNote\n\n\n\nPackages in R are collections of additional tools, functions, and datasets that extend R’s capabilities. Packages are created by contributors in the R community.\nThink of R as a smartphone, and packages as apps you download to add new features. Each package is designed to help with specific tasks or analyses, like creating graphs, analyzing particular types of data, or performing advanced statistical tests.\nPackages can save us time and leverage expert-created tools without having to write complex code from scratch. It’s very handy!\n\n\n\nOpen RStudio\nCopy the following code: install.packages(c( \"car\", \"rmarkdown\", \"huxtable\", \"gt\", \"gtsummary\", \"tidyverse\"))\nPaste it in the Console tab (see image below)\nPress Enter. Rstudio should proceed with installing the packages that we need."
+    "text": "In order to foster a positive and professional learning environment we encourage the following kinds of behaviours:\n\nUse welcoming and inclusive language\nBe respectful of different viewpoints and experiences\nGracefully accept constructive criticism\nFocus on what is best for the community\nShow courtesy and respect towards other community members\n\n(Adapted from The Carpentries’ Code of Conduct)"
   },
   {
     "objectID": "05-stats-quarto.html#todays-outline",
@@ -95,14 +81,7 @@
     "href": "05-stats-quarto.html#r-best-practices",
     "title": "Regression and Introduction to Quarto",
     "section": "R Best Practices",
-    "text": "R Best Practices\n\nUse &lt;- for assigning values to objects.\n\nOnly use = when passing values to a function parameter.\n\nDo not alter your raw data; save your wrangled/cleaned data into a new file and keep it separate from the raw data.\nMake use of R projects to organize your data and make it easier to send over to your collaborators.\n\nHaving said that, when it comes to coding project, the best way to collaborate is using GitHub or similar platforms.\n\nWhenever possible and makes sense for your project, follow the common convention when naming your objects, scripts, and functions. One guide that you can follow is Hadley Wickham’s tidyverse style guide."
-  },
-  {
-    "objectID": "05-stats-quarto.html#if-youd-like-to-continue-your-learning",
-    "href": "05-stats-quarto.html#if-youd-like-to-continue-your-learning",
-    "title": "Regression and Introduction to Quarto",
-    "section": "If you’d like to continue your learning:",
-    "text": "If you’d like to continue your learning:\nThese are the resources that I would recommend:\n\nR for Data Science by Hadley Wickham (free) - one of the most popular free R resource (I’ve used this myself!)\nStatistical Inference via Data Science: A ModernDive into R and the Tidyverse by Chester Ismay and Albert Y. Kim (free, print book available for purchase) - Very gentle introduction to tidyverse, regression, and statistical inference.\nA Guide on Data Analysis by Mike Nguyen (also free) - covers different kinds of regression and quasi-experimental designs such as Regression Discontinuity Design (RDD), among others.\nBig Book of R by Oscar Baruffa (also vv free) - Aggregation of many free resources on R in various topics (e.g. archaeology, people analytics, sports analytics, etc.)\n\n\n\n\n\nIntroductory R for Social Science"
+    "text": "R Best Practices\n\nUse &lt;- for assigning values to objects.\n\nOnly use = when passing values to a function parameter.\n\nDo not alter your raw data; save your wrangled/cleaned data into a new file and keep it separate from the raw data.\nMake use of R projects to organize your data and make it easier to send over to your collaborators.\n\nHaving said that, when it comes to coding project, the best way to collaborate is using GitHub or similar platforms.\n\nWhenever possible and makes sense for your project, follow the common convention when naming your objects, scripts, and functions. One guide that you can follow is Hadley Wickham’s tidyverse style guide.\n\n\n\n\n\nIntroductory R for Social Science"
   },
   {
     "objectID": "03-visualization.html#todays-outline",
@@ -235,7 +214,7 @@
     "href": "01-intro.html#preamble",
     "title": "Introduction to R and RStudio",
     "section": "Preamble",
-    "text": "Preamble\n\nAbout me:\n\nLibrarian, Research & Data Services team, SMU Libraries.\nBachelor of IT, MSc in Info Studies.\nHave been with SMU since the pandemic era (2021).\n\nAbout this workshop:\n\nLive-coding format; code along with me!\nGoal of workshop: to give you enough fundamentals (at least to the point that ChatGPT can’t bluff you so easily) and confidence to explore R on your own.\nDon’t be afraid to ask for help! We are all here to learn\nComes with quizzes!"
+    "text": "Preamble\n\nAbout me:\n\nLibrarian, Research & Data Services team, SMU Libraries.\nBachelor of IT, MSc in Info Studies.\nHave been with SMU since the pandemic era (2021).\n\nAbout this workshop:\n\nLive-coding format; code along with me!\nGoal of workshop: to give you enough fundamentals (at least to the point that ChatGPT can’t bluff you so easily) and confidence to explore R on your own.\nDon’t be afraid to ask for help! We are all here to learn"
   },
   {
     "objectID": "01-intro.html#what-is-r-what-is-r-studio",
@@ -329,6 +308,13 @@
     "text": "How do I find out more about a particular function?\nYou can call the help page / vignette in R by prepending ? to the function name.\nE.g. if you want to find out more about the round function, you can run ?round in your R console (bottom left panel)"
   },
   {
+    "objectID": "01-intro.html#packages-in-r",
+    "href": "01-intro.html#packages-in-r",
+    "title": "Introduction to R and RStudio",
+    "section": "Packages in R",
+    "text": "Packages in R\n\nPackages are a collections of R functions, datasets, etc. Packages extend the functionality of R.\n\n(Closest analogy I can think of is that they’re equivalent of browser add-ons, in a way)\n\nPopular packages: tidyverse, caret, shiny, etc.\nInstallation (you only need to do this once): install.packages(\"package name\")\nLoading packages (you need to run this everytime you restart RStudio): library(package name) - let’s try to load tidyverse!"
+  },
+  {
     "objectID": "01-intro.html#data-structures-in-r-vectors",
     "href": "01-intro.html#data-structures-in-r-vectors",
     "title": "Introduction to R and RStudio",
@@ -350,18 +336,11 @@
     "text": "Data Structures in R: Dataframe\n\nDe facto data structure for tabular data in R, and what we use for data processing, plotting, and statistics.\nSimilar to spreadsheets!\nYou can create it by hand like so:\n\n\nt1_data &lt;- data.frame(\n  course_code = c(\"IDIS110\", \"IDIS100\", \"PLE100\", \"PSYC111\", \"PSYC103\"),\n  grade = c(50, 70, 80, 95, 77)\n)\nprint(t1_data)\n\n  course_code grade\n1     IDIS110    50\n2     IDIS100    70\n3      PLE100    80\n4     PSYC111    95\n5     PSYC103    77"
   },
   {
-    "objectID": "01-intro.html#interlude-packages-in-r",
-    "href": "01-intro.html#interlude-packages-in-r",
-    "title": "Introduction to R and RStudio",
-    "section": "[Interlude] Packages in R",
-    "text": "[Interlude] Packages in R\n\nPackages are a collections of R functions, datasets, etc. Packages extend the functionality of R.\n\n(Closest analogy I can think of is that they’re equivalent of browser add-ons, in a way)\n\nPopular packages: tidyverse, caret, shiny, etc.\nInstallation (you only need to do this once): install.packages(\"package name\")\nLoading packages (you need to run this everytime you restart RStudio): library(package name)"
-  },
-  {
     "objectID": "01-intro.html#loading-data-from-csv",
     "href": "01-intro.html#loading-data-from-csv",
     "title": "Introduction to R and RStudio",
     "section": "Loading data from CSV",
-    "text": "Loading data from CSV\n\nMake sure to download and save chile_voting.csv from this URL into your data folder.\nCheck out the data dictionary/explanatory notes to learn more about the data, including the column names, data type inside each columns, etc in the course website.\nWe need to use readr package, which is part of tidyverse package. So please install tidyverse first if you have not done so."
+    "text": "Loading data from CSV\n\nMake sure to download and save chile_voting.csv from this URL into your data folder.\nCheck out the data dictionary/explanatory notes to learn more about the data, including the column names, data type inside each columns here.\nWe need to use readr package, which is part of tidyverse package. So please install tidyverse first if you have not done so."
   },
   {
     "objectID": "01-intro.html#more-ways-to-peek-at-the-data",
@@ -628,5 +607,33 @@
     "title": "About the workshop",
     "section": "Part 05: Correlation, Regression, and Introduction to Quarto",
     "text": "Part 05: Correlation, Regression, and Introduction to Quarto\nLearn how to conduct correlation analysis and simple linear regression and binary logistic regression in R. Learn best practices to improve code readability and reproducibility. This session will also introduce you to Quarto, a powerful tool for creating dynamic documents that integrate R code, text, plots, and statistical output."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Introductory R for Social Sciences (AY 24/25 Term 1)",
+    "section": "",
+    "text": "This site serves as a repository for the slides and codes developed for the ‘Introductory R for Social Sciences’ workshop tailored for undergraduate students at SMU. Comprising five sessions, this resource is designed for individuals with fundamental statistics knowledge who are venturing into R programming or coding for the first time."
+  },
+  {
+    "objectID": "index.html#welcome",
+    "href": "index.html#welcome",
+    "title": "Introductory R for Social Sciences (AY 24/25 Term 1)",
+    "section": "",
+    "text": "This site serves as a repository for the slides and codes developed for the ‘Introductory R for Social Sciences’ workshop tailored for undergraduate students at SMU. Comprising five sessions, this resource is designed for individuals with fundamental statistics knowledge who are venturing into R programming or coding for the first time."
+  },
+  {
+    "objectID": "index.html#schedule",
+    "href": "index.html#schedule",
+    "title": "Introductory R for Social Sciences (AY 24/25 Term 1)",
+    "section": "Schedule",
+    "text": "Schedule\nSlides will be progressively made available below.\n\n\n\n\nSession\nDate and Time\nVenue\nTopic\n\n\n\n\n1\nFri, 23 Aug 2024, 3.30 - 5.30 PM\nYPHSL seminar room 2.1\nIntroduction to R and RStudio\n\n\n2\nFri, 30 Aug 2024, 3.30 - 5.30 PM\nYPHSL seminar room 2.1\nData wrangling with tidyverse\n\n\n3\nFri, 6 Sep 2024, 3.30 - 5.30 PM\nYPHSL seminar room 2.1\nData visualization and Descriptive Statistics\n\n\n4\nFri, 13 Sep 2024, 3.30 - 5.30 PM\nYPHSL seminar room 2.2\nBasic Inferential Tests\n\n\n5\nFri, 20 Sep 2024, 3.30 - 5.30 PM\nYPHSL seminar room 2.1\nRegression and Introduction to Quarto"
+  },
+  {
+    "objectID": "index.html#pre-workshop-activities",
+    "href": "index.html#pre-workshop-activities",
+    "title": "Introductory R for Social Sciences (AY 24/25 Term 1)",
+    "section": "Pre-workshop activities",
+    "text": "Pre-workshop activities\n\nR and RStudio\nR and RStudio are two different but complementary tools used in data analysis and statistical computing. Understanding the difference between them is crucial (especially for beginners).\nR is a programming language and software environment specifically designed for statistical computing and graphics. It’s the core tool that actually processes your data and performs analyses.\nRStudio is an Integrated Development Environment (IDE) for R. Think of it as a user-friendly interface that makes it easier to write R code, manage projects, and visualize output. RStudio is not required to use R, but it significantly enhances the R programming experience!\n\n\n\n\n\n\nImportant\n\n\n\nAlways install R before installing RStudio, as RStudio requires R to function.\n\n\n\n\nStep 1: Install R\n\nGo to https://cran.rstudio.com/\nChoose your operating system (Windows, Mac, or Linux)\nDownload and install the latest version of R\n\n\n\nStep 2: Install RStudio\n\nVisit https://posit.co/download/rstudio-desktop/\nScroll down to “Download RStudio Desktop”\nClick “Download” and install the latest version of RStudio\n\n\n\nStep 3: Install the required packages\n\n\n\n\n\n\nNote\n\n\n\nPackages in R are collections of additional tools, functions, and datasets that extend R’s capabilities. Packages are created by contributors in the R community.\nThink of R as a smartphone, and packages as apps you download to add new features. Each package is designed to help with specific tasks or analyses, like creating graphs, analyzing particular types of data, or performing advanced statistical tests.\nPackages can save us time and leverage expert-created tools without having to write complex code from scratch. It’s very handy!\n\n\n\nOpen RStudio\nCopy the following code: install.packages(c( \"car\", \"rmarkdown\", \"huxtable\", \"gt\", \"gtsummary\", \"tidyverse\"))\nPaste it in the Console tab (see image below)\nPress Enter. Rstudio should proceed with installing the packages that we need."
   }
 ]

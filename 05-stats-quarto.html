@@ -449,37 +449,37 @@ Y = \beta_0 + \beta_1X + \varepsilon
 <h3 id="irl-examples">IRL Examples:</h3>
 <ul>
 <li><p>Does a person’s <strong>age</strong> affect their <strong>income</strong>?</p></li>
-<li><p>Do a person’s <strong>age</strong> and <strong>education level</strong> affect their <strong>income</strong>?</p></li>
+<li><p>Do a person’s <strong>age</strong> and <strong>income</strong> affect their support towards the <strong>statusquo</strong>?</p></li>
 </ul>
 </section>
 <section class="slide level2">
 
 <h3 id="example-with-1-continuous-predictor">Example: with 1 continuous predictor</h3>
 <p><strong>Research Question:</strong> Does a person’s age influence their income in Chile?</p>
-<p>The outcome/DV (<span class="math inline">\(Y\)</span>) here is <code>income</code>, while the predictor/IV (<span class="math inline">\(X\)</span>) would be <code>age</code></p>
+<p>The outcome/DV (<span class="math inline">\(Y\)</span>) here is <code>statusquo</code>, while the predictor/IV (<span class="math inline">\(X\)</span>) would be <code>age</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>income_model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(income <span class="sc">~</span> age, <span class="at">data =</span> chile_data)</span>
-<span id="cb2-2"><a></a><span class="fu">summary</span>(income_model1) <span class="co">#summarize the result</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>statsquo_model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(statusquo <span class="sc">~</span> age, <span class="at">data =</span> chile_data)</span>
+<span id="cb2-2"><a></a><span class="fu">summary</span>(statsquo_model1) <span class="co">#summarize the result</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
-lm(formula = income ~ age, data = chile_data)
+lm(formula = statusquo ~ age, data = chile_data)
 
 Residuals:
-   Min     1Q Median     3Q    Max 
--33175 -23653 -17457   1673 168847 
+     Min       1Q   Median       3Q      Max 
+-2.00213 -0.97057 -0.04264  0.96793  2.20837 
 
 Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) 37240.54    2176.34  17.112   &lt;2e-16 ***
-age           -86.96      52.68  -1.651   0.0989 .  
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -0.300221   0.053678  -5.593 2.46e-08 ***
+age          0.007802   0.001301   5.997 2.28e-09 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 39500 on 2599 degrees of freedom
-  (99 observations deleted due to missingness)
-Multiple R-squared:  0.001047,  Adjusted R-squared:  0.000663 
-F-statistic: 2.725 on 1 and 2599 DF,  p-value: 0.09891</code></pre>
+Residual standard error: 0.9937 on 2680 degrees of freedom
+  (18 observations deleted due to missingness)
+Multiple R-squared:  0.01324,   Adjusted R-squared:  0.01287 
+F-statistic: 35.96 on 1 and 2680 DF,  p-value: 2.283e-09</code></pre>
 </div>
 </div>
 <ul>
@@ -494,32 +494,32 @@ F-statistic: 2.725 on 1 and 2599 DF,  p-value: 0.09891</code></pre>
 <section class="slide level2">
 
 <h3 id="example-with-multiple-continuous-predictors">Example: with multiple continuous predictors</h3>
-<p><strong>Research Question:</strong> Do a person’s age and their support for the status quo (statusquo) have an impact on their income?</p>
+<p><strong>Research Question:</strong> Do a person’s age and their income have an impact on their support for the status quo?</p>
 <p>The outcome/DV (<span class="math inline">\(Y\)</span>) here is <code>income</code>, while the predictors/IVs (<span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span>) would be <code>age</code> and <code>statusquo</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>income_model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(income <span class="sc">~</span> age <span class="sc">+</span> statusquo, <span class="at">data =</span> chile_data)</span>
-<span id="cb4-2"><a></a><span class="fu">summary</span>(income_model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>statsquo_model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(statusquo <span class="sc">~</span> age <span class="sc">+</span> income, <span class="at">data =</span> chile_data)</span>
+<span id="cb4-2"><a></a><span class="fu">summary</span>(statsquo_model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
-lm(formula = income ~ age + statusquo, data = chile_data)
+lm(formula = statusquo ~ age + income, data = chile_data)
 
 Residuals:
-   Min     1Q Median     3Q    Max 
--36137 -22547 -16858   2035 169862 
+     Min       1Q   Median       3Q      Max 
+-1.61635 -0.96952 -0.05992  0.97136  1.89569 
 
 Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) 37836.55    2195.59  17.233   &lt;2e-16 ***
-age          -102.41      53.18  -1.926   0.0543 .  
-statusquo    1694.06     780.73   2.170   0.0301 *  
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -3.467e-01  5.793e-02  -5.985 2.46e-09 ***
+age          7.815e-03  1.330e-03   5.875 4.77e-09 ***
+income       1.072e-06  4.942e-07   2.170   0.0301 *  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 39520 on 2587 degrees of freedom
+Residual standard error: 0.9942 on 2587 degrees of freedom
   (110 observations deleted due to missingness)
-Multiple R-squared:  0.002916,  Adjusted R-squared:  0.002145 
-F-statistic: 3.783 on 2 and 2587 DF,  p-value: 0.02288</code></pre>
+Multiple R-squared:  0.01463,   Adjusted R-squared:  0.01387 
+F-statistic: 19.21 on 2 and 2587 DF,  p-value: 5.226e-09</code></pre>
 </div>
 </div>
 </section>
@@ -529,31 +529,31 @@ F-statistic: 3.783 on 2 and 2587 DF,  p-value: 0.02288</code></pre>
 <p>Don’t forget to install the library by running this line in your terminal: <code>install.packages("huxtable")</code></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="fu">library</span>(huxtable)</span>
-<span id="cb6-2"><a></a><span class="fu">huxreg</span>(<span class="st">"age"</span> <span class="ot">=</span> income_model1, <span class="st">"age + statusquo"</span> <span class="ot">=</span> income_model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-2"><a></a><span class="fu">huxreg</span>(<span class="st">"age"</span> <span class="ot">=</span> statsquo_model1, <span class="st">"age + income"</span> <span class="ot">=</span> statsquo_model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  ">
 <colgroup><col><col><col></colgroup><tbody><tr>
-<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">age</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">age + statusquo</th></tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">age</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">age + income</th></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(Intercept)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">37240.544 ***</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">37836.549 ***</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(Intercept)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-0.300 ***</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-0.347 ***</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(2176.341)&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(2195.594)&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.054)&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.058)&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">age</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-86.965&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-102.408&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">age</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.008 ***</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.008 ***</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(52.682)&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(53.183)&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.001)&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.001)&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">statusquo</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1694.060 *&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">income</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.000 *&nbsp;&nbsp;</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(780.733)&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.000)&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">N</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2601&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2590&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">N</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2682&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2590&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">R2</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.001&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.003&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">R2</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.013&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.015&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">logLik</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-31218.500&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-31087.242&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">logLik</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-3787.630&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-3658.444&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">AIC</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">62443.001&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">62182.485&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">AIC</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">7581.260&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">7324.888&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
 <th colspan="3" style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05.</th></tr>
 </tbody></table>
@@ -572,10 +572,10 @@ F-statistic: 3.783 on 2 and 2587 DF,  p-value: 0.02288</code></pre>
 <li><p>If they seem to be highly correlated (&gt; 5 or so), one of the easiest (and somewhat acceptable) way is to simply remove the less significant predictor from your model :D</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>car<span class="sc">::</span><span class="fu">vif</span>(income_model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>car<span class="sc">::</span><span class="fu">vif</span>(statsquo_model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>      age statusquo 
- 1.013008  1.013008 </code></pre>
+<pre><code>     age   income 
+1.001103 1.001103 </code></pre>
 </div>
 </div>
 </section>
@@ -626,29 +626,29 @@ $ vote       &lt;chr&gt; "Y", "N", "Y", "N", "N", "N", "N", "N", "U", "N", "Y", 
 <h3 id="continuing-with-the-analysis">Continuing with the analysis</h3>
 <p>The analysis summary should look like this:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>income_modelcat <span class="ot">&lt;-</span> <span class="fu">lm</span>(income <span class="sc">~</span> education, <span class="at">data =</span> chile_data)</span>
-<span id="cb11-2"><a></a><span class="fu">summary</span>(income_modelcat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>statusquo_model3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(statusquo <span class="sc">~</span> education, <span class="at">data =</span> chile_data)</span>
+<span id="cb11-2"><a></a><span class="fu">summary</span>(statusquo_model3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
-lm(formula = income ~ education, data = chile_data)
+lm(formula = statusquo ~ education, data = chile_data)
 
 Residuals:
-   Min     1Q Median     3Q    Max 
--65826 -20869  -2717   -869 182283 
+     Min       1Q   Median       3Q      Max 
+-1.96343 -0.94652 -0.05996  0.96151  2.23086 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)    17717       1080   16.40   &lt;2e-16 ***
-educationPS    50609       1994   25.37   &lt;2e-16 ***
-educationS     18152       1526   11.89   &lt;2e-16 ***
+(Intercept)  0.16042    0.02988   5.368 8.65e-08 ***
+educationPS -0.34269    0.05510  -6.219 5.78e-10 ***
+educationS  -0.24396    0.04210  -5.795 7.65e-09 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 35370 on 2590 degrees of freedom
-  (107 observations deleted due to missingness)
-Multiple R-squared:  0.2005,    Adjusted R-squared:  0.1998 
-F-statistic: 324.7 on 2 and 2590 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 0.9907 on 2670 degrees of freedom
+  (27 observations deleted due to missingness)
+Multiple R-squared:  0.01919,   Adjusted R-squared:  0.01846 
+F-statistic: 26.13 on 2 and 2670 DF,  p-value: 5.796e-12</code></pre>
 </div>
 </div>
 <p>Interpretation for categorical predictor - one of the category will be used as a reference category. By default, the first category will be used.</p>
@@ -674,29 +674,29 @@ PS 0  1</code></pre>
 
 <h3 id="re-run-the-analysis-with-the-new-reference-category">Re-run the analysis with the new reference category</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>income_modelcat <span class="ot">&lt;-</span> <span class="fu">lm</span>(income <span class="sc">~</span> education, <span class="at">data =</span> chile_data)</span>
-<span id="cb15-2"><a></a><span class="fu">summary</span>(income_modelcat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>statsquo_model3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(statusquo <span class="sc">~</span> education, <span class="at">data =</span> chile_data)</span>
+<span id="cb15-2"><a></a><span class="fu">summary</span>(statsquo_model3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
-lm(formula = income ~ education, data = chile_data)
+lm(formula = statusquo ~ education, data = chile_data)
 
 Residuals:
-   Min     1Q Median     3Q    Max 
--65826 -20869  -2717   -869 182283 
+     Min       1Q   Median       3Q      Max 
+-1.96343 -0.94652 -0.05996  0.96151  2.23086 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)    35869       1078   33.27   &lt;2e-16 ***
-educationP    -18152       1526  -11.89   &lt;2e-16 ***
-educationPS    32457       1993   16.28   &lt;2e-16 ***
+(Intercept) -0.08354    0.02966  -2.817  0.00488 ** 
+educationP   0.24396    0.04210   5.795 7.65e-09 ***
+educationPS -0.09873    0.05498  -1.796  0.07265 .  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 35370 on 2590 degrees of freedom
-  (107 observations deleted due to missingness)
-Multiple R-squared:  0.2005,    Adjusted R-squared:  0.1998 
-F-statistic: 324.7 on 2 and 2590 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 0.9907 on 2670 degrees of freedom
+  (27 observations deleted due to missingness)
+Multiple R-squared:  0.01919,   Adjusted R-squared:  0.01846 
+F-statistic: 26.13 on 2 and 2670 DF,  p-value: 5.796e-12</code></pre>
 </div>
 </div>
 </section>
@@ -1033,16 +1033,6 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <li>Having said that, when it comes to coding project, the best way to collaborate is using GitHub or similar platforms.</li>
 </ul></li>
 <li><p>Whenever possible and makes sense for your project, follow the common convention when naming your objects, scripts, and functions. One guide that you can follow is <a href="https://style.tidyverse.org/">Hadley Wickham’s tidyverse style guide</a>.</p></li>
-</ul>
-</section>
-<section id="if-youd-like-to-continue-your-learning" class="slide level2">
-<h2>If you’d like to continue your learning:</h2>
-<p>These are the resources that I would recommend:</p>
-<ul>
-<li><p><a href="https://r4ds.hadley.nz/">R for Data Science</a> by Hadley Wickham (free) - one of the most popular free R resource (I’ve used this myself!)</p></li>
-<li><p><a href="https://www.tidymodels.org/books/moderndive/">Statistical Inference via Data Science: A ModernDive into R and the Tidyverse</a> by Chester Ismay and Albert Y. Kim (free, print book available for purchase) - Very gentle introduction to tidyverse, regression, and statistical inference.</p></li>
-<li><p><a href="https://bookdown.org/mike/data_analysis/">A Guide on Data Analysis</a> by Mike Nguyen (also free) - covers different kinds of regression and quasi-experimental designs such as Regression Discontinuity Design (RDD), among others.</p></li>
-<li><p><a href="https://www.bigbookofr.com/">Big Book of R</a> by Oscar Baruffa (also vv free) - Aggregation of many free resources on R in various topics (e.g.&nbsp;archaeology, people analytics, sports analytics, etc.)</p></li>
 </ul>
 
 <div class="quarto-auto-generated-content">
