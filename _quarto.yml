@@ -10,6 +10,8 @@ website:
         text: Home
       - href: about.qmd
         text: About this workshop
+      - href: coc.qmd
+        text: Code of conduct
 
 format:
   html:

@@ -1,0 +1,13 @@
+---
+title: "Resources"
+format: html
+nocite: |
+    @*
+bibliography: references.bib
+csl: apa.csl
+---
+
+Further readings if you'd like to deepen your knowledge and skill after the workshop:
+
+::: {#refs}
+:::

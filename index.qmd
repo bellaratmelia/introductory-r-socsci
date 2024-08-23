@@ -12,13 +12,13 @@ This site serves as a repository for the slides and codes developed for the 'Int
 *Slides will be progressively made available below.*
 
 ::: table-schedule
-| Session | Date and Time                    | Venue                  | Topic                                         |
-|---------|----------------------------------|------------------------|-----------------------------------------------|
-| 1       | Fri, 23 Aug 2024, 3.30 - 5.30 PM | YPHSL seminar room 2.1 | Introduction to R and RStudio                 |
-| 2       | Fri, 30 Aug 2024, 3.30 - 5.30 PM | YPHSL seminar room 2.1 | Data wrangling with tidyverse                 |
-| 3       | Fri, 6 Sep 2024, 3.30 - 5.30 PM  | YPHSL seminar room 2.1 | Data visualization and Descriptive Statistics |
-| 4       | Fri, 13 Sep 2024, 3.30 - 5.30 PM | YPHSL seminar room 2.2 | Basic Inferential Tests                       |
-| 5       | Fri, 20 Sep 2024, 3.30 - 5.30 PM | YPHSL seminar room 2.1 | Regression and Introduction to Quarto         |
+| Session | Date and Time                    | Venue                  | Topic                                          |
+|---------------|------------------|---------------|--------------------------|
+| 1       | Fri, 23 Aug 2024, 3.30 - 5.30 PM | YPHSL seminar room 2.1 | [Introduction to R and RStudio](01-intro.html) |
+| 2       | Fri, 30 Aug 2024, 3.30 - 5.30 PM | YPHSL seminar room 2.1 | Data wrangling with tidyverse                  |
+| 3       | Fri, 6 Sep 2024, 3.30 - 5.30 PM  | YPHSL seminar room 2.1 | Data visualization and Descriptive Statistics  |
+| 4       | Fri, 13 Sep 2024, 3.30 - 5.30 PM | YPHSL seminar room 2.2 | Basic Inferential Tests                        |
+| 5       | Fri, 20 Sep 2024, 3.30 - 5.30 PM | YPHSL seminar room 2.1 | Regression and Introduction to Quarto          |
 :::
 
 ```{=html5}

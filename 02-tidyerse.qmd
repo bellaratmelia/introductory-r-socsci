@@ -63,7 +63,7 @@ Key variables in the dataset:
 ------------------------------------------------------------------------
 
 | Variable     | Description                                                                                                          |
-|-----------------|-------------------------------------------------------|
+|------------------|------------------------------------------------------|
 | `region`     | Region of voters: `C` (Central), `M` (Metropolitan Santiago area), `N` (North), `S` (South), `SA` (city of Santiago) |
 | `population` | Population size of respondent's community                                                                            |
 | `sex`        | Sex of voters: `F` (female), `M` (male)                                                                              |
@@ -107,7 +107,7 @@ A few things that you can do:
 
 6.  Create a new column called `high_income` that is TRUE if income is above the median, FALSE otherwise.
 
-7.  Create a new column called `support_level` that categorizes `statusquo` into "Low" (0-3), "Medium" (4-6), and "High" (7-10). Save all of these changes you made from step 3 onwards into a new CSV called `chile_voting_processed.csv`
+7.  Create a new column called `support_level` that categorizes `statusquo` into "Unsupportive" (\<= 0) and "Supportive" (\> 0). Save all of these changes you made from step 3 onwards into a new CSV called `chile_voting_processed.csv`
 
 8.  Generate summary stats of `income` grouped by `region` and `education`. The summary stats should include mean, median, max, min, std, and n (number of observations).
 

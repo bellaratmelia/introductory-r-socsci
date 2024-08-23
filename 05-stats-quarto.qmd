@@ -52,7 +52,7 @@ $$
 
 -   Does a person's **age** affect their **income**?
 
--   Do a person's **age** and **education level** affect their **income**?
+-   Do a person's **age** and **income** affect their support towards the **statusquo**?
 
 ------------------------------------------------------------------------
 
@@ -60,12 +60,12 @@ $$
 
 **Research Question:** Does a person's age influence their income in Chile?
 
-The outcome/DV ($Y$) here is `income`, while the predictor/IV ($X$) would be `age`
+The outcome/DV ($Y$) here is `statusquo`, while the predictor/IV ($X$) would be `age`
 
 ```{r}
 #| echo: true
-income_model1 <- lm(income ~ age, data = chile_data)
-summary(income_model1) #summarize the result
+statsquo_model1 <- lm(statusquo ~ age, data = chile_data)
+summary(statsquo_model1) #summarize the result
 ```
 
 -   **Call**: the formula
@@ -79,14 +79,14 @@ summary(income_model1) #summarize the result
 
 ### Example: with multiple continuous predictors
 
-**Research Question:** Do a person's age and their support for the status quo (statusquo) have an impact on their income?
+**Research Question:** Do a person's age and their income have an impact on their support for the status quo?
 
 The outcome/DV ($Y$) here is `income`, while the predictors/IVs ($X_1$ and $X_2$) would be `age` and `statusquo`
 
 ```{r}
 #| echo: true
-income_model2 <- lm(income ~ age + statusquo, data = chile_data)
-summary(income_model2)
+statsquo_model2 <- lm(statusquo ~ age + income, data = chile_data)
+summary(statsquo_model2)
 ```
 
 ------------------------------------------------------------------------
@@ -98,7 +98,7 @@ Don't forget to install the library by running this line in your terminal: `inst
 ```{r}
 #| echo: true
 library(huxtable)
-huxreg("age" = income_model1, "age + statusquo" = income_model2)
+huxreg("age" = statsquo_model1, "age + income" = statsquo_model2)
 ```
 
 ------------------------------------------------------------------------
@@ -117,7 +117,7 @@ One way to check for it:
 
 ```{r}
 #| echo: true
-car::vif(income_model2)
+car::vif(statsquo_model2)
 ```
 
 ------------------------------------------------------------------------
@@ -153,8 +153,8 @@ The analysis summary should look like this:
 
 ```{r}
 #| echo: true
-income_modelcat <- lm(income ~ education, data = chile_data)
-summary(income_modelcat)
+statusquo_model3 <- lm(statusquo ~ education, data = chile_data)
+summary(statusquo_model3)
 ```
 
 Interpretation for categorical predictor - one of the category will be used as a reference category. By default, the first category will be used.
@@ -179,8 +179,8 @@ contrasts(chile_data$education)
 
 ```{r}
 #| echo: true
-income_modelcat <- lm(income ~ education, data = chile_data)
-summary(income_modelcat)
+statsquo_model3 <- lm(statusquo ~ education, data = chile_data)
+summary(statsquo_model3)
 ```
 
 ------------------------------------------------------------------------
@@ -395,15 +395,3 @@ You can change the final result of rendering in the `YAML` section of your docum
     -   Having said that, when it comes to coding project, the best way to collaborate is using GitHub or similar platforms.
 
 -   Whenever possible and makes sense for your project, follow the common convention when naming your objects, scripts, and functions. One guide that you can follow is [Hadley Wickham's tidyverse style guide](https://style.tidyverse.org/).
-
-## If you'd like to continue your learning:
-
-These are the resources that I would recommend:
-
--   [R for Data Science](https://r4ds.hadley.nz/) by Hadley Wickham (free) - one of the most popular free R resource (I've used this myself!)
-
--   [Statistical Inference via Data Science: A ModernDive into R and the Tidyverse](https://www.tidymodels.org/books/moderndive/) by Chester Ismay and Albert Y. Kim (free, print book available for purchase) - Very gentle introduction to tidyverse, regression, and statistical inference.
-
--   [A Guide on Data Analysis](https://bookdown.org/mike/data_analysis/) by Mike Nguyen (also free) - covers different kinds of regression and quasi-experimental designs such as Regression Discontinuity Design (RDD), among others.
-
--   [Big Book of R](https://www.bigbookofr.com/) by Oscar Baruffa (also vv free) - Aggregation of many free resources on R in various topics (e.g. archaeology, people analytics, sports analytics, etc.)
