@@ -9,14 +9,15 @@ website:
       - href: index.qmd
         text: Home
       - href: about.qmd
-        text: About this workshop
+        text: About
       - href: coc.qmd
         text: Code of conduct
 
 format:
   html:
-    theme: flatly
-    css: styles.css
+    theme: 
+      - flatly
+      - custom.scss
     toc: true
 
   revealjs: 

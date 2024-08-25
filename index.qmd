@@ -1,5 +1,6 @@
 ---
-title: "Introductory R for Social Sciences (AY 24/25 Term 1)"
+title: "Introductory R for Social Sciences"
+subtitle: "Academic Year 24/25 Term 1"
 format: html
 ---
 
@@ -7,13 +8,19 @@ format: html
 
 This site serves as a repository for the slides and codes developed for the 'Introductory R for Social Sciences' workshop tailored for undergraduate students at [SMU](https://www.smu.edu.sg/). Comprising five sessions, this resource is designed for individuals with fundamental statistics knowledge who are venturing into R programming or coding for the first time.
 
+## Instructor
+
+**Instructor**: Bella Ratmelia, Senior Librarian, Research & Data Services, SMU Libraries
+
+**Teaching Assistant**: Hector Tan Kheng Wee, SCIS MITB Postgraduate Student
+
 ## Schedule
 
 *Slides will be progressively made available below.*
 
 ::: table-schedule
 | Session | Date and Time                    | Venue                  | Topic                                          |
-|---------------|------------------|---------------|--------------------------|
+|-----------------|-----------------|-----------------|-----------------------|
 | 1       | Fri, 23 Aug 2024, 3.30 - 5.30 PM | YPHSL seminar room 2.1 | [Introduction to R and RStudio](01-intro.html) |
 | 2       | Fri, 30 Aug 2024, 3.30 - 5.30 PM | YPHSL seminar room 2.1 | Data wrangling with tidyverse                  |
 | 3       | Fri, 6 Sep 2024, 3.30 - 5.30 PM  | YPHSL seminar room 2.1 | Data visualization and Descriptive Statistics  |
@@ -52,7 +59,7 @@ This site serves as a repository for the slides and codes developed for the 'Int
 
 3.  Download and install the latest version of R
 
-### **Step 2: Install RStudio**
+### Step 2: Install RStudio
 
 1.  Visit <https://posit.co/download/rstudio-desktop/>
 

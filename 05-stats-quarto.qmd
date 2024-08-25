@@ -46,7 +46,7 @@ $$
 -   $\beta_1$ - the slope / coefficient for independent variable
 -   $\varepsilon$ - the error term. (In some examples you might see this omitted from the formula).
 
-------------------------------------------------------------------------
+
 
 ### IRL Examples:
 
@@ -54,11 +54,10 @@ $$
 
 -   Do a person's **age** and **income** affect their support towards the **statusquo**?
 
-------------------------------------------------------------------------
 
-### Example: with 1 continuous predictor
+## Linear Regression: One continuous predictor
 
-**Research Question:** Does a person's age influence their income in Chile?
+**Research Question:** Does a person's age influence their support to incumbent in Chile?
 
 The outcome/DV ($Y$) here is `statusquo`, while the predictor/IV ($X$) would be `age`
 
@@ -68,18 +67,18 @@ statsquo_model1 <- lm(statusquo ~ age, data = chile_data)
 summary(statsquo_model1) #summarize the result
 ```
 
+::: {style="font-size: 75%; width: 75%"}
 -   **Call**: the formula
 -   **Residuals**: overview on the distribution of residuals (expected value minus observed value) -- we can plot this to check for homoscedasticity -
 -   **Coefficients**: shows the intercept, the regression coefficients for the predictor variables, and their statistical significance
 -   **Residual standard error**: the average difference between observed and expected outcome by the model. Generally the lower, the better.
 -   **R-squared & Adjusted R-squared**: indicates the proportion of variation in the outcome that can be explained by the model i.e., how "accurate" is your model?
 -   **F-statistics**: overall significance
+:::
 
-------------------------------------------------------------------------
+### Linear REgression: Multiple continuous predictors
 
-### Example: with multiple continuous predictors
-
-**Research Question:** Do a person's age and their income have an impact on their support for the status quo?
+**Research Question:** Do a person's age and their income have an impact on their support for the incumbent?
 
 The outcome/DV ($Y$) here is `income`, while the predictors/IVs ($X_1$ and $X_2$) would be `age` and `statusquo`
 
@@ -89,9 +88,8 @@ statsquo_model2 <- lm(statusquo ~ age + income, data = chile_data)
 summary(statsquo_model2)
 ```
 
-------------------------------------------------------------------------
 
-### Using huxtable to present both models in your paper
+## Presenting your models
 
 Don't forget to install the library by running this line in your terminal: `install.packages("huxtable")`
 
@@ -101,9 +99,8 @@ library(huxtable)
 huxreg("age" = statsquo_model1, "age + income" = statsquo_model2)
 ```
 
-------------------------------------------------------------------------
 
-### Heads-up: Multicollinearity
+## FYI: Multicollinearity
 
 Caution! When doing regression-type of tests, watch out for multicollinearity.
 
@@ -120,19 +117,15 @@ One way to check for it:
 car::vif(statsquo_model2)
 ```
 
-------------------------------------------------------------------------
 
-### Example: with a categorical predictor
+## Linear Regression: One categorical predictor
 
-**Research question**: Explore the difference of income between different education levels.
+**Research question**: Explore the difference of support for status quo between different education levels.
 
 ::: callout-note
 Before we proceed with analysis, let's ensure that all the categorical variables are cast as factors!
 :::
 
-------------------------------------------------------------------------
-
-### Data Preparation
 
 ```{r}
 #| echo: true
@@ -145,9 +138,7 @@ chile_data <- chile_data |>
 glimpse(chile_data)
 ```
 
-------------------------------------------------------------------------
-
-### Continuing with the analysis
+## Continuing the analysis
 
 The analysis summary should look like this:
 
@@ -159,9 +150,8 @@ summary(statusquo_model3)
 
 Interpretation for categorical predictor - one of the category will be used as a reference category. By default, the first category will be used.
 
-------------------------------------------------------------------------
 
-### Categorical predictor: changing the reference
+## Categorical predictor: changing the reference
 
 We can use `relevel` to change the reference/baseline category.
 
@@ -173,9 +163,8 @@ chile_data <- chile_data |>
 contrasts(chile_data$education)
 ```
 
-------------------------------------------------------------------------
 
-### Re-run the analysis with the new reference category
+## Re-run the analysis with the new reference category
 
 ```{r}
 #| echo: true
@@ -183,11 +172,10 @@ statsquo_model3 <- lm(statusquo ~ education, data = chile_data)
 summary(statsquo_model3)
 ```
 
-------------------------------------------------------------------------
 
-### Linear Regression group exercise (solo attempts ok)
+## Let's try this Linear Regression exercise! (5 mins)
 
-Create a regression model called `statusquo_model` that predicts the `statusquo` score based on `age` and `education`. Make sure that the reference category for `education` is set to **P** (Primary).
+Create a regression model called `statusquo_model4` that predicts the `statusquo` score based on `age` and `education`. Make sure that the reference category for `education` is set to **P** (Primary).
 
 Optional: Plot the scatterplot with the trend line for each education category. It should look like this:
 
@@ -206,8 +194,8 @@ chile_data |>
 chile_data <- chile_data |> 
     dplyr::mutate(education = relevel(education, ref = "P"))
 
-statusquo_model <- lm(statusquo ~ age + education, data = chile_data)
-summary(statusquo_model)
+statusquo_model4 <- lm(statusquo ~ age + education, data = chile_data)
+summary(statusquo_model4)
 ```
 
 ## Binary Logistic Regression
@@ -226,9 +214,8 @@ $$
 P = \frac{1}{1 + e^{-(\beta_0 + \beta_1X)}}
 $$
 
-------------------------------------------------------------------------
 
-### IRL Examples:
+### Examples:
 
 -   Does a person's **age** and **education** affect whether they will **vote Yes or No** in the plebiscite?
 
@@ -236,9 +223,8 @@ $$
 
 In a way, the goal or logistic regression is to determine the probability of a specific event occurring (pass or fail, survived or perished, vote A or vote B)
 
-------------------------------------------------------------------------
 
-### Example: with 1 continuous Predictor
+## Binary Logistic Regression: One Continuous Predictor
 
 **Research Question**: Does **age** affect the likelihood of voting "Yes" in the plebiscite?
 
@@ -258,7 +244,7 @@ exp(coefficients(vote_age))
 
 ------------------------------------------------------------------------
 
-### Example: with 1 categorical Predictor
+### Binary Logistic Regression: One Categorical Predictor
 
 **Research Question**: Does **education level** affect the likelihood of voting "Yes" in the plebiscite?
 
@@ -272,9 +258,8 @@ summary(vote_education)
 exp(coefficients(vote_education))
 ```
 
-------------------------------------------------------------------------
 
-### Present both models in a table
+## Present both models in a table
 
 ```{r}
 #| echo: true
@@ -282,9 +267,8 @@ library(huxtable)
 huxreg("age" = vote_age, "education" = vote_education)
 ```
 
-------------------------------------------------------------------------
 
-### Logistic Regression group exercise (solo attempts ok)
+## Let's try this Logistic Regression exercise!
 
 Create a regression model called `vote_model` that predicts the likelihood of voting "Yes" based on `age`, `education`, and `income`. Make sure that the reference category for `education` is set to P (Primary).
 

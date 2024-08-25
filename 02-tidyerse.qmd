@@ -56,14 +56,14 @@ glimpse(chile_data)
 
 ## About the data
 
-The data is from a national survey conducted in April and May of 1988 by FLACSO/Chile, capturing voting intentions for the 1988 Chilean plebiscite. The dataset contains information about respondents' demographic characteristics and their voting intentions. This data can also be found from `carData` package! (more on this later)
+The data is from a national survey conducted in April and May of 1988 by FLACSO/Chile, capturing voting intentions for the [1988 Chilean plebiscite](https://en.wikipedia.org/wiki/1988_Chilean_presidential_referendum). The dataset contains information about respondents' demographic characteristics and their voting intentions. This data can also be found from `carData` package! (more on this later)
 
 Key variables in the dataset:
 
 ------------------------------------------------------------------------
 
 | Variable     | Description                                                                                                          |
-|------------------|------------------------------------------------------|
+|-------------------|-----------------------------------------------------|
 | `region`     | Region of voters: `C` (Central), `M` (Metropolitan Santiago area), `N` (North), `S` (South), `SA` (city of Santiago) |
 | `population` | Population size of respondent's community                                                                            |
 | `sex`        | Sex of voters: `F` (female), `M` (male)                                                                              |
@@ -91,33 +91,95 @@ A few things that you can do:
 
 ## Data wrangling activities specific to our data
 
-**Scenario:** Our Principal Investigator (PI) is studying voting patterns in the 1988 Chilean plebiscite. As the Research Assistant (RA), we have been asked to do the following **9 tasks**:
+**Scenario**: We are a junior Research Assistant (RA) in a research team currently studying about the 1988 Chilean plebiscite. The team's primary goal is to identify any discernible and interesting patterns in the voter demographic data. 
 
-1.  Separate the demographic information (region, sex, age, education) into a separate CSV called `chile-demographics.csv`
+As a start, we have been asked to do the following data cleaning and processing tasks:
 
-2.  Retrieve only respondents aged 30 or older, arrange it from oldest to youngest, and save it into a separate CSV called `chile-30plus.csv`
+::: {.incremental}
 
-3.  Make the character columns such as `region`, `sex`, `education`, and `vote` to be in uppercase.
+1.  Remove all rows with empty values (NA)
 
-4.  Convert all the categorical columns such as `region`, `sex`, `education`, and `vote` to Factor. Make sure `education` is ordered.
+2.  Separate the demographic information (region, sex, age, education) into a separate CSV called `chile-demographics.csv`
 
-5.  Create a new column called `age_group` that categorizes age into groups: "18-29", "30-44", "45-59", "60+".
+3.  Retrieve only respondents aged 30 or older, arrange it from oldest to youngest, and save it into a separate CSV called `chile-30plus.csv`
+
+4.  Make the character columns such as `region`, `sex`, `education`, and `vote` to be in uppercase.
+
+5.  Convert all the categorical columns such as `region`, `sex`, `education`, and `vote` to Factor. Make sure `education` is ordered.
+
+:::
 
 ------------------------------------------------------------------------
 
-6.  Create a new column called `high_income` that is TRUE if income is above the median, FALSE otherwise.
+::: {.incremental}
+6.  Create a new column called `age_group` that categorizes age into groups: "18-29", "30-44", "45-59", "60+".
 
-7.  Create a new column called `support_level` that categorizes `statusquo` into "Unsupportive" (\<= 0) and "Supportive" (\> 0). Save all of these changes you made from step 3 onwards into a new CSV called `chile_voting_processed.csv`
+7.  Create a new column called `high_income` that is TRUE if income is above the median, FALSE otherwise.
 
-8.  Generate summary stats of `income` grouped by `region` and `education`. The summary stats should include mean, median, max, min, std, and n (number of observations).
+8.  Create a new column called `support_level` that categorizes `statusquo` into "Unsupportive" (\<= 0) and "Supportive" (\> 0). Save all of these changes you made from step 3 onwards into a new CSV called `chile_voting_processed.csv`
 
-9.  Reshape the data to have `region` as rows and `vote` options as columns, with the values being the count of votes for each option in each region.
+9.  Generate summary stats of `income` grouped by `region` and `education`. The summary stats should include mean, median, max, min, std, and n (number of observations).
 
-> **A strategy I'd like to recommend:** briefly read over the `dplyr` + `tidyr` documentation, either the PDF or HTML version, and have them open on a separate tab so that you can refer to it quickly.
+10.  Reshape the data to have `region` as rows and `vote` options as columns, with the values being the count of votes for each option in each region.
+:::
+
+
 
 # Let's wrangle our data!
 
 ## Task #1
+
+> **A strategy I'd like to recommend:** briefly read over the `dplyr` + `tidyr` documentation, either the PDF or HTML version, and have them open on a separate tab so that you can refer to it quickly.
+
+Remove all rows with empty values (NA)
+
+```{r}
+#| echo: false
+#| output: false
+chile_data <- chile_data |> 
+  drop_na()
+
+```
+
+The number of observations after all rows containing NAs are removed:
+
+```{r}
+#| echo: true
+dim(chile_data)
+```
+
+## Interlude: Pipe Operator ( |> )
+
+-  The pipe operator (|>) allows us to chain multiple operations without creating intermediate dataframes.
+
+-  Super handy when we perform several data wrangling tasks using tidyverse in sequence. 
+-  Helps with readability, especially for complex operations.
+
+-  Keyboard shortcut: `Ctrl`+`Shift`+`M` on Windows, `Cmd`+`Shift`+`M` on Mac
+
+::: {.panel-tabset}
+
+### Without pipe operator
+
+```r
+age_df <- filter(chile_data, age >= 30)
+age_df_desc <- arrange(age_df, desc(age))
+write_csv(age_df_desc, "data-output/chile-30plus.csv")
+
+```
+
+### With pipe operator
+
+```{.r code-overflow="overflow"}
+chile_data |> 
+    filter(age >= 30) |> 
+    arrange(desc(age)) |> 
+    write_csv("data-output/chile-30plus.csv")
+
+```
+:::
+
+## Task #2
 
 Separate the demographic information (region, sex, age, education) into a separate CSV called `chile-demographics.csv`
 
@@ -136,7 +198,8 @@ chile_data |>
     select(region, sex, age, education) |> print(n = 3)
 ```
 
-## Task #2
+
+## Task #3
 
 Retrieve only respondents aged 30 or older, arrange it from oldest to youngest, and save it into a separate CSV called `chile-30plus.csv`
 
@@ -149,46 +212,6 @@ chile_data |>
     print(n = 3)
 ```
 
-------------------------------------------------------------------------
-
-### Interlude: Pipe Operator ( %\>% )
-
-It is possible to complete the task like this:
-
-```{r}
-#| echo: true
-#| output: false
-
-age_df <- filter(chile_data, age >= 30)
-age_df_desc <- arrange(age_df, desc(age))
-write_csv(age_df_desc, "data-output/chile-30plus.csv")
-```
-
-But you'll notice that it will require us to create another dataframe (`age_df`)!
-
-It may be OK for this case because we only need to do 1-2 data wrangling task, but what if we need to do 2? or 3? or 5? what if we have lots of dataframe to wrangle?
-
-Enter the pipe operator `|>`, which will allow us to "chain" functions or tasks.
-
-------------------------------------------------------------------------
-
-### Interlude: Pipe Operator ( %\>% )
-
-Pipe operator can make things more efficient! Here is the code above re-written with pipe operator:
-
-```{r}
-#| echo: true
-#| output: false
-
-chile_data |> 
-    filter(age >= 30) |> 
-    arrange(desc(age)) |> 
-    write_csv("data-output/chile-30plus.csv") 
-```
-
-Since we declared the dataframe that we'd like to wrangle on at the start (`chile_data`), we don't have to specify the dataframe again on the wrangling functions `select`, `arrange`, and `write_csv`.
-
-> Keyboard shortcut: `Ctrl`+`Shift`+`M` on Windows, `Cmd`+`Shift`+`M` on Mac
 
 ## Group exercise 1 (solo attempts ok)
 
@@ -211,7 +234,7 @@ santiago_undecided |>
     print(n = 3)
 ```
 
-## Task #3
+## Task #4
 
 Make all character columns such as `region`, `sex`, `education`, and `vote` to be in uppercase.
 
@@ -233,7 +256,7 @@ chile_data |>
     print(n = 3)
 ```
 
-## Task #4
+## Task #5
 
 Convert all the categorical columns such as `region`, `sex`, `education`, and `vote` to Factor. Make sure `education` is ordered.
 
@@ -257,9 +280,9 @@ The education column after the change:
 str(chile_data["education"])
 ```
 
-## Task #5
+## Task #6
 
-Create a new column called `age_group` that categorizes age into groups: "18-29", "30-44", "45-59", "60+".
+Add a new column to `chile_data` called `age_group` that categorizes age into groups: "18-29", "30-44", "45-59", "60+".
 
 ```{r}
 #| echo: false
@@ -272,7 +295,7 @@ chile_data <- chile_data |>
     ))
 ```
 
-The new age_group column:
+The new age_group column should look something like this:
 
 ```{r}
 chile_data |> 
@@ -280,9 +303,11 @@ chile_data |>
     print(n = 4)
 ```
 
-## Task #6
+## Task #7
 
 Create a new column called `high_income` that is TRUE if income is above the median, FALSE otherwise.
+
+hint: you need to calculate the median income first.
 
 ```{r}
 #| echo: false
@@ -299,9 +324,11 @@ chile_data |>
     slice(9:11)
 ```
 
-## Task #7
+## Task #8 - Can you solve this?
 
-Create a new column called `support_level` that categorizes `statusquo` into "Unsupportive" (\<= 0) and "Supportive" (\> 0). Save all of these changes you made from step 3 onwards into a new CSV called `chile_voting_processed.csv`
+Create a new column called `support_level` that categorizes `statusquo` into "Unsupportive" (\<= 0) and "Supportive" (\> 0). 
+
+Save all of these changes you made from step 3 onwards into a new CSV called `chile_voting_processed.csv`
 
 ```{r}
 #| echo: false
@@ -323,7 +350,7 @@ chile_data |>
     print(n = 3)
 ```
 
-## Task #8
+## Task #9
 
 Generate summary stats of `income` grouped by `region` and `education`. The summary stats should include mean, median, max, min, std, and n (number of observations).
 
@@ -339,7 +366,7 @@ chile_data |>
               std_dev = sd(income, na.rm = TRUE))
 ```
 
-## Task #9
+## Task #10
 
 Reshape the data to have `region` as rows and `vote` options as columns, with the values being the count of votes for each option in each region.
 
@@ -393,4 +420,4 @@ chile_data |> select(region) |> print(n = 3)
 
 # End of Session 2!
 
-Next session: Data visualization with `ggplot2` package.
+Next session: Descriptive stats and data visualization with `ggplot2` package.

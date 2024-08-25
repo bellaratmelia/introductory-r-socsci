@@ -91,9 +91,7 @@ This is done by analyzing the frequency table (i.e., contingency table) formed 
 
 **Example**: Is there any relationship between `education` and `vote` in our Chile voting data?
 
-------------------------------------------------------------------------
-
-### Sample problem and results
+## Chi-Square: Sample problem and results
 
 Is there any relationship between `education` and `vote` in our Chile voting data?
 
@@ -102,9 +100,11 @@ Is there any relationship between `education` and `vote` in our Chile voting dat
 print(chisq.test(table(chile_data$education, chile_data$vote)))
 ```
 
+::: {style="font-size: 75%; width: 75%"}
 -   **X-squared** = the coefficient
 -   **df** = degree of freedom
 -   **p-value** = the probability of getting more extreme results than what was observed. Generally, if this value is less than the pre-determined significance level (also called alpha), the result would be considered "statistically significant"
+:::
 
 *What if there is a hypothesis? How would you write this in the report?*
 
@@ -139,9 +139,7 @@ A correlation test evaluates the strength and direction of a linear relationship
 :::
 :::
 
-------------------------------------------------------------------------
-
-### What is monotonic relationship?
+## What is monotonic relationship?
 
 When a size of one variable increases, the other variables also increase, though at different rate.
 
@@ -173,9 +171,7 @@ par(mfrow = c(1, 1))
 
 ```
 
-------------------------------------------------------------------------
-
-### Sample problem and result
+## Correlation: Sample problem and result
 
 Is there a significant correlation between a respondent's age and income?
 
@@ -184,17 +180,17 @@ Is there a significant correlation between a respondent's age and income?
 cor.test(chile_data$age, chile_data$income, method = "pearson")
 ```
 
+::: {style="font-size: 75%; width: 75%"}
 -   **t** is the **t-test statistic** (for hypothesis testing)
 -   **df** is the degrees of freedom
 -   **p-value** is the significance level of the **t-test**
 -   **conf.int** is the **confidence interval** of the coefficient at 95%
 -   **sample estimates** is the correlation coefficient
+:::
 
-------------------------------------------------------------------------
+## Let's try this correlation exercise! (5 mins)
 
-### Correlation exercise (5 mins)
-
--   Calculate the Kendall correlation coefficient between age and statusquo.
+-   Calculate the correlation coefficient between age and statusquo.
 
     -   What is the null and alternative hypothesis?
 
@@ -205,36 +201,47 @@ cor.test(chile_data$age, chile_data$income, method = "pearson")
     -   Is the correlation coefficient statistically significant?
 
 ```{r}
-#| echo: true
-#| output: true
-cor.test(chile_data$age, chile_data$statusquo, method = "kendall")
+#| echo: false
+#| output: false
+cor.test(chile_data$age, chile_data$statusquo, method = "pearson")
 
-# Interpret the results here
 ```
 
 ## T-Tests
 
-A **t-test** is a statistical test used to compare the means of two groups/samples of continuous data type and determine if the differences are statistically significant. [More in-depth info here!](https://www.sciencedirect.com/topics/mathematics/students-t-test)
+A **t-test** is a statistical test used to compare the means of two groups/samples of continuous data type and determine if the differences are statistically significant.
 
 -   The Student's *t*-test is widely used when the sample size is reasonably small (less than approximately 30) **or** when the population standard deviation is unknown.
 
-------------------------------------------------------------------------
+## 3 types of t-test
 
-### 3 types of t-test
+::: columns
+::: {.column width="30%"}
+**One-sample T-test**
 
-::: incremental
--   **One-sample T-test** - Test if a specific sample mean (X̄) is statistically different from a known or hypothesized population mean (μ or mu)
-
--   **Two-samples / Independent Samples T-test** - Used to compare the means of two independent groups (such as between-subjects research) to determine if they are significantly different. Examples: Men vs Women group, Placebo vs Actual drugs.
-
--   **Paired Samples T-Test** - Used to compare the means of two related groups, such as repeated measurements on the same subjects (within-subjects research). Examples: before vs after.
+Test if a specific sample mean (X̄) is statistically different from a known or hypothesized population mean (μ or mu)
 :::
 
-------------------------------------------------------------------------
+::: {.column width="40%"}
+**Two-samples / Independent Samples T-test**
 
-### Sample problem and result
+Used to compare the means of two independent groups (such as between-subjects research) to determine if they are significantly different.
 
-Is the average age of voters who intend to vote "Yes" significantly different from the overall mean age of voters?
+Examples: Men vs Women group, Placebo vs Actual drugs.
+:::
+
+::: {.column width="30%"}
+**Paired Samples T-Test**
+
+Used to compare the means of two related groups, such as repeated measurements on the same subjects (within-subjects research).
+
+Examples: Before workshop vs After workshop.
+:::
+:::
+
+## T-test: Sample problem and result
+
+Is the average age of voters who intend to vote "Yes" significantly different from the overall mean age of voters in Chile? Assume the
 
 ```{r}
 #| echo: true
@@ -245,33 +252,22 @@ t.test(x = yes_voters, alternative = "two.sided", mu = overall_mean_age)
 
 *What if there is a hypothesis? How would you write this in the report?*
 
-------------------------------------------------------------------------
-
-### T-Tests exercises (5 mins)
+## Let's try this T-Test exercises (5 mins)
 
 1.  Is there a significant difference in age between those who intend to vote "Yes" and those who intend to vote "No"?
 2.  Does the income of male voters significantly differ from female voters?
-3.  Is the average statusquo score significantly different from 0 (0 is the neutral point on the scale)?
 
 ```{r}
-#| echo: true
-#| output: true
+#| echo: false
+#| output: false
 t.test(age ~ vote, data = chile_data[chile_data$vote %in% c("Y", "N"),])
 ```
 
 ```{r}
-#| echo: true
-#| output: true
+#| echo: false
+#| output: false
 t.test(income ~ sex, data = chile_data)
 ```
-
-```{r}
-#| echo: true
-#| output: true
-t.test(chile_data$statusquo, mu = 5)
-```
-
-------------------------------------------------------------------------
 
 ## ANOVA (Analysis of Variance)
 
@@ -285,9 +281,7 @@ There are two 'mainstream' ANOVA that will be covered in this workshop:
 -   Other types of ANOVA that you may encounter: Repeated measures ANOVA, Multivariate ANOVA (MANOVA), ANCOVA, etc.
 :::
 
-------------------------------------------------------------------------
-
-### Sample problem and result: One-Way ANOVA
+## One-Way ANOVA: Sample problem and result
 
 Is there a significant difference in statusquo scores between different education levels?
 
@@ -297,15 +291,15 @@ statusquo_edu_anova <- aov(statusquo ~ education, data = chile_data)
 summary(statusquo_edu_anova)
 ```
 
+::: {style="font-size: 75%; width: 75%"}
 -   **F-value**: the coefficient value
 -   **Pr(\>F)**: the p-value
 -   **Sum Sq**: Sum of Squares
 -   **Mean Sq** : Mean Squares
 -   **Df**: Degrees of Freedom
+:::
 
-------------------------------------------------------------------------
-
-### Post-hoc test (only when result is significant)
+## Post-hoc test (only when result is significant)
 
 If your ANOVA test indicates significant result, the next step is to figure out which category pairings are yielding the significant result. Tukey's Honest Significant Difference (HSD) can help us figure that out.
 
@@ -314,9 +308,7 @@ If your ANOVA test indicates significant result, the next step is to figure out 
 TukeyHSD(statusquo_edu_anova)
 ```
 
-------------------------------------------------------------------------
-
-### Sample problem and result: Two-Way ANOVA
+## Two-Way ANOVA: Sample problem and result
 
 Is there a significant difference in statusquo scores between different education levels and sexes?
 
@@ -325,24 +317,26 @@ Is there a significant difference in statusquo scores between different educatio
 #| output: true
 statusquo_edu_sex_anova <- aov(statusquo ~ education * sex, data = chile_data)
 summary(statusquo_edu_sex_anova)
+```
+
+## Post-hoc test for Two-way ANOVA
+
+```{r}
+#| echo: true
 TukeyHSD(statusquo_edu_sex_anova)
 ```
 
-------------------------------------------------------------------------
-
-### ANOVA exercise
+## Let's try this ANOVA exercise! (5 mins)
 
 Is there a significant difference in income between different regions and education levels?
 
 ```{r}
-#| echo: true
-#| output: true
+#| echo: false
+#| output: false
 income_region_edu_anova <- aov(income ~ region * education, data = chile_data)
 summary(income_region_edu_anova)
 TukeyHSD(income_region_edu_anova)
 ```
-
-------------------------------------------------------------------------
 
 ## ANOVA Assumptions
 
