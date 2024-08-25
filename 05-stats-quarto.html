@@ -443,19 +443,15 @@ Y = \beta_0 + \beta_1X + \varepsilon
 <li><span class="math inline">\(\beta_1\)</span> - the slope / coefficient for independent variable</li>
 <li><span class="math inline">\(\varepsilon\)</span> - the error term. (In some examples you might see this omitted from the formula).</li>
 </ul>
-</section>
-<section class="slide level2">
-
 <h3 id="irl-examples">IRL Examples:</h3>
 <ul>
 <li><p>Does a person’s <strong>age</strong> affect their <strong>income</strong>?</p></li>
 <li><p>Do a person’s <strong>age</strong> and <strong>income</strong> affect their support towards the <strong>statusquo</strong>?</p></li>
 </ul>
 </section>
-<section class="slide level2">
-
-<h3 id="example-with-1-continuous-predictor">Example: with 1 continuous predictor</h3>
-<p><strong>Research Question:</strong> Does a person’s age influence their income in Chile?</p>
+<section id="linear-regression-one-continuous-predictor" class="slide level2">
+<h2>Linear Regression: One continuous predictor</h2>
+<p><strong>Research Question:</strong> Does a person’s age influence their support to incumbent in Chile?</p>
 <p>The outcome/DV (<span class="math inline">\(Y\)</span>) here is <code>statusquo</code>, while the predictor/IV (<span class="math inline">\(X\)</span>) would be <code>age</code></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>statsquo_model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(statusquo <span class="sc">~</span> age, <span class="at">data =</span> chile_data)</span>
@@ -482,6 +478,7 @@ Multiple R-squared:  0.01324,   Adjusted R-squared:  0.01287
 F-statistic: 35.96 on 1 and 2680 DF,  p-value: 2.283e-09</code></pre>
 </div>
 </div>
+<div style="font-size: 75%; width: 75%">
 <ul>
 <li><strong>Call</strong>: the formula</li>
 <li><strong>Residuals</strong>: overview on the distribution of residuals (expected value minus observed value) – we can plot this to check for homoscedasticity -</li>
@@ -490,11 +487,9 @@ F-statistic: 35.96 on 1 and 2680 DF,  p-value: 2.283e-09</code></pre>
 <li><strong>R-squared &amp; Adjusted R-squared</strong>: indicates the proportion of variation in the outcome that can be explained by the model i.e., how “accurate” is your model?</li>
 <li><strong>F-statistics</strong>: overall significance</li>
 </ul>
-</section>
-<section class="slide level2">
-
-<h3 id="example-with-multiple-continuous-predictors">Example: with multiple continuous predictors</h3>
-<p><strong>Research Question:</strong> Do a person’s age and their income have an impact on their support for the status quo?</p>
+</div>
+<h3 id="linear-regression-multiple-continuous-predictors">Linear REgression: Multiple continuous predictors</h3>
+<p><strong>Research Question:</strong> Do a person’s age and their income have an impact on their support for the incumbent?</p>
 <p>The outcome/DV (<span class="math inline">\(Y\)</span>) here is <code>income</code>, while the predictors/IVs (<span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span>) would be <code>age</code> and <code>statusquo</code></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>statsquo_model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(statusquo <span class="sc">~</span> age <span class="sc">+</span> income, <span class="at">data =</span> chile_data)</span>
@@ -523,9 +518,8 @@ F-statistic: 19.21 on 2 and 2587 DF,  p-value: 5.226e-09</code></pre>
 </div>
 </div>
 </section>
-<section class="slide level2">
-
-<h3 id="using-huxtable-to-present-both-models-in-your-paper">Using huxtable to present both models in your paper</h3>
+<section id="presenting-your-models" class="slide level2">
+<h2>Presenting your models</h2>
 <p>Don’t forget to install the library by running this line in your terminal: <code>install.packages("huxtable")</code></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="fu">library</span>(huxtable)</span>
@@ -561,9 +555,8 @@ F-statistic: 19.21 on 2 and 2587 DF,  p-value: 5.226e-09</code></pre>
 </div>
 </div>
 </section>
-<section class="slide level2">
-
-<h3 id="heads-up-multicollinearity">Heads-up: Multicollinearity</h3>
+<section id="fyi-multicollinearity" class="slide level2">
+<h2>FYI: Multicollinearity</h2>
 <p>Caution! When doing regression-type of tests, watch out for multicollinearity.</p>
 <p>Multicollinearity = a situation in which two or more predictor variables are highly correlated with each other. This makes it difficult to determine the specific contribution of each predictor variable to the relationship.</p>
 <p>One way to check for it:</p>
@@ -579,10 +572,9 @@ F-statistic: 19.21 on 2 and 2587 DF,  p-value: 5.226e-09</code></pre>
 </div>
 </div>
 </section>
-<section class="slide level2">
-
-<h3 id="example-with-a-categorical-predictor">Example: with a categorical predictor</h3>
-<p><strong>Research question</strong>: Explore the difference of income between different education levels.</p>
+<section id="linear-regression-one-categorical-predictor" class="slide level2">
+<h2>Linear Regression: One categorical predictor</h2>
+<p><strong>Research question</strong>: Explore the difference of support for status quo between different education levels.</p>
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -596,10 +588,6 @@ F-statistic: 19.21 on 2 and 2587 DF,  p-value: 5.226e-09</code></pre>
 </div>
 </div>
 </div>
-</section>
-<section class="slide level2">
-
-<h3 id="data-preparation">Data Preparation</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>chile_data <span class="ot">&lt;-</span> chile_data <span class="sc">|&gt;</span> </span>
 <span id="cb9-2"><a></a>    <span class="fu">mutate</span>(<span class="at">education =</span> <span class="fu">factor</span>(education)) <span class="sc">|&gt;</span> </span>
@@ -621,9 +609,8 @@ $ vote       &lt;chr&gt; "Y", "N", "Y", "N", "N", "N", "N", "N", "U", "N", "Y", 
 </div>
 </div>
 </section>
-<section class="slide level2">
-
-<h3 id="continuing-with-the-analysis">Continuing with the analysis</h3>
+<section id="continuing-the-analysis" class="slide level2">
+<h2>Continuing the analysis</h2>
 <p>The analysis summary should look like this:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>statusquo_model3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(statusquo <span class="sc">~</span> education, <span class="at">data =</span> chile_data)</span>
@@ -653,9 +640,8 @@ F-statistic: 26.13 on 2 and 2670 DF,  p-value: 5.796e-12</code></pre>
 </div>
 <p>Interpretation for categorical predictor - one of the category will be used as a reference category. By default, the first category will be used.</p>
 </section>
-<section class="slide level2">
-
-<h3 id="categorical-predictor-changing-the-reference">Categorical predictor: changing the reference</h3>
+<section id="categorical-predictor-changing-the-reference" class="slide level2">
+<h2>Categorical predictor: changing the reference</h2>
 <p>We can use <code>relevel</code> to change the reference/baseline category.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>chile_data <span class="ot">&lt;-</span> chile_data <span class="sc">|&gt;</span> </span>
@@ -670,9 +656,8 @@ PS 0  1</code></pre>
 </div>
 </div>
 </section>
-<section class="slide level2">
-
-<h3 id="re-run-the-analysis-with-the-new-reference-category">Re-run the analysis with the new reference category</h3>
+<section id="re-run-the-analysis-with-the-new-reference-category" class="slide level2">
+<h2>Re-run the analysis with the new reference category</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>statsquo_model3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(statusquo <span class="sc">~</span> education, <span class="at">data =</span> chile_data)</span>
 <span id="cb15-2"><a></a><span class="fu">summary</span>(statsquo_model3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -700,10 +685,9 @@ F-statistic: 26.13 on 2 and 2670 DF,  p-value: 5.796e-12</code></pre>
 </div>
 </div>
 </section>
-<section class="slide level2">
-
-<h3 id="linear-regression-group-exercise-solo-attempts-ok">Linear Regression group exercise (solo attempts ok)</h3>
-<p>Create a regression model called <code>statusquo_model</code> that predicts the <code>statusquo</code> score based on <code>age</code> and <code>education</code>. Make sure that the reference category for <code>education</code> is set to <strong>P</strong> (Primary).</p>
+<section id="lets-try-this-linear-regression-exercise-5-mins" class="slide level2">
+<h2>Let’s try this Linear Regression exercise! (5 mins)</h2>
+<p>Create a regression model called <code>statusquo_model4</code> that predicts the <code>statusquo</code> score based on <code>age</code> and <code>education</code>. Make sure that the reference category for <code>education</code> is set to <strong>P</strong> (Primary).</p>
 <p>Optional: Plot the scatterplot with the trend line for each education category. It should look like this:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a>chile_data <span class="sc">|&gt;</span> </span>
@@ -716,8 +700,8 @@ F-statistic: 26.13 on 2 and 2670 DF,  p-value: 5.796e-12</code></pre>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>chile_data <span class="ot">&lt;-</span> chile_data <span class="sc">|&gt;</span> </span>
 <span id="cb18-2"><a></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">education =</span> <span class="fu">relevel</span>(education, <span class="at">ref =</span> <span class="st">"P"</span>))</span>
 <span id="cb18-3"><a></a></span>
-<span id="cb18-4"><a></a>statusquo_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(statusquo <span class="sc">~</span> age <span class="sc">+</span> education, <span class="at">data =</span> chile_data)</span>
-<span id="cb18-5"><a></a><span class="fu">summary</span>(statusquo_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-4"><a></a>statusquo_model4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(statusquo <span class="sc">~</span> age <span class="sc">+</span> education, <span class="at">data =</span> chile_data)</span>
+<span id="cb18-5"><a></a><span class="fu">summary</span>(statusquo_model4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -754,19 +738,15 @@ logit(P) = \beta_0 + \beta_1X_1 + \beta_2X_2 + … + \beta_nX_n
 <p><span class="math display">\[
 P = \frac{1}{1 + e^{-(\beta_0 + \beta_1X)}}
 \]</span></p>
-</section>
-<section class="slide level2">
-
-<h3 id="irl-examples-1">IRL Examples:</h3>
+<h3 id="examples">Examples:</h3>
 <ul>
 <li><p>Does a person’s <strong>age</strong> and <strong>education</strong> affect whether they will <strong>vote Yes or No</strong> in the plebiscite?</p></li>
 <li><p>Does a person’s <strong>income</strong> and <strong>region</strong> affect their likelihood of <strong>abstaining from voting</strong>?</p></li>
 </ul>
 <p>In a way, the goal or logistic regression is to determine the probability of a specific event occurring (pass or fail, survived or perished, vote A or vote B)</p>
 </section>
-<section class="slide level2">
-
-<h3 id="example-with-1-continuous-predictor-1">Example: with 1 continuous Predictor</h3>
+<section id="binary-logistic-regression-one-continuous-predictor" class="slide level2">
+<h2>Binary Logistic Regression: One Continuous Predictor</h2>
 <p><strong>Research Question</strong>: Does <strong>age</strong> affect the likelihood of voting “Yes” in the plebiscite?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="co"># First, we need to create a binary outcome</span></span>
@@ -808,7 +788,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </section>
 <section class="slide level2">
 
-<h3 id="example-with-1-categorical-predictor">Example: with 1 categorical Predictor</h3>
+<h3 id="binary-logistic-regression-one-categorical-predictor">Binary Logistic Regression: One Categorical Predictor</h3>
 <p><strong>Research Question</strong>: Does <strong>education level</strong> affect the likelihood of voting “Yes” in the plebiscite?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a>vote_education <span class="ot">&lt;-</span> <span class="fu">glm</span>(vote_yes <span class="sc">~</span> education,</span>
@@ -845,9 +825,8 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </div>
 </div>
 </section>
-<section class="slide level2">
-
-<h3 id="present-both-models-in-a-table">Present both models in a table</h3>
+<section id="present-both-models-in-a-table" class="slide level2">
+<h2>Present both models in a table</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a><span class="fu">library</span>(huxtable)</span>
 <span id="cb28-2"><a></a><span class="fu">huxreg</span>(<span class="st">"age"</span> <span class="ot">=</span> vote_age, <span class="st">"education"</span> <span class="ot">=</span> vote_education)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -884,9 +863,8 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </div>
 </div>
 </section>
-<section class="slide level2">
-
-<h3 id="logistic-regression-group-exercise-solo-attempts-ok">Logistic Regression group exercise (solo attempts ok)</h3>
+<section id="lets-try-this-logistic-regression-exercise" class="slide level2">
+<h2>Let’s try this Logistic Regression exercise!</h2>
 <p>Create a regression model called <code>vote_model</code> that predicts the likelihood of voting “Yes” based on <code>age</code>, <code>education</code>, and <code>income</code>. Make sure that the reference category for <code>education</code> is set to P (Primary).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a>chile_data <span class="ot">&lt;-</span> chile_data <span class="sc">|&gt;</span> </span>

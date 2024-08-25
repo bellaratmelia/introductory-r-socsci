@@ -679,9 +679,8 @@ Bella Ratmelia
 </div>
 </div>
 </section>
-<section class="slide level2">
-
-<h3 id="vector-manipulations-retrieve-and-update-items">Vector Manipulations: Retrieve and update items</h3>
+<section id="vector-manipulations-retrieve-and-update-items" class="slide level2">
+<h2>Vector Manipulations: Retrieve and update items</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a><span class="co"># retrieve the 1st item in the vector</span></span>
 <span id="cb27-2"><a></a>t1_grades[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -701,9 +700,8 @@ Bella Ratmelia
 </div>
 </div>
 </section>
-<section class="slide level2">
-
-<h3 id="vector-manipulations-retrieve-items-based-on-criteria">Vector Manipulations: Retrieve items based on criteria</h3>
+<section id="vector-manipulations-retrieve-items-based-on-criteria" class="slide level2">
+<h2>Vector Manipulations: Retrieve items based on criteria</h2>
 <ul>
 <li><p>Let’s say we want to retrieve items that are larger than 75.</p></li>
 <li><p>The code below will create a boolean vector called <code>criteria</code> that basically keep tracks on whether each items inside <code>t1_grades</code> fulfil our condition.</p></li>
@@ -716,9 +714,6 @@ Bella Ratmelia
 <pre><code>[1] FALSE FALSE  TRUE  TRUE  TRUE</code></pre>
 </div>
 </div>
-</section>
-<section class="slide level2">
-
 <ul>
 <li>This line of code applies the boolean vector <code>criteria</code> to <code>t1_grades</code>, and only retrieve items that fulfils the condition. i.e.&nbsp;items whose position is marked as <code>TRUE</code> by <code>criteria</code> vector</li>
 </ul>
@@ -728,8 +723,11 @@ Bella Ratmelia
 <pre><code>[1] 80 95 77</code></pre>
 </div>
 </div>
+</section>
+<section id="shortened-version-of-the-previous-code" class="slide level2">
+<h2>Shortened version of the previous code</h2>
 <ul>
-<li>You can shorten the code like this too:</li>
+<li>You can shorten the code like this too (notice that we are not creating a temporary dataframe called criteria here):</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a></a>t1_grades[t1_grades <span class="sc">&gt;</span> <span class="dv">75</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -738,9 +736,8 @@ Bella Ratmelia
 </div>
 </div>
 </section>
-<section class="slide level2">
-
-<h3 id="vector-manipulations-handling-na-values">Vector Manipulations: Handling NA values</h3>
+<section id="vector-manipulations-handling-na-values" class="slide level2">
+<h2>Vector Manipulations: Handling NA values</h2>
 <ul>
 <li><p>NA values indicate null values, or the absence of a value (0 is still a value!)</p></li>
 <li><p>Summary functions like <code>mean</code> needs you to specify in the arguments how you want it to be handled.</p></li>
@@ -757,6 +754,60 @@ Bella Ratmelia
 <span id="cb41-2"><a></a><span class="fu">mean</span>(missing_vector, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 25</code></pre>
+</div>
+</div>
+</section>
+<section id="vector-manipulations-adding-items" class="slide level2">
+<h2>Vector Manipulations: Adding items</h2>
+<p>Several ways to add items to a vector</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="annotated-cell-23"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-23" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-23-1" class="code-annotation-target"><a href="#annotated-cell-23-1"></a>t1_grades <span class="ot">&lt;-</span> <span class="fu">c</span>(t1_grades, <span class="dv">92</span>)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-23" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-23-2" class="code-annotation-target"><a href="#annotated-cell-23-2"></a>t1_grades <span class="ot">&lt;-</span> <span class="fu">c</span>(t1_grades, <span class="dv">88</span>, <span class="dv">95</span>, <span class="dv">79</span>)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-23" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-23-3" class="code-annotation-target"><a href="#annotated-cell-23-3"></a>t1_grades <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">82</span>, t1_grades)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-23" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-23-4" class="code-annotation-target"><a href="#annotated-cell-23-4"></a>t1_grades <span class="ot">&lt;-</span> <span class="fu">append</span>(t1_grades, <span class="dv">92</span>, <span class="at">after =</span> <span class="dv">2</span>) <span class="co"># &lt;2&gt;</span></span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-23" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-23" data-code-lines="1" data-code-annotation="1">Add a single grade to the end of the vector using c()</span>
+</dd>
+<dt data-target-cell="annotated-cell-23" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-23" data-code-lines="2" data-code-annotation="2">Add multiple grades to the end</span>
+</dd>
+<dt data-target-cell="annotated-cell-23" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-23" data-code-lines="3" data-code-annotation="3">Add a grade to the beginning</span>
+</dd>
+<dt data-target-cell="annotated-cell-23" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-23" data-code-lines="4" data-code-annotation="4">Insert a grade at a specific position using append()</span>
+</dd>
+</dl>
+</div>
+</div>
+</section>
+<section id="vector-manipulations-removing-items" class="slide level2">
+<h2>Vector Manipulations: Removing items</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="annotated-cell-24"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-24" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-24-1" class="code-annotation-target"><a href="#annotated-cell-24-1"></a>t1_grades <span class="ot">&lt;-</span> t1_grades[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>)]</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-24" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-24-2" class="code-annotation-target"><a href="#annotated-cell-24-2"></a>t1_grades <span class="ot">&lt;-</span> t1_grades[t1_grades <span class="sc">&lt;=</span> <span class="dv">90</span>]</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-24" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-24-3" class="code-annotation-target"><a href="#annotated-cell-24-3"></a>t1_grades <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(t1_grades)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-24" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-24" data-code-lines="1" data-code-annotation="1">Remove elements by index using “negative indexing”</span>
+</dd>
+<dt data-target-cell="annotated-cell-24" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-24" data-code-lines="2" data-code-annotation="2">Remove elements based on a condition using logical indexing</span>
+</dd>
+<dt data-target-cell="annotated-cell-24" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-24" data-code-lines="3" data-code-annotation="3">Remove NA values from the vector</span>
+</dd>
+</dl>
 </div>
 </div>
 </section>
@@ -809,8 +860,8 @@ Bella Ratmelia
 </div>
 </div>
 </section>
-<section class="slide level2">
-
+<section id="creating-dataframe-from-two-or-more-vectors" class="slide level2">
+<h2>Creating dataframe from two (or more) vectors</h2>
 <p>Alternatively, here is how to create one using the two vectors that we created earlier:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a></a>t1_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">course_code =</span> t1_courses, <span class="at">grade =</span> t1_grades)</span>
@@ -827,35 +878,50 @@ Bella Ratmelia
 <p>Most of the time, our dataframe will be generated by loading from external data file such as CSV, SAV, or XLSX file.</p>
 <p>Let’s try loading one from a CSV!</p>
 </section>
-<section id="loading-data-from-csv" class="slide level2">
-<h2>Loading data from CSV</h2>
+<section id="preparation-get-the-csv" class="slide level2">
+<h2>Preparation: Get the CSV</h2>
+<div class="callout callout-note callout-titled callout-style-simple">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>What is a CSV?</strong></p>
+</div>
+<div class="callout-content">
+<p>A CSV (Comma-Separated Values) file is a type of file that stores data in a plain text format. Each line in the file represents a row of data, and within each row, individual pieces of data (like numbers or words) are separated by commas. This format is commonly used for storing and transferring data, especially in spreadsheets and databases.</p>
+<p>You can open CSV files in Excel, Google Sheets, or event Notepad!</p>
+</div>
+</div>
+</div>
 <ul>
-<li><p>Make sure to download and save <code>chile_voting.csv</code> from <a href="https://raw.githubusercontent.com/bellaratmelia/introductory-r-socsci/main/data/chile_voting.csv">this URL</a> into your <code>data</code> folder.</p></li>
+<li><p>Download and save <code>chile_voting.csv</code> from <a href="https://raw.githubusercontent.com/bellaratmelia/introductory-r-socsci/main/data/chile_voting.csv"><strong>this URL</strong></a></p></li>
+<li><p>Save the CSV file into your <code>data</code> folder.</p></li>
 <li><p>Check out the data dictionary/explanatory notes to learn more about the data, including the column names, data type inside each columns <a href="https://rdrr.io/cran/carData/man/Chile.html">here</a>.</p></li>
 <li><p>We need to use <code>readr</code> package, which is part of <code>tidyverse</code> package. So please install <code>tidyverse</code> first if you have not done so.</p></li>
 </ul>
 </section>
-<section class="slide level2">
-
+<section id="loading-data-from-csv-into-a-dataframe" class="slide level2">
+<h2>Loading data from CSV into a Dataframe</h2>
 <p>Load the CSV and save the content into a tibble/dataframe called <code>chile_data</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="annotated-cell-27"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-27" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-27-1" class="code-annotation-target"><a href="#annotated-cell-27-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="annotated-cell-27-2"><a href="#annotated-cell-27-2"></a></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-27" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-27-3" class="code-annotation-target"><a href="#annotated-cell-27-3"></a>chile_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/chile_voting.csv"</span>)</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-27" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-27-4" class="code-annotation-target"><a href="#annotated-cell-27-4"></a><span class="fu">head</span>(chile_data)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="annotated-cell-29"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-29" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-29-1" class="code-annotation-target"><a href="#annotated-cell-29-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="annotated-cell-29-2"><a href="#annotated-cell-29-2"></a></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-29" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-29-3" class="code-annotation-target"><a href="#annotated-cell-29-3"></a>chile_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/chile_voting.csv"</span>)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-29" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-29-4" class="code-annotation-target"><a href="#annotated-cell-29-4"></a><span class="fu">head</span>(chile_data)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-27" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-29" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-27" data-code-lines="1" data-code-annotation="1">Load the <code>tidyverse</code> library (make sure to have it installed first!)</span>
+<span data-code-cell="annotated-cell-29" data-code-lines="1" data-code-annotation="1">Load the <code>tidyverse</code> library (make sure to have it installed first!)</span>
 </dd>
-<dt data-target-cell="annotated-cell-27" data-target-annotation="2">2</dt>
+<dt data-target-cell="annotated-cell-29" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-27" data-code-lines="3" data-code-annotation="2">Read the CSV file that we placed inside the the data folder with the help of <code>read_csv</code> function, and save it into <code>chile_data</code> dataframe.</span>
+<span data-code-cell="annotated-cell-29" data-code-lines="3" data-code-annotation="2">Read the CSV file that we placed inside the the data folder with the help of <code>read_csv</code> function, and save it into <code>chile_data</code> dataframe.</span>
 </dd>
-<dt data-target-cell="annotated-cell-27" data-target-annotation="3">3</dt>
+<dt data-target-cell="annotated-cell-29" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-cell="annotated-cell-27" data-code-lines="4" data-code-annotation="3">Print the first few rows of the data to check if it’s loaded correctly.</span>
+<span data-code-cell="annotated-cell-29" data-code-lines="4" data-code-annotation="3">Print the first few rows of the data to check if it’s loaded correctly.</span>
 </dd>
 </dl>
 </div>
@@ -864,37 +930,37 @@ Bella Ratmelia
 <section id="more-ways-to-peek-at-the-data" class="slide level2">
 <h2>More ways to “peek” at the data</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="annotated-cell-28"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-28" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-28-1" class="code-annotation-target"><a href="#annotated-cell-28-1"></a><span class="fu">dim</span>(chile_data)</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-28" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-28-2" class="code-annotation-target"><a href="#annotated-cell-28-2"></a><span class="fu">names</span>(chile_data)</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-28" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-28-3" class="code-annotation-target"><a href="#annotated-cell-28-3"></a><span class="fu">str</span>(chile_data)</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-28" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-28-4" class="code-annotation-target"><a href="#annotated-cell-28-4"></a><span class="fu">summary</span>(chile_data)</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-28" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-28-5" class="code-annotation-target"><a href="#annotated-cell-28-5"></a><span class="fu">head</span>(chile_data, <span class="at">n=</span><span class="dv">5</span>)</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-28" data-target-annotation="6" onclick="event.preventDefault();">6</a><span id="annotated-cell-28-6" class="code-annotation-target"><a href="#annotated-cell-28-6"></a><span class="fu">tail</span>(chile_data, <span class="at">n=</span><span class="dv">5</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="annotated-cell-30"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-30" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-30-1" class="code-annotation-target"><a href="#annotated-cell-30-1"></a><span class="fu">dim</span>(chile_data)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-30" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-30-2" class="code-annotation-target"><a href="#annotated-cell-30-2"></a><span class="fu">names</span>(chile_data)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-30" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-30-3" class="code-annotation-target"><a href="#annotated-cell-30-3"></a><span class="fu">str</span>(chile_data)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-30" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-30-4" class="code-annotation-target"><a href="#annotated-cell-30-4"></a><span class="fu">summary</span>(chile_data)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-30" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-30-5" class="code-annotation-target"><a href="#annotated-cell-30-5"></a><span class="fu">head</span>(chile_data, <span class="at">n=</span><span class="dv">5</span>)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-30" data-target-annotation="6" onclick="event.preventDefault();">6</a><span id="annotated-cell-30-6" class="code-annotation-target"><a href="#annotated-cell-30-6"></a><span class="fu">tail</span>(chile_data, <span class="at">n=</span><span class="dv">5</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-28" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-30" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-28" data-code-lines="1" data-code-annotation="1">return a vector of number of rows and columns</span>
+<span data-code-cell="annotated-cell-30" data-code-lines="1" data-code-annotation="1">return a vector of number of rows and columns</span>
 </dd>
-<dt data-target-cell="annotated-cell-28" data-target-annotation="2">2</dt>
+<dt data-target-cell="annotated-cell-30" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-28" data-code-lines="2" data-code-annotation="2">inspect columns</span>
+<span data-code-cell="annotated-cell-30" data-code-lines="2" data-code-annotation="2">inspect columns</span>
 </dd>
-<dt data-target-cell="annotated-cell-28" data-target-annotation="3">3</dt>
+<dt data-target-cell="annotated-cell-30" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-cell="annotated-cell-28" data-code-lines="3" data-code-annotation="3">inspect structure</span>
+<span data-code-cell="annotated-cell-30" data-code-lines="3" data-code-annotation="3">inspect structure</span>
 </dd>
-<dt data-target-cell="annotated-cell-28" data-target-annotation="4">4</dt>
+<dt data-target-cell="annotated-cell-30" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-cell="annotated-cell-28" data-code-lines="4" data-code-annotation="4">print the summary stats of the entire dataframe</span>
+<span data-code-cell="annotated-cell-30" data-code-lines="4" data-code-annotation="4">print the summary stats of the entire dataframe</span>
 </dd>
-<dt data-target-cell="annotated-cell-28" data-target-annotation="5">5</dt>
+<dt data-target-cell="annotated-cell-30" data-target-annotation="5">5</dt>
 <dd>
-<span data-code-cell="annotated-cell-28" data-code-lines="5" data-code-annotation="5">view the first 5 rows</span>
+<span data-code-cell="annotated-cell-30" data-code-lines="5" data-code-annotation="5">view the first 5 rows</span>
 </dd>
-<dt data-target-cell="annotated-cell-28" data-target-annotation="6">6</dt>
+<dt data-target-cell="annotated-cell-30" data-target-annotation="6">6</dt>
 <dd>
-<span data-code-cell="annotated-cell-28" data-code-lines="6" data-code-annotation="6">view the last 5 rows</span>
+<span data-code-cell="annotated-cell-30" data-code-lines="6" data-code-annotation="6">view the last 5 rows</span>
 </dd>
 </dl>
 </div>
@@ -904,32 +970,32 @@ Bella Ratmelia
 <h2>Basic dataframe manipulations: Retrieving values</h2>
 <p>Some basic dataframe functions before we move on to data wrangling next week:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="annotated-cell-29"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-29" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-29-1" class="code-annotation-target"><a href="#annotated-cell-29-1"></a>chile_data[<span class="st">"income"</span>]</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-29" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-29-2" class="code-annotation-target"><a href="#annotated-cell-29-2"></a>chile_data<span class="sc">$</span>income</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-29" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-29-3" class="code-annotation-target"><a href="#annotated-cell-29-3"></a>chile_data[<span class="dv">3</span>]</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-29" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-29-4" class="code-annotation-target"><a href="#annotated-cell-29-4"></a>chile_data[<span class="dv">1</span>, <span class="dv">4</span>]</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-29" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-29-5" class="code-annotation-target"><a href="#annotated-cell-29-5"></a>chile_data[<span class="dv">3</span>, ]</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="annotated-cell-31"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-31" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-31-1" class="code-annotation-target"><a href="#annotated-cell-31-1"></a>chile_data[<span class="st">"income"</span>]</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-31" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-31-2" class="code-annotation-target"><a href="#annotated-cell-31-2"></a>chile_data<span class="sc">$</span>income</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-31" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-31-3" class="code-annotation-target"><a href="#annotated-cell-31-3"></a>chile_data[<span class="dv">3</span>]</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-31" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-31-4" class="code-annotation-target"><a href="#annotated-cell-31-4"></a>chile_data[<span class="dv">1</span>, <span class="dv">4</span>]</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-31" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-31-5" class="code-annotation-target"><a href="#annotated-cell-31-5"></a>chile_data[<span class="dv">3</span>, ]</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-29" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-31" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-29" data-code-lines="1" data-code-annotation="1">retrieve column by name (returns as tibble/dataframe)</span>
+<span data-code-cell="annotated-cell-31" data-code-lines="1" data-code-annotation="1">retrieve column by name (returns as tibble/dataframe)</span>
 </dd>
-<dt data-target-cell="annotated-cell-29" data-target-annotation="2">2</dt>
+<dt data-target-cell="annotated-cell-31" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-29" data-code-lines="2" data-code-annotation="2">another way to retrieve column by name (returns as vector)</span>
+<span data-code-cell="annotated-cell-31" data-code-lines="2" data-code-annotation="2">another way to retrieve column by name (returns as vector)</span>
 </dd>
-<dt data-target-cell="annotated-cell-29" data-target-annotation="3">3</dt>
+<dt data-target-cell="annotated-cell-31" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-cell="annotated-cell-29" data-code-lines="3" data-code-annotation="3">get an entire column by index</span>
+<span data-code-cell="annotated-cell-31" data-code-lines="3" data-code-annotation="3">get an entire column by index</span>
 </dd>
-<dt data-target-cell="annotated-cell-29" data-target-annotation="4">4</dt>
+<dt data-target-cell="annotated-cell-31" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-cell="annotated-cell-29" data-code-lines="4" data-code-annotation="4">get a cell at this row, column coord</span>
+<span data-code-cell="annotated-cell-31" data-code-lines="4" data-code-annotation="4">get a cell at this row, column coord</span>
 </dd>
-<dt data-target-cell="annotated-cell-29" data-target-annotation="5">5</dt>
+<dt data-target-cell="annotated-cell-31" data-target-annotation="5">5</dt>
 <dd>
-<span data-code-cell="annotated-cell-29" data-code-lines="5" data-code-annotation="5">get an entire row</span>
+<span data-code-cell="annotated-cell-31" data-code-lines="5" data-code-annotation="5">get an entire row</span>
 </dd>
 </dl>
 </div>

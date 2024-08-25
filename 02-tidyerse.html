@@ -456,7 +456,7 @@ Bella Ratmelia
 </section>
 <section id="about-the-data" class="slide level2">
 <h2>About the data</h2>
-<p>The data is from a national survey conducted in April and May of 1988 by FLACSO/Chile, capturing voting intentions for the 1988 Chilean plebiscite. The dataset contains information about respondents’ demographic characteristics and their voting intentions. This data can also be found from <code>carData</code> package! (more on this later)</p>
+<p>The data is from a national survey conducted in April and May of 1988 by FLACSO/Chile, capturing voting intentions for the <a href="https://en.wikipedia.org/wiki/1988_Chilean_presidential_referendum">1988 Chilean plebiscite</a>. The dataset contains information about respondents’ demographic characteristics and their voting intentions. This data can also be found from <code>carData</code> package! (more on this later)</p>
 <p>Key variables in the dataset:</p>
 </section>
 <section class="slide level2">
@@ -464,8 +464,8 @@ Bella Ratmelia
 <table class="caption-top">
 <caption>Explanatory notes on each column</caption>
 <colgroup>
-<col style="width: 25%">
-<col style="width: 75%">
+<col style="width: 26%">
+<col style="width: 73%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -522,26 +522,29 @@ Bella Ratmelia
 </section>
 <section id="data-wrangling-activities-specific-to-our-data" class="slide level2">
 <h2>Data wrangling activities specific to our data</h2>
-<p><strong>Scenario:</strong> Our Principal Investigator (PI) is studying voting patterns in the 1988 Chilean plebiscite. As the Research Assistant (RA), we have been asked to do the following <strong>9 tasks</strong>:</p>
+<p><strong>Scenario</strong>: We are a junior Research Assistant (RA) in a research team currently studying about the 1988 Chilean plebiscite. The team’s primary goal is to identify any discernible and interesting patterns in the voter demographic data.</p>
+<p>As a start, we have been asked to do the following data cleaning and processing tasks:</p>
+<div>
 <ol type="1">
-<li><p>Separate the demographic information (region, sex, age, education) into a separate CSV called <code>chile-demographics.csv</code></p></li>
-<li><p>Retrieve only respondents aged 30 or older, arrange it from oldest to youngest, and save it into a separate CSV called <code>chile-30plus.csv</code></p></li>
-<li><p>Make the character columns such as <code>region</code>, <code>sex</code>, <code>education</code>, and <code>vote</code> to be in uppercase.</p></li>
-<li><p>Convert all the categorical columns such as <code>region</code>, <code>sex</code>, <code>education</code>, and <code>vote</code> to Factor. Make sure <code>education</code> is ordered.</p></li>
-<li><p>Create a new column called <code>age_group</code> that categorizes age into groups: “18-29”, “30-44”, “45-59”, “60+”.</p></li>
+<li class="fragment"><p>Remove all rows with empty values (NA)</p></li>
+<li class="fragment"><p>Separate the demographic information (region, sex, age, education) into a separate CSV called <code>chile-demographics.csv</code></p></li>
+<li class="fragment"><p>Retrieve only respondents aged 30 or older, arrange it from oldest to youngest, and save it into a separate CSV called <code>chile-30plus.csv</code></p></li>
+<li class="fragment"><p>Make the character columns such as <code>region</code>, <code>sex</code>, <code>education</code>, and <code>vote</code> to be in uppercase.</p></li>
+<li class="fragment"><p>Convert all the categorical columns such as <code>region</code>, <code>sex</code>, <code>education</code>, and <code>vote</code> to Factor. Make sure <code>education</code> is ordered.</p></li>
 </ol>
+</div>
 </section>
 <section class="slide level2">
 
+<div>
 <ol start="6" type="1">
-<li><p>Create a new column called <code>high_income</code> that is TRUE if income is above the median, FALSE otherwise.</p></li>
-<li><p>Create a new column called <code>support_level</code> that categorizes <code>statusquo</code> into “Unsupportive” (&lt;= 0) and “Supportive” (&gt; 0). Save all of these changes you made from step 3 onwards into a new CSV called <code>chile_voting_processed.csv</code></p></li>
-<li><p>Generate summary stats of <code>income</code> grouped by <code>region</code> and <code>education</code>. The summary stats should include mean, median, max, min, std, and n (number of observations).</p></li>
-<li><p>Reshape the data to have <code>region</code> as rows and <code>vote</code> options as columns, with the values being the count of votes for each option in each region.</p></li>
+<li class="fragment"><p>Create a new column called <code>age_group</code> that categorizes age into groups: “18-29”, “30-44”, “45-59”, “60+”.</p></li>
+<li class="fragment"><p>Create a new column called <code>high_income</code> that is TRUE if income is above the median, FALSE otherwise.</p></li>
+<li class="fragment"><p>Create a new column called <code>support_level</code> that categorizes <code>statusquo</code> into “Unsupportive” (&lt;= 0) and “Supportive” (&gt; 0). Save all of these changes you made from step 3 onwards into a new CSV called <code>chile_voting_processed.csv</code></p></li>
+<li class="fragment"><p>Generate summary stats of <code>income</code> grouped by <code>region</code> and <code>education</code>. The summary stats should include mean, median, max, min, std, and n (number of observations).</p></li>
+<li class="fragment"><p>Reshape the data to have <code>region</code> as rows and <code>vote</code> options as columns, with the values being the count of votes for each option in each region.</p></li>
 </ol>
-<blockquote>
-<p><strong>A strategy I’d like to recommend:</strong> briefly read over the <code>dplyr</code> + <code>tidyr</code> documentation, either the PDF or HTML version, and have them open on a separate tab so that you can refer to it quickly.</p>
-</blockquote>
+</div>
 </section>
 <section>
 <section id="lets-wrangle-our-data" class="title-slide slide level1 center">
@@ -550,63 +553,74 @@ Bella Ratmelia
 </section>
 <section id="task-1" class="slide level2">
 <h2>Task #1</h2>
-<p>Separate the demographic information (region, sex, age, education) into a separate CSV called <code>chile-demographics.csv</code></p>
-<p>The first few rows in the CSV:</p>
+<blockquote>
+<p><strong>A strategy I’d like to recommend:</strong> briefly read over the <code>dplyr</code> + <code>tidyr</code> documentation, either the PDF or HTML version, and have them open on a separate tab so that you can refer to it quickly.</p>
+</blockquote>
+<p>Remove all rows with empty values (NA)</p>
+<p>The number of observations after all rows containing NAs are removed:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">dim</span>(chile_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 2,700 × 4
-  region sex     age education
-  &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;    
-1 N      M        65 P        
-2 N      M        29 PS       
-3 N      F        38 P        
-# ℹ 2,697 more rows</code></pre>
+<pre><code>[1] 2431    8</code></pre>
+</div>
+</div>
+</section>
+<section id="interlude-pipe-operator" class="slide level2">
+<h2>Interlude: Pipe Operator ( |&gt; )</h2>
+<ul>
+<li><p>The pipe operator (|&gt;) allows us to chain multiple operations without creating intermediate dataframes.</p></li>
+<li><p>Super handy when we perform several data wrangling tasks using tidyverse in sequence.</p></li>
+<li><p>Helps with readability, especially for complex operations.</p></li>
+<li><p>Keyboard shortcut: <code>Ctrl</code>+<code>Shift</code>+<code>M</code> on Windows, <code>Cmd</code>+<code>Shift</code>+<code>M</code> on Mac</p></li>
+</ul>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Without pipe operator</a></li><li><a href="#tabset-1-2">With pipe operator</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1">
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>age_df <span class="ot">&lt;-</span> <span class="fu">filter</span>(chile_data, age <span class="sc">&gt;=</span> <span class="dv">30</span>)</span>
+<span id="cb4-2"><a></a>age_df_desc <span class="ot">&lt;-</span> <span class="fu">arrange</span>(age_df, <span class="fu">desc</span>(age))</span>
+<span id="cb4-3"><a></a><span class="fu">write_csv</span>(age_df_desc, <span class="st">"data-output/chile-30plus.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="tabset-1-2">
+<div class="sourceCode" id="cb5" data-code-overflow="overflow"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>chile_data <span class="sc">|&gt;</span> </span>
+<span id="cb5-2"><a></a>    <span class="fu">filter</span>(age <span class="sc">&gt;=</span> <span class="dv">30</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb5-3"><a></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(age)) <span class="sc">|&gt;</span> </span>
+<span id="cb5-4"><a></a>    <span class="fu">write_csv</span>(<span class="st">"data-output/chile-30plus.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </div>
 </div>
 </section>
 <section id="task-2" class="slide level2">
 <h2>Task #2</h2>
+<p>Separate the demographic information (region, sex, age, education) into a separate CSV called <code>chile-demographics.csv</code></p>
+<p>The first few rows in the CSV:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2,431 × 4
+  region sex     age education
+  &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;    
+1 N      M        65 P        
+2 N      M        29 PS       
+3 N      F        38 P        
+# ℹ 2,428 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="task-3" class="slide level2">
+<h2>Task #3</h2>
 <p>Retrieve only respondents aged 30 or older, arrange it from oldest to youngest, and save it into a separate CSV called <code>chile-30plus.csv</code></p>
 <p>The first few rows in the resulting CSV:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1,770 × 8
+<pre><code># A tibble: 1,581 × 8
   region population sex     age education income statusquo vote 
   &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;
 1 N          125000 F        70 P          15000     1.49  Y    
 2 N          250000 F        70 P          75000     1.40  Y    
 3 N          250000 M        70 P           7500    -0.366 N    
-# ℹ 1,767 more rows</code></pre>
+# ℹ 1,578 more rows</code></pre>
 </div>
 </div>
-</section>
-<section class="slide level2">
-
-<h3 id="interlude-pipe-operator">Interlude: Pipe Operator ( %&gt;% )</h3>
-<p>It is possible to complete the task like this:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>age_df <span class="ot">&lt;-</span> <span class="fu">filter</span>(chile_data, age <span class="sc">&gt;=</span> <span class="dv">30</span>)</span>
-<span id="cb4-2"><a></a>age_df_desc <span class="ot">&lt;-</span> <span class="fu">arrange</span>(age_df, <span class="fu">desc</span>(age))</span>
-<span id="cb4-3"><a></a><span class="fu">write_csv</span>(age_df_desc, <span class="st">"data-output/chile-30plus.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>But you’ll notice that it will require us to create another dataframe (<code>age_df</code>)!</p>
-<p>It may be OK for this case because we only need to do 1-2 data wrangling task, but what if we need to do 2? or 3? or 5? what if we have lots of dataframe to wrangle?</p>
-<p>Enter the pipe operator <code>|&gt;</code>, which will allow us to “chain” functions or tasks.</p>
-</section>
-<section class="slide level2">
-
-<h3 id="interlude-pipe-operator-1">Interlude: Pipe Operator ( %&gt;% )</h3>
-<p>Pipe operator can make things more efficient! Here is the code above re-written with pipe operator:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>chile_data <span class="sc">|&gt;</span> </span>
-<span id="cb5-2"><a></a>    <span class="fu">filter</span>(age <span class="sc">&gt;=</span> <span class="dv">30</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb5-3"><a></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(age)) <span class="sc">|&gt;</span> </span>
-<span id="cb5-4"><a></a>    <span class="fu">write_csv</span>(<span class="st">"data-output/chile-30plus.csv"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Since we declared the dataframe that we’d like to wrangle on at the start (<code>chile_data</code>), we don’t have to specify the dataframe again on the wrangling functions <code>select</code>, <code>arrange</code>, and <code>write_csv</code>.</p>
-<blockquote>
-<p>Keyboard shortcut: <code>Ctrl</code>+<code>Shift</code>+<code>M</code> on Windows, <code>Cmd</code>+<code>Shift</code>+<code>M</code> on Mac</p>
-</blockquote>
 </section>
 <section id="group-exercise-1-solo-attempts-ok" class="slide level2">
 <h2>Group exercise 1 (solo attempts ok)</h2>
@@ -615,63 +629,64 @@ Bella Ratmelia
 <p>The first few rows of <code>santiago_undecided</code>:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 7 × 4
+<pre><code># A tibble: 5 × 4
   region education vote  income
   &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;  &lt;dbl&gt;
 1 M      S         U      35000
 2 M      S         U      15000
 3 M      S         U      15000
-# ℹ 4 more rows</code></pre>
-</div>
-</div>
-</section>
-<section id="task-3" class="slide level2">
-<h2>Task #3</h2>
-<p>Make all character columns such as <code>region</code>, <code>sex</code>, <code>education</code>, and <code>vote</code> to be in uppercase.</p>
-<p>The end result:</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 2,700 × 4
-  region sex   education vote 
-  &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;
-1 N      M     P         Y    
-2 N      M     PS        N    
-3 N      F     P         Y    
-# ℹ 2,697 more rows</code></pre>
+# ℹ 2 more rows</code></pre>
 </div>
 </div>
 </section>
 <section id="task-4" class="slide level2">
 <h2>Task #4</h2>
-<p>Convert all the categorical columns such as <code>region</code>, <code>sex</code>, <code>education</code>, and <code>vote</code> to Factor. Make sure <code>education</code> is ordered.</p>
-<p>The education column after the change:</p>
+<p>Make all character columns such as <code>region</code>, <code>sex</code>, <code>education</code>, and <code>vote</code> to be in uppercase.</p>
+<p>The end result:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>tibble [2,700 × 1] (S3: tbl_df/tbl/data.frame)
- $ education: Ord.factor w/ 3 levels "P"&lt;"S"&lt;"PS": 1 3 1 1 2 1 3 2 1 1 ...</code></pre>
+<pre><code># A tibble: 2,431 × 4
+  region sex   education vote 
+  &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;
+1 N      M     P         Y    
+2 N      M     PS        N    
+3 N      F     P         Y    
+# ℹ 2,428 more rows</code></pre>
 </div>
 </div>
 </section>
 <section id="task-5" class="slide level2">
 <h2>Task #5</h2>
-<p>Create a new column called <code>age_group</code> that categorizes age into groups: “18-29”, “30-44”, “45-59”, “60+”.</p>
-<p>The new age_group column:</p>
+<p>Convert all the categorical columns such as <code>region</code>, <code>sex</code>, <code>education</code>, and <code>vote</code> to Factor. Make sure <code>education</code> is ordered.</p>
+<p>The education column after the change:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 2,700 × 2
+<pre><code>tibble [2,431 × 1] (S3: tbl_df/tbl/data.frame)
+ $ education: Ord.factor w/ 3 levels "P"&lt;"S"&lt;"PS": 1 3 1 1 2 1 3 2 1 1 ...</code></pre>
+</div>
+</div>
+</section>
+<section id="task-6" class="slide level2">
+<h2>Task #6</h2>
+<p>Add a new column to <code>chile_data</code> called <code>age_group</code> that categorizes age into groups: “18-29”, “30-44”, “45-59”, “60+”.</p>
+<p>The new age_group column should look something like this:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2,431 × 2
     age age_group
   &lt;dbl&gt; &lt;chr&gt;    
 1    65 60+      
 2    29 18-29    
 3    38 30-44    
 4    49 45-59    
-# ℹ 2,696 more rows</code></pre>
+# ℹ 2,427 more rows</code></pre>
 </div>
 </div>
 </section>
-<section id="task-6" class="slide level2">
-<h2>Task #6</h2>
+<section id="task-7" class="slide level2">
+<h2>Task #7</h2>
 <p>Create a new column called <code>high_income</code> that is TRUE if income is above the median, FALSE otherwise.</p>
+<p>hint: you need to calculate the median income first.</p>
 <p>The original income column and the new high_income column:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -684,66 +699,63 @@ Bella Ratmelia
 </div>
 </div>
 </section>
-<section id="task-7" class="slide level2">
-<h2>Task #7</h2>
-<p>Create a new column called <code>support_level</code> that categorizes <code>statusquo</code> into “Unsupportive” (&lt;= 0) and “Supportive” (&gt; 0). Save all of these changes you made from step 3 onwards into a new CSV called <code>chile_voting_processed.csv</code></p>
+<section id="task-8---can-you-solve-this" class="slide level2">
+<h2>Task #8 - Can you solve this?</h2>
+<p>Create a new column called <code>support_level</code> that categorizes <code>statusquo</code> into “Unsupportive” (&lt;= 0) and “Supportive” (&gt; 0).</p>
+<p>Save all of these changes you made from step 3 onwards into a new CSV called <code>chile_voting_processed.csv</code></p>
 <p>The new support_level column:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 2,700 × 2
+<pre><code># A tibble: 2,431 × 2
   statusquo support_level
       &lt;dbl&gt; &lt;chr&gt;        
 1      1.01 Supportive   
 2     -1.30 Unsupportive 
 3      1.23 Supportive   
-# ℹ 2,697 more rows</code></pre>
-</div>
-</div>
-</section>
-<section id="task-8" class="slide level2">
-<h2>Task #8</h2>
-<p>Generate summary stats of <code>income</code> grouped by <code>region</code> and <code>education</code>. The summary stats should include mean, median, max, min, std, and n (number of observations).</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 19 × 8
-# Groups:   region [5]
-   region education observation mean_income median_income highest lowest std_dev
-   &lt;fct&gt;  &lt;ord&gt;           &lt;int&gt;       &lt;dbl&gt;         &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
- 1 C      P                 261      16161.         15000  200000   2500  18089.
- 2 C      S                 256      36352.         35000  200000   2500  37903.
- 3 C      PS                 81      63766.         35000  200000   7500  49953.
- 4 C      &lt;NA&gt;                2      41250          41250   75000   7500  47730.
- 5 M      P                  52      20700          15000  125000   2500  20541.
- 6 M      S                  42      28919.         15000   75000   7500  21324.
- 7 M      PS                  6      60000          55000  125000  15000  39875.
- 8 N      P                 139      19398.         15000   75000   2500  16375.
- 9 N      S                 117      32345.         35000  125000   2500  26429.
-10 N      PS                 65      52897.         35000  200000   7500  41570.
-11 N      &lt;NA&gt;                1      15000          15000   15000  15000     NA 
-12 S      P                 340      15977.          7500  200000   2500  19063.
-13 S      S                 269      29877.         15000  200000   2500  30017.
-14 S      PS                108      56054.         35000  200000   2500  51961.
-15 S      &lt;NA&gt;                1       2500           2500    2500   2500     NA 
-16 SA     P                 315      19653.         15000  125000   2500  16151.
-17 SA     S                 436      40962.         35000  200000   2500  41150.
-18 SA     PS                202      81833.         75000  200000   7500  65747.
-19 SA     &lt;NA&gt;                7      10500           7500   15000   7500   4108.</code></pre>
+# ℹ 2,428 more rows</code></pre>
 </div>
 </div>
 </section>
 <section id="task-9" class="slide level2">
 <h2>Task #9</h2>
+<p>Generate summary stats of <code>income</code> grouped by <code>region</code> and <code>education</code>. The summary stats should include mean, median, max, min, std, and n (number of observations).</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 15 × 8
+# Groups:   region [5]
+   region education observation mean_income median_income highest lowest std_dev
+   &lt;fct&gt;  &lt;ord&gt;           &lt;int&gt;       &lt;dbl&gt;         &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+ 1 C      P                 238      16450.         15000  200000   2500  18483.
+ 2 C      S                 234      35887.         35000  200000   2500  36540.
+ 3 C      PS                 76      64375          35000  200000   7500  50705.
+ 4 M      P                  43      21163.         15000  125000   2500  21967.
+ 5 M      S                  26      29038.         25000   75000   7500  19787.
+ 6 M      PS                  6      60000          55000  125000  15000  39875.
+ 7 N      P                 133      19173.         15000   75000   2500  15823.
+ 8 N      S                 111      31937.         35000  125000   2500  26351.
+ 9 N      PS                 61      53934.         35000  200000   7500  41772.
+10 S      P                 310      15677.          7500  200000   2500  19074.
+11 S      S                 250      29800          15000  200000   2500  30450.
+12 S      PS                 95      56658.         35000  200000   2500  52879.
+13 SA     P                 278      19191.         15000  125000   2500  15796.
+14 SA     S                 389      41292.         35000  200000   2500  41052.
+15 SA     PS                181      82859.         75000  200000   7500  66268.</code></pre>
+</div>
+</div>
+</section>
+<section id="task-10" class="slide level2">
+<h2>Task #10</h2>
 <p>Reshape the data to have <code>region</code> as rows and <code>vote</code> options as columns, with the values being the count of votes for each option in each region.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 5 × 6
-  region     A     N     U     Y  `NA`
-  &lt;fct&gt;  &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
-1 C         44   210   141   174    31
-2 M          2    18    23    38    19
-3 N         30   102    46   135     9
-4 S         42   214   148   275    39
-5 SA        69   345   230   246    70</code></pre>
+<pre><code># A tibble: 5 × 5
+  region     A     N     U     Y
+  &lt;fct&gt;  &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
+1 C         44   209   130   165
+2 M          2    17    19    37
+3 N         29    98    46   132
+4 S         39   209   140   267
+5 SA        63   334   216   235</code></pre>
 </div>
 </div>
 </section>
@@ -757,16 +769,16 @@ Bella Ratmelia
 # Groups:   region [5]
    region sex   observation mean_age median_age oldest youngest std_dev
    &lt;fct&gt;  &lt;fct&gt;       &lt;int&gt;    &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
- 1 C      F             300     37.9         36     70       18    14.2
- 2 C      M             300     38.8         35     70       18    15.8
- 3 M      F              51     36.6         36     68       18    13.9
- 4 M      M              49     36.8         34     65       18    13.0
- 5 N      F             168     38.8         36     70       18    13.6
- 6 N      M             154     38.6         35     70       18    16.5
- 7 S      F             362     37.3         36     70       18    14.0
- 8 S      M             356     37.9         35     70       18    14.8
- 9 SA     F             498     39.3         38     70       18    14.3
-10 SA     M             462     39.8         38     70       18    15.4</code></pre>
+ 1 C      F             269     37.7       36       70       18    14.3
+ 2 C      M             279     39.1       36       70       18    15.8
+ 3 M      F              43     37.0       36       68       18    14.1
+ 4 M      M              32     36         33.5     65       18    13.5
+ 5 N      F             159     38.7       36       70       18    13.8
+ 6 N      M             146     38.7       35       70       18    16.6
+ 7 S      F             330     36.7       35       70       18    13.9
+ 8 S      M             325     38.0       36       70       18    14.9
+ 9 SA     F             449     38.9       38       70       18    14.0
+10 SA     M             399     39.0       37       70       18    15.1</code></pre>
 </div>
 </div>
 </section>
@@ -775,35 +787,35 @@ Bella Ratmelia
 <p>Let’s say I have this column called <code>wrong_column</code> that I want to remove:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 2,700 × 2
+<pre><code># A tibble: 2,431 × 2
   region wrong_column 
   &lt;fct&gt;  &lt;chr&gt;        
 1 N      random values
 2 N      random values
 3 N      random values
-# ℹ 2,697 more rows</code></pre>
+# ℹ 2,428 more rows</code></pre>
 </div>
 </div>
 <p>Remove the wrong column with subset <code>-</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a>chile_data <span class="ot">&lt;-</span> chile_data <span class="sc">|&gt;</span> </span>
-<span id="cb16-2"><a></a>    <span class="fu">select</span>(<span class="sc">-</span>wrong_column)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>chile_data <span class="ot">&lt;-</span> chile_data <span class="sc">|&gt;</span> </span>
+<span id="cb18-2"><a></a>    <span class="fu">select</span>(<span class="sc">-</span>wrong_column)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 2,700 × 1
+<pre><code># A tibble: 2,431 × 1
   region
   &lt;fct&gt; 
 1 N     
 2 N     
 3 N     
-# ℹ 2,697 more rows</code></pre>
+# ℹ 2,428 more rows</code></pre>
 </div>
 </div>
 </section></section>
 <section id="end-of-session-2" class="title-slide slide level1 center">
 <h1>End of Session 2!</h1>
-<p>Next session: Data visualization with <code>ggplot2</code> package.</p>
+<p>Next session: Descriptive stats and data visualization with <code>ggplot2</code> package.</p>
 
 <div class="quarto-auto-generated-content">
 <p><img src="images/smu logo.png" class="slide-logo"></p>

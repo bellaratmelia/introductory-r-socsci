@@ -32,14 +32,91 @@
     "href": "05-stats-quarto.html#linear-regression",
     "title": "Regression and Introduction to Quarto",
     "section": "Linear Regression",
-    "text": "Linear Regression\nLinear regression is a statistical method used to model the relationship between a dependent variable (outcome) and one or more independent variables (predictors) by fitting a linear equation to the observed data. The math formula looks like this:\n\\[\nY = \\beta_0 + \\beta_1X + \\varepsilon\n\\]\n\n\\(Y\\) - the dependent variable\n\nmust be continuous\n\n\\(X\\) - the independent variable (if there are more than one, there will be \\(X_1\\) , \\(X_2\\) , and so on.\n\ncan be ordinal, nominal, or continuous\n\n\\(\\beta_0\\) - the y-intercept. Represents the expected value of independent variable \\(Y\\) when independent variable(s) \\(X\\) are set to zero.\n\\(\\beta_1\\) - the slope / coefficient for independent variable\n\\(\\varepsilon\\) - the error term. (In some examples you might see this omitted from the formula)."
+    "text": "Linear Regression\nLinear regression is a statistical method used to model the relationship between a dependent variable (outcome) and one or more independent variables (predictors) by fitting a linear equation to the observed data. The math formula looks like this:\n\\[\nY = \\beta_0 + \\beta_1X + \\varepsilon\n\\]\n\n\\(Y\\) - the dependent variable\n\nmust be continuous\n\n\\(X\\) - the independent variable (if there are more than one, there will be \\(X_1\\) , \\(X_2\\) , and so on.\n\ncan be ordinal, nominal, or continuous\n\n\\(\\beta_0\\) - the y-intercept. Represents the expected value of independent variable \\(Y\\) when independent variable(s) \\(X\\) are set to zero.\n\\(\\beta_1\\) - the slope / coefficient for independent variable\n\\(\\varepsilon\\) - the error term. (In some examples you might see this omitted from the formula).\n\nIRL Examples:\n\nDoes a person’s age affect their income?\nDo a person’s age and income affect their support towards the statusquo?"
+  },
+  {
+    "objectID": "05-stats-quarto.html#linear-regression-one-continuous-predictor",
+    "href": "05-stats-quarto.html#linear-regression-one-continuous-predictor",
+    "title": "Regression and Introduction to Quarto",
+    "section": "Linear Regression: One continuous predictor",
+    "text": "Linear Regression: One continuous predictor\nResearch Question: Does a person’s age influence their support to incumbent in Chile?\nThe outcome/DV (\\(Y\\)) here is statusquo, while the predictor/IV (\\(X\\)) would be age\n\nstatsquo_model1 &lt;- lm(statusquo ~ age, data = chile_data)\nsummary(statsquo_model1) #summarize the result\n\n\nCall:\nlm(formula = statusquo ~ age, data = chile_data)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-2.00213 -0.97057 -0.04264  0.96793  2.20837 \n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) -0.300221   0.053678  -5.593 2.46e-08 ***\nage          0.007802   0.001301   5.997 2.28e-09 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.9937 on 2680 degrees of freedom\n  (18 observations deleted due to missingness)\nMultiple R-squared:  0.01324,   Adjusted R-squared:  0.01287 \nF-statistic: 35.96 on 1 and 2680 DF,  p-value: 2.283e-09\n\n\n\n\nCall: the formula\nResiduals: overview on the distribution of residuals (expected value minus observed value) – we can plot this to check for homoscedasticity -\nCoefficients: shows the intercept, the regression coefficients for the predictor variables, and their statistical significance\nResidual standard error: the average difference between observed and expected outcome by the model. Generally the lower, the better.\nR-squared & Adjusted R-squared: indicates the proportion of variation in the outcome that can be explained by the model i.e., how “accurate” is your model?\nF-statistics: overall significance\n\n\nLinear REgression: Multiple continuous predictors\nResearch Question: Do a person’s age and their income have an impact on their support for the incumbent?\nThe outcome/DV (\\(Y\\)) here is income, while the predictors/IVs (\\(X_1\\) and \\(X_2\\)) would be age and statusquo\n\nstatsquo_model2 &lt;- lm(statusquo ~ age + income, data = chile_data)\nsummary(statsquo_model2)\n\n\nCall:\nlm(formula = statusquo ~ age + income, data = chile_data)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-1.61635 -0.96952 -0.05992  0.97136  1.89569 \n\nCoefficients:\n              Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) -3.467e-01  5.793e-02  -5.985 2.46e-09 ***\nage          7.815e-03  1.330e-03   5.875 4.77e-09 ***\nincome       1.072e-06  4.942e-07   2.170   0.0301 *  \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.9942 on 2587 degrees of freedom\n  (110 observations deleted due to missingness)\nMultiple R-squared:  0.01463,   Adjusted R-squared:  0.01387 \nF-statistic: 19.21 on 2 and 2587 DF,  p-value: 5.226e-09"
+  },
+  {
+    "objectID": "05-stats-quarto.html#presenting-your-models",
+    "href": "05-stats-quarto.html#presenting-your-models",
+    "title": "Regression and Introduction to Quarto",
+    "section": "Presenting your models",
+    "text": "Presenting your models\nDon’t forget to install the library by running this line in your terminal: install.packages(\"huxtable\")\n\nlibrary(huxtable)\nhuxreg(\"age\" = statsquo_model1, \"age + income\" = statsquo_model2)\n\n\n\nageage + income\n\n(Intercept)-0.300 ***-0.347 ***\n\n(0.054)   (0.058)   \n\nage0.008 ***0.008 ***\n\n(0.001)   (0.001)   \n\nincome        0.000 *  \n\n        (0.000)   \n\nN2682        2590        \n\nR20.013    0.015    \n\nlogLik-3787.630    -3658.444    \n\nAIC7581.260    7324.888    \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
+  },
+  {
+    "objectID": "05-stats-quarto.html#fyi-multicollinearity",
+    "href": "05-stats-quarto.html#fyi-multicollinearity",
+    "title": "Regression and Introduction to Quarto",
+    "section": "FYI: Multicollinearity",
+    "text": "FYI: Multicollinearity\nCaution! When doing regression-type of tests, watch out for multicollinearity.\nMulticollinearity = a situation in which two or more predictor variables are highly correlated with each other. This makes it difficult to determine the specific contribution of each predictor variable to the relationship.\nOne way to check for it:\n\nAssess the correlation between your predictor variables in your model using Variance Inflation Factor (VIF)\nIf they seem to be highly correlated (&gt; 5 or so), one of the easiest (and somewhat acceptable) way is to simply remove the less significant predictor from your model :D\n\n\ncar::vif(statsquo_model2)\n\n     age   income \n1.001103 1.001103"
+  },
+  {
+    "objectID": "05-stats-quarto.html#linear-regression-one-categorical-predictor",
+    "href": "05-stats-quarto.html#linear-regression-one-categorical-predictor",
+    "title": "Regression and Introduction to Quarto",
+    "section": "Linear Regression: One categorical predictor",
+    "text": "Linear Regression: One categorical predictor\nResearch question: Explore the difference of support for status quo between different education levels.\n\n\n\n\n\n\nNote\n\n\nBefore we proceed with analysis, let’s ensure that all the categorical variables are cast as factors!\n\n\n\n\nchile_data &lt;- chile_data |&gt; \n    mutate(education = factor(education)) |&gt; \n    mutate(sex = factor(sex)) |&gt; \n    mutate(region = factor(region))\n\nglimpse(chile_data)\n\nRows: 2,700\nColumns: 8\n$ region     &lt;fct&gt; N, N, N, N, N, N, N, N, N, N, N, N, N, N, N, N, N, N, N, N,…\n$ population &lt;dbl&gt; 175000, 175000, 175000, 175000, 175000, 175000, 175000, 175…\n$ sex        &lt;fct&gt; M, M, F, F, F, F, M, F, F, M, M, M, F, F, M, M, F, M, M, F,…\n$ age        &lt;dbl&gt; 65, 29, 38, 49, 23, 28, 26, 24, 41, 41, 64, 19, 27, 46, 36,…\n$ education  &lt;fct&gt; P, PS, P, P, S, P, PS, S, P, P, P, S, PS, S, PS, S, PS, S, …\n$ income     &lt;dbl&gt; 35000, 7500, 15000, 35000, 35000, 7500, 35000, 15000, 15000…\n$ statusquo  &lt;dbl&gt; 1.00820, -1.29617, 1.23072, -1.03163, -1.10496, -1.04685, -…\n$ vote       &lt;chr&gt; \"Y\", \"N\", \"Y\", \"N\", \"N\", \"N\", \"N\", \"N\", \"U\", \"N\", \"Y\", \"U\",…"
+  },
+  {
+    "objectID": "05-stats-quarto.html#continuing-the-analysis",
+    "href": "05-stats-quarto.html#continuing-the-analysis",
+    "title": "Regression and Introduction to Quarto",
+    "section": "Continuing the analysis",
+    "text": "Continuing the analysis\nThe analysis summary should look like this:\n\nstatusquo_model3 &lt;- lm(statusquo ~ education, data = chile_data)\nsummary(statusquo_model3)\n\n\nCall:\nlm(formula = statusquo ~ education, data = chile_data)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-1.96343 -0.94652 -0.05996  0.96151  2.23086 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  0.16042    0.02988   5.368 8.65e-08 ***\neducationPS -0.34269    0.05510  -6.219 5.78e-10 ***\neducationS  -0.24396    0.04210  -5.795 7.65e-09 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.9907 on 2670 degrees of freedom\n  (27 observations deleted due to missingness)\nMultiple R-squared:  0.01919,   Adjusted R-squared:  0.01846 \nF-statistic: 26.13 on 2 and 2670 DF,  p-value: 5.796e-12\n\n\nInterpretation for categorical predictor - one of the category will be used as a reference category. By default, the first category will be used."
+  },
+  {
+    "objectID": "05-stats-quarto.html#categorical-predictor-changing-the-reference",
+    "href": "05-stats-quarto.html#categorical-predictor-changing-the-reference",
+    "title": "Regression and Introduction to Quarto",
+    "section": "Categorical predictor: changing the reference",
+    "text": "Categorical predictor: changing the reference\nWe can use relevel to change the reference/baseline category.\n\nchile_data &lt;- chile_data |&gt; \n    mutate(education = relevel(education, ref = \"S\"))\n\ncontrasts(chile_data$education)\n\n   P PS\nS  0  0\nP  1  0\nPS 0  1"
+  },
+  {
+    "objectID": "05-stats-quarto.html#re-run-the-analysis-with-the-new-reference-category",
+    "href": "05-stats-quarto.html#re-run-the-analysis-with-the-new-reference-category",
+    "title": "Regression and Introduction to Quarto",
+    "section": "Re-run the analysis with the new reference category",
+    "text": "Re-run the analysis with the new reference category\n\nstatsquo_model3 &lt;- lm(statusquo ~ education, data = chile_data)\nsummary(statsquo_model3)\n\n\nCall:\nlm(formula = statusquo ~ education, data = chile_data)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-1.96343 -0.94652 -0.05996  0.96151  2.23086 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) -0.08354    0.02966  -2.817  0.00488 ** \neducationP   0.24396    0.04210   5.795 7.65e-09 ***\neducationPS -0.09873    0.05498  -1.796  0.07265 .  \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.9907 on 2670 degrees of freedom\n  (27 observations deleted due to missingness)\nMultiple R-squared:  0.01919,   Adjusted R-squared:  0.01846 \nF-statistic: 26.13 on 2 and 2670 DF,  p-value: 5.796e-12"
+  },
+  {
+    "objectID": "05-stats-quarto.html#lets-try-this-linear-regression-exercise-5-mins",
+    "href": "05-stats-quarto.html#lets-try-this-linear-regression-exercise-5-mins",
+    "title": "Regression and Introduction to Quarto",
+    "section": "Let’s try this Linear Regression exercise! (5 mins)",
+    "text": "Let’s try this Linear Regression exercise! (5 mins)\nCreate a regression model called statusquo_model4 that predicts the statusquo score based on age and education. Make sure that the reference category for education is set to P (Primary).\nOptional: Plot the scatterplot with the trend line for each education category. It should look like this:\n\nchile_data |&gt; \n    ggplot(aes(x = age, y = statusquo, color = education)) +\n    geom_point() +\n    geom_smooth(method = \"lm\")\n\n\n\nchile_data &lt;- chile_data |&gt; \n    dplyr::mutate(education = relevel(education, ref = \"P\"))\n\nstatusquo_model4 &lt;- lm(statusquo ~ age + education, data = chile_data)\nsummary(statusquo_model4)\n\n\nCall:\nlm(formula = statusquo ~ age + education, data = chile_data)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-2.06547 -0.94351 -0.05112  0.95388  2.31446 \n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) -0.072022   0.068814  -1.047 0.295374    \nage          0.005226   0.001388   3.766 0.000169 ***\neducationS  -0.190121   0.044468  -4.275 1.97e-05 ***\neducationPS -0.287916   0.056936  -5.057 4.55e-07 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.9882 on 2668 degrees of freedom\n  (28 observations deleted due to missingness)\nMultiple R-squared:  0.02453,   Adjusted R-squared:  0.02343 \nF-statistic: 22.36 on 3 and 2668 DF,  p-value: 2.678e-14"
   },
   {
     "objectID": "05-stats-quarto.html#binary-logistic-regression",
     "href": "05-stats-quarto.html#binary-logistic-regression",
     "title": "Regression and Introduction to Quarto",
     "section": "Binary Logistic Regression",
-    "text": "Binary Logistic Regression\nAlso known as simply logistic regression, it is used to model the relationship between a set of independent variables and a binary outcome. These independent variables can be either categorical or continuous.\nThe formula is:\n\\[\nlogit(P) = \\beta_0 + \\beta_1X_1 + \\beta_2X_2 + … + \\beta_nX_n\n\\]\nIt can also be written like below, in which the \\(logit(P)\\) part is expanded:\n\\[\nP = \\frac{1}{1 + e^{-(\\beta_0 + \\beta_1X)}}\n\\]"
+    "text": "Binary Logistic Regression\nAlso known as simply logistic regression, it is used to model the relationship between a set of independent variables and a binary outcome. These independent variables can be either categorical or continuous.\nThe formula is:\n\\[\nlogit(P) = \\beta_0 + \\beta_1X_1 + \\beta_2X_2 + … + \\beta_nX_n\n\\]\nIt can also be written like below, in which the \\(logit(P)\\) part is expanded:\n\\[\nP = \\frac{1}{1 + e^{-(\\beta_0 + \\beta_1X)}}\n\\]\nExamples:\n\nDoes a person’s age and education affect whether they will vote Yes or No in the plebiscite?\nDoes a person’s income and region affect their likelihood of abstaining from voting?\n\nIn a way, the goal or logistic regression is to determine the probability of a specific event occurring (pass or fail, survived or perished, vote A or vote B)"
+  },
+  {
+    "objectID": "05-stats-quarto.html#binary-logistic-regression-one-continuous-predictor",
+    "href": "05-stats-quarto.html#binary-logistic-regression-one-continuous-predictor",
+    "title": "Regression and Introduction to Quarto",
+    "section": "Binary Logistic Regression: One Continuous Predictor",
+    "text": "Binary Logistic Regression: One Continuous Predictor\nResearch Question: Does age affect the likelihood of voting “Yes” in the plebiscite?\n\n# First, we need to create a binary outcome\nchile_data &lt;- chile_data |&gt;\n    mutate(vote_yes = ifelse(vote == \"Y\", 1, 0))\n\nvote_age &lt;- glm(vote_yes ~ age,\n                family = binomial, \n                data = chile_data)\n\nsummary(vote_age)\n\n\nCall:\nglm(formula = vote_yes ~ age, family = binomial, data = chile_data)\n\nCoefficients:\n             Estimate Std. Error z value Pr(&gt;|z|)    \n(Intercept) -1.201369   0.118548  -10.13  &lt; 2e-16 ***\nage          0.014211   0.002825    5.03  4.9e-07 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 3254.7  on 2530  degrees of freedom\nResidual deviance: 3229.4  on 2529  degrees of freedom\n  (169 observations deleted due to missingness)\nAIC: 3233.4\n\nNumber of Fisher Scoring iterations: 4\n\nexp(coefficients(vote_age))\n\n(Intercept)         age \n  0.3007821   1.0143125"
+  },
+  {
+    "objectID": "05-stats-quarto.html#present-both-models-in-a-table",
+    "href": "05-stats-quarto.html#present-both-models-in-a-table",
+    "title": "Regression and Introduction to Quarto",
+    "section": "Present both models in a table",
+    "text": "Present both models in a table\n\nlibrary(huxtable)\nhuxreg(\"age\" = vote_age, \"education\" = vote_education)\n\n\n\nageeducation\n\n(Intercept)-1.201 ***-0.375 ***\n\n(0.119)   (0.063)   \n\nage0.014 ***        \n\n(0.003)           \n\neducationS        -0.488 ***\n\n        (0.093)   \n\neducationPS        -0.488 ***\n\n        (0.122)   \n\nN2531        2522        \n\nlogLik-1614.695    -1603.846    \n\nAIC3233.390    3213.692    \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
+  },
+  {
+    "objectID": "05-stats-quarto.html#lets-try-this-logistic-regression-exercise",
+    "href": "05-stats-quarto.html#lets-try-this-logistic-regression-exercise",
+    "title": "Regression and Introduction to Quarto",
+    "section": "Let’s try this Logistic Regression exercise!",
+    "text": "Let’s try this Logistic Regression exercise!\nCreate a regression model called vote_model that predicts the likelihood of voting “Yes” based on age, education, and income. Make sure that the reference category for education is set to P (Primary).\n\nchile_data &lt;- chile_data |&gt; \n    mutate(education = relevel(education, ref = \"P\"))\n\nvote_model &lt;- glm(vote_yes ~ age + education + income,\n                  family = \"binomial\", \n                  data = chile_data) \n\nsummary(vote_model)\n\n\nCall:\nglm(formula = vote_yes ~ age + education + income, family = \"binomial\", \n    data = chile_data)\n\nCoefficients:\n              Estimate Std. Error z value Pr(&gt;|z|)    \n(Intercept) -8.070e-01  1.528e-01  -5.283 1.27e-07 ***\nage          7.532e-03  3.114e-03   2.418   0.0156 *  \neducationS  -5.018e-01  1.031e-01  -4.869 1.12e-06 ***\neducationPS -7.396e-01  1.490e-01  -4.963 6.93e-07 ***\nincome       5.524e-06  1.202e-06   4.597 4.29e-06 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 3137.1  on 2438  degrees of freedom\nResidual deviance: 3076.3  on 2434  degrees of freedom\n  (261 observations deleted due to missingness)\nAIC: 3086.3\n\nNumber of Fisher Scoring iterations: 4\n\nexp(coefficients(vote_model))\n\n(Intercept)         age  educationS educationPS      income \n  0.4461754   1.0075605   0.6054551   0.4773035   1.0000055"
   },
   {
     "objectID": "05-stats-quarto.html#markdown-specifically-r-markdown",
@@ -322,6 +399,48 @@
     "text": "Data Structures in R: Vectors\n\nBasic objects in R can only contain one value. But quite often you may want to group a bunch of values together and save it in a single object.\nA vector is a data structure that can do this. It is the most common and basic data structure in R. (pretty much the workhorse of R!)\n\n\nt1_courses &lt;- c(\"IDIS110\", \"IDIS100\", \"PLE100\", \"PSYC111\", \"PSYC103\")\nstr(t1_courses)\n\n chr [1:5] \"IDIS110\" \"IDIS100\" \"PLE100\" \"PSYC111\" \"PSYC103\"\n\nprint(t1_courses)\n\n[1] \"IDIS110\" \"IDIS100\" \"PLE100\"  \"PSYC111\" \"PSYC103\"\n\n\nExample of numeric vector:\n\nt1_grades &lt;- c(50, 70, 80, 95, 77)\nstr(t1_grades)\n\n num [1:5] 50 70 80 95 77"
   },
   {
+    "objectID": "01-intro.html#vector-manipulations-retrieve-and-update-items",
+    "href": "01-intro.html#vector-manipulations-retrieve-and-update-items",
+    "title": "Introduction to R and RStudio",
+    "section": "Vector Manipulations: Retrieve and update items",
+    "text": "Vector Manipulations: Retrieve and update items\n\n# retrieve the 1st item in the vector\nt1_grades[1]\n\n[1] 50\n\n# retrieves the 1st item up to the 3rd item\nt1_grades[1:3]\n\n[1] 50 70 80\n\n# update the value of the 1st item\nt1_grades[1] &lt;- 65\nprint(t1_grades[1])\n\n[1] 65"
+  },
+  {
+    "objectID": "01-intro.html#vector-manipulations-retrieve-items-based-on-criteria",
+    "href": "01-intro.html#vector-manipulations-retrieve-items-based-on-criteria",
+    "title": "Introduction to R and RStudio",
+    "section": "Vector Manipulations: Retrieve items based on criteria",
+    "text": "Vector Manipulations: Retrieve items based on criteria\n\nLet’s say we want to retrieve items that are larger than 75.\nThe code below will create a boolean vector called criteria that basically keep tracks on whether each items inside t1_grades fulfil our condition.\nThe condition is “value must be &gt; 75”. e.g. if item 1 fulfils our condition, then item 1 is ‘marked’ as TRUE. Otherwise, it will be FALSE\n\n\ncriteria &lt;- t1_grades &gt; 75 \nprint(criteria)\n\n[1] FALSE FALSE  TRUE  TRUE  TRUE\n\n\n\nThis line of code applies the boolean vector criteria to t1_grades, and only retrieve items that fulfils the condition. i.e. items whose position is marked as TRUE by criteria vector\n\n\nt1_grades[criteria]\n\n[1] 80 95 77"
+  },
+  {
+    "objectID": "01-intro.html#shortened-version-of-the-previous-code",
+    "href": "01-intro.html#shortened-version-of-the-previous-code",
+    "title": "Introduction to R and RStudio",
+    "section": "Shortened version of the previous code",
+    "text": "Shortened version of the previous code\n\nYou can shorten the code like this too (notice that we are not creating a temporary dataframe called criteria here):\n\n\nt1_grades[t1_grades &gt; 75]\n\n[1] 80 95 77"
+  },
+  {
+    "objectID": "01-intro.html#vector-manipulations-handling-na-values",
+    "href": "01-intro.html#vector-manipulations-handling-na-values",
+    "title": "Introduction to R and RStudio",
+    "section": "Vector Manipulations: Handling NA values",
+    "text": "Vector Manipulations: Handling NA values\n\nNA values indicate null values, or the absence of a value (0 is still a value!)\nSummary functions like mean needs you to specify in the arguments how you want it to be handled.\n\n\nmissing_vector &lt;- c(21, 22, 23, 24, 25, NA, 27, 28, NA, 30)\n\n# by default it will be confused and return NA\nmean(missing_vector)\n\n[1] NA\n\n# indicate that we want the NA values to be removed entirely\nmean(missing_vector, na.rm = TRUE)\n\n[1] 25"
+  },
+  {
+    "objectID": "01-intro.html#vector-manipulations-adding-items",
+    "href": "01-intro.html#vector-manipulations-adding-items",
+    "title": "Introduction to R and RStudio",
+    "section": "Vector Manipulations: Adding items",
+    "text": "Vector Manipulations: Adding items\nSeveral ways to add items to a vector\n\n1t1_grades &lt;- c(t1_grades, 92)\n2t1_grades &lt;- c(t1_grades, 88, 95, 79)\n3t1_grades &lt;- c(82, t1_grades)\n4t1_grades &lt;- append(t1_grades, 92, after = 2) # &lt;2&gt;\n\n\n1\n\nAdd a single grade to the end of the vector using c()\n\n2\n\nAdd multiple grades to the end\n\n3\n\nAdd a grade to the beginning\n\n4\n\nInsert a grade at a specific position using append()"
+  },
+  {
+    "objectID": "01-intro.html#vector-manipulations-removing-items",
+    "href": "01-intro.html#vector-manipulations-removing-items",
+    "title": "Introduction to R and RStudio",
+    "section": "Vector Manipulations: Removing items",
+    "text": "Vector Manipulations: Removing items\n\n1t1_grades &lt;- t1_grades[-c(2, 4)]\n2t1_grades &lt;- t1_grades[t1_grades &lt;= 90]\n3t1_grades &lt;- na.omit(t1_grades)\n\n\n1\n\nRemove elements by index using “negative indexing”\n\n2\n\nRemove elements based on a condition using logical indexing\n\n3\n\nRemove NA values from the vector"
+  },
+  {
     "objectID": "01-intro.html#data-structures-in-r-factors",
     "href": "01-intro.html#data-structures-in-r-factors",
     "title": "Introduction to R and RStudio",
@@ -336,11 +455,25 @@
     "text": "Data Structures in R: Dataframe\n\nDe facto data structure for tabular data in R, and what we use for data processing, plotting, and statistics.\nSimilar to spreadsheets!\nYou can create it by hand like so:\n\n\nt1_data &lt;- data.frame(\n  course_code = c(\"IDIS110\", \"IDIS100\", \"PLE100\", \"PSYC111\", \"PSYC103\"),\n  grade = c(50, 70, 80, 95, 77)\n)\nprint(t1_data)\n\n  course_code grade\n1     IDIS110    50\n2     IDIS100    70\n3      PLE100    80\n4     PSYC111    95\n5     PSYC103    77"
   },
   {
-    "objectID": "01-intro.html#loading-data-from-csv",
-    "href": "01-intro.html#loading-data-from-csv",
+    "objectID": "01-intro.html#creating-dataframe-from-two-or-more-vectors",
+    "href": "01-intro.html#creating-dataframe-from-two-or-more-vectors",
     "title": "Introduction to R and RStudio",
-    "section": "Loading data from CSV",
-    "text": "Loading data from CSV\n\nMake sure to download and save chile_voting.csv from this URL into your data folder.\nCheck out the data dictionary/explanatory notes to learn more about the data, including the column names, data type inside each columns here.\nWe need to use readr package, which is part of tidyverse package. So please install tidyverse first if you have not done so."
+    "section": "Creating dataframe from two (or more) vectors",
+    "text": "Creating dataframe from two (or more) vectors\nAlternatively, here is how to create one using the two vectors that we created earlier:\n\nt1_data &lt;- data.frame(course_code = t1_courses, grade = t1_grades)\nprint(t1_data)\n\n  course_code grade\n1     IDIS110    65\n2     IDIS100    70\n3      PLE100    80\n4     PSYC111    95\n5     PSYC103    77\n\n\nMost of the time, our dataframe will be generated by loading from external data file such as CSV, SAV, or XLSX file.\nLet’s try loading one from a CSV!"
+  },
+  {
+    "objectID": "01-intro.html#preparation-get-the-csv",
+    "href": "01-intro.html#preparation-get-the-csv",
+    "title": "Introduction to R and RStudio",
+    "section": "Preparation: Get the CSV",
+    "text": "Preparation: Get the CSV\n\n\n\n\n\n\nWhat is a CSV?\n\n\nA CSV (Comma-Separated Values) file is a type of file that stores data in a plain text format. Each line in the file represents a row of data, and within each row, individual pieces of data (like numbers or words) are separated by commas. This format is commonly used for storing and transferring data, especially in spreadsheets and databases.\nYou can open CSV files in Excel, Google Sheets, or event Notepad!\n\n\n\n\nDownload and save chile_voting.csv from this URL\nSave the CSV file into your data folder.\nCheck out the data dictionary/explanatory notes to learn more about the data, including the column names, data type inside each columns here.\nWe need to use readr package, which is part of tidyverse package. So please install tidyverse first if you have not done so."
+  },
+  {
+    "objectID": "01-intro.html#loading-data-from-csv-into-a-dataframe",
+    "href": "01-intro.html#loading-data-from-csv-into-a-dataframe",
+    "title": "Introduction to R and RStudio",
+    "section": "Loading data from CSV into a Dataframe",
+    "text": "Loading data from CSV into a Dataframe\nLoad the CSV and save the content into a tibble/dataframe called chile_data\n\n1library(tidyverse)\n\n2chile_data &lt;- read_csv(\"data/chile_voting.csv\")\n3head(chile_data)\n\n\n1\n\nLoad the tidyverse library (make sure to have it installed first!)\n\n2\n\nRead the CSV file that we placed inside the the data folder with the help of read_csv function, and save it into chile_data dataframe.\n\n3\n\nPrint the first few rows of the data to check if it’s loaded correctly."
   },
   {
     "objectID": "01-intro.html#more-ways-to-peek-at-the-data",
@@ -410,91 +543,105 @@
     "href": "02-tidyerse.html#data-wrangling-activities-specific-to-our-data",
     "title": "Data Wrangling with Tidyverse",
     "section": "Data wrangling activities specific to our data",
-    "text": "Data wrangling activities specific to our data\nScenario: Our Principal Investigator (PI) is studying voting patterns in the 1988 Chilean plebiscite. As the Research Assistant (RA), we have been asked to do the following 9 tasks:\n\nSeparate the demographic information (region, sex, age, education) into a separate CSV called chile-demographics.csv\nRetrieve only respondents aged 30 or older, arrange it from oldest to youngest, and save it into a separate CSV called chile-30plus.csv\nMake the character columns such as region, sex, education, and vote to be in uppercase.\nConvert all the categorical columns such as region, sex, education, and vote to Factor. Make sure education is ordered.\nCreate a new column called age_group that categorizes age into groups: “18-29”, “30-44”, “45-59”, “60+”."
+    "text": "Data wrangling activities specific to our data\nScenario: We are a junior Research Assistant (RA) in a research team currently studying about the 1988 Chilean plebiscite. The team’s primary goal is to identify any discernible and interesting patterns in the voter demographic data.\nAs a start, we have been asked to do the following data cleaning and processing tasks:\n\n\nRemove all rows with empty values (NA)\nSeparate the demographic information (region, sex, age, education) into a separate CSV called chile-demographics.csv\nRetrieve only respondents aged 30 or older, arrange it from oldest to youngest, and save it into a separate CSV called chile-30plus.csv\nMake the character columns such as region, sex, education, and vote to be in uppercase.\nConvert all the categorical columns such as region, sex, education, and vote to Factor. Make sure education is ordered."
   },
   {
     "objectID": "02-tidyerse.html#task-1",
     "href": "02-tidyerse.html#task-1",
     "title": "Data Wrangling with Tidyverse",
     "section": "Task #1",
-    "text": "Task #1\nSeparate the demographic information (region, sex, age, education) into a separate CSV called chile-demographics.csv\nThe first few rows in the CSV:\n\n\n# A tibble: 2,700 × 4\n  region sex     age education\n  &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;    \n1 N      M        65 P        \n2 N      M        29 PS       \n3 N      F        38 P        \n# ℹ 2,697 more rows"
+    "text": "Task #1\n\nA strategy I’d like to recommend: briefly read over the dplyr + tidyr documentation, either the PDF or HTML version, and have them open on a separate tab so that you can refer to it quickly.\n\nRemove all rows with empty values (NA)\nThe number of observations after all rows containing NAs are removed:\n\ndim(chile_data)\n\n[1] 2431    8"
+  },
+  {
+    "objectID": "02-tidyerse.html#interlude-pipe-operator",
+    "href": "02-tidyerse.html#interlude-pipe-operator",
+    "title": "Data Wrangling with Tidyverse",
+    "section": "Interlude: Pipe Operator ( |> )",
+    "text": "Interlude: Pipe Operator ( |&gt; )\n\nThe pipe operator (|&gt;) allows us to chain multiple operations without creating intermediate dataframes.\nSuper handy when we perform several data wrangling tasks using tidyverse in sequence.\nHelps with readability, especially for complex operations.\nKeyboard shortcut: Ctrl+Shift+M on Windows, Cmd+Shift+M on Mac\n\n\nWithout pipe operatorWith pipe operator\n\n\nage_df &lt;- filter(chile_data, age &gt;= 30)\nage_df_desc &lt;- arrange(age_df, desc(age))\nwrite_csv(age_df_desc, \"data-output/chile-30plus.csv\")\n\n\nchile_data |&gt; \n    filter(age &gt;= 30) |&gt; \n    arrange(desc(age)) |&gt; \n    write_csv(\"data-output/chile-30plus.csv\")"
   },
   {
     "objectID": "02-tidyerse.html#task-2",
     "href": "02-tidyerse.html#task-2",
     "title": "Data Wrangling with Tidyverse",
     "section": "Task #2",
-    "text": "Task #2\nRetrieve only respondents aged 30 or older, arrange it from oldest to youngest, and save it into a separate CSV called chile-30plus.csv\nThe first few rows in the resulting CSV:\n\n\n# A tibble: 1,770 × 8\n  region population sex     age education income statusquo vote \n  &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;\n1 N          125000 F        70 P          15000     1.49  Y    \n2 N          250000 F        70 P          75000     1.40  Y    \n3 N          250000 M        70 P           7500    -0.366 N    \n# ℹ 1,767 more rows"
-  },
-  {
-    "objectID": "02-tidyerse.html#group-exercise-1-solo-attempts-ok",
-    "href": "02-tidyerse.html#group-exercise-1-solo-attempts-ok",
-    "title": "Data Wrangling with Tidyverse",
-    "section": "Group exercise 1 (solo attempts ok)",
-    "text": "Group exercise 1 (solo attempts ok)\nTime: 5 minutes!\nRetrieve only respondents from the Metropolitan Santiago area (M), with Secondary education (S), and who are undecided (U) about their vote. Keep only their region, education, vote, and income columns in a new dataframe called santiago_undecided in descending order of income.\nThe first few rows of santiago_undecided:\n\n\n# A tibble: 7 × 4\n  region education vote  income\n  &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;  &lt;dbl&gt;\n1 M      S         U      35000\n2 M      S         U      15000\n3 M      S         U      15000\n# ℹ 4 more rows"
+    "text": "Task #2\nSeparate the demographic information (region, sex, age, education) into a separate CSV called chile-demographics.csv\nThe first few rows in the CSV:\n\n\n# A tibble: 2,431 × 4\n  region sex     age education\n  &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;    \n1 N      M        65 P        \n2 N      M        29 PS       \n3 N      F        38 P        \n# ℹ 2,428 more rows"
   },
   {
     "objectID": "02-tidyerse.html#task-3",
     "href": "02-tidyerse.html#task-3",
     "title": "Data Wrangling with Tidyverse",
     "section": "Task #3",
-    "text": "Task #3\nMake all character columns such as region, sex, education, and vote to be in uppercase.\nThe end result:\n\n\n# A tibble: 2,700 × 4\n  region sex   education vote \n  &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;\n1 N      M     P         Y    \n2 N      M     PS        N    \n3 N      F     P         Y    \n# ℹ 2,697 more rows"
+    "text": "Task #3\nRetrieve only respondents aged 30 or older, arrange it from oldest to youngest, and save it into a separate CSV called chile-30plus.csv\nThe first few rows in the resulting CSV:\n\n\n# A tibble: 1,581 × 8\n  region population sex     age education income statusquo vote \n  &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;\n1 N          125000 F        70 P          15000     1.49  Y    \n2 N          250000 F        70 P          75000     1.40  Y    \n3 N          250000 M        70 P           7500    -0.366 N    \n# ℹ 1,578 more rows"
+  },
+  {
+    "objectID": "02-tidyerse.html#group-exercise-1-solo-attempts-ok",
+    "href": "02-tidyerse.html#group-exercise-1-solo-attempts-ok",
+    "title": "Data Wrangling with Tidyverse",
+    "section": "Group exercise 1 (solo attempts ok)",
+    "text": "Group exercise 1 (solo attempts ok)\nTime: 5 minutes!\nRetrieve only respondents from the Metropolitan Santiago area (M), with Secondary education (S), and who are undecided (U) about their vote. Keep only their region, education, vote, and income columns in a new dataframe called santiago_undecided in descending order of income.\nThe first few rows of santiago_undecided:\n\n\n# A tibble: 5 × 4\n  region education vote  income\n  &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;  &lt;dbl&gt;\n1 M      S         U      35000\n2 M      S         U      15000\n3 M      S         U      15000\n# ℹ 2 more rows"
   },
   {
     "objectID": "02-tidyerse.html#task-4",
     "href": "02-tidyerse.html#task-4",
     "title": "Data Wrangling with Tidyverse",
     "section": "Task #4",
-    "text": "Task #4\nConvert all the categorical columns such as region, sex, education, and vote to Factor. Make sure education is ordered.\nThe education column after the change:\n\n\ntibble [2,700 × 1] (S3: tbl_df/tbl/data.frame)\n $ education: Ord.factor w/ 3 levels \"P\"&lt;\"S\"&lt;\"PS\": 1 3 1 1 2 1 3 2 1 1 ..."
+    "text": "Task #4\nMake all character columns such as region, sex, education, and vote to be in uppercase.\nThe end result:\n\n\n# A tibble: 2,431 × 4\n  region sex   education vote \n  &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;\n1 N      M     P         Y    \n2 N      M     PS        N    \n3 N      F     P         Y    \n# ℹ 2,428 more rows"
   },
   {
     "objectID": "02-tidyerse.html#task-5",
     "href": "02-tidyerse.html#task-5",
     "title": "Data Wrangling with Tidyverse",
     "section": "Task #5",
-    "text": "Task #5\nCreate a new column called age_group that categorizes age into groups: “18-29”, “30-44”, “45-59”, “60+”.\nThe new age_group column:\n\n\n# A tibble: 2,700 × 2\n    age age_group\n  &lt;dbl&gt; &lt;chr&gt;    \n1    65 60+      \n2    29 18-29    \n3    38 30-44    \n4    49 45-59    \n# ℹ 2,696 more rows"
+    "text": "Task #5\nConvert all the categorical columns such as region, sex, education, and vote to Factor. Make sure education is ordered.\nThe education column after the change:\n\n\ntibble [2,431 × 1] (S3: tbl_df/tbl/data.frame)\n $ education: Ord.factor w/ 3 levels \"P\"&lt;\"S\"&lt;\"PS\": 1 3 1 1 2 1 3 2 1 1 ..."
   },
   {
     "objectID": "02-tidyerse.html#task-6",
     "href": "02-tidyerse.html#task-6",
     "title": "Data Wrangling with Tidyverse",
     "section": "Task #6",
-    "text": "Task #6\nCreate a new column called high_income that is TRUE if income is above the median, FALSE otherwise.\nThe original income column and the new high_income column:\n\n\n# A tibble: 3 × 2\n  income high_income\n   &lt;dbl&gt; &lt;lgl&gt;      \n1  15000 FALSE      \n2  15000 FALSE      \n3  15000 FALSE"
+    "text": "Task #6\nAdd a new column to chile_data called age_group that categorizes age into groups: “18-29”, “30-44”, “45-59”, “60+”.\nThe new age_group column should look something like this:\n\n\n# A tibble: 2,431 × 2\n    age age_group\n  &lt;dbl&gt; &lt;chr&gt;    \n1    65 60+      \n2    29 18-29    \n3    38 30-44    \n4    49 45-59    \n# ℹ 2,427 more rows"
   },
   {
     "objectID": "02-tidyerse.html#task-7",
     "href": "02-tidyerse.html#task-7",
     "title": "Data Wrangling with Tidyverse",
     "section": "Task #7",
-    "text": "Task #7\nCreate a new column called support_level that categorizes statusquo into “Unsupportive” (&lt;= 0) and “Supportive” (&gt; 0). Save all of these changes you made from step 3 onwards into a new CSV called chile_voting_processed.csv\nThe new support_level column:\n\n\n# A tibble: 2,700 × 2\n  statusquo support_level\n      &lt;dbl&gt; &lt;chr&gt;        \n1      1.01 Supportive   \n2     -1.30 Unsupportive \n3      1.23 Supportive   \n# ℹ 2,697 more rows"
+    "text": "Task #7\nCreate a new column called high_income that is TRUE if income is above the median, FALSE otherwise.\nhint: you need to calculate the median income first.\nThe original income column and the new high_income column:\n\n\n# A tibble: 3 × 2\n  income high_income\n   &lt;dbl&gt; &lt;lgl&gt;      \n1  15000 FALSE      \n2  15000 FALSE      \n3  15000 FALSE"
   },
   {
-    "objectID": "02-tidyerse.html#task-8",
-    "href": "02-tidyerse.html#task-8",
+    "objectID": "02-tidyerse.html#task-8---can-you-solve-this",
+    "href": "02-tidyerse.html#task-8---can-you-solve-this",
     "title": "Data Wrangling with Tidyverse",
-    "section": "Task #8",
-    "text": "Task #8\nGenerate summary stats of income grouped by region and education. The summary stats should include mean, median, max, min, std, and n (number of observations).\n\n\n# A tibble: 19 × 8\n# Groups:   region [5]\n   region education observation mean_income median_income highest lowest std_dev\n   &lt;fct&gt;  &lt;ord&gt;           &lt;int&gt;       &lt;dbl&gt;         &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;\n 1 C      P                 261      16161.         15000  200000   2500  18089.\n 2 C      S                 256      36352.         35000  200000   2500  37903.\n 3 C      PS                 81      63766.         35000  200000   7500  49953.\n 4 C      &lt;NA&gt;                2      41250          41250   75000   7500  47730.\n 5 M      P                  52      20700          15000  125000   2500  20541.\n 6 M      S                  42      28919.         15000   75000   7500  21324.\n 7 M      PS                  6      60000          55000  125000  15000  39875.\n 8 N      P                 139      19398.         15000   75000   2500  16375.\n 9 N      S                 117      32345.         35000  125000   2500  26429.\n10 N      PS                 65      52897.         35000  200000   7500  41570.\n11 N      &lt;NA&gt;                1      15000          15000   15000  15000     NA \n12 S      P                 340      15977.          7500  200000   2500  19063.\n13 S      S                 269      29877.         15000  200000   2500  30017.\n14 S      PS                108      56054.         35000  200000   2500  51961.\n15 S      &lt;NA&gt;                1       2500           2500    2500   2500     NA \n16 SA     P                 315      19653.         15000  125000   2500  16151.\n17 SA     S                 436      40962.         35000  200000   2500  41150.\n18 SA     PS                202      81833.         75000  200000   7500  65747.\n19 SA     &lt;NA&gt;                7      10500           7500   15000   7500   4108."
+    "section": "Task #8 - Can you solve this?",
+    "text": "Task #8 - Can you solve this?\nCreate a new column called support_level that categorizes statusquo into “Unsupportive” (&lt;= 0) and “Supportive” (&gt; 0).\nSave all of these changes you made from step 3 onwards into a new CSV called chile_voting_processed.csv\nThe new support_level column:\n\n\n# A tibble: 2,431 × 2\n  statusquo support_level\n      &lt;dbl&gt; &lt;chr&gt;        \n1      1.01 Supportive   \n2     -1.30 Unsupportive \n3      1.23 Supportive   \n# ℹ 2,428 more rows"
   },
   {
     "objectID": "02-tidyerse.html#task-9",
     "href": "02-tidyerse.html#task-9",
     "title": "Data Wrangling with Tidyverse",
     "section": "Task #9",
-    "text": "Task #9\nReshape the data to have region as rows and vote options as columns, with the values being the count of votes for each option in each region.\n\n\n# A tibble: 5 × 6\n  region     A     N     U     Y  `NA`\n  &lt;fct&gt;  &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;\n1 C         44   210   141   174    31\n2 M          2    18    23    38    19\n3 N         30   102    46   135     9\n4 S         42   214   148   275    39\n5 SA        69   345   230   246    70"
+    "text": "Task #9\nGenerate summary stats of income grouped by region and education. The summary stats should include mean, median, max, min, std, and n (number of observations).\n\n\n# A tibble: 15 × 8\n# Groups:   region [5]\n   region education observation mean_income median_income highest lowest std_dev\n   &lt;fct&gt;  &lt;ord&gt;           &lt;int&gt;       &lt;dbl&gt;         &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;\n 1 C      P                 238      16450.         15000  200000   2500  18483.\n 2 C      S                 234      35887.         35000  200000   2500  36540.\n 3 C      PS                 76      64375          35000  200000   7500  50705.\n 4 M      P                  43      21163.         15000  125000   2500  21967.\n 5 M      S                  26      29038.         25000   75000   7500  19787.\n 6 M      PS                  6      60000          55000  125000  15000  39875.\n 7 N      P                 133      19173.         15000   75000   2500  15823.\n 8 N      S                 111      31937.         35000  125000   2500  26351.\n 9 N      PS                 61      53934.         35000  200000   7500  41772.\n10 S      P                 310      15677.          7500  200000   2500  19074.\n11 S      S                 250      29800          15000  200000   2500  30450.\n12 S      PS                 95      56658.         35000  200000   2500  52879.\n13 SA     P                 278      19191.         15000  125000   2500  15796.\n14 SA     S                 389      41292.         35000  200000   2500  41052.\n15 SA     PS                181      82859.         75000  200000   7500  66268."
+  },
+  {
+    "objectID": "02-tidyerse.html#task-10",
+    "href": "02-tidyerse.html#task-10",
+    "title": "Data Wrangling with Tidyverse",
+    "section": "Task #10",
+    "text": "Task #10\nReshape the data to have region as rows and vote options as columns, with the values being the count of votes for each option in each region.\n\n\n# A tibble: 5 × 5\n  region     A     N     U     Y\n  &lt;fct&gt;  &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;\n1 C         44   209   130   165\n2 M          2    17    19    37\n3 N         29    98    46   132\n4 S         39   209   140   267\n5 SA        63   334   216   235"
   },
   {
     "objectID": "02-tidyerse.html#group-exercise-3-solo-attempts-ok",
     "href": "02-tidyerse.html#group-exercise-3-solo-attempts-ok",
     "title": "Data Wrangling with Tidyverse",
     "section": "Group exercise 3 (solo attempts ok)",
-    "text": "Group exercise 3 (solo attempts ok)\nTime: 5 minutes\nGenerate a summary stats of age grouped by region and sex. The summary stats should include mean, median, max, min, std, and n (number of observations). It should look something like this:\n\n\n# A tibble: 10 × 8\n# Groups:   region [5]\n   region sex   observation mean_age median_age oldest youngest std_dev\n   &lt;fct&gt;  &lt;fct&gt;       &lt;int&gt;    &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;\n 1 C      F             300     37.9         36     70       18    14.2\n 2 C      M             300     38.8         35     70       18    15.8\n 3 M      F              51     36.6         36     68       18    13.9\n 4 M      M              49     36.8         34     65       18    13.0\n 5 N      F             168     38.8         36     70       18    13.6\n 6 N      M             154     38.6         35     70       18    16.5\n 7 S      F             362     37.3         36     70       18    14.0\n 8 S      M             356     37.9         35     70       18    14.8\n 9 SA     F             498     39.3         38     70       18    14.3\n10 SA     M             462     39.8         38     70       18    15.4"
+    "text": "Group exercise 3 (solo attempts ok)\nTime: 5 minutes\nGenerate a summary stats of age grouped by region and sex. The summary stats should include mean, median, max, min, std, and n (number of observations). It should look something like this:\n\n\n# A tibble: 10 × 8\n# Groups:   region [5]\n   region sex   observation mean_age median_age oldest youngest std_dev\n   &lt;fct&gt;  &lt;fct&gt;       &lt;int&gt;    &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;\n 1 C      F             269     37.7       36       70       18    14.3\n 2 C      M             279     39.1       36       70       18    15.8\n 3 M      F              43     37.0       36       68       18    14.1\n 4 M      M              32     36         33.5     65       18    13.5\n 5 N      F             159     38.7       36       70       18    13.8\n 6 N      M             146     38.7       35       70       18    16.6\n 7 S      F             330     36.7       35       70       18    13.9\n 8 S      M             325     38.0       36       70       18    14.9\n 9 SA     F             449     38.9       38       70       18    14.0\n10 SA     M             399     39.0       37       70       18    15.1"
   },
   {
     "objectID": "02-tidyerse.html#bonus-deleting-columns-from-dataframe",
     "href": "02-tidyerse.html#bonus-deleting-columns-from-dataframe",
     "title": "Data Wrangling with Tidyverse",
     "section": "Bonus: Deleting columns from dataframe",
-    "text": "Bonus: Deleting columns from dataframe\nLet’s say I have this column called wrong_column that I want to remove:\n\n\n# A tibble: 2,700 × 2\n  region wrong_column \n  &lt;fct&gt;  &lt;chr&gt;        \n1 N      random values\n2 N      random values\n3 N      random values\n# ℹ 2,697 more rows\n\n\nRemove the wrong column with subset -:\n\nchile_data &lt;- chile_data |&gt; \n    select(-wrong_column)\n\n\n\n# A tibble: 2,700 × 1\n  region\n  &lt;fct&gt; \n1 N     \n2 N     \n3 N     \n# ℹ 2,697 more rows"
+    "text": "Bonus: Deleting columns from dataframe\nLet’s say I have this column called wrong_column that I want to remove:\n\n\n# A tibble: 2,431 × 2\n  region wrong_column \n  &lt;fct&gt;  &lt;chr&gt;        \n1 N      random values\n2 N      random values\n3 N      random values\n# ℹ 2,428 more rows\n\n\nRemove the wrong column with subset -:\n\nchile_data &lt;- chile_data |&gt; \n    select(-wrong_column)\n\n\n\n# A tibble: 2,431 × 1\n  region\n  &lt;fct&gt; \n1 N     \n2 N     \n3 N     \n# ℹ 2,428 more rows"
   },
   {
     "objectID": "04-stats.html#todays-outline",
@@ -532,6 +679,13 @@
     "text": "Chi-square test of independence\nThe \\(X^2\\) test of independence evaluates whether there is a statistically significant relationship between two categorical variables.\nThis is done by analyzing the frequency table (i.e., contingency table) formed by two categorical variables.\nExample: Is there any relationship between education and vote in our Chile voting data?"
   },
   {
+    "objectID": "04-stats.html#chi-square-sample-problem-and-results",
+    "href": "04-stats.html#chi-square-sample-problem-and-results",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "Chi-Square: Sample problem and results",
+    "text": "Chi-Square: Sample problem and results\nIs there any relationship between education and vote in our Chile voting data?\n\nprint(chisq.test(table(chile_data$education, chile_data$vote)))\n\n\n    Pearson's Chi-squared test\n\ndata:  table(chile_data$education, chile_data$vote)\nX-squared = 135.85, df = 6, p-value &lt; 2.2e-16\n\n\n\n\nX-squared = the coefficient\ndf = degree of freedom\np-value = the probability of getting more extreme results than what was observed. Generally, if this value is less than the pre-determined significance level (also called alpha), the result would be considered “statistically significant”\n\n\nWhat if there is a hypothesis? How would you write this in the report?"
+  },
+  {
     "objectID": "04-stats.html#correlation",
     "href": "04-stats.html#correlation",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
@@ -539,11 +693,53 @@
     "text": "Correlation\nA correlation test evaluates the strength and direction of a linear relationship between two variables. The coefficient is expressed in value between -1 to 1, with 0 being no correlation at all.\n\n\nPearson’s \\(r\\) (r)\n\nAssumes and measures linear relationships\nSensitive to outliers\nAssumes normality\n(most likely the one that you learned in class)\n\n\nKendall’s \\(\\tau\\) (tau)\n\nMeasures monotonic relationship\nless sensitive/more robust to outliers\nnon-parametric, do not assume normality\n\n\nSpearman’s \\(\\rho\\) (rho)\n\nMeasures monotonic relationship\nless sensitive/more robust to outliers\nnon-parametric, do not assume normality"
   },
   {
+    "objectID": "04-stats.html#what-is-monotonic-relationship",
+    "href": "04-stats.html#what-is-monotonic-relationship",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "What is monotonic relationship?",
+    "text": "What is monotonic relationship?\nWhen a size of one variable increases, the other variables also increase, though at different rate."
+  },
+  {
+    "objectID": "04-stats.html#correlation-sample-problem-and-result",
+    "href": "04-stats.html#correlation-sample-problem-and-result",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "Correlation: Sample problem and result",
+    "text": "Correlation: Sample problem and result\nIs there a significant correlation between a respondent’s age and income?\n\ncor.test(chile_data$age, chile_data$income, method = \"pearson\")\n\n\n    Pearson's product-moment correlation\n\ndata:  chile_data$age and chile_data$income\nt = -1.6507, df = 2599, p-value = 0.09891\nalternative hypothesis: true correlation is not equal to 0\n95 percent confidence interval:\n -0.070708808  0.006078618\nsample estimates:\n        cor \n-0.03236285 \n\n\n\n\nt is the t-test statistic (for hypothesis testing)\ndf is the degrees of freedom\np-value is the significance level of the t-test\nconf.int is the confidence interval of the coefficient at 95%\nsample estimates is the correlation coefficient"
+  },
+  {
+    "objectID": "04-stats.html#lets-try-this-correlation-exercise-5-mins",
+    "href": "04-stats.html#lets-try-this-correlation-exercise-5-mins",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "Let’s try this correlation exercise! (5 mins)",
+    "text": "Let’s try this correlation exercise! (5 mins)\n\nCalculate the correlation coefficient between age and statusquo.\n\nWhat is the null and alternative hypothesis?\nHow strong is the correlation? i.e. would you say it’s a strong correlation?\nIn which direction is the correlation?\nIs the correlation coefficient statistically significant?"
+  },
+  {
     "objectID": "04-stats.html#t-tests",
     "href": "04-stats.html#t-tests",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "T-Tests",
-    "text": "T-Tests\nA t-test is a statistical test used to compare the means of two groups/samples of continuous data type and determine if the differences are statistically significant. More in-depth info here!\n\nThe Student’s t-test is widely used when the sample size is reasonably small (less than approximately 30) or when the population standard deviation is unknown."
+    "text": "T-Tests\nA t-test is a statistical test used to compare the means of two groups/samples of continuous data type and determine if the differences are statistically significant.\n\nThe Student’s t-test is widely used when the sample size is reasonably small (less than approximately 30) or when the population standard deviation is unknown."
+  },
+  {
+    "objectID": "04-stats.html#types-of-t-test",
+    "href": "04-stats.html#types-of-t-test",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "3 types of t-test",
+    "text": "3 types of t-test\n\n\nOne-sample T-test\nTest if a specific sample mean (X̄) is statistically different from a known or hypothesized population mean (μ or mu)\n\nTwo-samples / Independent Samples T-test\nUsed to compare the means of two independent groups (such as between-subjects research) to determine if they are significantly different.\nExamples: Men vs Women group, Placebo vs Actual drugs.\n\nPaired Samples T-Test\nUsed to compare the means of two related groups, such as repeated measurements on the same subjects (within-subjects research).\nExamples: Before workshop vs After workshop."
+  },
+  {
+    "objectID": "04-stats.html#t-test-sample-problem-and-result",
+    "href": "04-stats.html#t-test-sample-problem-and-result",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "T-test: Sample problem and result",
+    "text": "T-test: Sample problem and result\nIs the average age of voters who intend to vote “Yes” significantly different from the overall mean age of voters in Chile? Assume the\n\noverall_mean_age = mean(chile_data$age, na.rm = TRUE)\nyes_voters = chile_data$age[chile_data$vote == \"Y\"]\nt.test(x = yes_voters, alternative = \"two.sided\", mu = overall_mean_age)\n\n\n    One Sample t-test\n\ndata:  yes_voters\nt = 3.522, df = 867, p-value = 0.0004507\nalternative hypothesis: true mean is not equal to 38.54872\n95 percent confidence interval:\n 39.35548 41.38646\nsample estimates:\nmean of x \n 40.37097 \n\n\nWhat if there is a hypothesis? How would you write this in the report?"
+  },
+  {
+    "objectID": "04-stats.html#lets-try-this-t-test-exercises-5-mins",
+    "href": "04-stats.html#lets-try-this-t-test-exercises-5-mins",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "Let’s try this T-Test exercises (5 mins)",
+    "text": "Let’s try this T-Test exercises (5 mins)\n\nIs there a significant difference in age between those who intend to vote “Yes” and those who intend to vote “No”?\nDoes the income of male voters significantly differ from female voters?"
   },
   {
     "objectID": "04-stats.html#anova-analysis-of-variance",
@@ -551,6 +747,41 @@
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "ANOVA (Analysis of Variance)",
     "text": "ANOVA (Analysis of Variance)\nANOVA (Analysis of Variance) is a statistical test used to compare the means of three or more groups or samples and determine if the differences are statistically significant.\nThere are two ‘mainstream’ ANOVA that will be covered in this workshop:\n\n\nOne-Way ANOVA: comparing means across two or more independent groups (levels) of a single independent variable.\nTwo-Way ANOVA: comparing means across two or more independent groups (levels) of two independent variable.\nOther types of ANOVA that you may encounter: Repeated measures ANOVA, Multivariate ANOVA (MANOVA), ANCOVA, etc."
+  },
+  {
+    "objectID": "04-stats.html#one-way-anova-sample-problem-and-result",
+    "href": "04-stats.html#one-way-anova-sample-problem-and-result",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "One-Way ANOVA: Sample problem and result",
+    "text": "One-Way ANOVA: Sample problem and result\nIs there a significant difference in statusquo scores between different education levels?\n\nstatusquo_edu_anova &lt;- aov(statusquo ~ education, data = chile_data)\nsummary(statusquo_edu_anova)\n\n              Df Sum Sq Mean Sq F value  Pr(&gt;F)    \neducation      2   51.3  25.643   26.13 5.8e-12 ***\nResiduals   2670 2620.6   0.982                    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n27 observations deleted due to missingness\n\n\n\n\nF-value: the coefficient value\nPr(&gt;F): the p-value\nSum Sq: Sum of Squares\nMean Sq : Mean Squares\nDf: Degrees of Freedom"
+  },
+  {
+    "objectID": "04-stats.html#post-hoc-test-only-when-result-is-significant",
+    "href": "04-stats.html#post-hoc-test-only-when-result-is-significant",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "Post-hoc test (only when result is significant)",
+    "text": "Post-hoc test (only when result is significant)\nIf your ANOVA test indicates significant result, the next step is to figure out which category pairings are yielding the significant result. Tukey’s Honest Significant Difference (HSD) can help us figure that out.\n\nTukeyHSD(statusquo_edu_anova)\n\n  Tukey multiple comparisons of means\n    95% family-wise confidence level\n\nFit: aov(formula = statusquo ~ education, data = chile_data)\n\n$education\n            diff         lwr        upr     p adj\nPS-P -0.34268849 -0.47190147 -0.2134755 0.0000000\nS-P  -0.24396212 -0.34269216 -0.1452321 0.0000000\nS-PS  0.09872637 -0.03019678  0.2276495 0.1711681"
+  },
+  {
+    "objectID": "04-stats.html#two-way-anova-sample-problem-and-result",
+    "href": "04-stats.html#two-way-anova-sample-problem-and-result",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "Two-Way ANOVA: Sample problem and result",
+    "text": "Two-Way ANOVA: Sample problem and result\nIs there a significant difference in statusquo scores between different education levels and sexes?\n\nstatusquo_edu_sex_anova &lt;- aov(statusquo ~ education * sex, data = chile_data)\nsummary(statusquo_edu_sex_anova)\n\n                Df Sum Sq Mean Sq F value   Pr(&gt;F)    \neducation        2   51.3  25.643  26.187 5.46e-12 ***\nsex              1    8.4   8.398   8.576  0.00344 ** \neducation:sex    2    0.6   0.315   0.322  0.72500    \nResiduals     2667 2611.6   0.979                     \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n27 observations deleted due to missingness"
+  },
+  {
+    "objectID": "04-stats.html#post-hoc-test-for-two-way-anova",
+    "href": "04-stats.html#post-hoc-test-for-two-way-anova",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "Post-hoc test for Two-way ANOVA",
+    "text": "Post-hoc test for Two-way ANOVA\n\nTukeyHSD(statusquo_edu_sex_anova)\n\n  Tukey multiple comparisons of means\n    95% family-wise confidence level\n\nFit: aov(formula = statusquo ~ education * sex, data = chile_data)\n\n$education\n            diff         lwr        upr     p adj\nPS-P -0.34268849 -0.47175132 -0.2136257 0.0000000\nS-P  -0.24396212 -0.34257744 -0.1453468 0.0000000\nS-PS  0.09872637 -0.03004698  0.2274997 0.1704709\n\n$sex\n          diff        lwr         upr     p adj\nM-F -0.1117353 -0.1868097 -0.03666085 0.0035479\n\n$`education:sex`\n                 diff         lwr         upr     p adj\nPS:F-P:F  -0.34969549 -0.58182141 -0.11756957 0.0002599\nS:F-P:F   -0.21586575 -0.38130781 -0.05042369 0.0027797\nP:M-P:F   -0.09756257 -0.26856673  0.07344160 0.5806001\nPS:M-P:F  -0.41472874 -0.62364742 -0.20581007 0.0000002\nS:M-P:F   -0.36204920 -0.52841637 -0.19568204 0.0000000\nS:F-PS:F   0.13382974 -0.10016115  0.36782063 0.5779021\nP:M-PS:F   0.25213292  0.01417686  0.49008899 0.0304649\nPS:M-PS:F -0.06503325 -0.33154343  0.20147693 0.9824439\nS:M-PS:F  -0.01235371 -0.24699961  0.22229219 0.9999894\nP:M-S:F    0.11830318 -0.05522411  0.29183047 0.3752949\nPS:M-S:F  -0.19886299 -0.40985188  0.01212589 0.0779562\nS:M-S:F   -0.14618345 -0.31514301  0.02277610 0.1342398\nPS:M-P:M  -0.31716617 -0.53254412 -0.10178823 0.0003965\nS:M-P:M   -0.26448664 -0.43889616 -0.09007712 0.0002291\nS:M-PS:M   0.05267954 -0.15903553  0.26439461 0.9808453"
+  },
+  {
+    "objectID": "04-stats.html#lets-try-this-anova-exercise-5-mins",
+    "href": "04-stats.html#lets-try-this-anova-exercise-5-mins",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "Let’s try this ANOVA exercise! (5 mins)",
+    "text": "Let’s try this ANOVA exercise! (5 mins)\nIs there a significant difference in income between different regions and education levels?"
   },
   {
     "objectID": "04-stats.html#anova-assumptions",
@@ -611,28 +842,35 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Introductory R for Social Sciences (AY 24/25 Term 1)",
+    "title": "Introductory R for Social Sciences",
     "section": "",
     "text": "This site serves as a repository for the slides and codes developed for the ‘Introductory R for Social Sciences’ workshop tailored for undergraduate students at SMU. Comprising five sessions, this resource is designed for individuals with fundamental statistics knowledge who are venturing into R programming or coding for the first time."
   },
   {
     "objectID": "index.html#welcome",
     "href": "index.html#welcome",
-    "title": "Introductory R for Social Sciences (AY 24/25 Term 1)",
+    "title": "Introductory R for Social Sciences",
     "section": "",
     "text": "This site serves as a repository for the slides and codes developed for the ‘Introductory R for Social Sciences’ workshop tailored for undergraduate students at SMU. Comprising five sessions, this resource is designed for individuals with fundamental statistics knowledge who are venturing into R programming or coding for the first time."
   },
   {
+    "objectID": "index.html#instructor",
+    "href": "index.html#instructor",
+    "title": "Introductory R for Social Sciences",
+    "section": "Instructor",
+    "text": "Instructor\nInstructor: Bella Ratmelia, Senior Librarian, Research & Data Services, SMU Libraries\nTeaching Assistant: Hector Tan Kheng Wee, SCIS MITB Postgraduate Student"
+  },
+  {
     "objectID": "index.html#schedule",
     "href": "index.html#schedule",
-    "title": "Introductory R for Social Sciences (AY 24/25 Term 1)",
+    "title": "Introductory R for Social Sciences",
     "section": "Schedule",
     "text": "Schedule\nSlides will be progressively made available below.\n\n\n\n\nSession\nDate and Time\nVenue\nTopic\n\n\n\n\n1\nFri, 23 Aug 2024, 3.30 - 5.30 PM\nYPHSL seminar room 2.1\nIntroduction to R and RStudio\n\n\n2\nFri, 30 Aug 2024, 3.30 - 5.30 PM\nYPHSL seminar room 2.1\nData wrangling with tidyverse\n\n\n3\nFri, 6 Sep 2024, 3.30 - 5.30 PM\nYPHSL seminar room 2.1\nData visualization and Descriptive Statistics\n\n\n4\nFri, 13 Sep 2024, 3.30 - 5.30 PM\nYPHSL seminar room 2.2\nBasic Inferential Tests\n\n\n5\nFri, 20 Sep 2024, 3.30 - 5.30 PM\nYPHSL seminar room 2.1\nRegression and Introduction to Quarto"
   },
   {
     "objectID": "index.html#pre-workshop-activities",
     "href": "index.html#pre-workshop-activities",
-    "title": "Introductory R for Social Sciences (AY 24/25 Term 1)",
+    "title": "Introductory R for Social Sciences",
     "section": "Pre-workshop activities",
     "text": "Pre-workshop activities\n\nR and RStudio\nR and RStudio are two different but complementary tools used in data analysis and statistical computing. Understanding the difference between them is crucial (especially for beginners).\nR is a programming language and software environment specifically designed for statistical computing and graphics. It’s the core tool that actually processes your data and performs analyses.\nRStudio is an Integrated Development Environment (IDE) for R. Think of it as a user-friendly interface that makes it easier to write R code, manage projects, and visualize output. RStudio is not required to use R, but it significantly enhances the R programming experience!\n\n\n\n\n\n\nImportant\n\n\n\nAlways install R before installing RStudio, as RStudio requires R to function.\n\n\n\n\nStep 1: Install R\n\nGo to https://cran.rstudio.com/\nChoose your operating system (Windows, Mac, or Linux)\nDownload and install the latest version of R\n\n\n\nStep 2: Install RStudio\n\nVisit https://posit.co/download/rstudio-desktop/\nScroll down to “Download RStudio Desktop”\nClick “Download” and install the latest version of RStudio\n\n\n\nStep 3: Install the required packages\n\n\n\n\n\n\nNote\n\n\n\nPackages in R are collections of additional tools, functions, and datasets that extend R’s capabilities. Packages are created by contributors in the R community.\nThink of R as a smartphone, and packages as apps you download to add new features. Each package is designed to help with specific tasks or analyses, like creating graphs, analyzing particular types of data, or performing advanced statistical tests.\nPackages can save us time and leverage expert-created tools without having to write complex code from scratch. It’s very handy!\n\n\n\nOpen RStudio\nCopy the following code: install.packages(c( \"car\", \"rmarkdown\", \"huxtable\", \"gt\", \"gtsummary\", \"tidyverse\"))\nPaste it in the Console tab (see image below)\nPress Enter. Rstudio should proceed with installing the packages that we need."
   }
