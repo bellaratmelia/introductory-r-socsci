@@ -125,6 +125,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#step-2-install-rstudio" id="toc-step-2-install-rstudio" class="nav-link" data-scroll-target="#step-2-install-rstudio">Step 2: Install RStudio</a></li>
   <li><a href="#step-3-install-the-required-packages" id="toc-step-3-install-the-required-packages" class="nav-link" data-scroll-target="#step-3-install-the-required-packages">Step 3: Install the required packages</a></li>
   </ul></li>
+  <li><a href="#dataset" id="toc-dataset" class="nav-link" data-scroll-target="#dataset">Dataset</a></li>
   </ul>
 </nav>
     </div>
@@ -276,10 +277,79 @@ Note
 <li><p>Press Enter. Rstudio should proceed with installing the packages that we need.</p></li>
 </ol>
 <p><img src="images/install-packages.jpg" class="img-fluid"></p>
-<hr>
-
-
 </section>
+</section>
+<section id="dataset" class="level2">
+<h2 class="anchored" data-anchor-id="dataset">Dataset</h2>
+<p>For this workshop, we will be using dataset stored in a CSV file called <code>chile_voting.csv</code>.</p>
+<a href="https://raw.githubusercontent.com/bellaratmelia/introductory-r-socsci/main/data/chile_voting.csv" type="button" class="btn btn-success">Click here to open the CSV file, and then Ctrl + S / Cmd + S to save it locally</a>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+What is a CSV?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A CSV (Comma-Separated Values) file is a type of file that stores data in a plain text format. Each line in the file represents a row of data, and within each row, individual pieces of data (like numbers or words) are separated by commas.</p>
+<p>This format is commonly used for storing and transferring data, especially in spreadsheets and databases. Because it is literally just plain text, it is an ideal format if you have large amount of data.</p>
+<p>You can open CSV files in Excel, Google Sheets, or event Notepad!</p>
+</div>
+</div>
+<p>The data is from a national survey conducted in April and May of 1988 by FLACSO/Chile, capturing voting intentions for the <a href="https://en.wikipedia.org/wiki/1988_Chilean_presidential_referendum">1988 Chilean plebiscite</a>. The dataset contains information about respondents’ demographic characteristics and their voting intentions. This data can also be found from <code>carData</code> package, but for the purpose of this workshop, we will load the data from a CSV.</p>
+<p>Key variables in the dataset:</p>
+<hr>
+<table class="caption-top table">
+<caption>Explanatory notes on each column</caption>
+<colgroup>
+<col style="width: 27%">
+<col style="width: 72%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>region</code></td>
+<td>Region of voters: <code>C</code> (Central), <code>M</code> (Metropolitan Santiago area), <code>N</code> (North), <code>S</code> (South), <code>SA</code> (city of Santiago)</td>
+</tr>
+<tr class="even">
+<td><code>population</code></td>
+<td>Population size of respondent’s community</td>
+</tr>
+<tr class="odd">
+<td><code>sex</code></td>
+<td>Sex of voters: <code>F</code> (female), <code>M</code> (male)</td>
+</tr>
+<tr class="even">
+<td><code>age</code></td>
+<td>Age in years</td>
+</tr>
+<tr class="odd">
+<td><code>education</code></td>
+<td>Education level of voters: <code>P</code> (Primary), <code>PS</code> (Post-secondary), <code>S</code> (Secondary)</td>
+</tr>
+<tr class="even">
+<td><code>income</code></td>
+<td>Monthly income, in Pesos</td>
+</tr>
+<tr class="odd">
+<td><code>statusquo</code></td>
+<td>Scale of support for the status-quo in numerical value</td>
+</tr>
+<tr class="even">
+<td><code>vote</code></td>
+<td>Voter’s decision: <code>A</code> (will abstain), <code>N</code> (will vote no), <code>U</code> (undecided), <code>Y</code> (will vote yes)</td>
+</tr>
+</tbody>
+</table>
+
+
 </section>
 
 </main> <!-- /main -->
@@ -375,7 +445,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/bellaratmelia\.github\.io\/introductory-r-socsci\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
