@@ -63,7 +63,7 @@ Key variables in the dataset:
 ------------------------------------------------------------------------
 
 | Variable     | Description                                                                                                          |
-|-------------------|-----------------------------------------------------|
+|--------------|----------------------------------------------------------------------------------------------------------------------|
 | `region`     | Region of voters: `C` (Central), `M` (Metropolitan Santiago area), `N` (North), `S` (South), `SA` (city of Santiago) |
 | `population` | Population size of respondent's community                                                                            |
 | `sex`        | Sex of voters: `F` (female), `M` (male)                                                                              |
@@ -91,12 +91,11 @@ A few things that you can do:
 
 ## Data wrangling activities specific to our data
 
-**Scenario**: We are a junior Research Assistant (RA) in a research team currently studying about the 1988 Chilean plebiscite. The team's primary goal is to identify any discernible and interesting patterns in the voter demographic data. 
+**Scenario**: We are a junior Research Assistant (RA) in a research team currently studying about the 1988 Chilean plebiscite. The team's primary goal is to identify any discernible and interesting patterns in the voter demographic data.
 
 As a start, we have been asked to do the following data cleaning and processing tasks:
 
-::: {.incremental}
-
+::: incremental
 1.  Remove all rows with empty values (NA)
 
 2.  Separate the demographic information (region, sex, age, education) into a separate CSV called `chile-demographics.csv`
@@ -106,12 +105,11 @@ As a start, we have been asked to do the following data cleaning and processing 
 4.  Make the character columns such as `region`, `sex`, `education`, and `vote` to be in uppercase.
 
 5.  Convert all the categorical columns such as `region`, `sex`, `education`, and `vote` to Factor. Make sure `education` is ordered.
-
 :::
 
 ------------------------------------------------------------------------
 
-::: {.incremental}
+::: incremental
 6.  Create a new column called `age_group` that categorizes age into groups: "18-29", "30-44", "45-59", "60+".
 
 7.  Create a new column called `high_income` that is TRUE if income is above the median, FALSE otherwise.
@@ -120,10 +118,8 @@ As a start, we have been asked to do the following data cleaning and processing 
 
 9.  Generate summary stats of `income` grouped by `region` and `education`. The summary stats should include mean, median, max, min, std, and n (number of observations).
 
-10.  Reshape the data to have `region` as rows and `vote` options as columns, with the values being the count of votes for each option in each region.
+10. Reshape the data to have `region` as rows and `vote` options as columns, with the values being the count of votes for each option in each region.
 :::
-
-
 
 # Let's wrangle our data!
 
@@ -148,34 +144,32 @@ The number of observations after all rows containing NAs are removed:
 dim(chile_data)
 ```
 
-## Interlude: Pipe Operator ( |> )
+## Interlude: Pipe Operator ( \|\> )
 
--  The pipe operator (|>) allows us to chain multiple operations without creating intermediate dataframes.
+-   The pipe operator (\|\>) allows us to chain multiple operations without creating intermediate dataframes.
 
--  Super handy when we perform several data wrangling tasks using tidyverse in sequence. 
--  Helps with readability, especially for complex operations.
+-   Super handy when we perform several data wrangling tasks using tidyverse in sequence.
 
--  Keyboard shortcut: `Ctrl`+`Shift`+`M` on Windows, `Cmd`+`Shift`+`M` on Mac
+-   Helps with readability, especially for complex operations.
 
-::: {.panel-tabset}
+-   Keyboard shortcut: `Ctrl`+`Shift`+`M` on Windows, `Cmd`+`Shift`+`M` on Mac
 
+::: panel-tabset
 ### Without pipe operator
 
-```r
+``` r
 age_df <- filter(chile_data, age >= 30)
 age_df_desc <- arrange(age_df, desc(age))
 write_csv(age_df_desc, "data-output/chile-30plus.csv")
-
 ```
 
 ### With pipe operator
 
-```{.r code-overflow="overflow"}
+``` {.r code-overflow="overflow"}
 chile_data |> 
     filter(age >= 30) |> 
     arrange(desc(age)) |> 
     write_csv("data-output/chile-30plus.csv")
-
 ```
 :::
 
@@ -198,7 +192,6 @@ chile_data |>
     select(region, sex, age, education) |> print(n = 3)
 ```
 
-
 ## Task #3
 
 Retrieve only respondents aged 30 or older, arrange it from oldest to youngest, and save it into a separate CSV called `chile-30plus.csv`
@@ -211,7 +204,6 @@ chile_data |>
     arrange(desc(age)) |> 
     print(n = 3)
 ```
-
 
 ## Group exercise 1 (solo attempts ok)
 
@@ -326,7 +318,7 @@ chile_data |>
 
 ## Task #8 - Can you solve this?
 
-Create a new column called `support_level` that categorizes `statusquo` into "Unsupportive" (\<= 0) and "Supportive" (\> 0). 
+Create a new column called `support_level` that categorizes `statusquo` into "Unsupportive" (\<= 0) and "Supportive" (\> 0).
 
 Save all of these changes you made from step 3 onwards into a new CSV called `chile_voting_processed.csv`
 

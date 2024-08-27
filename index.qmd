@@ -20,7 +20,7 @@ This site serves as a repository for the slides and codes developed for the 'Int
 
 ::: table-schedule
 | Session | Date and Time                    | Venue                  | Topic                                          |
-|-----------------|-----------------|-----------------|-----------------------|
+|-----------------|-----------------|-----------------|---------------------|
 | 1       | Fri, 23 Aug 2024, 3.30 - 5.30 PM | YPHSL seminar room 2.1 | [Introduction to R and RStudio](01-intro.html) |
 | 2       | Fri, 30 Aug 2024, 3.30 - 5.30 PM | YPHSL seminar room 2.1 | Data wrangling with tidyverse                  |
 | 3       | Fri, 6 Sep 2024, 3.30 - 5.30 PM  | YPHSL seminar room 2.1 | Data visualization and Descriptive Statistics  |
@@ -87,4 +87,39 @@ Packages can save us time and leverage expert-created tools without having to wr
 
 ![](images/install-packages.jpg)
 
+## Dataset
+
+For this workshop, we will be using dataset stored in a CSV file called `chile_voting.csv`.
+
+```{=html}
+<a href="https://raw.githubusercontent.com/bellaratmelia/introductory-r-socsci/main/data/chile_voting.csv" type="button" class="btn btn-success">Click here to open the CSV file, and then Ctrl + S / Cmd + S to save it locally</a>
+```
+
+::: {.callout-note appearance="simple"}
+### What is a CSV?
+
+A CSV (Comma-Separated Values) file is a type of file that stores data in a plain text format. Each line in the file represents a row of data, and within each row, individual pieces of data (like numbers or words) are separated by commas. 
+
+This format is commonly used for storing and transferring data, especially in spreadsheets and databases. Because it is literally just plain text, it is an ideal format if you have large amount of data.
+
+You can open CSV files in Excel, Google Sheets, or event Notepad!
+:::
+
+The data is from a national survey conducted in April and May of 1988 by FLACSO/Chile, capturing voting intentions for the [1988 Chilean plebiscite](https://en.wikipedia.org/wiki/1988_Chilean_presidential_referendum). The dataset contains information about respondents' demographic characteristics and their voting intentions. This data can also be found from `carData` package, but for the purpose of this workshop, we will load the data from a CSV.
+
+Key variables in the dataset:
+
 ------------------------------------------------------------------------
+
+| Variable     | Description                                                                                                          |
+|--------------------|----------------------------------------------------|
+| `region`     | Region of voters: `C` (Central), `M` (Metropolitan Santiago area), `N` (North), `S` (South), `SA` (city of Santiago) |
+| `population` | Population size of respondent's community                                                                            |
+| `sex`        | Sex of voters: `F` (female), `M` (male)                                                                              |
+| `age`        | Age in years                                                                                                         |
+| `education`  | Education level of voters: `P` (Primary), `PS` (Post-secondary), `S` (Secondary)                                     |
+| `income`     | Monthly income, in Pesos                                                                                             |
+| `statusquo`  | Scale of support for the status-quo in numerical value                                                               |
+| `vote`       | Voter's decision: `A` (will abstain), `N` (will vote no), `U` (undecided), `Y` (will vote yes)                       |
+
+: Explanatory notes on each column
