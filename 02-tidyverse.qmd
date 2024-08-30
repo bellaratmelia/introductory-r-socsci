@@ -63,7 +63,7 @@ Key variables in the dataset:
 ------------------------------------------------------------------------
 
 | Variable     | Description                                                                                                          |
-|--------------|----------------------------------------------------------|
+|--------------|----------------------------------------------------------------------------------------------------------------------|
 | `region`     | Region of voters: `C` (Central), `M` (Metropolitan Santiago area), `N` (North), `S` (South), `SA` (city of Santiago) |
 | `population` | Population size of respondent's community                                                                            |
 | `sex`        | Sex of voters: `F` (female), `M` (male)                                                                              |
