@@ -63,7 +63,7 @@ Key variables in the dataset:
 ------------------------------------------------------------------------
 
 | Variable     | Description                                                                                                          |
-|--------------|----------------------------------------------------------------------------------------------------------------------|
+|--------------|----------------------------------------------------------|
 | `region`     | Region of voters: `C` (Central), `M` (Metropolitan Santiago area), `N` (North), `S` (South), `SA` (city of Santiago) |
 | `population` | Population size of respondent's community                                                                            |
 | `sex`        | Sex of voters: `F` (female), `M` (male)                                                                              |
@@ -81,7 +81,7 @@ It's good practice to do some preliminary checks on your data to get a better se
 
 A few things that you can do:
 
--   Check for duplicates (*hint: dplyr has a function for this!*)
+-   Check for duplicates
 
 -   Check for missing values
 
