@@ -30,19 +30,26 @@ Use `read_csv` from `readr` package (part of `tidyverse`) to load our data into 
 library(tidyverse)
 
 # read the CSV with Chile voting data
-chile_data <- read_csv("data/chile_voting.csv")
+chile_data <- read_csv("data-output/chile_voting_processed.csv")
+
+chile_data <- chile_data |> 
+    mutate(across(c("region", "sex", "education", "vote", "age_group", "support_level"), as.factor))
+
+#reordering
+chile_data <- chile_data |> 
+    mutate(education = factor(education, 
+                         levels = c("P", "S", "PS"), 
+                         ordered = TRUE))
 
 # peek at the data, pay attention to the data types!
 glimpse(chile_data)
 ```
 
-## Introduction to Descriptive Statistics
-
-Descriptive statistics provide summaries about the sample and observations made. These summaries can be quantitative (summary statistics) or visual (graphs). Let's explore some basic R functions for descriptive statistics using our Chile voting data.
-
 ## Basic R Functions for Descriptive Statistics
 
-We'll cover the following functions:
+Descriptive statistics provide summaries about the sample and observations made. These summaries can be quantitative (summary statistics) or visual (graphs). 
+
+Let's explore some basic R functions for descriptive statistics using our Chile voting data.
 
 -   `mean()`: arithmetic average
 -   `median()`: middle value
@@ -51,47 +58,46 @@ We'll cover the following functions:
 -   `range()`: range of values
 -   `IQR()`: interquartile range
 -   `summary()`: provides a summary of descriptive statistics
--   `Mode()` function from `DescTools` package: the most frequently occuring value
+-   `Mode()` function from `DescTools` package: the most frequently occuring value ^[R doesn't have built-in functions for mode, so we need `DescTools` package to get this function]
 
-**Note**: R doesn't have built-in functions for mode, so we need `DescTools` package to get this function!
+## Exploring Age Distribution
 
-## Exploring Income Distribution
-
-Let's start by examining the `income` variable in our dataset.
+Let's start by examining the `age` variable in our dataset.
 
 ```{r}
 #| echo: true
+#| output-location: slide
 
 library(DescTools)
 
 # Basic statistics
-mean_income <- mean(chile_data$income, na.rm = TRUE)
-median_income <- median(chile_data$income, na.rm = TRUE)
-sd_income <- sd(chile_data$income, na.rm = TRUE)
-range_income <- range(chile_data$income, na.rm = TRUE)
-iqr_income <- IQR(chile_data$income, na.rm = TRUE)
-mode_income <- DescTools::Mode(chile_data$income, na.rm = TRUE)
+mean_age <- mean(chile_data$age, na.rm = TRUE)
+median_age <- median(chile_data$age, na.rm = TRUE)
+sd_age <- sd(chile_data$age, na.rm = TRUE)
+range_age <- range(chile_data$age, na.rm = TRUE)
+iqr_age <- IQR(chile_data$age, na.rm = TRUE)
+mode_age <- DescTools::Mode(chile_data$age, na.rm = TRUE)
 
 # Print results
-cat("Mean income:", mean_income, "\n")
-cat("Median income:", median_income, "\n")
-cat("Standard deviation of income:", sd_income, "\n")
-cat("Range of income:", range_income[1], "to", range_income[2], "\n")
-cat("Interquartile range of income:", iqr_income, "\n")
-cat("Most frequently occuring income:", mode_income, "\n")
+cat("Mean age:", mean_age, "\n")
+cat("Median age:", median_age, "\n")
+cat("Standard deviation of age:", sd_age, "\n")
+cat("Range of age:", range_age[1], "to", range_age[2], "\n")
+cat("Interquartile range of age:", iqr_age, "\n")
+cat("Most frequently occuring age:", mode_age, "\n")
 
 # Summary statistics
-summary(chile_data$income)
+summary(chile_data$age)
 ```
 
-## Interpreting Income Statistics
+## Interpreting Age Statistics
 
 Some possible interpretation:
 
--   The mean income is higher than the median, suggesting a right-skewed distribution.
--   The standard deviation indicates the spread of incomes around the mean.
--   The range shows the full spread of incomes from lowest to highest.
--   The IQR represents the middle 50% of incomes, less affected by outliers than the range.
+-   Median is lower than mean, suggesting a slight skew towards older ages
+-   Mode is much lower than both mean and median, indicating a cluster of young adults
+-   With a standard deviation of about 14.67 years, we can expect roughly two-thirds of the participants to fall between 23.62 and 52.96 years old
+-   Middle 50% of participants fall between 25 and 49 years old
 
 It's much easier if we have a graph to visualize these interpretations!
 
@@ -101,18 +107,30 @@ It's much easier if we have a graph to visualize these interpretations!
 
 -   works best with data in the long format, i.e., a column for all the dimensions/measures and another column for the value for each dimension/measure.
 
-[![](images/ggplot-cheatsheet.jpg)](https://rstudio.github.io/cheatsheets/data-visualization.pdf)
-
-[ggplot documentation link](https://rstudio.github.io/cheatsheets/html/data-visualization.html)
+```{r}
+#| echo: true
+#| output-location: slide
+chile_data |> 
+    ggplot(aes(x = age)) +
+    geom_bar(fill = "lightblue") +
+    labs(title = "Age distribution of respondents",
+         x = "Age",
+         y = "Number of Respondents") +
+    theme_minimal()
+```
 
 ## Anatomy of ggplot code
 
 Charts built with ggplot must include the following:
 
-``` r
+```{.r code-line-numbers="|1|2|3|4-6|7"}
 chile_data |> # <1>
-    ggplot(aes(x = age, y = income)) + # <2>
-    geom_point() # <3>
+    ggplot(aes(x = age)) + # <2>
+    geom_bar(fill = "lightblue") + # <3>
+    labs(title = "Age distribution of respondents", # <4>
+         x = "Age", # <4>
+         y = "Count") + # <4>
+    theme_minimal() # <5>
 ```
 
 1.  **Data** - the dataframe/tibble to visualize.
@@ -121,202 +139,242 @@ chile_data |> # <1>
 
 3.  **Geometric objects (geom)** - describes how values are rendered; as bars, scatterplot, lines, etc.
 
+4.  Provide titles and labels to your graph
+
+5.  (Optional) apply a theme/look to your graph
+
+
 ## Going back to our data
 
 Our PI has asked us to generate visualizations to address these questions about the Chile voting data. The PI also has asked us to write down our interpretation of the visualizations.
 
-**Univariate visualizations:**
+1.  What's the distribution of respondents' `statusquo` support?
+2.  What's the distribution of `votes`?
+3.  What's the percentage of the voting intentions on each region?
+4.  Is there any major divide in terms of support for the statusquo across age? Visualize the distribution of `age` and `statusquo`.
+5.  What does the voting intention look like across different education level? Visualize the distribution of `vote` intention on various `education` level.
+6.  Do people's voting intention matches their level of support to the status quo? Compare the distribution of `statusquo` across different `vote` intentions.
 
-1.  What's the distribution of respondents for each `region`?
-2.  What's the distribution of `age` of our respondents?
-
-**Bivariate/multivariate visualizations:**
-
-3.  Compare the distribution of `income` across different `education` levels
-4.  Visualize and explore the relationship between `age` and `income`. Don't forget to label the graph!
-5.  Are there any outliers in the `statusquo` scores?
-6.  Explore the distribution of votes (`vote`) across different regions (`region`).
+## Tip: open the ggplot cheatsheet
 
 ::: callout-tip
 **A strategy I'd like to recommend:** briefly read over the `ggplot2` documentation and have them open on a separate tab. Figure out the type of variables you need to visualize (discrete or continuous) to quickly identify which visualization would make sense.
 :::
 
-## Task #1: distribution of regions
+![](images/ggplot-cheatsheet.jpg){width="60%"}
 
-What's the distribution of respondents for each `region`?
+[ggplot documentation link](https://rstudio.github.io/cheatsheets/html/data-visualization.html)
 
-```{r}
-#| echo: true
+## Task #1
 
-# simple bar chart 
-chile_data |> 
-    ggplot(aes(x = region)) +
-    geom_bar(fill = "skyblue") +
-    labs(title = "Distribution of Respondents by Region",
-         x = "Region",
-         y = "Number of Respondents")
-```
-
-## Task #2: distribution of respondent ages
-
-What's the distribution of `age` of our respondents?
+What's the distribution of our respondents' `statusquo`?
 
 ```{r}
-#| echo: true
+#| echo: false
+#| output-location: slide
 
-# histogram
+# One continuous variable
 chile_data |> 
-    ggplot(aes(x = age)) +
-    geom_histogram(color = "black", fill = "lightgreen", binwidth = 5) +
-    labs(title = "Distribution of Respondent Ages",
-         x = "Age",
-         y = "Count")
-```
-
-## Task #3: income across education levels
-
-Compare the distribution of `income` across different `education` levels.
-
-```{r}
-#| echo: true
-
-# boxplot layered with jittered points
-chile_data |> 
-    ggplot(aes(x = education, y = income)) +
-    geom_boxplot() + 
-    geom_jitter(alpha = 0.2, width = 0.2) +
-    labs(title = "Distribution of Income by Education Level",
-         x = "Education Level",
-         y = "Income (Pesos)")
-```
-
-------------------------------------------------------------------------
-
-### Anatomy of a boxplot
-
-![](images/boxplot_explanation.png){fig-align="center"}
-
-Image source: https://www.leansigmacorporation.com/box-plot-with-minitab/
-
-## Task #4: relationship between age and income
-
-Visualize and explore the relationship between `age` and `income`. Do you see any trend or differences between `sex`? Don't forget to label the graph!
-
-```{r}
-#| echo: true
-#| output: true
-
-# scatterplot with trendline
-chile_data |> 
-    ggplot(aes(x = age, y = income, 
-               color = sex, 
-               shape = sex)) +
-    geom_jitter() +
-    geom_smooth(method = "lm") + 
-    labs(x = "Age", 
-         y = "Income (Pesos)",
-         title = "Relationship between Age and Income",
-         subtitle = "Comparison between sexes",
-         caption = "Data from 1988 Chilean national survey")
-```
-
-------------------------------------------------------------------------
-
-We can layer two (or more) geom objects!
-
-Use `labs` to specify the title, axis labels, subtitles, captions, etc.
-
-``` r
-# scatterplot with trendline
-chile_data |> 
-    ggplot(aes(x = age, y = income, 
-               color = sex, 
-               shape = sex)) +
-    geom_jitter() +
-    geom_smooth(method = "lm") + 
-    labs(x = "Age", 
-         y = "Income (Pesos)",
-         title = "Relationship between Age and Income",
-         subtitle = "Comparison between sexes",
-         caption = "Data from 1988 Chilean national survey")
-```
-
-## Task #5: Outliers in statusquo score
-
-Are there any outliers in the `statusquo` scores?
-
-```{r}
-#| echo: true
-
-chile_data |> 
-    ggplot(aes(y = statusquo)) + 
-    geom_boxplot() +
+    ggplot(aes(x = statusquo)) +
+    geom_histogram(binwidth = 0.1, fill = "pink", color = "maroon") +
     labs(title = "Distribution of Status Quo Scores",
-         y = "Status Quo Score")
+       x = "Status Quo Score",
+       y = "Count")
 ```
 
-## Task #6: Distribution of votes across regions
+## Task #2
 
-Explore the distribution of votes (`vote`) across different regions (`region`).
+What's the distribution of `votes`?
 
 ```{r}
-#| echo: true
+#| echo: false
+#| output-location: slide
 
-# Prepare data
-vote_distribution <- chile_data |>
-    group_by(region, vote) |>
-    summarise(count = n(), .groups = 'drop') |>
-    mutate(percentage = count / sum(count) * 100)
+# One discrete/categorical variable
+chile_data |> 
+    ggplot(aes(x = vote)) +
+    geom_bar(fill = "skyblue") +
+    labs(title = "Distribution of Votes",
+       x = "Vote",
+       y = "Count")
+```
 
-# Create stacked bar chart
-ggplot(vote_distribution, aes(x = region, y = percentage, fill = vote)) +
-    geom_bar(stat = "identity") +
-    labs(title = "Distribution of Votes Across Regions",
-         x = "Region",
-         y = "Percentage",
-         fill = "Vote") +
+
+## Task #3
+
+What's the percentage of the voting intentions on each `region`?
+
+```{r}
+#| echo: false
+#| output-location: slide
+
+# Showing proportions / percentage as part of whole
+chile_data %>%
+  ggplot(aes(x = vote, fill = region)) +
+  geom_bar(position = "fill") +
+  labs(title = "Distribution of Votes Across Regions",
+         x = "Vote",
+         y = "Proportion",
+         fill = "Region") +
+  theme_minimal()
+```
+## Group exercise #1 (solo attempts also ok)
+
+Visualize the `vote` intention by `sex`. Make sure it is shown as proportion. 
+
+```{r}
+#| echo: false
+#| output-location: slide
+
+chile_data %>%
+    ggplot(aes(x = vote, fill = sex)) +
+    geom_bar(position = "fill") + 
+    labs(title = "Proportion of Sex for each voting intention",
+       x = "vote intention",
+       y = "percentage") +
+    theme_minimal()
+```
+
+
+## Task #4
+
+Is there any major divide in terms of support for the statusquo across age? Visualize the distribution of `age` and `statusquo`.
+
+```{r}
+#| echo: false
+#| output-location: slide
+
+# Two variables - both continuous
+chile_data |>
+    ggplot(aes(x = statusquo, y = age, color=support_level)) +
+    geom_point(alpha = 0.5) +
+    labs(title = "Age vs Status Quo Score",
+       x = "Status Quo Score",
+       y = "Age")
+```
+
+
+## Task #5
+What does the voting intention look like across different education level? Visualize the distribution of `vote` intention on various `education` level.
+
+We can achieve this in two ways!
+
+```{r}
+#| echo: false
+#| output-location: slide
+
+# Two variables - both discrete/categorical
+
+chile_data |> 
+    ggplot(aes(x = education, y = vote)) +
+    geom_jitter(color="tomato", alpha=0.5) +
+    labs(title = "Voting intention Distribution by Education level",
+       x = "Education Level",
+       y = "Voting intention")
+```
+
+## Alternative way
+
+```{r}
+#| echo: false
+#| output-location: slide
+
+# Two variables - both discrete/categorical
+# Alternative way
+chile_data |> 
+    ggplot(aes(x = education, fill = vote)) +
+    geom_bar(position = "dodge") +
+    labs(title = "Voting intention Distribution by Education Level",
+       x = "Education Level",
+       y = "Count") +
     theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
-## Group Exercises (solo attempts ok)
-
-1.  Explore the relationship between `age` and `statusquo`. Is there a trend or relationship there and does the trend differ between different `education` levels?
-2.  Visualize the distribution of `income` across different `sex` with a violin plot.
-
-**Make sure to give the graph proper title and labels on both axis!**
-
-------------------------------------------------------------------------
-
-### Question #1 answer
+## Facets for multiple variables
 
 ```{r}
-#| echo: true
+#| echo: false
+#| output-location: slide
 
+# Faceting and multiple variables
 chile_data |> 
-    ggplot(aes(x = age, y = statusquo, 
-               color = education)) +
-    geom_jitter() +
-    geom_smooth(method = "lm") +
-    labs(title = "Relationship between Age and Status Quo Support",
-         subtitle = "By Education Level",
-         x = "Age",
-         y = "Status Quo Support")
+    ggplot(aes(x = age, y = statusquo, color = vote)) +
+    geom_point(alpha = 0.5) +
+    facet_wrap(~ education) +
+    labs(title = "Income vs Status Quo Score by Education Level",
+       x = "Age",
+       y = "Status Quo Score")
 ```
 
-------------------------------------------------------------------------
+## Task #6
+Do people's voting intention matches their level of support to the status quo? Compare the distribution of `statusquo` across different `vote` intentions.
 
-### Question #2 answer
+Let's layer two kinds of visualization here:
 
 ```{r}
-#| echo: true
+#| echo: false
+#| output-location: slide
+
+# Two variables - one categorical, one continuous
+chile_data |> 
+    ggplot(aes(x = vote, y = statusquo)) +
+    geom_boxplot(fill = "pink") +
+    geom_jitter(alpha = 0.4, color = "maroon") + 
+    labs(title = "Distribution Status Quo Score by voting intention",
+       x = "Voting intention",
+       y = "Status Quo Support level")
+```
+
+## Group Exercise #2 (solo attempts ok)
+
+Update the visualization from task #6 to the following:
+
+-  Replace the boxplot with violin plot (check out ggplot documentation)
+-  Change the fill color for both the violin plot and jitters to other color of your choice.
+
+```{r}
+#| echo: false
+#| output-location: slide
+
+# Two variables - one categorical, one continuous
+chile_data |> 
+    ggplot(aes(x = vote, y = statusquo)) +
+    geom_violin(fill = "lightblue") +
+    geom_jitter(alpha = 0.4, color = "navy") + 
+    labs(title = "Distribution Status Quo Score by voting intention",
+       x = "Voting intention",
+       y = "Status Quo Support level")
+```
+
+## Group Exercise #3 (solo attempts ok)
+
+Visualize the distribution of `age_group` for each `vote` intention. To show the difference between sex, show the visualization with `sex` facet.
+
+
+```{r}
+#| echo: false
+#| output-location: slide
 
 chile_data |> 
-    ggplot(aes(x = sex, y = income)) +
-    geom_violin() +
-    geom_jitter(alpha = 0.2) +
-    labs(title = "Distribution of Income by Sex",
-         x = "Sex",
-         y = "Income (Pesos)")
+    ggplot(aes(x = vote, fill = age_group)) +
+    geom_bar(alpha = 0.7, position = "fill") +
+    facet_wrap( ~ sex) + 
+    labs(title = "Proportion of age groups for each voting intentions by sex",
+       x = "Voting intention",
+       y = "Proportion",
+       fill = "Age Group") +
+    theme_minimal()
+
+```
+
+## Is fancier = better?
+
+Fancier, more complicated visualization does not necessarily mean better!
+
+Take a look at this award-winning visualization by [Simon Scarr](http://www.simonscarr.com/iraqs-bloody-toll)
+
+```{=html}
+<iframe width="1500" height="600" src="http://www.simonscarr.com/iraqs-bloody-toll" title="Simon Scarr's visualization"></iframe>
 ```
 
 ## Strategy for data visualization with ggplot

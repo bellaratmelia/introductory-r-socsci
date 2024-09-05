@@ -130,7 +130,7 @@ As a start, we have been asked to do the following data cleaning and processing 
 Remove all rows with empty values (NA)
 
 ```{r}
-#| echo: false
+#| echo: true
 #| output: false
 chile_data <- chile_data |> 
   drop_na()
@@ -156,6 +156,7 @@ dim(chile_data)
 
 ::: panel-tabset
 ### Without pipe operator
+Notice that we have to create a "temp" dataframes called `age_df` and `age_df_desc` in this method.
 
 ``` r
 age_df <- filter(chile_data, age >= 30)
@@ -164,6 +165,8 @@ write_csv(age_df_desc, "data-output/chile-30plus.csv")
 ```
 
 ### With pipe operator
+
+No "temp" dataframe needed here! :D
 
 ``` {.r code-overflow="overflow"}
 chile_data |> 
@@ -178,8 +181,10 @@ chile_data |>
 Separate the demographic information (region, sex, age, education) into a separate CSV called `chile-demographics.csv`
 
 ```{r}
-#| echo: false
+#| echo: true
 #| output: false
+
+# not using the |> operator here!
 
 demographics_df <- select(chile_data, region, sex, age, education)
 write_csv(demographics_df, "data-output/chile-demographics.csv")
@@ -189,16 +194,28 @@ The first few rows in the CSV:
 
 ```{r}
 chile_data |> 
-    select(region, sex, age, education) |> print(n = 3)
+    select(region, sex, age, education) |> 
+    print(n = 3)
 ```
 
 ## Task #3
 
 Retrieve only respondents aged 30 or older, arrange it from oldest to youngest, and save it into a separate CSV called `chile-30plus.csv`
 
+```{r}
+#| echo: true
+
+chile_data |> 
+    filter(age >= 30) |> 
+    arrange(desc(age)) |> 
+    write_csv("chile-30plus.csv")
+```
+
 The first few rows in the resulting CSV:
 
 ```{r}
+#| echo: false
+
 chile_data |> 
     filter(age >= 30) |> 
     arrange(desc(age)) |> 
@@ -212,7 +229,10 @@ chile_data |>
 Retrieve only respondents from the Metropolitan Santiago area (`M`), with Secondary education (`S`), and who are undecided (`U`) about their vote. Keep only their `region`, `education`, `vote`, and `income` columns in a new dataframe called `santiago_undecided` in **descending** order of `income`.
 
 ```{r}
-#| echo: false
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show answer"
+
 santiago_undecided <- chile_data |> 
     filter(region == "M" & education == "S" & vote == "U") |> 
     select(region, education, vote, income) |> 
@@ -231,9 +251,7 @@ santiago_undecided |>
 Make all character columns such as `region`, `sex`, `education`, and `vote` to be in uppercase.
 
 ```{r}
-#| message: false
-#| warning: false
-#| echo: false
+#| echo: true
 
 cols_to_change <- c("region", "sex", "education", "vote")
 chile_data <- chile_data |> 
@@ -253,9 +271,8 @@ chile_data |>
 Convert all the categorical columns such as `region`, `sex`, `education`, and `vote` to Factor. Make sure `education` is ordered.
 
 ```{r}
-#| message: false
-#| warning: false
-#| echo: false
+#| echo: true
+
 chile_data <- chile_data |> 
     mutate(across(cols_to_change, as.factor))
 
@@ -266,7 +283,7 @@ chile_data <- chile_data |>
                          ordered = TRUE))
 ```
 
-The education column after the change:
+The structure of education column after the change:
 
 ```{r}
 str(chile_data["education"])
@@ -277,7 +294,8 @@ str(chile_data["education"])
 Add a new column to `chile_data` called `age_group` that categorizes age into groups: "18-29", "30-44", "45-59", "60+".
 
 ```{r}
-#| echo: false
+#| echo: true
+
 chile_data <- chile_data |> 
     mutate(age_group = case_when(
         age < 30 ~ "18-29",
@@ -302,7 +320,8 @@ Create a new column called `high_income` that is TRUE if income is above the med
 hint: you need to calculate the median income first.
 
 ```{r}
-#| echo: false
+#| echo: true
+
 median_income <- median(chile_data$income, na.rm = TRUE)
 chile_data <- chile_data |> 
     mutate(high_income = income > median_income)
@@ -313,7 +332,7 @@ The original income column and the new high_income column:
 ```{r}
 chile_data |> 
     select(income, high_income) |> 
-    slice(9:11)
+    slice(9:11) #print row 9 to row 11
 ```
 
 ## Task #8 - Can you solve this?
@@ -323,7 +342,9 @@ Create a new column called `support_level` that categorizes `statusquo` into "Un
 Save all of these changes you made from step 3 onwards into a new CSV called `chile_voting_processed.csv`
 
 ```{r}
-#| echo: false
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show answer"
 chile_data <- chile_data |> 
     mutate(support_level = case_when(
         statusquo <= 0 ~ "Unsupportive",
@@ -348,6 +369,8 @@ Generate summary stats of `income` grouped by `region` and `education`. The summ
 
 ```{r}
 #| echo: false
+
+library(gt)
 chile_data |> 
     group_by(region, education) |> 
     summarise(observation = n(), 
@@ -362,15 +385,67 @@ chile_data |>
 
 Reshape the data to have `region` as rows and `vote` options as columns, with the values being the count of votes for each option in each region.
 
+To achieve this clean table look, we can use `gt` package or `knitr` package!
+
 ```{r}
 #| echo: false
-vote_by_region <- chile_data |>
+chile_data |>
     group_by(region, vote) |>
     summarise(count = n(), .groups = "drop") |>
-    pivot_wider(names_from = vote, values_from = count, values_fill = 0)
-
-print(vote_by_region)
+    pivot_wider(names_from = vote, values_from = count, values_fill = 0) |> 
+    knitr::kable()
 ```
+
+## Long vs Wide Data
+
+::: columns
+::: {.column width="50%"}
+**Wide Data:**
+
+-   Each row is a unique observation.
+
+-   Each column is a variable --\> the more variables you have, the "wider" is the data
+
+-   This format is more intuitive for humans!
+:::
+
+::: {.column width="50%"}
+**Long data:**
+
+-   Each row is a unique observation.
+
+-   There is a separate column indicating the variable or type of measurements
+
+-   This format is more "understandable" by R, more suitable for visualizations.
+:::
+:::
+
+## Long vs Wide Data: Examples
+
+::: columns
+::: {.column width="50%"}
+**Long data:**
+
+```{r}
+# Creating the wide data frame
+long_data <- chile_data |>
+    group_by(region, vote) |>
+    summarise(count = n(), .groups = "drop")
+
+# Display the wide data frame
+print(long_data)
+```
+:::
+
+::: {.column width="50%"}
+**Wide data:**
+
+```{r}
+long_data |>
+    pivot_wider(names_from = "vote", values_from = "count") 
+```
+:::
+:::
 
 ## Group exercise 3 (solo attempts ok)
 
