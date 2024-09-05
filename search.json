@@ -683,7 +683,7 @@
     "href": "02-tidyverse.html#long-vs-wide-data",
     "title": "Data Wrangling with Tidyverse",
     "section": "Long vs Wide Data",
-    "text": "Long vs Wide Data\n\n\nWide Data:\n\nEach row is a unique observation.\nEach column is a variable –&gt; the more variables you have, the “wider” is the data\nThis format is more intuitive for humans!\n\n\nLong data:\n\nEach row is a unique observation.\nThere is a separate column indicating the variable or type of measurements\nThis format is more “understandable” by R, more suitable for visualizations."
+    "text": "Long vs Wide Data\n\n\nLong data:\n\nEach row is a unique observation.\nThere is a separate column indicating the variable or type of measurements\nThis format is more “understandable” by R, more suitable for visualizations.\n\n\nWide Data:\n\nEach row is a unique observation.\nEach column is a variable –&gt; the more variables you have, the “wider” is the data\nThis format is more intuitive for humans!"
   },
   {
     "objectID": "02-tidyverse.html#long-vs-wide-data-examples",
