@@ -125,7 +125,11 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#step-2-install-rstudio" id="toc-step-2-install-rstudio" class="nav-link" data-scroll-target="#step-2-install-rstudio">Step 2: Install RStudio</a></li>
   <li><a href="#step-3-install-the-required-packages" id="toc-step-3-install-the-required-packages" class="nav-link" data-scroll-target="#step-3-install-the-required-packages">Step 3: Install the required packages</a></li>
   </ul></li>
-  <li><a href="#dataset" id="toc-dataset" class="nav-link" data-scroll-target="#dataset">Dataset</a></li>
+  <li><a href="#dataset" id="toc-dataset" class="nav-link" data-scroll-target="#dataset">Dataset</a>
+  <ul class="collapse">
+  <li><a href="#chile_voting" id="toc-chile_voting" class="nav-link" data-scroll-target="#chile_voting">chile_voting</a></li>
+  <li><a href="#chile_voting_processed" id="toc-chile_voting_processed" class="nav-link" data-scroll-target="#chile_voting_processed">chile_voting_processed</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -191,7 +195,7 @@ ul.task-list li input[type="checkbox"] {
 <td>3</td>
 <td>Fri, 6 Sep 2024, 3.30 - 5.30 PM</td>
 <td>YPHSL seminar room 2.1</td>
-<td>Data visualization and Descriptive Statistics</td>
+<td><a href="03-visualization.html">Data visualization and Descriptive Statistics</a></td>
 </tr>
 <tr class="even">
 <td>4</td>
@@ -281,8 +285,10 @@ Note
 </section>
 <section id="dataset" class="level2">
 <h2 class="anchored" data-anchor-id="dataset">Dataset</h2>
+<section id="chile_voting" class="level3">
+<h3 class="anchored" data-anchor-id="chile_voting">chile_voting</h3>
 <p>For this workshop, we will be using dataset stored in a CSV file called <code>chile_voting.csv</code>.</p>
-<a href="https://raw.githubusercontent.com/bellaratmelia/introductory-r-socsci/main/data/chile_voting.csv" type="button" class="btn btn-success">Click here to open the CSV file, and then Ctrl + S / Cmd + S to save it locally</a>
+<a href="https://raw.githubusercontent.com/bellaratmelia/introductory-r-socsci/main/data/chile_voting.csv" type="button" class="btn btn-success">Click here to open chile_voting.csv, and then Ctrl + S / Cmd + S to save it locally into your data folder</a>
 <div class="callout callout-style-simple callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -298,14 +304,16 @@ What is a CSV?
 <p>You can open CSV files in Excel, Google Sheets, or even Notepad!</p>
 </div>
 </div>
+<section id="data-dictionary-for-chile_voting" class="level4">
+<h4 class="anchored" data-anchor-id="data-dictionary-for-chile_voting">Data dictionary for chile_voting</h4>
 <p>The data is from a national survey conducted in April and May of 1988 by FLACSO/Chile, capturing voting intentions for the <a href="https://en.wikipedia.org/wiki/1988_Chilean_presidential_referendum">1988 Chilean plebiscite</a>. The dataset contains information about respondents’ demographic characteristics and their voting intentions. This data can also be found from <code>carData</code> package, but for the purpose of this workshop, we will load the data from a CSV.</p>
 <p>Key variables in the dataset:</p>
 <hr>
 <table class="caption-top table">
 <caption>Explanatory notes on each column</caption>
 <colgroup>
-<col style="width: 31%">
-<col style="width: 68%">
+<col style="width: 19%">
+<col style="width: 80%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -348,8 +356,15 @@ What is a CSV?
 </tr>
 </tbody>
 </table>
+</section>
+</section>
+<section id="chile_voting_processed" class="level3">
+<h3 class="anchored" data-anchor-id="chile_voting_processed">chile_voting_processed</h3>
+<p>For session 3 onwards, we will use <code>chile_voting_processed.csv</code>. This is the version that has been processed and cleaned. You can download this file below if you missed session 1 and 2. Save this inside the <code>data-output</code> folder of your project.</p>
+<a href="https://raw.githubusercontent.com/bellaratmelia/introductory-r-socsci/main/data-output/chile_voting_processed.csv" type="button" class="btn btn-info">Click here to open chile_voting_processed.CSV, and then Ctrl + S / Cmd + S to save it locally into your data-output folder</a>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -445,7 +460,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/bellaratmelia\.github\.io\/introductory-r-socsci\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

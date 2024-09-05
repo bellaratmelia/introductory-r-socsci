@@ -426,19 +426,25 @@ Bella Ratmelia
 <span id="cb1-2"><a></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-3"><a></a></span>
 <span id="cb1-4"><a></a><span class="co"># read the CSV with Chile voting data</span></span>
-<span id="cb1-5"><a></a>chile_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/chile_voting.csv"</span>)</span>
+<span id="cb1-5"><a></a>chile_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data-output/chile_voting_processed.csv"</span>)</span>
 <span id="cb1-6"><a></a></span>
-<span id="cb1-7"><a></a><span class="co"># peek at the data, pay attention to the data types!</span></span>
-<span id="cb1-8"><a></a><span class="fu">glimpse</span>(chile_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-7"><a></a>chile_data <span class="ot">&lt;-</span> chile_data <span class="sc">|&gt;</span> </span>
+<span id="cb1-8"><a></a>    <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(<span class="st">"region"</span>, <span class="st">"sex"</span>, <span class="st">"education"</span>, <span class="st">"vote"</span>, <span class="st">"age_group"</span>, <span class="st">"support_level"</span>), as.factor))</span>
+<span id="cb1-9"><a></a></span>
+<span id="cb1-10"><a></a><span class="co">#reordering</span></span>
+<span id="cb1-11"><a></a>chile_data <span class="ot">&lt;-</span> chile_data <span class="sc">|&gt;</span> </span>
+<span id="cb1-12"><a></a>    <span class="fu">mutate</span>(<span class="at">education =</span> <span class="fu">factor</span>(education, </span>
+<span id="cb1-13"><a></a>                         <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"P"</span>, <span class="st">"S"</span>, <span class="st">"PS"</span>), </span>
+<span id="cb1-14"><a></a>                         <span class="at">ordered =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb1-15"><a></a></span>
+<span id="cb1-16"><a></a><span class="co"># peek at the data, pay attention to the data types!</span></span>
+<span id="cb1-17"><a></a><span class="fu">glimpse</span>(chile_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="introduction-to-descriptive-statistics" class="slide level2">
-<h2>Introduction to Descriptive Statistics</h2>
-<p>Descriptive statistics provide summaries about the sample and observations made. These summaries can be quantitative (summary statistics) or visual (graphs). Let’s explore some basic R functions for descriptive statistics using our Chile voting data.</p>
 </section>
 <section id="basic-r-functions-for-descriptive-statistics" class="slide level2">
 <h2>Basic R Functions for Descriptive Statistics</h2>
-<p>We’ll cover the following functions:</p>
+<p>Descriptive statistics provide summaries about the sample and observations made. These summaries can be quantitative (summary statistics) or visual (graphs).</p>
+<p>Let’s explore some basic R functions for descriptive statistics using our Chile voting data.</p>
 <ul>
 <li><code>mean()</code>: arithmetic average</li>
 <li><code>median()</code>: middle value</li>
@@ -447,65 +453,66 @@ Bella Ratmelia
 <li><code>range()</code>: range of values</li>
 <li><code>IQR()</code>: interquartile range</li>
 <li><code>summary()</code>: provides a summary of descriptive statistics</li>
-<li><code>Mode()</code> function from <code>DescTools</code> package: the most frequently occuring value</li>
+<li><code>Mode()</code> function from <code>DescTools</code> package: the most frequently occuring value <sup>1</sup></li>
 </ul>
-<p><strong>Note</strong>: R doesn’t have built-in functions for mode, so we need <code>DescTools</code> package to get this function!</p>
-</section>
-<section id="exploring-income-distribution" class="slide level2">
-<h2>Exploring Income Distribution</h2>
-<p>Let’s start by examining the <code>income</code> variable in our dataset.</p>
+<aside><ol class="aside-footnotes"><li id="fn1"><p>R doesn’t have built-in functions for mode, so we need <code>DescTools</code> package to get this function</p></li></ol></aside></section>
+<section id="exploring-age-distribution" class="slide level2">
+<h2>Exploring Age Distribution</h2>
+<p>Let’s start by examining the <code>age</code> variable in our dataset.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">library</span>(DescTools)</span>
 <span id="cb2-2"><a></a></span>
 <span id="cb2-3"><a></a><span class="co"># Basic statistics</span></span>
-<span id="cb2-4"><a></a>mean_income <span class="ot">&lt;-</span> <span class="fu">mean</span>(chile_data<span class="sc">$</span>income, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb2-5"><a></a>median_income <span class="ot">&lt;-</span> <span class="fu">median</span>(chile_data<span class="sc">$</span>income, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb2-6"><a></a>sd_income <span class="ot">&lt;-</span> <span class="fu">sd</span>(chile_data<span class="sc">$</span>income, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb2-7"><a></a>range_income <span class="ot">&lt;-</span> <span class="fu">range</span>(chile_data<span class="sc">$</span>income, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb2-8"><a></a>iqr_income <span class="ot">&lt;-</span> <span class="fu">IQR</span>(chile_data<span class="sc">$</span>income, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb2-9"><a></a>mode_income <span class="ot">&lt;-</span> DescTools<span class="sc">::</span><span class="fu">Mode</span>(chile_data<span class="sc">$</span>income, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-4"><a></a>mean_age <span class="ot">&lt;-</span> <span class="fu">mean</span>(chile_data<span class="sc">$</span>age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-5"><a></a>median_age <span class="ot">&lt;-</span> <span class="fu">median</span>(chile_data<span class="sc">$</span>age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-6"><a></a>sd_age <span class="ot">&lt;-</span> <span class="fu">sd</span>(chile_data<span class="sc">$</span>age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-7"><a></a>range_age <span class="ot">&lt;-</span> <span class="fu">range</span>(chile_data<span class="sc">$</span>age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-8"><a></a>iqr_age <span class="ot">&lt;-</span> <span class="fu">IQR</span>(chile_data<span class="sc">$</span>age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-9"><a></a>mode_age <span class="ot">&lt;-</span> DescTools<span class="sc">::</span><span class="fu">Mode</span>(chile_data<span class="sc">$</span>age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb2-10"><a></a></span>
 <span id="cb2-11"><a></a><span class="co"># Print results</span></span>
-<span id="cb2-12"><a></a><span class="fu">cat</span>(<span class="st">"Mean income:"</span>, mean_income, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Mean income: 33875.86 </code></pre>
+<span id="cb2-12"><a></a><span class="fu">cat</span>(<span class="st">"Mean age:"</span>, mean_age, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">cat</span>(<span class="st">"Median income:"</span>, median_income, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</section>
+<section id="exploring-age-distribution-output" class="slide level2 output-location-slide"><h2>Exploring Age Distribution</h2><div class="cell output-location-slide">
 <div class="cell-output cell-output-stdout">
-<pre><code>Median income: 15000 </code></pre>
+<pre><code>Mean age: 38.29 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="fu">cat</span>(<span class="st">"Standard deviation of income:"</span>, sd_income, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">cat</span>(<span class="st">"Median age:"</span>, median_age, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Standard deviation of income: 39502.87 </code></pre>
+<pre><code>Median age: 36 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">cat</span>(<span class="st">"Range of income:"</span>, range_income[<span class="dv">1</span>], <span class="st">"to"</span>, range_income[<span class="dv">2</span>], <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="fu">cat</span>(<span class="st">"Standard deviation of age:"</span>, sd_age, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Range of income: 2500 to 2e+05 </code></pre>
+<pre><code>Standard deviation of age: 14.66718 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="fu">cat</span>(<span class="st">"Interquartile range of income:"</span>, iqr_income, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">cat</span>(<span class="st">"Range of age:"</span>, range_age[<span class="dv">1</span>], <span class="st">"to"</span>, range_age[<span class="dv">2</span>], <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Interquartile range of income: 27500 </code></pre>
+<pre><code>Range of age: 18 to 70 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="fu">cat</span>(<span class="st">"Most frequently occuring income:"</span>, mode_income, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="fu">cat</span>(<span class="st">"Interquartile range of age:"</span>, iqr_age, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Most frequently occuring income: 15000 </code></pre>
+<pre><code>Interquartile range of age: 24 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="fu">cat</span>(<span class="st">"Most frequently occuring age:"</span>, mode_age, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Most frequently occuring age: 21 36 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="co"># Summary statistics</span></span>
-<span id="cb14-2"><a></a><span class="fu">summary</span>(chile_data<span class="sc">$</span>income)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-2"><a></a><span class="fu">summary</span>(chile_data<span class="sc">$</span>age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
-   2500    7500   15000   33876   35000  200000      98 </code></pre>
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  18.00   25.00   36.00   38.29   49.00   70.00 </code></pre>
 </div>
-</div>
-</section>
-<section id="interpreting-income-statistics" class="slide level2">
-<h2>Interpreting Income Statistics</h2>
+</div></section><section id="interpreting-age-statistics" class="slide level2">
+<h2>Interpreting Age Statistics</h2>
 <p>Some possible interpretation:</p>
 <ul>
-<li>The mean income is higher than the median, suggesting a right-skewed distribution.</li>
-<li>The standard deviation indicates the spread of incomes around the mean.</li>
-<li>The range shows the full spread of incomes from lowest to highest.</li>
-<li>The IQR represents the middle 50% of incomes, less affected by outliers than the range.</li>
+<li>Median is lower than mean, suggesting a slight skew towards older ages</li>
+<li>Mode is much lower than both mean and median, indicating a cluster of young adults</li>
+<li>With a standard deviation of about 14.67 years, we can expect roughly two-thirds of the participants to fall between 23.62 and 52.96 years old</li>
+<li>Middle 50% of participants fall between 25 and 49 years old</li>
 </ul>
 <p>It’s much easier if we have a graph to visualize these interpretations!</p>
 </section>
@@ -515,45 +522,72 @@ Bella Ratmelia
 <li><p><code>ggplot</code> is plotting package that is included inside <code>tidyverse</code> package</p></li>
 <li><p>works best with data in the long format, i.e., a column for all the dimensions/measures and another column for the value for each dimension/measure.</p></li>
 </ul>
-<p><a href="https://rstudio.github.io/cheatsheets/data-visualization.pdf"><img data-src="images/ggplot-cheatsheet.jpg"></a></p>
-<p><a href="https://rstudio.github.io/cheatsheets/html/data-visualization.html">ggplot documentation link</a></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a>chile_data <span class="sc">|&gt;</span> </span>
+<span id="cb16-2"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age)) <span class="sc">+</span></span>
+<span id="cb16-3"><a></a>    <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span></span>
+<span id="cb16-4"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Age distribution of respondents"</span>,</span>
+<span id="cb16-5"><a></a>         <span class="at">x =</span> <span class="st">"Age"</span>,</span>
+<span id="cb16-6"><a></a>         <span class="at">y =</span> <span class="st">"Number of Respondents"</span>) <span class="sc">+</span></span>
+<span id="cb16-7"><a></a>    <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
 </section>
-<section id="anatomy-of-ggplot-code" class="slide level2">
+<section id="visualizing-data-with-ggplot-output" class="slide level2 output-location-slide"><h2>Visualizing data with ggplot</h2><div class="cell output-location-slide">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-3-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div></section><section id="anatomy-of-ggplot-code" class="slide level2">
 <h2>Anatomy of ggplot code</h2>
 <p>Charts built with ggplot must include the following:</p>
-<div class="sourceCode" id="annotated-cell-9"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-9-1" class="code-annotation-target"><a href="#annotated-cell-9-1"></a>chile_data <span class="sc">|&gt;</span></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-9-2" class="code-annotation-target"><a href="#annotated-cell-9-2"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> income)) <span class="sc">+</span></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-9-3" class="code-annotation-target"><a href="#annotated-cell-9-3"></a>    <span class="fu">geom_point</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="annotated-cell-10" data-code-line-numbers="|1|2|3|4-6|7"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-10-1" class="code-annotation-target"><a href="#annotated-cell-10-1"></a>chile_data <span class="sc">|&gt;</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-10-2" class="code-annotation-target"><a href="#annotated-cell-10-2"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age)) <span class="sc">+</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-10-3" class="code-annotation-target"><a href="#annotated-cell-10-3"></a>    <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-10-4" class="code-annotation-target"><a href="#annotated-cell-10-4"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Age distribution of respondents"</span>,</span>
+<span id="annotated-cell-10-5"><a href="#annotated-cell-10-5"></a>         <span class="at">x =</span> <span class="st">"Age"</span>,</span>
+<span id="annotated-cell-10-6"><a href="#annotated-cell-10-6"></a>         <span class="at">y =</span> <span class="st">"Count"</span>) <span class="sc">+</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-10-7" class="code-annotation-target"><a href="#annotated-cell-10-7"></a>    <span class="fu">theme_minimal</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-9" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-10" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-9" data-code-lines="1" data-code-annotation="1"><strong>Data</strong> - the dataframe/tibble to visualize.</span>
+<span data-code-cell="annotated-cell-10" data-code-lines="1" data-code-annotation="1"><strong>Data</strong> - the dataframe/tibble to visualize.</span>
 </dd>
-<dt data-target-cell="annotated-cell-9" data-target-annotation="2">2</dt>
+<dt data-target-cell="annotated-cell-10" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-9" data-code-lines="2" data-code-annotation="2"><strong>Aesthetic mappings (aes)</strong> - describes which variables are mapped to the x, y axes, alpha (transparency) and other visual aesthetics.</span>
+<span data-code-cell="annotated-cell-10" data-code-lines="2" data-code-annotation="2"><strong>Aesthetic mappings (aes)</strong> - describes which variables are mapped to the x, y axes, alpha (transparency) and other visual aesthetics.</span>
 </dd>
-<dt data-target-cell="annotated-cell-9" data-target-annotation="3">3</dt>
+<dt data-target-cell="annotated-cell-10" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-cell="annotated-cell-9" data-code-lines="3" data-code-annotation="3"><strong>Geometric objects (geom)</strong> - describes how values are rendered; as bars, scatterplot, lines, etc.</span>
+<span data-code-cell="annotated-cell-10" data-code-lines="3" data-code-annotation="3"><strong>Geometric objects (geom)</strong> - describes how values are rendered; as bars, scatterplot, lines, etc.</span>
+</dd>
+<dt data-target-cell="annotated-cell-10" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-10" data-code-lines="4,5,6" data-code-annotation="4">Provide titles and labels to your graph</span>
+</dd>
+<dt data-target-cell="annotated-cell-10" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-10" data-code-lines="7" data-code-annotation="5">(Optional) apply a theme/look to your graph</span>
 </dd>
 </dl>
 </section>
 <section id="going-back-to-our-data" class="slide level2">
 <h2>Going back to our data</h2>
 <p>Our PI has asked us to generate visualizations to address these questions about the Chile voting data. The PI also has asked us to write down our interpretation of the visualizations.</p>
-<p><strong>Univariate visualizations:</strong></p>
 <ol type="1">
-<li>What’s the distribution of respondents for each <code>region</code>?</li>
-<li>What’s the distribution of <code>age</code> of our respondents?</li>
+<li>What’s the distribution of respondents’ <code>statusquo</code> support?</li>
+<li>What’s the distribution of <code>votes</code>?</li>
+<li>What’s the percentage of the voting intentions on each region?</li>
+<li>Is there any major divide in terms of support for the statusquo across age? Visualize the distribution of <code>age</code> and <code>statusquo</code>.</li>
+<li>What does the voting intention look like across different education level? Visualize the distribution of <code>vote</code> intention on various <code>education</code> level.</li>
+<li>Do people’s voting intention matches their level of support to the status quo? Compare the distribution of <code>statusquo</code> across different <code>vote</code> intentions.</li>
 </ol>
-<p><strong>Bivariate/multivariate visualizations:</strong></p>
-<ol start="3" type="1">
-<li>Compare the distribution of <code>income</code> across different <code>education</code> levels</li>
-<li>Visualize and explore the relationship between <code>age</code> and <code>income</code>. Don’t forget to label the graph!</li>
-<li>Are there any outliers in the <code>statusquo</code> scores?</li>
-<li>Explore the distribution of votes (<code>vote</code>) across different regions (<code>region</code>).</li>
-</ol>
+</section>
+<section id="tip-open-the-ggplot-cheatsheet" class="slide level2">
+<h2>Tip: open the ggplot cheatsheet</h2>
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -567,163 +601,74 @@ Bella Ratmelia
 </div>
 </div>
 </div>
+
+<img data-src="images/ggplot-cheatsheet.jpg" style="width:60.0%" class="r-stretch"><p><a href="https://rstudio.github.io/cheatsheets/html/data-visualization.html">ggplot documentation link</a></p>
 </section>
-<section id="task-1-distribution-of-regions" class="slide level2">
-<h2>Task #1: distribution of regions</h2>
-<p>What’s the distribution of respondents for each <code>region</code>?</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="co"># simple bar chart </span></span>
-<span id="cb16-2"><a></a>chile_data <span class="sc">|&gt;</span> </span>
-<span id="cb16-3"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> region)) <span class="sc">+</span></span>
-<span id="cb16-4"><a></a>    <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"skyblue"</span>) <span class="sc">+</span></span>
-<span id="cb16-5"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of Respondents by Region"</span>,</span>
-<span id="cb16-6"><a></a>         <span class="at">x =</span> <span class="st">"Region"</span>,</span>
-<span id="cb16-7"><a></a>         <span class="at">y =</span> <span class="st">"Number of Respondents"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="task-1" class="slide level2">
+<h2>Task #1</h2>
+<p>What’s the distribution of our respondents’ <code>statusquo</code>?</p>
 
-</div>
-<img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
-<section id="task-2-distribution-of-respondent-ages" class="slide level2">
-<h2>Task #2: distribution of respondent ages</h2>
-<p>What’s the distribution of <code>age</code> of our respondents?</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="co"># histogram</span></span>
-<span id="cb17-2"><a></a>chile_data <span class="sc">|&gt;</span> </span>
-<span id="cb17-3"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age)) <span class="sc">+</span></span>
-<span id="cb17-4"><a></a>    <span class="fu">geom_histogram</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"lightgreen"</span>, <span class="at">binwidth =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
-<span id="cb17-5"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of Respondent Ages"</span>,</span>
-<span id="cb17-6"><a></a>         <span class="at">x =</span> <span class="st">"Age"</span>,</span>
-<span id="cb17-7"><a></a>         <span class="at">y =</span> <span class="st">"Count"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
 <img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"></section>
-<section id="task-3-income-across-education-levels" class="slide level2">
-<h2>Task #3: income across education levels</h2>
-<p>Compare the distribution of <code>income</code> across different <code>education</code> levels.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a><span class="co"># boxplot layered with jittered points</span></span>
-<span id="cb18-2"><a></a>chile_data <span class="sc">|&gt;</span> </span>
-<span id="cb18-3"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> education, <span class="at">y =</span> income)) <span class="sc">+</span></span>
-<span id="cb18-4"><a></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
-<span id="cb18-5"><a></a>    <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>, <span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb18-6"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of Income by Education Level"</span>,</span>
-<span id="cb18-7"><a></a>         <span class="at">x =</span> <span class="st">"Education Level"</span>,</span>
-<span id="cb18-8"><a></a>         <span class="at">y =</span> <span class="st">"Income (Pesos)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="task-2" class="slide level2">
+<h2>Task #2</h2>
+<p>What’s the distribution of <code>votes</code>?</p>
 
-</div>
 <img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"></section>
-<section class="slide level2">
+<section id="task-3" class="slide level2">
+<h2>Task #3</h2>
+<p>What’s the percentage of the voting intentions on each <code>region</code>?</p>
 
-<h3 id="anatomy-of-a-boxplot">Anatomy of a boxplot</h3>
-
-<img data-src="images/boxplot_explanation.png" class="quarto-figure quarto-figure-center r-stretch"><p>Image source: https://www.leansigmacorporation.com/box-plot-with-minitab/</p>
-</section>
-<section id="task-4-relationship-between-age-and-income" class="slide level2">
-<h2>Task #4: relationship between age and income</h2>
-<p>Visualize and explore the relationship between <code>age</code> and <code>income</code>. Do you see any trend or differences between <code>sex</code>? Don’t forget to label the graph!</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a><span class="co"># scatterplot with trendline</span></span>
-<span id="cb19-2"><a></a>chile_data <span class="sc">|&gt;</span> </span>
-<span id="cb19-3"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> income, </span>
-<span id="cb19-4"><a></a>               <span class="at">color =</span> sex, </span>
-<span id="cb19-5"><a></a>               <span class="at">shape =</span> sex)) <span class="sc">+</span></span>
-<span id="cb19-6"><a></a>    <span class="fu">geom_jitter</span>() <span class="sc">+</span></span>
-<span id="cb19-7"><a></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span> </span>
-<span id="cb19-8"><a></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Age"</span>, </span>
-<span id="cb19-9"><a></a>         <span class="at">y =</span> <span class="st">"Income (Pesos)"</span>,</span>
-<span id="cb19-10"><a></a>         <span class="at">title =</span> <span class="st">"Relationship between Age and Income"</span>,</span>
-<span id="cb19-11"><a></a>         <span class="at">subtitle =</span> <span class="st">"Comparison between sexes"</span>,</span>
-<span id="cb19-12"><a></a>         <span class="at">caption =</span> <span class="st">"Data from 1988 Chilean national survey"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
 <img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section>
-<section class="slide level2">
+<section id="group-exercise-1-solo-attempts-also-ok" class="slide level2">
+<h2>Group exercise #1 (solo attempts also ok)</h2>
+<p>Visualize the <code>vote</code> intention by <code>sex</code>. Make sure it is shown as proportion.</p>
 
-<p>We can layer two (or more) geom objects!</p>
-<p>Use <code>labs</code> to specify the title, axis labels, subtitles, captions, etc.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="co"># scatterplot with trendline</span></span>
-<span id="cb20-2"><a></a>chile_data <span class="sc">|&gt;</span> </span>
-<span id="cb20-3"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> income, </span>
-<span id="cb20-4"><a></a>               <span class="at">color =</span> sex, </span>
-<span id="cb20-5"><a></a>               <span class="at">shape =</span> sex)) <span class="sc">+</span></span>
-<span id="cb20-6"><a></a>    <span class="fu">geom_jitter</span>() <span class="sc">+</span></span>
-<span id="cb20-7"><a></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span> </span>
-<span id="cb20-8"><a></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Age"</span>, </span>
-<span id="cb20-9"><a></a>         <span class="at">y =</span> <span class="st">"Income (Pesos)"</span>,</span>
-<span id="cb20-10"><a></a>         <span class="at">title =</span> <span class="st">"Relationship between Age and Income"</span>,</span>
-<span id="cb20-11"><a></a>         <span class="at">subtitle =</span> <span class="st">"Comparison between sexes"</span>,</span>
-<span id="cb20-12"><a></a>         <span class="at">caption =</span> <span class="st">"Data from 1988 Chilean national survey"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="task-5-outliers-in-statusquo-score" class="slide level2">
-<h2>Task #5: Outliers in statusquo score</h2>
-<p>Are there any outliers in the <code>statusquo</code> scores?</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a>chile_data <span class="sc">|&gt;</span> </span>
-<span id="cb21-2"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> statusquo)) <span class="sc">+</span> </span>
-<span id="cb21-3"><a></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb21-4"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of Status Quo Scores"</span>,</span>
-<span id="cb21-5"><a></a>         <span class="at">y =</span> <span class="st">"Status Quo Score"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
 <img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" class="r-stretch"></section>
-<section id="task-6-distribution-of-votes-across-regions" class="slide level2">
-<h2>Task #6: Distribution of votes across regions</h2>
-<p>Explore the distribution of votes (<code>vote</code>) across different regions (<code>region</code>).</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a><span class="co"># Prepare data</span></span>
-<span id="cb22-2"><a></a>vote_distribution <span class="ot">&lt;-</span> chile_data <span class="sc">|&gt;</span></span>
-<span id="cb22-3"><a></a>    <span class="fu">group_by</span>(region, vote) <span class="sc">|&gt;</span></span>
-<span id="cb22-4"><a></a>    <span class="fu">summarise</span>(<span class="at">count =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">'drop'</span>) <span class="sc">|&gt;</span></span>
-<span id="cb22-5"><a></a>    <span class="fu">mutate</span>(<span class="at">percentage =</span> count <span class="sc">/</span> <span class="fu">sum</span>(count) <span class="sc">*</span> <span class="dv">100</span>)</span>
-<span id="cb22-6"><a></a></span>
-<span id="cb22-7"><a></a><span class="co"># Create stacked bar chart</span></span>
-<span id="cb22-8"><a></a><span class="fu">ggplot</span>(vote_distribution, <span class="fu">aes</span>(<span class="at">x =</span> region, <span class="at">y =</span> percentage, <span class="at">fill =</span> vote)) <span class="sc">+</span></span>
-<span id="cb22-9"><a></a>    <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
-<span id="cb22-10"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of Votes Across Regions"</span>,</span>
-<span id="cb22-11"><a></a>         <span class="at">x =</span> <span class="st">"Region"</span>,</span>
-<span id="cb22-12"><a></a>         <span class="at">y =</span> <span class="st">"Percentage"</span>,</span>
-<span id="cb22-13"><a></a>         <span class="at">fill =</span> <span class="st">"Vote"</span>) <span class="sc">+</span></span>
-<span id="cb22-14"><a></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="task-4" class="slide level2">
+<h2>Task #4</h2>
+<p>Is there any major divide in terms of support for the statusquo across age? Visualize the distribution of <code>age</code> and <code>statusquo</code>.</p>
 
-</div>
 <img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-8-1.png" width="960" class="r-stretch"></section>
-<section id="group-exercises-solo-attempts-ok" class="slide level2">
-<h2>Group Exercises (solo attempts ok)</h2>
-<ol type="1">
-<li>Explore the relationship between <code>age</code> and <code>statusquo</code>. Is there a trend or relationship there and does the trend differ between different <code>education</code> levels?</li>
-<li>Visualize the distribution of <code>income</code> across different <code>sex</code> with a violin plot.</li>
-</ol>
-<p><strong>Make sure to give the graph proper title and labels on both axis!</strong></p>
-</section>
-<section class="slide level2">
+<section id="task-5" class="slide level2">
+<h2>Task #5</h2>
+<p>What does the voting intention look like across different education level? Visualize the distribution of <code>vote</code> intention on various <code>education</code> level.</p>
+<p>We can achieve this in two ways!</p>
 
-<h3 id="question-1-answer">Question #1 answer</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a>chile_data <span class="sc">|&gt;</span> </span>
-<span id="cb23-2"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> statusquo, </span>
-<span id="cb23-3"><a></a>               <span class="at">color =</span> education)) <span class="sc">+</span></span>
-<span id="cb23-4"><a></a>    <span class="fu">geom_jitter</span>() <span class="sc">+</span></span>
-<span id="cb23-5"><a></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
-<span id="cb23-6"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Relationship between Age and Status Quo Support"</span>,</span>
-<span id="cb23-7"><a></a>         <span class="at">subtitle =</span> <span class="st">"By Education Level"</span>,</span>
-<span id="cb23-8"><a></a>         <span class="at">x =</span> <span class="st">"Age"</span>,</span>
-<span id="cb23-9"><a></a>         <span class="at">y =</span> <span class="st">"Status Quo Support"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
 <img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" class="r-stretch"></section>
-<section class="slide level2">
+<section id="alternative-way" class="slide level2">
+<h2>Alternative way</h2>
 
-<h3 id="question-2-answer">Question #2 answer</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a>chile_data <span class="sc">|&gt;</span> </span>
-<span id="cb24-2"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sex, <span class="at">y =</span> income)) <span class="sc">+</span></span>
-<span id="cb24-3"><a></a>    <span class="fu">geom_violin</span>() <span class="sc">+</span></span>
-<span id="cb24-4"><a></a>    <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb24-5"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of Income by Sex"</span>,</span>
-<span id="cb24-6"><a></a>         <span class="at">x =</span> <span class="st">"Sex"</span>,</span>
-<span id="cb24-7"><a></a>         <span class="at">y =</span> <span class="st">"Income (Pesos)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
 <img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-10-1.png" width="960" class="r-stretch"></section>
+<section id="facets-for-multiple-variables" class="slide level2">
+<h2>Facets for multiple variables</h2>
+
+<img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
+<section id="task-6" class="slide level2">
+<h2>Task #6</h2>
+<p>Do people’s voting intention matches their level of support to the status quo? Compare the distribution of <code>statusquo</code> across different <code>vote</code> intentions.</p>
+<p>Let’s layer two kinds of visualization here:</p>
+
+<img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"></section>
+<section id="group-exercise-2-solo-attempts-ok" class="slide level2">
+<h2>Group Exercise #2 (solo attempts ok)</h2>
+<p>Update the visualization from task #6 to the following:</p>
+<ul>
+<li>Replace the boxplot with violin plot (check out ggplot documentation)</li>
+<li>Change the fill color for both the violin plot and jitters to other color of your choice.</li>
+</ul>
+
+<img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-13-1.png" width="960" class="r-stretch"></section>
+<section id="group-exercise-3-solo-attempts-ok" class="slide level2">
+<h2>Group Exercise #3 (solo attempts ok)</h2>
+<p>Visualize the distribution of <code>age_group</code> for each <code>vote</code> intention. To show the difference between sex, show the visualization with <code>sex</code> facet.</p>
+
+<img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-14-1.png" width="960" class="r-stretch"></section>
+<section id="is-fancier-better" class="slide level2">
+<h2>Is fancier = better?</h2>
+<p>Fancier, more complicated visualization does not necessarily mean better!</p>
+<p>Take a look at this award-winning visualization by <a href="http://www.simonscarr.com/iraqs-bloody-toll">Simon Scarr</a></p>
+<iframe width="1500" height="600" src="http://www.simonscarr.com/iraqs-bloody-toll" title="Simon Scarr's visualization"></iframe>
+</section>
 <section id="strategy-for-data-visualization-with-ggplot" class="slide level2">
 <h2>Strategy for data visualization with ggplot</h2>
 <ol type="1">
@@ -745,6 +690,8 @@ Bella Ratmelia
 </div>
 </div>
 </section>
+
+
     </div>
   </div>
 
@@ -1120,7 +1067,7 @@ Bella Ratmelia
       }
         var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
         var mailtoRegex = new RegExp(/^mailto:/);
-          var filterRegex = new RegExp("https:\/\/bellaratmelia\.github\.io\/introductory-r-socsci\/");
+          var filterRegex = new RegExp('/' + window.location.host + '/');
         var isInternal = (href) => {
             return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
         }

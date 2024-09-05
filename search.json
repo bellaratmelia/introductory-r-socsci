@@ -179,105 +179,154 @@
     "href": "03-visualization.html#refresher-loading-from-csv-into-a-dataframe",
     "title": "Data Visualization and Descriptive Stats",
     "section": "Refresher: Loading from CSV into a dataframe",
-    "text": "Refresher: Loading from CSV into a dataframe\nUse read_csv from readr package (part of tidyverse) to load our data into a dataframe\n\n# import tidyverse library\nlibrary(tidyverse)\n\n# read the CSV with Chile voting data\nchile_data &lt;- read_csv(\"data/chile_voting.csv\")\n\n# peek at the data, pay attention to the data types!\nglimpse(chile_data)"
-  },
-  {
-    "objectID": "03-visualization.html#introduction-to-descriptive-statistics",
-    "href": "03-visualization.html#introduction-to-descriptive-statistics",
-    "title": "Data Visualization and Descriptive Stats",
-    "section": "Introduction to Descriptive Statistics",
-    "text": "Introduction to Descriptive Statistics\nDescriptive statistics provide summaries about the sample and observations made. These summaries can be quantitative (summary statistics) or visual (graphs). Let’s explore some basic R functions for descriptive statistics using our Chile voting data."
+    "text": "Refresher: Loading from CSV into a dataframe\nUse read_csv from readr package (part of tidyverse) to load our data into a dataframe\n\n# import tidyverse library\nlibrary(tidyverse)\n\n# read the CSV with Chile voting data\nchile_data &lt;- read_csv(\"data-output/chile_voting_processed.csv\")\n\nchile_data &lt;- chile_data |&gt; \n    mutate(across(c(\"region\", \"sex\", \"education\", \"vote\", \"age_group\", \"support_level\"), as.factor))\n\n#reordering\nchile_data &lt;- chile_data |&gt; \n    mutate(education = factor(education, \n                         levels = c(\"P\", \"S\", \"PS\"), \n                         ordered = TRUE))\n\n# peek at the data, pay attention to the data types!\nglimpse(chile_data)"
   },
   {
     "objectID": "03-visualization.html#basic-r-functions-for-descriptive-statistics",
     "href": "03-visualization.html#basic-r-functions-for-descriptive-statistics",
     "title": "Data Visualization and Descriptive Stats",
     "section": "Basic R Functions for Descriptive Statistics",
-    "text": "Basic R Functions for Descriptive Statistics\nWe’ll cover the following functions:\n\nmean(): arithmetic average\nmedian(): middle value\nsd(): standard deviation\nvar(): variance\nrange(): range of values\nIQR(): interquartile range\nsummary(): provides a summary of descriptive statistics\nMode() function from DescTools package: the most frequently occuring value\n\nNote: R doesn’t have built-in functions for mode, so we need DescTools package to get this function!"
+    "text": "Basic R Functions for Descriptive Statistics\nDescriptive statistics provide summaries about the sample and observations made. These summaries can be quantitative (summary statistics) or visual (graphs).\nLet’s explore some basic R functions for descriptive statistics using our Chile voting data.\n\nmean(): arithmetic average\nmedian(): middle value\nsd(): standard deviation\nvar(): variance\nrange(): range of values\nIQR(): interquartile range\nsummary(): provides a summary of descriptive statistics\nMode() function from DescTools package: the most frequently occuring value 1\n\nR doesn’t have built-in functions for mode, so we need DescTools package to get this function"
   },
   {
-    "objectID": "03-visualization.html#exploring-income-distribution",
-    "href": "03-visualization.html#exploring-income-distribution",
+    "objectID": "03-visualization.html#exploring-age-distribution",
+    "href": "03-visualization.html#exploring-age-distribution",
     "title": "Data Visualization and Descriptive Stats",
-    "section": "Exploring Income Distribution",
-    "text": "Exploring Income Distribution\nLet’s start by examining the income variable in our dataset.\n\nlibrary(DescTools)\n\n# Basic statistics\nmean_income &lt;- mean(chile_data$income, na.rm = TRUE)\nmedian_income &lt;- median(chile_data$income, na.rm = TRUE)\nsd_income &lt;- sd(chile_data$income, na.rm = TRUE)\nrange_income &lt;- range(chile_data$income, na.rm = TRUE)\niqr_income &lt;- IQR(chile_data$income, na.rm = TRUE)\nmode_income &lt;- DescTools::Mode(chile_data$income, na.rm = TRUE)\n\n# Print results\ncat(\"Mean income:\", mean_income, \"\\n\")\n\nMean income: 33875.86 \n\ncat(\"Median income:\", median_income, \"\\n\")\n\nMedian income: 15000 \n\ncat(\"Standard deviation of income:\", sd_income, \"\\n\")\n\nStandard deviation of income: 39502.87 \n\ncat(\"Range of income:\", range_income[1], \"to\", range_income[2], \"\\n\")\n\nRange of income: 2500 to 2e+05 \n\ncat(\"Interquartile range of income:\", iqr_income, \"\\n\")\n\nInterquartile range of income: 27500 \n\ncat(\"Most frequently occuring income:\", mode_income, \"\\n\")\n\nMost frequently occuring income: 15000 \n\n# Summary statistics\nsummary(chile_data$income)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's \n   2500    7500   15000   33876   35000  200000      98"
+    "section": "Exploring Age Distribution",
+    "text": "Exploring Age Distribution\nLet’s start by examining the age variable in our dataset.\n\nlibrary(DescTools)\n\n# Basic statistics\nmean_age &lt;- mean(chile_data$age, na.rm = TRUE)\nmedian_age &lt;- median(chile_data$age, na.rm = TRUE)\nsd_age &lt;- sd(chile_data$age, na.rm = TRUE)\nrange_age &lt;- range(chile_data$age, na.rm = TRUE)\niqr_age &lt;- IQR(chile_data$age, na.rm = TRUE)\nmode_age &lt;- DescTools::Mode(chile_data$age, na.rm = TRUE)\n\n# Print results\ncat(\"Mean age:\", mean_age, \"\\n\")"
   },
   {
-    "objectID": "03-visualization.html#interpreting-income-statistics",
-    "href": "03-visualization.html#interpreting-income-statistics",
+    "objectID": "03-visualization.html#exploring-age-distribution-output",
+    "href": "03-visualization.html#exploring-age-distribution-output",
     "title": "Data Visualization and Descriptive Stats",
-    "section": "Interpreting Income Statistics",
-    "text": "Interpreting Income Statistics\nSome possible interpretation:\n\nThe mean income is higher than the median, suggesting a right-skewed distribution.\nThe standard deviation indicates the spread of incomes around the mean.\nThe range shows the full spread of incomes from lowest to highest.\nThe IQR represents the middle 50% of incomes, less affected by outliers than the range.\n\nIt’s much easier if we have a graph to visualize these interpretations!"
+    "section": "Exploring Age Distribution",
+    "text": "Exploring Age Distribution\n\nMean age: 38.29 \n\ncat(\"Median age:\", median_age, \"\\n\")\n\nMedian age: 36 \n\ncat(\"Standard deviation of age:\", sd_age, \"\\n\")\n\nStandard deviation of age: 14.66718 \n\ncat(\"Range of age:\", range_age[1], \"to\", range_age[2], \"\\n\")\n\nRange of age: 18 to 70 \n\ncat(\"Interquartile range of age:\", iqr_age, \"\\n\")\n\nInterquartile range of age: 24 \n\ncat(\"Most frequently occuring age:\", mode_age, \"\\n\")\n\nMost frequently occuring age: 21 36 \n\n# Summary statistics\nsummary(chile_data$age)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  18.00   25.00   36.00   38.29   49.00   70.00"
+  },
+  {
+    "objectID": "03-visualization.html#interpreting-age-statistics",
+    "href": "03-visualization.html#interpreting-age-statistics",
+    "title": "Data Visualization and Descriptive Stats",
+    "section": "Interpreting Age Statistics",
+    "text": "Interpreting Age Statistics\nSome possible interpretation:\n\nMedian is lower than mean, suggesting a slight skew towards older ages\nMode is much lower than both mean and median, indicating a cluster of young adults\nWith a standard deviation of about 14.67 years, we can expect roughly two-thirds of the participants to fall between 23.62 and 52.96 years old\nMiddle 50% of participants fall between 25 and 49 years old\n\nIt’s much easier if we have a graph to visualize these interpretations!"
   },
   {
     "objectID": "03-visualization.html#visualizing-data-with-ggplot",
     "href": "03-visualization.html#visualizing-data-with-ggplot",
     "title": "Data Visualization and Descriptive Stats",
     "section": "Visualizing data with ggplot",
-    "text": "Visualizing data with ggplot\n\nggplot is plotting package that is included inside tidyverse package\nworks best with data in the long format, i.e., a column for all the dimensions/measures and another column for the value for each dimension/measure.\n\n\nggplot documentation link"
+    "text": "Visualizing data with ggplot\n\nggplot is plotting package that is included inside tidyverse package\nworks best with data in the long format, i.e., a column for all the dimensions/measures and another column for the value for each dimension/measure.\n\n\nchile_data |&gt; \n    ggplot(aes(x = age)) +\n    geom_bar(fill = \"lightblue\") +\n    labs(title = \"Age distribution of respondents\",\n         x = \"Age\",\n         y = \"Number of Respondents\") +\n    theme_minimal()"
+  },
+  {
+    "objectID": "03-visualization.html#visualizing-data-with-ggplot-output",
+    "href": "03-visualization.html#visualizing-data-with-ggplot-output",
+    "title": "Data Visualization and Descriptive Stats",
+    "section": "Visualizing data with ggplot",
+    "text": "Visualizing data with ggplot"
   },
   {
     "objectID": "03-visualization.html#anatomy-of-ggplot-code",
     "href": "03-visualization.html#anatomy-of-ggplot-code",
     "title": "Data Visualization and Descriptive Stats",
     "section": "Anatomy of ggplot code",
-    "text": "Anatomy of ggplot code\nCharts built with ggplot must include the following:\n1chile_data |&gt;\n2    ggplot(aes(x = age, y = income)) +\n3    geom_point()\n\n1\n\nData - the dataframe/tibble to visualize.\n\n2\n\nAesthetic mappings (aes) - describes which variables are mapped to the x, y axes, alpha (transparency) and other visual aesthetics.\n\n3\n\nGeometric objects (geom) - describes how values are rendered; as bars, scatterplot, lines, etc."
+    "text": "Anatomy of ggplot code\nCharts built with ggplot must include the following:\n1chile_data |&gt;\n2    ggplot(aes(x = age)) +\n3    geom_bar(fill = \"lightblue\") +\n4    labs(title = \"Age distribution of respondents\",\n         x = \"Age\",\n         y = \"Count\") +\n5    theme_minimal()\n\n1\n\nData - the dataframe/tibble to visualize.\n\n2\n\nAesthetic mappings (aes) - describes which variables are mapped to the x, y axes, alpha (transparency) and other visual aesthetics.\n\n3\n\nGeometric objects (geom) - describes how values are rendered; as bars, scatterplot, lines, etc.\n\n4\n\nProvide titles and labels to your graph\n\n5\n\n(Optional) apply a theme/look to your graph"
   },
   {
     "objectID": "03-visualization.html#going-back-to-our-data",
     "href": "03-visualization.html#going-back-to-our-data",
     "title": "Data Visualization and Descriptive Stats",
     "section": "Going back to our data",
-    "text": "Going back to our data\nOur PI has asked us to generate visualizations to address these questions about the Chile voting data. The PI also has asked us to write down our interpretation of the visualizations.\nUnivariate visualizations:\n\nWhat’s the distribution of respondents for each region?\nWhat’s the distribution of age of our respondents?\n\nBivariate/multivariate visualizations:\n\nCompare the distribution of income across different education levels\nVisualize and explore the relationship between age and income. Don’t forget to label the graph!\nAre there any outliers in the statusquo scores?\nExplore the distribution of votes (vote) across different regions (region).\n\n\n\n\n\n\n\nTip\n\n\nA strategy I’d like to recommend: briefly read over the ggplot2 documentation and have them open on a separate tab. Figure out the type of variables you need to visualize (discrete or continuous) to quickly identify which visualization would make sense."
+    "text": "Going back to our data\nOur PI has asked us to generate visualizations to address these questions about the Chile voting data. The PI also has asked us to write down our interpretation of the visualizations.\n\nWhat’s the distribution of respondents’ statusquo support?\nWhat’s the distribution of votes?\nWhat’s the percentage of the voting intentions on each region?\nIs there any major divide in terms of support for the statusquo across age? Visualize the distribution of age and statusquo.\nWhat does the voting intention look like across different education level? Visualize the distribution of vote intention on various education level.\nDo people’s voting intention matches their level of support to the status quo? Compare the distribution of statusquo across different vote intentions."
   },
   {
-    "objectID": "03-visualization.html#task-1-distribution-of-regions",
-    "href": "03-visualization.html#task-1-distribution-of-regions",
+    "objectID": "03-visualization.html#tip-open-the-ggplot-cheatsheet",
+    "href": "03-visualization.html#tip-open-the-ggplot-cheatsheet",
     "title": "Data Visualization and Descriptive Stats",
-    "section": "Task #1: distribution of regions",
-    "text": "Task #1: distribution of regions\nWhat’s the distribution of respondents for each region?\n\n# simple bar chart \nchile_data |&gt; \n    ggplot(aes(x = region)) +\n    geom_bar(fill = \"skyblue\") +\n    labs(title = \"Distribution of Respondents by Region\",\n         x = \"Region\",\n         y = \"Number of Respondents\")"
+    "section": "Tip: open the ggplot cheatsheet",
+    "text": "Tip: open the ggplot cheatsheet\n\n\n\n\n\n\nTip\n\n\nA strategy I’d like to recommend: briefly read over the ggplot2 documentation and have them open on a separate tab. Figure out the type of variables you need to visualize (discrete or continuous) to quickly identify which visualization would make sense.\n\n\n\n\nggplot documentation link"
   },
   {
-    "objectID": "03-visualization.html#task-2-distribution-of-respondent-ages",
-    "href": "03-visualization.html#task-2-distribution-of-respondent-ages",
+    "objectID": "03-visualization.html#task-1",
+    "href": "03-visualization.html#task-1",
     "title": "Data Visualization and Descriptive Stats",
-    "section": "Task #2: distribution of respondent ages",
-    "text": "Task #2: distribution of respondent ages\nWhat’s the distribution of age of our respondents?\n\n# histogram\nchile_data |&gt; \n    ggplot(aes(x = age)) +\n    geom_histogram(color = \"black\", fill = \"lightgreen\", binwidth = 5) +\n    labs(title = \"Distribution of Respondent Ages\",\n         x = \"Age\",\n         y = \"Count\")"
+    "section": "Task #1",
+    "text": "Task #1\nWhat’s the distribution of our respondents’ statusquo?"
   },
   {
-    "objectID": "03-visualization.html#task-3-income-across-education-levels",
-    "href": "03-visualization.html#task-3-income-across-education-levels",
+    "objectID": "03-visualization.html#task-2",
+    "href": "03-visualization.html#task-2",
     "title": "Data Visualization and Descriptive Stats",
-    "section": "Task #3: income across education levels",
-    "text": "Task #3: income across education levels\nCompare the distribution of income across different education levels.\n\n# boxplot layered with jittered points\nchile_data |&gt; \n    ggplot(aes(x = education, y = income)) +\n    geom_boxplot() + \n    geom_jitter(alpha = 0.2, width = 0.2) +\n    labs(title = \"Distribution of Income by Education Level\",\n         x = \"Education Level\",\n         y = \"Income (Pesos)\")"
+    "section": "Task #2",
+    "text": "Task #2\nWhat’s the distribution of votes?"
   },
   {
-    "objectID": "03-visualization.html#task-4-relationship-between-age-and-income",
-    "href": "03-visualization.html#task-4-relationship-between-age-and-income",
+    "objectID": "03-visualization.html#task-3",
+    "href": "03-visualization.html#task-3",
     "title": "Data Visualization and Descriptive Stats",
-    "section": "Task #4: relationship between age and income",
-    "text": "Task #4: relationship between age and income\nVisualize and explore the relationship between age and income. Do you see any trend or differences between sex? Don’t forget to label the graph!\n\n# scatterplot with trendline\nchile_data |&gt; \n    ggplot(aes(x = age, y = income, \n               color = sex, \n               shape = sex)) +\n    geom_jitter() +\n    geom_smooth(method = \"lm\") + \n    labs(x = \"Age\", \n         y = \"Income (Pesos)\",\n         title = \"Relationship between Age and Income\",\n         subtitle = \"Comparison between sexes\",\n         caption = \"Data from 1988 Chilean national survey\")"
+    "section": "Task #3",
+    "text": "Task #3\nWhat’s the percentage of the voting intentions on each region?"
   },
   {
-    "objectID": "03-visualization.html#task-5-outliers-in-statusquo-score",
-    "href": "03-visualization.html#task-5-outliers-in-statusquo-score",
+    "objectID": "03-visualization.html#group-exercise-1-solo-attempts-also-ok",
+    "href": "03-visualization.html#group-exercise-1-solo-attempts-also-ok",
     "title": "Data Visualization and Descriptive Stats",
-    "section": "Task #5: Outliers in statusquo score",
-    "text": "Task #5: Outliers in statusquo score\nAre there any outliers in the statusquo scores?\n\nchile_data |&gt; \n    ggplot(aes(y = statusquo)) + \n    geom_boxplot() +\n    labs(title = \"Distribution of Status Quo Scores\",\n         y = \"Status Quo Score\")"
+    "section": "Group exercise #1 (solo attempts also ok)",
+    "text": "Group exercise #1 (solo attempts also ok)\nVisualize the vote intention by sex. Make sure it is shown as proportion."
   },
   {
-    "objectID": "03-visualization.html#task-6-distribution-of-votes-across-regions",
-    "href": "03-visualization.html#task-6-distribution-of-votes-across-regions",
+    "objectID": "03-visualization.html#task-4",
+    "href": "03-visualization.html#task-4",
     "title": "Data Visualization and Descriptive Stats",
-    "section": "Task #6: Distribution of votes across regions",
-    "text": "Task #6: Distribution of votes across regions\nExplore the distribution of votes (vote) across different regions (region).\n\n# Prepare data\nvote_distribution &lt;- chile_data |&gt;\n    group_by(region, vote) |&gt;\n    summarise(count = n(), .groups = 'drop') |&gt;\n    mutate(percentage = count / sum(count) * 100)\n\n# Create stacked bar chart\nggplot(vote_distribution, aes(x = region, y = percentage, fill = vote)) +\n    geom_bar(stat = \"identity\") +\n    labs(title = \"Distribution of Votes Across Regions\",\n         x = \"Region\",\n         y = \"Percentage\",\n         fill = \"Vote\") +\n    theme(axis.text.x = element_text(angle = 45, hjust = 1))"
+    "section": "Task #4",
+    "text": "Task #4\nIs there any major divide in terms of support for the statusquo across age? Visualize the distribution of age and statusquo."
   },
   {
-    "objectID": "03-visualization.html#group-exercises-solo-attempts-ok",
-    "href": "03-visualization.html#group-exercises-solo-attempts-ok",
+    "objectID": "03-visualization.html#task-5",
+    "href": "03-visualization.html#task-5",
     "title": "Data Visualization and Descriptive Stats",
-    "section": "Group Exercises (solo attempts ok)",
-    "text": "Group Exercises (solo attempts ok)\n\nExplore the relationship between age and statusquo. Is there a trend or relationship there and does the trend differ between different education levels?\nVisualize the distribution of income across different sex with a violin plot.\n\nMake sure to give the graph proper title and labels on both axis!"
+    "section": "Task #5",
+    "text": "Task #5\nWhat does the voting intention look like across different education level? Visualize the distribution of vote intention on various education level.\nWe can achieve this in two ways!"
+  },
+  {
+    "objectID": "03-visualization.html#alternative-way",
+    "href": "03-visualization.html#alternative-way",
+    "title": "Data Visualization and Descriptive Stats",
+    "section": "Alternative way",
+    "text": "Alternative way"
+  },
+  {
+    "objectID": "03-visualization.html#facets-for-multiple-variables",
+    "href": "03-visualization.html#facets-for-multiple-variables",
+    "title": "Data Visualization and Descriptive Stats",
+    "section": "Facets for multiple variables",
+    "text": "Facets for multiple variables"
+  },
+  {
+    "objectID": "03-visualization.html#task-6",
+    "href": "03-visualization.html#task-6",
+    "title": "Data Visualization and Descriptive Stats",
+    "section": "Task #6",
+    "text": "Task #6\nDo people’s voting intention matches their level of support to the status quo? Compare the distribution of statusquo across different vote intentions.\nLet’s layer two kinds of visualization here:"
+  },
+  {
+    "objectID": "03-visualization.html#group-exercise-2-solo-attempts-ok",
+    "href": "03-visualization.html#group-exercise-2-solo-attempts-ok",
+    "title": "Data Visualization and Descriptive Stats",
+    "section": "Group Exercise #2 (solo attempts ok)",
+    "text": "Group Exercise #2 (solo attempts ok)\nUpdate the visualization from task #6 to the following:\n\nReplace the boxplot with violin plot (check out ggplot documentation)\nChange the fill color for both the violin plot and jitters to other color of your choice."
+  },
+  {
+    "objectID": "03-visualization.html#group-exercise-3-solo-attempts-ok",
+    "href": "03-visualization.html#group-exercise-3-solo-attempts-ok",
+    "title": "Data Visualization and Descriptive Stats",
+    "section": "Group Exercise #3 (solo attempts ok)",
+    "text": "Group Exercise #3 (solo attempts ok)\nVisualize the distribution of age_group for each vote intention. To show the difference between sex, show the visualization with sex facet."
+  },
+  {
+    "objectID": "03-visualization.html#is-fancier-better",
+    "href": "03-visualization.html#is-fancier-better",
+    "title": "Data Visualization and Descriptive Stats",
+    "section": "Is fancier = better?",
+    "text": "Is fancier = better?\nFancier, more complicated visualization does not necessarily mean better!\nTake a look at this award-winning visualization by Simon Scarr"
   },
   {
     "objectID": "03-visualization.html#strategy-for-data-visualization-with-ggplot",
@@ -550,70 +599,70 @@
     "href": "02-tidyverse.html#task-1",
     "title": "Data Wrangling with Tidyverse",
     "section": "Task #1",
-    "text": "Task #1\n\nA strategy I’d like to recommend: briefly read over the dplyr + tidyr documentation, either the PDF or HTML version, and have them open on a separate tab so that you can refer to it quickly.\n\nRemove all rows with empty values (NA)\nThe number of observations after all rows containing NAs are removed:\n\ndim(chile_data)\n\n[1] 2431    8"
+    "text": "Task #1\n\nA strategy I’d like to recommend: briefly read over the dplyr + tidyr documentation, either the PDF or HTML version, and have them open on a separate tab so that you can refer to it quickly.\n\nRemove all rows with empty values (NA)\n\nchile_data &lt;- chile_data |&gt; \n  drop_na()\n\nThe number of observations after all rows containing NAs are removed:\n\ndim(chile_data)\n\n[1] 2431    8"
   },
   {
     "objectID": "02-tidyverse.html#interlude-pipe-operator",
     "href": "02-tidyverse.html#interlude-pipe-operator",
     "title": "Data Wrangling with Tidyverse",
     "section": "Interlude: Pipe Operator ( |> )",
-    "text": "Interlude: Pipe Operator ( |&gt; )\n\nThe pipe operator (|&gt;) allows us to chain multiple operations without creating intermediate dataframes.\nSuper handy when we perform several data wrangling tasks using tidyverse in sequence.\nHelps with readability, especially for complex operations.\nKeyboard shortcut: Ctrl+Shift+M on Windows, Cmd+Shift+M on Mac\n\n\nWithout pipe operatorWith pipe operator\n\n\nage_df &lt;- filter(chile_data, age &gt;= 30)\nage_df_desc &lt;- arrange(age_df, desc(age))\nwrite_csv(age_df_desc, \"data-output/chile-30plus.csv\")\n\n\nchile_data |&gt; \n    filter(age &gt;= 30) |&gt; \n    arrange(desc(age)) |&gt; \n    write_csv(\"data-output/chile-30plus.csv\")"
+    "text": "Interlude: Pipe Operator ( |&gt; )\n\nThe pipe operator (|&gt;) allows us to chain multiple operations without creating intermediate dataframes.\nSuper handy when we perform several data wrangling tasks using tidyverse in sequence.\nHelps with readability, especially for complex operations.\nKeyboard shortcut: Ctrl+Shift+M on Windows, Cmd+Shift+M on Mac\n\n\nWithout pipe operatorWith pipe operator\n\n\nNotice that we have to create a “temp” dataframes called age_df and age_df_desc in this method.\nage_df &lt;- filter(chile_data, age &gt;= 30)\nage_df_desc &lt;- arrange(age_df, desc(age))\nwrite_csv(age_df_desc, \"data-output/chile-30plus.csv\")\n\n\nNo “temp” dataframe needed here! :D\nchile_data |&gt; \n    filter(age &gt;= 30) |&gt; \n    arrange(desc(age)) |&gt; \n    write_csv(\"data-output/chile-30plus.csv\")"
   },
   {
     "objectID": "02-tidyverse.html#task-2",
     "href": "02-tidyverse.html#task-2",
     "title": "Data Wrangling with Tidyverse",
     "section": "Task #2",
-    "text": "Task #2\nSeparate the demographic information (region, sex, age, education) into a separate CSV called chile-demographics.csv\nThe first few rows in the CSV:\n\n\n# A tibble: 2,431 × 4\n  region sex     age education\n  &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;    \n1 N      M        65 P        \n2 N      M        29 PS       \n3 N      F        38 P        \n# ℹ 2,428 more rows"
+    "text": "Task #2\nSeparate the demographic information (region, sex, age, education) into a separate CSV called chile-demographics.csv\n\n# not using the |&gt; operator here!\n\ndemographics_df &lt;- select(chile_data, region, sex, age, education)\nwrite_csv(demographics_df, \"data-output/chile-demographics.csv\")\n\nThe first few rows in the CSV:\n\n\n# A tibble: 2,431 × 4\n  region sex     age education\n  &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;    \n1 N      M        65 P        \n2 N      M        29 PS       \n3 N      F        38 P        \n# ℹ 2,428 more rows"
   },
   {
     "objectID": "02-tidyverse.html#task-3",
     "href": "02-tidyverse.html#task-3",
     "title": "Data Wrangling with Tidyverse",
     "section": "Task #3",
-    "text": "Task #3\nRetrieve only respondents aged 30 or older, arrange it from oldest to youngest, and save it into a separate CSV called chile-30plus.csv\nThe first few rows in the resulting CSV:\n\n\n# A tibble: 1,581 × 8\n  region population sex     age education income statusquo vote \n  &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;\n1 N          125000 F        70 P          15000     1.49  Y    \n2 N          250000 F        70 P          75000     1.40  Y    \n3 N          250000 M        70 P           7500    -0.366 N    \n# ℹ 1,578 more rows"
+    "text": "Task #3\nRetrieve only respondents aged 30 or older, arrange it from oldest to youngest, and save it into a separate CSV called chile-30plus.csv\n\nchile_data |&gt; \n    filter(age &gt;= 30) |&gt; \n    arrange(desc(age)) |&gt; \n    write_csv(\"chile-30plus.csv\")\n\nThe first few rows in the resulting CSV:\n\n\n# A tibble: 1,581 × 8\n  region population sex     age education income statusquo vote \n  &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;\n1 N          125000 F        70 P          15000     1.49  Y    \n2 N          250000 F        70 P          75000     1.40  Y    \n3 N          250000 M        70 P           7500    -0.366 N    \n# ℹ 1,578 more rows"
   },
   {
     "objectID": "02-tidyverse.html#group-exercise-1-solo-attempts-ok",
     "href": "02-tidyverse.html#group-exercise-1-solo-attempts-ok",
     "title": "Data Wrangling with Tidyverse",
     "section": "Group exercise 1 (solo attempts ok)",
-    "text": "Group exercise 1 (solo attempts ok)\nTime: 5 minutes!\nRetrieve only respondents from the Metropolitan Santiago area (M), with Secondary education (S), and who are undecided (U) about their vote. Keep only their region, education, vote, and income columns in a new dataframe called santiago_undecided in descending order of income.\nThe first few rows of santiago_undecided:\n\n\n# A tibble: 5 × 4\n  region education vote  income\n  &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;  &lt;dbl&gt;\n1 M      S         U      35000\n2 M      S         U      15000\n3 M      S         U      15000\n# ℹ 2 more rows"
+    "text": "Group exercise 1 (solo attempts ok)\nTime: 5 minutes!\nRetrieve only respondents from the Metropolitan Santiago area (M), with Secondary education (S), and who are undecided (U) about their vote. Keep only their region, education, vote, and income columns in a new dataframe called santiago_undecided in descending order of income.\n\n\nShow answer\nsantiago_undecided &lt;- chile_data |&gt; \n    filter(region == \"M\" & education == \"S\" & vote == \"U\") |&gt; \n    select(region, education, vote, income) |&gt; \n    arrange(desc(income)) \n\n\nThe first few rows of santiago_undecided:\n\n\n# A tibble: 5 × 4\n  region education vote  income\n  &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;  &lt;dbl&gt;\n1 M      S         U      35000\n2 M      S         U      15000\n3 M      S         U      15000\n# ℹ 2 more rows"
   },
   {
     "objectID": "02-tidyverse.html#task-4",
     "href": "02-tidyverse.html#task-4",
     "title": "Data Wrangling with Tidyverse",
     "section": "Task #4",
-    "text": "Task #4\nMake all character columns such as region, sex, education, and vote to be in uppercase.\nThe end result:\n\n\n# A tibble: 2,431 × 4\n  region sex   education vote \n  &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;\n1 N      M     P         Y    \n2 N      M     PS        N    \n3 N      F     P         Y    \n# ℹ 2,428 more rows"
+    "text": "Task #4\nMake all character columns such as region, sex, education, and vote to be in uppercase.\n\ncols_to_change &lt;- c(\"region\", \"sex\", \"education\", \"vote\")\nchile_data &lt;- chile_data |&gt; \n    mutate(across(cols_to_change, toupper))\n\nThe end result:\n\n\n# A tibble: 2,431 × 4\n  region sex   education vote \n  &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;\n1 N      M     P         Y    \n2 N      M     PS        N    \n3 N      F     P         Y    \n# ℹ 2,428 more rows"
   },
   {
     "objectID": "02-tidyverse.html#task-5",
     "href": "02-tidyverse.html#task-5",
     "title": "Data Wrangling with Tidyverse",
     "section": "Task #5",
-    "text": "Task #5\nConvert all the categorical columns such as region, sex, education, and vote to Factor. Make sure education is ordered.\nThe education column after the change:\n\n\ntibble [2,431 × 1] (S3: tbl_df/tbl/data.frame)\n $ education: Ord.factor w/ 3 levels \"P\"&lt;\"S\"&lt;\"PS\": 1 3 1 1 2 1 3 2 1 1 ..."
+    "text": "Task #5\nConvert all the categorical columns such as region, sex, education, and vote to Factor. Make sure education is ordered.\n\nchile_data &lt;- chile_data |&gt; \n    mutate(across(cols_to_change, as.factor))\n\n#reordering\nchile_data &lt;- chile_data |&gt; \n    mutate(education = factor(education, \n                         levels = c(\"P\", \"S\", \"PS\"), \n                         ordered = TRUE))\n\nThe structure of education column after the change:\n\n\ntibble [2,431 × 1] (S3: tbl_df/tbl/data.frame)\n $ education: Ord.factor w/ 3 levels \"P\"&lt;\"S\"&lt;\"PS\": 1 3 1 1 2 1 3 2 1 1 ..."
   },
   {
     "objectID": "02-tidyverse.html#task-6",
     "href": "02-tidyverse.html#task-6",
     "title": "Data Wrangling with Tidyverse",
     "section": "Task #6",
-    "text": "Task #6\nAdd a new column to chile_data called age_group that categorizes age into groups: “18-29”, “30-44”, “45-59”, “60+”.\nThe new age_group column should look something like this:\n\n\n# A tibble: 2,431 × 2\n    age age_group\n  &lt;dbl&gt; &lt;chr&gt;    \n1    65 60+      \n2    29 18-29    \n3    38 30-44    \n4    49 45-59    \n# ℹ 2,427 more rows"
+    "text": "Task #6\nAdd a new column to chile_data called age_group that categorizes age into groups: “18-29”, “30-44”, “45-59”, “60+”.\n\nchile_data &lt;- chile_data |&gt; \n    mutate(age_group = case_when(\n        age &lt; 30 ~ \"18-29\",\n        age &lt; 45 ~ \"30-44\",\n        age &lt; 60 ~ \"45-59\",\n        TRUE ~ \"60+\"\n    ))\n\nThe new age_group column should look something like this:\n\n\n# A tibble: 2,431 × 2\n    age age_group\n  &lt;dbl&gt; &lt;chr&gt;    \n1    65 60+      \n2    29 18-29    \n3    38 30-44    \n4    49 45-59    \n# ℹ 2,427 more rows"
   },
   {
     "objectID": "02-tidyverse.html#task-7",
     "href": "02-tidyverse.html#task-7",
     "title": "Data Wrangling with Tidyverse",
     "section": "Task #7",
-    "text": "Task #7\nCreate a new column called high_income that is TRUE if income is above the median, FALSE otherwise.\nhint: you need to calculate the median income first.\nThe original income column and the new high_income column:\n\n\n# A tibble: 3 × 2\n  income high_income\n   &lt;dbl&gt; &lt;lgl&gt;      \n1  15000 FALSE      \n2  15000 FALSE      \n3  15000 FALSE"
+    "text": "Task #7\nCreate a new column called high_income that is TRUE if income is above the median, FALSE otherwise.\nhint: you need to calculate the median income first.\n\nmedian_income &lt;- median(chile_data$income, na.rm = TRUE)\nchile_data &lt;- chile_data |&gt; \n    mutate(high_income = income &gt; median_income)\n\nThe original income column and the new high_income column:\n\n\n# A tibble: 3 × 2\n  income high_income\n   &lt;dbl&gt; &lt;lgl&gt;      \n1  15000 FALSE      \n2  15000 FALSE      \n3  15000 FALSE"
   },
   {
     "objectID": "02-tidyverse.html#task-8---can-you-solve-this",
     "href": "02-tidyverse.html#task-8---can-you-solve-this",
     "title": "Data Wrangling with Tidyverse",
     "section": "Task #8 - Can you solve this?",
-    "text": "Task #8 - Can you solve this?\nCreate a new column called support_level that categorizes statusquo into “Unsupportive” (&lt;= 0) and “Supportive” (&gt; 0).\nSave all of these changes you made from step 3 onwards into a new CSV called chile_voting_processed.csv\nThe new support_level column:\n\n\n# A tibble: 2,431 × 2\n  statusquo support_level\n      &lt;dbl&gt; &lt;chr&gt;        \n1      1.01 Supportive   \n2     -1.30 Unsupportive \n3      1.23 Supportive   \n# ℹ 2,428 more rows"
+    "text": "Task #8 - Can you solve this?\nCreate a new column called support_level that categorizes statusquo into “Unsupportive” (&lt;= 0) and “Supportive” (&gt; 0).\nSave all of these changes you made from step 3 onwards into a new CSV called chile_voting_processed.csv\n\n\nShow answer\nchile_data &lt;- chile_data |&gt; \n    mutate(support_level = case_when(\n        statusquo &lt;= 0 ~ \"Unsupportive\",\n        statusquo &gt; 0 ~ \"Supportive\",\n        TRUE ~ NA_character_\n    ))\n\nwrite_csv(chile_data, \"data-output/chile_voting_processed.csv\")\n\n\nThe new support_level column:\n\n\n# A tibble: 2,431 × 2\n  statusquo support_level\n      &lt;dbl&gt; &lt;chr&gt;        \n1      1.01 Supportive   \n2     -1.30 Unsupportive \n3      1.23 Supportive   \n# ℹ 2,428 more rows"
   },
   {
     "objectID": "02-tidyverse.html#task-9",
@@ -627,7 +676,21 @@
     "href": "02-tidyverse.html#task-10",
     "title": "Data Wrangling with Tidyverse",
     "section": "Task #10",
-    "text": "Task #10\nReshape the data to have region as rows and vote options as columns, with the values being the count of votes for each option in each region.\n\n\n# A tibble: 5 × 5\n  region     A     N     U     Y\n  &lt;fct&gt;  &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;\n1 C         44   209   130   165\n2 M          2    17    19    37\n3 N         29    98    46   132\n4 S         39   209   140   267\n5 SA        63   334   216   235"
+    "text": "Task #10\nReshape the data to have region as rows and vote options as columns, with the values being the count of votes for each option in each region.\nTo achieve this clean table look, we can use gt package or knitr package!\n\n\n\n\n\nregion\nA\nN\nU\nY\n\n\n\n\nC\n44\n209\n130\n165\n\n\nM\n2\n17\n19\n37\n\n\nN\n29\n98\n46\n132\n\n\nS\n39\n209\n140\n267\n\n\nSA\n63\n334\n216\n235"
+  },
+  {
+    "objectID": "02-tidyverse.html#long-vs-wide-data",
+    "href": "02-tidyverse.html#long-vs-wide-data",
+    "title": "Data Wrangling with Tidyverse",
+    "section": "Long vs Wide Data",
+    "text": "Long vs Wide Data\n\n\nWide Data:\n\nEach row is a unique observation.\nEach column is a variable –&gt; the more variables you have, the “wider” is the data\nThis format is more intuitive for humans!\n\n\nLong data:\n\nEach row is a unique observation.\nThere is a separate column indicating the variable or type of measurements\nThis format is more “understandable” by R, more suitable for visualizations."
+  },
+  {
+    "objectID": "02-tidyverse.html#long-vs-wide-data-examples",
+    "href": "02-tidyverse.html#long-vs-wide-data-examples",
+    "title": "Data Wrangling with Tidyverse",
+    "section": "Long vs Wide Data: Examples",
+    "text": "Long vs Wide Data: Examples\n\n\nLong data:\n\n\n# A tibble: 20 × 3\n   region vote  count\n   &lt;fct&gt;  &lt;fct&gt; &lt;int&gt;\n 1 C      A        44\n 2 C      N       209\n 3 C      U       130\n 4 C      Y       165\n 5 M      A         2\n 6 M      N        17\n 7 M      U        19\n 8 M      Y        37\n 9 N      A        29\n10 N      N        98\n11 N      U        46\n12 N      Y       132\n13 S      A        39\n14 S      N       209\n15 S      U       140\n16 S      Y       267\n17 SA     A        63\n18 SA     N       334\n19 SA     U       216\n20 SA     Y       235\n\n\n\nWide data:\n\n\n# A tibble: 5 × 5\n  region     A     N     U     Y\n  &lt;fct&gt;  &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;\n1 C         44   209   130   165\n2 M          2    17    19    37\n3 N         29    98    46   132\n4 S         39   209   140   267\n5 SA        63   334   216   235"
   },
   {
     "objectID": "02-tidyverse.html#group-exercise-3-solo-attempts-ok",
@@ -879,6 +942,6 @@
     "href": "index.html#dataset",
     "title": "Introductory R for Social Sciences",
     "section": "Dataset",
-    "text": "Dataset\nFor this workshop, we will be using dataset stored in a CSV file called chile_voting.csv.\nClick here to open the CSV file, and then Ctrl + S / Cmd + S to save it locally\n\n\n\n\n\n\nWhat is a CSV?\n\n\n\nA CSV (Comma-Separated Values) file is a type of file that stores data in a plain text format. Each line in the file represents a row of data, and within each row, individual pieces of data (like numbers or words) are separated by commas.\nThis format is commonly used for storing and transferring data, especially in spreadsheets and databases. Because it is literally just plain text, it is an ideal format if you have large amount of data.\nYou can open CSV files in Excel, Google Sheets, or even Notepad!\n\n\nThe data is from a national survey conducted in April and May of 1988 by FLACSO/Chile, capturing voting intentions for the 1988 Chilean plebiscite. The dataset contains information about respondents’ demographic characteristics and their voting intentions. This data can also be found from carData package, but for the purpose of this workshop, we will load the data from a CSV.\nKey variables in the dataset:\n\n\nExplanatory notes on each column\n\n\n\n\n\n\nVariable\nDescription\n\n\n\n\nregion\nRegion of voters: C (Central), M (Metropolitan Santiago area), N (North), S (South), SA (city of Santiago)\n\n\npopulation\nPopulation size of respondent’s community\n\n\nsex\nSex of voters: F (female), M (male)\n\n\nage\nAge in years\n\n\neducation\nEducation level of voters: P (Primary), PS (Post-secondary), S (Secondary)\n\n\nincome\nMonthly income, in Pesos\n\n\nstatusquo\nScale of support for the status-quo in numerical value\n\n\nvote\nVoter’s decision: A (will abstain), N (will vote no), U (undecided), Y (will vote yes)"
+    "text": "Dataset\n\nchile_voting\nFor this workshop, we will be using dataset stored in a CSV file called chile_voting.csv.\nClick here to open chile_voting.csv, and then Ctrl + S / Cmd + S to save it locally into your data folder\n\n\n\n\n\n\nWhat is a CSV?\n\n\n\nA CSV (Comma-Separated Values) file is a type of file that stores data in a plain text format. Each line in the file represents a row of data, and within each row, individual pieces of data (like numbers or words) are separated by commas.\nThis format is commonly used for storing and transferring data, especially in spreadsheets and databases. Because it is literally just plain text, it is an ideal format if you have large amount of data.\nYou can open CSV files in Excel, Google Sheets, or even Notepad!\n\n\n\nData dictionary for chile_voting\nThe data is from a national survey conducted in April and May of 1988 by FLACSO/Chile, capturing voting intentions for the 1988 Chilean plebiscite. The dataset contains information about respondents’ demographic characteristics and their voting intentions. This data can also be found from carData package, but for the purpose of this workshop, we will load the data from a CSV.\nKey variables in the dataset:\n\n\nExplanatory notes on each column\n\n\n\n\n\n\nVariable\nDescription\n\n\n\n\nregion\nRegion of voters: C (Central), M (Metropolitan Santiago area), N (North), S (South), SA (city of Santiago)\n\n\npopulation\nPopulation size of respondent’s community\n\n\nsex\nSex of voters: F (female), M (male)\n\n\nage\nAge in years\n\n\neducation\nEducation level of voters: P (Primary), PS (Post-secondary), S (Secondary)\n\n\nincome\nMonthly income, in Pesos\n\n\nstatusquo\nScale of support for the status-quo in numerical value\n\n\nvote\nVoter’s decision: A (will abstain), N (will vote no), U (undecided), Y (will vote yes)\n\n\n\n\n\n\nchile_voting_processed\nFor session 3 onwards, we will use chile_voting_processed.csv. This is the version that has been processed and cleaned. You can download this file below if you missed session 1 and 2. Save this inside the data-output folder of your project.\nClick here to open chile_voting_processed.CSV, and then Ctrl + S / Cmd + S to save it locally into your data-output folder"
   }
 ]

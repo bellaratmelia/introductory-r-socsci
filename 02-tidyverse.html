@@ -557,9 +557,13 @@ Bella Ratmelia
 <p><strong>A strategy I’d like to recommend:</strong> briefly read over the <code>dplyr</code> + <code>tidyr</code> documentation, either the PDF or HTML version, and have them open on a separate tab so that you can refer to it quickly.</p>
 </blockquote>
 <p>Remove all rows with empty values (NA)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>chile_data <span class="ot">&lt;-</span> chile_data <span class="sc">|&gt;</span> </span>
+<span id="cb2-2"><a></a>  <span class="fu">drop_na</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>The number of observations after all rows containing NAs are removed:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">dim</span>(chile_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">dim</span>(chile_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2431    8</code></pre>
 </div>
@@ -577,15 +581,17 @@ Bella Ratmelia
 <ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Without pipe operator</a></li><li><a href="#tabset-1-2">With pipe operator</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1">
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>age_df <span class="ot">&lt;-</span> <span class="fu">filter</span>(chile_data, age <span class="sc">&gt;=</span> <span class="dv">30</span>)</span>
-<span id="cb4-2"><a></a>age_df_desc <span class="ot">&lt;-</span> <span class="fu">arrange</span>(age_df, <span class="fu">desc</span>(age))</span>
-<span id="cb4-3"><a></a><span class="fu">write_csv</span>(age_df_desc, <span class="st">"data-output/chile-30plus.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Notice that we have to create a “temp” dataframes called <code>age_df</code> and <code>age_df_desc</code> in this method.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>age_df <span class="ot">&lt;-</span> <span class="fu">filter</span>(chile_data, age <span class="sc">&gt;=</span> <span class="dv">30</span>)</span>
+<span id="cb5-2"><a></a>age_df_desc <span class="ot">&lt;-</span> <span class="fu">arrange</span>(age_df, <span class="fu">desc</span>(age))</span>
+<span id="cb5-3"><a></a><span class="fu">write_csv</span>(age_df_desc, <span class="st">"data-output/chile-30plus.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="tabset-1-2">
-<div class="sourceCode" id="cb5" data-code-overflow="overflow"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>chile_data <span class="sc">|&gt;</span> </span>
-<span id="cb5-2"><a></a>    <span class="fu">filter</span>(age <span class="sc">&gt;=</span> <span class="dv">30</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb5-3"><a></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(age)) <span class="sc">|&gt;</span> </span>
-<span id="cb5-4"><a></a>    <span class="fu">write_csv</span>(<span class="st">"data-output/chile-30plus.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>No “temp” dataframe needed here! :D</p>
+<div class="sourceCode" id="cb6" data-code-overflow="overflow"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>chile_data <span class="sc">|&gt;</span> </span>
+<span id="cb6-2"><a></a>    <span class="fu">filter</span>(age <span class="sc">&gt;=</span> <span class="dv">30</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb6-3"><a></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(age)) <span class="sc">|&gt;</span> </span>
+<span id="cb6-4"><a></a>    <span class="fu">write_csv</span>(<span class="st">"data-output/chile-30plus.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -593,6 +599,12 @@ Bella Ratmelia
 <section id="task-2" class="slide level2">
 <h2>Task #2</h2>
 <p>Separate the demographic information (region, sex, age, education) into a separate CSV called <code>chile-demographics.csv</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="co"># not using the |&gt; operator here!</span></span>
+<span id="cb7-2"><a></a></span>
+<span id="cb7-3"><a></a>demographics_df <span class="ot">&lt;-</span> <span class="fu">select</span>(chile_data, region, sex, age, education)</span>
+<span id="cb7-4"><a></a><span class="fu">write_csv</span>(demographics_df, <span class="st">"data-output/chile-demographics.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>The first few rows in the CSV:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -609,6 +621,12 @@ Bella Ratmelia
 <section id="task-3" class="slide level2">
 <h2>Task #3</h2>
 <p>Retrieve only respondents aged 30 or older, arrange it from oldest to youngest, and save it into a separate CSV called <code>chile-30plus.csv</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>chile_data <span class="sc">|&gt;</span> </span>
+<span id="cb9-2"><a></a>    <span class="fu">filter</span>(age <span class="sc">&gt;=</span> <span class="dv">30</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb9-3"><a></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(age)) <span class="sc">|&gt;</span> </span>
+<span id="cb9-4"><a></a>    <span class="fu">write_csv</span>(<span class="st">"chile-30plus.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>The first few rows in the resulting CSV:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -626,6 +644,15 @@ Bella Ratmelia
 <h2>Group exercise 1 (solo attempts ok)</h2>
 <p><u><strong>Time: 5 minutes!</strong></u></p>
 <p>Retrieve only respondents from the Metropolitan Santiago area (<code>M</code>), with Secondary education (<code>S</code>), and who are undecided (<code>U</code>) about their vote. Keep only their <code>region</code>, <code>education</code>, <code>vote</code>, and <code>income</code> columns in a new dataframe called <code>santiago_undecided</code> in <strong>descending</strong> order of <code>income</code>.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show answer</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>santiago_undecided <span class="ot">&lt;-</span> chile_data <span class="sc">|&gt;</span> </span>
+<span id="cb11-2"><a></a>    <span class="fu">filter</span>(region <span class="sc">==</span> <span class="st">"M"</span> <span class="sc">&amp;</span> education <span class="sc">==</span> <span class="st">"S"</span> <span class="sc">&amp;</span> vote <span class="sc">==</span> <span class="st">"U"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb11-3"><a></a>    <span class="fu">select</span>(region, education, vote, income) <span class="sc">|&gt;</span> </span>
+<span id="cb11-4"><a></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(income)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 <p>The first few rows of <code>santiago_undecided</code>:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -642,6 +669,11 @@ Bella Ratmelia
 <section id="task-4" class="slide level2">
 <h2>Task #4</h2>
 <p>Make all character columns such as <code>region</code>, <code>sex</code>, <code>education</code>, and <code>vote</code> to be in uppercase.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>cols_to_change <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"region"</span>, <span class="st">"sex"</span>, <span class="st">"education"</span>, <span class="st">"vote"</span>)</span>
+<span id="cb13-2"><a></a>chile_data <span class="ot">&lt;-</span> chile_data <span class="sc">|&gt;</span> </span>
+<span id="cb13-3"><a></a>    <span class="fu">mutate</span>(<span class="fu">across</span>(cols_to_change, toupper))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>The end result:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -658,7 +690,17 @@ Bella Ratmelia
 <section id="task-5" class="slide level2">
 <h2>Task #5</h2>
 <p>Convert all the categorical columns such as <code>region</code>, <code>sex</code>, <code>education</code>, and <code>vote</code> to Factor. Make sure <code>education</code> is ordered.</p>
-<p>The education column after the change:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>chile_data <span class="ot">&lt;-</span> chile_data <span class="sc">|&gt;</span> </span>
+<span id="cb15-2"><a></a>    <span class="fu">mutate</span>(<span class="fu">across</span>(cols_to_change, as.factor))</span>
+<span id="cb15-3"><a></a></span>
+<span id="cb15-4"><a></a><span class="co">#reordering</span></span>
+<span id="cb15-5"><a></a>chile_data <span class="ot">&lt;-</span> chile_data <span class="sc">|&gt;</span> </span>
+<span id="cb15-6"><a></a>    <span class="fu">mutate</span>(<span class="at">education =</span> <span class="fu">factor</span>(education, </span>
+<span id="cb15-7"><a></a>                         <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"P"</span>, <span class="st">"S"</span>, <span class="st">"PS"</span>), </span>
+<span id="cb15-8"><a></a>                         <span class="at">ordered =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The structure of education column after the change:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>tibble [2,431 × 1] (S3: tbl_df/tbl/data.frame)
@@ -669,6 +711,15 @@ Bella Ratmelia
 <section id="task-6" class="slide level2">
 <h2>Task #6</h2>
 <p>Add a new column to <code>chile_data</code> called <code>age_group</code> that categorizes age into groups: “18-29”, “30-44”, “45-59”, “60+”.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a>chile_data <span class="ot">&lt;-</span> chile_data <span class="sc">|&gt;</span> </span>
+<span id="cb17-2"><a></a>    <span class="fu">mutate</span>(<span class="at">age_group =</span> <span class="fu">case_when</span>(</span>
+<span id="cb17-3"><a></a>        age <span class="sc">&lt;</span> <span class="dv">30</span> <span class="sc">~</span> <span class="st">"18-29"</span>,</span>
+<span id="cb17-4"><a></a>        age <span class="sc">&lt;</span> <span class="dv">45</span> <span class="sc">~</span> <span class="st">"30-44"</span>,</span>
+<span id="cb17-5"><a></a>        age <span class="sc">&lt;</span> <span class="dv">60</span> <span class="sc">~</span> <span class="st">"45-59"</span>,</span>
+<span id="cb17-6"><a></a>        <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"60+"</span></span>
+<span id="cb17-7"><a></a>    ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>The new age_group column should look something like this:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -687,6 +738,11 @@ Bella Ratmelia
 <h2>Task #7</h2>
 <p>Create a new column called <code>high_income</code> that is TRUE if income is above the median, FALSE otherwise.</p>
 <p>hint: you need to calculate the median income first.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a>median_income <span class="ot">&lt;-</span> <span class="fu">median</span>(chile_data<span class="sc">$</span>income, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb19-2"><a></a>chile_data <span class="ot">&lt;-</span> chile_data <span class="sc">|&gt;</span> </span>
+<span id="cb19-3"><a></a>    <span class="fu">mutate</span>(<span class="at">high_income =</span> income <span class="sc">&gt;</span> median_income)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>The original income column and the new high_income column:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -703,6 +759,19 @@ Bella Ratmelia
 <h2>Task #8 - Can you solve this?</h2>
 <p>Create a new column called <code>support_level</code> that categorizes <code>statusquo</code> into “Unsupportive” (&lt;= 0) and “Supportive” (&gt; 0).</p>
 <p>Save all of these changes you made from step 3 onwards into a new CSV called <code>chile_voting_processed.csv</code></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show answer</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a>chile_data <span class="ot">&lt;-</span> chile_data <span class="sc">|&gt;</span> </span>
+<span id="cb21-2"><a></a>    <span class="fu">mutate</span>(<span class="at">support_level =</span> <span class="fu">case_when</span>(</span>
+<span id="cb21-3"><a></a>        statusquo <span class="sc">&lt;=</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"Unsupportive"</span>,</span>
+<span id="cb21-4"><a></a>        statusquo <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"Supportive"</span>,</span>
+<span id="cb21-5"><a></a>        <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA_character_</span></span>
+<span id="cb21-6"><a></a>    ))</span>
+<span id="cb21-7"><a></a></span>
+<span id="cb21-8"><a></a><span class="fu">write_csv</span>(chile_data, <span class="st">"data-output/chile_voting_processed.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 <p>The new support_level column:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -746,6 +815,113 @@ Bella Ratmelia
 <section id="task-10" class="slide level2">
 <h2>Task #10</h2>
 <p>Reshape the data to have <code>region</code> as rows and <code>vote</code> options as columns, with the values being the count of votes for each option in each region.</p>
+<p>To achieve this clean table look, we can use <code>gt</code> package or <code>knitr</code> package!</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">region</th>
+<th style="text-align: right;">A</th>
+<th style="text-align: right;">N</th>
+<th style="text-align: right;">U</th>
+<th style="text-align: right;">Y</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">C</td>
+<td style="text-align: right;">44</td>
+<td style="text-align: right;">209</td>
+<td style="text-align: right;">130</td>
+<td style="text-align: right;">165</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">M</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">37</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">N</td>
+<td style="text-align: right;">29</td>
+<td style="text-align: right;">98</td>
+<td style="text-align: right;">46</td>
+<td style="text-align: right;">132</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">S</td>
+<td style="text-align: right;">39</td>
+<td style="text-align: right;">209</td>
+<td style="text-align: right;">140</td>
+<td style="text-align: right;">267</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SA</td>
+<td style="text-align: right;">63</td>
+<td style="text-align: right;">334</td>
+<td style="text-align: right;">216</td>
+<td style="text-align: right;">235</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="long-vs-wide-data" class="slide level2">
+<h2>Long vs Wide Data</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Wide Data:</strong></p>
+<ul>
+<li><p>Each row is a unique observation.</p></li>
+<li><p>Each column is a variable –&gt; the more variables you have, the “wider” is the data</p></li>
+<li><p>This format is more intuitive for humans!</p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><strong>Long data:</strong></p>
+<ul>
+<li><p>Each row is a unique observation.</p></li>
+<li><p>There is a separate column indicating the variable or type of measurements</p></li>
+<li><p>This format is more “understandable” by R, more suitable for visualizations.</p></li>
+</ul>
+</div></div>
+</section>
+<section id="long-vs-wide-data-examples" class="slide level2">
+<h2>Long vs Wide Data: Examples</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Long data:</strong></p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 20 × 3
+   region vote  count
+   &lt;fct&gt;  &lt;fct&gt; &lt;int&gt;
+ 1 C      A        44
+ 2 C      N       209
+ 3 C      U       130
+ 4 C      Y       165
+ 5 M      A         2
+ 6 M      N        17
+ 7 M      U        19
+ 8 M      Y        37
+ 9 N      A        29
+10 N      N        98
+11 N      U        46
+12 N      Y       132
+13 S      A        39
+14 S      N       209
+15 S      U       140
+16 S      Y       267
+17 SA     A        63
+18 SA     N       334
+19 SA     U       216
+20 SA     Y       235</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p><strong>Wide data:</strong></p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 5
@@ -758,6 +934,7 @@ Bella Ratmelia
 5 SA        63   334   216   235</code></pre>
 </div>
 </div>
+</div></div>
 </section>
 <section id="group-exercise-3-solo-attempts-ok" class="slide level2">
 <h2>Group exercise 3 (solo attempts ok)</h2>
@@ -798,8 +975,8 @@ Bella Ratmelia
 </div>
 <p>Remove the wrong column with subset <code>-</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>chile_data <span class="ot">&lt;-</span> chile_data <span class="sc">|&gt;</span> </span>
-<span id="cb18-2"><a></a>    <span class="fu">select</span>(<span class="sc">-</span>wrong_column)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a>chile_data <span class="ot">&lt;-</span> chile_data <span class="sc">|&gt;</span> </span>
+<span id="cb28-2"><a></a>    <span class="fu">select</span>(<span class="sc">-</span>wrong_column)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -1199,7 +1376,7 @@ Bella Ratmelia
       }
         var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
         var mailtoRegex = new RegExp(/^mailto:/);
-          var filterRegex = new RegExp("https:\/\/bellaratmelia\.github\.io\/introductory-r-socsci\/");
+          var filterRegex = new RegExp('/' + window.location.host + '/');
         var isInternal = (href) => {
             return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
         }
