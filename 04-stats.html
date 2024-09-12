@@ -419,16 +419,18 @@ Bella Ratmelia
 <h2>Refresher: Research Variables</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p><u><strong>Independent Variable (IV)</strong></u></p>
-<p>The variables that researchers will manipulate.</p>
-<ul>
-<li>Other names for it: Predictor, Covariate, Treatment, Regressor, Input, etc.</li>
-</ul>
-</div><div class="column" style="width:50%;">
 <p><u><strong>Dependent Variable (DV)</strong></u></p>
 <p>The variables that will be affected as a result of manipulation/changes in the IVs</p>
 <ul>
 <li>Other names for it: Outcome, Response, Output, etc.</li>
+<li>Often denoted as <span class="math inline">\(y\)</span></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><u><strong>Independent Variable (IV)</strong></u></p>
+<p>The variables that researchers will manipulate.</p>
+<ul>
+<li>Other names for it: Predictor, Covariate, Treatment, Regressor, Input, etc.</li>
+<li>Often denoted as <span class="math inline">\(x\)</span></li>
 </ul>
 </div></div>
 </section>
@@ -440,10 +442,19 @@ Bella Ratmelia
 <span id="cb1-2"><a></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-3"><a></a></span>
 <span id="cb1-4"><a></a><span class="co"># read the CSV with Chile voting data</span></span>
-<span id="cb1-5"><a></a>chile_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/chile_voting.csv"</span>)</span>
+<span id="cb1-5"><a></a>chile_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data-output/chile_voting_processed.csv"</span>)</span>
 <span id="cb1-6"><a></a></span>
-<span id="cb1-7"><a></a><span class="co"># peek at the data, pay attention to the data types!</span></span>
-<span id="cb1-8"><a></a><span class="fu">glimpse</span>(chile_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-7"><a></a>chile_data <span class="ot">&lt;-</span> chile_data <span class="sc">|&gt;</span> </span>
+<span id="cb1-8"><a></a>    <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(<span class="st">"region"</span>, <span class="st">"sex"</span>, <span class="st">"education"</span>, <span class="st">"vote"</span>, <span class="st">"age_group"</span>, <span class="st">"support_level"</span>), as.factor))</span>
+<span id="cb1-9"><a></a></span>
+<span id="cb1-10"><a></a><span class="co">#reordering</span></span>
+<span id="cb1-11"><a></a>chile_data <span class="ot">&lt;-</span> chile_data <span class="sc">|&gt;</span> </span>
+<span id="cb1-12"><a></a>    <span class="fu">mutate</span>(<span class="at">education =</span> <span class="fu">factor</span>(education, </span>
+<span id="cb1-13"><a></a>                         <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"P"</span>, <span class="st">"S"</span>, <span class="st">"PS"</span>), </span>
+<span id="cb1-14"><a></a>                         <span class="at">ordered =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb1-15"><a></a></span>
+<span id="cb1-16"><a></a><span class="co"># peek at the data, pay attention to the data types!</span></span>
+<span id="cb1-17"><a></a><span class="fu">glimpse</span>(chile_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="chi-square-test-of-independence" class="slide level2">
@@ -451,18 +462,28 @@ Bella Ratmelia
 <p>The <span class="math inline">\(X^2\)</span> test of independence evaluates whether there is a statistically significant relationship between two categorical variables.</p>
 <p>This is done by analyzing the frequency table (i.e.,&nbsp;contingency table) formed by two categorical variables.</p>
 <p><strong>Example</strong>: Is there any relationship between <code>education</code> and <code>vote</code> in our Chile voting data?</p>
+<p>Typically, we can start with visualizing the data first!</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>    
+       A   N   U   Y
+  P   49 262 282 409
+  S   98 385 223 304
+  PS  30 220  46 123</code></pre>
+</div>
+</div>
 </section>
 <section id="chi-square-sample-problem-and-results" class="slide level2">
 <h2>Chi-Square: Sample problem and results</h2>
 <p>Is there any relationship between <code>education</code> and <code>vote</code> in our Chile voting data?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">print</span>(<span class="fu">chisq.test</span>(<span class="fu">table</span>(chile_data<span class="sc">$</span>education, chile_data<span class="sc">$</span>vote)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">chisq.test</span>(<span class="fu">table</span>(chile_data<span class="sc">$</span>education, chile_data<span class="sc">$</span>vote))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's Chi-squared test
 
 data:  table(chile_data$education, chile_data$vote)
-X-squared = 135.85, df = 6, p-value &lt; 2.2e-16</code></pre>
+X-squared = 135.69, df = 6, p-value &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <div style="font-size: 75%; width: 75%">
@@ -478,57 +499,63 @@ X-squared = 135.85, df = 6, p-value &lt; 2.2e-16</code></pre>
 <h2>Correlation</h2>
 <p>A correlation test evaluates the strength and direction of a linear relationship between two variables. The coefficient is expressed in value between -1 to 1, with 0 being no correlation at all.</p>
 <div class="columns">
-<div class="column" style="width:40%;">
+<div class="column" style="width:33%;">
 <p><strong>Pearson’s</strong> <span class="math inline">\(r\)</span> (r)</p>
 <ul>
-<li>Assumes and measures linear relationships</li>
+<li>Measure the association between two continuous numerical variables</li>
 <li>Sensitive to outliers</li>
-<li>Assumes normality</li>
+<li>Assumes normality and/or linearity</li>
 <li>(<em>most likely the one that you learned in class)</em></li>
 </ul>
-</div><div class="column" style="width:30%;">
+</div><div class="column" style="width:33%;">
 <p><strong>Kendall’s</strong> <span class="math inline">\(\tau\)</span> (tau)</p>
 <ul>
-<li>Measures monotonic relationship</li>
+<li>Measure the association between two variables (ordinal-ordinal or ordinal-continuous)</li>
 <li>less sensitive/more robust to outliers</li>
-<li>non-parametric, do not assume normality</li>
+<li>non-parametric, does not assume normality and/or linearity</li>
 </ul>
-</div><div class="column" style="width:30%;">
+</div><div class="column" style="width:33%;">
 <p><strong>Spearman’s</strong> <span class="math inline">\(\rho\)</span> (rho)</p>
 <ul>
-<li>Measures monotonic relationship</li>
+<li>Measure the association between two variables (ordinal-ordinal or ordinal-continuous)</li>
 <li>less sensitive/more robust to outliers</li>
-<li>non-parametric, do not assume normality</li>
+<li>non-parametric, does not assume normality and/or linearity</li>
 </ul>
 </div></div>
+<p>For more info, you can refer to this reading: <a href="https://journals.sagepub.com/doi/pdf/10.1177/8756479308317006" target="_blank">Measures of Association - How to Choose? (Harry Khamis, PhD)</a></p>
 </section>
-<section id="what-is-monotonic-relationship" class="slide level2">
-<h2>What is monotonic relationship?</h2>
-<p>When a size of one variable increases, the other variables also increase, though at different rate.</p>
-
-<img data-src="04-stats_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"></section>
 <section id="correlation-sample-problem-and-result" class="slide level2">
 <h2>Correlation: Sample problem and result</h2>
-<p>Is there a significant correlation between a respondent’s age and income?</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">cor.test</span>(chile_data<span class="sc">$</span>age, chile_data<span class="sc">$</span>income, <span class="at">method =</span> <span class="st">"pearson"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>RQ: <strong>Is there a significant correlation between a respondent’s age and statusquo?</strong></p>
+<p>As both variables are numerical and continuous, we can use pearson correlation.</p>
+<p>Let’s start with visualizing the data, which can be used to support the explanation.</p>
+
+<img data-src="04-stats_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"></section>
+<section id="conduct-the-correlation-test" class="slide level2">
+<h2>Conduct the correlation test</h2>
+<div class="cell columns column-output-location">
+<div class="column">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">cor.test</span>(chile_data<span class="sc">$</span>age, chile_data<span class="sc">$</span>statusquo, </span>
+<span id="cb5-2"><a></a>         <span class="at">method =</span> <span class="st">"pearson"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's product-moment correlation
 
-data:  chile_data$age and chile_data$income
-t = -1.6507, df = 2599, p-value = 0.09891
+data:  chile_data$age and chile_data$statusquo
+t = 5.5546, df = 2429, p-value = 3.086e-08
 alternative hypothesis: true correlation is not equal to 0
 95 percent confidence interval:
- -0.070708808  0.006078618
+ 0.07256203 0.15107687
 sample estimates:
-        cor 
--0.03236285 </code></pre>
+      cor 
+0.1119942 </code></pre>
 </div>
-</div>
+</div></div>
 <div style="font-size: 75%; width: 75%">
 <ul>
-<li><strong>t</strong> is the <strong>t-test statistic</strong> (for hypothesis testing)</li>
+<li><strong>cor</strong> is the <strong>correlation coefficient</strong> - this is the number that you want to report.</li>
+<li><strong>t</strong> is the <strong>t-test statistic</strong></li>
 <li><strong>df</strong> is the degrees of freedom</li>
 <li><strong>p-value</strong> is the significance level of the <strong>t-test</strong></li>
 <li><strong>conf.int</strong> is the <strong>confidence interval</strong> of the coefficient at 95%</li>
@@ -539,12 +566,13 @@ sample estimates:
 <section id="lets-try-this-correlation-exercise-5-mins" class="slide level2">
 <h2>Let’s try this correlation exercise! (5 mins)</h2>
 <ul>
-<li><p>Calculate the correlation coefficient between age and statusquo.</p>
+<li><p>Calculate the correlation coefficient between age and income</p>
 <ul>
-<li><p>What is the null and alternative hypothesis?</p></li>
+<li><p>Which method should you use for this?</p></li>
 <li><p>How strong is the correlation? i.e.&nbsp;would you say it’s a strong correlation?</p></li>
 <li><p>In which direction is the correlation?</p></li>
 <li><p>Is the correlation coefficient statistically significant?</p></li>
+<li><p>Visualize the relationship!</p></li>
 </ul></li>
 </ul>
 </section>
@@ -571,35 +599,202 @@ sample estimates:
 <p>Examples: Before workshop vs After workshop.</p>
 </div></div>
 </section>
-<section id="t-test-sample-problem-and-result" class="slide level2">
-<h2>T-test: Sample problem and result</h2>
-<p>Is the average age of voters who intend to vote “Yes” significantly different from the overall mean age of voters in Chile? Assume the</p>
+<section id="t-test-one-sample-t-test" class="slide level2">
+<h2>T-test: One-sample T-Test</h2>
+<p>RQ: <strong>Is the average age of participants who intend to vote “Yes” significantly greater than the overall mean age of voting population in Chile? Assume the population mean is 35.</strong></p>
+<p>Let’s start with visualizing the data</p>
+<div class="cell columns column-output-location">
+<div class="column">
+<div class="sourceCode cell-code" id="annotated-cell-4"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy"><code class="sourceCode r"><span id="annotated-cell-4-1"><a href="#annotated-cell-4-1"></a>yes_voters_age <span class="ot">&lt;-</span> chile_data <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-4-2"><a href="#annotated-cell-4-2"></a>    <span class="fu">filter</span>(vote <span class="sc">==</span> <span class="st">"Y"</span>) <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-4-3"><a href="#annotated-cell-4-3"></a>    <span class="fu">select</span>(age)   </span>
+<span id="annotated-cell-4-4"><a href="#annotated-cell-4-4"></a></span>
+<span id="annotated-cell-4-5"><a href="#annotated-cell-4-5"></a></span>
+<span id="annotated-cell-4-6"><a href="#annotated-cell-4-6"></a>yes_voters_age <span class="sc">|&gt;</span> </span>
+<span id="annotated-cell-4-7"><a href="#annotated-cell-4-7"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> age, <span class="at">x =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="annotated-cell-4-8"><a href="#annotated-cell-4-8"></a>    <span class="fu">geom_boxplot</span>(<span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span> </span>
+<span id="annotated-cell-4-9"><a href="#annotated-cell-4-9"></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">35</span>, <span class="at">color=</span><span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-4-10"><a href="#annotated-cell-4-10"></a>    <span class="fu">geom_label</span>(<span class="at">label =</span> <span class="st">"population mean"</span>, </span>
+<span id="annotated-cell-4-11"><a href="#annotated-cell-4-11"></a>               <span class="at">x =</span> <span class="dv">1</span>, <span class="at">y =</span> <span class="fl">35.1</span>, </span>
+<span id="annotated-cell-4-12"><a href="#annotated-cell-4-12"></a>               <span class="at">label.size =</span> <span class="fl">0.15</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-4-13"><a href="#annotated-cell-4-13"></a>    <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="annotated-cell-4-14"><a href="#annotated-cell-4-14"></a>    <span class="fu">theme</span>(<span class="at">aspect.ratio =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="04-stats_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div></div>
+</section>
+<section id="conduct-the-one-sample-t-test" class="slide level2">
+<h2>Conduct the One-sample T-Test</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>overall_mean_age <span class="ot">=</span> <span class="fu">mean</span>(chile_data<span class="sc">$</span>age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb6-2"><a></a>yes_voters <span class="ot">=</span> chile_data<span class="sc">$</span>age[chile_data<span class="sc">$</span>vote <span class="sc">==</span> <span class="st">"Y"</span>]</span>
-<span id="cb6-3"><a></a><span class="fu">t.test</span>(<span class="at">x =</span> yes_voters, <span class="at">alternative =</span> <span class="st">"two.sided"</span>, <span class="at">mu =</span> overall_mean_age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>population_mean_age <span class="ot">=</span> <span class="dv">35</span>  </span>
+<span id="cb7-2"><a></a></span>
+<span id="cb7-3"><a></a><span class="fu">t.test</span>(yes_voters_age,          </span>
+<span id="cb7-4"><a></a>       <span class="at">alternative =</span> <span class="st">"greater"</span>, </span>
+<span id="cb7-5"><a></a>       <span class="at">mu =</span> population_mean_age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
 <div class="cell-output cell-output-stdout">
 <pre><code>
     One Sample t-test
 
-data:  yes_voters
-t = 3.522, df = 867, p-value = 0.0004507
-alternative hypothesis: true mean is not equal to 38.54872
+data:  yes_voters_age
+t = 9.9302, df = 835, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is greater than 35
 95 percent confidence interval:
- 39.35548 41.38646
+ 39.3405     Inf
 sample estimates:
 mean of x 
- 40.37097 </code></pre>
+ 40.20335 </code></pre>
 </div>
 </div>
 <p><em>What if there is a hypothesis? How would you write this in the report?</em></p>
 </section>
-<section id="lets-try-this-t-test-exercises-5-mins" class="slide level2">
-<h2>Let’s try this T-Test exercises (5 mins)</h2>
-<ol type="1">
-<li>Is there a significant difference in age between those who intend to vote “Yes” and those who intend to vote “No”?</li>
-<li>Does the income of male voters significantly differ from female voters?</li>
-</ol>
+<section id="t-test-independent-samples-t-test" class="slide level2">
+<h2>T-Test: Independent Samples T-Test</h2>
+<p>RQ: <strong>Is there a significant difference in age between those who intend to vote “Yes” and those who intend to vote “No”?</strong></p>
+<p>Let’s first take only the necessary columns and get some summary statistics, particularly on the number of samples for each group, as well as the mean, standard deviation, and variance.</p>
+<div class="cell columns column-output-location">
+<div class="column">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>voters_age <span class="ot">&lt;-</span> chile_data <span class="sc">|&gt;</span> </span>
+<span id="cb9-2"><a></a>    <span class="fu">select</span>(age, vote) <span class="sc">|&gt;</span> </span>
+<span id="cb9-3"><a></a>    <span class="fu">filter</span>(vote <span class="sc">==</span> <span class="st">"Y"</span> <span class="sc">|</span> vote <span class="sc">==</span> <span class="st">"N"</span>) </span>
+<span id="cb9-4"><a></a></span>
+<span id="cb9-5"><a></a>voters_age <span class="sc">|&gt;</span> </span>
+<span id="cb9-6"><a></a>    <span class="fu">group_by</span>(vote) <span class="sc">|&gt;</span> </span>
+<span id="cb9-7"><a></a>    <span class="fu">summarise</span>(<span class="at">total =</span> <span class="fu">n</span>(), </span>
+<span id="cb9-8"><a></a>              <span class="at">mean =</span> <span class="fu">mean</span>(age),</span>
+<span id="cb9-9"><a></a>              <span class="at">variance =</span> <span class="fu">var</span>(age),</span>
+<span id="cb9-10"><a></a>              <span class="at">stdeviation =</span> <span class="fu">sd</span>(age))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  vote  total  mean variance stdeviation
+  &lt;fct&gt; &lt;int&gt; &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;
+1 N       867  36.0     205.        14.3
+2 Y       836  40.2     230.        15.2</code></pre>
+</div>
+</div></div>
+</section>
+<section id="visualize-the-differences-between-two-samples" class="slide level2">
+<h2>Visualize the differences between two samples</h2>
+<p>The variance will be easier to see when we visualize it as well. As we can see, the variance is roughly the same between these two samples.</p>
+
+<img data-src="04-stats_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
+<section id="conduct-the-independent-samples-t-test" class="slide level2">
+<h2>Conduct the independent samples T-test</h2>
+<p>Remember, the hypotheses are:</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span class="math inline">\(H_0\)</span>: There is no significant difference in the mean age between those who intend to vote “Yes” and those who intend to vote “No”.</p>
+</div><div class="column" style="width:50%;">
+<p><span class="math inline">\(H_1\)</span>: There is a significant difference in the mean age between those who intend to vote “Yes” and those who intend to vote “No”.</p>
+</div></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">t.test</span>(age <span class="sc">~</span> vote, </span>
+<span id="cb11-2"><a></a>       <span class="at">data =</span> voters_age, </span>
+<span id="cb11-3"><a></a>       <span class="at">var.equal =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  age by vote
+t = -5.8797, df = 1686.7, p-value = 4.944e-09
+alternative hypothesis: true difference in means between group N and group Y is not equal to 0
+95 percent confidence interval:
+ -5.607052 -2.801954
+sample estimates:
+mean in group N mean in group Y 
+       35.99885        40.20335 </code></pre>
+</div>
+</div>
+</section>
+<section id="t-test-paired-sample-t-test" class="slide level2">
+<h2>T-Test: Paired Sample T-Test</h2>
+<p>Unfortunately, our data is not suitable for paired T-Test. For demo purposes, we are going to use a built-in sample datasets called <code>sleep</code> from the base R dataset.</p>
+<p>The dataset is already loaded, so you can use it right away!</p>
+<ul>
+<li>type <code>View(sleep)</code> in your R console (bottom left), and then press enter. RStudio will open up the preview of the dataset.</li>
+<li>type <code>?sleep</code> in your R console to view the help page (a.k.a vignette) about this dataset.</li>
+<li>type <code>data()</code> in your console to see what are the available datasets that you can use for practice!</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 20
+Columns: 3
+$ extra &lt;dbl&gt; 0.7, -1.6, -0.2, -1.2, -0.1, 3.4, 3.7, 0.8, 0.0, 2.0, 1.9, 0.8, …
+$ group &lt;fct&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2
+$ ID    &lt;fct&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10</code></pre>
+</div>
+</div>
+</section>
+<section id="visualise-the-before-and-after" class="slide level2">
+<h2>Visualise the before and after</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  group     n  mean    sd variance
+  &lt;fct&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
+1 1        10  0.75  1.79     3.20
+2 2        10  2.33  2.00     4.01</code></pre>
+</div>
+</div>
+
+<img data-src="04-stats_files/figure-revealjs/unnamed-chunk-15-1.png" width="960" class="r-stretch"></section>
+<section id="transform-the-data-shape" class="slide level2">
+<h2>Transform the data shape</h2>
+<p>The data is in long format. let’s transform it into wide format so that we can conduct the analysis more easily.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>sleep_wide <span class="ot">&lt;-</span> sleep <span class="sc">|&gt;</span> </span>
+<span id="cb15-2"><a></a>    <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> group, <span class="at">values_from =</span> extra, </span>
+<span id="cb15-3"><a></a>                <span class="at">names_prefix =</span> <span class="st">"group_"</span>)</span>
+<span id="cb15-4"><a></a><span class="fu">glimpse</span>(sleep_wide)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 10
+Columns: 3
+$ ID      &lt;fct&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+$ group_1 &lt;dbl&gt; 0.7, -1.6, -0.2, -1.2, -0.1, 3.4, 3.7, 0.8, 0.0, 2.0
+$ group_2 &lt;dbl&gt; 1.9, 0.8, 1.1, 0.1, -0.1, 4.4, 5.5, 1.6, 4.6, 3.4</code></pre>
+</div>
+</div>
+</section>
+<section id="conduct-the-paired-sample-t-test" class="slide level2">
+<h2>Conduct the paired-sample T-test</h2>
+<p>Remember, the hypotheses are:</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span class="math inline">\(H_0\)</span>: There is no significant difference in the increase in hours of sleep.</p>
+</div><div class="column" style="width:50%;">
+<p><span class="math inline">\(H_1\)</span>: There is a significant difference in the increase in hours of sleep.</p>
+</div></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="fu">t.test</span>(<span class="fu">Pair</span>(sleep_wide<span class="sc">$</span>group_1, sleep_wide<span class="sc">$</span>group_2) <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb17-2"><a></a>       <span class="at">data =</span> sleep)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Paired t-test
+
+data:  Pair(sleep_wide$group_1, sleep_wide$group_2)
+t = -4.0621, df = 9, p-value = 0.002833
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -2.4598858 -0.7001142
+sample estimates:
+mean difference 
+          -1.58 </code></pre>
+</div>
+</div>
 </section>
 <section id="anova-analysis-of-variance" class="slide level2">
 <h2>ANOVA (Analysis of Variance)</h2>
@@ -616,16 +811,20 @@ mean of x
 <section id="one-way-anova-sample-problem-and-result" class="slide level2">
 <h2>One-Way ANOVA: Sample problem and result</h2>
 <p>Is there a significant difference in statusquo scores between different education levels?</p>
+<p>Let’s visualize the data first!</p>
+
+<img data-src="04-stats_files/figure-revealjs/unnamed-chunk-18-1.png" width="960" class="r-stretch"></section>
+<section id="conduct-the-one-way-anova-test" class="slide level2">
+<h2>Conduct the one-way Anova test</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>statusquo_edu_anova <span class="ot">&lt;-</span> <span class="fu">aov</span>(statusquo <span class="sc">~</span> education, <span class="at">data =</span> chile_data)</span>
-<span id="cb8-2"><a></a><span class="fu">summary</span>(statusquo_edu_anova)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a>statusquo_edu_anova <span class="ot">&lt;-</span> <span class="fu">aov</span>(statusquo <span class="sc">~</span> education, <span class="at">data =</span> chile_data)</span>
+<span id="cb19-2"><a></a><span class="fu">summary</span>(statusquo_edu_anova)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>              Df Sum Sq Mean Sq F value  Pr(&gt;F)    
-education      2   51.3  25.643   26.13 5.8e-12 ***
-Residuals   2670 2620.6   0.982                    
+<pre><code>              Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+education      2   51.2  25.583   25.87 7.63e-12 ***
+Residuals   2428 2401.0   0.989                     
 ---
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-27 observations deleted due to missingness</code></pre>
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 <div style="font-size: 75%; width: 75%">
@@ -640,9 +839,12 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 </section>
 <section id="post-hoc-test-only-when-result-is-significant" class="slide level2">
 <h2>Post-hoc test (only when result is significant)</h2>
-<p>If your ANOVA test indicates significant result, the next step is to figure out which category pairings are yielding the significant result. Tukey’s Honest Significant Difference (HSD) can help us figure that out.</p>
+<p>If your ANOVA test indicates significant result, the next step is to figure out which category pairings are yielding the significant result.</p>
+<p>Tukey’s Honest Significant Difference (HSD) can help us figure that out! Other alternative is the <code>pairwise.t.test</code>, but let’s try Tukey’s for now.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="fu">TukeyHSD</span>(statusquo_edu_anova)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a><span class="fu">TukeyHSD</span>(statusquo_edu_anova)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
 <div class="cell-output cell-output-stdout">
 <pre><code>  Tukey multiple comparisons of means
     95% family-wise confidence level
@@ -650,74 +852,12 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 Fit: aov(formula = statusquo ~ education, data = chile_data)
 
 $education
-            diff         lwr        upr     p adj
-PS-P -0.34268849 -0.47190147 -0.2134755 0.0000000
-S-P  -0.24396212 -0.34269216 -0.1452321 0.0000000
-S-PS  0.09872637 -0.03019678  0.2276495 0.1711681</code></pre>
+           diff        lwr         upr     p adj
+S-P  -0.2465701 -0.3505516 -0.14258851 0.0000001
+PS-P -0.3674205 -0.5030933 -0.23174756 0.0000000
+PS-S -0.1208504 -0.2563647  0.01466399 0.0918081</code></pre>
 </div>
 </div>
-</section>
-<section id="two-way-anova-sample-problem-and-result" class="slide level2">
-<h2>Two-Way ANOVA: Sample problem and result</h2>
-<p>Is there a significant difference in statusquo scores between different education levels and sexes?</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>statusquo_edu_sex_anova <span class="ot">&lt;-</span> <span class="fu">aov</span>(statusquo <span class="sc">~</span> education <span class="sc">*</span> sex, <span class="at">data =</span> chile_data)</span>
-<span id="cb12-2"><a></a><span class="fu">summary</span>(statusquo_edu_sex_anova)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>                Df Sum Sq Mean Sq F value   Pr(&gt;F)    
-education        2   51.3  25.643  26.187 5.46e-12 ***
-sex              1    8.4   8.398   8.576  0.00344 ** 
-education:sex    2    0.6   0.315   0.322  0.72500    
-Residuals     2667 2611.6   0.979                     
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-27 observations deleted due to missingness</code></pre>
-</div>
-</div>
-</section>
-<section id="post-hoc-test-for-two-way-anova" class="slide level2">
-<h2>Post-hoc test for Two-way ANOVA</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="fu">TukeyHSD</span>(statusquo_edu_sex_anova)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  Tukey multiple comparisons of means
-    95% family-wise confidence level
-
-Fit: aov(formula = statusquo ~ education * sex, data = chile_data)
-
-$education
-            diff         lwr        upr     p adj
-PS-P -0.34268849 -0.47175132 -0.2136257 0.0000000
-S-P  -0.24396212 -0.34257744 -0.1453468 0.0000000
-S-PS  0.09872637 -0.03004698  0.2274997 0.1704709
-
-$sex
-          diff        lwr         upr     p adj
-M-F -0.1117353 -0.1868097 -0.03666085 0.0035479
-
-$`education:sex`
-                 diff         lwr         upr     p adj
-PS:F-P:F  -0.34969549 -0.58182141 -0.11756957 0.0002599
-S:F-P:F   -0.21586575 -0.38130781 -0.05042369 0.0027797
-P:M-P:F   -0.09756257 -0.26856673  0.07344160 0.5806001
-PS:M-P:F  -0.41472874 -0.62364742 -0.20581007 0.0000002
-S:M-P:F   -0.36204920 -0.52841637 -0.19568204 0.0000000
-S:F-PS:F   0.13382974 -0.10016115  0.36782063 0.5779021
-P:M-PS:F   0.25213292  0.01417686  0.49008899 0.0304649
-PS:M-PS:F -0.06503325 -0.33154343  0.20147693 0.9824439
-S:M-PS:F  -0.01235371 -0.24699961  0.22229219 0.9999894
-P:M-S:F    0.11830318 -0.05522411  0.29183047 0.3752949
-PS:M-S:F  -0.19886299 -0.40985188  0.01212589 0.0779562
-S:M-S:F   -0.14618345 -0.31514301  0.02277610 0.1342398
-PS:M-P:M  -0.31716617 -0.53254412 -0.10178823 0.0003965
-S:M-P:M   -0.26448664 -0.43889616 -0.09007712 0.0002291
-S:M-PS:M   0.05267954 -0.15903553  0.26439461 0.9808453</code></pre>
-</div>
-</div>
-</section>
-<section id="lets-try-this-anova-exercise-5-mins" class="slide level2">
-<h2>Let’s try this ANOVA exercise! (5 mins)</h2>
-<p>Is there a significant difference in income between different regions and education levels?</p>
 </section>
 <section id="anova-assumptions" class="slide level2">
 <h2>ANOVA Assumptions</h2>
@@ -736,33 +876,141 @@ S:M-PS:M   0.05267954 -0.15903553  0.26439461 0.9808453</code></pre>
 <li><p>No significant outliers</p></li>
 </ol>
 </section>
-<section id="verifying-the-assumptions" class="slide level2">
-<h2>Verifying the assumptions</h2>
-<p><strong>Shapiro-Wilk Test</strong></p>
+<section id="verifying-the-assumption-test-for-homogeneity-of-variance" class="slide level2">
+<h2>Verifying the assumption: Test for Homogeneity of variance</h2>
+<p><strong>Levene’s Test</strong> to test for homogeneity of variance i.e.&nbsp;homoskedasticity</p>
+<div class="cell columns column-output-location">
+<div class="column">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a><span class="fu">library</span>(car)</span>
+<span id="cb23-2"><a></a><span class="fu">leveneTest</span>(income <span class="sc">~</span> education, </span>
+<span id="cb23-3"><a></a>           <span class="at">data =</span> chile_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output cell-output-stdout">
+<pre><code>Levene's Test for Homogeneity of Variance (center = median)
+        Df F value    Pr(&gt;F)    
+group    2  164.96 &lt; 2.2e-16 ***
+      2428                      
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div></div>
+<p>The results indicate that the p-value is less than the significance level of 0.05, suggesting a significant difference in variance across the groups. Consequently, the assumption of homogeneity of variances is violated.</p>
+</section>
+<section id="plotting-residuals-residual-vs-fitted" class="slide level2">
+<h2>Plotting Residuals: Residual vs Fitted</h2>
+<p>When we plot the residuals<sup>1</sup>, we can see some outliers as well:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="fu">library</span>(car)</span>
-<span id="cb16-2"><a></a><span class="fu">shapiro.test</span>(chile_data<span class="sc">$</span>income)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="04-stats_files/figure-revealjs/unnamed-chunk-22-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<aside><ol class="aside-footnotes"><li id="fn1"><p>Residual = difference between an observed value and the mean of all values for that group.</p></li></ol></aside></section>
+<section id="verifying-the-assumptions-test-for-normality" class="slide level2">
+<h2>Verifying the assumptions: Test for Normality</h2>
+<p><strong>Shapiro-Wilk Test</strong> to test for normality.</p>
+<div class="cell columns column-output-location">
+<div class="column">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a><span class="fu">library</span>(car)</span>
+<span id="cb25-2"><a></a><span class="fu">shapiro.test</span>(chile_data<span class="sc">$</span>income)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Shapiro-Wilk normality test
 
 data:  chile_data$income
-W = 0.65993, p-value &lt; 2.2e-16</code></pre>
+W = 0.66002, p-value &lt; 2.2e-16</code></pre>
 </div>
-</div>
-<p><strong>Levene’s Test</strong></p>
+</div></div>
+<p>The p-value from the Shapiro-Wilk test is less than the significance level of 0.05, indicating that the data significantly deviates from normality. Therefore, the assumption of normality is not satisfied.</p>
+</section>
+<section id="plotting-residuals-q-q-plot" class="slide level2">
+<h2>Plotting Residuals: Q-Q Plot</h2>
+<p>We can see this better from when we plot the residuals:</p>
+
+<img data-src="04-stats_files/figure-revealjs/unnamed-chunk-24-1.png" width="960" class="r-stretch"></section>
+<section id="when-the-assumptions-are-not-met" class="slide level2">
+<h2>When the assumptions are not met…</h2>
+<p>We can use <strong>Kruskal-Wallis rank sum test</strong> as an non-parametric alternative to One-Way ANOVA!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a><span class="fu">library</span>(car)</span>
-<span id="cb18-2"><a></a><span class="fu">leveneTest</span>(income <span class="sc">~</span> education, <span class="at">data =</span> chile_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a><span class="fu">kruskal.test</span>(statusquo <span class="sc">~</span> education, <span class="at">data =</span> chile_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Levene's Test for Homogeneity of Variance (center = median)
-        Df F value    Pr(&gt;F)    
-group    2  168.03 &lt; 2.2e-16 ***
-      2590                      
+<pre><code>
+    Kruskal-Wallis rank sum test
+
+data:  statusquo by education
+Kruskal-Wallis chi-squared = 43.324, df = 2, p-value = 3.91e-10</code></pre>
+</div>
+</div>
+<p>Other alternative: <strong>Welch’s ANOVA</strong> for when the homoskedasticity assumption is not met.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a><span class="fu">oneway.test</span>(statusquo <span class="sc">~</span> education, <span class="at">data =</span> chile_data, <span class="at">var.equal =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One-way analysis of means (not assuming equal variances)
+
+data:  statusquo and education
+F = 25.205, num df = 2.0, denom df = 1143.3, p-value = 1.942e-11</code></pre>
+</div>
+</div>
+</section>
+<section id="two-way-anova-sample-problem-and-result" class="slide level2">
+<h2>Two-Way ANOVA: Sample problem and result</h2>
+<p>Is there a significant difference in statusquo scores between different education levels and sexes?</p>
+<p>Let’s visualize the data!</p>
+
+<img data-src="04-stats_files/figure-revealjs/unnamed-chunk-27-1.png" width="960" class="r-stretch"></section>
+<section id="conduct-the-two-way-anova-test" class="slide level2">
+<h2>Conduct the Two-way ANOVA test</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a>statusquo_edu_sex_anova <span class="ot">&lt;-</span> <span class="fu">aov</span>(statusquo <span class="sc">~</span> education <span class="sc">+</span> sex, <span class="at">data =</span> chile_data)</span>
+<span id="cb31-2"><a></a><span class="fu">summary</span>(statusquo_edu_sex_anova)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>              Df Sum Sq Mean Sq F value  Pr(&gt;F)    
+education      2   51.2  25.583   25.94 7.1e-12 ***
+sex            1    7.7   7.692    7.80 0.00526 ** 
+Residuals   2427 2393.3   0.986                    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
+</section>
+<section id="post-hoc-test-for-two-way-anova" class="slide level2">
+<h2>Post-hoc test for Two-way ANOVA</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a></a><span class="fu">TukeyHSD</span>(statusquo_edu_sex_anova)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = statusquo ~ education + sex, data = chile_data)
+
+$education
+           diff        lwr         upr     p adj
+S-P  -0.2465701 -0.3504064 -0.14273380 0.0000001
+PS-P -0.3674205 -0.5029038 -0.23193712 0.0000000
+PS-S -0.1208504 -0.2561754  0.01447465 0.0912018
+
+$sex
+          diff        lwr         upr     p adj
+M-F -0.1121996 -0.1912197 -0.03317946 0.0054057</code></pre>
+</div>
+</div>
+</section>
+<section id="lets-try-this-anova-exercise-5-mins" class="slide level2">
+<h2>Let’s try this ANOVA exercise! (5 mins)</h2>
+<p>Is there a significant difference in income between different regions and statusquo?</p>
+<ul>
+<li>Visualize the data as well</li>
+<li>Test for normality and homoskedasticity, and choose the appropriate test</li>
+</ul>
 </section>
 <section id="end-of-session-4" class="title-slide slide level1 center">
 <h1>End of Session 4!</h1>
@@ -775,6 +1023,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 </section>
+
+
     </div>
   </div>
 

@@ -683,7 +683,7 @@
     "href": "02-tidyverse.html#long-vs-wide-data",
     "title": "Data Wrangling with Tidyverse",
     "section": "Long vs Wide Data",
-    "text": "Long vs Wide Data\n\n\nLong data:\n\nEach row is a unique observation.\nThere is a separate column indicating the variable or type of measurements\nThis format is more “understandable” by R, more suitable for visualizations.\n\n\nWide Data:\n\nEach row is a unique observation.\nEach column is a variable –&gt; the more variables you have, the “wider” is the data\nThis format is more intuitive for humans!"
+    "text": "Long vs Wide Data\n\n\nLong data:\n\nEach row is a unique observation.\nThere is a separate column indicating the variable or type of measurements\nThis format is more “understandable” by R, more suitable for visualizations.\n\n\nWide data:\n\nEach row is a unique observation.\nEach column is a variable –&gt; the more variables you have, the “wider” is the data\nThis format is more intuitive for humans!"
   },
   {
     "objectID": "02-tidyverse.html#long-vs-wide-data-examples",
@@ -725,56 +725,56 @@
     "href": "04-stats.html#refresher-research-variables",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "Refresher: Research Variables",
-    "text": "Refresher: Research Variables\n\n\nIndependent Variable (IV)\nThe variables that researchers will manipulate.\n\nOther names for it: Predictor, Covariate, Treatment, Regressor, Input, etc.\n\n\nDependent Variable (DV)\nThe variables that will be affected as a result of manipulation/changes in the IVs\n\nOther names for it: Outcome, Response, Output, etc."
+    "text": "Refresher: Research Variables\n\n\nDependent Variable (DV)\nThe variables that will be affected as a result of manipulation/changes in the IVs\n\nOther names for it: Outcome, Response, Output, etc.\nOften denoted as \\(y\\)\n\n\nIndependent Variable (IV)\nThe variables that researchers will manipulate.\n\nOther names for it: Predictor, Covariate, Treatment, Regressor, Input, etc.\nOften denoted as \\(x\\)"
   },
   {
     "objectID": "04-stats.html#load-our-data-for-today",
     "href": "04-stats.html#load-our-data-for-today",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "Load our data for today!",
-    "text": "Load our data for today!\nUse read_csv from readr package (part of tidyverse) to load our data into a dataframe\n\n# import tidyverse library\nlibrary(tidyverse)\n\n# read the CSV with Chile voting data\nchile_data &lt;- read_csv(\"data/chile_voting.csv\")\n\n# peek at the data, pay attention to the data types!\nglimpse(chile_data)"
+    "text": "Load our data for today!\nUse read_csv from readr package (part of tidyverse) to load our data into a dataframe\n\n# import tidyverse library\nlibrary(tidyverse)\n\n# read the CSV with Chile voting data\nchile_data &lt;- read_csv(\"data-output/chile_voting_processed.csv\")\n\nchile_data &lt;- chile_data |&gt; \n    mutate(across(c(\"region\", \"sex\", \"education\", \"vote\", \"age_group\", \"support_level\"), as.factor))\n\n#reordering\nchile_data &lt;- chile_data |&gt; \n    mutate(education = factor(education, \n                         levels = c(\"P\", \"S\", \"PS\"), \n                         ordered = TRUE))\n\n# peek at the data, pay attention to the data types!\nglimpse(chile_data)"
   },
   {
     "objectID": "04-stats.html#chi-square-test-of-independence",
     "href": "04-stats.html#chi-square-test-of-independence",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "Chi-square test of independence",
-    "text": "Chi-square test of independence\nThe \\(X^2\\) test of independence evaluates whether there is a statistically significant relationship between two categorical variables.\nThis is done by analyzing the frequency table (i.e., contingency table) formed by two categorical variables.\nExample: Is there any relationship between education and vote in our Chile voting data?"
+    "text": "Chi-square test of independence\nThe \\(X^2\\) test of independence evaluates whether there is a statistically significant relationship between two categorical variables.\nThis is done by analyzing the frequency table (i.e., contingency table) formed by two categorical variables.\nExample: Is there any relationship between education and vote in our Chile voting data?\nTypically, we can start with visualizing the data first!\n\n\n    \n       A   N   U   Y\n  P   49 262 282 409\n  S   98 385 223 304\n  PS  30 220  46 123"
   },
   {
     "objectID": "04-stats.html#chi-square-sample-problem-and-results",
     "href": "04-stats.html#chi-square-sample-problem-and-results",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "Chi-Square: Sample problem and results",
-    "text": "Chi-Square: Sample problem and results\nIs there any relationship between education and vote in our Chile voting data?\n\nprint(chisq.test(table(chile_data$education, chile_data$vote)))\n\n\n    Pearson's Chi-squared test\n\ndata:  table(chile_data$education, chile_data$vote)\nX-squared = 135.85, df = 6, p-value &lt; 2.2e-16\n\n\n\n\nX-squared = the coefficient\ndf = degree of freedom\np-value = the probability of getting more extreme results than what was observed. Generally, if this value is less than the pre-determined significance level (also called alpha), the result would be considered “statistically significant”\n\n\nWhat if there is a hypothesis? How would you write this in the report?"
+    "text": "Chi-Square: Sample problem and results\nIs there any relationship between education and vote in our Chile voting data?\n\nchisq.test(table(chile_data$education, chile_data$vote))\n\n\n    Pearson's Chi-squared test\n\ndata:  table(chile_data$education, chile_data$vote)\nX-squared = 135.69, df = 6, p-value &lt; 2.2e-16\n\n\n\n\nX-squared = the coefficient\ndf = degree of freedom\np-value = the probability of getting more extreme results than what was observed. Generally, if this value is less than the pre-determined significance level (also called alpha), the result would be considered “statistically significant”\n\n\nWhat if there is a hypothesis? How would you write this in the report?"
   },
   {
     "objectID": "04-stats.html#correlation",
     "href": "04-stats.html#correlation",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "Correlation",
-    "text": "Correlation\nA correlation test evaluates the strength and direction of a linear relationship between two variables. The coefficient is expressed in value between -1 to 1, with 0 being no correlation at all.\n\n\nPearson’s \\(r\\) (r)\n\nAssumes and measures linear relationships\nSensitive to outliers\nAssumes normality\n(most likely the one that you learned in class)\n\n\nKendall’s \\(\\tau\\) (tau)\n\nMeasures monotonic relationship\nless sensitive/more robust to outliers\nnon-parametric, do not assume normality\n\n\nSpearman’s \\(\\rho\\) (rho)\n\nMeasures monotonic relationship\nless sensitive/more robust to outliers\nnon-parametric, do not assume normality"
-  },
-  {
-    "objectID": "04-stats.html#what-is-monotonic-relationship",
-    "href": "04-stats.html#what-is-monotonic-relationship",
-    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
-    "section": "What is monotonic relationship?",
-    "text": "What is monotonic relationship?\nWhen a size of one variable increases, the other variables also increase, though at different rate."
+    "text": "Correlation\nA correlation test evaluates the strength and direction of a linear relationship between two variables. The coefficient is expressed in value between -1 to 1, with 0 being no correlation at all.\n\n\nPearson’s \\(r\\) (r)\n\nMeasure the association between two continuous numerical variables\nSensitive to outliers\nAssumes normality and/or linearity\n(most likely the one that you learned in class)\n\n\nKendall’s \\(\\tau\\) (tau)\n\nMeasure the association between two variables (ordinal-ordinal or ordinal-continuous)\nless sensitive/more robust to outliers\nnon-parametric, does not assume normality and/or linearity\n\n\nSpearman’s \\(\\rho\\) (rho)\n\nMeasure the association between two variables (ordinal-ordinal or ordinal-continuous)\nless sensitive/more robust to outliers\nnon-parametric, does not assume normality and/or linearity\n\n\nFor more info, you can refer to this reading: Measures of Association - How to Choose? (Harry Khamis, PhD)"
   },
   {
     "objectID": "04-stats.html#correlation-sample-problem-and-result",
     "href": "04-stats.html#correlation-sample-problem-and-result",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "Correlation: Sample problem and result",
-    "text": "Correlation: Sample problem and result\nIs there a significant correlation between a respondent’s age and income?\n\ncor.test(chile_data$age, chile_data$income, method = \"pearson\")\n\n\n    Pearson's product-moment correlation\n\ndata:  chile_data$age and chile_data$income\nt = -1.6507, df = 2599, p-value = 0.09891\nalternative hypothesis: true correlation is not equal to 0\n95 percent confidence interval:\n -0.070708808  0.006078618\nsample estimates:\n        cor \n-0.03236285 \n\n\n\n\nt is the t-test statistic (for hypothesis testing)\ndf is the degrees of freedom\np-value is the significance level of the t-test\nconf.int is the confidence interval of the coefficient at 95%\nsample estimates is the correlation coefficient"
+    "text": "Correlation: Sample problem and result\nRQ: Is there a significant correlation between a respondent’s age and statusquo?\nAs both variables are numerical and continuous, we can use pearson correlation.\nLet’s start with visualizing the data, which can be used to support the explanation."
+  },
+  {
+    "objectID": "04-stats.html#conduct-the-correlation-test",
+    "href": "04-stats.html#conduct-the-correlation-test",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "Conduct the correlation test",
+    "text": "Conduct the correlation test\n\n\ncor.test(chile_data$age, chile_data$statusquo, \n         method = \"pearson\")\n\n\n\n    Pearson's product-moment correlation\n\ndata:  chile_data$age and chile_data$statusquo\nt = 5.5546, df = 2429, p-value = 3.086e-08\nalternative hypothesis: true correlation is not equal to 0\n95 percent confidence interval:\n 0.07256203 0.15107687\nsample estimates:\n      cor \n0.1119942 \n\n\n\n\ncor is the correlation coefficient - this is the number that you want to report.\nt is the t-test statistic\ndf is the degrees of freedom\np-value is the significance level of the t-test\nconf.int is the confidence interval of the coefficient at 95%\nsample estimates is the correlation coefficient"
   },
   {
     "objectID": "04-stats.html#lets-try-this-correlation-exercise-5-mins",
     "href": "04-stats.html#lets-try-this-correlation-exercise-5-mins",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "Let’s try this correlation exercise! (5 mins)",
-    "text": "Let’s try this correlation exercise! (5 mins)\n\nCalculate the correlation coefficient between age and statusquo.\n\nWhat is the null and alternative hypothesis?\nHow strong is the correlation? i.e. would you say it’s a strong correlation?\nIn which direction is the correlation?\nIs the correlation coefficient statistically significant?"
+    "text": "Let’s try this correlation exercise! (5 mins)\n\nCalculate the correlation coefficient between age and income\n\nWhich method should you use for this?\nHow strong is the correlation? i.e. would you say it’s a strong correlation?\nIn which direction is the correlation?\nIs the correlation coefficient statistically significant?\nVisualize the relationship!"
   },
   {
     "objectID": "04-stats.html#t-tests",
@@ -791,18 +791,67 @@
     "text": "3 types of t-test\n\n\nOne-sample T-test\nTest if a specific sample mean (X̄) is statistically different from a known or hypothesized population mean (μ or mu)\n\nTwo-samples / Independent Samples T-test\nUsed to compare the means of two independent groups (such as between-subjects research) to determine if they are significantly different.\nExamples: Men vs Women group, Placebo vs Actual drugs.\n\nPaired Samples T-Test\nUsed to compare the means of two related groups, such as repeated measurements on the same subjects (within-subjects research).\nExamples: Before workshop vs After workshop."
   },
   {
-    "objectID": "04-stats.html#t-test-sample-problem-and-result",
-    "href": "04-stats.html#t-test-sample-problem-and-result",
+    "objectID": "04-stats.html#t-test-one-sample-t-test",
+    "href": "04-stats.html#t-test-one-sample-t-test",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
-    "section": "T-test: Sample problem and result",
-    "text": "T-test: Sample problem and result\nIs the average age of voters who intend to vote “Yes” significantly different from the overall mean age of voters in Chile? Assume the\n\noverall_mean_age = mean(chile_data$age, na.rm = TRUE)\nyes_voters = chile_data$age[chile_data$vote == \"Y\"]\nt.test(x = yes_voters, alternative = \"two.sided\", mu = overall_mean_age)\n\n\n    One Sample t-test\n\ndata:  yes_voters\nt = 3.522, df = 867, p-value = 0.0004507\nalternative hypothesis: true mean is not equal to 38.54872\n95 percent confidence interval:\n 39.35548 41.38646\nsample estimates:\nmean of x \n 40.37097 \n\n\nWhat if there is a hypothesis? How would you write this in the report?"
+    "section": "T-test: One-sample T-Test",
+    "text": "T-test: One-sample T-Test\nRQ: Is the average age of participants who intend to vote “Yes” significantly greater than the overall mean age of voting population in Chile? Assume the population mean is 35.\nLet’s start with visualizing the data\n\n\nyes_voters_age &lt;- chile_data |&gt;\n    filter(vote == \"Y\") |&gt;\n    select(age)   \n\n\nyes_voters_age |&gt; \n    ggplot(aes(y = age, x = 1)) +\n    geom_boxplot(width = 0.2) + \n    geom_hline(yintercept = 35, color=\"red\") +\n    geom_label(label = \"population mean\", \n               x = 1, y = 35.1, \n               label.size = 0.15) +\n    coord_flip() +\n    theme(aspect.ratio = 1/3)"
   },
   {
-    "objectID": "04-stats.html#lets-try-this-t-test-exercises-5-mins",
-    "href": "04-stats.html#lets-try-this-t-test-exercises-5-mins",
+    "objectID": "04-stats.html#conduct-the-one-sample-t-test",
+    "href": "04-stats.html#conduct-the-one-sample-t-test",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
-    "section": "Let’s try this T-Test exercises (5 mins)",
-    "text": "Let’s try this T-Test exercises (5 mins)\n\nIs there a significant difference in age between those who intend to vote “Yes” and those who intend to vote “No”?\nDoes the income of male voters significantly differ from female voters?"
+    "section": "Conduct the One-sample T-Test",
+    "text": "Conduct the One-sample T-Test\n\npopulation_mean_age = 35  \n\nt.test(yes_voters_age,          \n       alternative = \"greater\", \n       mu = population_mean_age)\n\n\n\n\n    One Sample t-test\n\ndata:  yes_voters_age\nt = 9.9302, df = 835, p-value &lt; 2.2e-16\nalternative hypothesis: true mean is greater than 35\n95 percent confidence interval:\n 39.3405     Inf\nsample estimates:\nmean of x \n 40.20335 \n\n\nWhat if there is a hypothesis? How would you write this in the report?"
+  },
+  {
+    "objectID": "04-stats.html#t-test-independent-samples-t-test",
+    "href": "04-stats.html#t-test-independent-samples-t-test",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "T-Test: Independent Samples T-Test",
+    "text": "T-Test: Independent Samples T-Test\nRQ: Is there a significant difference in age between those who intend to vote “Yes” and those who intend to vote “No”?\nLet’s first take only the necessary columns and get some summary statistics, particularly on the number of samples for each group, as well as the mean, standard deviation, and variance.\n\n\nvoters_age &lt;- chile_data |&gt; \n    select(age, vote) |&gt; \n    filter(vote == \"Y\" | vote == \"N\") \n\nvoters_age |&gt; \n    group_by(vote) |&gt; \n    summarise(total = n(), \n              mean = mean(age),\n              variance = var(age),\n              stdeviation = sd(age))\n\n\n# A tibble: 2 × 5\n  vote  total  mean variance stdeviation\n  &lt;fct&gt; &lt;int&gt; &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;\n1 N       867  36.0     205.        14.3\n2 Y       836  40.2     230.        15.2"
+  },
+  {
+    "objectID": "04-stats.html#visualize-the-differences-between-two-samples",
+    "href": "04-stats.html#visualize-the-differences-between-two-samples",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "Visualize the differences between two samples",
+    "text": "Visualize the differences between two samples\nThe variance will be easier to see when we visualize it as well. As we can see, the variance is roughly the same between these two samples."
+  },
+  {
+    "objectID": "04-stats.html#conduct-the-independent-samples-t-test",
+    "href": "04-stats.html#conduct-the-independent-samples-t-test",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "Conduct the independent samples T-test",
+    "text": "Conduct the independent samples T-test\nRemember, the hypotheses are:\n\n\n\\(H_0\\): There is no significant difference in the mean age between those who intend to vote “Yes” and those who intend to vote “No”.\n\n\\(H_1\\): There is a significant difference in the mean age between those who intend to vote “Yes” and those who intend to vote “No”.\n\n\nt.test(age ~ vote, \n       data = voters_age, \n       var.equal = FALSE)\n\n\n\n\n    Welch Two Sample t-test\n\ndata:  age by vote\nt = -5.8797, df = 1686.7, p-value = 4.944e-09\nalternative hypothesis: true difference in means between group N and group Y is not equal to 0\n95 percent confidence interval:\n -5.607052 -2.801954\nsample estimates:\nmean in group N mean in group Y \n       35.99885        40.20335"
+  },
+  {
+    "objectID": "04-stats.html#t-test-paired-sample-t-test",
+    "href": "04-stats.html#t-test-paired-sample-t-test",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "T-Test: Paired Sample T-Test",
+    "text": "T-Test: Paired Sample T-Test\nUnfortunately, our data is not suitable for paired T-Test. For demo purposes, we are going to use a built-in sample datasets called sleep from the base R dataset.\nThe dataset is already loaded, so you can use it right away!\n\ntype View(sleep) in your R console (bottom left), and then press enter. RStudio will open up the preview of the dataset.\ntype ?sleep in your R console to view the help page (a.k.a vignette) about this dataset.\ntype data() in your console to see what are the available datasets that you can use for practice!\n\n\n\nRows: 20\nColumns: 3\n$ extra &lt;dbl&gt; 0.7, -1.6, -0.2, -1.2, -0.1, 3.4, 3.7, 0.8, 0.0, 2.0, 1.9, 0.8, …\n$ group &lt;fct&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2\n$ ID    &lt;fct&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10"
+  },
+  {
+    "objectID": "04-stats.html#visualise-the-before-and-after",
+    "href": "04-stats.html#visualise-the-before-and-after",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "Visualise the before and after",
+    "text": "Visualise the before and after\n\n\n# A tibble: 2 × 5\n  group     n  mean    sd variance\n  &lt;fct&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;\n1 1        10  0.75  1.79     3.20\n2 2        10  2.33  2.00     4.01"
+  },
+  {
+    "objectID": "04-stats.html#transform-the-data-shape",
+    "href": "04-stats.html#transform-the-data-shape",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "Transform the data shape",
+    "text": "Transform the data shape\nThe data is in long format. let’s transform it into wide format so that we can conduct the analysis more easily.\n\nsleep_wide &lt;- sleep |&gt; \n    pivot_wider(names_from = group, values_from = extra, \n                names_prefix = \"group_\")\nglimpse(sleep_wide)\n\n\n\nRows: 10\nColumns: 3\n$ ID      &lt;fct&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n$ group_1 &lt;dbl&gt; 0.7, -1.6, -0.2, -1.2, -0.1, 3.4, 3.7, 0.8, 0.0, 2.0\n$ group_2 &lt;dbl&gt; 1.9, 0.8, 1.1, 0.1, -0.1, 4.4, 5.5, 1.6, 4.6, 3.4"
+  },
+  {
+    "objectID": "04-stats.html#conduct-the-paired-sample-t-test",
+    "href": "04-stats.html#conduct-the-paired-sample-t-test",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "Conduct the paired-sample T-test",
+    "text": "Conduct the paired-sample T-test\nRemember, the hypotheses are:\n\n\n\\(H_0\\): There is no significant difference in the increase in hours of sleep.\n\n\\(H_1\\): There is a significant difference in the increase in hours of sleep.\n\n\nt.test(Pair(sleep_wide$group_1, sleep_wide$group_2) ~ 1,\n       data = sleep)\n\n\n\n\n    Paired t-test\n\ndata:  Pair(sleep_wide$group_1, sleep_wide$group_2)\nt = -4.0621, df = 9, p-value = 0.002833\nalternative hypothesis: true mean difference is not equal to 0\n95 percent confidence interval:\n -2.4598858 -0.7001142\nsample estimates:\nmean difference \n          -1.58"
   },
   {
     "objectID": "04-stats.html#anova-analysis-of-variance",
@@ -816,35 +865,21 @@
     "href": "04-stats.html#one-way-anova-sample-problem-and-result",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "One-Way ANOVA: Sample problem and result",
-    "text": "One-Way ANOVA: Sample problem and result\nIs there a significant difference in statusquo scores between different education levels?\n\nstatusquo_edu_anova &lt;- aov(statusquo ~ education, data = chile_data)\nsummary(statusquo_edu_anova)\n\n              Df Sum Sq Mean Sq F value  Pr(&gt;F)    \neducation      2   51.3  25.643   26.13 5.8e-12 ***\nResiduals   2670 2620.6   0.982                    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n27 observations deleted due to missingness\n\n\n\n\nF-value: the coefficient value\nPr(&gt;F): the p-value\nSum Sq: Sum of Squares\nMean Sq : Mean Squares\nDf: Degrees of Freedom"
+    "text": "One-Way ANOVA: Sample problem and result\nIs there a significant difference in statusquo scores between different education levels?\nLet’s visualize the data first!"
+  },
+  {
+    "objectID": "04-stats.html#conduct-the-one-way-anova-test",
+    "href": "04-stats.html#conduct-the-one-way-anova-test",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "Conduct the one-way Anova test",
+    "text": "Conduct the one-way Anova test\n\nstatusquo_edu_anova &lt;- aov(statusquo ~ education, data = chile_data)\nsummary(statusquo_edu_anova)\n\n              Df Sum Sq Mean Sq F value   Pr(&gt;F)    \neducation      2   51.2  25.583   25.87 7.63e-12 ***\nResiduals   2428 2401.0   0.989                     \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\n\nF-value: the coefficient value\nPr(&gt;F): the p-value\nSum Sq: Sum of Squares\nMean Sq : Mean Squares\nDf: Degrees of Freedom"
   },
   {
     "objectID": "04-stats.html#post-hoc-test-only-when-result-is-significant",
     "href": "04-stats.html#post-hoc-test-only-when-result-is-significant",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "Post-hoc test (only when result is significant)",
-    "text": "Post-hoc test (only when result is significant)\nIf your ANOVA test indicates significant result, the next step is to figure out which category pairings are yielding the significant result. Tukey’s Honest Significant Difference (HSD) can help us figure that out.\n\nTukeyHSD(statusquo_edu_anova)\n\n  Tukey multiple comparisons of means\n    95% family-wise confidence level\n\nFit: aov(formula = statusquo ~ education, data = chile_data)\n\n$education\n            diff         lwr        upr     p adj\nPS-P -0.34268849 -0.47190147 -0.2134755 0.0000000\nS-P  -0.24396212 -0.34269216 -0.1452321 0.0000000\nS-PS  0.09872637 -0.03019678  0.2276495 0.1711681"
-  },
-  {
-    "objectID": "04-stats.html#two-way-anova-sample-problem-and-result",
-    "href": "04-stats.html#two-way-anova-sample-problem-and-result",
-    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
-    "section": "Two-Way ANOVA: Sample problem and result",
-    "text": "Two-Way ANOVA: Sample problem and result\nIs there a significant difference in statusquo scores between different education levels and sexes?\n\nstatusquo_edu_sex_anova &lt;- aov(statusquo ~ education * sex, data = chile_data)\nsummary(statusquo_edu_sex_anova)\n\n                Df Sum Sq Mean Sq F value   Pr(&gt;F)    \neducation        2   51.3  25.643  26.187 5.46e-12 ***\nsex              1    8.4   8.398   8.576  0.00344 ** \neducation:sex    2    0.6   0.315   0.322  0.72500    \nResiduals     2667 2611.6   0.979                     \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n27 observations deleted due to missingness"
-  },
-  {
-    "objectID": "04-stats.html#post-hoc-test-for-two-way-anova",
-    "href": "04-stats.html#post-hoc-test-for-two-way-anova",
-    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
-    "section": "Post-hoc test for Two-way ANOVA",
-    "text": "Post-hoc test for Two-way ANOVA\n\nTukeyHSD(statusquo_edu_sex_anova)\n\n  Tukey multiple comparisons of means\n    95% family-wise confidence level\n\nFit: aov(formula = statusquo ~ education * sex, data = chile_data)\n\n$education\n            diff         lwr        upr     p adj\nPS-P -0.34268849 -0.47175132 -0.2136257 0.0000000\nS-P  -0.24396212 -0.34257744 -0.1453468 0.0000000\nS-PS  0.09872637 -0.03004698  0.2274997 0.1704709\n\n$sex\n          diff        lwr         upr     p adj\nM-F -0.1117353 -0.1868097 -0.03666085 0.0035479\n\n$`education:sex`\n                 diff         lwr         upr     p adj\nPS:F-P:F  -0.34969549 -0.58182141 -0.11756957 0.0002599\nS:F-P:F   -0.21586575 -0.38130781 -0.05042369 0.0027797\nP:M-P:F   -0.09756257 -0.26856673  0.07344160 0.5806001\nPS:M-P:F  -0.41472874 -0.62364742 -0.20581007 0.0000002\nS:M-P:F   -0.36204920 -0.52841637 -0.19568204 0.0000000\nS:F-PS:F   0.13382974 -0.10016115  0.36782063 0.5779021\nP:M-PS:F   0.25213292  0.01417686  0.49008899 0.0304649\nPS:M-PS:F -0.06503325 -0.33154343  0.20147693 0.9824439\nS:M-PS:F  -0.01235371 -0.24699961  0.22229219 0.9999894\nP:M-S:F    0.11830318 -0.05522411  0.29183047 0.3752949\nPS:M-S:F  -0.19886299 -0.40985188  0.01212589 0.0779562\nS:M-S:F   -0.14618345 -0.31514301  0.02277610 0.1342398\nPS:M-P:M  -0.31716617 -0.53254412 -0.10178823 0.0003965\nS:M-P:M   -0.26448664 -0.43889616 -0.09007712 0.0002291\nS:M-PS:M   0.05267954 -0.15903553  0.26439461 0.9808453"
-  },
-  {
-    "objectID": "04-stats.html#lets-try-this-anova-exercise-5-mins",
-    "href": "04-stats.html#lets-try-this-anova-exercise-5-mins",
-    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
-    "section": "Let’s try this ANOVA exercise! (5 mins)",
-    "text": "Let’s try this ANOVA exercise! (5 mins)\nIs there a significant difference in income between different regions and education levels?"
+    "text": "Post-hoc test (only when result is significant)\nIf your ANOVA test indicates significant result, the next step is to figure out which category pairings are yielding the significant result.\nTukey’s Honest Significant Difference (HSD) can help us figure that out! Other alternative is the pairwise.t.test, but let’s try Tukey’s for now.\n\nTukeyHSD(statusquo_edu_anova)\n\n\n\n  Tukey multiple comparisons of means\n    95% family-wise confidence level\n\nFit: aov(formula = statusquo ~ education, data = chile_data)\n\n$education\n           diff        lwr         upr     p adj\nS-P  -0.2465701 -0.3505516 -0.14258851 0.0000001\nPS-P -0.3674205 -0.5030933 -0.23174756 0.0000000\nPS-S -0.1208504 -0.2563647  0.01466399 0.0918081"
   },
   {
     "objectID": "04-stats.html#anova-assumptions",
@@ -854,11 +889,67 @@
     "text": "ANOVA Assumptions\n\nThe Dependent variable should be a continuous variable\nThe Independent variable should be a categorical variable\nThe observations for Independent variable should be independent of each other\nThe Dependent Variable distribution should be approximately normal – even more crucial if sample size is small.\n\nYou can verify this by visualizing your data in histogram, or use Shapiro-Wilk Test, among other things\n\nThe variance for each combination of groups should be approximately equal – also referred to as “homogeneity of variances” or homoskedasticity.\n\nOne way to verify this is using Levene’s Test\n\nNo significant outliers"
   },
   {
-    "objectID": "04-stats.html#verifying-the-assumptions",
-    "href": "04-stats.html#verifying-the-assumptions",
+    "objectID": "04-stats.html#verifying-the-assumption-test-for-homogeneity-of-variance",
+    "href": "04-stats.html#verifying-the-assumption-test-for-homogeneity-of-variance",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
-    "section": "Verifying the assumptions",
-    "text": "Verifying the assumptions\nShapiro-Wilk Test\n\nlibrary(car)\nshapiro.test(chile_data$income)\n\n\n    Shapiro-Wilk normality test\n\ndata:  chile_data$income\nW = 0.65993, p-value &lt; 2.2e-16\n\n\nLevene’s Test\n\nlibrary(car)\nleveneTest(income ~ education, data = chile_data)\n\nLevene's Test for Homogeneity of Variance (center = median)\n        Df F value    Pr(&gt;F)    \ngroup    2  168.03 &lt; 2.2e-16 ***\n      2590                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
+    "section": "Verifying the assumption: Test for Homogeneity of variance",
+    "text": "Verifying the assumption: Test for Homogeneity of variance\nLevene’s Test to test for homogeneity of variance i.e. homoskedasticity\n\n\nlibrary(car)\nleveneTest(income ~ education, \n           data = chile_data)\n\n\nLevene's Test for Homogeneity of Variance (center = median)\n        Df F value    Pr(&gt;F)    \ngroup    2  164.96 &lt; 2.2e-16 ***\n      2428                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nThe results indicate that the p-value is less than the significance level of 0.05, suggesting a significant difference in variance across the groups. Consequently, the assumption of homogeneity of variances is violated."
+  },
+  {
+    "objectID": "04-stats.html#plotting-residuals-residual-vs-fitted",
+    "href": "04-stats.html#plotting-residuals-residual-vs-fitted",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "Plotting Residuals: Residual vs Fitted",
+    "text": "Plotting Residuals: Residual vs Fitted\nWhen we plot the residuals1, we can see some outliers as well:\n\n\n\n\n\n\n\n\n\nResidual = difference between an observed value and the mean of all values for that group."
+  },
+  {
+    "objectID": "04-stats.html#verifying-the-assumptions-test-for-normality",
+    "href": "04-stats.html#verifying-the-assumptions-test-for-normality",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "Verifying the assumptions: Test for Normality",
+    "text": "Verifying the assumptions: Test for Normality\nShapiro-Wilk Test to test for normality.\n\n\nlibrary(car)\nshapiro.test(chile_data$income)\n\n\n\n    Shapiro-Wilk normality test\n\ndata:  chile_data$income\nW = 0.66002, p-value &lt; 2.2e-16\n\n\nThe p-value from the Shapiro-Wilk test is less than the significance level of 0.05, indicating that the data significantly deviates from normality. Therefore, the assumption of normality is not satisfied."
+  },
+  {
+    "objectID": "04-stats.html#plotting-residuals-q-q-plot",
+    "href": "04-stats.html#plotting-residuals-q-q-plot",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "Plotting Residuals: Q-Q Plot",
+    "text": "Plotting Residuals: Q-Q Plot\nWe can see this better from when we plot the residuals:"
+  },
+  {
+    "objectID": "04-stats.html#when-the-assumptions-are-not-met",
+    "href": "04-stats.html#when-the-assumptions-are-not-met",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "When the assumptions are not met…",
+    "text": "When the assumptions are not met…\nWe can use Kruskal-Wallis rank sum test as an non-parametric alternative to One-Way ANOVA!\n\nkruskal.test(statusquo ~ education, data = chile_data)\n\n\n    Kruskal-Wallis rank sum test\n\ndata:  statusquo by education\nKruskal-Wallis chi-squared = 43.324, df = 2, p-value = 3.91e-10\n\n\nOther alternative: Welch’s ANOVA for when the homoskedasticity assumption is not met.\n\noneway.test(statusquo ~ education, data = chile_data, var.equal = FALSE)\n\n\n    One-way analysis of means (not assuming equal variances)\n\ndata:  statusquo and education\nF = 25.205, num df = 2.0, denom df = 1143.3, p-value = 1.942e-11"
+  },
+  {
+    "objectID": "04-stats.html#two-way-anova-sample-problem-and-result",
+    "href": "04-stats.html#two-way-anova-sample-problem-and-result",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "Two-Way ANOVA: Sample problem and result",
+    "text": "Two-Way ANOVA: Sample problem and result\nIs there a significant difference in statusquo scores between different education levels and sexes?\nLet’s visualize the data!"
+  },
+  {
+    "objectID": "04-stats.html#conduct-the-two-way-anova-test",
+    "href": "04-stats.html#conduct-the-two-way-anova-test",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "Conduct the Two-way ANOVA test",
+    "text": "Conduct the Two-way ANOVA test\n\nstatusquo_edu_sex_anova &lt;- aov(statusquo ~ education + sex, data = chile_data)\nsummary(statusquo_edu_sex_anova)\n\n\n\n              Df Sum Sq Mean Sq F value  Pr(&gt;F)    \neducation      2   51.2  25.583   25.94 7.1e-12 ***\nsex            1    7.7   7.692    7.80 0.00526 ** \nResiduals   2427 2393.3   0.986                    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
+  },
+  {
+    "objectID": "04-stats.html#post-hoc-test-for-two-way-anova",
+    "href": "04-stats.html#post-hoc-test-for-two-way-anova",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "Post-hoc test for Two-way ANOVA",
+    "text": "Post-hoc test for Two-way ANOVA\n\nTukeyHSD(statusquo_edu_sex_anova)\n\n\n\n  Tukey multiple comparisons of means\n    95% family-wise confidence level\n\nFit: aov(formula = statusquo ~ education + sex, data = chile_data)\n\n$education\n           diff        lwr         upr     p adj\nS-P  -0.2465701 -0.3504064 -0.14273380 0.0000001\nPS-P -0.3674205 -0.5029038 -0.23193712 0.0000000\nPS-S -0.1208504 -0.2561754  0.01447465 0.0912018\n\n$sex\n          diff        lwr         upr     p adj\nM-F -0.1121996 -0.1912197 -0.03317946 0.0054057"
+  },
+  {
+    "objectID": "04-stats.html#lets-try-this-anova-exercise-5-mins",
+    "href": "04-stats.html#lets-try-this-anova-exercise-5-mins",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "Let’s try this ANOVA exercise! (5 mins)",
+    "text": "Let’s try this ANOVA exercise! (5 mins)\nIs there a significant difference in income between different regions and statusquo?\n\nVisualize the data as well\nTest for normality and homoskedasticity, and choose the appropriate test"
   },
   {
     "objectID": "about.html",
