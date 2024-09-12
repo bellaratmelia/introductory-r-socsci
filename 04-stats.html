@@ -698,18 +698,18 @@ mean of x
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">t.test</span>(age <span class="sc">~</span> vote, </span>
 <span id="cb11-2"><a></a>       <span class="at">data =</span> voters_age, </span>
-<span id="cb11-3"><a></a>       <span class="at">var.equal =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-3"><a></a>       <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
 <pre><code>
-    Welch Two Sample t-test
+    Two Sample t-test
 
 data:  age by vote
-t = -5.8797, df = 1686.7, p-value = 4.944e-09
+t = -5.8857, df = 1701, p-value = 4.765e-09
 alternative hypothesis: true difference in means between group N and group Y is not equal to 0
 95 percent confidence interval:
- -5.607052 -2.801954
+ -5.605619 -2.803386
 sample estimates:
 mean in group N mean in group Y 
        35.99885        40.20335 </code></pre>
@@ -810,7 +810,7 @@ mean difference
 </section>
 <section id="one-way-anova-sample-problem-and-result" class="slide level2">
 <h2>One-Way ANOVA: Sample problem and result</h2>
-<p>Is there a significant difference in statusquo scores between different education levels?</p>
+<p>RQ: <strong>Is there a significant difference in statusquo scores between different education levels?</strong></p>
 <p>Let’s visualize the data first!</p>
 
 <img data-src="04-stats_files/figure-revealjs/unnamed-chunk-18-1.png" width="960" class="r-stretch"></section>
@@ -959,7 +959,7 @@ F = 25.205, num df = 2.0, denom df = 1143.3, p-value = 1.942e-11</code></pre>
 </section>
 <section id="two-way-anova-sample-problem-and-result" class="slide level2">
 <h2>Two-Way ANOVA: Sample problem and result</h2>
-<p>Is there a significant difference in statusquo scores between different education levels and sexes?</p>
+<p>RQ: <strong>Is there a significant difference in statusquo scores between different education levels and sexes?</strong></p>
 <p>Let’s visualize the data!</p>
 
 <img data-src="04-stats_files/figure-revealjs/unnamed-chunk-27-1.png" width="960" class="r-stretch"></section>

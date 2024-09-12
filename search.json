@@ -823,7 +823,7 @@
     "href": "04-stats.html#conduct-the-independent-samples-t-test",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "Conduct the independent samples T-test",
-    "text": "Conduct the independent samples T-test\nRemember, the hypotheses are:\n\n\n\\(H_0\\): There is no significant difference in the mean age between those who intend to vote “Yes” and those who intend to vote “No”.\n\n\\(H_1\\): There is a significant difference in the mean age between those who intend to vote “Yes” and those who intend to vote “No”.\n\n\nt.test(age ~ vote, \n       data = voters_age, \n       var.equal = FALSE)\n\n\n\n\n    Welch Two Sample t-test\n\ndata:  age by vote\nt = -5.8797, df = 1686.7, p-value = 4.944e-09\nalternative hypothesis: true difference in means between group N and group Y is not equal to 0\n95 percent confidence interval:\n -5.607052 -2.801954\nsample estimates:\nmean in group N mean in group Y \n       35.99885        40.20335"
+    "text": "Conduct the independent samples T-test\nRemember, the hypotheses are:\n\n\n\\(H_0\\): There is no significant difference in the mean age between those who intend to vote “Yes” and those who intend to vote “No”.\n\n\\(H_1\\): There is a significant difference in the mean age between those who intend to vote “Yes” and those who intend to vote “No”.\n\n\nt.test(age ~ vote, \n       data = voters_age, \n       var.equal = TRUE)\n\n\n\n\n    Two Sample t-test\n\ndata:  age by vote\nt = -5.8857, df = 1701, p-value = 4.765e-09\nalternative hypothesis: true difference in means between group N and group Y is not equal to 0\n95 percent confidence interval:\n -5.605619 -2.803386\nsample estimates:\nmean in group N mean in group Y \n       35.99885        40.20335"
   },
   {
     "objectID": "04-stats.html#t-test-paired-sample-t-test",
@@ -865,7 +865,7 @@
     "href": "04-stats.html#one-way-anova-sample-problem-and-result",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "One-Way ANOVA: Sample problem and result",
-    "text": "One-Way ANOVA: Sample problem and result\nIs there a significant difference in statusquo scores between different education levels?\nLet’s visualize the data first!"
+    "text": "One-Way ANOVA: Sample problem and result\nRQ: Is there a significant difference in statusquo scores between different education levels?\nLet’s visualize the data first!"
   },
   {
     "objectID": "04-stats.html#conduct-the-one-way-anova-test",
@@ -928,7 +928,7 @@
     "href": "04-stats.html#two-way-anova-sample-problem-and-result",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "Two-Way ANOVA: Sample problem and result",
-    "text": "Two-Way ANOVA: Sample problem and result\nIs there a significant difference in statusquo scores between different education levels and sexes?\nLet’s visualize the data!"
+    "text": "Two-Way ANOVA: Sample problem and result\nRQ: Is there a significant difference in statusquo scores between different education levels and sexes?\nLet’s visualize the data!"
   },
   {
     "objectID": "04-stats.html#conduct-the-two-way-anova-test",
