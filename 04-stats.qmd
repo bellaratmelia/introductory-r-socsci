@@ -47,19 +47,21 @@ curve(dbeta(x, 2, 5), add = TRUE, col = "darkred", lwd = 2)
 
 ::: columns
 ::: {.column width="50%"}
-[**Independent Variable (IV)**]{.underline}
-
-The variables that researchers will manipulate.
-
--   Other names for it: Predictor, Covariate, Treatment, Regressor, Input, etc.
-:::
-
-::: {.column width="50%"}
 [**Dependent Variable (DV)**]{.underline}
 
 The variables that will be affected as a result of manipulation/changes in the IVs
 
 -   Other names for it: Outcome, Response, Output, etc.
+-   Often denoted as $y$
+:::
+
+::: {.column width="50%"}
+[**Independent Variable (IV)**]{.underline}
+
+The variables that researchers will manipulate.
+
+-   Other names for it: Predictor, Covariate, Treatment, Regressor, Input, etc.
+-   Often denoted as $x$
 :::
 :::
 
@@ -77,7 +79,16 @@ Use `read_csv` from `readr` package (part of `tidyverse`) to load our data into 
 library(tidyverse)
 
 # read the CSV with Chile voting data
-chile_data <- read_csv("data/chile_voting.csv")
+chile_data <- read_csv("data-output/chile_voting_processed.csv")
+
+chile_data <- chile_data |> 
+    mutate(across(c("region", "sex", "education", "vote", "age_group", "support_level"), as.factor))
+
+#reordering
+chile_data <- chile_data |> 
+    mutate(education = factor(education, 
+                         levels = c("P", "S", "PS"), 
+                         ordered = TRUE))
 
 # peek at the data, pay attention to the data types!
 glimpse(chile_data)
@@ -91,13 +102,19 @@ This is done by analyzing the frequency table (i.e., contingency table) formed 
 
 **Example**: Is there any relationship between `education` and `vote` in our Chile voting data?
 
+Typically, we can start with visualizing the data first!
+
+```{r}
+table(chile_data$education, chile_data$vote)
+```
+
 ## Chi-Square: Sample problem and results
 
 Is there any relationship between `education` and `vote` in our Chile voting data?
 
 ```{r}
 #| echo: true
-print(chisq.test(table(chile_data$education, chile_data$vote)))
+chisq.test(table(chile_data$education, chile_data$vote))
 ```
 
 ::: {style="font-size: 75%; width: 75%"}
@@ -113,75 +130,61 @@ print(chisq.test(table(chile_data$education, chile_data$vote)))
 A correlation test evaluates the strength and direction of a linear relationship between two variables. The coefficient is expressed in value between -1 to 1, with 0 being no correlation at all.
 
 ::: columns
-::: {.column width="40%"}
+::: {.column width="33%"}
 **Pearson's** $r$ (r)
 
--   Assumes and measures linear relationships
+-   Measure the association between two continuous numerical variables
 -   Sensitive to outliers
--   Assumes normality
+-   Assumes normality and/or linearity
 -   (*most likely the one that you learned in class)*
 :::
 
-::: {.column width="30%"}
+::: {.column width="33%"}
 **Kendall's** $\tau$ (tau)
 
--   Measures monotonic relationship
+-   Measure the association between two variables (ordinal-ordinal or ordinal-continuous)
 -   less sensitive/more robust to outliers
--   non-parametric, do not assume normality
+-   non-parametric, does not assume normality and/or linearity
 :::
 
-::: {.column width="30%"}
+::: {.column width="33%"}
 **Spearman's** $\rho$ (rho)
 
--   Measures monotonic relationship
+-   Measure the association between two variables (ordinal-ordinal or ordinal-continuous)
 -   less sensitive/more robust to outliers
--   non-parametric, do not assume normality
+-   non-parametric, does not assume normality and/or linearity
 :::
 :::
 
-## What is monotonic relationship?
-
-When a size of one variable increases, the other variables also increase, though at different rate.
-
-```{r}
-
-par(mfrow = c(1, 2))
-
-# Monotonic Relationship 
-set.seed(123)
-x_monotonic <- seq(1, 20, length.out = 25)
-y_monotonic <- c(1, 2, 3, 4, 5, 
-                 5, 7, 8, 8, 10, 
-                 10, 10, 10, 10, 10 ,
-                10 ,10, 10, 11, 11, 
-                 11, 12, 14, 15, 16)
-
-plot(x_monotonic, y_monotonic, main = "Monotonic Relationship", 
-     xlab = "X", ylab = "Y", pch = 3, col = "navy")
-
-# Linear Relationship 
-set.seed(456)
-x_linear <- seq(1, 20, length.out = 25)
-y_linear <- x_linear + rnorm(25, mean = 0, sd = 1)
-
-plot(x_linear, y_linear, main = "Linear Relationship", 
-     xlab = "X", ylab = "Y", pch = 4, col = "purple")
-
-par(mfrow = c(1, 1))
-
-```
+For more info, you can refer to this reading: [Measures of Association - How to Choose? (Harry Khamis, PhD)](https://journals.sagepub.com/doi/pdf/10.1177/8756479308317006){target="_blank"}
 
 ## Correlation: Sample problem and result
 
-Is there a significant correlation between a respondent's age and income?
+RQ: **Is there a significant correlation between a respondent's age and statusquo?**
+
+As both variables are numerical and continuous, we can use pearson correlation.
+
+Let's start with visualizing the data, which can be used to support the explanation.
+
+```{r}
+chile_data |> 
+    ggplot(aes(x = age, y = statusquo)) +
+    geom_jitter(color="maroon", alpha=0.5) +
+    geom_smooth(method = "lm", se = TRUE) # se is to show the confidence interval
+```
+
+## Conduct the correlation test
 
 ```{r}
 #| echo: true
-cor.test(chile_data$age, chile_data$income, method = "pearson")
+#| output-location: column
+cor.test(chile_data$age, chile_data$statusquo, 
+         method = "pearson")
 ```
 
 ::: {style="font-size: 75%; width: 75%"}
--   **t** is the **t-test statistic** (for hypothesis testing)
+-   **cor** is the **correlation coefficient** - this is the number that you want to report.
+-   **t** is the **t-test statistic**
 -   **df** is the degrees of freedom
 -   **p-value** is the significance level of the **t-test**
 -   **conf.int** is the **confidence interval** of the coefficient at 95%
@@ -190,9 +193,9 @@ cor.test(chile_data$age, chile_data$income, method = "pearson")
 
 ## Let's try this correlation exercise! (5 mins)
 
--   Calculate the correlation coefficient between age and statusquo.
+-   Calculate the correlation coefficient between age and income
 
-    -   What is the null and alternative hypothesis?
+    -   Which method should you use for this?
 
     -   How strong is the correlation? i.e. would you say it's a strong correlation?
 
@@ -200,10 +203,12 @@ cor.test(chile_data$age, chile_data$income, method = "pearson")
 
     -   Is the correlation coefficient statistically significant?
 
+    -   Visualize the relationship!
+
 ```{r}
 #| echo: false
 #| output: false
-cor.test(chile_data$age, chile_data$statusquo, method = "pearson")
+cor.test(chile_data$age, chile_data$income, method = "pearson")
 
 ```
 
@@ -239,34 +244,170 @@ Examples: Before workshop vs After workshop.
 :::
 :::
 
-## T-test: Sample problem and result
+## T-test: One-sample T-Test
 
-Is the average age of voters who intend to vote "Yes" significantly different from the overall mean age of voters in Chile? Assume the
+RQ: **Is the average age of participants who intend to vote "Yes" significantly greater than the overall mean age of voting population in Chile? Assume the population mean is 35.**
+
+Let's start with visualizing the data
 
 ```{r}
 #| echo: true
-overall_mean_age = mean(chile_data$age, na.rm = TRUE)
-yes_voters = chile_data$age[chile_data$vote == "Y"]
-t.test(x = yes_voters, alternative = "two.sided", mu = overall_mean_age)
+#| output-location: column-fragment
+
+yes_voters_age <- chile_data |> # <2>
+    filter(vote == "Y") |>      # <2>
+    select(age)   
+
+
+yes_voters_age |> 
+    ggplot(aes(y = age, x = 1)) +
+    geom_boxplot(width = 0.2) + 
+    geom_hline(yintercept = 35, color="red") +
+    geom_label(label = "population mean", 
+               x = 1, y = 35.1, 
+               label.size = 0.15) +
+    coord_flip() +
+    theme(aspect.ratio = 1/3) 
+```
+
+## Conduct the One-sample T-Test
+
+```{r}
+#| echo: true
+#| output-location: fragment
+population_mean_age = 35  
+
+t.test(yes_voters_age,          
+       alternative = "greater", 
+       mu = population_mean_age)
 ```
 
 *What if there is a hypothesis? How would you write this in the report?*
 
-## Let's try this T-Test exercises (5 mins)
+## T-Test: Independent Samples T-Test
 
-1.  Is there a significant difference in age between those who intend to vote "Yes" and those who intend to vote "No"?
-2.  Does the income of male voters significantly differ from female voters?
+RQ: **Is there a significant difference in age between those who intend to vote "Yes" and those who intend to vote "No"?**
+
+Let's first take only the necessary columns and get some summary statistics, particularly on the number of samples for each group, as well as the mean, standard deviation, and variance.
 
 ```{r}
-#| echo: false
-#| output: false
-t.test(age ~ vote, data = chile_data[chile_data$vote %in% c("Y", "N"),])
+#| echo: true
+#| output-location: column-fragment
+
+voters_age <- chile_data |> 
+    select(age, vote) |> 
+    filter(vote == "Y" | vote == "N") 
+
+voters_age |> 
+    group_by(vote) |> 
+    summarise(total = n(), 
+              mean = mean(age),
+              variance = var(age),
+              stdeviation = sd(age))
+
+```
+
+## Visualize the differences between two samples
+
+The variance will be easier to see when we visualize it as well. As we can see, the variance is roughly the same between these two samples.
+
+```{r}
+voters_age |> 
+    ggplot(aes(x = vote, y = age)) +
+    geom_boxplot() +
+    theme_minimal()
+```
+
+## Conduct the independent samples T-test
+
+Remember, the hypotheses are:
+
+::: columns
+::: {.column width="50%"}
+$H_0$: There is no significant difference in the mean age between those who intend to vote "Yes" and those who intend to vote "No".
+:::
+
+::: {.column width="50%"}
+$H_1$: There is a significant difference in the mean age between those who intend to vote "Yes" and those who intend to vote "No".
+:::
+:::
+
+```{r}
+#| echo: true
+#| output-location: fragment
+
+t.test(age ~ vote, 
+       data = voters_age, 
+       var.equal = TRUE)
+```
+
+## T-Test: Paired Sample T-Test
+
+Unfortunately, our data is not suitable for paired T-Test. For demo purposes, we are going to use a built-in sample datasets called `sleep` from the base R dataset.
+
+The dataset is already loaded, so you can use it right away!
+
+-   type `View(sleep)` in your R console (bottom left), and then press enter. RStudio will open up the preview of the dataset.
+-   type `?sleep` in your R console to view the help page (a.k.a vignette) about this dataset.
+-   type `data()` in your console to see what are the available datasets that you can use for practice!
+
+```{r}
+sleep <- as_tibble(sleep)
+glimpse(sleep)
+
+```
+
+## Visualise the before and after
+
+```{r}
+sleep |> 
+    group_by(group) |> 
+    summarise(n = n(), mean = mean(extra), sd = sd(extra), variance = var(extra))
 ```
 
 ```{r}
-#| echo: false
-#| output: false
-t.test(income ~ sex, data = chile_data)
+sleep |> 
+    ggplot(aes(x = group, y = extra)) +
+    geom_boxplot() +
+    theme_minimal()
+```
+
+## Transform the data shape
+
+The data is in long format. let's transform it into wide format so that we can conduct the analysis more easily.
+
+```{r}
+#| echo: true
+#| output-location: fragment
+
+sleep_wide <- sleep |> 
+    pivot_wider(names_from = group, values_from = extra, 
+                names_prefix = "group_")
+glimpse(sleep_wide)
+
+```
+
+## Conduct the paired-sample T-test
+
+Remember, the hypotheses are:
+
+::: columns
+::: {.column width="50%"}
+$H_0$: There is no significant difference in the increase in hours of sleep.
+:::
+
+::: {.column width="50%"}
+$H_1$: There is a significant difference in the increase in hours of sleep.
+:::
+:::
+
+```{r}
+#| echo: true
+#| output-location: fragment
+
+t.test(Pair(sleep_wide$group_1, sleep_wide$group_2) ~ 1,
+       data = sleep)
+
 ```
 
 ## ANOVA (Analysis of Variance)
@@ -283,10 +424,24 @@ There are two 'mainstream' ANOVA that will be covered in this workshop:
 
 ## One-Way ANOVA: Sample problem and result
 
-Is there a significant difference in statusquo scores between different education levels?
+RQ: **Is there a significant difference in statusquo scores between different education levels?**
+
+Let's visualize the data first!
+
+```{r}
+chile_data |> 
+    select(statusquo, education) |> 
+    ggplot(aes(x = education, y = statusquo)) +
+    geom_boxplot() +
+    geom_hline(yintercept = 0, color = "maroon") +
+    theme_minimal()
+```
+
+## Conduct the one-way Anova test
 
 ```{r}
 #| echo: true
+
 statusquo_edu_anova <- aov(statusquo ~ education, data = chile_data)
 summary(statusquo_edu_anova)
 ```
@@ -301,41 +456,14 @@ summary(statusquo_edu_anova)
 
 ## Post-hoc test (only when result is significant)
 
-If your ANOVA test indicates significant result, the next step is to figure out which category pairings are yielding the significant result. Tukey's Honest Significant Difference (HSD) can help us figure that out.
+If your ANOVA test indicates significant result, the next step is to figure out which category pairings are yielding the significant result.
+
+Tukey's Honest Significant Difference (HSD) can help us figure that out! Other alternative is the `pairwise.t.test`, but let's try Tukey's for now.
 
 ```{r}
 #| echo: true
+#| output-location: fragment
 TukeyHSD(statusquo_edu_anova)
-```
-
-## Two-Way ANOVA: Sample problem and result
-
-Is there a significant difference in statusquo scores between different education levels and sexes?
-
-```{r}
-#| echo: true
-#| output: true
-statusquo_edu_sex_anova <- aov(statusquo ~ education * sex, data = chile_data)
-summary(statusquo_edu_sex_anova)
-```
-
-## Post-hoc test for Two-way ANOVA
-
-```{r}
-#| echo: true
-TukeyHSD(statusquo_edu_sex_anova)
-```
-
-## Let's try this ANOVA exercise! (5 mins)
-
-Is there a significant difference in income between different regions and education levels?
-
-```{r}
-#| echo: false
-#| output: false
-income_region_edu_anova <- aov(income ~ region * education, data = chile_data)
-summary(income_region_edu_anova)
-TukeyHSD(income_region_edu_anova)
 ```
 
 ## ANOVA Assumptions
@@ -356,24 +484,119 @@ TukeyHSD(income_region_edu_anova)
 
 6.  No significant outliers
 
-## Verifying the assumptions
+## Verifying the assumption: Test for Homogeneity of variance
 
-**Shapiro-Wilk Test**
+**Levene's Test** to test for homogeneity of variance i.e. homoskedasticity
 
 ```{r}
 #| echo: true
+#| output-location: column
+
+library(car)
+leveneTest(income ~ education, 
+           data = chile_data)
+```
+
+The results indicate that the p-value is less than the significance level of 0.05, suggesting a significant difference in variance across the groups. Consequently, the assumption of homogeneity of variances is violated.
+
+## Plotting Residuals: Residual vs Fitted
+
+When we plot the residuals[^1], we can see some outliers as well:
+
+[^1]: Residual = difference between an observed value and the mean of all values for that group.
+
+```{r}
+plot(statusquo_edu_anova, 1)
+
+```
+
+## Verifying the assumptions: Test for Normality
+
+**Shapiro-Wilk Test** to test for normality.
+
+```{r}
+#| echo: true
+#| output-location: column
 
 library(car)
 shapiro.test(chile_data$income)
 ```
 
-**Levene's Test**
+The p-value from the Shapiro-Wilk test is less than the significance level of 0.05, indicating that the data significantly deviates from normality. Therefore, the assumption of normality is not satisfied.
+
+## Plotting Residuals: Q-Q Plot 
+
+We can see this better from when we plot the residuals:
+
+```{r}
+plot(statusquo_edu_anova, 2)
+
+```
+
+## When the assumptions are not met...
+
+We can use **Kruskal-Wallis rank sum test** as an non-parametric alternative to One-Way ANOVA!
+
+```{r}
+#| echo: true 
+
+kruskal.test(statusquo ~ education, data = chile_data)
+```
+
+Other alternative: **Welch's ANOVA** for when the homoskedasticity assumption is not met.
 
 ```{r}
 #| echo: true
 
-library(car)
-leveneTest(income ~ education, data = chile_data)
+oneway.test(statusquo ~ education, data = chile_data, var.equal = FALSE)
+```
+
+## Two-Way ANOVA: Sample problem and result
+
+RQ: **Is there a significant difference in statusquo scores between different education levels and sexes?**
+
+Let's visualize the data!
+
+```{r}
+
+chile_data |> 
+    ggplot(aes(x = education, y = statusquo)) +
+    geom_boxplot() +
+    geom_hline(yintercept = 0, color = "maroon") +
+    facet_wrap(~ sex) 
+
+```
+
+## Conduct the Two-way ANOVA test
+
+```{r}
+#| echo: true
+#| output-location: fragment
+statusquo_edu_sex_anova <- aov(statusquo ~ education + sex, data = chile_data)
+summary(statusquo_edu_sex_anova)
+```
+
+## Post-hoc test for Two-way ANOVA
+
+```{r}
+#| echo: true
+#| output-location: fragment
+TukeyHSD(statusquo_edu_sex_anova)
+```
+
+## Let's try this ANOVA exercise! (5 mins)
+
+Is there a significant difference in income between different regions and statusquo?
+
+-   Visualize the data as well
+-   Test for normality and homoskedasticity, and choose the appropriate test
+
+```{r}
+#| echo: false
+#| output: false
+statusquo_region <- aov(statusquo ~ region, data = chile_data)
+summary(statusquo_region)
+TukeyHSD(statusquo_region)
 ```
 
 # End of Session 4!

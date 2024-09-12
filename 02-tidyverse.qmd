@@ -400,16 +400,6 @@ chile_data |>
 
 ::: columns
 ::: {.column width="50%"}
-**Wide Data:**
-
--   Each row is a unique observation.
-
--   Each column is a variable --\> the more variables you have, the "wider" is the data
-
--   This format is more intuitive for humans!
-:::
-
-::: {.column width="50%"}
 **Long data:**
 
 -   Each row is a unique observation.
@@ -417,6 +407,17 @@ chile_data |>
 -   There is a separate column indicating the variable or type of measurements
 
 -   This format is more "understandable" by R, more suitable for visualizations.
+
+:::
+
+::: {.column width="50%"}
+**Wide data:**
+
+-   Each row is a unique observation.
+
+-   Each column is a variable --\> the more variables you have, the "wider" is the data
+
+-   This format is more intuitive for humans!
 :::
 :::
 
