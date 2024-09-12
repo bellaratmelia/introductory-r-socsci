@@ -683,7 +683,7 @@ mean of x
 </section>
 <section id="visualize-the-differences-between-two-samples" class="slide level2">
 <h2>Visualize the differences between two samples</h2>
-<p>The variance will be easier to see when we visualize it as well. As we can see, the variance is roughly the same between these two samples.</p>
+<p>The variance will be easier to see when we visualize it as well. As we can see, the variance for Y group is wider than the N group. This suggests that the variance might be heterogeneous (heteroskedastic).</p>
 
 <img data-src="04-stats_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
 <section id="conduct-the-independent-samples-t-test" class="slide level2">
@@ -695,24 +695,37 @@ mean of x
 </div><div class="column" style="width:50%;">
 <p><span class="math inline">\(H_1\)</span>: There is a significant difference in the mean age between those who intend to vote “Yes” and those who intend to vote “No”.</p>
 </div></div>
-<div class="cell">
+<div class="cell columns column-output-location">
+<div class="column">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">t.test</span>(age <span class="sc">~</span> vote, </span>
 <span id="cb11-2"><a></a>       <span class="at">data =</span> voters_age, </span>
-<span id="cb11-3"><a></a>       <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell fragment">
+<span id="cb11-3"><a></a>       <span class="at">var.equal =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
 <div class="cell-output cell-output-stdout">
 <pre><code>
-    Two Sample t-test
+    Welch Two Sample t-test
 
 data:  age by vote
-t = -5.8857, df = 1701, p-value = 4.765e-09
+t = -5.8797, df = 1686.7, p-value = 4.944e-09
 alternative hypothesis: true difference in means between group N and group Y is not equal to 0
 95 percent confidence interval:
- -5.605619 -2.803386
+ -5.607052 -2.801954
 sample estimates:
 mean in group N mean in group Y 
        35.99885        40.20335 </code></pre>
+</div>
+</div></div>
+<div class="callout callout-tip callout-titled callout-style-simple">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Notice that we are using Welch’s t-test instead of Students’ t-test</strong></p>
+</div>
+<div class="callout-content">
+<p>Welch’s t-test (also known as <strong>unequal variances t-test</strong>, is a more robust alternative to Student’s t-test. It is often used when two samples have unequal variances and possibly unequal sample sizes.</p>
+</div>
 </div>
 </div>
 </section>
@@ -735,8 +748,8 @@ $ ID    &lt;fct&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
 </div>
 </div>
 </section>
-<section id="visualise-the-before-and-after" class="slide level2">
-<h2>Visualise the before and after</h2>
+<section id="visualise-the-before-group-1-and-after-group-2" class="slide level2">
+<h2>Visualise the before (group 1) and after (group 2)</h2>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 5
