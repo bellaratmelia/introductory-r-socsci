@@ -96,6 +96,15 @@
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto.css">
+  <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-G5L1RGYC4H"></script>
+
+  <script type="text/javascript">
+
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-G5L1RGYC4H', { 'anonymize_ip': true});
+  </script>
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -760,11 +769,13 @@ Bella Ratmelia
 <section id="vector-manipulations-adding-items" class="slide level2">
 <h2>Vector Manipulations: Adding items</h2>
 <p>Several ways to add items to a vector</p>
-<div class="cell">
+<div class="cell columns column-output-location">
+<div class="column">
 <div class="sourceCode cell-code" id="annotated-cell-23"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-23" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-23-1" class="code-annotation-target"><a href="#annotated-cell-23-1"></a>t1_grades <span class="ot">&lt;-</span> <span class="fu">c</span>(t1_grades, <span class="dv">92</span>)</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-23" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-23-2" class="code-annotation-target"><a href="#annotated-cell-23-2"></a>t1_grades <span class="ot">&lt;-</span> <span class="fu">c</span>(t1_grades, <span class="dv">88</span>, <span class="dv">95</span>, <span class="dv">79</span>)</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-23" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-23-3" class="code-annotation-target"><a href="#annotated-cell-23-3"></a>t1_grades <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">82</span>, t1_grades)</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-23" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-23-4" class="code-annotation-target"><a href="#annotated-cell-23-4"></a>t1_grades <span class="ot">&lt;-</span> <span class="fu">append</span>(t1_grades, <span class="dv">92</span>, <span class="at">after =</span> <span class="dv">2</span>) <span class="co"># &lt;2&gt;</span></span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
 <div class="cell-annotation">
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-23" data-target-annotation="1">1</dt>
@@ -785,14 +796,16 @@ Bella Ratmelia
 </dd>
 </dl>
 </div>
-</div>
+</div></div>
 </section>
 <section id="vector-manipulations-removing-items" class="slide level2">
 <h2>Vector Manipulations: Removing items</h2>
-<div class="cell">
+<div class="cell columns column-output-location">
+<div class="column">
 <div class="sourceCode cell-code" id="annotated-cell-24"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-24" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-24-1" class="code-annotation-target"><a href="#annotated-cell-24-1"></a>t1_grades <span class="ot">&lt;-</span> t1_grades[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>)]</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-24" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-24-2" class="code-annotation-target"><a href="#annotated-cell-24-2"></a>t1_grades <span class="ot">&lt;-</span> t1_grades[t1_grades <span class="sc">&lt;=</span> <span class="dv">90</span>]</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-24" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-24-3" class="code-annotation-target"><a href="#annotated-cell-24-3"></a>t1_grades <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(t1_grades)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
 <div class="cell-annotation">
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-24" data-target-annotation="1">1</dt>
@@ -809,7 +822,7 @@ Bella Ratmelia
 </dd>
 </dl>
 </div>
-</div>
+</div></div>
 </section>
 <section id="data-structures-in-r-factors" class="slide level2">
 <h2>Data Structures in R: Factors</h2>
@@ -880,6 +893,7 @@ Bella Ratmelia
 </section>
 <section id="preparation-get-the-csv" class="slide level2">
 <h2>Preparation: Get the CSV</h2>
+<div title="What is a CSV?">
 <div class="callout callout-note callout-titled callout-style-simple">
 <div class="callout-body">
 <div class="callout-title">
@@ -891,6 +905,7 @@ Bella Ratmelia
 <div class="callout-content">
 <p>A CSV (Comma-Separated Values) file is a type of file that stores data in a plain text format. Each line in the file represents a row of data, and within each row, individual pieces of data (like numbers or words) are separated by commas. This format is commonly used for storing and transferring data, especially in spreadsheets and databases.</p>
 <p>You can open CSV files in Excel, Google Sheets, or event Notepad!</p>
+</div>
 </div>
 </div>
 </div>

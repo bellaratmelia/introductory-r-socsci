@@ -96,6 +96,15 @@
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto.css">
+  <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-G5L1RGYC4H"></script>
+
+  <script type="text/javascript">
+
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-G5L1RGYC4H', { 'anonymize_ip': true});
+  </script>
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -405,8 +414,8 @@ Bella Ratmelia
 <section id="todays-outline" class="slide level2">
 <h2>Today’s Outline</h2>
 <ol type="1">
-<li>Linear Regression</li>
-<li>Logistic Regression</li>
+<li>Simple Linear Regression in R</li>
+<li>Binary Logistic Regression in R</li>
 <li>Create your manuscript with Quarto</li>
 </ol>
 </section>
@@ -417,67 +426,56 @@ Bella Ratmelia
 <span id="cb1-2"><a></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-3"><a></a></span>
 <span id="cb1-4"><a></a><span class="co"># read the CSV with Chile voting data</span></span>
-<span id="cb1-5"><a></a>chile_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/chile_voting.csv"</span>)</span>
+<span id="cb1-5"><a></a>chile_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data-output/chile_voting_processed.csv"</span>)</span>
 <span id="cb1-6"><a></a></span>
-<span id="cb1-7"><a></a><span class="co"># Display the first few rows and structure of the data</span></span>
-<span id="cb1-8"><a></a><span class="fu">head</span>(chile_data)</span>
-<span id="cb1-9"><a></a><span class="fu">str</span>(chile_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-7"><a></a>chile_data <span class="ot">&lt;-</span> chile_data <span class="sc">|&gt;</span> </span>
+<span id="cb1-8"><a></a>    <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(<span class="st">"region"</span>, <span class="st">"sex"</span>, <span class="st">"education"</span>, <span class="st">"vote"</span>, <span class="st">"age_group"</span>, <span class="st">"support_level"</span>), as_factor))</span>
+<span id="cb1-9"><a></a></span>
+<span id="cb1-10"><a></a><span class="co">#reordering</span></span>
+<span id="cb1-11"><a></a>chile_data <span class="ot">&lt;-</span> chile_data <span class="sc">|&gt;</span> </span>
+<span id="cb1-12"><a></a>    <span class="fu">mutate</span>(<span class="at">education =</span> <span class="fu">factor</span>(education, </span>
+<span id="cb1-13"><a></a>                         <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"P"</span>, <span class="st">"S"</span>, <span class="st">"PS"</span>), </span>
+<span id="cb1-14"><a></a>                         <span class="at">ordered =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb1-15"><a></a></span>
+<span id="cb1-16"><a></a><span class="co"># peek at the data, pay attention to the data types!</span></span>
+<span id="cb1-17"><a></a><span class="fu">glimpse</span>(chile_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="linear-regression" class="slide level2">
-<h2>Linear Regression</h2>
+<section id="simple-linear-regression" class="slide level2">
+<h2>Simple Linear Regression</h2>
 <p><strong>Linear regression</strong> is a statistical method used to model the relationship between a dependent variable (outcome) and one or more independent variables (predictors) by fitting a linear equation to the observed data. The math formula looks like this:</p>
+<div class="columns">
+<div class="column" style="width:30%;">
 <p><span class="math display">\[
 Y = \beta_0 + \beta_1X + \varepsilon
 \]</span></p>
+</div><div class="column" style="font-size: 75%; width: 70%;">
 <ul>
-<li><span class="math inline">\(Y\)</span> - the dependent variable
-<ul>
-<li><strong>must be continuous</strong></li>
-</ul></li>
-<li><span class="math inline">\(X\)</span> - the independent variable (if there are more than one, there will be <span class="math inline">\(X_1\)</span> , <span class="math inline">\(X_2\)</span> , and so on.
-<ul>
-<li><strong>can be ordinal, nominal, or continuous</strong></li>
-</ul></li>
+<li><span class="math inline">\(Y\)</span> - the dependent variable; <strong>must be continuous</strong></li>
+<li><span class="math inline">\(X\)</span> - the independent variable (if there are more than one, there will be <span class="math inline">\(X_1\)</span> , <span class="math inline">\(X_2\)</span> , and so on. This can be ordinal, nominal, or continuous</li>
 <li><span class="math inline">\(\beta_0\)</span> - the y-intercept. Represents the expected value of independent variable <span class="math inline">\(Y\)</span> when independent variable(s) <span class="math inline">\(X\)</span> are set to zero.</li>
 <li><span class="math inline">\(\beta_1\)</span> - the slope / coefficient for independent variable</li>
 <li><span class="math inline">\(\varepsilon\)</span> - the error term. (In some examples you might see this omitted from the formula).</li>
 </ul>
-<h3 id="irl-examples">IRL Examples:</h3>
+</div></div>
+<p>Examples:</p>
 <ul>
-<li><p>Does a person’s <strong>age</strong> affect their <strong>income</strong>?</p></li>
-<li><p>Do a person’s <strong>age</strong> and <strong>income</strong> affect their support towards the <strong>statusquo</strong>?</p></li>
+<li>Does a person’s <strong>age</strong> affect their <strong>income</strong>?</li>
+<li>Do a person’s <strong>age</strong> and <strong>education level</strong> affect their <strong>income</strong>?</li>
 </ul>
 </section>
 <section id="linear-regression-one-continuous-predictor" class="slide level2">
 <h2>Linear Regression: One continuous predictor</h2>
-<p><strong>Research Question:</strong> Does a person’s age influence their support to incumbent in Chile?</p>
-<p>The outcome/DV (<span class="math inline">\(Y\)</span>) here is <code>statusquo</code>, while the predictor/IV (<span class="math inline">\(X\)</span>) would be <code>age</code></p>
+<p><strong>Research Question:</strong> Does a person’s <strong>age</strong> influence their <strong>support to incumbent</strong> in Chile?</p>
+<ul>
+<li>The outcome/DV (<span class="math inline">\(Y\)</span>): <code>statusquo</code></li>
+<li>The predictor/IV (<span class="math inline">\(X\)</span>): <code>age</code></li>
+</ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>statsquo_model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(statusquo <span class="sc">~</span> age, <span class="at">data =</span> chile_data)</span>
 <span id="cb2-2"><a></a><span class="fu">summary</span>(statsquo_model1) <span class="co">#summarize the result</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = statusquo ~ age, data = chile_data)
-
-Residuals:
-     Min       1Q   Median       3Q      Max 
--2.00213 -0.97057 -0.04264  0.96793  2.20837 
-
-Coefficients:
-             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) -0.300221   0.053678  -5.593 2.46e-08 ***
-age          0.007802   0.001301   5.997 2.28e-09 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 0.9937 on 2680 degrees of freedom
-  (18 observations deleted due to missingness)
-Multiple R-squared:  0.01324,   Adjusted R-squared:  0.01287 
-F-statistic: 35.96 on 1 and 2680 DF,  p-value: 2.283e-09</code></pre>
 </div>
-</div>
+
 <div style="font-size: 75%; width: 75%">
 <ul>
 <li><strong>Call</strong>: the formula</li>
@@ -488,9 +486,35 @@ F-statistic: 35.96 on 1 and 2680 DF,  p-value: 2.283e-09</code></pre>
 <li><strong>F-statistics</strong>: overall significance</li>
 </ul>
 </div>
-<h3 id="linear-regression-multiple-continuous-predictors">Linear REgression: Multiple continuous predictors</h3>
+</section>
+<section id="linear-regression-one-continuous-predictor-output" class="slide level2 output-location-slide"><h2>Linear Regression: One continuous predictor</h2><div class="cell output-location-slide">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = statusquo ~ age, data = chile_data)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.58205 -0.97443 -0.07783  0.97579  1.87278 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -0.304966   0.056620  -5.386 7.89e-08 ***
+age          0.007670   0.001381   5.555 3.09e-08 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.9984 on 2429 degrees of freedom
+Multiple R-squared:  0.01254,   Adjusted R-squared:  0.01214 
+F-statistic: 30.85 on 1 and 2429 DF,  p-value: 3.086e-08</code></pre>
+</div>
+</div></section><section id="linear-regression-multiple-continuous-predictors" class="slide level2">
+<h2>Linear Regression: Multiple continuous predictors</h2>
 <p><strong>Research Question:</strong> Do a person’s age and their income have an impact on their support for the incumbent?</p>
-<p>The outcome/DV (<span class="math inline">\(Y\)</span>) here is <code>income</code>, while the predictors/IVs (<span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span>) would be <code>age</code> and <code>statusquo</code></p>
+<ul>
+<li>The outcome/DV (<span class="math inline">\(Y\)</span>): <code>statusquo</code></li>
+<li>The predictor/IV (<span class="math inline">\(X\)</span>): <code>age</code> and <code>income</code></li>
+</ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>statsquo_model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(statusquo <span class="sc">~</span> age <span class="sc">+</span> income, <span class="at">data =</span> chile_data)</span>
 <span id="cb4-2"><a></a><span class="fu">summary</span>(statsquo_model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -501,24 +525,23 @@ lm(formula = statusquo ~ age + income, data = chile_data)
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--1.61635 -0.96952 -0.05992  0.97136  1.89569 
+-1.58170 -0.97166 -0.06689  0.97791  1.88982 
 
 Coefficients:
               Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) -3.467e-01  5.793e-02  -5.985 2.46e-09 ***
-age          7.815e-03  1.330e-03   5.875 4.77e-09 ***
-income       1.072e-06  4.942e-07   2.170   0.0301 *  
+(Intercept) -3.357e-01  5.968e-02  -5.625 2.07e-08 ***
+age          7.738e-03  1.381e-03   5.603 2.35e-08 ***
+income       8.276e-07  5.097e-07   1.624    0.105    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.9942 on 2587 degrees of freedom
-  (110 observations deleted due to missingness)
-Multiple R-squared:  0.01463,   Adjusted R-squared:  0.01387 
-F-statistic: 19.21 on 2 and 2587 DF,  p-value: 5.226e-09</code></pre>
+Residual standard error: 0.9981 on 2428 degrees of freedom
+Multiple R-squared:  0.01361,   Adjusted R-squared:  0.0128 
+F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
 </div>
 </div>
 </section>
-<section id="presenting-your-models" class="slide level2">
+<section id="presenting-your-models" class="slide level2 scrollable">
 <h2>Presenting your models</h2>
 <p>Don’t forget to install the library by running this line in your terminal: <code>install.packages("huxtable")</code></p>
 <div class="cell">
@@ -529,25 +552,25 @@ F-statistic: 19.21 on 2 and 2587 DF,  p-value: 5.226e-09</code></pre>
 <colgroup><col><col><col></colgroup><tbody><tr>
 <th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">age</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">age + income</th></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(Intercept)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-0.300 ***</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-0.347 ***</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(Intercept)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-0.305 ***</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-0.336 ***</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.054)&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.058)&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.057)&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.060)&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
 <th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">age</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.008 ***</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.008 ***</td></tr>
 <tr>
 <th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.001)&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.001)&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">income</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.000 *&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">income</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.000&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
 <th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.000)&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">N</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2682&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2590&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">N</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2431&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2431&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">R2</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.013&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.015&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">R2</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.013&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.014&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">logLik</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-3787.630&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-3658.444&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">logLik</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-3444.614&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-3443.294&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">AIC</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">7581.260&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">7324.888&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">AIC</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">6895.227&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">6894.589&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
 <th colspan="3" style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05.</th></tr>
 </tbody></table>
@@ -558,7 +581,7 @@ F-statistic: 19.21 on 2 and 2587 DF,  p-value: 5.226e-09</code></pre>
 <section id="fyi-multicollinearity" class="slide level2">
 <h2>FYI: Multicollinearity</h2>
 <p>Caution! When doing regression-type of tests, watch out for multicollinearity.</p>
-<p>Multicollinearity = a situation in which two or more predictor variables are highly correlated with each other. This makes it difficult to determine the specific contribution of each predictor variable to the relationship.</p>
+<p>Multicollinearity is a situation in which two or more predictor variables are highly correlated with each other. This makes it difficult to determine the specific contribution of each predictor variable to the relationship.</p>
 <p>One way to check for it:</p>
 <ul>
 <li><p>Assess the correlation between your predictor variables in your model using Variance Inflation Factor (VIF)</p></li>
@@ -567,14 +590,18 @@ F-statistic: 19.21 on 2 and 2587 DF,  p-value: 5.226e-09</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>car<span class="sc">::</span><span class="fu">vif</span>(statsquo_model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>     age   income 
-1.001103 1.001103 </code></pre>
+<pre><code>   age income 
+1.0009 1.0009 </code></pre>
 </div>
 </div>
 </section>
 <section id="linear-regression-one-categorical-predictor" class="slide level2">
 <h2>Linear Regression: One categorical predictor</h2>
-<p><strong>Research question</strong>: Explore the difference of support for status quo between different education levels.</p>
+<p><strong>Research question</strong>: Explore the difference of support for <code>statusquo</code> between different <code>sex</code>.</p>
+<ul>
+<li>The outcome/DV (<span class="math inline">\(Y\)</span>): <code>statusquo</code></li>
+<li>The predictor/IV (<span class="math inline">\(X\)</span>): <code>sex</code></li>
+</ul>
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -584,28 +611,18 @@ F-statistic: 19.21 on 2 and 2587 DF,  p-value: 5.226e-09</code></pre>
 <p><strong>Note</strong></p>
 </div>
 <div class="callout-content">
-<p>Before we proceed with analysis, let’s ensure that all the categorical variables are cast as factors!</p>
+<p>Before proceeding with analysis, ensure that all the categorical variables involved are cast as factors!</p>
 </div>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>chile_data <span class="ot">&lt;-</span> chile_data <span class="sc">|&gt;</span> </span>
-<span id="cb9-2"><a></a>    <span class="fu">mutate</span>(<span class="at">education =</span> <span class="fu">factor</span>(education)) <span class="sc">|&gt;</span> </span>
-<span id="cb9-3"><a></a>    <span class="fu">mutate</span>(<span class="at">sex =</span> <span class="fu">factor</span>(sex)) <span class="sc">|&gt;</span> </span>
-<span id="cb9-4"><a></a>    <span class="fu">mutate</span>(<span class="at">region =</span> <span class="fu">factor</span>(region))</span>
-<span id="cb9-5"><a></a></span>
-<span id="cb9-6"><a></a><span class="fu">glimpse</span>(chile_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">str</span>(chile_data<span class="sc">$</span>statusquo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Rows: 2,700
-Columns: 8
-$ region     &lt;fct&gt; N, N, N, N, N, N, N, N, N, N, N, N, N, N, N, N, N, N, N, N,…
-$ population &lt;dbl&gt; 175000, 175000, 175000, 175000, 175000, 175000, 175000, 175…
-$ sex        &lt;fct&gt; M, M, F, F, F, F, M, F, F, M, M, M, F, F, M, M, F, M, M, F,…
-$ age        &lt;dbl&gt; 65, 29, 38, 49, 23, 28, 26, 24, 41, 41, 64, 19, 27, 46, 36,…
-$ education  &lt;fct&gt; P, PS, P, P, S, P, PS, S, P, P, P, S, PS, S, PS, S, PS, S, …
-$ income     &lt;dbl&gt; 35000, 7500, 15000, 35000, 35000, 7500, 35000, 15000, 15000…
-$ statusquo  &lt;dbl&gt; 1.00820, -1.29617, 1.23072, -1.03163, -1.10496, -1.04685, -…
-$ vote       &lt;chr&gt; "Y", "N", "Y", "N", "N", "N", "N", "N", "U", "N", "Y", "U",…</code></pre>
+<pre><code> num [1:2431] 1.01 -1.3 1.23 -1.03 -1.1 ...</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">str</span>(chile_data<span class="sc">$</span>sex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Factor w/ 2 levels "M","F": 1 1 2 2 2 2 1 2 2 1 ...</code></pre>
 </div>
 </div>
 </section>
@@ -613,124 +630,81 @@ $ vote       &lt;chr&gt; "Y", "N", "Y", "N", "N", "N", "N", "N", "U", "N", "Y", 
 <h2>Continuing the analysis</h2>
 <p>The analysis summary should look like this:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>statusquo_model3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(statusquo <span class="sc">~</span> education, <span class="at">data =</span> chile_data)</span>
-<span id="cb11-2"><a></a><span class="fu">summary</span>(statusquo_model3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>statusquo_model3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(statusquo <span class="sc">~</span> sex, <span class="at">data =</span> chile_data)</span>
+<span id="cb13-2"><a></a><span class="fu">summary</span>(statusquo_model3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
-lm(formula = statusquo ~ education, data = chile_data)
+lm(formula = statusquo ~ sex, data = chile_data)
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--1.96343 -0.94652 -0.05996  0.96151  2.23086 
+-1.77948 -0.98619 -0.06878  0.96289  1.79341 
 
 Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  0.16042    0.02988   5.368 8.65e-08 ***
-educationPS -0.34269    0.05510  -6.219 5.78e-10 ***
-educationS  -0.24396    0.04210  -5.795 7.65e-09 ***
+            Estimate Std. Error t value Pr(&gt;|t|)   
+(Intercept) -0.07986    0.02917  -2.737  0.00624 **
+sexF         0.13339    0.04068   3.279  0.00106 **
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.9907 on 2670 degrees of freedom
-  (27 observations deleted due to missingness)
-Multiple R-squared:  0.01919,   Adjusted R-squared:  0.01846 
-F-statistic: 26.13 on 2 and 2670 DF,  p-value: 5.796e-12</code></pre>
+Residual standard error: 1.003 on 2429 degrees of freedom
+Multiple R-squared:  0.004406,  Adjusted R-squared:  0.003997 
+F-statistic: 10.75 on 1 and 2429 DF,  p-value: 0.001057</code></pre>
 </div>
 </div>
-<p>Interpretation for categorical predictor - one of the category will be used as a reference category. By default, the first category will be used.</p>
+<p>When interpreting a categorical predictor in regression, one category is treated as the reference category, which serves as the baseline for comparison. In this case, the reference category corresponds to the intercept.</p>
+<p>By default, the first category in the data is used as the reference category, unless specified otherwise.</p>
 </section>
 <section id="categorical-predictor-changing-the-reference" class="slide level2">
 <h2>Categorical predictor: changing the reference</h2>
-<p>We can use <code>relevel</code> to change the reference/baseline category.</p>
+<p>Let’s change the reference category for <code>sex</code> variable to “M”.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>chile_data <span class="ot">&lt;-</span> chile_data <span class="sc">|&gt;</span> </span>
-<span id="cb13-2"><a></a>    <span class="fu">mutate</span>(<span class="at">education =</span> <span class="fu">relevel</span>(education, <span class="at">ref =</span> <span class="st">"S"</span>))</span>
-<span id="cb13-3"><a></a></span>
-<span id="cb13-4"><a></a><span class="fu">contrasts</span>(chile_data<span class="sc">$</span>education)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>chile_data <span class="ot">&lt;-</span> chile_data <span class="sc">|&gt;</span> </span>
+<span id="cb15-2"><a></a>    <span class="fu">mutate</span>(<span class="at">sex =</span> <span class="fu">relevel</span>(sex, <span class="at">ref =</span> <span class="st">"M"</span>))</span>
+<span id="cb15-3"><a></a></span>
+<span id="cb15-4"><a></a><span class="fu">str</span>(chile_data<span class="sc">$</span>sex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   P PS
-S  0  0
-P  1  0
-PS 0  1</code></pre>
+<pre><code> Factor w/ 2 levels "M","F": 1 1 2 2 2 2 1 2 2 1 ...</code></pre>
 </div>
 </div>
-</section>
-<section id="re-run-the-analysis-with-the-new-reference-category" class="slide level2">
-<h2>Re-run the analysis with the new reference category</h2>
+<p>Re-run the analysis with the new reference category</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>statsquo_model3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(statusquo <span class="sc">~</span> education, <span class="at">data =</span> chile_data)</span>
-<span id="cb15-2"><a></a><span class="fu">summary</span>(statsquo_model3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a>statsquo_model3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(statusquo <span class="sc">~</span> sex, <span class="at">data =</span> chile_data)</span>
+<span id="cb17-2"><a></a><span class="fu">summary</span>(statsquo_model3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+</section>
+<section id="categorical-predictor-changing-the-reference-output" class="slide level2 output-location-slide"><h2>Categorical predictor: changing the reference</h2><div class="cell output-location-slide">
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
-lm(formula = statusquo ~ education, data = chile_data)
+lm(formula = statusquo ~ sex, data = chile_data)
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--1.96343 -0.94652 -0.05996  0.96151  2.23086 
+-1.77948 -0.98619 -0.06878  0.96289  1.79341 
 
 Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) -0.08354    0.02966  -2.817  0.00488 ** 
-educationP   0.24396    0.04210   5.795 7.65e-09 ***
-educationPS -0.09873    0.05498  -1.796  0.07265 .  
+            Estimate Std. Error t value Pr(&gt;|t|)   
+(Intercept) -0.07986    0.02917  -2.737  0.00624 **
+sexF         0.13339    0.04068   3.279  0.00106 **
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.9907 on 2670 degrees of freedom
-  (27 observations deleted due to missingness)
-Multiple R-squared:  0.01919,   Adjusted R-squared:  0.01846 
-F-statistic: 26.13 on 2 and 2670 DF,  p-value: 5.796e-12</code></pre>
+Residual standard error: 1.003 on 2429 degrees of freedom
+Multiple R-squared:  0.004406,  Adjusted R-squared:  0.003997 
+F-statistic: 10.75 on 1 and 2429 DF,  p-value: 0.001057</code></pre>
 </div>
-</div>
-</section>
-<section id="lets-try-this-linear-regression-exercise-5-mins" class="slide level2">
+</div></section><section id="lets-try-this-linear-regression-exercise-5-mins" class="slide level2">
 <h2>Let’s try this Linear Regression exercise! (5 mins)</h2>
-<p>Create a regression model called <code>statusquo_model4</code> that predicts the <code>statusquo</code> score based on <code>age</code> and <code>education</code>. Make sure that the reference category for <code>education</code> is set to <strong>P</strong> (Primary).</p>
-<p>Optional: Plot the scatterplot with the trend line for each education category. It should look like this:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a>chile_data <span class="sc">|&gt;</span> </span>
-<span id="cb17-2"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> statusquo, <span class="at">color =</span> education)) <span class="sc">+</span></span>
-<span id="cb17-3"><a></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb17-4"><a></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-<img data-src="05-stats-quarto_files/figure-revealjs/unnamed-chunk-10-1.png" width="960" class="r-stretch"><div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>chile_data <span class="ot">&lt;-</span> chile_data <span class="sc">|&gt;</span> </span>
-<span id="cb18-2"><a></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">education =</span> <span class="fu">relevel</span>(education, <span class="at">ref =</span> <span class="st">"P"</span>))</span>
-<span id="cb18-3"><a></a></span>
-<span id="cb18-4"><a></a>statusquo_model4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(statusquo <span class="sc">~</span> age <span class="sc">+</span> education, <span class="at">data =</span> chile_data)</span>
-<span id="cb18-5"><a></a><span class="fu">summary</span>(statusquo_model4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = statusquo ~ age + education, data = chile_data)
-
-Residuals:
-     Min       1Q   Median       3Q      Max 
--2.06547 -0.94351 -0.05112  0.95388  2.31446 
-
-Coefficients:
-             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) -0.072022   0.068814  -1.047 0.295374    
-age          0.005226   0.001388   3.766 0.000169 ***
-educationS  -0.190121   0.044468  -4.275 1.97e-05 ***
-educationPS -0.287916   0.056936  -5.057 4.55e-07 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 0.9882 on 2668 degrees of freedom
-  (28 observations deleted due to missingness)
-Multiple R-squared:  0.02453,   Adjusted R-squared:  0.02343 
-F-statistic: 22.36 on 3 and 2668 DF,  p-value: 2.678e-14</code></pre>
-</div>
-</div>
+<p>Create a regression model called <code>statusquo_model4</code> that predicts the <code>statusquo</code> score based on <code>region</code>. Make sure the reference category is region “M”.</p>
 </section>
 <section id="binary-logistic-regression" class="slide level2">
 <h2>Binary Logistic Regression</h2>
-<p>Also known as simply logistic regression, it is used to model the relationship between a set of independent variables and a binary outcome. These independent variables can be either categorical or continuous.</p>
-<p>The formula is:</p>
+<p>Also known as simply logistic regression, it is used to model the relationship between a set of independent variables and a binary outcome.</p>
+<p>These independent variables can be either categorical or continuous.</p>
+<p>Binary Logistics Regression formula:</p>
 <p><span class="math display">\[
 logit(P) = \beta_0 + \beta_1X_1 + \beta_2X_2 + … + \beta_nX_n
 \]</span></p>
@@ -738,26 +712,49 @@ logit(P) = \beta_0 + \beta_1X_1 + \beta_2X_2 + … + \beta_nX_n
 <p><span class="math display">\[
 P = \frac{1}{1 + e^{-(\beta_0 + \beta_1X)}}
 \]</span></p>
-<h3 id="examples">Examples:</h3>
+</section>
+<section id="binary-logistic-regression-examples" class="slide level2">
+<h2>Binary Logistic Regression Examples</h2>
 <ul>
-<li><p>Does a person’s <strong>age</strong> and <strong>education</strong> affect whether they will <strong>vote Yes or No</strong> in the plebiscite?</p></li>
-<li><p>Does a person’s <strong>income</strong> and <strong>region</strong> affect their likelihood of <strong>abstaining from voting</strong>?</p></li>
+<li>Does a person’s <strong>age</strong> and <strong>education level</strong> influence whether they will vote Yes or No in a referendum?</li>
+<li>Does the number of <strong>hours spent studying</strong> impact a student’s likelihood of passing a module? (pass/fail outcome)</li>
 </ul>
-<p>In a way, the goal or logistic regression is to determine the probability of a specific event occurring (pass or fail, survived or perished, vote A or vote B)</p>
+<p>In essence, the goal of binary logistic regression is to estimate the probability of a specific event happening when there are only two possible outcomes (hence the term “binary”).</p>
 </section>
 <section id="binary-logistic-regression-one-continuous-predictor" class="slide level2">
 <h2>Binary Logistic Regression: One Continuous Predictor</h2>
 <p><strong>Research Question</strong>: Does <strong>age</strong> affect the likelihood of voting “Yes” in the plebiscite?</p>
+<ul>
+<li>The outcome/DV (<span class="math inline">\(Y\)</span>): <code>vote</code> - there are 4 outcomes here, but for the purpose of this workshop practice, let’s define the outcome as “Yes” and “not Yes” outcome</li>
+<li>The predictor/IV (<span class="math inline">\(X\)</span>): <code>age</code></li>
+</ul>
+<p>Before we proceed with the calculations, we need to <strong>dummy code</strong> the dependent variable into 1 and 0, with 1 = Yes and 0 = Not Yes. <a href="https://stats.oarc.ucla.edu/other/mult-pkg/faq/general/faqwhat-is-dummy-coding/">More info on dummy coding here</a></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="co"># First, we need to create a binary outcome</span></span>
-<span id="cb20-2"><a></a>chile_data <span class="ot">&lt;-</span> chile_data <span class="sc">|&gt;</span></span>
-<span id="cb20-3"><a></a>    <span class="fu">mutate</span>(<span class="at">vote_yes =</span> <span class="fu">ifelse</span>(vote <span class="sc">==</span> <span class="st">"Y"</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span>
-<span id="cb20-4"><a></a></span>
-<span id="cb20-5"><a></a>vote_age <span class="ot">&lt;-</span> <span class="fu">glm</span>(vote_yes <span class="sc">~</span> age,</span>
-<span id="cb20-6"><a></a>                <span class="at">family =</span> binomial, </span>
-<span id="cb20-7"><a></a>                <span class="at">data =</span> chile_data)</span>
-<span id="cb20-8"><a></a></span>
-<span id="cb20-9"><a></a><span class="fu">summary</span>(vote_age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a><span class="co"># First, we need to create a binary outcome</span></span>
+<span id="cb19-2"><a></a>chile_data <span class="ot">&lt;-</span> chile_data <span class="sc">|&gt;</span></span>
+<span id="cb19-3"><a></a>    <span class="fu">mutate</span>(<span class="at">vote_yes =</span> <span class="fu">ifelse</span>(vote <span class="sc">==</span> <span class="st">"Y"</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2,431 × 2
+  vote  vote_yes
+  &lt;fct&gt;    &lt;dbl&gt;
+1 Y            1
+2 N            0
+3 Y            1
+# ℹ 2,428 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="binary-logistic-regression-one-continuous-predictor-1" class="slide level2">
+<h2>Binary Logistic Regression: One Continuous Predictor</h2>
+<p>Let’s conduct the analysis!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a>vote_age <span class="ot">&lt;-</span> <span class="fu">glm</span>(vote_yes <span class="sc">~</span> age,</span>
+<span id="cb21-2"><a></a>                <span class="at">family =</span> binomial, </span>
+<span id="cb21-3"><a></a>                <span class="at">data =</span> chile_data)</span>
+<span id="cb21-4"><a></a></span>
+<span id="cb21-5"><a></a><span class="fu">summary</span>(vote_age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -765,37 +762,50 @@ glm(formula = vote_yes ~ age, family = binomial, data = chile_data)
 
 Coefficients:
              Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept) -1.201369   0.118548  -10.13  &lt; 2e-16 ***
-age          0.014211   0.002825    5.03  4.9e-07 ***
+(Intercept) -1.166859   0.121266  -9.622  &lt; 2e-16 ***
+age          0.013451   0.002898   4.641 3.47e-06 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 (Dispersion parameter for binomial family taken to be 1)
 
-    Null deviance: 3254.7  on 2530  degrees of freedom
-Residual deviance: 3229.4  on 2529  degrees of freedom
-  (169 observations deleted due to missingness)
-AIC: 3233.4
+    Null deviance: 3129.1  on 2430  degrees of freedom
+Residual deviance: 3107.6  on 2429  degrees of freedom
+AIC: 3111.6
 
 Number of Fisher Scoring iterations: 4</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a><span class="fu">exp</span>(<span class="fu">coefficients</span>(vote_age))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>(Intercept)         age 
-  0.3007821   1.0143125 </code></pre>
-</div>
 </div>
 </section>
-<section class="slide level2">
-
-<h3 id="binary-logistic-regression-one-categorical-predictor">Binary Logistic Regression: One Categorical Predictor</h3>
-<p><strong>Research Question</strong>: Does <strong>education level</strong> affect the likelihood of voting “Yes” in the plebiscite?</p>
+<section id="exponentiate-the-coefficients" class="slide level2">
+<h2>Exponentiate the coefficients</h2>
+<p>If you recall the formula, the results are expressed in Logit Probability. As we typically report the result in terms of Odd Ratios (OR), we need to exponentiate the coefficients.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a>vote_education <span class="ot">&lt;-</span> <span class="fu">glm</span>(vote_yes <span class="sc">~</span> education,</span>
-<span id="cb24-2"><a></a>                      <span class="at">family =</span> <span class="st">"binomial"</span>,</span>
-<span id="cb24-3"><a></a>                      <span class="at">data =</span> chile_data)</span>
-<span id="cb24-4"><a></a></span>
-<span id="cb24-5"><a></a><span class="fu">summary</span>(vote_education)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a><span class="fu">exp</span>(<span class="fu">coefficients</span>(vote_age))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept)         age 
+  0.3113433   1.0135417 </code></pre>
+</div>
+</div>
+<p>[interpretation to OR here]</p>
+</section>
+<section id="binary-logistic-regression-one-categorical-predictor" class="slide level2">
+<h2>Binary Logistic Regression: One Categorical Predictor</h2>
+<p><strong>Research Question</strong>: Does <strong>education level</strong> affect the likelihood of voting “Yes” in the plebiscite?</p>
+<ul>
+<li>The outcome/DV (<span class="math inline">\(Y\)</span>): <code>vote</code> - there are 4 outcomes here, but for the purpose of this workshop practice, let’s define the outcome as “Yes” and “not Yes” outcome</li>
+<li>The predictor/IV (<span class="math inline">\(X\)</span>): <code>education</code></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a>vote_education <span class="ot">&lt;-</span> <span class="fu">glm</span>(vote_yes <span class="sc">~</span> education,</span>
+<span id="cb25-2"><a></a>                      <span class="at">family =</span> <span class="st">"binomial"</span>,</span>
+<span id="cb25-3"><a></a>                      <span class="at">data =</span> chile_data)</span>
+<span id="cb25-4"><a></a></span>
+<span id="cb25-5"><a></a><span class="fu">summary</span>(vote_education)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+</section>
+<section id="binary-logistic-regression-one-categorical-predictor-output" class="slide level2 output-location-slide"><h2>Binary Logistic Regression: One Categorical Predictor</h2><div class="cell output-location-slide">
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -803,59 +813,85 @@ glm(formula = vote_yes ~ education, family = "binomial", data = chile_data)
 
 Coefficients:
             Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept) -0.37499    0.06323  -5.930 3.02e-09 ***
-educationS  -0.48781    0.09258  -5.269 1.37e-07 ***
-educationPS -0.48758    0.12222  -3.989 6.62e-05 ***
+(Intercept) -0.69741    0.04755 -14.668  &lt; 2e-16 ***
+education.L -0.35829    0.08843  -4.052 5.09e-05 ***
+education.Q  0.17780    0.07579   2.346    0.019 *  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 (Dispersion parameter for binomial family taken to be 1)
 
-    Null deviance: 3240.7  on 2521  degrees of freedom
-Residual deviance: 3207.7  on 2519  degrees of freedom
-  (178 observations deleted due to missingness)
-AIC: 3213.7
+    Null deviance: 3129.1  on 2430  degrees of freedom
+Residual deviance: 3098.0  on 2428  degrees of freedom
+AIC: 3104
 
 Number of Fisher Scoring iterations: 4</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a><span class="fu">exp</span>(<span class="fu">coefficients</span>(vote_education))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></section><section id="exponentiate-the-coefficients-1" class="slide level2">
+<h2>Exponentiate the coefficients</h2>
+<p>If you recall the formula, the results are expressed in Logit Probability. As we typically report the result in terms of Odd Ratios (OR), we need to exponentiate the coefficients.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a><span class="fu">exp</span>(<span class="fu">coefficients</span>(vote_education))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>(Intercept)  educationS educationPS 
-  0.6872964   0.6139724   0.6141134 </code></pre>
+<pre><code>(Intercept) education.L education.Q 
+  0.4978712   0.6988717   1.1945871 </code></pre>
+</div>
+</div>
+<p>[interpretation to OR here]</p>
+</section>
+<section id="changing-baseline-category-for-ordered-factor" class="slide level2">
+<h2>Changing baseline category for ordered factor</h2>
+<div class="sourceCode" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a>chile_data <span class="ot">&lt;-</span> chile_data <span class="sc">|&gt;</span> </span>
+<span id="cb29-2"><a></a>    <span class="fu">mutate</span>(<span class="at">education =</span> <span class="fu">factor</span>(education, </span>
+<span id="cb29-3"><a></a>                         <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"S"</span>, <span class="st">"P"</span>, <span class="st">"PS"</span>), </span>
+<span id="cb29-4"><a></a>                         <span class="at">ordered =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div title="Releveling ordered factor">
+<div class="callout callout-note callout-titled callout-style-simple">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Releveling ordered factor</strong></p>
+</div>
+<div class="callout-content">
+<p>Previously, we could use the <code>relevel()</code> function to change the reference category for ordered factors. However, in recent R versions, this no longer works for ordered factors, so we now use the method shown in the code above. The <code>relevel()</code> function still works for unordered factors.</p>
+</div>
+</div>
 </div>
 </div>
 </section>
-<section id="present-both-models-in-a-table" class="slide level2">
+<section id="present-both-models-in-a-table" class="slide level2 scrollable">
 <h2>Present both models in a table</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a><span class="fu">library</span>(huxtable)</span>
-<span id="cb28-2"><a></a><span class="fu">huxreg</span>(<span class="st">"age"</span> <span class="ot">=</span> vote_age, <span class="st">"education"</span> <span class="ot">=</span> vote_education)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a><span class="fu">library</span>(huxtable)</span>
+<span id="cb30-2"><a></a><span class="fu">huxreg</span>(<span class="st">"age"</span> <span class="ot">=</span> vote_age, <span class="st">"education"</span> <span class="ot">=</span> vote_education)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  ">
 <colgroup><col><col><col></colgroup><tbody><tr>
 <th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">age</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">education</th></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(Intercept)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-1.201 ***</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-0.375 ***</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(Intercept)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-1.167 ***</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-0.697 ***</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.119)&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.063)&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.121)&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.048)&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">age</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.014 ***</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">age</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.013 ***</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
 <th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.003)&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">educationS</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-0.488 ***</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">education.L</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-0.358 ***</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.093)&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.088)&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">educationPS</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-0.488 ***</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">education.Q</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.178 *&nbsp;&nbsp;</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.122)&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.076)&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">N</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2531&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2522&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">N</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2431&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2431&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">logLik</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-1614.695&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-1603.846&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">logLik</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-1553.776&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-1548.984&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">AIC</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3233.390&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3213.692&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">AIC</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3111.552&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3103.967&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
 <th colspan="3" style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05.</th></tr>
 </tbody></table>
@@ -863,49 +899,9 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </div>
 </div>
 </section>
-<section id="lets-try-this-logistic-regression-exercise" class="slide level2">
-<h2>Let’s try this Logistic Regression exercise!</h2>
-<p>Create a regression model called <code>vote_model</code> that predicts the likelihood of voting “Yes” based on <code>age</code>, <code>education</code>, and <code>income</code>. Make sure that the reference category for <code>education</code> is set to P (Primary).</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a>chile_data <span class="ot">&lt;-</span> chile_data <span class="sc">|&gt;</span> </span>
-<span id="cb29-2"><a></a>    <span class="fu">mutate</span>(<span class="at">education =</span> <span class="fu">relevel</span>(education, <span class="at">ref =</span> <span class="st">"P"</span>))</span>
-<span id="cb29-3"><a></a></span>
-<span id="cb29-4"><a></a>vote_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(vote_yes <span class="sc">~</span> age <span class="sc">+</span> education <span class="sc">+</span> income,</span>
-<span id="cb29-5"><a></a>                  <span class="at">family =</span> <span class="st">"binomial"</span>, </span>
-<span id="cb29-6"><a></a>                  <span class="at">data =</span> chile_data) </span>
-<span id="cb29-7"><a></a></span>
-<span id="cb29-8"><a></a><span class="fu">summary</span>(vote_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-glm(formula = vote_yes ~ age + education + income, family = "binomial", 
-    data = chile_data)
-
-Coefficients:
-              Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept) -8.070e-01  1.528e-01  -5.283 1.27e-07 ***
-age          7.532e-03  3.114e-03   2.418   0.0156 *  
-educationS  -5.018e-01  1.031e-01  -4.869 1.12e-06 ***
-educationPS -7.396e-01  1.490e-01  -4.963 6.93e-07 ***
-income       5.524e-06  1.202e-06   4.597 4.29e-06 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-(Dispersion parameter for binomial family taken to be 1)
-
-    Null deviance: 3137.1  on 2438  degrees of freedom
-Residual deviance: 3076.3  on 2434  degrees of freedom
-  (261 observations deleted due to missingness)
-AIC: 3086.3
-
-Number of Fisher Scoring iterations: 4</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a><span class="fu">exp</span>(<span class="fu">coefficients</span>(vote_model))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>(Intercept)         age  educationS educationPS      income 
-  0.4461754   1.0075605   0.6054551   0.4773035   1.0000055 </code></pre>
-</div>
-</div>
+<section id="lets-try-this-logistic-regression-exercise-5-mins" class="slide level2">
+<h2>Let’s try this Logistic Regression exercise! (5 mins)</h2>
+<p>Create a regression model called <code>vote_model</code> that predicts the likelihood of voting “Yes” based on <code>age</code> and <code>vote</code> intention. Make sure that the reference category for <code>vote</code> is set to U (Undecided).</p>
 </section>
 <section>
 <section id="what-is-quarto-what-is-markdown" class="title-slide slide level1 center">
@@ -926,13 +922,12 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </ul></li>
 </ul>
 </section>
-<section class="slide level2">
-
+<section id="rmarkdown-in-action" class="slide level2">
+<h2>RMarkdown in action</h2>
 
 <img data-src="images/rmarkdown.png" class="quarto-figure quarto-figure-center r-stretch"></section>
-<section class="slide level2">
-
-<p>How it all works:</p>
+<section id="how-it-all-works" class="slide level2">
+<h2>How it all works</h2>
 
 <img data-src="images/rmarkdown_wizards.png" class="r-stretch quarto-figure-center"><p class="caption">Illustration by Allison Horst (www.allisonhorst.com)</p></section>
 <section id="quarto" class="slide level2">
@@ -942,8 +937,8 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </ul>
 
 <img data-src="images/quarto-rendering.png" class="r-stretch quarto-figure-center"><p class="caption">Illustration by Allison Horst (www.allisonhorst.com)</p></section>
-<section class="slide level2">
-
+<section id="quarto-in-action-r-scripts-markdown" class="slide level2">
+<h2>Quarto in action: R scripts + Markdown</h2>
 
 <img data-src="images/quarto.png" class="quarto-figure quarto-figure-center r-stretch"></section>
 <section id="r-scripts-vs-quarto" class="slide level2">
@@ -1012,6 +1007,23 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </ul></li>
 <li><p>Whenever possible and makes sense for your project, follow the common convention when naming your objects, scripts, and functions. One guide that you can follow is <a href="https://style.tidyverse.org/">Hadley Wickham’s tidyverse style guide</a>.</p></li>
 </ul>
+</section></section>
+<section>
+<section id="thank-you-for-your-participation" class="title-slide slide level1 center">
+<h1>Thank you for your participation!</h1>
+<div class="columns">
+<div class="column" style="width:35%;">
+<p><img data-src="images/wedidit.webp"></p>
+</div><div class="column" style="width:65%;">
+<p>All the best for your studies and academic journey! (manifesting excellent grades)</p>
+<p>Need help with R or Quarto? Please don’t hesitate to contact me at <code>bellar@smu.edu.sg</code> or <code>libresearch@smu.edu.sg</code></p>
+</div></div>
+</section>
+<section id="post-workshop-survey" class="slide level2">
+<h2>Post-workshop survey</h2>
+<p>Please scan this QR code or click on the link below to fill in the post-workshop survey. It should not take more than 2-3 minutes.</p>
+<p>Survey link: <a href="https://smusg.asia.qualtrics.com/jfe/form/SV_1TYE6ntFBi3lwbQ" class="uri">https://smusg.asia.qualtrics.com/jfe/form/SV_1TYE6ntFBi3lwbQ</a></p>
+<p><img data-src="images/post-workshop-qrcode.png" width="500"></p>
 
 <div class="quarto-auto-generated-content">
 <p><img src="images/smu logo.png" class="slide-logo"></p>

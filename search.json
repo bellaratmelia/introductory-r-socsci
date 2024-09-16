@@ -18,105 +18,168 @@
     "href": "05-stats-quarto.html#todays-outline",
     "title": "Regression and Introduction to Quarto",
     "section": "Today’s Outline",
-    "text": "Today’s Outline\n\nLinear Regression\nLogistic Regression\nCreate your manuscript with Quarto"
+    "text": "Today’s Outline\n\nSimple Linear Regression in R\nBinary Logistic Regression in R\nCreate your manuscript with Quarto"
   },
   {
     "objectID": "05-stats-quarto.html#load-our-data-for-today",
     "href": "05-stats-quarto.html#load-our-data-for-today",
     "title": "Regression and Introduction to Quarto",
     "section": "Load our data for today!",
-    "text": "Load our data for today!\n\n# import tidyverse library\nlibrary(tidyverse)\n\n# read the CSV with Chile voting data\nchile_data &lt;- read_csv(\"data/chile_voting.csv\")\n\n# Display the first few rows and structure of the data\nhead(chile_data)\nstr(chile_data)"
+    "text": "Load our data for today!\n\n# import tidyverse library\nlibrary(tidyverse)\n\n# read the CSV with Chile voting data\nchile_data &lt;- read_csv(\"data-output/chile_voting_processed.csv\")\n\nchile_data &lt;- chile_data |&gt; \n    mutate(across(c(\"region\", \"sex\", \"education\", \"vote\", \"age_group\", \"support_level\"), as_factor))\n\n#reordering\nchile_data &lt;- chile_data |&gt; \n    mutate(education = factor(education, \n                         levels = c(\"P\", \"S\", \"PS\"), \n                         ordered = TRUE))\n\n# peek at the data, pay attention to the data types!\nglimpse(chile_data)"
   },
   {
-    "objectID": "05-stats-quarto.html#linear-regression",
-    "href": "05-stats-quarto.html#linear-regression",
+    "objectID": "05-stats-quarto.html#simple-linear-regression",
+    "href": "05-stats-quarto.html#simple-linear-regression",
     "title": "Regression and Introduction to Quarto",
-    "section": "Linear Regression",
-    "text": "Linear Regression\nLinear regression is a statistical method used to model the relationship between a dependent variable (outcome) and one or more independent variables (predictors) by fitting a linear equation to the observed data. The math formula looks like this:\n\\[\nY = \\beta_0 + \\beta_1X + \\varepsilon\n\\]\n\n\\(Y\\) - the dependent variable\n\nmust be continuous\n\n\\(X\\) - the independent variable (if there are more than one, there will be \\(X_1\\) , \\(X_2\\) , and so on.\n\ncan be ordinal, nominal, or continuous\n\n\\(\\beta_0\\) - the y-intercept. Represents the expected value of independent variable \\(Y\\) when independent variable(s) \\(X\\) are set to zero.\n\\(\\beta_1\\) - the slope / coefficient for independent variable\n\\(\\varepsilon\\) - the error term. (In some examples you might see this omitted from the formula).\n\nIRL Examples:\n\nDoes a person’s age affect their income?\nDo a person’s age and income affect their support towards the statusquo?"
+    "section": "Simple Linear Regression",
+    "text": "Simple Linear Regression\nLinear regression is a statistical method used to model the relationship between a dependent variable (outcome) and one or more independent variables (predictors) by fitting a linear equation to the observed data. The math formula looks like this:\n\n\n\\[\nY = \\beta_0 + \\beta_1X + \\varepsilon\n\\]\n\n\n\\(Y\\) - the dependent variable; must be continuous\n\\(X\\) - the independent variable (if there are more than one, there will be \\(X_1\\) , \\(X_2\\) , and so on. This can be ordinal, nominal, or continuous\n\\(\\beta_0\\) - the y-intercept. Represents the expected value of independent variable \\(Y\\) when independent variable(s) \\(X\\) are set to zero.\n\\(\\beta_1\\) - the slope / coefficient for independent variable\n\\(\\varepsilon\\) - the error term. (In some examples you might see this omitted from the formula).\n\n\nExamples:\n\nDoes a person’s age affect their income?\nDo a person’s age and education level affect their income?"
   },
   {
     "objectID": "05-stats-quarto.html#linear-regression-one-continuous-predictor",
     "href": "05-stats-quarto.html#linear-regression-one-continuous-predictor",
     "title": "Regression and Introduction to Quarto",
     "section": "Linear Regression: One continuous predictor",
-    "text": "Linear Regression: One continuous predictor\nResearch Question: Does a person’s age influence their support to incumbent in Chile?\nThe outcome/DV (\\(Y\\)) here is statusquo, while the predictor/IV (\\(X\\)) would be age\n\nstatsquo_model1 &lt;- lm(statusquo ~ age, data = chile_data)\nsummary(statsquo_model1) #summarize the result\n\n\nCall:\nlm(formula = statusquo ~ age, data = chile_data)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-2.00213 -0.97057 -0.04264  0.96793  2.20837 \n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) -0.300221   0.053678  -5.593 2.46e-08 ***\nage          0.007802   0.001301   5.997 2.28e-09 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.9937 on 2680 degrees of freedom\n  (18 observations deleted due to missingness)\nMultiple R-squared:  0.01324,   Adjusted R-squared:  0.01287 \nF-statistic: 35.96 on 1 and 2680 DF,  p-value: 2.283e-09\n\n\n\n\nCall: the formula\nResiduals: overview on the distribution of residuals (expected value minus observed value) – we can plot this to check for homoscedasticity -\nCoefficients: shows the intercept, the regression coefficients for the predictor variables, and their statistical significance\nResidual standard error: the average difference between observed and expected outcome by the model. Generally the lower, the better.\nR-squared & Adjusted R-squared: indicates the proportion of variation in the outcome that can be explained by the model i.e., how “accurate” is your model?\nF-statistics: overall significance\n\n\nLinear REgression: Multiple continuous predictors\nResearch Question: Do a person’s age and their income have an impact on their support for the incumbent?\nThe outcome/DV (\\(Y\\)) here is income, while the predictors/IVs (\\(X_1\\) and \\(X_2\\)) would be age and statusquo\n\nstatsquo_model2 &lt;- lm(statusquo ~ age + income, data = chile_data)\nsummary(statsquo_model2)\n\n\nCall:\nlm(formula = statusquo ~ age + income, data = chile_data)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-1.61635 -0.96952 -0.05992  0.97136  1.89569 \n\nCoefficients:\n              Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) -3.467e-01  5.793e-02  -5.985 2.46e-09 ***\nage          7.815e-03  1.330e-03   5.875 4.77e-09 ***\nincome       1.072e-06  4.942e-07   2.170   0.0301 *  \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.9942 on 2587 degrees of freedom\n  (110 observations deleted due to missingness)\nMultiple R-squared:  0.01463,   Adjusted R-squared:  0.01387 \nF-statistic: 19.21 on 2 and 2587 DF,  p-value: 5.226e-09"
+    "text": "Linear Regression: One continuous predictor\nResearch Question: Does a person’s age influence their support to incumbent in Chile?\n\nThe outcome/DV (\\(Y\\)): statusquo\nThe predictor/IV (\\(X\\)): age\n\n\nstatsquo_model1 &lt;- lm(statusquo ~ age, data = chile_data)\nsummary(statsquo_model1) #summarize the result\n\n\n\n\nCall: the formula\nResiduals: overview on the distribution of residuals (expected value minus observed value) – we can plot this to check for homoscedasticity -\nCoefficients: shows the intercept, the regression coefficients for the predictor variables, and their statistical significance\nResidual standard error: the average difference between observed and expected outcome by the model. Generally the lower, the better.\nR-squared & Adjusted R-squared: indicates the proportion of variation in the outcome that can be explained by the model i.e., how “accurate” is your model?\nF-statistics: overall significance"
+  },
+  {
+    "objectID": "05-stats-quarto.html#linear-regression-one-continuous-predictor-output",
+    "href": "05-stats-quarto.html#linear-regression-one-continuous-predictor-output",
+    "title": "Regression and Introduction to Quarto",
+    "section": "Linear Regression: One continuous predictor",
+    "text": "Linear Regression: One continuous predictor\n\n\nCall:\nlm(formula = statusquo ~ age, data = chile_data)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-1.58205 -0.97443 -0.07783  0.97579  1.87278 \n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) -0.304966   0.056620  -5.386 7.89e-08 ***\nage          0.007670   0.001381   5.555 3.09e-08 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.9984 on 2429 degrees of freedom\nMultiple R-squared:  0.01254,   Adjusted R-squared:  0.01214 \nF-statistic: 30.85 on 1 and 2429 DF,  p-value: 3.086e-08"
+  },
+  {
+    "objectID": "05-stats-quarto.html#linear-regression-multiple-continuous-predictors",
+    "href": "05-stats-quarto.html#linear-regression-multiple-continuous-predictors",
+    "title": "Regression and Introduction to Quarto",
+    "section": "Linear Regression: Multiple continuous predictors",
+    "text": "Linear Regression: Multiple continuous predictors\nResearch Question: Do a person’s age and their income have an impact on their support for the incumbent?\n\nThe outcome/DV (\\(Y\\)): statusquo\nThe predictor/IV (\\(X\\)): age and income\n\n\nstatsquo_model2 &lt;- lm(statusquo ~ age + income, data = chile_data)\nsummary(statsquo_model2)\n\n\nCall:\nlm(formula = statusquo ~ age + income, data = chile_data)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-1.58170 -0.97166 -0.06689  0.97791  1.88982 \n\nCoefficients:\n              Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) -3.357e-01  5.968e-02  -5.625 2.07e-08 ***\nage          7.738e-03  1.381e-03   5.603 2.35e-08 ***\nincome       8.276e-07  5.097e-07   1.624    0.105    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.9981 on 2428 degrees of freedom\nMultiple R-squared:  0.01361,   Adjusted R-squared:  0.0128 \nF-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08"
   },
   {
     "objectID": "05-stats-quarto.html#presenting-your-models",
     "href": "05-stats-quarto.html#presenting-your-models",
     "title": "Regression and Introduction to Quarto",
     "section": "Presenting your models",
-    "text": "Presenting your models\nDon’t forget to install the library by running this line in your terminal: install.packages(\"huxtable\")\n\nlibrary(huxtable)\nhuxreg(\"age\" = statsquo_model1, \"age + income\" = statsquo_model2)\n\n\n\nageage + income\n\n(Intercept)-0.300 ***-0.347 ***\n\n(0.054)   (0.058)   \n\nage0.008 ***0.008 ***\n\n(0.001)   (0.001)   \n\nincome        0.000 *  \n\n        (0.000)   \n\nN2682        2590        \n\nR20.013    0.015    \n\nlogLik-3787.630    -3658.444    \n\nAIC7581.260    7324.888    \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
+    "text": "Presenting your models\nDon’t forget to install the library by running this line in your terminal: install.packages(\"huxtable\")\n\nlibrary(huxtable)\nhuxreg(\"age\" = statsquo_model1, \"age + income\" = statsquo_model2)\n\n\n\nageage + income\n\n(Intercept)-0.305 ***-0.336 ***\n\n(0.057)   (0.060)   \n\nage0.008 ***0.008 ***\n\n(0.001)   (0.001)   \n\nincome        0.000    \n\n        (0.000)   \n\nN2431        2431        \n\nR20.013    0.014    \n\nlogLik-3444.614    -3443.294    \n\nAIC6895.227    6894.589    \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
   },
   {
     "objectID": "05-stats-quarto.html#fyi-multicollinearity",
     "href": "05-stats-quarto.html#fyi-multicollinearity",
     "title": "Regression and Introduction to Quarto",
     "section": "FYI: Multicollinearity",
-    "text": "FYI: Multicollinearity\nCaution! When doing regression-type of tests, watch out for multicollinearity.\nMulticollinearity = a situation in which two or more predictor variables are highly correlated with each other. This makes it difficult to determine the specific contribution of each predictor variable to the relationship.\nOne way to check for it:\n\nAssess the correlation between your predictor variables in your model using Variance Inflation Factor (VIF)\nIf they seem to be highly correlated (&gt; 5 or so), one of the easiest (and somewhat acceptable) way is to simply remove the less significant predictor from your model :D\n\n\ncar::vif(statsquo_model2)\n\n     age   income \n1.001103 1.001103"
+    "text": "FYI: Multicollinearity\nCaution! When doing regression-type of tests, watch out for multicollinearity.\nMulticollinearity is a situation in which two or more predictor variables are highly correlated with each other. This makes it difficult to determine the specific contribution of each predictor variable to the relationship.\nOne way to check for it:\n\nAssess the correlation between your predictor variables in your model using Variance Inflation Factor (VIF)\nIf they seem to be highly correlated (&gt; 5 or so), one of the easiest (and somewhat acceptable) way is to simply remove the less significant predictor from your model :D\n\n\ncar::vif(statsquo_model2)\n\n   age income \n1.0009 1.0009"
   },
   {
     "objectID": "05-stats-quarto.html#linear-regression-one-categorical-predictor",
     "href": "05-stats-quarto.html#linear-regression-one-categorical-predictor",
     "title": "Regression and Introduction to Quarto",
     "section": "Linear Regression: One categorical predictor",
-    "text": "Linear Regression: One categorical predictor\nResearch question: Explore the difference of support for status quo between different education levels.\n\n\n\n\n\n\nNote\n\n\nBefore we proceed with analysis, let’s ensure that all the categorical variables are cast as factors!\n\n\n\n\nchile_data &lt;- chile_data |&gt; \n    mutate(education = factor(education)) |&gt; \n    mutate(sex = factor(sex)) |&gt; \n    mutate(region = factor(region))\n\nglimpse(chile_data)\n\nRows: 2,700\nColumns: 8\n$ region     &lt;fct&gt; N, N, N, N, N, N, N, N, N, N, N, N, N, N, N, N, N, N, N, N,…\n$ population &lt;dbl&gt; 175000, 175000, 175000, 175000, 175000, 175000, 175000, 175…\n$ sex        &lt;fct&gt; M, M, F, F, F, F, M, F, F, M, M, M, F, F, M, M, F, M, M, F,…\n$ age        &lt;dbl&gt; 65, 29, 38, 49, 23, 28, 26, 24, 41, 41, 64, 19, 27, 46, 36,…\n$ education  &lt;fct&gt; P, PS, P, P, S, P, PS, S, P, P, P, S, PS, S, PS, S, PS, S, …\n$ income     &lt;dbl&gt; 35000, 7500, 15000, 35000, 35000, 7500, 35000, 15000, 15000…\n$ statusquo  &lt;dbl&gt; 1.00820, -1.29617, 1.23072, -1.03163, -1.10496, -1.04685, -…\n$ vote       &lt;chr&gt; \"Y\", \"N\", \"Y\", \"N\", \"N\", \"N\", \"N\", \"N\", \"U\", \"N\", \"Y\", \"U\",…"
+    "text": "Linear Regression: One categorical predictor\nResearch question: Explore the difference of support for statusquo between different sex.\n\nThe outcome/DV (\\(Y\\)): statusquo\nThe predictor/IV (\\(X\\)): sex\n\n\n\n\n\n\n\nNote\n\n\nBefore proceeding with analysis, ensure that all the categorical variables involved are cast as factors!\n\n\n\n\nstr(chile_data$statusquo)\n\n num [1:2431] 1.01 -1.3 1.23 -1.03 -1.1 ...\n\nstr(chile_data$sex)\n\n Factor w/ 2 levels \"M\",\"F\": 1 1 2 2 2 2 1 2 2 1 ..."
   },
   {
     "objectID": "05-stats-quarto.html#continuing-the-analysis",
     "href": "05-stats-quarto.html#continuing-the-analysis",
     "title": "Regression and Introduction to Quarto",
     "section": "Continuing the analysis",
-    "text": "Continuing the analysis\nThe analysis summary should look like this:\n\nstatusquo_model3 &lt;- lm(statusquo ~ education, data = chile_data)\nsummary(statusquo_model3)\n\n\nCall:\nlm(formula = statusquo ~ education, data = chile_data)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-1.96343 -0.94652 -0.05996  0.96151  2.23086 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  0.16042    0.02988   5.368 8.65e-08 ***\neducationPS -0.34269    0.05510  -6.219 5.78e-10 ***\neducationS  -0.24396    0.04210  -5.795 7.65e-09 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.9907 on 2670 degrees of freedom\n  (27 observations deleted due to missingness)\nMultiple R-squared:  0.01919,   Adjusted R-squared:  0.01846 \nF-statistic: 26.13 on 2 and 2670 DF,  p-value: 5.796e-12\n\n\nInterpretation for categorical predictor - one of the category will be used as a reference category. By default, the first category will be used."
+    "text": "Continuing the analysis\nThe analysis summary should look like this:\n\nstatusquo_model3 &lt;- lm(statusquo ~ sex, data = chile_data)\nsummary(statusquo_model3)\n\n\nCall:\nlm(formula = statusquo ~ sex, data = chile_data)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-1.77948 -0.98619 -0.06878  0.96289  1.79341 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)   \n(Intercept) -0.07986    0.02917  -2.737  0.00624 **\nsexF         0.13339    0.04068   3.279  0.00106 **\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.003 on 2429 degrees of freedom\nMultiple R-squared:  0.004406,  Adjusted R-squared:  0.003997 \nF-statistic: 10.75 on 1 and 2429 DF,  p-value: 0.001057\n\n\nWhen interpreting a categorical predictor in regression, one category is treated as the reference category, which serves as the baseline for comparison. In this case, the reference category corresponds to the intercept.\nBy default, the first category in the data is used as the reference category, unless specified otherwise."
   },
   {
     "objectID": "05-stats-quarto.html#categorical-predictor-changing-the-reference",
     "href": "05-stats-quarto.html#categorical-predictor-changing-the-reference",
     "title": "Regression and Introduction to Quarto",
     "section": "Categorical predictor: changing the reference",
-    "text": "Categorical predictor: changing the reference\nWe can use relevel to change the reference/baseline category.\n\nchile_data &lt;- chile_data |&gt; \n    mutate(education = relevel(education, ref = \"S\"))\n\ncontrasts(chile_data$education)\n\n   P PS\nS  0  0\nP  1  0\nPS 0  1"
+    "text": "Categorical predictor: changing the reference\nLet’s change the reference category for sex variable to “M”.\n\nchile_data &lt;- chile_data |&gt; \n    mutate(sex = relevel(sex, ref = \"M\"))\n\nstr(chile_data$sex)\n\n Factor w/ 2 levels \"M\",\"F\": 1 1 2 2 2 2 1 2 2 1 ...\n\n\nRe-run the analysis with the new reference category\n\nstatsquo_model3 &lt;- lm(statusquo ~ sex, data = chile_data)\nsummary(statsquo_model3)"
   },
   {
-    "objectID": "05-stats-quarto.html#re-run-the-analysis-with-the-new-reference-category",
-    "href": "05-stats-quarto.html#re-run-the-analysis-with-the-new-reference-category",
+    "objectID": "05-stats-quarto.html#categorical-predictor-changing-the-reference-output",
+    "href": "05-stats-quarto.html#categorical-predictor-changing-the-reference-output",
     "title": "Regression and Introduction to Quarto",
-    "section": "Re-run the analysis with the new reference category",
-    "text": "Re-run the analysis with the new reference category\n\nstatsquo_model3 &lt;- lm(statusquo ~ education, data = chile_data)\nsummary(statsquo_model3)\n\n\nCall:\nlm(formula = statusquo ~ education, data = chile_data)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-1.96343 -0.94652 -0.05996  0.96151  2.23086 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) -0.08354    0.02966  -2.817  0.00488 ** \neducationP   0.24396    0.04210   5.795 7.65e-09 ***\neducationPS -0.09873    0.05498  -1.796  0.07265 .  \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.9907 on 2670 degrees of freedom\n  (27 observations deleted due to missingness)\nMultiple R-squared:  0.01919,   Adjusted R-squared:  0.01846 \nF-statistic: 26.13 on 2 and 2670 DF,  p-value: 5.796e-12"
+    "section": "Categorical predictor: changing the reference",
+    "text": "Categorical predictor: changing the reference\n\n\nCall:\nlm(formula = statusquo ~ sex, data = chile_data)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-1.77948 -0.98619 -0.06878  0.96289  1.79341 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)   \n(Intercept) -0.07986    0.02917  -2.737  0.00624 **\nsexF         0.13339    0.04068   3.279  0.00106 **\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.003 on 2429 degrees of freedom\nMultiple R-squared:  0.004406,  Adjusted R-squared:  0.003997 \nF-statistic: 10.75 on 1 and 2429 DF,  p-value: 0.001057"
   },
   {
     "objectID": "05-stats-quarto.html#lets-try-this-linear-regression-exercise-5-mins",
     "href": "05-stats-quarto.html#lets-try-this-linear-regression-exercise-5-mins",
     "title": "Regression and Introduction to Quarto",
     "section": "Let’s try this Linear Regression exercise! (5 mins)",
-    "text": "Let’s try this Linear Regression exercise! (5 mins)\nCreate a regression model called statusquo_model4 that predicts the statusquo score based on age and education. Make sure that the reference category for education is set to P (Primary).\nOptional: Plot the scatterplot with the trend line for each education category. It should look like this:\n\nchile_data |&gt; \n    ggplot(aes(x = age, y = statusquo, color = education)) +\n    geom_point() +\n    geom_smooth(method = \"lm\")\n\n\n\nchile_data &lt;- chile_data |&gt; \n    dplyr::mutate(education = relevel(education, ref = \"P\"))\n\nstatusquo_model4 &lt;- lm(statusquo ~ age + education, data = chile_data)\nsummary(statusquo_model4)\n\n\nCall:\nlm(formula = statusquo ~ age + education, data = chile_data)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-2.06547 -0.94351 -0.05112  0.95388  2.31446 \n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) -0.072022   0.068814  -1.047 0.295374    \nage          0.005226   0.001388   3.766 0.000169 ***\neducationS  -0.190121   0.044468  -4.275 1.97e-05 ***\neducationPS -0.287916   0.056936  -5.057 4.55e-07 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.9882 on 2668 degrees of freedom\n  (28 observations deleted due to missingness)\nMultiple R-squared:  0.02453,   Adjusted R-squared:  0.02343 \nF-statistic: 22.36 on 3 and 2668 DF,  p-value: 2.678e-14"
+    "text": "Let’s try this Linear Regression exercise! (5 mins)\nCreate a regression model called statusquo_model4 that predicts the statusquo score based on region. Make sure the reference category is region “M”."
   },
   {
     "objectID": "05-stats-quarto.html#binary-logistic-regression",
     "href": "05-stats-quarto.html#binary-logistic-regression",
     "title": "Regression and Introduction to Quarto",
     "section": "Binary Logistic Regression",
-    "text": "Binary Logistic Regression\nAlso known as simply logistic regression, it is used to model the relationship between a set of independent variables and a binary outcome. These independent variables can be either categorical or continuous.\nThe formula is:\n\\[\nlogit(P) = \\beta_0 + \\beta_1X_1 + \\beta_2X_2 + … + \\beta_nX_n\n\\]\nIt can also be written like below, in which the \\(logit(P)\\) part is expanded:\n\\[\nP = \\frac{1}{1 + e^{-(\\beta_0 + \\beta_1X)}}\n\\]\nExamples:\n\nDoes a person’s age and education affect whether they will vote Yes or No in the plebiscite?\nDoes a person’s income and region affect their likelihood of abstaining from voting?\n\nIn a way, the goal or logistic regression is to determine the probability of a specific event occurring (pass or fail, survived or perished, vote A or vote B)"
+    "text": "Binary Logistic Regression\nAlso known as simply logistic regression, it is used to model the relationship between a set of independent variables and a binary outcome.\nThese independent variables can be either categorical or continuous.\nBinary Logistics Regression formula:\n\\[\nlogit(P) = \\beta_0 + \\beta_1X_1 + \\beta_2X_2 + … + \\beta_nX_n\n\\]\nIt can also be written like below, in which the \\(logit(P)\\) part is expanded:\n\\[\nP = \\frac{1}{1 + e^{-(\\beta_0 + \\beta_1X)}}\n\\]"
+  },
+  {
+    "objectID": "05-stats-quarto.html#binary-logistic-regression-examples",
+    "href": "05-stats-quarto.html#binary-logistic-regression-examples",
+    "title": "Regression and Introduction to Quarto",
+    "section": "Binary Logistic Regression Examples",
+    "text": "Binary Logistic Regression Examples\n\nDoes a person’s age and education level influence whether they will vote Yes or No in a referendum?\nDoes the number of hours spent studying impact a student’s likelihood of passing a module? (pass/fail outcome)\n\nIn essence, the goal of binary logistic regression is to estimate the probability of a specific event happening when there are only two possible outcomes (hence the term “binary”)."
   },
   {
     "objectID": "05-stats-quarto.html#binary-logistic-regression-one-continuous-predictor",
     "href": "05-stats-quarto.html#binary-logistic-regression-one-continuous-predictor",
     "title": "Regression and Introduction to Quarto",
     "section": "Binary Logistic Regression: One Continuous Predictor",
-    "text": "Binary Logistic Regression: One Continuous Predictor\nResearch Question: Does age affect the likelihood of voting “Yes” in the plebiscite?\n\n# First, we need to create a binary outcome\nchile_data &lt;- chile_data |&gt;\n    mutate(vote_yes = ifelse(vote == \"Y\", 1, 0))\n\nvote_age &lt;- glm(vote_yes ~ age,\n                family = binomial, \n                data = chile_data)\n\nsummary(vote_age)\n\n\nCall:\nglm(formula = vote_yes ~ age, family = binomial, data = chile_data)\n\nCoefficients:\n             Estimate Std. Error z value Pr(&gt;|z|)    \n(Intercept) -1.201369   0.118548  -10.13  &lt; 2e-16 ***\nage          0.014211   0.002825    5.03  4.9e-07 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 3254.7  on 2530  degrees of freedom\nResidual deviance: 3229.4  on 2529  degrees of freedom\n  (169 observations deleted due to missingness)\nAIC: 3233.4\n\nNumber of Fisher Scoring iterations: 4\n\nexp(coefficients(vote_age))\n\n(Intercept)         age \n  0.3007821   1.0143125"
+    "text": "Binary Logistic Regression: One Continuous Predictor\nResearch Question: Does age affect the likelihood of voting “Yes” in the plebiscite?\n\nThe outcome/DV (\\(Y\\)): vote - there are 4 outcomes here, but for the purpose of this workshop practice, let’s define the outcome as “Yes” and “not Yes” outcome\nThe predictor/IV (\\(X\\)): age\n\nBefore we proceed with the calculations, we need to dummy code the dependent variable into 1 and 0, with 1 = Yes and 0 = Not Yes. More info on dummy coding here\n\n# First, we need to create a binary outcome\nchile_data &lt;- chile_data |&gt;\n    mutate(vote_yes = ifelse(vote == \"Y\", 1, 0))\n\n\n\n# A tibble: 2,431 × 2\n  vote  vote_yes\n  &lt;fct&gt;    &lt;dbl&gt;\n1 Y            1\n2 N            0\n3 Y            1\n# ℹ 2,428 more rows"
+  },
+  {
+    "objectID": "05-stats-quarto.html#binary-logistic-regression-one-continuous-predictor-1",
+    "href": "05-stats-quarto.html#binary-logistic-regression-one-continuous-predictor-1",
+    "title": "Regression and Introduction to Quarto",
+    "section": "Binary Logistic Regression: One Continuous Predictor",
+    "text": "Binary Logistic Regression: One Continuous Predictor\nLet’s conduct the analysis!\n\nvote_age &lt;- glm(vote_yes ~ age,\n                family = binomial, \n                data = chile_data)\n\nsummary(vote_age)\n\n\nCall:\nglm(formula = vote_yes ~ age, family = binomial, data = chile_data)\n\nCoefficients:\n             Estimate Std. Error z value Pr(&gt;|z|)    \n(Intercept) -1.166859   0.121266  -9.622  &lt; 2e-16 ***\nage          0.013451   0.002898   4.641 3.47e-06 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 3129.1  on 2430  degrees of freedom\nResidual deviance: 3107.6  on 2429  degrees of freedom\nAIC: 3111.6\n\nNumber of Fisher Scoring iterations: 4"
+  },
+  {
+    "objectID": "05-stats-quarto.html#exponentiate-the-coefficients",
+    "href": "05-stats-quarto.html#exponentiate-the-coefficients",
+    "title": "Regression and Introduction to Quarto",
+    "section": "Exponentiate the coefficients",
+    "text": "Exponentiate the coefficients\nIf you recall the formula, the results are expressed in Logit Probability. As we typically report the result in terms of Odd Ratios (OR), we need to exponentiate the coefficients.\n\nexp(coefficients(vote_age))\n\n(Intercept)         age \n  0.3113433   1.0135417 \n\n\n[interpretation to OR here]"
+  },
+  {
+    "objectID": "05-stats-quarto.html#binary-logistic-regression-one-categorical-predictor",
+    "href": "05-stats-quarto.html#binary-logistic-regression-one-categorical-predictor",
+    "title": "Regression and Introduction to Quarto",
+    "section": "Binary Logistic Regression: One Categorical Predictor",
+    "text": "Binary Logistic Regression: One Categorical Predictor\nResearch Question: Does education level affect the likelihood of voting “Yes” in the plebiscite?\n\nThe outcome/DV (\\(Y\\)): vote - there are 4 outcomes here, but for the purpose of this workshop practice, let’s define the outcome as “Yes” and “not Yes” outcome\nThe predictor/IV (\\(X\\)): education\n\n\nvote_education &lt;- glm(vote_yes ~ education,\n                      family = \"binomial\",\n                      data = chile_data)\n\nsummary(vote_education)"
+  },
+  {
+    "objectID": "05-stats-quarto.html#binary-logistic-regression-one-categorical-predictor-output",
+    "href": "05-stats-quarto.html#binary-logistic-regression-one-categorical-predictor-output",
+    "title": "Regression and Introduction to Quarto",
+    "section": "Binary Logistic Regression: One Categorical Predictor",
+    "text": "Binary Logistic Regression: One Categorical Predictor\n\n\nCall:\nglm(formula = vote_yes ~ education, family = \"binomial\", data = chile_data)\n\nCoefficients:\n            Estimate Std. Error z value Pr(&gt;|z|)    \n(Intercept) -0.69741    0.04755 -14.668  &lt; 2e-16 ***\neducation.L -0.35829    0.08843  -4.052 5.09e-05 ***\neducation.Q  0.17780    0.07579   2.346    0.019 *  \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 3129.1  on 2430  degrees of freedom\nResidual deviance: 3098.0  on 2428  degrees of freedom\nAIC: 3104\n\nNumber of Fisher Scoring iterations: 4"
+  },
+  {
+    "objectID": "05-stats-quarto.html#exponentiate-the-coefficients-1",
+    "href": "05-stats-quarto.html#exponentiate-the-coefficients-1",
+    "title": "Regression and Introduction to Quarto",
+    "section": "Exponentiate the coefficients",
+    "text": "Exponentiate the coefficients\nIf you recall the formula, the results are expressed in Logit Probability. As we typically report the result in terms of Odd Ratios (OR), we need to exponentiate the coefficients.\n\nexp(coefficients(vote_education))\n\n(Intercept) education.L education.Q \n  0.4978712   0.6988717   1.1945871 \n\n\n[interpretation to OR here]"
+  },
+  {
+    "objectID": "05-stats-quarto.html#changing-baseline-category-for-ordered-factor",
+    "href": "05-stats-quarto.html#changing-baseline-category-for-ordered-factor",
+    "title": "Regression and Introduction to Quarto",
+    "section": "Changing baseline category for ordered factor",
+    "text": "Changing baseline category for ordered factor\nchile_data &lt;- chile_data |&gt; \n    mutate(education = factor(education, \n                         levels = c(\"S\", \"P\", \"PS\"), \n                         ordered = TRUE))\n\n\n\n\n\n\n\nReleveling ordered factor\n\n\nPreviously, we could use the relevel() function to change the reference category for ordered factors. However, in recent R versions, this no longer works for ordered factors, so we now use the method shown in the code above. The relevel() function still works for unordered factors."
   },
   {
     "objectID": "05-stats-quarto.html#present-both-models-in-a-table",
     "href": "05-stats-quarto.html#present-both-models-in-a-table",
     "title": "Regression and Introduction to Quarto",
     "section": "Present both models in a table",
-    "text": "Present both models in a table\n\nlibrary(huxtable)\nhuxreg(\"age\" = vote_age, \"education\" = vote_education)\n\n\n\nageeducation\n\n(Intercept)-1.201 ***-0.375 ***\n\n(0.119)   (0.063)   \n\nage0.014 ***        \n\n(0.003)           \n\neducationS        -0.488 ***\n\n        (0.093)   \n\neducationPS        -0.488 ***\n\n        (0.122)   \n\nN2531        2522        \n\nlogLik-1614.695    -1603.846    \n\nAIC3233.390    3213.692    \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
+    "text": "Present both models in a table\n\nlibrary(huxtable)\nhuxreg(\"age\" = vote_age, \"education\" = vote_education)\n\n\n\nageeducation\n\n(Intercept)-1.167 ***-0.697 ***\n\n(0.121)   (0.048)   \n\nage0.013 ***        \n\n(0.003)           \n\neducation.L        -0.358 ***\n\n        (0.088)   \n\neducation.Q        0.178 *  \n\n        (0.076)   \n\nN2431        2431        \n\nlogLik-1553.776    -1548.984    \n\nAIC3111.552    3103.967    \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
   },
   {
-    "objectID": "05-stats-quarto.html#lets-try-this-logistic-regression-exercise",
-    "href": "05-stats-quarto.html#lets-try-this-logistic-regression-exercise",
+    "objectID": "05-stats-quarto.html#lets-try-this-logistic-regression-exercise-5-mins",
+    "href": "05-stats-quarto.html#lets-try-this-logistic-regression-exercise-5-mins",
     "title": "Regression and Introduction to Quarto",
-    "section": "Let’s try this Logistic Regression exercise!",
-    "text": "Let’s try this Logistic Regression exercise!\nCreate a regression model called vote_model that predicts the likelihood of voting “Yes” based on age, education, and income. Make sure that the reference category for education is set to P (Primary).\n\nchile_data &lt;- chile_data |&gt; \n    mutate(education = relevel(education, ref = \"P\"))\n\nvote_model &lt;- glm(vote_yes ~ age + education + income,\n                  family = \"binomial\", \n                  data = chile_data) \n\nsummary(vote_model)\n\n\nCall:\nglm(formula = vote_yes ~ age + education + income, family = \"binomial\", \n    data = chile_data)\n\nCoefficients:\n              Estimate Std. Error z value Pr(&gt;|z|)    \n(Intercept) -8.070e-01  1.528e-01  -5.283 1.27e-07 ***\nage          7.532e-03  3.114e-03   2.418   0.0156 *  \neducationS  -5.018e-01  1.031e-01  -4.869 1.12e-06 ***\neducationPS -7.396e-01  1.490e-01  -4.963 6.93e-07 ***\nincome       5.524e-06  1.202e-06   4.597 4.29e-06 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 3137.1  on 2438  degrees of freedom\nResidual deviance: 3076.3  on 2434  degrees of freedom\n  (261 observations deleted due to missingness)\nAIC: 3086.3\n\nNumber of Fisher Scoring iterations: 4\n\nexp(coefficients(vote_model))\n\n(Intercept)         age  educationS educationPS      income \n  0.4461754   1.0075605   0.6054551   0.4773035   1.0000055"
+    "section": "Let’s try this Logistic Regression exercise! (5 mins)",
+    "text": "Let’s try this Logistic Regression exercise! (5 mins)\nCreate a regression model called vote_model that predicts the likelihood of voting “Yes” based on age and vote intention. Make sure that the reference category for vote is set to U (Undecided)."
   },
   {
     "objectID": "05-stats-quarto.html#markdown-specifically-r-markdown",
@@ -126,11 +189,32 @@
     "text": "Markdown (Specifically, R Markdown)\n\nMarkdown is a lightweight markup language that provides a simple and readable way to write formatted text without using complex HTML or LaTeX. It is designed to make authoring content easy for everyone!\n\nMarkdown files can be converted into HTML or other formats.\nGeneric Markdown file will have .md extension.\n\nR Markdown is an extension of Markdown that incorporates R code chunks and allows you to create dynamic documents that integrate text, code, and output (such as tables and plots).\n\nRMarkdown file will have .Rmd extension."
   },
   {
+    "objectID": "05-stats-quarto.html#rmarkdown-in-action",
+    "href": "05-stats-quarto.html#rmarkdown-in-action",
+    "title": "Regression and Introduction to Quarto",
+    "section": "RMarkdown in action",
+    "text": "RMarkdown in action"
+  },
+  {
+    "objectID": "05-stats-quarto.html#how-it-all-works",
+    "href": "05-stats-quarto.html#how-it-all-works",
+    "title": "Regression and Introduction to Quarto",
+    "section": "How it all works",
+    "text": "How it all works\n\nIllustration by Allison Horst (www.allisonhorst.com)"
+  },
+  {
     "objectID": "05-stats-quarto.html#quarto",
     "href": "05-stats-quarto.html#quarto",
     "title": "Regression and Introduction to Quarto",
     "section": "Quarto",
     "text": "Quarto\n\nQuarto is a multi-language, next-generation version of R Markdown from Posit and includes dozens of new features and capabilities while at the same being able to render most existing Rmd files without modification.\n\n\nIllustration by Allison Horst (www.allisonhorst.com)"
+  },
+  {
+    "objectID": "05-stats-quarto.html#quarto-in-action-r-scripts-markdown",
+    "href": "05-stats-quarto.html#quarto-in-action-r-scripts-markdown",
+    "title": "Regression and Introduction to Quarto",
+    "section": "Quarto in action: R scripts + Markdown",
+    "text": "Quarto in action: R scripts + Markdown"
   },
   {
     "objectID": "05-stats-quarto.html#r-scripts-vs-quarto",
@@ -158,7 +242,14 @@
     "href": "05-stats-quarto.html#r-best-practices",
     "title": "Regression and Introduction to Quarto",
     "section": "R Best Practices",
-    "text": "R Best Practices\n\nUse &lt;- for assigning values to objects.\n\nOnly use = when passing values to a function parameter.\n\nDo not alter your raw data; save your wrangled/cleaned data into a new file and keep it separate from the raw data.\nMake use of R projects to organize your data and make it easier to send over to your collaborators.\n\nHaving said that, when it comes to coding project, the best way to collaborate is using GitHub or similar platforms.\n\nWhenever possible and makes sense for your project, follow the common convention when naming your objects, scripts, and functions. One guide that you can follow is Hadley Wickham’s tidyverse style guide.\n\n\n\n\n\nIntroductory R for Social Science"
+    "text": "R Best Practices\n\nUse &lt;- for assigning values to objects.\n\nOnly use = when passing values to a function parameter.\n\nDo not alter your raw data; save your wrangled/cleaned data into a new file and keep it separate from the raw data.\nMake use of R projects to organize your data and make it easier to send over to your collaborators.\n\nHaving said that, when it comes to coding project, the best way to collaborate is using GitHub or similar platforms.\n\nWhenever possible and makes sense for your project, follow the common convention when naming your objects, scripts, and functions. One guide that you can follow is Hadley Wickham’s tidyverse style guide."
+  },
+  {
+    "objectID": "05-stats-quarto.html#post-workshop-survey",
+    "href": "05-stats-quarto.html#post-workshop-survey",
+    "title": "Regression and Introduction to Quarto",
+    "section": "Post-workshop survey",
+    "text": "Post-workshop survey\nPlease scan this QR code or click on the link below to fill in the post-workshop survey. It should not take more than 2-3 minutes.\nSurvey link: https://smusg.asia.qualtrics.com/jfe/form/SV_1TYE6ntFBi3lwbQ\n\n\n\n\n\nIntroductory R for Social Science"
   },
   {
     "objectID": "03-visualization.html#todays-outline",
@@ -480,14 +571,14 @@
     "href": "01-intro.html#vector-manipulations-adding-items",
     "title": "Introduction to R and RStudio",
     "section": "Vector Manipulations: Adding items",
-    "text": "Vector Manipulations: Adding items\nSeveral ways to add items to a vector\n\n1t1_grades &lt;- c(t1_grades, 92)\n2t1_grades &lt;- c(t1_grades, 88, 95, 79)\n3t1_grades &lt;- c(82, t1_grades)\n4t1_grades &lt;- append(t1_grades, 92, after = 2) # &lt;2&gt;\n\n\n1\n\nAdd a single grade to the end of the vector using c()\n\n2\n\nAdd multiple grades to the end\n\n3\n\nAdd a grade to the beginning\n\n4\n\nInsert a grade at a specific position using append()"
+    "text": "Vector Manipulations: Adding items\nSeveral ways to add items to a vector\n\n\n1t1_grades &lt;- c(t1_grades, 92)\n2t1_grades &lt;- c(t1_grades, 88, 95, 79)\n3t1_grades &lt;- c(82, t1_grades)\n4t1_grades &lt;- append(t1_grades, 92, after = 2) # &lt;2&gt;\n\n\n\n1\n\nAdd a single grade to the end of the vector using c()\n\n2\n\nAdd multiple grades to the end\n\n3\n\nAdd a grade to the beginning\n\n4\n\nInsert a grade at a specific position using append()"
   },
   {
     "objectID": "01-intro.html#vector-manipulations-removing-items",
     "href": "01-intro.html#vector-manipulations-removing-items",
     "title": "Introduction to R and RStudio",
     "section": "Vector Manipulations: Removing items",
-    "text": "Vector Manipulations: Removing items\n\n1t1_grades &lt;- t1_grades[-c(2, 4)]\n2t1_grades &lt;- t1_grades[t1_grades &lt;= 90]\n3t1_grades &lt;- na.omit(t1_grades)\n\n\n1\n\nRemove elements by index using “negative indexing”\n\n2\n\nRemove elements based on a condition using logical indexing\n\n3\n\nRemove NA values from the vector"
+    "text": "Vector Manipulations: Removing items\n\n\n1t1_grades &lt;- t1_grades[-c(2, 4)]\n2t1_grades &lt;- t1_grades[t1_grades &lt;= 90]\n3t1_grades &lt;- na.omit(t1_grades)\n\n\n\n1\n\nRemove elements by index using “negative indexing”\n\n2\n\nRemove elements based on a condition using logical indexing\n\n3\n\nRemove NA values from the vector"
   },
   {
     "objectID": "01-intro.html#data-structures-in-r-factors",
@@ -515,7 +606,7 @@
     "href": "01-intro.html#preparation-get-the-csv",
     "title": "Introduction to R and RStudio",
     "section": "Preparation: Get the CSV",
-    "text": "Preparation: Get the CSV\n\n\n\n\n\n\nWhat is a CSV?\n\n\nA CSV (Comma-Separated Values) file is a type of file that stores data in a plain text format. Each line in the file represents a row of data, and within each row, individual pieces of data (like numbers or words) are separated by commas. This format is commonly used for storing and transferring data, especially in spreadsheets and databases.\nYou can open CSV files in Excel, Google Sheets, or event Notepad!\n\n\n\n\nDownload and save chile_voting.csv from this URL\nSave the CSV file into your data folder.\nCheck out the data dictionary/explanatory notes to learn more about the data, including the column names, data type inside each columns here.\nWe need to use readr package, which is part of tidyverse package. So please install tidyverse first if you have not done so."
+    "text": "Preparation: Get the CSV\n\n\n\n\n\n\n\nWhat is a CSV?\n\n\nA CSV (Comma-Separated Values) file is a type of file that stores data in a plain text format. Each line in the file represents a row of data, and within each row, individual pieces of data (like numbers or words) are separated by commas. This format is commonly used for storing and transferring data, especially in spreadsheets and databases.\nYou can open CSV files in Excel, Google Sheets, or event Notepad!\n\n\n\n\n\nDownload and save chile_voting.csv from this URL\nSave the CSV file into your data folder.\nCheck out the data dictionary/explanatory notes to learn more about the data, including the column names, data type inside each columns here.\nWe need to use readr package, which is part of tidyverse package. So please install tidyverse first if you have not done so."
   },
   {
     "objectID": "01-intro.html#loading-data-from-csv-into-a-dataframe",
