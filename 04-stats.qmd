@@ -309,7 +309,7 @@ voters_age |>
 
 ## Visualize the differences between two samples
 
-The variance will be easier to see when we visualize it as well. As we can see, the variance is roughly the same between these two samples.
+The variance will be easier to see when we visualize it as well. As we can see, the variance for Y group is wider than the N group. This suggests that the variance might be heterogeneous (heteroskedastic).
 
 ```{r}
 voters_age |> 
@@ -334,12 +334,20 @@ $H_1$: There is a significant difference in the mean age between those who inten
 
 ```{r}
 #| echo: true
-#| output-location: fragment
+#| output-location: column
 
 t.test(age ~ vote, 
        data = voters_age, 
-       var.equal = TRUE)
+       var.equal = FALSE)
 ```
+::: {.callout-tip appearance="simple"}
+
+### Notice that we are using Welch's t-test instead of Students' t-test
+
+Welch's t-test (also known as **unequal variances t-test**, is a more robust alternative to Student's t-test. It is often used when two samples have unequal variances and possibly unequal sample sizes. 
+
+:::
+
 
 ## T-Test: Paired Sample T-Test
 
@@ -357,7 +365,7 @@ glimpse(sleep)
 
 ```
 
-## Visualise the before and after
+## Visualise the before (group 1) and after (group 2)
 
 ```{r}
 sleep |> 

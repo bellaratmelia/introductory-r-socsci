@@ -12,6 +12,11 @@ website:
         text: About
       - href: coc.qmd
         text: Code of conduct
+      - href: resources.qmd
+        text: Resources
+  google-analytics:
+    tracking-id: "G-G5L1RGYC4H"
+    anonymize-ip: true
 
 format:
   html:

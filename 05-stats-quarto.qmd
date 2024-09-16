@@ -6,8 +6,8 @@ format: revealjs
 
 ## Today's Outline
 
-1.  Linear Regression
-2.  Logistic Regression
+1.  Simple Linear Regression in R
+2.  Binary Logistic Regression in R
 3.  Create your manuscript with Quarto
 
 ## Load our data for today!
@@ -17,52 +17,61 @@ format: revealjs
 #| label: load-data
 #| message: false
 #| output: false
-#| warning: false
 
 # import tidyverse library
 library(tidyverse)
 
 # read the CSV with Chile voting data
-chile_data <- read_csv("data/chile_voting.csv")
+chile_data <- read_csv("data-output/chile_voting_processed.csv")
 
-# Display the first few rows and structure of the data
-head(chile_data)
-str(chile_data)
+chile_data <- chile_data |> 
+    mutate(across(c("region", "sex", "education", "vote", "age_group", "support_level"), as_factor))
+
+#reordering
+chile_data <- chile_data |> 
+    mutate(education = factor(education, 
+                         levels = c("P", "S", "PS"), 
+                         ordered = TRUE))
+
+# peek at the data, pay attention to the data types!
+glimpse(chile_data)
 ```
 
-## Linear Regression
+## Simple Linear Regression
 
 **Linear regression** is a statistical method used to model the relationship between a dependent variable (outcome) and one or more independent variables (predictors) by fitting a linear equation to the observed data. The math formula looks like this:
 
+::: columns
+::: {.column width="30%"}
 $$
 Y = \beta_0 + \beta_1X + \varepsilon
 $$
+:::
 
--   $Y$ - the dependent variable
-    -   **must be continuous**
--   $X$ - the independent variable (if there are more than one, there will be $X_1$ , $X_2$ , and so on.
-    -   **can be ordinal, nominal, or continuous**
+::: {.column style="font-size: 75%; width: 70%;"}
+-   $Y$ - the dependent variable; **must be continuous**
+-   $X$ - the independent variable (if there are more than one, there will be $X_1$ , $X_2$ , and so on. This can be ordinal, nominal, or continuous
 -   $\beta_0$ - the y-intercept. Represents the expected value of independent variable $Y$ when independent variable(s) $X$ are set to zero.
 -   $\beta_1$ - the slope / coefficient for independent variable
 -   $\varepsilon$ - the error term. (In some examples you might see this omitted from the formula).
+:::
+:::
 
-
-
-### IRL Examples:
+Examples:
 
 -   Does a person's **age** affect their **income**?
-
--   Do a person's **age** and **income** affect their support towards the **statusquo**?
-
+-   Do a person's **age** and **education level** affect their **income**?
 
 ## Linear Regression: One continuous predictor
 
-**Research Question:** Does a person's age influence their support to incumbent in Chile?
+**Research Question:** Does a person's **age** influence their **support to incumbent** in Chile?
 
-The outcome/DV ($Y$) here is `statusquo`, while the predictor/IV ($X$) would be `age`
+-   The outcome/DV ($Y$): `statusquo`
+-   The predictor/IV ($X$): `age`
 
 ```{r}
 #| echo: true
+#| output-location: slide
 statsquo_model1 <- lm(statusquo ~ age, data = chile_data)
 summary(statsquo_model1) #summarize the result
 ```
@@ -76,11 +85,12 @@ summary(statsquo_model1) #summarize the result
 -   **F-statistics**: overall significance
 :::
 
-### Linear REgression: Multiple continuous predictors
+## Linear Regression: Multiple continuous predictors
 
 **Research Question:** Do a person's age and their income have an impact on their support for the incumbent?
 
-The outcome/DV ($Y$) here is `income`, while the predictors/IVs ($X_1$ and $X_2$) would be `age` and `statusquo`
+-   The outcome/DV ($Y$): `statusquo`
+-   The predictor/IV ($X$): `age` and `income`
 
 ```{r}
 #| echo: true
@@ -88,8 +98,7 @@ statsquo_model2 <- lm(statusquo ~ age + income, data = chile_data)
 summary(statsquo_model2)
 ```
 
-
-## Presenting your models
+## Presenting your models {.scrollable}
 
 Don't forget to install the library by running this line in your terminal: `install.packages("huxtable")`
 
@@ -99,12 +108,11 @@ library(huxtable)
 huxreg("age" = statsquo_model1, "age + income" = statsquo_model2)
 ```
 
-
 ## FYI: Multicollinearity
 
 Caution! When doing regression-type of tests, watch out for multicollinearity.
 
-Multicollinearity = a situation in which two or more predictor variables are highly correlated with each other. This makes it difficult to determine the specific contribution of each predictor variable to the relationship.
+Multicollinearity is a situation in which two or more predictor variables are highly correlated with each other. This makes it difficult to determine the specific contribution of each predictor variable to the relationship.
 
 One way to check for it:
 
@@ -117,25 +125,22 @@ One way to check for it:
 car::vif(statsquo_model2)
 ```
 
-
 ## Linear Regression: One categorical predictor
 
-**Research question**: Explore the difference of support for status quo between different education levels.
+**Research question**: Explore the difference of support for `statusquo` between different `sex`.
+
+-   The outcome/DV ($Y$): `statusquo`
+-   The predictor/IV ($X$): `sex`
 
 ::: callout-note
-Before we proceed with analysis, let's ensure that all the categorical variables are cast as factors!
+Before proceeding with analysis, ensure that all the categorical variables involved are cast as factors!
 :::
-
 
 ```{r}
 #| echo: true
 
-chile_data <- chile_data |> 
-    mutate(education = factor(education)) |> 
-    mutate(sex = factor(sex)) |> 
-    mutate(region = factor(region))
-
-glimpse(chile_data)
+str(chile_data$statusquo)
+str(chile_data$sex)
 ```
 
 ## Continuing the analysis
@@ -144,65 +149,55 @@ The analysis summary should look like this:
 
 ```{r}
 #| echo: true
-statusquo_model3 <- lm(statusquo ~ education, data = chile_data)
+statusquo_model3 <- lm(statusquo ~ sex, data = chile_data)
 summary(statusquo_model3)
 ```
 
-Interpretation for categorical predictor - one of the category will be used as a reference category. By default, the first category will be used.
+When interpreting a categorical predictor in regression, one category is treated as the reference category, which serves as the baseline for comparison. In this case, the reference category corresponds to the intercept.
 
+By default, the first category in the data is used as the reference category, unless specified otherwise.
 
 ## Categorical predictor: changing the reference
 
-We can use `relevel` to change the reference/baseline category.
+Let's change the reference category for `sex` variable to "M".
 
 ```{r}
 #| echo: true
-chile_data <- chile_data |> 
-    mutate(education = relevel(education, ref = "S"))
 
-contrasts(chile_data$education)
+chile_data <- chile_data |> 
+    mutate(sex = relevel(sex, ref = "M"))
+
+str(chile_data$sex)
 ```
 
-
-## Re-run the analysis with the new reference category
+Re-run the analysis with the new reference category
 
 ```{r}
 #| echo: true
-statsquo_model3 <- lm(statusquo ~ education, data = chile_data)
+#| output-location: slide
+statsquo_model3 <- lm(statusquo ~ sex, data = chile_data)
 summary(statsquo_model3)
 ```
 
-
 ## Let's try this Linear Regression exercise! (5 mins)
 
-Create a regression model called `statusquo_model4` that predicts the `statusquo` score based on `age` and `education`. Make sure that the reference category for `education` is set to **P** (Primary).
-
-Optional: Plot the scatterplot with the trend line for each education category. It should look like this:
+Create a regression model called `statusquo_model4` that predicts the `statusquo` score based on `region`. Make sure the reference category is region "M".
 
 ```{r}
-#| echo: true
-chile_data |> 
-	ggplot(aes(x = age, y = statusquo, color = education)) +
-	geom_point() +
-	geom_smooth(method = "lm")
-```
+#| echo: false
+#| output: false
 
-```{r}
-#| echo: true
-#| output: true
-
-chile_data <- chile_data |> 
-    dplyr::mutate(education = relevel(education, ref = "P"))
-
-statusquo_model4 <- lm(statusquo ~ age + education, data = chile_data)
+statusquo_model4 <- lm(statusquo ~ region, data = chile_data)
 summary(statusquo_model4)
 ```
 
 ## Binary Logistic Regression
 
-Also known as simply logistic regression, it is used to model the relationship between a set of independent variables and a binary outcome. These independent variables can be either categorical or continuous.
+Also known as simply logistic regression, it is used to model the relationship between a set of independent variables and a binary outcome.
 
-The formula is:
+These independent variables can be either categorical or continuous.
+
+Binary Logistics Regression formula:
 
 $$
 logit(P) = \beta_0 + \beta_1X_1 + \beta_2X_2 + … + \beta_nX_n
@@ -214,19 +209,21 @@ $$
 P = \frac{1}{1 + e^{-(\beta_0 + \beta_1X)}}
 $$
 
+## Binary Logistic Regression Examples
 
-### Examples:
+-   Does a person’s **age** and **education level** influence whether they will vote Yes or No in a referendum?
+-   Does the number of **hours spent studying** impact a student’s likelihood of passing a module? (pass/fail outcome)
 
--   Does a person's **age** and **education** affect whether they will **vote Yes or No** in the plebiscite?
-
--   Does a person's **income** and **region** affect their likelihood of **abstaining from voting**?
-
-In a way, the goal or logistic regression is to determine the probability of a specific event occurring (pass or fail, survived or perished, vote A or vote B)
-
+In essence, the goal of binary logistic regression is to estimate the probability of a specific event happening when there are only two possible outcomes (hence the term "binary").
 
 ## Binary Logistic Regression: One Continuous Predictor
 
 **Research Question**: Does **age** affect the likelihood of voting "Yes" in the plebiscite?
+
+-   The outcome/DV ($Y$): `vote` - there are 4 outcomes here, but for the purpose of this workshop practice, let's define the outcome as "Yes" and "not Yes" outcome
+-   The predictor/IV ($X$): `age`
+
+Before we proceed with the calculations, we need to **dummy code** the dependent variable into 1 and 0, with 1 = Yes and 0 = Not Yes. [More info on dummy coding here](https://stats.oarc.ucla.edu/other/mult-pkg/faq/general/faqwhat-is-dummy-coding/)
 
 ```{r}
 #| echo: true
@@ -234,32 +231,80 @@ In a way, the goal or logistic regression is to determine the probability of a s
 chile_data <- chile_data |>
     mutate(vote_yes = ifelse(vote == "Y", 1, 0))
 
+```
+
+```{r}
+chile_data |> select(vote, vote_yes) |> print(n = 3)
+```
+
+## Binary Logistic Regression: One Continuous Predictor
+
+Let's conduct the analysis!
+
+```{r}
+#| echo: true
+
 vote_age <- glm(vote_yes ~ age,
                 family = binomial, 
                 data = chile_data)
 
 summary(vote_age)
-exp(coefficients(vote_age))
 ```
 
-------------------------------------------------------------------------
+## Exponentiate the coefficients
 
-### Binary Logistic Regression: One Categorical Predictor
-
-**Research Question**: Does **education level** affect the likelihood of voting "Yes" in the plebiscite?
+If you recall the formula, the results are expressed in Logit Probability. As we typically report the result in terms of Odd Ratios (OR), we need to exponentiate the coefficients.
 
 ```{r}
 #| echo: true
+exp(coefficients(vote_age))
+```
+
+\[interpretation to OR here\]
+
+## Binary Logistic Regression: One Categorical Predictor
+
+**Research Question**: Does **education level** affect the likelihood of voting "Yes" in the plebiscite?
+
+-   The outcome/DV ($Y$): `vote` - there are 4 outcomes here, but for the purpose of this workshop practice, let's define the outcome as "Yes" and "not Yes" outcome
+-   The predictor/IV ($X$): `education`
+
+```{r}
+#| echo: true
+#| output-location: slide
 vote_education <- glm(vote_yes ~ education,
                       family = "binomial",
                       data = chile_data)
 
 summary(vote_education)
+
+```
+
+## Exponentiate the coefficients
+
+If you recall the formula, the results are expressed in Logit Probability. As we typically report the result in terms of Odd Ratios (OR), we need to exponentiate the coefficients.
+
+```{r}
+#| echo: true
 exp(coefficients(vote_education))
 ```
 
+\[interpretation to OR here\]
 
-## Present both models in a table
+## Changing baseline category for ordered factor
+
+``` r
+chile_data <- chile_data |> 
+    mutate(education = factor(education, 
+                         levels = c("S", "P", "PS"), 
+                         ordered = TRUE))
+```
+
+::: {.callout-note appearance="simple" title="Releveling ordered factor"}
+Previously, we could use the `relevel()` function to change the reference category for ordered factors. However, in recent R versions, this no longer works for ordered factors, so we now use the method shown in the code above. The `relevel()` function still works for unordered factors.
+:::
+
+## Present both models in a table {.scrollable}
 
 ```{r}
 #| echo: true
@@ -267,19 +312,18 @@ library(huxtable)
 huxreg("age" = vote_age, "education" = vote_education)
 ```
 
+## Let's try this Logistic Regression exercise! (5 mins)
 
-## Let's try this Logistic Regression exercise!
-
-Create a regression model called `vote_model` that predicts the likelihood of voting "Yes" based on `age`, `education`, and `income`. Make sure that the reference category for `education` is set to P (Primary).
+Create a regression model called `vote_model` that predicts the likelihood of voting "Yes" based on `age` and `vote` intention. Make sure that the reference category for `vote` is set to U (Undecided).
 
 ```{r}
-#| echo: true
-#| output: true
+#| echo: false
+#| output: false
 
 chile_data <- chile_data |> 
-    mutate(education = relevel(education, ref = "P"))
+    mutate(vote = relevel(vote, ref = "U"))
 
-vote_model <- glm(vote_yes ~ age + education + income,
+vote_model <- glm(vote_yes ~ age + vote,
                   family = "binomial", 
                   data = chile_data) 
 
@@ -300,13 +344,11 @@ exp(coefficients(vote_model))
 
     -   RMarkdown file will have `.Rmd` extension.
 
-------------------------------------------------------------------------
+## RMarkdown in action
 
 ![](images/rmarkdown.png){fig-align="center"}
 
-------------------------------------------------------------------------
-
-How it all works:
+## How it all works
 
 ![Illustration by Allison Horst (www.allisonhorst.com)](images/rmarkdown_wizards.png){fig-align="center"}
 
@@ -316,7 +358,7 @@ How it all works:
 
 ![Illustration by Allison Horst (www.allisonhorst.com)](images/quarto-rendering.png){fig-align="center"}
 
-------------------------------------------------------------------------
+## Quarto in action: R scripts + Markdown
 
 ![](images/quarto.png){fig-align="center"}
 
@@ -379,3 +421,29 @@ You can change the final result of rendering in the `YAML` section of your docum
     -   Having said that, when it comes to coding project, the best way to collaborate is using GitHub or similar platforms.
 
 -   Whenever possible and makes sense for your project, follow the common convention when naming your objects, scripts, and functions. One guide that you can follow is [Hadley Wickham's tidyverse style guide](https://style.tidyverse.org/).
+
+
+# Thank you for your participation!
+
+:::: {.columns}
+
+::: {.column width="35%"}
+![](images/wedidit.webp)
+:::
+
+::: {.column width="65%"}
+All the best for your studies and academic journey! (manifesting excellent grades)
+
+Need help with R or Quarto? Please don't hesitate to contact me at `bellar@smu.edu.sg` or `libresearch@smu.edu.sg`
+:::
+
+::::
+
+
+## Post-workshop survey
+
+Please scan this QR code or click on the link below to fill in the post-workshop survey. It should not take more than 2-3 minutes.
+
+Survey link: <https://smusg.asia.qualtrics.com/jfe/form/SV_1TYE6ntFBi3lwbQ>
+
+![](images/post-workshop-qrcode.png){width="500"}

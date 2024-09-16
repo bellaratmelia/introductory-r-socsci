@@ -349,7 +349,7 @@ mean(missing_vector, na.rm = TRUE)
 Several ways to add items to a vector
 ```{r}
 #| echo: true
-#| output: false
+#| output-location: column
 #| eval: false
 
 t1_grades <- c(t1_grades, 92) # <1>
@@ -366,7 +366,7 @@ t1_grades <- append(t1_grades, 92, after = 2) # <2> # <4>
 
 ```{r}
 #| echo: true
-#| output: false
+#| output-location: column
 #| eval: false
 
 t1_grades <- t1_grades[-c(2, 4)] # <1>
@@ -438,9 +438,7 @@ Let's try loading one from a CSV!
 
 ## Preparation: Get the CSV 
 
-::: {.callout-note appearance="simple"}
-
-### What is a CSV?
+::: {.callout-note appearance="simple" title="What is a CSV?"}
 
 A CSV (Comma-Separated Values) file is a type of file that stores data in a plain text format. Each line in the file represents a row of data, and within each row, individual pieces of data (like numbers or words) are separated by commas. This format is commonly used for storing and transferring data, especially in spreadsheets and databases.
 
