@@ -98,6 +98,13 @@
     "text": "Categorical predictor: changing the reference\n\n\nCall:\nlm(formula = statusquo ~ sex, data = chile_data)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-1.77948 -0.98619 -0.06878  0.96289  1.79341 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)   \n(Intercept) -0.07986    0.02917  -2.737  0.00624 **\nsexF         0.13339    0.04068   3.279  0.00106 **\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.003 on 2429 degrees of freedom\nMultiple R-squared:  0.004406,  Adjusted R-squared:  0.003997 \nF-statistic: 10.75 on 1 and 2429 DF,  p-value: 0.001057"
   },
   {
+    "objectID": "05-stats-quarto.html#changing-baseline-category-for-ordered-factor",
+    "href": "05-stats-quarto.html#changing-baseline-category-for-ordered-factor",
+    "title": "Regression and Introduction to Quarto",
+    "section": "Changing baseline category for ordered factor",
+    "text": "Changing baseline category for ordered factor\nchile_data &lt;- chile_data |&gt; \n    mutate(education = factor(education, \n                         levels = c(\"S\", \"P\", \"PS\"), \n                         ordered = TRUE))\n\n\n\n\n\n\n\nReleveling ordered factor\n\n\nPreviously, we could use the relevel() function to change the reference category for ordered factors. However, in recent R versions, this no longer works for ordered factors, so we now use the method shown in the code above. The relevel() function still works for unordered factors."
+  },
+  {
     "objectID": "05-stats-quarto.html#lets-try-this-linear-regression-exercise-5-mins",
     "href": "05-stats-quarto.html#lets-try-this-linear-regression-exercise-5-mins",
     "title": "Regression and Introduction to Quarto",
@@ -123,63 +130,63 @@
     "href": "05-stats-quarto.html#binary-logistic-regression-one-continuous-predictor",
     "title": "Regression and Introduction to Quarto",
     "section": "Binary Logistic Regression: One Continuous Predictor",
-    "text": "Binary Logistic Regression: One Continuous Predictor\nResearch Question: Does age affect the likelihood of voting “Yes” in the plebiscite?\n\nThe outcome/DV (\\(Y\\)): vote - there are 4 outcomes here, but for the purpose of this workshop practice, let’s define the outcome as “Yes” and “not Yes” outcome\nThe predictor/IV (\\(X\\)): age\n\nBefore we proceed with the calculations, we need to dummy code the dependent variable into 1 and 0, with 1 = Yes and 0 = Not Yes. More info on dummy coding here\n\n# First, we need to create a binary outcome\nchile_data &lt;- chile_data |&gt;\n    mutate(vote_yes = ifelse(vote == \"Y\", 1, 0))\n\n\n\n# A tibble: 2,431 × 2\n  vote  vote_yes\n  &lt;fct&gt;    &lt;dbl&gt;\n1 Y            1\n2 N            0\n3 Y            1\n# ℹ 2,428 more rows"
+    "text": "Binary Logistic Regression: One Continuous Predictor\nResearch Question: Does age affect the likelihood of voting “Yes” in the plebiscite?\n\nThe outcome/DV (\\(Y\\)): vote - there are 4 outcomes here, but for the purpose of this workshop practice, let’s define the outcome as “Yes” and “not Yes” outcome\nThe predictor/IV (\\(X\\)): age"
   },
   {
-    "objectID": "05-stats-quarto.html#binary-logistic-regression-one-continuous-predictor-1",
-    "href": "05-stats-quarto.html#binary-logistic-regression-one-continuous-predictor-1",
+    "objectID": "05-stats-quarto.html#dummy-coding-dependent-variable",
+    "href": "05-stats-quarto.html#dummy-coding-dependent-variable",
     "title": "Regression and Introduction to Quarto",
-    "section": "Binary Logistic Regression: One Continuous Predictor",
-    "text": "Binary Logistic Regression: One Continuous Predictor\nLet’s conduct the analysis!\n\nvote_age &lt;- glm(vote_yes ~ age,\n                family = binomial, \n                data = chile_data)\n\nsummary(vote_age)\n\n\nCall:\nglm(formula = vote_yes ~ age, family = binomial, data = chile_data)\n\nCoefficients:\n             Estimate Std. Error z value Pr(&gt;|z|)    \n(Intercept) -1.166859   0.121266  -9.622  &lt; 2e-16 ***\nage          0.013451   0.002898   4.641 3.47e-06 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 3129.1  on 2430  degrees of freedom\nResidual deviance: 3107.6  on 2429  degrees of freedom\nAIC: 3111.6\n\nNumber of Fisher Scoring iterations: 4"
+    "section": "Dummy-coding dependent variable",
+    "text": "Dummy-coding dependent variable\nBefore we proceed with the calculations, we need to dummy code the dependent variable into 1 and 0, with 1 = Yes and 0 = Not Yes. More info on dummy coding here\n\n# First, we need to create a binary outcome\nchile_data &lt;- chile_data |&gt;\n    mutate(vote_yes = ifelse(vote == \"Y\", 1, 0))\n\n\n\n# A tibble: 2,431 × 2\n  vote  vote_yes\n  &lt;fct&gt;    &lt;dbl&gt;\n1 Y            1\n2 N            0\n3 Y            1\n# ℹ 2,428 more rows"
+  },
+  {
+    "objectID": "05-stats-quarto.html#conduct-the-analysis",
+    "href": "05-stats-quarto.html#conduct-the-analysis",
+    "title": "Regression and Introduction to Quarto",
+    "section": "Conduct the analysis",
+    "text": "Conduct the analysis\nLet’s conduct the analysis!\n\nvote_age &lt;- glm(vote_yes ~ age,\n                family = binomial, \n                data = chile_data)\n\nsummary(vote_age)\n\n\nCall:\nglm(formula = vote_yes ~ age, family = binomial, data = chile_data)\n\nCoefficients:\n             Estimate Std. Error z value Pr(&gt;|z|)    \n(Intercept) -1.166859   0.121266  -9.622  &lt; 2e-16 ***\nage          0.013451   0.002898   4.641 3.47e-06 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 3129.1  on 2430  degrees of freedom\nResidual deviance: 3107.6  on 2429  degrees of freedom\nAIC: 3111.6\n\nNumber of Fisher Scoring iterations: 4"
   },
   {
     "objectID": "05-stats-quarto.html#exponentiate-the-coefficients",
     "href": "05-stats-quarto.html#exponentiate-the-coefficients",
     "title": "Regression and Introduction to Quarto",
     "section": "Exponentiate the coefficients",
-    "text": "Exponentiate the coefficients\nIf you recall the formula, the results are expressed in Logit Probability. As we typically report the result in terms of Odd Ratios (OR), we need to exponentiate the coefficients.\n\nexp(coefficients(vote_age))\n\n(Intercept)         age \n  0.3113433   1.0135417 \n\n\n[interpretation to OR here]"
+    "text": "Exponentiate the coefficients\nIf you recall the formula, the results are expressed in Logit Probability. As we typically report the result in terms of Odd Ratios (OR), perform exponentiation on the coefficients.\n\nexp(coefficients(vote_age))\n\n(Intercept)         age \n  0.3113433   1.0135417 \n\n\nPossible interpretation:\n(The intercept isn’t typically interpreted as an odds ratio, so we’ll ignore that for now)\nThe result above indicates that like one unit increase of age will increase the odds of voting “Yes” by a factor of 1.0135. i.e. for each year increase in age, there is a 1.35% increase in the odds of voting “Yes” by 1.35 %. \\(((1.0135 - 1) * 100 = 1.35)\\)\nThis positive effect is very small, and thus age is a very weak predictor of the outcome.\n\n\nMore on intepreting Odds Ratio: https://stats.oarc.ucla.edu/other/mult-pkg/faq/general/faq-how-do-i-interpret-odds-ratios-in-logistic-regression/"
   },
   {
     "objectID": "05-stats-quarto.html#binary-logistic-regression-one-categorical-predictor",
     "href": "05-stats-quarto.html#binary-logistic-regression-one-categorical-predictor",
     "title": "Regression and Introduction to Quarto",
     "section": "Binary Logistic Regression: One Categorical Predictor",
-    "text": "Binary Logistic Regression: One Categorical Predictor\nResearch Question: Does education level affect the likelihood of voting “Yes” in the plebiscite?\n\nThe outcome/DV (\\(Y\\)): vote - there are 4 outcomes here, but for the purpose of this workshop practice, let’s define the outcome as “Yes” and “not Yes” outcome\nThe predictor/IV (\\(X\\)): education\n\n\nvote_education &lt;- glm(vote_yes ~ education,\n                      family = \"binomial\",\n                      data = chile_data)\n\nsummary(vote_education)"
+    "text": "Binary Logistic Regression: One Categorical Predictor\nResearch Question: Does region affect the likelihood of voting “Yes” in the plebiscite?\n\nThe outcome/DV (\\(Y\\)): vote - there are 4 outcomes here, but for the purpose of this workshop practice, let’s define the outcome as “Yes” and “not Yes” outcome\nThe predictor/IV (\\(X\\)): region\n\n\nvote_region &lt;- glm(vote_yes ~ region,\n                      family = \"binomial\",\n                      data = chile_data)\n\nsummary(vote_region)"
   },
   {
     "objectID": "05-stats-quarto.html#binary-logistic-regression-one-categorical-predictor-output",
     "href": "05-stats-quarto.html#binary-logistic-regression-one-categorical-predictor-output",
     "title": "Regression and Introduction to Quarto",
     "section": "Binary Logistic Regression: One Categorical Predictor",
-    "text": "Binary Logistic Regression: One Categorical Predictor\n\n\nCall:\nglm(formula = vote_yes ~ education, family = \"binomial\", data = chile_data)\n\nCoefficients:\n            Estimate Std. Error z value Pr(&gt;|z|)    \n(Intercept) -0.69741    0.04755 -14.668  &lt; 2e-16 ***\neducation.L -0.35829    0.08843  -4.052 5.09e-05 ***\neducation.Q  0.17780    0.07579   2.346    0.019 *  \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 3129.1  on 2430  degrees of freedom\nResidual deviance: 3098.0  on 2428  degrees of freedom\nAIC: 3104\n\nNumber of Fisher Scoring iterations: 4"
+    "text": "Binary Logistic Regression: One Categorical Predictor\n\n\nCall:\nglm(formula = vote_yes ~ region, family = \"binomial\", data = chile_data)\n\nCoefficients:\n            Estimate Std. Error z value Pr(&gt;|z|)    \n(Intercept)  -0.2705     0.1156  -2.341 0.019257 *  \nregionC      -0.5716     0.1484  -3.851 0.000117 ***\nregionS      -0.1033     0.1403  -0.736 0.461643    \nregionSA     -0.6883     0.1387  -4.962 6.98e-07 ***\nregionM       0.2438     0.2583   0.944 0.345125    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 3129.1  on 2430  degrees of freedom\nResidual deviance: 3078.3  on 2426  degrees of freedom\nAIC: 3088.3\n\nNumber of Fisher Scoring iterations: 4"
   },
   {
     "objectID": "05-stats-quarto.html#exponentiate-the-coefficients-1",
     "href": "05-stats-quarto.html#exponentiate-the-coefficients-1",
     "title": "Regression and Introduction to Quarto",
     "section": "Exponentiate the coefficients",
-    "text": "Exponentiate the coefficients\nIf you recall the formula, the results are expressed in Logit Probability. As we typically report the result in terms of Odd Ratios (OR), we need to exponentiate the coefficients.\n\nexp(coefficients(vote_education))\n\n(Intercept) education.L education.Q \n  0.4978712   0.6988717   1.1945871 \n\n\n[interpretation to OR here]"
-  },
-  {
-    "objectID": "05-stats-quarto.html#changing-baseline-category-for-ordered-factor",
-    "href": "05-stats-quarto.html#changing-baseline-category-for-ordered-factor",
-    "title": "Regression and Introduction to Quarto",
-    "section": "Changing baseline category for ordered factor",
-    "text": "Changing baseline category for ordered factor\nchile_data &lt;- chile_data |&gt; \n    mutate(education = factor(education, \n                         levels = c(\"S\", \"P\", \"PS\"), \n                         ordered = TRUE))\n\n\n\n\n\n\n\nReleveling ordered factor\n\n\nPreviously, we could use the relevel() function to change the reference category for ordered factors. However, in recent R versions, this no longer works for ordered factors, so we now use the method shown in the code above. The relevel() function still works for unordered factors."
+    "text": "Exponentiate the coefficients\nIf you recall the formula, the results are expressed in Logit Probability. As we typically report the result in terms of Odd Ratios (OR), perform exponentiation on the coefficients.\n\nexp(coefficients(vote_region))\n\n(Intercept)     regionC     regionS    regionSA     regionM \n  0.7630058   0.5646214   0.9018861   0.5024346   1.2761164 \n\n\nPossible interpretation:\n(The intercept isn’t typically interpreted as an odds ratio, so we’ll ignore that for now)\nThe result above indicates that the odds for people in region C to vote “Yes” are about 0.56 times the odds of people in region N (the reference category). i.e., There is a 43.54% decrease in odds for region C compared to region N. \\(((0.5646 - 1) * 100 = -43.54)\\)\n\n\nMore on logistic regression: https://stats.oarc.ucla.edu/r/dae/logit-regression/"
   },
   {
     "objectID": "05-stats-quarto.html#present-both-models-in-a-table",
     "href": "05-stats-quarto.html#present-both-models-in-a-table",
     "title": "Regression and Introduction to Quarto",
     "section": "Present both models in a table",
-    "text": "Present both models in a table\n\nlibrary(huxtable)\nhuxreg(\"age\" = vote_age, \"education\" = vote_education)\n\n\n\nageeducation\n\n(Intercept)-1.167 ***-0.697 ***\n\n(0.121)   (0.048)   \n\nage0.013 ***        \n\n(0.003)           \n\neducation.L        -0.358 ***\n\n        (0.088)   \n\neducation.Q        0.178 *  \n\n        (0.076)   \n\nN2431        2431        \n\nlogLik-1553.776    -1548.984    \n\nAIC3111.552    3103.967    \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
+    "text": "Present both models in a table\n\nlibrary(huxtable)\nhuxreg(\"age\" = vote_age, \"region\" = vote_region)\n\n\n\nageregion\n\n(Intercept)-1.167 ***-0.270 *  \n\n(0.121)   (0.116)   \n\nage0.013 ***        \n\n(0.003)           \n\nregionC        -0.572 ***\n\n        (0.148)   \n\nregionS        -0.103    \n\n        (0.140)   \n\nregionSA        -0.688 ***\n\n        (0.139)   \n\nregionM        0.244    \n\n        (0.258)   \n\nN2431        2431        \n\nlogLik-1553.776    -1539.159    \n\nAIC3111.552    3088.317    \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
   },
   {
     "objectID": "05-stats-quarto.html#lets-try-this-logistic-regression-exercise-5-mins",
     "href": "05-stats-quarto.html#lets-try-this-logistic-regression-exercise-5-mins",
     "title": "Regression and Introduction to Quarto",
     "section": "Let’s try this Logistic Regression exercise! (5 mins)",
-    "text": "Let’s try this Logistic Regression exercise! (5 mins)\nCreate a regression model called vote_model that predicts the likelihood of voting “Yes” based on age and vote intention. Make sure that the reference category for vote is set to U (Undecided)."
+    "text": "Let’s try this Logistic Regression exercise! (5 mins)\nCreate a regression model called vote_model that predicts the likelihood of voting “Yes” based on sex."
   },
   {
     "objectID": "05-stats-quarto.html#markdown-specifically-r-markdown",
