@@ -179,6 +179,20 @@ statsquo_model3 <- lm(statusquo ~ sex, data = chile_data)
 summary(statsquo_model3)
 ```
 
+
+## Changing baseline category for ordered factor
+
+``` r
+chile_data <- chile_data |> 
+    mutate(education = factor(education, 
+                         levels = c("S", "P", "PS"), 
+                         ordered = TRUE))
+```
+
+::: {.callout-note appearance="simple" title="Releveling ordered factor"}
+Previously, we could use the `relevel()` function to change the reference category for ordered factors. However, in recent R versions, this no longer works for ordered factors, so we now use the method shown in the code above. The `relevel()` function still works for unordered factors.
+:::
+
 ## Let's try this Linear Regression exercise! (5 mins)
 
 Create a regression model called `statusquo_model4` that predicts the `statusquo` score based on `region`. Make sure the reference category is region "M".
@@ -223,6 +237,8 @@ In essence, the goal of binary logistic regression is to estimate the probabilit
 -   The outcome/DV ($Y$): `vote` - there are 4 outcomes here, but for the purpose of this workshop practice, let's define the outcome as "Yes" and "not Yes" outcome
 -   The predictor/IV ($X$): `age`
 
+## Dummy-coding dependent variable
+
 Before we proceed with the calculations, we need to **dummy code** the dependent variable into 1 and 0, with 1 = Yes and 0 = Not Yes. [More info on dummy coding here](https://stats.oarc.ucla.edu/other/mult-pkg/faq/general/faqwhat-is-dummy-coding/)
 
 ```{r}
@@ -237,7 +253,7 @@ chile_data <- chile_data |>
 chile_data |> select(vote, vote_yes) |> print(n = 3)
 ```
 
-## Binary Logistic Regression: One Continuous Predictor
+## Conduct the analysis
 
 Let's conduct the analysis!
 
@@ -253,55 +269,59 @@ summary(vote_age)
 
 ## Exponentiate the coefficients
 
-If you recall the formula, the results are expressed in Logit Probability. As we typically report the result in terms of Odd Ratios (OR), we need to exponentiate the coefficients.
+If you recall the formula, the results are expressed in Logit Probability. As we typically report the result in terms of Odd Ratios (OR), perform exponentiation on the coefficients.
 
 ```{r}
 #| echo: true
 exp(coefficients(vote_age))
 ```
+**Possible interpretation:**
 
-\[interpretation to OR here\]
+*(The intercept isn't typically interpreted as an odds ratio, so we'll ignore that for now)* 
+
+The result above indicates that like one unit increase of age will increase the odds of voting "Yes" by a factor of 1.0135. i.e. for each year increase in age, there is a 1.35% increase in the odds of voting "Yes" by 1.35 %. $((1.0135 - 1) * 100 = 1.35)$ 
+
+This positive effect is very small, and thus age is a very weak predictor of the outcome.
+
+::: aside
+More on intepreting Odds Ratio: <https://stats.oarc.ucla.edu/other/mult-pkg/faq/general/faq-how-do-i-interpret-odds-ratios-in-logistic-regression/>
+:::
+
 
 ## Binary Logistic Regression: One Categorical Predictor
 
-**Research Question**: Does **education level** affect the likelihood of voting "Yes" in the plebiscite?
+**Research Question**: Does **region** affect the likelihood of voting "Yes" in the plebiscite?
 
 -   The outcome/DV ($Y$): `vote` - there are 4 outcomes here, but for the purpose of this workshop practice, let's define the outcome as "Yes" and "not Yes" outcome
--   The predictor/IV ($X$): `education`
+-   The predictor/IV ($X$): `region`
 
 ```{r}
 #| echo: true
 #| output-location: slide
-vote_education <- glm(vote_yes ~ education,
+vote_region <- glm(vote_yes ~ region,
                       family = "binomial",
                       data = chile_data)
 
-summary(vote_education)
+summary(vote_region)
 
 ```
 
 ## Exponentiate the coefficients
 
-If you recall the formula, the results are expressed in Logit Probability. As we typically report the result in terms of Odd Ratios (OR), we need to exponentiate the coefficients.
+If you recall the formula, the results are expressed in Logit Probability. As we typically report the result in terms of Odd Ratios (OR), perform exponentiation on the coefficients.
 
 ```{r}
 #| echo: true
-exp(coefficients(vote_education))
+exp(coefficients(vote_region))
 ```
+**Possible interpretation:**
 
-\[interpretation to OR here\]
+*(The intercept isn't typically interpreted as an odds ratio, so we'll ignore that for now)* 
 
-## Changing baseline category for ordered factor
+The result above indicates that the odds for people in region C to vote "Yes" are about 0.56 times the odds of people in region N (the reference category). i.e., There is a 43.54% decrease in odds for region C compared to region N. $((0.5646 - 1) * 100 = -43.54)$
 
-``` r
-chile_data <- chile_data |> 
-    mutate(education = factor(education, 
-                         levels = c("S", "P", "PS"), 
-                         ordered = TRUE))
-```
-
-::: {.callout-note appearance="simple" title="Releveling ordered factor"}
-Previously, we could use the `relevel()` function to change the reference category for ordered factors. However, in recent R versions, this no longer works for ordered factors, so we now use the method shown in the code above. The `relevel()` function still works for unordered factors.
+::: aside
+More on logistic regression: <https://stats.oarc.ucla.edu/r/dae/logit-regression/>
 :::
 
 ## Present both models in a table {.scrollable}
@@ -309,21 +329,18 @@ Previously, we could use the `relevel()` function to change the reference catego
 ```{r}
 #| echo: true
 library(huxtable)
-huxreg("age" = vote_age, "education" = vote_education)
+huxreg("age" = vote_age, "region" = vote_region)
 ```
 
 ## Let's try this Logistic Regression exercise! (5 mins)
 
-Create a regression model called `vote_model` that predicts the likelihood of voting "Yes" based on `age` and `vote` intention. Make sure that the reference category for `vote` is set to U (Undecided).
+Create a regression model called `vote_model` that predicts the likelihood of voting "Yes" based on `sex`. 
 
 ```{r}
 #| echo: false
 #| output: false
 
-chile_data <- chile_data |> 
-    mutate(vote = relevel(vote, ref = "U"))
-
-vote_model <- glm(vote_yes ~ age + vote,
+vote_model <- glm(vote_yes ~ sex,
                   family = "binomial", 
                   data = chile_data) 
 
@@ -423,7 +440,7 @@ You can change the final result of rendering in the `YAML` section of your docum
 -   Whenever possible and makes sense for your project, follow the common convention when naming your objects, scripts, and functions. One guide that you can follow is [Hadley Wickham's tidyverse style guide](https://style.tidyverse.org/).
 
 
-# Thank you for your participation!
+# Thank you for your participation 😄
 
 :::: {.columns}
 
@@ -432,9 +449,9 @@ You can change the final result of rendering in the `YAML` section of your docum
 :::
 
 ::: {.column width="65%"}
-All the best for your studies and academic journey! (manifesting excellent grades)
+All the best for your studies and academic journey! *(manifesting excellent grades for everyone who attended the workshop)*
 
-Need help with R or Quarto? Please don't hesitate to contact me at `bellar@smu.edu.sg` or `libresearch@smu.edu.sg`
+Need help with R or Quarto? Please don't hesitate to contact me at [bellar@smu.edu.sg](mailto:bellar@smu.edu.sg)
 :::
 
 ::::
