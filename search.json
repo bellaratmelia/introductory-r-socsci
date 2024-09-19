@@ -25,7 +25,7 @@
     "href": "05-stats-quarto.html#load-our-data-for-today",
     "title": "Regression and Introduction to Quarto",
     "section": "Load our data for today!",
-    "text": "Load our data for today!\n\n# import tidyverse library\nlibrary(tidyverse)\n\n# read the CSV with Chile voting data\nchile_data &lt;- read_csv(\"data-output/chile_voting_processed.csv\")\n\nchile_data &lt;- chile_data |&gt; \n    mutate(across(c(\"region\", \"sex\", \"education\", \"vote\", \"age_group\", \"support_level\"), as_factor))\n\n#reordering\nchile_data &lt;- chile_data |&gt; \n    mutate(education = factor(education, \n                         levels = c(\"P\", \"S\", \"PS\"), \n                         ordered = TRUE))\n\n# peek at the data, pay attention to the data types!\nglimpse(chile_data)"
+    "text": "Load our data for today!\n\n# import tidyverse library\nlibrary(tidyverse)\nlibrary(gtsummary)\nlibrary(huxtable)\n\n# read the CSV with Chile voting data\nchile_data &lt;- read_csv(\"data-output/chile_voting_processed.csv\")\n\nchile_data &lt;- chile_data |&gt; \n    mutate(across(c(\"region\", \"sex\", \"education\", \"vote\", \"age_group\", \"support_level\"), as_factor))\n\n#reordering\nchile_data &lt;- chile_data |&gt; \n    mutate(education = factor(education, \n                         levels = c(\"P\", \"S\", \"PS\"), \n                         ordered = TRUE))\n\n# peek at the data, pay attention to the data types!\nglimpse(chile_data)"
   },
   {
     "objectID": "05-stats-quarto.html#simple-linear-regression",
@@ -53,21 +53,42 @@
     "href": "05-stats-quarto.html#linear-regression-multiple-continuous-predictors",
     "title": "Regression and Introduction to Quarto",
     "section": "Linear Regression: Multiple continuous predictors",
-    "text": "Linear Regression: Multiple continuous predictors\nResearch Question: Do a person’s age and their income have an impact on their support for the incumbent?\n\nThe outcome/DV (\\(Y\\)): statusquo\nThe predictor/IV (\\(X\\)): age and income\n\n\nstatsquo_model2 &lt;- lm(statusquo ~ age + income, data = chile_data)\nsummary(statsquo_model2)\n\n\nCall:\nlm(formula = statusquo ~ age + income, data = chile_data)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-1.58170 -0.97166 -0.06689  0.97791  1.88982 \n\nCoefficients:\n              Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) -3.357e-01  5.968e-02  -5.625 2.07e-08 ***\nage          7.738e-03  1.381e-03   5.603 2.35e-08 ***\nincome       8.276e-07  5.097e-07   1.624    0.105    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.9981 on 2428 degrees of freedom\nMultiple R-squared:  0.01361,   Adjusted R-squared:  0.0128 \nF-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08"
+    "text": "Linear Regression: Multiple continuous predictors\nResearch Question: Do a person’s age and their income have an impact on their support for the incumbent?\n\nThe outcome/DV (\\(Y\\)): statusquo\nThe predictor/IV (\\(X\\)): age and income\n\n\n# let's divide income by 1000 to make the scale bit more similar\nchile_data$income_downscaled &lt;- chile_data$income / 10000\n\nstatsquo_model2 &lt;- lm(statusquo ~ age + income_downscaled, data = chile_data)\nsummary(statsquo_model2)"
+  },
+  {
+    "objectID": "05-stats-quarto.html#linear-regression-multiple-continuous-predictors-output",
+    "href": "05-stats-quarto.html#linear-regression-multiple-continuous-predictors-output",
+    "title": "Regression and Introduction to Quarto",
+    "section": "Linear Regression: Multiple continuous predictors",
+    "text": "Linear Regression: Multiple continuous predictors\n\n\nCall:\nlm(formula = statusquo ~ age + income_downscaled, data = chile_data)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-1.58170 -0.97166 -0.06689  0.97791  1.88982 \n\nCoefficients:\n                   Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)       -0.335698   0.059682  -5.625 2.07e-08 ***\nage                0.007738   0.001381   5.603 2.35e-08 ***\nincome_downscaled  0.008276   0.005097   1.624    0.105    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.9981 on 2428 degrees of freedom\nMultiple R-squared:  0.01361,   Adjusted R-squared:  0.0128 \nF-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08"
+  },
+  {
+    "objectID": "05-stats-quarto.html#alternative-package-to-present-regression-result",
+    "href": "05-stats-quarto.html#alternative-package-to-present-regression-result",
+    "title": "Regression and Introduction to Quarto",
+    "section": "Alternative package to present regression result",
+    "text": "Alternative package to present regression result\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nBeta\n95% CI\n1\np-value\n\n\n\n\nage\n0.01\n0.01, 0.01\n&lt;0.001\n\n\nincome_downscaled\n0.01\n0.00, 0.02\n0.10\n\n\n\n1\nCI = Confidence Interval\n\n\n\n\n\n\n\n\n\n\nMore ontbl_regression() by gtsummary: https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html"
   },
   {
     "objectID": "05-stats-quarto.html#presenting-your-models",
     "href": "05-stats-quarto.html#presenting-your-models",
     "title": "Regression and Introduction to Quarto",
     "section": "Presenting your models",
-    "text": "Presenting your models\nDon’t forget to install the library by running this line in your terminal: install.packages(\"huxtable\")\n\nlibrary(huxtable)\nhuxreg(\"age\" = statsquo_model1, \"age + income\" = statsquo_model2)\n\n\n\nageage + income\n\n(Intercept)-0.305 ***-0.336 ***\n\n(0.057)   (0.060)   \n\nage0.008 ***0.008 ***\n\n(0.001)   (0.001)   \n\nincome        0.000    \n\n        (0.000)   \n\nN2431        2431        \n\nR20.013    0.014    \n\nlogLik-3444.614    -3443.294    \n\nAIC6895.227    6894.589    \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
+    "text": "Presenting your models\nDon’t forget to install the library by running this line in your terminal: install.packages(\"huxtable\")\nHere’s how a regression table may look like!\n\nlibrary(huxtable)\nhuxreg(\"age\" = statsquo_model1, \"age + income\" = statsquo_model2)\n\n\n\nageage + income\n\n(Intercept)-0.305 ***-0.336 ***\n\n(0.057)   (0.060)   \n\nage0.008 ***0.008 ***\n\n(0.001)   (0.001)   \n\nincome_downscaled        0.008    \n\n        (0.005)   \n\nN2431        2431        \n\nR20.013    0.014    \n\nlogLik-3444.614    -3443.294    \n\nAIC6895.227    6894.589    \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
+  },
+  {
+    "objectID": "05-stats-quarto.html#reporting-result-a-sample-regression-table",
+    "href": "05-stats-quarto.html#reporting-result-a-sample-regression-table",
+    "title": "Regression and Introduction to Quarto",
+    "section": "Reporting result: A sample regression table",
+    "text": "Reporting result: A sample regression table"
   },
   {
     "objectID": "05-stats-quarto.html#fyi-multicollinearity",
     "href": "05-stats-quarto.html#fyi-multicollinearity",
     "title": "Regression and Introduction to Quarto",
     "section": "FYI: Multicollinearity",
-    "text": "FYI: Multicollinearity\nCaution! When doing regression-type of tests, watch out for multicollinearity.\nMulticollinearity is a situation in which two or more predictor variables are highly correlated with each other. This makes it difficult to determine the specific contribution of each predictor variable to the relationship.\nOne way to check for it:\n\nAssess the correlation between your predictor variables in your model using Variance Inflation Factor (VIF)\nIf they seem to be highly correlated (&gt; 5 or so), one of the easiest (and somewhat acceptable) way is to simply remove the less significant predictor from your model :D\n\n\ncar::vif(statsquo_model2)\n\n   age income \n1.0009 1.0009"
+    "text": "FYI: Multicollinearity\nCaution! When doing regression-type of tests, watch out for multicollinearity.\nMulticollinearity is a situation in which two or more predictor variables are highly correlated with each other. This makes it difficult to determine the specific contribution of each predictor variable to the relationship.\nOne way to check for it:\n\nAssess the correlation between your predictor variables in your model using Variance Inflation Factor (VIF)\nIf they seem to be highly correlated (&gt; 5 or so), one of the easiest (and somewhat acceptable) way is to simply remove the less significant predictor from your model :D\n\n\ncar::vif(statsquo_model2)\n\n              age income_downscaled \n           1.0009            1.0009"
   },
   {
     "objectID": "05-stats-quarto.html#linear-regression-one-categorical-predictor",
@@ -151,7 +172,35 @@
     "href": "05-stats-quarto.html#exponentiate-the-coefficients",
     "title": "Regression and Introduction to Quarto",
     "section": "Exponentiate the coefficients",
-    "text": "Exponentiate the coefficients\nIf you recall the formula, the results are expressed in Logit Probability. As we typically report the result in terms of Odd Ratios (OR), perform exponentiation on the coefficients.\n\nexp(coefficients(vote_age))\n\n(Intercept)         age \n  0.3113433   1.0135417 \n\n\nPossible interpretation:\n(The intercept isn’t typically interpreted as an odds ratio, so we’ll ignore that for now)\nThe result above indicates that like one unit increase of age will increase the odds of voting “Yes” by a factor of 1.0135. i.e. for each year increase in age, there is a 1.35% increase in the odds of voting “Yes” by 1.35 %. \\(((1.0135 - 1) * 100 = 1.35)\\)\nThis positive effect is very small, and thus age is a very weak predictor of the outcome.\n\n\nMore on intepreting Odds Ratio: https://stats.oarc.ucla.edu/other/mult-pkg/faq/general/faq-how-do-i-interpret-odds-ratios-in-logistic-regression/"
+    "text": "Exponentiate the coefficients\nIf you recall the formula, the results are expressed in Logit Probability. As we typically report the result in terms of Odd Ratios (OR), perform exponentiation on the coefficients.\n\nlibrary(gtsummary)\nvote_age |&gt; tbl_regression(exponentiate = TRUE) |&gt; \n    bold_p() \n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nOR\n1\n95% CI\n1\np-value\n\n\n\n\nage\n1.01\n1.01, 1.02\n&lt;0.001\n\n\n\n1\nOR = Odds Ratio, CI = Confidence Interval\n\n\n\n\n\n\n\n\n\n\nMore ontbl_regression() by gtsummary: https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html"
+  },
+  {
+    "objectID": "05-stats-quarto.html#exponentiate-the-coefficients-interpretation",
+    "href": "05-stats-quarto.html#exponentiate-the-coefficients-interpretation",
+    "title": "Regression and Introduction to Quarto",
+    "section": "Exponentiate the coefficients: interpretation",
+    "text": "Exponentiate the coefficients: interpretation\nPossible interpretation:\n(The intercept isn’t typically interpreted as an odds ratio, so we’ll ignore that for now)\nThe result above indicates that like one unit increase of age will increase the odds of voting “Yes” by a factor of 1.0135. i.e. for each year increase in age, there is a 1.35% increase in the odds of voting “Yes” by 1.35 %. \\(((1.0135 - 1) * 100 = 1.35)\\) . This positive effect is very small.\n\n\nMore on interpreting Odds Ratio: https://stats.oarc.ucla.edu/other/mult-pkg/faq/general/faq-how-do-i-interpret-odds-ratios-in-logistic-regression/"
+  },
+  {
+    "objectID": "05-stats-quarto.html#for-reporting-purposes-get-the-rsquared",
+    "href": "05-stats-quarto.html#for-reporting-purposes-get-the-rsquared",
+    "title": "Regression and Introduction to Quarto",
+    "section": "For reporting purposes: get the Rsquared",
+    "text": "For reporting purposes: get the Rsquared\nIn the report, the model’s Chi square and Rsquared will be reported as well to indicate the model fit. However, since the resulting item does not have this info, we will call upon DescTools’ PseudoR2() function to help!\n\n\n# by default, McFadden will be used\nDescTools::PseudoR2(vote_age) \n\n\n   McFadden \n0.006886506 \n\n\n\n\nDescTools::PseudoR2(vote_age, \n                    which = \"CoxSnell\")\n\n\n   CoxSnell \n0.008824905 \n\n\n\nDescTools::PseudoR2(vote_age, \n                    which = \"all\")\n\n       McFadden     McFaddenAdj        CoxSnell      Nagelkerke   AldrichNelson \n   6.886506e-03    5.608183e-03    8.824905e-03    1.218997e-02    8.786194e-03 \nVeallZimmermann           Efron McKelveyZavoina            Tjur             AIC \n   1.561219e-02    8.994005e-03    1.168768e-02    8.961863e-03    3.111552e+03 \n            BIC          logLik         logLik0              G2 \n   3.123144e+03   -1.553776e+03   -1.564550e+03    2.154857e+01"
+  },
+  {
+    "objectID": "05-stats-quarto.html#reporting-result-in-text-narration",
+    "href": "05-stats-quarto.html#reporting-result-in-text-narration",
+    "title": "Regression and Introduction to Quarto",
+    "section": "Reporting result: in-text narration",
+    "text": "Reporting result: in-text narration\n\nIn a nutshell, you will most likely have to mention the p-value, the \\(\\beta\\) coefficients, the OR (Odd Ratios) with the confidence intervals, and the adjusted R-squared. You should include these information in your table and narrate the results.\n\n\nThe screenshot is retrieved from https://statistics.laerd.com/spss-tutorials/binomial-logistic-regression-using-spss-statistics.php"
+  },
+  {
+    "objectID": "05-stats-quarto.html#reporting-result-regression-table",
+    "href": "05-stats-quarto.html#reporting-result-regression-table",
+    "title": "Regression and Introduction to Quarto",
+    "section": "Reporting result: regression table",
+    "text": "Reporting result: regression table\n\nhuxreg(\"age\" = vote_age, statistics = c(R2 = \"r.squared\", \"logLik\", \"AIC\"))\n\n\n\nage\n\n(Intercept)-1.167 ***\n\n(0.121)   \n\nage0.013 ***\n\n(0.003)   \n\nlogLik-1553.776    \n\nAIC3111.552    \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
   },
   {
     "objectID": "05-stats-quarto.html#binary-logistic-regression-one-categorical-predictor",
@@ -172,7 +221,14 @@
     "href": "05-stats-quarto.html#exponentiate-the-coefficients-1",
     "title": "Regression and Introduction to Quarto",
     "section": "Exponentiate the coefficients",
-    "text": "Exponentiate the coefficients\nIf you recall the formula, the results are expressed in Logit Probability. As we typically report the result in terms of Odd Ratios (OR), perform exponentiation on the coefficients.\n\nexp(coefficients(vote_region))\n\n(Intercept)     regionC     regionS    regionSA     regionM \n  0.7630058   0.5646214   0.9018861   0.5024346   1.2761164 \n\n\nPossible interpretation:\n(The intercept isn’t typically interpreted as an odds ratio, so we’ll ignore that for now)\nThe result above indicates that the odds for people in region C to vote “Yes” are about 0.56 times the odds of people in region N (the reference category). i.e., There is a 43.54% decrease in odds for region C compared to region N. \\(((0.5646 - 1) * 100 = -43.54)\\)\n\n\nMore on logistic regression: https://stats.oarc.ucla.edu/r/dae/logit-regression/"
+    "text": "Exponentiate the coefficients\nIf you recall the formula, the results are expressed in Logit Probability. As we typically report the result in terms of Odd Ratios (OR), perform exponentiation on the coefficients.\n\nlibrary(gtsummary)\nvote_region |&gt; tbl_regression(exponentiate = TRUE) |&gt;  \n    bold_p()\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nOR\n1\n95% CI\n1\np-value\n\n\n\n\nregion\n\n\n\n\n\n\n\n\n    N\n—\n—\n\n\n\n\n    C\n0.56\n0.42, 0.76\n&lt;0.001\n\n\n    S\n0.90\n0.69, 1.19\n0.5\n\n\n    SA\n0.50\n0.38, 0.66\n&lt;0.001\n\n\n    M\n1.28\n0.77, 2.12\n0.3\n\n\n\n1\nOR = Odds Ratio, CI = Confidence Interval\n\n\n\n\n\n\n\n\nPossible interpretation for region C:\n(The intercept isn’t typically interpreted as an odds ratio, so we’ll ignore that for now)\nThe result above indicates that the odds for people in region C to vote “Yes” are about 0.56 times the odds of people in region N (the reference category). i.e., There is a 43.54% decrease in odds for region C residents to vote “Yes” compared to region N residents. \\(((0.5646 - 1) * 100 = -43.54)\\)\n\n\nMore on logistic regression: https://stats.oarc.ucla.edu/r/dae/logit-regression/"
+  },
+  {
+    "objectID": "05-stats-quarto.html#get-the-rsquared",
+    "href": "05-stats-quarto.html#get-the-rsquared",
+    "title": "Regression and Introduction to Quarto",
+    "section": "Get the Rsquared",
+    "text": "Get the Rsquared\nLet’s retrieve the Rsquared value:\n\n\n# the default is McFadden\nDescTools::PseudoR2(vote_region) \n\n\n  McFadden \n0.01622922 \n\n\n\n\nDescTools::PseudoR2(vote_region, \n                    which = \"CoxSnell\")\n\n\n  CoxSnell \n0.02067302 \n\n\n\nDescTools::PseudoR2(vote_region, \n                    which = \"all\")\n\n       McFadden     McFaddenAdj        CoxSnell      Nagelkerke   AldrichNelson \n   1.622922e-02    1.303341e-02    2.067302e-02    2.855594e-02    2.046225e-02 \nVeallZimmermann           Efron McKelveyZavoina            Tjur             AIC \n   3.635938e-02    2.102186e-02    2.723262e-02    2.102186e-02    3.088317e+03 \n            BIC          logLik         logLik0              G2 \n   3.117298e+03   -1.539159e+03   -1.564550e+03    5.078285e+01"
   },
   {
     "objectID": "05-stats-quarto.html#present-both-models-in-a-table",
