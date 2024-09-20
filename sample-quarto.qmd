@@ -1,0 +1,50 @@
+---
+title: "Sample Quarto Document"
+author: "Bella Ratmelia"
+format: html
+bibliography: references.bib
+---
+
+# Hello Quarto!
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+mollit anim id est laborum.
+
+```{r}
+library(tidyverse)
+
+diamonds = as_tibble(diamonds)
+
+```
+
+## Let's visualize the diamonds data
+
+```{r}
+#| echo: true
+#| output: true
+diamonds |> print(n = 10)
+```
+
+Let's create boxplots for carats for each cut quality:
+
+```{r}
+
+diamonds |> ggplot(aes(x = cut, y = carat)) +
+    geom_boxplot() +
+    theme_minimal()
+```
+
+## Text with formulas
+
+$$
+E = mc^2
+$$
+
+## Text with citations
+
+A lot of people have been saying that R is pretty cool [@wickham].

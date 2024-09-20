@@ -20,6 +20,8 @@ format: revealjs
 
 # import tidyverse library
 library(tidyverse)
+library(gtsummary)
+library(huxtable)
 
 # read the CSV with Chile voting data
 chile_data <- read_csv("data-output/chile_voting_processed.csv")
@@ -37,7 +39,9 @@ chile_data <- chile_data |>
 glimpse(chile_data)
 ```
 
-## Simple Linear Regression
+# Simple Linear Regression 
+
+## Simple Linear Regression: what is it?
 
 **Linear regression** is a statistical method used to model the relationship between a dependent variable (outcome) and one or more independent variables (predictors) by fitting a linear equation to the observed data. The math formula looks like this:
 
@@ -81,9 +85,25 @@ summary(statsquo_model1) #summarize the result
 -   **Residuals**: overview on the distribution of residuals (expected value minus observed value) -- we can plot this to check for homoscedasticity -
 -   **Coefficients**: shows the intercept, the regression coefficients for the predictor variables, and their statistical significance
 -   **Residual standard error**: the average difference between observed and expected outcome by the model. Generally the lower, the better.
--   **R-squared & Adjusted R-squared**: indicates the proportion of variation in the outcome that can be explained by the model i.e., how "accurate" is your model?
--   **F-statistics**: overall significance
+-   **R-squared & Adjusted R-squared**: indicates the proportion of variation in the outcome that can be explained by the model (i.e. goodness of fit).
+-   **F-statistics**: indicates whether the model as a whole is statistically significant and whether it explains more variance than just the baseline (intercept-only) model.
 :::
+
+## Narrating the results
+
+Here is one possible way to narrate your result:
+
+> A linear regression analysis was conducted to assess the influence of age on support for the incumbent (statusquo) in Chile. The coefficient for age was 0.008 (SE = 0.001), indicating that for each additional year of age, support for the incumbent increased by 0.008 units. This effect was statistically significant at p < 0.001.
+
+> The model explained a small portion of the variance in support for the statusquo (R² = 0.013, Adjusted R² = 0.012). The F-statistic was 30.85 (p < 0.001), further suggesting that age is a significant predictor of support for the incumbent. 
+
+## Present the regression tables!
+
+```{r}
+#| echo: true
+huxreg("age" = statsquo_model1)
+
+```
 
 ## Linear Regression: Multiple continuous predictors
 
@@ -94,19 +114,49 @@ summary(statsquo_model1) #summarize the result
 
 ```{r}
 #| echo: true
-statsquo_model2 <- lm(statusquo ~ age + income, data = chile_data)
+#| output-location: slide
+
+# let's divide income by 1000 to make the scale bit more similar
+chile_data$income_downscaled <- chile_data$income / 10000
+
+statsquo_model2 <- lm(statusquo ~ age + income_downscaled, data = chile_data)
 summary(statsquo_model2)
 ```
+
+## Alternative package to present regression result
+
+```{r}
+#| echo: true
+statsquo_model2 |> tbl_regression() |> bold_p()
+```
+
+::: aside
+More on `tbl_regression()` by `gtsummary`: <https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html>
+:::
+
+## Reporting result: A sample regression table with 2 models
+
+![](images/regression-table.png)
+
 
 ## Presenting your models {.scrollable}
 
 Don't forget to install the library by running this line in your terminal: `install.packages("huxtable")`
 
+For more info about huxreg, go here: <https://cran.r-project.org/web/packages/huxtable/vignettes/huxreg.html>
+
 ```{r}
 #| echo: true
 library(huxtable)
-huxreg("age" = statsquo_model1, "age + income" = statsquo_model2)
+huxreg("age" = statsquo_model1, 
+       "age + income" = statsquo_model2,
+       number_format = 4,
+       bold_signif = 0.05,
+       statistics = c( "R squared" = "r.squared", "N" = "nobs", "F" = "statistic",
+      "P value" = "p.value"))
 ```
+
+
 
 ## FYI: Multicollinearity
 
@@ -157,15 +207,39 @@ When interpreting a categorical predictor in regression, one category is treated
 
 By default, the first category in the data is used as the reference category, unless specified otherwise.
 
+## Narrating the result
+
+Here is one possible way to narrate your result:
+
+> A linear regression analysis was conducted to explore the relationship between `gender` (male vs. female) of voters and support for the status quo in Chile (`statusquo`). The model includes gender as the only predictor. Results revealed that the intercept, representing the mean statusquo score for male voters, was -0.080 (SE = 0.030). This was statistically significant at p < 0.01, indicating that on average, male voters showed a negative inclination towards the status quo.
+
+> The coefficient for female voters was 0.134 (SE = 0.041), indicating that being female was associated with an increase of 0.134 units in support for the status quo compared to male voters. This effect was statistically significant p < 0.01
+
+> The model explain a small portion of the variance in support for the status quo (R^2 = 0.004, Adjusted R^2 = 0.004). The F-statistic (10.75, p < 0.01) suggests that gender is a significant predictor of support for the status quo.
+
+## Presenting the regression table {.scrollable}
+
+For more info about huxreg, go here: <https://cran.r-project.org/web/packages/huxtable/vignettes/huxreg.html>
+
+```{r}
+#| echo: true
+library(huxtable)
+huxreg("sex" = statusquo_model3,
+       number_format = 4,
+       bold_signif = 0.05,
+       statistics = c( "R squared" = "r.squared", "N" = "nobs", "F" = "statistic",
+      "P value" = "p.value"))
+```
+
 ## Categorical predictor: changing the reference
 
-Let's change the reference category for `sex` variable to "M".
+Let's change the reference category for `sex` variable to "F".
 
 ```{r}
 #| echo: true
 
 chile_data <- chile_data |> 
-    mutate(sex = relevel(sex, ref = "M"))
+    mutate(sex = relevel(sex, ref = "F"))
 
 str(chile_data$sex)
 ```
@@ -198,14 +272,20 @@ Previously, we could use the `relevel()` function to change the reference catego
 Create a regression model called `statusquo_model4` that predicts the `statusquo` score based on `region`. Make sure the reference category is region "M".
 
 ```{r}
-#| echo: false
+#| echo: true
 #| output: false
+#| code-fold: true
+
+chile_data <- chile_data |> 
+    mutate(region = relevel(region, ref = "M"))
 
 statusquo_model4 <- lm(statusquo ~ region, data = chile_data)
 summary(statusquo_model4)
 ```
 
-## Binary Logistic Regression
+# Binary Logistic Regression
+
+## Binary Logistic Regression - what is it?
 
 Also known as simply logistic regression, it is used to model the relationship between a set of independent variables and a binary outcome.
 
@@ -245,7 +325,8 @@ Before we proceed with the calculations, we need to **dummy code** the dependent
 #| echo: true
 # First, we need to create a binary outcome
 chile_data <- chile_data |>
-    mutate(vote_yes = ifelse(vote == "Y", 1, 0))
+    mutate(vote_yes = if_else(vote == "Y", 1, 0))
+# the if_else is from dplyr package (from session 2)
 
 ```
 
@@ -273,20 +354,74 @@ If you recall the formula, the results are expressed in Logit Probability. As we
 
 ```{r}
 #| echo: true
-exp(coefficients(vote_age))
+library(gtsummary)
+vote_age |> tbl_regression(exponentiate = TRUE) |> 
+    bold_p() 
 ```
+
+
+::: aside
+More on `tbl_regression()` by `gtsummary`: <https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html>
+:::
+
+
+## Exponentiate the coefficients: interpretation
+
 **Possible interpretation:**
 
 *(The intercept isn't typically interpreted as an odds ratio, so we'll ignore that for now)* 
 
-The result above indicates that like one unit increase of age will increase the odds of voting "Yes" by a factor of 1.0135. i.e. for each year increase in age, there is a 1.35% increase in the odds of voting "Yes" by 1.35 %. $((1.0135 - 1) * 100 = 1.35)$ 
-
-This positive effect is very small, and thus age is a very weak predictor of the outcome.
+The result above indicates that like one unit increase of age will increase the odds of voting "Yes" by a factor of 1.0135. i.e. for each year increase in age, there is a 1.35% increase in the odds of voting "Yes". $((1.0135 - 1) * 100 = 1.35)$ . This positive effect is very small. 
 
 ::: aside
-More on intepreting Odds Ratio: <https://stats.oarc.ucla.edu/other/mult-pkg/faq/general/faq-how-do-i-interpret-odds-ratios-in-logistic-regression/>
+More on interpreting Odds Ratio: <https://stats.oarc.ucla.edu/other/mult-pkg/faq/general/faq-how-do-i-interpret-odds-ratios-in-logistic-regression/>
 :::
 
+## For reporting purposes: get the Rsquared
+
+In the report, the model's Chi square and Rsquared will be reported as well to indicate the model fit. However, since the resulting item does not have this info, we will call upon `DescTools`' `PseudoR2()` function to help!
+
+```{r}
+#| echo: true
+#| output-location: column
+
+# by default, McFadden will be used
+DescTools::PseudoR2(vote_age) 
+```
+```{r}
+#| echo: true
+#| output-location: column
+
+DescTools::PseudoR2(vote_age, 
+                    which = "CoxSnell")
+```
+
+```{r}
+#| echo: true
+
+DescTools::PseudoR2(vote_age, 
+                    which = "all")
+```
+## Reporting result: in-text narration
+
+Below is a sample of how you may want to narrate your result. Note the resulting values mentioned in the paragraph below.
+
+![](images/logreg-reporting.jpg)
+
+In a nutshell, you will most likely have to mention the p-value, the $\beta$ coefficients (for linear regressions), the Odd Ratios (for logistic regression) with the confidence intervals, and the adjusted R-squared. You should also include these information in your regression table. 
+
+::: aside
+The screenshot is retrieved from <https://statistics.laerd.com/spss-tutorials/binomial-logistic-regression-using-spss-statistics.php>
+
+:::
+
+## Reporting result: regression table
+
+```{r}
+#| echo: true
+
+huxreg("age" = vote_age, statistics = c(R2 = "r.squared", "logLik", "AIC"))
+```
 
 ## Binary Logistic Regression: One Categorical Predictor
 
@@ -312,19 +447,53 @@ If you recall the formula, the results are expressed in Logit Probability. As we
 
 ```{r}
 #| echo: true
-exp(coefficients(vote_region))
+
+library(gtsummary)
+vote_region |> tbl_regression(exponentiate = TRUE) |>  
+    bold_p()
 ```
-**Possible interpretation:**
+
+## Narrating the results
+
+**Possible interpretation for region C:**
 
 *(The intercept isn't typically interpreted as an odds ratio, so we'll ignore that for now)* 
 
-The result above indicates that the odds for people in region C to vote "Yes" are about 0.56 times the odds of people in region N (the reference category). i.e., There is a 43.54% decrease in odds for region C compared to region N. $((0.5646 - 1) * 100 = -43.54)$
+The result above indicates that the odds for people in region C to vote "Yes" are about 0.56 times the odds of people in region N (the reference category). i.e., There is a 43.54% decrease in odds for region C residents to vote "Yes" compared to region N residents. $((0.5646 - 1) * 100 = -43.54)$
 
 ::: aside
 More on logistic regression: <https://stats.oarc.ucla.edu/r/dae/logit-regression/>
 :::
 
+## Get the Rsquared
+
+Let's retrieve the Rsquared value:
+
+```{r}
+#| echo: true
+#| output-location: column
+
+# the default is McFadden
+DescTools::PseudoR2(vote_region) 
+```
+```{r}
+#| echo: true
+#| output-location: column
+
+DescTools::PseudoR2(vote_region, 
+                    which = "CoxSnell")
+```
+
+```{r}
+#| echo: true
+
+DescTools::PseudoR2(vote_region, 
+                    which = "all")
+```
+
 ## Present both models in a table {.scrollable}
+
+Note that the R-squared is missing here, so be sure to put that in when you paste this table to your document. 
 
 ```{r}
 #| echo: true
@@ -332,13 +501,15 @@ library(huxtable)
 huxreg("age" = vote_age, "region" = vote_region)
 ```
 
+
 ## Let's try this Logistic Regression exercise! (5 mins)
 
 Create a regression model called `vote_model` that predicts the likelihood of voting "Yes" based on `sex`. 
 
 ```{r}
-#| echo: false
+#| echo: true
 #| output: false
+#| code-fold: true
 
 vote_model <- glm(vote_yes ~ sex,
                   family = "binomial", 
