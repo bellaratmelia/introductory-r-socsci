@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Bella Ratmelia">
 
-<title>Introductory R for Social Sciences</title>
+<title>Sample Quarto Document – Introductory R for Social Sciences</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +21,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -76,6 +131,35 @@ gtag('js', new Date());
 gtag('config', 'G-G5L1RGYC4H', { 'anonymize_ip': true});
 </script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -97,7 +181,7 @@ gtag('config', 'G-G5L1RGYC4H', { 'anonymize_ip': true});
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
@@ -128,20 +212,11 @@ gtag('config', 'G-G5L1RGYC4H', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#welcome" id="toc-welcome" class="nav-link active" data-scroll-target="#welcome">Welcome!</a></li>
-  <li><a href="#instructor" id="toc-instructor" class="nav-link" data-scroll-target="#instructor">Instructor</a></li>
-  <li><a href="#schedule" id="toc-schedule" class="nav-link" data-scroll-target="#schedule">Schedule</a></li>
-  <li><a href="#pre-workshop-activities" id="toc-pre-workshop-activities" class="nav-link" data-scroll-target="#pre-workshop-activities">Pre-workshop activities</a>
+  <li><a href="#hello-quarto" id="toc-hello-quarto" class="nav-link active" data-scroll-target="#hello-quarto">Hello Quarto!</a>
   <ul class="collapse">
-  <li><a href="#r-and-rstudio" id="toc-r-and-rstudio" class="nav-link" data-scroll-target="#r-and-rstudio">R and RStudio</a></li>
-  <li><a href="#step-1-install-r" id="toc-step-1-install-r" class="nav-link" data-scroll-target="#step-1-install-r">Step 1: Install R</a></li>
-  <li><a href="#step-2-install-rstudio" id="toc-step-2-install-rstudio" class="nav-link" data-scroll-target="#step-2-install-rstudio">Step 2: Install RStudio</a></li>
-  <li><a href="#step-3-install-the-required-packages" id="toc-step-3-install-the-required-packages" class="nav-link" data-scroll-target="#step-3-install-the-required-packages">Step 3: Install the required packages</a></li>
-  </ul></li>
-  <li><a href="#dataset" id="toc-dataset" class="nav-link" data-scroll-target="#dataset">Dataset</a>
-  <ul class="collapse">
-  <li><a href="#chile_voting" id="toc-chile_voting" class="nav-link" data-scroll-target="#chile_voting">chile_voting</a></li>
-  <li><a href="#chile_voting_processed" id="toc-chile_voting_processed" class="nav-link" data-scroll-target="#chile_voting_processed">chile_voting_processed</a></li>
+  <li><a href="#lets-visualize-the-diamonds-data" id="toc-lets-visualize-the-diamonds-data" class="nav-link" data-scroll-target="#lets-visualize-the-diamonds-data">Let’s visualize the diamonds data</a></li>
+  <li><a href="#text-with-formulas" id="toc-text-with-formulas" class="nav-link" data-scroll-target="#text-with-formulas">Text with formulas</a></li>
+  <li><a href="#text-with-citations" id="toc-text-with-citations" class="nav-link" data-scroll-target="#text-with-citations">Text with citations</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -151,14 +226,19 @@ gtag('config', 'G-G5L1RGYC4H', { 'anonymize_ip': true});
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Introductory R for Social Sciences</h1>
-<p class="subtitle lead">Academic Year 24/25 Term 1</p>
+<h1 class="title">Sample Quarto Document</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Bella Ratmelia </p>
+          </div>
+  </div>
     
   
     
@@ -169,218 +249,80 @@ gtag('config', 'G-G5L1RGYC4H', { 'anonymize_ip': true});
 </header>
 
 
-<section id="welcome" class="level2">
-<h2 class="anchored" data-anchor-id="welcome">Welcome!</h2>
-<p>This site serves as a repository for the slides and codes developed for the ‘Introductory R for Social Sciences’ workshop tailored for undergraduate students at <a href="https://www.smu.edu.sg/">SMU</a>. Comprising five sessions, this resource is designed for individuals with fundamental statistics knowledge who are venturing into R programming or coding for the first time.</p>
-</section>
-<section id="instructor" class="level2">
-<h2 class="anchored" data-anchor-id="instructor">Instructor</h2>
-<p><strong>Instructor</strong>: Bella Ratmelia, Senior Librarian, Research &amp; Data Services, SMU Libraries</p>
-<p><strong>Teaching Assistant</strong>: Hector Tan Kheng Wee, SCIS MITB Postgraduate Student</p>
-</section>
-<section id="schedule" class="level2">
-<h2 class="anchored" data-anchor-id="schedule">Schedule</h2>
-<p><em>Slides will be progressively made available below.</em></p>
-<div class="table-schedule">
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Session</th>
-<th>Date and Time</th>
-<th>Venue</th>
-<th>Topic</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>1</td>
-<td>Fri, 23 Aug 2024, 3.30 - 5.30 PM</td>
-<td>YPHSL seminar room 2.1</td>
-<td><a href="01-intro.html">Introduction to R and RStudio</a></td>
-</tr>
-<tr class="even">
-<td>2</td>
-<td>Fri, 30 Aug 2024, 3.30 - 5.30 PM</td>
-<td>YPHSL seminar room 2.1</td>
-<td><a href="02-tidyverse.html">Data wrangling with tidyverse</a></td>
-</tr>
-<tr class="odd">
-<td>3</td>
-<td>Fri, 6 Sep 2024, 3.30 - 5.30 PM</td>
-<td>YPHSL seminar room 2.1</td>
-<td><a href="03-visualization.html">Data visualization and Descriptive Statistics</a></td>
-</tr>
-<tr class="even">
-<td>4</td>
-<td>Fri, 13 Sep 2024, 3.30 - 5.30 PM</td>
-<td>YPHSL seminar room 2.2</td>
-<td><a href="04-stats.html">Basic Inferential Tests</a></td>
-</tr>
-<tr class="odd">
-<td>5</td>
-<td>Fri, 20 Sep 2024, 3.30 - 5.30 PM</td>
-<td>YPHSL seminar room 2.1</td>
-<td><a href="05-stats-quarto.html">Regression and Introduction to Quarto</a></td>
-</tr>
-</tbody>
-</table>
+<section id="hello-quarto" class="level1">
+<h1>Hello Quarto!</h1>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
-<style type="text/css">
-    .table-schedule {width: 100%;}
-    .table-schedule th:nth-child(1), .table-schedule td:nth-child(1) { width: 8%; }
-    .table-schedule th:nth-child(2), .table-schedule td:nth-child(2) { width: 30%; }
-    .table-schedule th:nth-child(3), .table-schedule td:nth-child(3) { width: 25%; }
-    .table-schedule th:nth-child(4), .table-schedule td:nth-child(4) { width: 35%; }
-</style>
-</section>
-<section id="pre-workshop-activities" class="level2">
-<h2 class="anchored" data-anchor-id="pre-workshop-activities">Pre-workshop activities</h2>
-<section id="r-and-rstudio" class="level3">
-<h3 class="anchored" data-anchor-id="r-and-rstudio">R and RStudio</h3>
-<p><strong>R</strong> and <strong>RStudio</strong> are two different but complementary tools used in data analysis and statistical computing. Understanding the difference between them is crucial (especially for beginners).</p>
-<p><strong>R</strong> is a programming language and software environment specifically designed for statistical computing and graphics. It’s the core tool that actually processes your data and performs analyses.</p>
-<p><strong>RStudio</strong> is an Integrated Development Environment (IDE) for R. Think of it as a user-friendly interface that makes it easier to write R code, manage projects, and visualize output. RStudio is not required to use R, but it significantly enhances the R programming experience!</p>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>diamonds <span class="ot">=</span> <span class="fu">as_tibble</span>(diamonds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout-title-container flex-fill">
-Important
+<section id="lets-visualize-the-diamonds-data" class="level2">
+<h2 class="anchored" data-anchor-id="lets-visualize-the-diamonds-data">Let’s visualize the diamonds data</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">|&gt;</span> <span class="fu">print</span>(<span class="at">n =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 53,940 × 10
+   carat cut       color clarity depth table price     x     y     z
+   &lt;dbl&gt; &lt;ord&gt;     &lt;ord&gt; &lt;ord&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1  0.23 Ideal     E     SI2      61.5    55   326  3.95  3.98  2.43
+ 2  0.21 Premium   E     SI1      59.8    61   326  3.89  3.84  2.31
+ 3  0.23 Good      E     VS1      56.9    65   327  4.05  4.07  2.31
+ 4  0.29 Premium   I     VS2      62.4    58   334  4.2   4.23  2.63
+ 5  0.31 Good      J     SI2      63.3    58   335  4.34  4.35  2.75
+ 6  0.24 Very Good J     VVS2     62.8    57   336  3.94  3.96  2.48
+ 7  0.24 Very Good I     VVS1     62.3    57   336  3.95  3.98  2.47
+ 8  0.26 Very Good H     SI1      61.9    55   337  4.07  4.11  2.53
+ 9  0.22 Fair      E     VS2      65.1    61   337  3.87  3.78  2.49
+10  0.23 Very Good H     VS1      59.4    61   338  4     4.05  2.39
+# ℹ 53,930 more rows</code></pre>
 </div>
 </div>
-<div class="callout-body-container callout-body">
-<p><strong>Always</strong> install R before installing RStudio, as RStudio requires R to function.</p>
+<p>Let’s create boxplots for carats for each cut quality:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>diamonds <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> cut, <span class="at">y =</span> carat)) <span class="sc">+</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="sample-quarto_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
-<section id="step-1-install-r" class="level3">
-<h3 class="anchored" data-anchor-id="step-1-install-r">Step 1: Install R</h3>
-<ol type="1">
-<li><p>Go to <a href="https://cran.rstudio.com/" class="uri">https://cran.rstudio.com/</a></p></li>
-<li><p>Choose your operating system (Windows, Mac, or Linux)</p></li>
-<li><p>Download and install the latest version of R</p></li>
-</ol>
+<section id="text-with-formulas" class="level2">
+<h2 class="anchored" data-anchor-id="text-with-formulas">Text with formulas</h2>
+<p><span class="math display">\[
+E = mc^2
+\]</span></p>
 </section>
-<section id="step-2-install-rstudio" class="level3">
-<h3 class="anchored" data-anchor-id="step-2-install-rstudio">Step 2: Install RStudio</h3>
-<ol type="1">
-<li><p>Visit <a href="https://posit.co/download/rstudio-desktop/" class="uri">https://posit.co/download/rstudio-desktop/</a></p></li>
-<li><p>Scroll down to “Download RStudio Desktop”</p></li>
-<li><p>Click “Download” and install the latest version of RStudio</p></li>
-</ol>
-</section>
-<section id="step-3-install-the-required-packages" class="level3">
-<h3 class="anchored" data-anchor-id="step-3-install-the-required-packages">Step 3: Install the required packages</h3>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><strong>Packages</strong> in R are collections of additional tools, functions, and datasets that extend R’s capabilities. Packages are created by contributors in the R community.</p>
-<p>Think of R as a smartphone, and packages as apps you download to add new features. Each package is designed to help with specific tasks or analyses, like creating graphs, analyzing particular types of data, or performing advanced statistical tests.</p>
-<p>Packages can save us time and leverage expert-created tools without having to write complex code from scratch. It’s very handy!</p>
-</div>
-</div>
-<ol type="1">
-<li><p>Open RStudio</p></li>
-<li><p>Copy the following code: <code>install.packages(c( "car", "rmarkdown", "huxtable", "gt", "gtsummary", "tidyverse"))</code></p></li>
-<li><p>Paste it in the <strong>Console</strong> tab (see image below)</p></li>
-<li><p>Press Enter. Rstudio should proceed with installing the packages that we need.</p></li>
-</ol>
-<p><img src="images/install-packages.jpg" class="img-fluid"></p>
-</section>
-</section>
-<section id="dataset" class="level2">
-<h2 class="anchored" data-anchor-id="dataset">Dataset</h2>
-<section id="chile_voting" class="level3">
-<h3 class="anchored" data-anchor-id="chile_voting">chile_voting</h3>
-<p>For this workshop, we will be using dataset stored in a CSV file called <code>chile_voting.csv</code>.</p>
-<a href="https://raw.githubusercontent.com/bellaratmelia/introductory-r-socsci/main/data/chile_voting.csv" type="button" class="btn btn-success">Click here to open chile_voting.csv, and then Ctrl + S / Cmd + S to save it locally into your data folder</a>
-<div class="callout callout-style-simple callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-What is a CSV?
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>A CSV (Comma-Separated Values) file is a type of file that stores data in a plain text format. Each line in the file represents a row of data, and within each row, individual pieces of data (like numbers or words) are separated by commas.</p>
-<p>This format is commonly used for storing and transferring data, especially in spreadsheets and databases. Because it is literally just plain text, it is an ideal format if you have large amount of data.</p>
-<p>You can open CSV files in Excel, Google Sheets, or even Notepad!</p>
-</div>
-</div>
-<section id="data-dictionary-for-chile_voting" class="level4">
-<h4 class="anchored" data-anchor-id="data-dictionary-for-chile_voting">Data dictionary for chile_voting</h4>
-<p>The data is from a national survey conducted in April and May of 1988 by FLACSO/Chile, capturing voting intentions for the <a href="https://en.wikipedia.org/wiki/1988_Chilean_presidential_referendum">1988 Chilean plebiscite</a>. The dataset contains information about respondents’ demographic characteristics and their voting intentions. This data can also be found from <code>carData</code> package, but for the purpose of this workshop, we will load the data from a CSV.</p>
-<p>Key variables in the dataset:</p>
-<hr>
-<table class="caption-top table">
-<caption>Explanatory notes on each column</caption>
-<colgroup>
-<col style="width: 19%">
-<col style="width: 80%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Variable</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>region</code></td>
-<td>Region of voters: <code>C</code> (Central), <code>M</code> (Metropolitan Santiago area), <code>N</code> (North), <code>S</code> (South), <code>SA</code> (city of Santiago)</td>
-</tr>
-<tr class="even">
-<td><code>population</code></td>
-<td>Population size of respondent’s community</td>
-</tr>
-<tr class="odd">
-<td><code>sex</code></td>
-<td>Sex of voters: <code>F</code> (female), <code>M</code> (male)</td>
-</tr>
-<tr class="even">
-<td><code>age</code></td>
-<td>Age in years</td>
-</tr>
-<tr class="odd">
-<td><code>education</code></td>
-<td>Education level of voters: <code>P</code> (Primary), <code>PS</code> (Post-secondary), <code>S</code> (Secondary)</td>
-</tr>
-<tr class="even">
-<td><code>income</code></td>
-<td>Monthly income, in Pesos</td>
-</tr>
-<tr class="odd">
-<td><code>statusquo</code></td>
-<td>Scale of support for the status-quo in numerical value</td>
-</tr>
-<tr class="even">
-<td><code>vote</code></td>
-<td>Voter’s decision: <code>A</code> (will abstain), <code>N</code> (will vote no), <code>U</code> (undecided), <code>Y</code> (will vote yes)</td>
-</tr>
-</tbody>
-</table>
-</section>
-</section>
-<section id="chile_voting_processed" class="level3">
-<h3 class="anchored" data-anchor-id="chile_voting_processed">chile_voting_processed</h3>
-<p>For session 3 onwards, we will use <code>chile_voting_processed.csv</code>. This is the version that has been processed and cleaned. You can download this file below if you missed session 1 and 2. Save this inside the <code>data-output</code> folder of your project.</p>
-<a href="https://raw.githubusercontent.com/bellaratmelia/introductory-r-socsci/main/data-output/chile_voting_processed.csv" type="button" class="btn btn-info">Click here to open chile_voting_processed.CSV, and then Ctrl + S / Cmd + S to save it locally into your data-output folder</a>
+<section id="text-with-citations" class="level2">
+<h2 class="anchored" data-anchor-id="text-with-citations">Text with citations</h2>
+<p>A lot of people have been saying that R is pretty cool <span class="citation" data-cites="wickham">(<a href="#ref-wickham" role="doc-biblioref">Wickham, Çetinkaya-Rundel, and Garrett Grolemund, n.d.</a>)</span>.</p>
+
 
 
 </section>
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-wickham" class="csl-entry" role="listitem">
+Wickham, Hadley, Mine Çetinkaya-Rundel, and Garrett Grolemund. n.d. <em>R for Data Science (2e)</em>. 2nd ed. <a href="https://r4ds.hadley.nz/">https://r4ds.hadley.nz/</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

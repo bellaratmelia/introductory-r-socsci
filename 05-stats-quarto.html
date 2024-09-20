@@ -443,8 +443,13 @@ Bella Ratmelia
 <span id="cb1-19"><a></a><span class="fu">glimpse</span>(chile_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="simple-linear-regression" class="slide level2">
-<h2>Simple Linear Regression</h2>
+<section>
+<section id="simple-linear-regression" class="title-slide slide level1 center">
+<h1>Simple Linear Regression</h1>
+
+</section>
+<section id="simple-linear-regression-what-is-it" class="slide level2">
+<h2>Simple Linear Regression: what is it?</h2>
 <p><strong>Linear regression</strong> is a statistical method used to model the relationship between a dependent variable (outcome) and one or more independent variables (predictors) by fitting a linear equation to the observed data. The math formula looks like this:</p>
 <div class="columns">
 <div class="column" style="width:30%;">
@@ -484,8 +489,8 @@ Y = \beta_0 + \beta_1X + \varepsilon
 <li><strong>Residuals</strong>: overview on the distribution of residuals (expected value minus observed value) – we can plot this to check for homoscedasticity -</li>
 <li><strong>Coefficients</strong>: shows the intercept, the regression coefficients for the predictor variables, and their statistical significance</li>
 <li><strong>Residual standard error</strong>: the average difference between observed and expected outcome by the model. Generally the lower, the better.</li>
-<li><strong>R-squared &amp; Adjusted R-squared</strong>: indicates the proportion of variation in the outcome that can be explained by the model i.e., how “accurate” is your model?</li>
-<li><strong>F-statistics</strong>: overall significance</li>
+<li><strong>R-squared &amp; Adjusted R-squared</strong>: indicates the proportion of variation in the outcome that can be explained by the model (i.e.&nbsp;goodness of fit).</li>
+<li><strong>F-statistics</strong>: indicates whether the model as a whole is statistically significant and whether it explains more variance than just the baseline (intercept-only) model.</li>
 </ul>
 </div>
 </section>
@@ -510,7 +515,48 @@ Residual standard error: 0.9984 on 2429 degrees of freedom
 Multiple R-squared:  0.01254,   Adjusted R-squared:  0.01214 
 F-statistic: 30.85 on 1 and 2429 DF,  p-value: 3.086e-08</code></pre>
 </div>
-</div></section><section id="linear-regression-multiple-continuous-predictors" class="slide level2">
+</div></section><section id="narrating-the-results" class="slide level2">
+<h2>Narrating the results</h2>
+<p>Here is one possible way to narrate your result:</p>
+<blockquote>
+<p>A linear regression analysis was conducted to assess the influence of age on support for the incumbent (statusquo) in Chile. The coefficient for age was 0.008 (SE = 0.001), indicating that for each additional year of age, support for the incumbent increased by 0.008 units. This effect was statistically significant at p &lt; 0.001.</p>
+</blockquote>
+<blockquote>
+<p>The model explained a small portion of the variance in support for the statusquo (R² = 0.013, Adjusted R² = 0.012). The F-statistic was 30.85 (p &lt; 0.001), further suggesting that age is a significant predictor of support for the incumbent.</p>
+</blockquote>
+</section>
+<section id="present-the-regression-tables" class="slide level2">
+<h2>Present the regression tables!</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">huxreg</span>(<span class="st">"age"</span> <span class="ot">=</span> statsquo_model1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  ">
+<colgroup><col><col></colgroup><tbody><tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">age</th></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(Intercept)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-0.305 ***</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.057)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">age</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.008 ***</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.001)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">N</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2431&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">R2</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.013&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">logLik</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-3444.614&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">AIC</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">6895.227&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th colspan="2" style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05.</th></tr>
+</tbody></table>
+
+</div>
+</div>
+</section>
+<section id="linear-regression-multiple-continuous-predictors" class="slide level2">
 <h2>Linear Regression: Multiple continuous predictors</h2>
 <p><strong>Research Question:</strong> Do a person’s age and their income have an impact on their support for the incumbent?</p>
 <ul>
@@ -518,11 +564,11 @@ F-statistic: 30.85 on 1 and 2429 DF,  p-value: 3.086e-08</code></pre>
 <li>The predictor/IV (<span class="math inline">\(X\)</span>): <code>age</code> and <code>income</code></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="co"># let's divide income by 1000 to make the scale bit more similar</span></span>
-<span id="cb4-2"><a></a>chile_data<span class="sc">$</span>income_downscaled <span class="ot">&lt;-</span> chile_data<span class="sc">$</span>income <span class="sc">/</span> <span class="dv">10000</span></span>
-<span id="cb4-3"><a></a></span>
-<span id="cb4-4"><a></a>statsquo_model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(statusquo <span class="sc">~</span> age <span class="sc">+</span> income_downscaled, <span class="at">data =</span> chile_data)</span>
-<span id="cb4-5"><a></a><span class="fu">summary</span>(statsquo_model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="co"># let's divide income by 1000 to make the scale bit more similar</span></span>
+<span id="cb5-2"><a></a>chile_data<span class="sc">$</span>income_downscaled <span class="ot">&lt;-</span> chile_data<span class="sc">$</span>income <span class="sc">/</span> <span class="dv">10000</span></span>
+<span id="cb5-3"><a></a></span>
+<span id="cb5-4"><a></a>statsquo_model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(statusquo <span class="sc">~</span> age <span class="sc">+</span> income_downscaled, <span class="at">data =</span> chile_data)</span>
+<span id="cb5-5"><a></a><span class="fu">summary</span>(statsquo_model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 </section>
@@ -551,24 +597,25 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
 </div></section><section id="alternative-package-to-present-regression-result" class="slide level2">
 <h2>Alternative package to present regression result</h2>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>statsquo_model2 <span class="sc">|&gt;</span> <span class="fu">tbl_regression</span>() <span class="sc">|&gt;</span> <span class="fu">bold_p</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="dcqkmreozi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#dcqkmreozi table {
+<div id="lknepwsldn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#lknepwsldn table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#dcqkmreozi thead, #dcqkmreozi tbody, #dcqkmreozi tfoot, #dcqkmreozi tr, #dcqkmreozi td, #dcqkmreozi th {
+#lknepwsldn thead, #lknepwsldn tbody, #lknepwsldn tfoot, #lknepwsldn tr, #lknepwsldn td, #lknepwsldn th {
   border-style: none;
 }
 
-#dcqkmreozi p {
+#lknepwsldn p {
   margin: 0;
   padding: 0;
 }
 
-#dcqkmreozi .gt_table {
+#lknepwsldn .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -594,12 +641,12 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#dcqkmreozi .gt_caption {
+#lknepwsldn .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#dcqkmreozi .gt_title {
+#lknepwsldn .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -611,7 +658,7 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
   border-bottom-width: 0;
 }
 
-#dcqkmreozi .gt_subtitle {
+#lknepwsldn .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -623,7 +670,7 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
   border-top-width: 0;
 }
 
-#dcqkmreozi .gt_heading {
+#lknepwsldn .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -635,13 +682,13 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#dcqkmreozi .gt_bottom_border {
+#lknepwsldn .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#dcqkmreozi .gt_col_headings {
+#lknepwsldn .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -656,7 +703,7 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#dcqkmreozi .gt_col_heading {
+#lknepwsldn .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -676,7 +723,7 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
   overflow-x: hidden;
 }
 
-#dcqkmreozi .gt_column_spanner_outer {
+#lknepwsldn .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -688,15 +735,15 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
   padding-right: 4px;
 }
 
-#dcqkmreozi .gt_column_spanner_outer:first-child {
+#lknepwsldn .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#dcqkmreozi .gt_column_spanner_outer:last-child {
+#lknepwsldn .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#dcqkmreozi .gt_column_spanner {
+#lknepwsldn .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -708,11 +755,11 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
   width: 100%;
 }
 
-#dcqkmreozi .gt_spanner_row {
+#lknepwsldn .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#dcqkmreozi .gt_group_heading {
+#lknepwsldn .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -738,7 +785,7 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
   text-align: left;
 }
 
-#dcqkmreozi .gt_empty_group_heading {
+#lknepwsldn .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -753,15 +800,15 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
   vertical-align: middle;
 }
 
-#dcqkmreozi .gt_from_md > :first-child {
+#lknepwsldn .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#dcqkmreozi .gt_from_md > :last-child {
+#lknepwsldn .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#dcqkmreozi .gt_row {
+#lknepwsldn .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -780,7 +827,7 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
   overflow-x: hidden;
 }
 
-#dcqkmreozi .gt_stub {
+#lknepwsldn .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -793,7 +840,7 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
   padding-right: 5px;
 }
 
-#dcqkmreozi .gt_stub_row_group {
+#lknepwsldn .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -807,15 +854,15 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
   vertical-align: top;
 }
 
-#dcqkmreozi .gt_row_group_first td {
+#lknepwsldn .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#dcqkmreozi .gt_row_group_first th {
+#lknepwsldn .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#dcqkmreozi .gt_summary_row {
+#lknepwsldn .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -825,16 +872,16 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
   padding-right: 5px;
 }
 
-#dcqkmreozi .gt_first_summary_row {
+#lknepwsldn .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#dcqkmreozi .gt_first_summary_row.thick {
+#lknepwsldn .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#dcqkmreozi .gt_last_summary_row {
+#lknepwsldn .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -844,7 +891,7 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#dcqkmreozi .gt_grand_summary_row {
+#lknepwsldn .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -854,7 +901,7 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
   padding-right: 5px;
 }
 
-#dcqkmreozi .gt_first_grand_summary_row {
+#lknepwsldn .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -864,7 +911,7 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#dcqkmreozi .gt_last_grand_summary_row_top {
+#lknepwsldn .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -874,11 +921,11 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#dcqkmreozi .gt_striped {
+#lknepwsldn .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#dcqkmreozi .gt_table_body {
+#lknepwsldn .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -887,7 +934,7 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#dcqkmreozi .gt_footnotes {
+#lknepwsldn .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -901,7 +948,7 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#dcqkmreozi .gt_footnote {
+#lknepwsldn .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -910,7 +957,7 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
   padding-right: 5px;
 }
 
-#dcqkmreozi .gt_sourcenotes {
+#lknepwsldn .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -924,7 +971,7 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#dcqkmreozi .gt_sourcenote {
+#lknepwsldn .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -932,72 +979,72 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
   padding-right: 5px;
 }
 
-#dcqkmreozi .gt_left {
+#lknepwsldn .gt_left {
   text-align: left;
 }
 
-#dcqkmreozi .gt_center {
+#lknepwsldn .gt_center {
   text-align: center;
 }
 
-#dcqkmreozi .gt_right {
+#lknepwsldn .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#dcqkmreozi .gt_font_normal {
+#lknepwsldn .gt_font_normal {
   font-weight: normal;
 }
 
-#dcqkmreozi .gt_font_bold {
+#lknepwsldn .gt_font_bold {
   font-weight: bold;
 }
 
-#dcqkmreozi .gt_font_italic {
+#lknepwsldn .gt_font_italic {
   font-style: italic;
 }
 
-#dcqkmreozi .gt_super {
+#lknepwsldn .gt_super {
   font-size: 65%;
 }
 
-#dcqkmreozi .gt_footnote_marks {
+#lknepwsldn .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#dcqkmreozi .gt_asterisk {
+#lknepwsldn .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#dcqkmreozi .gt_indent_1 {
+#lknepwsldn .gt_indent_1 {
   text-indent: 5px;
 }
 
-#dcqkmreozi .gt_indent_2 {
+#lknepwsldn .gt_indent_2 {
   text-indent: 10px;
 }
 
-#dcqkmreozi .gt_indent_3 {
+#lknepwsldn .gt_indent_3 {
   text-indent: 15px;
 }
 
-#dcqkmreozi .gt_indent_4 {
+#lknepwsldn .gt_indent_4 {
   text-indent: 20px;
 }
 
-#dcqkmreozi .gt_indent_5 {
+#lknepwsldn .gt_indent_5 {
   text-indent: 25px;
 }
 
-#dcqkmreozi .katex-display {
+#lknepwsldn .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#dcqkmreozi div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#lknepwsldn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1049,39 +1096,48 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
 </div>
 
 <aside><div>
-<p>More on<code>tbl_regression()</code> by <code>gtsummary</code>: <a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html" class="uri">https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html</a></p>
+<p>More on <code>tbl_regression()</code> by <code>gtsummary</code>: <a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html" class="uri">https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html</a></p>
 </div></aside></section>
+<section id="reporting-result-a-sample-regression-table-with-2-models" class="slide level2">
+<h2>Reporting result: A sample regression table with 2 models</h2>
+
+<img data-src="images/regression-table.png" class="r-stretch"></section>
 <section id="presenting-your-models" class="slide level2 scrollable">
 <h2>Presenting your models</h2>
 <p>Don’t forget to install the library by running this line in your terminal: <code>install.packages("huxtable")</code></p>
-<p>Here’s how a regression table may look like!</p>
+<p>For more info about huxreg, go here: <a href="https://cran.r-project.org/web/packages/huxtable/vignettes/huxreg.html" class="uri">https://cran.r-project.org/web/packages/huxtable/vignettes/huxreg.html</a></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="fu">library</span>(huxtable)</span>
-<span id="cb6-2"><a></a><span class="fu">huxreg</span>(<span class="st">"age"</span> <span class="ot">=</span> statsquo_model1, <span class="st">"age + income"</span> <span class="ot">=</span> statsquo_model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">library</span>(huxtable)</span>
+<span id="cb8-2"><a></a><span class="fu">huxreg</span>(<span class="st">"age"</span> <span class="ot">=</span> statsquo_model1, </span>
+<span id="cb8-3"><a></a>       <span class="st">"age + income"</span> <span class="ot">=</span> statsquo_model2,</span>
+<span id="cb8-4"><a></a>       <span class="at">number_format =</span> <span class="dv">4</span>,</span>
+<span id="cb8-5"><a></a>       <span class="at">bold_signif =</span> <span class="fl">0.05</span>,</span>
+<span id="cb8-6"><a></a>       <span class="at">statistics =</span> <span class="fu">c</span>( <span class="st">"R squared"</span> <span class="ot">=</span> <span class="st">"r.squared"</span>, <span class="st">"N"</span> <span class="ot">=</span> <span class="st">"nobs"</span>, <span class="st">"F"</span> <span class="ot">=</span> <span class="st">"statistic"</span>,</span>
+<span id="cb8-7"><a></a>      <span class="st">"P value"</span> <span class="ot">=</span> <span class="st">"p.value"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  ">
 <colgroup><col><col><col></colgroup><tbody><tr>
 <th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">age</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">age + income</th></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(Intercept)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-0.305 ***</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-0.336 ***</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(Intercept)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">-0.3050 ***</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">-0.3357 ***</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.057)&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.060)&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">(0.0566)&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">(0.0597)&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">age</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.008 ***</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.008 ***</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">age</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.0077 ***</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.0077 ***</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.001)&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.001)&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">(0.0014)&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">(0.0014)&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">income_downscaled</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.008&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">income_downscaled</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.0083&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.005)&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.0051)&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">N</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2431&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2431&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">R squared</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.0125&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.0136&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">R2</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.013&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.014&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">N</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2431&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2431&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">logLik</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-3444.614&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-3443.294&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">F</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">30.8532&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">16.7552&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">AIC</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">6895.227&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">6894.589&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">P value</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.0000&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.0000&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
 <th colspan="3" style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05.</th></tr>
 </tbody></table>
@@ -1089,10 +1145,6 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
 </div>
 </div>
 </section>
-<section id="reporting-result-a-sample-regression-table" class="slide level2">
-<h2>Reporting result: A sample regression table</h2>
-
-<img data-src="images/regression-table.png" class="r-stretch"></section>
 <section id="fyi-multicollinearity" class="slide level2">
 <h2>FYI: Multicollinearity</h2>
 <p>Caution! When doing regression-type of tests, watch out for multicollinearity.</p>
@@ -1103,7 +1155,7 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
 <li><p>If they seem to be highly correlated (&gt; 5 or so), one of the easiest (and somewhat acceptable) way is to simply remove the less significant predictor from your model :D</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>car<span class="sc">::</span><span class="fu">vif</span>(statsquo_model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>car<span class="sc">::</span><span class="fu">vif</span>(statsquo_model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>              age income_downscaled 
            1.0009            1.0009 </code></pre>
@@ -1131,11 +1183,11 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">str</span>(chile_data<span class="sc">$</span>statusquo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">str</span>(chile_data<span class="sc">$</span>statusquo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> num [1:2431] 1.01 -1.3 1.23 -1.03 -1.1 ...</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">str</span>(chile_data<span class="sc">$</span>sex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="fu">str</span>(chile_data<span class="sc">$</span>sex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> Factor w/ 2 levels "M","F": 1 1 2 2 2 2 1 2 2 1 ...</code></pre>
 </div>
@@ -1145,8 +1197,8 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
 <h2>Continuing the analysis</h2>
 <p>The analysis summary should look like this:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>statusquo_model3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(statusquo <span class="sc">~</span> sex, <span class="at">data =</span> chile_data)</span>
-<span id="cb13-2"><a></a><span class="fu">summary</span>(statusquo_model3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>statusquo_model3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(statusquo <span class="sc">~</span> sex, <span class="at">data =</span> chile_data)</span>
+<span id="cb15-2"><a></a><span class="fu">summary</span>(statusquo_model3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1171,22 +1223,72 @@ F-statistic: 10.75 on 1 and 2429 DF,  p-value: 0.001057</code></pre>
 <p>When interpreting a categorical predictor in regression, one category is treated as the reference category, which serves as the baseline for comparison. In this case, the reference category corresponds to the intercept.</p>
 <p>By default, the first category in the data is used as the reference category, unless specified otherwise.</p>
 </section>
+<section id="narrating-the-result" class="slide level2">
+<h2>Narrating the result</h2>
+<p>Here is one possible way to narrate your result:</p>
+<blockquote>
+<p>A linear regression analysis was conducted to explore the relationship between <code>gender</code> (male vs.&nbsp;female) of voters and support for the status quo in Chile (<code>statusquo</code>). The model includes gender as the only predictor. Results revealed that the intercept, representing the mean statusquo score for male voters, was -0.080 (SE = 0.030). This was statistically significant at p &lt; 0.01, indicating that on average, male voters showed a negative inclination towards the status quo.</p>
+</blockquote>
+<blockquote>
+<p>The coefficient for female voters was 0.134 (SE = 0.041), indicating that being female was associated with an increase of 0.134 units in support for the status quo compared to male voters. This effect was statistically significant p &lt; 0.01</p>
+</blockquote>
+<blockquote>
+<p>The model explain a small portion of the variance in support for the status quo (R^2 = 0.004, Adjusted R^2 = 0.004). The F-statistic (10.75, p &lt; 0.01) suggests that gender is a significant predictor of support for the status quo.</p>
+</blockquote>
+</section>
+<section id="presenting-the-regression-table" class="slide level2 scrollable">
+<h2>Presenting the regression table</h2>
+<p>For more info about huxreg, go here: <a href="https://cran.r-project.org/web/packages/huxtable/vignettes/huxreg.html" class="uri">https://cran.r-project.org/web/packages/huxtable/vignettes/huxreg.html</a></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="fu">library</span>(huxtable)</span>
+<span id="cb17-2"><a></a><span class="fu">huxreg</span>(<span class="st">"sex"</span> <span class="ot">=</span> statusquo_model3,</span>
+<span id="cb17-3"><a></a>       <span class="at">number_format =</span> <span class="dv">4</span>,</span>
+<span id="cb17-4"><a></a>       <span class="at">bold_signif =</span> <span class="fl">0.05</span>,</span>
+<span id="cb17-5"><a></a>       <span class="at">statistics =</span> <span class="fu">c</span>( <span class="st">"R squared"</span> <span class="ot">=</span> <span class="st">"r.squared"</span>, <span class="st">"N"</span> <span class="ot">=</span> <span class="st">"nobs"</span>, <span class="st">"F"</span> <span class="ot">=</span> <span class="st">"statistic"</span>,</span>
+<span id="cb17-6"><a></a>      <span class="st">"P value"</span> <span class="ot">=</span> <span class="st">"p.value"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  ">
+<colgroup><col><col></colgroup><tbody><tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">sex</th></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(Intercept)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">-0.0799 **</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">(0.0292)&nbsp;&nbsp;</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">sexF</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.1334 **</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">(0.0407)&nbsp;&nbsp;</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">R squared</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.0044&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">N</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2431&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">F</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">10.7507&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">P value</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.0011&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th colspan="2" style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05.</th></tr>
+</tbody></table>
+
+</div>
+</div>
+</section>
 <section id="categorical-predictor-changing-the-reference" class="slide level2">
 <h2>Categorical predictor: changing the reference</h2>
-<p>Let’s change the reference category for <code>sex</code> variable to “M”.</p>
+<p>Let’s change the reference category for <code>sex</code> variable to “F”.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>chile_data <span class="ot">&lt;-</span> chile_data <span class="sc">|&gt;</span> </span>
-<span id="cb15-2"><a></a>    <span class="fu">mutate</span>(<span class="at">sex =</span> <span class="fu">relevel</span>(sex, <span class="at">ref =</span> <span class="st">"M"</span>))</span>
-<span id="cb15-3"><a></a></span>
-<span id="cb15-4"><a></a><span class="fu">str</span>(chile_data<span class="sc">$</span>sex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>chile_data <span class="ot">&lt;-</span> chile_data <span class="sc">|&gt;</span> </span>
+<span id="cb18-2"><a></a>    <span class="fu">mutate</span>(<span class="at">sex =</span> <span class="fu">relevel</span>(sex, <span class="at">ref =</span> <span class="st">"F"</span>))</span>
+<span id="cb18-3"><a></a></span>
+<span id="cb18-4"><a></a><span class="fu">str</span>(chile_data<span class="sc">$</span>sex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> Factor w/ 2 levels "M","F": 1 1 2 2 2 2 1 2 2 1 ...</code></pre>
+<pre><code> Factor w/ 2 levels "F","M": 2 2 1 1 1 1 2 1 1 2 ...</code></pre>
 </div>
 </div>
 <p>Re-run the analysis with the new reference category</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a>statsquo_model3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(statusquo <span class="sc">~</span> sex, <span class="at">data =</span> chile_data)</span>
-<span id="cb17-2"><a></a><span class="fu">summary</span>(statsquo_model3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a>statsquo_model3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(statusquo <span class="sc">~</span> sex, <span class="at">data =</span> chile_data)</span>
+<span id="cb20-2"><a></a><span class="fu">summary</span>(statsquo_model3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 </section>
@@ -1202,8 +1304,8 @@ Residuals:
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)   
-(Intercept) -0.07986    0.02917  -2.737  0.00624 **
-sexF         0.13339    0.04068   3.279  0.00106 **
+(Intercept)  0.05354    0.02836   1.888  0.05915 . 
+sexM        -0.13339    0.04068  -3.279  0.00106 **
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -1213,10 +1315,10 @@ F-statistic: 10.75 on 1 and 2429 DF,  p-value: 0.001057</code></pre>
 </div>
 </div></section><section id="changing-baseline-category-for-ordered-factor" class="slide level2">
 <h2>Changing baseline category for ordered factor</h2>
-<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a>chile_data <span class="ot">&lt;-</span> chile_data <span class="sc">|&gt;</span> </span>
-<span id="cb19-2"><a></a>    <span class="fu">mutate</span>(<span class="at">education =</span> <span class="fu">factor</span>(education, </span>
-<span id="cb19-3"><a></a>                         <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"S"</span>, <span class="st">"P"</span>, <span class="st">"PS"</span>), </span>
-<span id="cb19-4"><a></a>                         <span class="at">ordered =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a>chile_data <span class="ot">&lt;-</span> chile_data <span class="sc">|&gt;</span> </span>
+<span id="cb22-2"><a></a>    <span class="fu">mutate</span>(<span class="at">education =</span> <span class="fu">factor</span>(education, </span>
+<span id="cb22-3"><a></a>                         <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"S"</span>, <span class="st">"P"</span>, <span class="st">"PS"</span>), </span>
+<span id="cb22-4"><a></a>                         <span class="at">ordered =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div title="Releveling ordered factor">
 <div class="callout callout-note callout-titled callout-style-simple">
 <div class="callout-body">
@@ -1236,9 +1338,24 @@ F-statistic: 10.75 on 1 and 2429 DF,  p-value: 0.001057</code></pre>
 <section id="lets-try-this-linear-regression-exercise-5-mins" class="slide level2">
 <h2>Let’s try this Linear Regression exercise! (5 mins)</h2>
 <p>Create a regression model called <code>statusquo_model4</code> that predicts the <code>statusquo</code> score based on <code>region</code>. Make sure the reference category is region “M”.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a>chile_data <span class="ot">&lt;-</span> chile_data <span class="sc">|&gt;</span> </span>
+<span id="cb23-2"><a></a>    <span class="fu">mutate</span>(<span class="at">region =</span> <span class="fu">relevel</span>(region, <span class="at">ref =</span> <span class="st">"M"</span>))</span>
+<span id="cb23-3"><a></a></span>
+<span id="cb23-4"><a></a>statusquo_model4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(statusquo <span class="sc">~</span> region, <span class="at">data =</span> chile_data)</span>
+<span id="cb23-5"><a></a><span class="fu">summary</span>(statusquo_model4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section></section>
+<section>
+<section id="binary-logistic-regression" class="title-slide slide level1 center">
+<h1>Binary Logistic Regression</h1>
+
 </section>
-<section id="binary-logistic-regression" class="slide level2">
-<h2>Binary Logistic Regression</h2>
+<section id="binary-logistic-regression---what-is-it" class="slide level2">
+<h2>Binary Logistic Regression - what is it?</h2>
 <p>Also known as simply logistic regression, it is used to model the relationship between a set of independent variables and a binary outcome.</p>
 <p>These independent variables can be either categorical or continuous.</p>
 <p>Binary Logistics Regression formula:</p>
@@ -1270,9 +1387,10 @@ P = \frac{1}{1 + e^{-(\beta_0 + \beta_1X)}}
 <h2>Dummy-coding dependent variable</h2>
 <p>Before we proceed with the calculations, we need to <strong>dummy code</strong> the dependent variable into 1 and 0, with 1 = Yes and 0 = Not Yes. <a href="https://stats.oarc.ucla.edu/other/mult-pkg/faq/general/faqwhat-is-dummy-coding/">More info on dummy coding here</a></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="co"># First, we need to create a binary outcome</span></span>
-<span id="cb20-2"><a></a>chile_data <span class="ot">&lt;-</span> chile_data <span class="sc">|&gt;</span></span>
-<span id="cb20-3"><a></a>    <span class="fu">mutate</span>(<span class="at">vote_yes =</span> <span class="fu">ifelse</span>(vote <span class="sc">==</span> <span class="st">"Y"</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a><span class="co"># First, we need to create a binary outcome</span></span>
+<span id="cb24-2"><a></a>chile_data <span class="ot">&lt;-</span> chile_data <span class="sc">|&gt;</span></span>
+<span id="cb24-3"><a></a>    <span class="fu">mutate</span>(<span class="at">vote_yes =</span> <span class="fu">if_else</span>(vote <span class="sc">==</span> <span class="st">"Y"</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span>
+<span id="cb24-4"><a></a><span class="co"># the if_else is from dplyr package (from session 2)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -1290,11 +1408,11 @@ P = \frac{1}{1 + e^{-(\beta_0 + \beta_1X)}}
 <h2>Conduct the analysis</h2>
 <p>Let’s conduct the analysis!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a>vote_age <span class="ot">&lt;-</span> <span class="fu">glm</span>(vote_yes <span class="sc">~</span> age,</span>
-<span id="cb22-2"><a></a>                <span class="at">family =</span> binomial, </span>
-<span id="cb22-3"><a></a>                <span class="at">data =</span> chile_data)</span>
-<span id="cb22-4"><a></a></span>
-<span id="cb22-5"><a></a><span class="fu">summary</span>(vote_age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a>vote_age <span class="ot">&lt;-</span> <span class="fu">glm</span>(vote_yes <span class="sc">~</span> age,</span>
+<span id="cb26-2"><a></a>                <span class="at">family =</span> binomial, </span>
+<span id="cb26-3"><a></a>                <span class="at">data =</span> chile_data)</span>
+<span id="cb26-4"><a></a></span>
+<span id="cb26-5"><a></a><span class="fu">summary</span>(vote_age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1321,27 +1439,27 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <h2>Exponentiate the coefficients</h2>
 <p>If you recall the formula, the results are expressed in Logit Probability. As we typically report the result in terms of Odd Ratios (OR), perform exponentiation on the coefficients.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a><span class="fu">library</span>(gtsummary)</span>
-<span id="cb24-2"><a></a>vote_age <span class="sc">|&gt;</span> <span class="fu">tbl_regression</span>(<span class="at">exponentiate =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb24-3"><a></a>    <span class="fu">bold_p</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a><span class="fu">library</span>(gtsummary)</span>
+<span id="cb28-2"><a></a>vote_age <span class="sc">|&gt;</span> <span class="fu">tbl_regression</span>(<span class="at">exponentiate =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb28-3"><a></a>    <span class="fu">bold_p</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="htalbjxcgh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#htalbjxcgh table {
+<div id="fbfioacroz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#fbfioacroz table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#htalbjxcgh thead, #htalbjxcgh tbody, #htalbjxcgh tfoot, #htalbjxcgh tr, #htalbjxcgh td, #htalbjxcgh th {
+#fbfioacroz thead, #fbfioacroz tbody, #fbfioacroz tfoot, #fbfioacroz tr, #fbfioacroz td, #fbfioacroz th {
   border-style: none;
 }
 
-#htalbjxcgh p {
+#fbfioacroz p {
   margin: 0;
   padding: 0;
 }
 
-#htalbjxcgh .gt_table {
+#fbfioacroz .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1367,12 +1485,12 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#htalbjxcgh .gt_caption {
+#fbfioacroz .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#htalbjxcgh .gt_title {
+#fbfioacroz .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1384,7 +1502,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-bottom-width: 0;
 }
 
-#htalbjxcgh .gt_subtitle {
+#fbfioacroz .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1396,7 +1514,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-top-width: 0;
 }
 
-#htalbjxcgh .gt_heading {
+#fbfioacroz .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1408,13 +1526,13 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#htalbjxcgh .gt_bottom_border {
+#fbfioacroz .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#htalbjxcgh .gt_col_headings {
+#fbfioacroz .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1429,7 +1547,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#htalbjxcgh .gt_col_heading {
+#fbfioacroz .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1449,7 +1567,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   overflow-x: hidden;
 }
 
-#htalbjxcgh .gt_column_spanner_outer {
+#fbfioacroz .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1461,15 +1579,15 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 4px;
 }
 
-#htalbjxcgh .gt_column_spanner_outer:first-child {
+#fbfioacroz .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#htalbjxcgh .gt_column_spanner_outer:last-child {
+#fbfioacroz .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#htalbjxcgh .gt_column_spanner {
+#fbfioacroz .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1481,11 +1599,11 @@ Number of Fisher Scoring iterations: 4</code></pre>
   width: 100%;
 }
 
-#htalbjxcgh .gt_spanner_row {
+#fbfioacroz .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#htalbjxcgh .gt_group_heading {
+#fbfioacroz .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1511,7 +1629,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   text-align: left;
 }
 
-#htalbjxcgh .gt_empty_group_heading {
+#fbfioacroz .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1526,15 +1644,15 @@ Number of Fisher Scoring iterations: 4</code></pre>
   vertical-align: middle;
 }
 
-#htalbjxcgh .gt_from_md > :first-child {
+#fbfioacroz .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#htalbjxcgh .gt_from_md > :last-child {
+#fbfioacroz .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#htalbjxcgh .gt_row {
+#fbfioacroz .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1553,7 +1671,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   overflow-x: hidden;
 }
 
-#htalbjxcgh .gt_stub {
+#fbfioacroz .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1566,7 +1684,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#htalbjxcgh .gt_stub_row_group {
+#fbfioacroz .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1580,15 +1698,15 @@ Number of Fisher Scoring iterations: 4</code></pre>
   vertical-align: top;
 }
 
-#htalbjxcgh .gt_row_group_first td {
+#fbfioacroz .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#htalbjxcgh .gt_row_group_first th {
+#fbfioacroz .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#htalbjxcgh .gt_summary_row {
+#fbfioacroz .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1598,16 +1716,16 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#htalbjxcgh .gt_first_summary_row {
+#fbfioacroz .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#htalbjxcgh .gt_first_summary_row.thick {
+#fbfioacroz .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#htalbjxcgh .gt_last_summary_row {
+#fbfioacroz .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1617,7 +1735,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#htalbjxcgh .gt_grand_summary_row {
+#fbfioacroz .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1627,7 +1745,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#htalbjxcgh .gt_first_grand_summary_row {
+#fbfioacroz .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1637,7 +1755,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#htalbjxcgh .gt_last_grand_summary_row_top {
+#fbfioacroz .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1647,11 +1765,11 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#htalbjxcgh .gt_striped {
+#fbfioacroz .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#htalbjxcgh .gt_table_body {
+#fbfioacroz .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1660,7 +1778,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#htalbjxcgh .gt_footnotes {
+#fbfioacroz .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1674,7 +1792,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#htalbjxcgh .gt_footnote {
+#fbfioacroz .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1683,7 +1801,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#htalbjxcgh .gt_sourcenotes {
+#fbfioacroz .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1697,7 +1815,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#htalbjxcgh .gt_sourcenote {
+#fbfioacroz .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1705,72 +1823,72 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#htalbjxcgh .gt_left {
+#fbfioacroz .gt_left {
   text-align: left;
 }
 
-#htalbjxcgh .gt_center {
+#fbfioacroz .gt_center {
   text-align: center;
 }
 
-#htalbjxcgh .gt_right {
+#fbfioacroz .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#htalbjxcgh .gt_font_normal {
+#fbfioacroz .gt_font_normal {
   font-weight: normal;
 }
 
-#htalbjxcgh .gt_font_bold {
+#fbfioacroz .gt_font_bold {
   font-weight: bold;
 }
 
-#htalbjxcgh .gt_font_italic {
+#fbfioacroz .gt_font_italic {
   font-style: italic;
 }
 
-#htalbjxcgh .gt_super {
+#fbfioacroz .gt_super {
   font-size: 65%;
 }
 
-#htalbjxcgh .gt_footnote_marks {
+#fbfioacroz .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#htalbjxcgh .gt_asterisk {
+#fbfioacroz .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#htalbjxcgh .gt_indent_1 {
+#fbfioacroz .gt_indent_1 {
   text-indent: 5px;
 }
 
-#htalbjxcgh .gt_indent_2 {
+#fbfioacroz .gt_indent_2 {
   text-indent: 10px;
 }
 
-#htalbjxcgh .gt_indent_3 {
+#fbfioacroz .gt_indent_3 {
   text-indent: 15px;
 }
 
-#htalbjxcgh .gt_indent_4 {
+#fbfioacroz .gt_indent_4 {
   text-indent: 20px;
 }
 
-#htalbjxcgh .gt_indent_5 {
+#fbfioacroz .gt_indent_5 {
   text-indent: 25px;
 }
 
-#htalbjxcgh .katex-display {
+#fbfioacroz .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#htalbjxcgh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#fbfioacroz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1817,13 +1935,13 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </div>
 
 <aside><div>
-<p>More on<code>tbl_regression()</code> by <code>gtsummary</code>: <a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html" class="uri">https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html</a></p>
+<p>More on <code>tbl_regression()</code> by <code>gtsummary</code>: <a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html" class="uri">https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html</a></p>
 </div></aside></section>
 <section id="exponentiate-the-coefficients-interpretation" class="slide level2">
 <h2>Exponentiate the coefficients: interpretation</h2>
 <p><strong>Possible interpretation:</strong></p>
 <p><em>(The intercept isn’t typically interpreted as an odds ratio, so we’ll ignore that for now)</em></p>
-<p>The result above indicates that like one unit increase of age will increase the odds of voting “Yes” by a factor of 1.0135. i.e.&nbsp;for each year increase in age, there is a 1.35% increase in the odds of voting “Yes” by 1.35 %. <span class="math inline">\(((1.0135 - 1) * 100 = 1.35)\)</span> . This positive effect is very small.</p>
+<p>The result above indicates that like one unit increase of age will increase the odds of voting “Yes” by a factor of 1.0135. i.e.&nbsp;for each year increase in age, there is a 1.35% increase in the odds of voting “Yes”. <span class="math inline">\(((1.0135 - 1) * 100 = 1.35)\)</span> . This positive effect is very small.</p>
 
 <aside><div>
 <p>More on interpreting Odds Ratio: <a href="https://stats.oarc.ucla.edu/other/mult-pkg/faq/general/faq-how-do-i-interpret-odds-ratios-in-logistic-regression/" class="uri">https://stats.oarc.ucla.edu/other/mult-pkg/faq/general/faq-how-do-i-interpret-odds-ratios-in-logistic-regression/</a></p>
@@ -1833,8 +1951,8 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <p>In the report, the model’s Chi square and Rsquared will be reported as well to indicate the model fit. However, since the resulting item does not have this info, we will call upon <code>DescTools</code>’ <code>PseudoR2()</code> function to help!</p>
 <div class="cell columns column-output-location">
 <div class="column">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a><span class="co"># by default, McFadden will be used</span></span>
-<span id="cb25-2"><a></a>DescTools<span class="sc">::</span><span class="fu">PseudoR2</span>(vote_age) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a><span class="co"># by default, McFadden will be used</span></span>
+<span id="cb29-2"><a></a>DescTools<span class="sc">::</span><span class="fu">PseudoR2</span>(vote_age) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output cell-output-stdout">
 <pre><code>   McFadden 
@@ -1843,8 +1961,8 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </div></div>
 <div class="cell columns column-output-location">
 <div class="column">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a>DescTools<span class="sc">::</span><span class="fu">PseudoR2</span>(vote_age, </span>
-<span id="cb27-2"><a></a>                    <span class="at">which =</span> <span class="st">"CoxSnell"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a>DescTools<span class="sc">::</span><span class="fu">PseudoR2</span>(vote_age, </span>
+<span id="cb31-2"><a></a>                    <span class="at">which =</span> <span class="st">"CoxSnell"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output cell-output-stdout">
 <pre><code>   CoxSnell 
@@ -1852,8 +1970,8 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </div>
 </div></div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a>DescTools<span class="sc">::</span><span class="fu">PseudoR2</span>(vote_age, </span>
-<span id="cb29-2"><a></a>                    <span class="at">which =</span> <span class="st">"all"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a></a>DescTools<span class="sc">::</span><span class="fu">PseudoR2</span>(vote_age, </span>
+<span id="cb33-2"><a></a>                    <span class="at">which =</span> <span class="st">"all"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       McFadden     McFaddenAdj        CoxSnell      Nagelkerke   AldrichNelson 
    6.886506e-03    5.608183e-03    8.824905e-03    1.218997e-02    8.786194e-03 
@@ -1866,8 +1984,9 @@ VeallZimmermann           Efron McKelveyZavoina            Tjur             AIC
 </section>
 <section id="reporting-result-in-text-narration" class="slide level2">
 <h2>Reporting result: in-text narration</h2>
+<p>Below is a sample of how you may want to narrate your result. Note the resulting values mentioned in the paragraph below.</p>
 <p><img data-src="images/logreg-reporting.jpg"></p>
-<p>In a nutshell, you will most likely have to mention the p-value, the <span class="math inline">\(\beta\)</span> coefficients, the OR (Odd Ratios) with the confidence intervals, and the adjusted R-squared. You should include these information in your table and narrate the results.</p>
+<p>In a nutshell, you will most likely have to mention the p-value, the <span class="math inline">\(\beta\)</span> coefficients (for linear regressions), the Odd Ratios (for logistic regression) with the confidence intervals, and the adjusted R-squared. You should also include these information in your regression table.</p>
 
 <aside><div>
 <p>The screenshot is retrieved from <a href="https://statistics.laerd.com/spss-tutorials/binomial-logistic-regression-using-spss-statistics.php" class="uri">https://statistics.laerd.com/spss-tutorials/binomial-logistic-regression-using-spss-statistics.php</a></p>
@@ -1875,7 +1994,7 @@ VeallZimmermann           Efron McKelveyZavoina            Tjur             AIC
 <section id="reporting-result-regression-table" class="slide level2">
 <h2>Reporting result: regression table</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a><span class="fu">huxreg</span>(<span class="st">"age"</span> <span class="ot">=</span> vote_age, <span class="at">statistics =</span> <span class="fu">c</span>(<span class="at">R2 =</span> <span class="st">"r.squared"</span>, <span class="st">"logLik"</span>, <span class="st">"AIC"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a></a><span class="fu">huxreg</span>(<span class="st">"age"</span> <span class="ot">=</span> vote_age, <span class="at">statistics =</span> <span class="fu">c</span>(<span class="at">R2 =</span> <span class="st">"r.squared"</span>, <span class="st">"logLik"</span>, <span class="st">"AIC"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  ">
 <colgroup><col><col></colgroup><tbody><tr>
@@ -1907,11 +2026,11 @@ VeallZimmermann           Efron McKelveyZavoina            Tjur             AIC
 <li>The predictor/IV (<span class="math inline">\(X\)</span>): <code>region</code></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a>vote_region <span class="ot">&lt;-</span> <span class="fu">glm</span>(vote_yes <span class="sc">~</span> region,</span>
-<span id="cb32-2"><a></a>                      <span class="at">family =</span> <span class="st">"binomial"</span>,</span>
-<span id="cb32-3"><a></a>                      <span class="at">data =</span> chile_data)</span>
-<span id="cb32-4"><a></a></span>
-<span id="cb32-5"><a></a><span class="fu">summary</span>(vote_region)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a></a>vote_region <span class="ot">&lt;-</span> <span class="fu">glm</span>(vote_yes <span class="sc">~</span> region,</span>
+<span id="cb36-2"><a></a>                      <span class="at">family =</span> <span class="st">"binomial"</span>,</span>
+<span id="cb36-3"><a></a>                      <span class="at">data =</span> chile_data)</span>
+<span id="cb36-4"><a></a></span>
+<span id="cb36-5"><a></a><span class="fu">summary</span>(vote_region)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 </section>
@@ -1923,11 +2042,11 @@ glm(formula = vote_yes ~ region, family = "binomial", data = chile_data)
 
 Coefficients:
             Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept)  -0.2705     0.1156  -2.341 0.019257 *  
-regionC      -0.5716     0.1484  -3.851 0.000117 ***
-regionS      -0.1033     0.1403  -0.736 0.461643    
-regionSA     -0.6883     0.1387  -4.962 6.98e-07 ***
-regionM       0.2438     0.2583   0.944 0.345125    
+(Intercept) -0.02667    0.23096  -0.115 0.908075    
+regionN     -0.24382    0.25826  -0.944 0.345125    
+regionC     -0.81542    0.24903  -3.274 0.001059 ** 
+regionS     -0.34709    0.24427  -1.421 0.155331    
+regionSA    -0.93211    0.24337  -3.830 0.000128 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -1943,27 +2062,27 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <h2>Exponentiate the coefficients</h2>
 <p>If you recall the formula, the results are expressed in Logit Probability. As we typically report the result in terms of Odd Ratios (OR), perform exponentiation on the coefficients.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a></a><span class="fu">library</span>(gtsummary)</span>
-<span id="cb34-2"><a></a>vote_region <span class="sc">|&gt;</span> <span class="fu">tbl_regression</span>(<span class="at">exponentiate =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span>  </span>
-<span id="cb34-3"><a></a>    <span class="fu">bold_p</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a></a><span class="fu">library</span>(gtsummary)</span>
+<span id="cb38-2"><a></a>vote_region <span class="sc">|&gt;</span> <span class="fu">tbl_regression</span>(<span class="at">exponentiate =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span>  </span>
+<span id="cb38-3"><a></a>    <span class="fu">bold_p</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="vjbwlgdnxi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#vjbwlgdnxi table {
+<div id="xaywkmbyou" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#xaywkmbyou table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#vjbwlgdnxi thead, #vjbwlgdnxi tbody, #vjbwlgdnxi tfoot, #vjbwlgdnxi tr, #vjbwlgdnxi td, #vjbwlgdnxi th {
+#xaywkmbyou thead, #xaywkmbyou tbody, #xaywkmbyou tfoot, #xaywkmbyou tr, #xaywkmbyou td, #xaywkmbyou th {
   border-style: none;
 }
 
-#vjbwlgdnxi p {
+#xaywkmbyou p {
   margin: 0;
   padding: 0;
 }
 
-#vjbwlgdnxi .gt_table {
+#xaywkmbyou .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1989,12 +2108,12 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#vjbwlgdnxi .gt_caption {
+#xaywkmbyou .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#vjbwlgdnxi .gt_title {
+#xaywkmbyou .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2006,7 +2125,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-bottom-width: 0;
 }
 
-#vjbwlgdnxi .gt_subtitle {
+#xaywkmbyou .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2018,7 +2137,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-top-width: 0;
 }
 
-#vjbwlgdnxi .gt_heading {
+#xaywkmbyou .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2030,13 +2149,13 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#vjbwlgdnxi .gt_bottom_border {
+#xaywkmbyou .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#vjbwlgdnxi .gt_col_headings {
+#xaywkmbyou .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2051,7 +2170,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#vjbwlgdnxi .gt_col_heading {
+#xaywkmbyou .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2071,7 +2190,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   overflow-x: hidden;
 }
 
-#vjbwlgdnxi .gt_column_spanner_outer {
+#xaywkmbyou .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2083,15 +2202,15 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 4px;
 }
 
-#vjbwlgdnxi .gt_column_spanner_outer:first-child {
+#xaywkmbyou .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#vjbwlgdnxi .gt_column_spanner_outer:last-child {
+#xaywkmbyou .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#vjbwlgdnxi .gt_column_spanner {
+#xaywkmbyou .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2103,11 +2222,11 @@ Number of Fisher Scoring iterations: 4</code></pre>
   width: 100%;
 }
 
-#vjbwlgdnxi .gt_spanner_row {
+#xaywkmbyou .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#vjbwlgdnxi .gt_group_heading {
+#xaywkmbyou .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2133,7 +2252,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   text-align: left;
 }
 
-#vjbwlgdnxi .gt_empty_group_heading {
+#xaywkmbyou .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2148,15 +2267,15 @@ Number of Fisher Scoring iterations: 4</code></pre>
   vertical-align: middle;
 }
 
-#vjbwlgdnxi .gt_from_md > :first-child {
+#xaywkmbyou .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#vjbwlgdnxi .gt_from_md > :last-child {
+#xaywkmbyou .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#vjbwlgdnxi .gt_row {
+#xaywkmbyou .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2175,7 +2294,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   overflow-x: hidden;
 }
 
-#vjbwlgdnxi .gt_stub {
+#xaywkmbyou .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2188,7 +2307,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#vjbwlgdnxi .gt_stub_row_group {
+#xaywkmbyou .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2202,15 +2321,15 @@ Number of Fisher Scoring iterations: 4</code></pre>
   vertical-align: top;
 }
 
-#vjbwlgdnxi .gt_row_group_first td {
+#xaywkmbyou .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#vjbwlgdnxi .gt_row_group_first th {
+#xaywkmbyou .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#vjbwlgdnxi .gt_summary_row {
+#xaywkmbyou .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2220,16 +2339,16 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#vjbwlgdnxi .gt_first_summary_row {
+#xaywkmbyou .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#vjbwlgdnxi .gt_first_summary_row.thick {
+#xaywkmbyou .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#vjbwlgdnxi .gt_last_summary_row {
+#xaywkmbyou .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2239,7 +2358,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#vjbwlgdnxi .gt_grand_summary_row {
+#xaywkmbyou .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2249,7 +2368,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#vjbwlgdnxi .gt_first_grand_summary_row {
+#xaywkmbyou .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2259,7 +2378,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#vjbwlgdnxi .gt_last_grand_summary_row_top {
+#xaywkmbyou .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2269,11 +2388,11 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#vjbwlgdnxi .gt_striped {
+#xaywkmbyou .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#vjbwlgdnxi .gt_table_body {
+#xaywkmbyou .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2282,7 +2401,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#vjbwlgdnxi .gt_footnotes {
+#xaywkmbyou .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2296,7 +2415,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#vjbwlgdnxi .gt_footnote {
+#xaywkmbyou .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2305,7 +2424,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#vjbwlgdnxi .gt_sourcenotes {
+#xaywkmbyou .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2319,7 +2438,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#vjbwlgdnxi .gt_sourcenote {
+#xaywkmbyou .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2327,72 +2446,72 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#vjbwlgdnxi .gt_left {
+#xaywkmbyou .gt_left {
   text-align: left;
 }
 
-#vjbwlgdnxi .gt_center {
+#xaywkmbyou .gt_center {
   text-align: center;
 }
 
-#vjbwlgdnxi .gt_right {
+#xaywkmbyou .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#vjbwlgdnxi .gt_font_normal {
+#xaywkmbyou .gt_font_normal {
   font-weight: normal;
 }
 
-#vjbwlgdnxi .gt_font_bold {
+#xaywkmbyou .gt_font_bold {
   font-weight: bold;
 }
 
-#vjbwlgdnxi .gt_font_italic {
+#xaywkmbyou .gt_font_italic {
   font-style: italic;
 }
 
-#vjbwlgdnxi .gt_super {
+#xaywkmbyou .gt_super {
   font-size: 65%;
 }
 
-#vjbwlgdnxi .gt_footnote_marks {
+#xaywkmbyou .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#vjbwlgdnxi .gt_asterisk {
+#xaywkmbyou .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#vjbwlgdnxi .gt_indent_1 {
+#xaywkmbyou .gt_indent_1 {
   text-indent: 5px;
 }
 
-#vjbwlgdnxi .gt_indent_2 {
+#xaywkmbyou .gt_indent_2 {
   text-indent: 10px;
 }
 
-#vjbwlgdnxi .gt_indent_3 {
+#xaywkmbyou .gt_indent_3 {
   text-indent: 15px;
 }
 
-#vjbwlgdnxi .gt_indent_4 {
+#xaywkmbyou .gt_indent_4 {
   text-indent: 20px;
 }
 
-#vjbwlgdnxi .gt_indent_5 {
+#xaywkmbyou .gt_indent_5 {
   text-indent: 25px;
 }
 
-#vjbwlgdnxi .katex-display {
+#xaywkmbyou .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#vjbwlgdnxi div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#xaywkmbyou div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2429,35 +2548,35 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;N</td>
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;M</td>
 <td class="gt_row gt_center" headers="estimate">—</td>
 <td class="gt_row gt_center" headers="ci">—</td>
 <td class="gt_row gt_center" headers="p.value"><br>
 </td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;C</td>
-<td class="gt_row gt_center" headers="estimate">0.56</td>
-<td class="gt_row gt_center" headers="ci">0.42, 0.76</td>
-<td class="gt_row gt_center" headers="p.value" style="font-weight: bold">&lt;0.001</td>
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;N</td>
+<td class="gt_row gt_center" headers="estimate">0.78</td>
+<td class="gt_row gt_center" headers="ci">0.47, 1.30</td>
+<td class="gt_row gt_center" headers="p.value">0.3</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;S</td>
-<td class="gt_row gt_center" headers="estimate">0.90</td>
-<td class="gt_row gt_center" headers="ci">0.69, 1.19</td>
-<td class="gt_row gt_center" headers="p.value">0.5</td>
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;C</td>
+<td class="gt_row gt_center" headers="estimate">0.44</td>
+<td class="gt_row gt_center" headers="ci">0.27, 0.72</td>
+<td class="gt_row gt_center" headers="p.value" style="font-weight: bold">0.001</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;SA</td>
-<td class="gt_row gt_center" headers="estimate">0.50</td>
-<td class="gt_row gt_center" headers="ci">0.38, 0.66</td>
-<td class="gt_row gt_center" headers="p.value" style="font-weight: bold">&lt;0.001</td>
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;S</td>
+<td class="gt_row gt_center" headers="estimate">0.71</td>
+<td class="gt_row gt_center" headers="ci">0.44, 1.14</td>
+<td class="gt_row gt_center" headers="p.value">0.2</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;M</td>
-<td class="gt_row gt_center" headers="estimate">1.28</td>
-<td class="gt_row gt_center" headers="ci">0.77, 2.12</td>
-<td class="gt_row gt_center" headers="p.value">0.3</td>
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;SA</td>
+<td class="gt_row gt_center" headers="estimate">0.39</td>
+<td class="gt_row gt_center" headers="ci">0.24, 0.64</td>
+<td class="gt_row gt_center" headers="p.value" style="font-weight: bold">&lt;0.001</td>
 </tr>
 </tbody><tfoot class="gt_footnotes">
 <tr class="odd">
@@ -2471,6 +2590,9 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </div>
 </div>
 </div>
+</section>
+<section id="narrating-the-results-1" class="slide level2">
+<h2>Narrating the results</h2>
 <p><strong>Possible interpretation for region C:</strong></p>
 <p><em>(The intercept isn’t typically interpreted as an odds ratio, so we’ll ignore that for now)</em></p>
 <p>The result above indicates that the odds for people in region C to vote “Yes” are about 0.56 times the odds of people in region N (the reference category). i.e., There is a 43.54% decrease in odds for region C residents to vote “Yes” compared to region N residents. <span class="math inline">\(((0.5646 - 1) * 100 = -43.54)\)</span></p>
@@ -2483,8 +2605,8 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <p>Let’s retrieve the Rsquared value:</p>
 <div class="cell columns column-output-location">
 <div class="column">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a></a><span class="co"># the default is McFadden</span></span>
-<span id="cb35-2"><a></a>DescTools<span class="sc">::</span><span class="fu">PseudoR2</span>(vote_region) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a></a><span class="co"># the default is McFadden</span></span>
+<span id="cb39-2"><a></a>DescTools<span class="sc">::</span><span class="fu">PseudoR2</span>(vote_region) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output cell-output-stdout">
 <pre><code>  McFadden 
@@ -2493,8 +2615,8 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </div></div>
 <div class="cell columns column-output-location">
 <div class="column">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a></a>DescTools<span class="sc">::</span><span class="fu">PseudoR2</span>(vote_region, </span>
-<span id="cb37-2"><a></a>                    <span class="at">which =</span> <span class="st">"CoxSnell"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a></a>DescTools<span class="sc">::</span><span class="fu">PseudoR2</span>(vote_region, </span>
+<span id="cb41-2"><a></a>                    <span class="at">which =</span> <span class="st">"CoxSnell"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output cell-output-stdout">
 <pre><code>  CoxSnell 
@@ -2502,8 +2624,8 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </div>
 </div></div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a></a>DescTools<span class="sc">::</span><span class="fu">PseudoR2</span>(vote_region, </span>
-<span id="cb39-2"><a></a>                    <span class="at">which =</span> <span class="st">"all"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a></a>DescTools<span class="sc">::</span><span class="fu">PseudoR2</span>(vote_region, </span>
+<span id="cb43-2"><a></a>                    <span class="at">which =</span> <span class="st">"all"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       McFadden     McFaddenAdj        CoxSnell      Nagelkerke   AldrichNelson 
    1.622922e-02    1.303341e-02    2.067302e-02    2.855594e-02    2.046225e-02 
@@ -2516,37 +2638,38 @@ VeallZimmermann           Efron McKelveyZavoina            Tjur             AIC
 </section>
 <section id="present-both-models-in-a-table" class="slide level2 scrollable">
 <h2>Present both models in a table</h2>
+<p>Note that the R-squared is missing here, so be sure to put that in when you paste this table to your document.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a></a><span class="fu">library</span>(huxtable)</span>
-<span id="cb41-2"><a></a><span class="fu">huxreg</span>(<span class="st">"age"</span> <span class="ot">=</span> vote_age, <span class="st">"region"</span> <span class="ot">=</span> vote_region)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a></a><span class="fu">library</span>(huxtable)</span>
+<span id="cb45-2"><a></a><span class="fu">huxreg</span>(<span class="st">"age"</span> <span class="ot">=</span> vote_age, <span class="st">"region"</span> <span class="ot">=</span> vote_region)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  ">
 <colgroup><col><col><col></colgroup><tbody><tr>
 <th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">age</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">region</th></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(Intercept)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-1.167 ***</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-0.270 *&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(Intercept)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-1.167 ***</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-0.027&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.121)&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.116)&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.121)&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.231)&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
 <th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">age</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.013 ***</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
 <th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.003)&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">regionC</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-0.572 ***</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">regionN</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-0.244&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.148)&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.258)&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">regionS</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-0.103&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">regionC</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-0.815 **&nbsp;</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.140)&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.249)&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">regionSA</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-0.688 ***</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">regionS</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-0.347&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.139)&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.244)&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">regionM</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.244&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">regionSA</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-0.932 ***</td></tr>
 <tr>
-<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.258)&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.243)&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
 <th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">N</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2431&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2431&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
@@ -2563,7 +2686,18 @@ VeallZimmermann           Efron McKelveyZavoina            Tjur             AIC
 <section id="lets-try-this-logistic-regression-exercise-5-mins" class="slide level2">
 <h2>Let’s try this Logistic Regression exercise! (5 mins)</h2>
 <p>Create a regression model called <code>vote_model</code> that predicts the likelihood of voting “Yes” based on <code>sex</code>.</p>
-</section>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a></a>vote_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(vote_yes <span class="sc">~</span> sex,</span>
+<span id="cb46-2"><a></a>                  <span class="at">family =</span> <span class="st">"binomial"</span>, </span>
+<span id="cb46-3"><a></a>                  <span class="at">data =</span> chile_data) </span>
+<span id="cb46-4"><a></a></span>
+<span id="cb46-5"><a></a><span class="fu">summary</span>(vote_model)</span>
+<span id="cb46-6"><a></a><span class="fu">exp</span>(<span class="fu">coefficients</span>(vote_model))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section></section>
 <section>
 <section id="what-is-quarto-what-is-markdown" class="title-slide slide level1 center">
 <h1>What is Quarto? What is Markdown?</h1>
@@ -3068,7 +3202,7 @@ VeallZimmermann           Efron McKelveyZavoina            Tjur             AIC
       }
         var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
         var mailtoRegex = new RegExp(/^mailto:/);
-          var filterRegex = new RegExp('/' + window.location.host + '/');
+          var filterRegex = new RegExp("https:\/\/bellaratmelia\.github\.io\/introductory-r-socsci\/");
         var isInternal = (href) => {
             return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
         }
