@@ -798,6 +798,19 @@ Bella Ratmelia
 <h2>Task #9</h2>
 <p>Generate summary stats of <code>income</code> grouped by <code>region</code> and <code>education</code>. The summary stats should include mean, median, max, min, std, and n (number of observations).</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a><span class="fu">library</span>(gt)</span>
+<span id="cb23-2"><a></a>chile_data <span class="sc">|&gt;</span> </span>
+<span id="cb23-3"><a></a>    <span class="fu">group_by</span>(region, education) <span class="sc">|&gt;</span> </span>
+<span id="cb23-4"><a></a>    <span class="fu">summarise</span>(<span class="at">observation =</span> <span class="fu">n</span>(), </span>
+<span id="cb23-5"><a></a>              <span class="at">mean_income =</span> <span class="fu">mean</span>(income, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb23-6"><a></a>              <span class="at">median_income =</span> <span class="fu">median</span>(income, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb23-7"><a></a>              <span class="at">highest =</span> <span class="fu">max</span>(income, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb23-8"><a></a>              <span class="at">lowest =</span> <span class="fu">min</span>(income, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb23-9"><a></a>              <span class="at">std_dev =</span> <span class="fu">sd</span>(income, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+</section>
+<section id="task-9-output" class="slide level2 output-location-slide"><h2>Task #9</h2><div class="cell output-location-slide">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 15 × 8
 # Groups:   region [5]
@@ -819,13 +832,16 @@ Bella Ratmelia
 14 SA     S                 389      41292.         35000  200000   2500  41052.
 15 SA     PS                181      82859.         75000  200000   7500  66268.</code></pre>
 </div>
-</div>
-</section>
-<section id="task-10" class="slide level2">
+</div></section><section id="task-10" class="slide level2">
 <h2>Task #10</h2>
 <p>Reshape the data to have <code>region</code> as rows and <code>vote</code> options as columns, with the values being the count of votes for each option in each region.</p>
 <p>To achieve this clean table look, we can use <code>gt</code> package or <code>knitr</code> package!</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a>chile_data <span class="sc">|&gt;</span></span>
+<span id="cb25-2"><a></a>    <span class="fu">group_by</span>(region, vote) <span class="sc">|&gt;</span></span>
+<span id="cb25-3"><a></a>    <span class="fu">summarise</span>(<span class="at">count =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb25-4"><a></a>    <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> vote, <span class="at">values_from =</span> count, <span class="at">values_fill =</span> <span class="dv">0</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb25-5"><a></a>    knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="caption-top">
 <thead>
@@ -950,6 +966,21 @@ Bella Ratmelia
 <p><u><strong>Time: 5 minutes</strong></u></p>
 <p>Generate a summary stats of <code>age</code> grouped by <code>region</code> and <code>sex</code>. The summary stats should include mean, median, max, min, std, and n (number of observations). It should look something like this:</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Show answer</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a>chile_data <span class="sc">|&gt;</span> </span>
+<span id="cb28-2"><a></a>    <span class="fu">group_by</span>(region, sex) <span class="sc">|&gt;</span> </span>
+<span id="cb28-3"><a></a>    <span class="fu">summarise</span>(<span class="at">observation =</span> <span class="fu">n</span>(), </span>
+<span id="cb28-4"><a></a>              <span class="at">mean_age =</span> <span class="fu">mean</span>(age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb28-5"><a></a>              <span class="at">median_age =</span> <span class="fu">median</span>(age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb28-6"><a></a>              <span class="at">oldest =</span> <span class="fu">max</span>(age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb28-7"><a></a>              <span class="at">youngest =</span> <span class="fu">min</span>(age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb28-8"><a></a>              <span class="at">std_dev =</span> <span class="fu">sd</span>(age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+
+</section>
+<section id="group-exercise-3-solo-attempts-ok-output" class="slide level2 output-location-slide"><h2>Group exercise 3 (solo attempts ok)</h2><div class="cell output-location-slide">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 8
 # Groups:   region [5]
@@ -966,12 +997,12 @@ Bella Ratmelia
  9 SA     F             449     38.9       38       70       18    14.0
 10 SA     M             399     39.0       37       70       18    15.1</code></pre>
 </div>
-</div>
-</section>
-<section id="bonus-deleting-columns-from-dataframe" class="slide level2">
+</div></section><section id="bonus-deleting-columns-from-dataframe" class="slide level2">
 <h2>Bonus: Deleting columns from dataframe</h2>
 <p>Let’s say I have this column called <code>wrong_column</code> that I want to remove:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a>chile_data <span class="ot">&lt;-</span> chile_data <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">wrong_column =</span> <span class="st">"random values"</span>)</span>
+<span id="cb30-2"><a></a>chile_data <span class="sc">|&gt;</span> <span class="fu">select</span>(region, wrong_column) <span class="sc">|&gt;</span> <span class="fu">print</span>(<span class="at">n =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2,431 × 2
   region wrong_column 
@@ -982,10 +1013,12 @@ Bella Ratmelia
 # ℹ 2,428 more rows</code></pre>
 </div>
 </div>
-<p>Remove the wrong column with subset <code>-</code>:</p>
+</section>
+<section id="remove-the-wrong-column-with-subset--" class="slide level2">
+<h2>Remove the wrong column with subset <code>-</code>:</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a>chile_data <span class="ot">&lt;-</span> chile_data <span class="sc">|&gt;</span> </span>
-<span id="cb28-2"><a></a>    <span class="fu">select</span>(<span class="sc">-</span>wrong_column)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a>chile_data <span class="ot">&lt;-</span> chile_data <span class="sc">|&gt;</span> </span>
+<span id="cb32-2"><a></a>    <span class="fu">select</span>(<span class="sc">-</span>wrong_column)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -1385,7 +1418,7 @@ Bella Ratmelia
       }
         var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
         var mailtoRegex = new RegExp(/^mailto:/);
-          var filterRegex = new RegExp("https:\/\/bellaratmelia\.github\.io\/introductory-r-socsci\/");
+          var filterRegex = new RegExp('/' + window.location.host + '/');
         var isInternal = (href) => {
             return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
         }

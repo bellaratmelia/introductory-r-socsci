@@ -132,6 +132,10 @@ gtag('config', 'G-G5L1RGYC4H', { 'anonymize_ip': true});
     <a class="nav-link active" href="./resources.html" aria-current="page"> 
 <span class="menu-text">Resources</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./exercises.html"> 
+<span class="menu-text">Exercises</span></a>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -171,13 +175,13 @@ gtag('config', 'G-G5L1RGYC4H', { 'anonymize_ip': true});
 <p>Further readings if you’d like to deepen your knowledge and skill after the workshop:</p>
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
 <div id="ref-ismay" class="csl-entry" role="listitem">
-Ismay, C., &amp; Kim, A. Y. (2024). <em>Statistical inference via data science</em>. <a href="https://moderndive.com/">https://moderndive.com/</a>
+Ismay, C., &amp; Kim, A. Y. (2024). <em>Statistical inference via data science</em>. <a href="https://moderndive.com/">https://moderndive.com/</a><div class="csl-block">This book offers a gentle introduction to R, while also covering foundational research methods such as sampling, hypothesis testing, and making inferences. I really like how it combines both programming and research basics; very suitable for beginners!</div>
 </div>
 <div id="ref-wickham" class="csl-entry" role="listitem">
-Wickham, H., Çetinkaya-Rundel, M., &amp; Garrett Grolemund. (n.d.). <em>R for data science (2e)</em> (2nd ed.). <a href="https://r4ds.hadley.nz/">https://r4ds.hadley.nz/</a>
+Wickham, H., Çetinkaya-Rundel, M., &amp; Garrett Grolemund. (2024). <em>R for data science (2e)</em> (2nd ed.). <a href="https://r4ds.hadley.nz/">https://r4ds.hadley.nz/</a><div class="csl-block">A great book for R beginners! It introduces the popular tidyverse package and explains how to make the most of it. It also offers useful tips for managing projects and outlines recommended steps for transforming raw data into meaningful insights and discoveries.</div>
 </div>
 <div id="ref-wilke" class="csl-entry" role="listitem">
-Wilke, C. O. (2024). <em>Fundamentals of data visualization</em>. <a href="https://clauswilke.com/dataviz/">https://clauswilke.com/dataviz/</a>
+Wilke, C. O. (2024). <em>Fundamentals of data visualization</em>. <a href="https://clauswilke.com/dataviz/">https://clauswilke.com/dataviz/</a><div class="csl-block">I noticed that some of you are particularly interested in visualizations. While I couldn’t cover more of this topic during the workshops, if you’re eager to dive deeper, this book does a great job of covering foundational theories that I believe are both important and helpful.</div>
 </div>
 </div>
 
@@ -276,7 +280,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/bellaratmelia\.github\.io\/introductory-r-socsci\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

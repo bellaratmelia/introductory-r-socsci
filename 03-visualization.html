@@ -616,63 +616,269 @@ Bella Ratmelia
 <section id="task-1" class="slide level2">
 <h2>Task #1</h2>
 <p>What’s the distribution of our respondents’ <code>statusquo</code>?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="co"># One continuous variable</span></span>
+<span id="cb17-2"><a></a>chile_data <span class="sc">|&gt;</span> </span>
+<span id="cb17-3"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> statusquo)) <span class="sc">+</span></span>
+<span id="cb17-4"><a></a>    <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.1</span>, <span class="at">fill =</span> <span class="st">"pink"</span>, <span class="at">color =</span> <span class="st">"maroon"</span>) <span class="sc">+</span></span>
+<span id="cb17-5"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of Status Quo Scores"</span>,</span>
+<span id="cb17-6"><a></a>       <span class="at">x =</span> <span class="st">"Status Quo Score"</span>,</span>
+<span id="cb17-7"><a></a>       <span class="at">y =</span> <span class="st">"Count"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
-<img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"></section>
-<section id="task-2" class="slide level2">
+</section>
+<section id="task-1-output" class="slide level2 output-location-slide"><h2>Task #1</h2><div class="cell output-location-slide">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-4-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div></section><section id="task-2" class="slide level2">
 <h2>Task #2</h2>
 <p>What’s the distribution of <code>votes</code>?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a><span class="co"># One discrete/categorical variable</span></span>
+<span id="cb18-2"><a></a>chile_data <span class="sc">|&gt;</span> </span>
+<span id="cb18-3"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> vote)) <span class="sc">+</span></span>
+<span id="cb18-4"><a></a>    <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"skyblue"</span>) <span class="sc">+</span></span>
+<span id="cb18-5"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of Votes"</span>,</span>
+<span id="cb18-6"><a></a>       <span class="at">x =</span> <span class="st">"Vote"</span>,</span>
+<span id="cb18-7"><a></a>       <span class="at">y =</span> <span class="st">"Count"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
-<img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"></section>
-<section id="task-3" class="slide level2">
+</section>
+<section id="task-2-output" class="slide level2 output-location-slide"><h2>Task #2</h2><div class="cell output-location-slide">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div></section><section id="task-3" class="slide level2">
 <h2>Task #3</h2>
 <p>What’s the percentage of the voting intentions on each <code>region</code>?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a><span class="co"># Showing proportions / percentage as part of whole</span></span>
+<span id="cb19-2"><a></a>chile_data <span class="sc">%&gt;%</span></span>
+<span id="cb19-3"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> vote, <span class="at">fill =</span> region)) <span class="sc">+</span></span>
+<span id="cb19-4"><a></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
+<span id="cb19-5"><a></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of Votes Across Regions"</span>,</span>
+<span id="cb19-6"><a></a>         <span class="at">x =</span> <span class="st">"Vote"</span>,</span>
+<span id="cb19-7"><a></a>         <span class="at">y =</span> <span class="st">"Proportion"</span>,</span>
+<span id="cb19-8"><a></a>         <span class="at">fill =</span> <span class="st">"Region"</span>) <span class="sc">+</span></span>
+<span id="cb19-9"><a></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
-<img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section>
-<section id="group-exercise-1-solo-attempts-also-ok" class="slide level2">
+</section>
+<section id="task-3-output" class="slide level2 output-location-slide"><h2>Task #3</h2><div class="cell output-location-slide">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div></section><section id="group-exercise-1-solo-attempts-also-ok" class="slide level2">
 <h2>Group exercise #1 (solo attempts also ok)</h2>
 <p>Visualize the <code>vote</code> intention by <code>sex</code>. Make sure it is shown as proportion.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a>chile_data <span class="sc">%&gt;%</span></span>
+<span id="cb20-2"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> vote, <span class="at">fill =</span> sex)) <span class="sc">+</span></span>
+<span id="cb20-3"><a></a>    <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span> </span>
+<span id="cb20-4"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Proportion of Sex for each voting intention"</span>,</span>
+<span id="cb20-5"><a></a>       <span class="at">x =</span> <span class="st">"vote intention"</span>,</span>
+<span id="cb20-6"><a></a>       <span class="at">y =</span> <span class="st">"percentage"</span>) <span class="sc">+</span></span>
+<span id="cb20-7"><a></a>    <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 
-<img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" class="r-stretch"></section>
-<section id="task-4" class="slide level2">
+</section>
+<section id="group-exercise-1-solo-attempts-also-ok-output" class="slide level2 output-location-slide"><h2>Group exercise #1 (solo attempts also ok)</h2><div class="cell output-location-slide">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div></section><section id="task-4" class="slide level2">
 <h2>Task #4</h2>
 <p>Is there any major divide in terms of support for the statusquo across age? Visualize the distribution of <code>age</code> and <code>statusquo</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a><span class="co"># Two variables - both continuous</span></span>
+<span id="cb21-2"><a></a>chile_data <span class="sc">|&gt;</span></span>
+<span id="cb21-3"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> statusquo, <span class="at">y =</span> age, <span class="at">color=</span>support_level)) <span class="sc">+</span></span>
+<span id="cb21-4"><a></a>    <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb21-5"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Age vs Status Quo Score"</span>,</span>
+<span id="cb21-6"><a></a>       <span class="at">x =</span> <span class="st">"Status Quo Score"</span>,</span>
+<span id="cb21-7"><a></a>       <span class="at">y =</span> <span class="st">"Age"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
-<img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-8-1.png" width="960" class="r-stretch"></section>
-<section id="task-5" class="slide level2">
+</section>
+<section id="task-4-output" class="slide level2 output-location-slide"><h2>Task #4</h2><div class="cell output-location-slide">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div></section><section id="task-5" class="slide level2">
 <h2>Task #5</h2>
 <p>What does the voting intention look like across different education level? Visualize the distribution of <code>vote</code> intention on various <code>education</code> level.</p>
 <p>We can achieve this in two ways!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a><span class="co"># Two variables - both discrete/categorical</span></span>
+<span id="cb22-2"><a></a></span>
+<span id="cb22-3"><a></a>chile_data <span class="sc">|&gt;</span> </span>
+<span id="cb22-4"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> education, <span class="at">y =</span> vote)) <span class="sc">+</span></span>
+<span id="cb22-5"><a></a>    <span class="fu">geom_jitter</span>(<span class="at">color=</span><span class="st">"tomato"</span>, <span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb22-6"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Voting intention Distribution by Education level"</span>,</span>
+<span id="cb22-7"><a></a>       <span class="at">x =</span> <span class="st">"Education Level"</span>,</span>
+<span id="cb22-8"><a></a>       <span class="at">y =</span> <span class="st">"Voting intention"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
-<img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" class="r-stretch"></section>
-<section id="alternative-way" class="slide level2">
+</section>
+<section id="task-5-output" class="slide level2 output-location-slide"><h2>Task #5</h2><div class="cell output-location-slide">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-9-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div></section><section id="alternative-way" class="slide level2">
 <h2>Alternative way</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a><span class="co"># Two variables - both discrete/categorical</span></span>
+<span id="cb23-2"><a></a><span class="co"># Alternative way</span></span>
+<span id="cb23-3"><a></a>chile_data <span class="sc">|&gt;</span> </span>
+<span id="cb23-4"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> education, <span class="at">fill =</span> vote)) <span class="sc">+</span></span>
+<span id="cb23-5"><a></a>    <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb23-6"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Voting intention Distribution by Education Level"</span>,</span>
+<span id="cb23-7"><a></a>       <span class="at">x =</span> <span class="st">"Education Level"</span>,</span>
+<span id="cb23-8"><a></a>       <span class="at">y =</span> <span class="st">"Count"</span>) <span class="sc">+</span></span>
+<span id="cb23-9"><a></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
-<img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-10-1.png" width="960" class="r-stretch"></section>
-<section id="facets-for-multiple-variables" class="slide level2">
+</section>
+<section id="alternative-way-output" class="slide level2 output-location-slide"><h2>Alternative way</h2><div class="cell output-location-slide">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-10-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div></section><section id="facets-for-multiple-variables" class="slide level2">
 <h2>Facets for multiple variables</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a><span class="co"># Faceting and multiple variables</span></span>
+<span id="cb24-2"><a></a>chile_data <span class="sc">|&gt;</span> </span>
+<span id="cb24-3"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> statusquo, <span class="at">color =</span> vote)) <span class="sc">+</span></span>
+<span id="cb24-4"><a></a>    <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb24-5"><a></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span> education) <span class="sc">+</span></span>
+<span id="cb24-6"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Income vs Status Quo Score by Education Level"</span>,</span>
+<span id="cb24-7"><a></a>       <span class="at">x =</span> <span class="st">"Age"</span>,</span>
+<span id="cb24-8"><a></a>       <span class="at">y =</span> <span class="st">"Status Quo Score"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
-<img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
-<section id="task-6" class="slide level2">
+</section>
+<section id="facets-for-multiple-variables-output" class="slide level2 output-location-slide"><h2>Facets for multiple variables</h2><div class="cell output-location-slide">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-11-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div></section><section id="task-6" class="slide level2">
 <h2>Task #6</h2>
 <p>Do people’s voting intention matches their level of support to the status quo? Compare the distribution of <code>statusquo</code> across different <code>vote</code> intentions.</p>
 <p>Let’s layer two kinds of visualization here:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a><span class="co"># Two variables - one categorical, one continuous</span></span>
+<span id="cb25-2"><a></a>chile_data <span class="sc">|&gt;</span> </span>
+<span id="cb25-3"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> vote, <span class="at">y =</span> statusquo)) <span class="sc">+</span></span>
+<span id="cb25-4"><a></a>    <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">"pink"</span>) <span class="sc">+</span></span>
+<span id="cb25-5"><a></a>    <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>, <span class="at">color =</span> <span class="st">"maroon"</span>) <span class="sc">+</span> </span>
+<span id="cb25-6"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution Status Quo Score by voting intention"</span>,</span>
+<span id="cb25-7"><a></a>       <span class="at">x =</span> <span class="st">"Voting intention"</span>,</span>
+<span id="cb25-8"><a></a>       <span class="at">y =</span> <span class="st">"Status Quo Support level"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
-<img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"></section>
-<section id="group-exercise-2-solo-attempts-ok" class="slide level2">
+</section>
+<section id="task-6-output" class="slide level2 output-location-slide"><h2>Task #6</h2><div class="cell output-location-slide">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-12-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div></section><section id="group-exercise-2-solo-attempts-ok" class="slide level2">
 <h2>Group Exercise #2 (solo attempts ok)</h2>
 <p>Update the visualization from task #6 to the following:</p>
 <ul>
 <li>Replace the boxplot with violin plot (check out ggplot documentation)</li>
 <li>Change the fill color for both the violin plot and jitters to other color of your choice.</li>
 </ul>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a><span class="co"># Two variables - one categorical, one continuous</span></span>
+<span id="cb26-2"><a></a>chile_data <span class="sc">|&gt;</span> </span>
+<span id="cb26-3"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> vote, <span class="at">y =</span> statusquo)) <span class="sc">+</span></span>
+<span id="cb26-4"><a></a>    <span class="fu">geom_violin</span>(<span class="at">fill =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span></span>
+<span id="cb26-5"><a></a>    <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>, <span class="at">color =</span> <span class="st">"navy"</span>) <span class="sc">+</span> </span>
+<span id="cb26-6"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution Status Quo Score by voting intention"</span>,</span>
+<span id="cb26-7"><a></a>       <span class="at">x =</span> <span class="st">"Voting intention"</span>,</span>
+<span id="cb26-8"><a></a>       <span class="at">y =</span> <span class="st">"Status Quo Support level"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 
-<img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-13-1.png" width="960" class="r-stretch"></section>
-<section id="group-exercise-3-solo-attempts-ok" class="slide level2">
+</section>
+<section id="group-exercise-2-solo-attempts-ok-output" class="slide level2 output-location-slide"><h2>Group Exercise #2 (solo attempts ok)</h2><div class="cell output-location-slide">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-13-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div></section><section id="group-exercise-3-solo-attempts-ok" class="slide level2">
 <h2>Group Exercise #3 (solo attempts ok)</h2>
 <p>Visualize the distribution of <code>age_group</code> for each <code>vote</code> intention. To show the difference between sex, show the visualization with <code>sex</code> facet.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a>chile_data <span class="sc">|&gt;</span> </span>
+<span id="cb27-2"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> vote, <span class="at">fill =</span> age_group)) <span class="sc">+</span></span>
+<span id="cb27-3"><a></a>    <span class="fu">geom_bar</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>, <span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
+<span id="cb27-4"><a></a>    <span class="fu">facet_wrap</span>( <span class="sc">~</span> sex) <span class="sc">+</span> </span>
+<span id="cb27-5"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Proportion of age groups for each voting intentions by sex"</span>,</span>
+<span id="cb27-6"><a></a>       <span class="at">x =</span> <span class="st">"Voting intention"</span>,</span>
+<span id="cb27-7"><a></a>       <span class="at">y =</span> <span class="st">"Proportion"</span>,</span>
+<span id="cb27-8"><a></a>       <span class="at">fill =</span> <span class="st">"Age Group"</span>) <span class="sc">+</span></span>
+<span id="cb27-9"><a></a>    <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 
-<img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-14-1.png" width="960" class="r-stretch"></section>
-<section id="is-fancier-better" class="slide level2">
+</section>
+<section id="group-exercise-3-solo-attempts-ok-output" class="slide level2 output-location-slide"><h2>Group Exercise #3 (solo attempts ok)</h2><div class="cell output-location-slide">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-14-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div></section><section id="is-fancier-better" class="slide level2">
 <h2>Is fancier = better?</h2>
 <p>Fancier, more complicated visualization does not necessarily mean better!</p>
 <p>Take a look at this award-winning visualization by <a href="http://www.simonscarr.com/iraqs-bloody-toll">Simon Scarr</a></p>
@@ -1076,7 +1282,7 @@ Bella Ratmelia
       }
         var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
         var mailtoRegex = new RegExp(/^mailto:/);
-          var filterRegex = new RegExp("https:\/\/bellaratmelia\.github\.io\/introductory-r-socsci\/");
+          var filterRegex = new RegExp('/' + window.location.host + '/');
         var isInternal = (href) => {
             return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
         }

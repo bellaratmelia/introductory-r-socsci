@@ -196,6 +196,10 @@ window.Quarto = {
     <a class="nav-link" href="./resources.html"> 
 <span class="menu-text">Resources</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./exercises.html"> 
+<span class="menu-text">Exercises</span></a>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -311,7 +315,7 @@ E = mc^2
 </section>
 <section id="text-with-citations" class="level2">
 <h2 class="anchored" data-anchor-id="text-with-citations">Text with citations</h2>
-<p>A lot of people have been saying that R is pretty cool <span class="citation" data-cites="wickham">(<a href="#ref-wickham" role="doc-biblioref">Wickham, Çetinkaya-Rundel, and Garrett Grolemund, n.d.</a>)</span>.</p>
+<p>A lot of people have been saying that R is pretty cool <span class="citation" data-cites="wickham">(<a href="#ref-wickham" role="doc-biblioref">Wickham, Çetinkaya-Rundel, and Garrett Grolemund 2024</a>)</span>.</p>
 
 
 
@@ -320,7 +324,7 @@ E = mc^2
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-wickham" class="csl-entry" role="listitem">
-Wickham, Hadley, Mine Çetinkaya-Rundel, and Garrett Grolemund. n.d. <em>R for Data Science (2e)</em>. 2nd ed. <a href="https://r4ds.hadley.nz/">https://r4ds.hadley.nz/</a>.
+Wickham, Hadley, Mine Çetinkaya-Rundel, and Garrett Grolemund. 2024. <em>R for Data Science (2e)</em>. 2nd ed. <a href="https://r4ds.hadley.nz/">https://r4ds.hadley.nz/</a>.
 </div>
 </div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -415,7 +419,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/bellaratmelia\.github\.io\/introductory-r-socsci\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
