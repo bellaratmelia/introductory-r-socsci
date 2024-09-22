@@ -345,6 +345,7 @@ Save all of these changes you made from step 3 onwards into a new CSV called `ch
 #| echo: true
 #| code-fold: true
 #| code-summary: "Show answer"
+
 chile_data <- chile_data |> 
     mutate(support_level = case_when(
         statusquo <= 0 ~ "Unsupportive",
@@ -368,7 +369,8 @@ chile_data |>
 Generate summary stats of `income` grouped by `region` and `education`. The summary stats should include mean, median, max, min, std, and n (number of observations).
 
 ```{r}
-#| echo: false
+#| echo: true
+#| output-location: slide
 
 library(gt)
 chile_data |> 
@@ -388,7 +390,7 @@ Reshape the data to have `region` as rows and `vote` options as columns, with th
 To achieve this clean table look, we can use `gt` package or `knitr` package!
 
 ```{r}
-#| echo: false
+#| echo: true
 chile_data |>
     group_by(region, vote) |>
     summarise(count = n(), .groups = "drop") |>
@@ -428,6 +430,8 @@ chile_data |>
 **Long data:**
 
 ```{r}
+#| echo: false
+
 # Creating the wide data frame
 long_data <- chile_data |>
     group_by(region, vote) |>
@@ -442,6 +446,8 @@ print(long_data)
 **Wide data:**
 
 ```{r}
+#| echo: false
+
 long_data |>
     pivot_wider(names_from = "vote", values_from = "count") 
 ```
@@ -455,6 +461,11 @@ long_data |>
 Generate a summary stats of `age` grouped by `region` and `sex`. The summary stats should include mean, median, max, min, std, and n (number of observations). It should look something like this:
 
 ```{r}
+#| echo: true
+#| code-fold: true
+#| output-location: slide
+#| code-summary: "Show answer"
+
 chile_data |> 
     group_by(region, sex) |> 
     summarise(observation = n(), 
@@ -470,11 +481,13 @@ chile_data |>
 Let's say I have this column called `wrong_column` that I want to remove:
 
 ```{r}
+#| echo: true
+
 chile_data <- chile_data |> mutate(wrong_column = "random values")
 chile_data |> select(region, wrong_column) |> print(n = 3)
 ```
 
-Remove the wrong column with subset `-`:
+## Remove the wrong column with subset `-`:
 
 ```{r}
 #| echo: true

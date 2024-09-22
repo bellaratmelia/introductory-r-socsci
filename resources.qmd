@@ -4,7 +4,7 @@ format: html
 nocite: |
     @*
 bibliography: references.bib
-csl: apa.csl
+csl: apa-annotated-bibliography.csl
 ---
 
 Further readings if you'd like to deepen your knowledge and skill after the workshop:

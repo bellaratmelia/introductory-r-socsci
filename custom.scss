@@ -23,3 +23,17 @@ $presentation-font-size-root: 36px;
   position: fixed;
   height: 200px;
 }
+
+div.csl-entry {
+    clear: both;
+    margin-bottom: 1em;
+}
+
+div.csl-block {
+    text-indent: 0;
+    font-style: italic;
+}
+
+details>summary {
+    color: darkorange;
+}

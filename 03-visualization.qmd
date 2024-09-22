@@ -170,7 +170,7 @@ Our PI has asked us to generate visualizations to address these questions about 
 What's the distribution of our respondents' `statusquo`?
 
 ```{r}
-#| echo: false
+#| echo: true
 #| output-location: slide
 
 # One continuous variable
@@ -187,7 +187,7 @@ chile_data |>
 What's the distribution of `votes`?
 
 ```{r}
-#| echo: false
+#| echo: true
 #| output-location: slide
 
 # One discrete/categorical variable
@@ -205,7 +205,7 @@ chile_data |>
 What's the percentage of the voting intentions on each `region`?
 
 ```{r}
-#| echo: false
+#| echo: true
 #| output-location: slide
 
 # Showing proportions / percentage as part of whole
@@ -223,8 +223,9 @@ chile_data %>%
 Visualize the `vote` intention by `sex`. Make sure it is shown as proportion. 
 
 ```{r}
-#| echo: false
+#| echo: true
 #| output-location: slide
+#| code-fold: true
 
 chile_data %>%
     ggplot(aes(x = vote, fill = sex)) +
@@ -241,7 +242,7 @@ chile_data %>%
 Is there any major divide in terms of support for the statusquo across age? Visualize the distribution of `age` and `statusquo`.
 
 ```{r}
-#| echo: false
+#| echo: true
 #| output-location: slide
 
 # Two variables - both continuous
@@ -260,7 +261,7 @@ What does the voting intention look like across different education level? Visua
 We can achieve this in two ways!
 
 ```{r}
-#| echo: false
+#| echo: true
 #| output-location: slide
 
 # Two variables - both discrete/categorical
@@ -276,7 +277,7 @@ chile_data |>
 ## Alternative way
 
 ```{r}
-#| echo: false
+#| echo: true
 #| output-location: slide
 
 # Two variables - both discrete/categorical
@@ -293,7 +294,7 @@ chile_data |>
 ## Facets for multiple variables
 
 ```{r}
-#| echo: false
+#| echo: true
 #| output-location: slide
 
 # Faceting and multiple variables
@@ -312,7 +313,7 @@ Do people's voting intention matches their level of support to the status quo? C
 Let's layer two kinds of visualization here:
 
 ```{r}
-#| echo: false
+#| echo: true
 #| output-location: slide
 
 # Two variables - one categorical, one continuous
@@ -333,8 +334,9 @@ Update the visualization from task #6 to the following:
 -  Change the fill color for both the violin plot and jitters to other color of your choice.
 
 ```{r}
-#| echo: false
+#| echo: true
 #| output-location: slide
+#| code-fold: true
 
 # Two variables - one categorical, one continuous
 chile_data |> 
@@ -352,8 +354,9 @@ Visualize the distribution of `age_group` for each `vote` intention. To show the
 
 
 ```{r}
-#| echo: false
+#| echo: true
 #| output-location: slide
+#| code-fold: true
 
 chile_data |> 
     ggplot(aes(x = vote, fill = age_group)) +

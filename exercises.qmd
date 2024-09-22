@@ -1,0 +1,385 @@
+---
+title: "Post-workshop exercises"
+subtitle: "Optional exercises to test your knowledge and reinforce your learning"
+format: html
+---
+
+## Prep
+
+Have the dplyr, tidyr, and ggplot cheatsheets ready open and ready. 
+
+### Load packages
+
+the code below will load the packages you need:
+
+```{r}
+#| output: false
+library(tidyverse)
+library(car)
+```
+
+### Load datasets
+
+The code below will load and print the first few rows of the `Duncan` dataset. To find out more about this dataset, type `?Duncan` in your RStudio console to open the vignette.
+
+```{r}
+#| echo: true
+
+duncan <- as_tibble(Duncan)
+print(duncan)
+```
+
+The code below will load and print the first few rows of the `WVS` dataset. To find out more about this dataset, type `?WVS` in your RStudio console to open the vignette.
+
+```{r}
+#| echo: true
+
+wvs <- as_tibble(WVS)
+print(wvs)
+```
+
+## Question 1
+
+Using `wvs` dataset, filter the `age` column to include values that is more than 29. Then, select the columns `age`, `degree`, `religion` and `poverty`. Save the result to a new dataframe called `wvs_filtered`. 
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show Answer"
+
+wvs_filtered <- wvs |> 
+    filter(age > 29) |> 
+    select(age, degree, religion, poverty) 
+
+print(wvs_filtered)
+```
+
+## Question 2
+
+Update the `wvs` dataset by creating a dummy-coded version of the `gender` variable, where male = 0 and female = 1. Save the results in a new column named `gender_coded`.
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show Answer"
+
+wvs <- wvs |> 
+    mutate(gender_coded = if_else(gender == "male", 0, 1)) 
+
+print(wvs)
+```
+
+
+## Question 3
+
+Create a summary of the `wvs` dataset showing the number of observations for each country.
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show Answer"
+
+wvs |> 
+    count(country) 
+```
+
+## Question 4
+
+Using `wvs` dataset, calculate the average `age` for each combination of gender and degree status.
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show Answer"
+
+wvs |> 
+    group_by(gender, degree) |> 
+    summarise(avg_age = mean(age, na.rm = TRUE))
+```
+
+## Question 5
+
+Using the `wvs` dataset, create a summary statistics for each country and religion (yes/no). Calculate the `age` mean, `age` median, number of observation.
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show Answer"
+
+wvs |> 
+    group_by(country, religion) %>%
+    summarise(
+        avg_age = mean(age, na.rm = TRUE),
+        median_age = median(age, na.rm = TRUE),
+        n_observations = n()
+    ) 
+
+```
+
+
+
+## Question 6
+
+Using the `wvs` dataset, select the 10 oldest respondents from the USA. (hint: `arrange()` and `slice()`)
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show Answer"
+
+wvs |> 
+    filter(country == "USA", age > 50) |> 
+    arrange(desc(age)) |> 
+    slice(1:10)
+
+```
+
+## Question 7
+
+
+Update the `wvs` dataset by adding a new column called `age_category` that categorises each respondents based on the following criteria:
+
+- below 18 = "youth" category
+- between 18 to 34 = "young adult" category
+- between 35 to 49 = "adult" category
+- between 50 to 69 = "senior" category
+- more than 70 = "elderly" category
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show Answer"
+
+wvs <- wvs |> 
+    mutate(age_category = case_when(
+        age < 18 ~ "youth",
+        age >= 18 & age < 35 ~ "young adult",
+        age >= 35 & age < 50 ~ "adult",
+        age >= 50 & age < 70 ~ "senior",
+        age >= 70 ~ "elderly"
+    )) 
+
+print(wvs)
+
+```
+
+## Question 8
+
+Recreate the following visualization:
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show Answer"
+
+wvs |> ggplot(aes(x = country, fill = poverty)) +
+    geom_bar(position = "dodge") +
+    labs(title = "Distribution of Poverty Opinions Across Countries",
+       x = "Country", 
+       y = "Count", 
+       fill = "Poverty Opinion") +
+    theme_minimal() 
+
+```
+
+## Question 9
+
+Recreate the following visualization:
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show Answer"
+
+wvs |> 
+    ggplot(aes(x = country, fill = degree)) +
+    geom_bar(position = "fill") +
+    labs(title = "Proportion of Degree Status by Country", 
+       x = "Country", y = "Count", fill = "Degree Status") +
+    theme_minimal()
+```
+
+
+## Question 10
+
+Recreate the following visualization:
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show Answer"
+
+wvs |> ggplot(aes(x = country, y = age)) +
+    geom_boxplot() +
+    labs(title = "Age Distribution by Country", x = "Country", y = "Age") +
+    theme_minimal() +
+    theme(legend.position = "none")
+```
+
+## Question 11
+
+Recreate the following visualization:
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show Answer"
+
+wvs |> 
+    ggplot(aes(x = country, y = age)) +
+    geom_boxplot() +
+    facet_wrap(~ religion) +
+    labs(title = "Age Distribution by Country and Religion",
+       x = "Country", y = "Age") +
+    theme_minimal() 
+```
+
+## Question 12
+
+Recreate the following visualization using `duncan` dataset:
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show Answer"
+
+duncan |> 
+    ggplot(aes(x = income, y = prestige, color = type)) +
+    geom_jitter() +
+    labs(title = "Occupation Prestige vs. Income",
+       x = "Income", 
+       y = "Prestige Score",
+       color = "Occupation Type") +
+    theme_minimal()
+```
+
+## Question 13
+
+Recreate the following visualization using `duncan` dataset:
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show Answer"
+
+duncan |> 
+    ggplot(aes(x = type, y = income)) +
+    geom_boxplot() +
+    labs(title = "Income Distribution by Occupation Type",
+        x = "Occupation Type",
+        y = "Income") +
+    theme_minimal()
+
+```
+
+## Question 14
+
+Recreate the following visualization using `duncan` dataset:
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show Answer"
+
+duncan |> 
+    ggplot(aes(x = prestige, y = income, color = type)) +
+    geom_jitter() +
+    geom_smooth(method = "lm") +
+    labs(
+        title = "Relationship between Prestige and Income",
+        subtitle = "Grouped by Occupation Type",
+        x = "Prestige Score",
+        y = "Income",
+        color = "Occupation Type"
+    ) + 
+    theme_minimal()
+
+```
+
+## Question 15
+
+Using `duncan` dataset:
+
+-  Examine the correlation between `prestige` scores and `education`.
+-  Analyze the relationship between `income` and `prestige` scores.
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show Answer"
+
+cor.test(duncan$prestige, duncan$education)
+cor.test(duncan$prestige, duncan$income)
+```
+
+## Question 16
+
+Using `duncan` dataset, compare prestige scores across different occupational categories using ANOVA.
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show Answer"
+
+duncan_anova <- aov(prestige ~ type, data=duncan)
+summary(duncan_anova)
+
+```
+
+## Question 17
+
+Using `duncan` dataset, create a regression model that predicts `income` based on occupational `prestige` and `education` scores.
+
+```{r}
+#| output: false
+
+library(huxtable)
+```
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show Answer"
+
+duncan_model <- lm(income ~ prestige + education, data = duncan)
+huxreg("income" = duncan_model)
+```
+
+## Question 18
+
+Using the `wvs` dataset, examine the relationship between `religion` and `poverty` perception.
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show Answer"
+
+wvs_chisq <- chisq.test(table(wvs$religion, wvs$poverty))
+print(wvs_chisq)
+```
+
+## Question 19
+
+Using the wvs dataset, examine whether there is a significant difference in the average age between individuals with and without a university degree.
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show Answer"
+
+wvs_ttest <- t.test(age ~ degree, data = wvs)
+print(wvs_ttest)
+```
+
+## Question 20
+
+Using `wvs` dataset, compare the mean of age across different countries and age categories **(see Question 7 to create age_category)**, and investigate if there is any significant difference. Conduct the post-hoc test if needed.
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show Answer"
+
+wvs_anova <- aov(age ~ country + age_category, data = wvs)
+summary(wvs_anova)
+```

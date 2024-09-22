@@ -14,6 +14,8 @@ website:
         text: Code of conduct
       - href: resources.qmd
         text: Resources
+      - href: exercises.qmd
+        text: Exercises
   google-analytics:
     tracking-id: "G-G5L1RGYC4H"
     anonymize-ip: true
