@@ -101,7 +101,7 @@ Here is one possible way to narrate your result:
 
 ```{r}
 #| echo: true
-huxreg("age" = statsquo_model1)
+huxreg("statusquo" = statsquo_model1)
 
 ```
 
@@ -134,10 +134,29 @@ statsquo_model2 |> tbl_regression() |> bold_p()
 More on `tbl_regression()` by `gtsummary`: <https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html>
 :::
 
-## Reporting result: A sample regression table with 2 models
+## Reporting result: A sample regression table
 
-![](images/regression-table.png)
+:::: {.columns}
 
+::: {.column width="60%"}
+![](images/regression-table.jpg)
+:::
+
+::: {.column width="40%"}
+You might encounter different table formats when reporting regression results, but there are some key elements that should generally be included. 
+
+These are: the number of observations ($N$), the $\beta$ coefficients, standard errors (SE), confidence intervals (95% CI), and p-values. Other metrics to include are the $R^2$ and $F$ statistics. 
+:::
+
+::::
+
+
+::: aside
+
+- The above screenshot is taken from <https://www.ncfr.org/system/files/2017-01/regression_0.pdf>
+- [APA recommended format](https://apastyle.apa.org/style-grammar-guidelines/tables-figures/sample-tables#regression)
+
+:::
 
 ## Presenting your models {.scrollable}
 
@@ -148,8 +167,8 @@ For more info about huxreg, go here: <https://cran.r-project.org/web/packages/hu
 ```{r}
 #| echo: true
 library(huxtable)
-huxreg("age" = statsquo_model1, 
-       "age + income" = statsquo_model2,
+huxreg("statusquo (model1)" = statsquo_model1, 
+       "statusquo (model2)" = statsquo_model2,
        number_format = 4,
        bold_signif = 0.05,
        statistics = c( "R squared" = "r.squared", "N" = "nobs", "F" = "statistic",
@@ -224,7 +243,7 @@ For more info about huxreg, go here: <https://cran.r-project.org/web/packages/hu
 ```{r}
 #| echo: true
 library(huxtable)
-huxreg("sex" = statusquo_model3,
+huxreg("statusquo (model3)" = statusquo_model3,
        number_format = 4,
        bold_signif = 0.05,
        statistics = c( "R squared" = "r.squared", "N" = "nobs", "F" = "statistic",
@@ -420,7 +439,7 @@ The screenshot is retrieved from <https://statistics.laerd.com/spss-tutorials/bi
 ```{r}
 #| echo: true
 
-huxreg("age" = vote_age, statistics = c(R2 = "r.squared", "logLik", "AIC"))
+huxreg("Vote 'Yes'" = vote_age, statistics = c(R2 = "r.squared", "logLik", "AIC"))
 ```
 
 ## Binary Logistic Regression: One Categorical Predictor
@@ -498,7 +517,7 @@ Note that the R-squared is missing here, so be sure to put that in when you past
 ```{r}
 #| echo: true
 library(huxtable)
-huxreg("age" = vote_age, "region" = vote_region)
+huxreg("vote 'Yes' (model1)" = vote_age, "vote 'Yes' (model2)" = vote_region)
 ```
 
 
