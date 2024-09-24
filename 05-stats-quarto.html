@@ -528,11 +528,11 @@ F-statistic: 30.85 on 1 and 2429 DF,  p-value: 3.086e-08</code></pre>
 <section id="present-the-regression-tables" class="slide level2">
 <h2>Present the regression tables!</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">huxreg</span>(<span class="st">"age"</span> <span class="ot">=</span> statsquo_model1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">huxreg</span>(<span class="st">"statusquo"</span> <span class="ot">=</span> statsquo_model1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  ">
 <colgroup><col><col></colgroup><tbody><tr>
-<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">age</th></tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">statusquo</th></tr>
 <tr>
 <th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(Intercept)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-0.305 ***</td></tr>
 <tr>
@@ -599,23 +599,23 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>statsquo_model2 <span class="sc">|&gt;</span> <span class="fu">tbl_regression</span>() <span class="sc">|&gt;</span> <span class="fu">bold_p</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="ntghbhynec" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ntghbhynec table {
+<div id="iirjrpfsqx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#iirjrpfsqx table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ntghbhynec thead, #ntghbhynec tbody, #ntghbhynec tfoot, #ntghbhynec tr, #ntghbhynec td, #ntghbhynec th {
+#iirjrpfsqx thead, #iirjrpfsqx tbody, #iirjrpfsqx tfoot, #iirjrpfsqx tr, #iirjrpfsqx td, #iirjrpfsqx th {
   border-style: none;
 }
 
-#ntghbhynec p {
+#iirjrpfsqx p {
   margin: 0;
   padding: 0;
 }
 
-#ntghbhynec .gt_table {
+#iirjrpfsqx .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -641,12 +641,12 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#ntghbhynec .gt_caption {
+#iirjrpfsqx .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ntghbhynec .gt_title {
+#iirjrpfsqx .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -658,7 +658,7 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
   border-bottom-width: 0;
 }
 
-#ntghbhynec .gt_subtitle {
+#iirjrpfsqx .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -670,7 +670,7 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
   border-top-width: 0;
 }
 
-#ntghbhynec .gt_heading {
+#iirjrpfsqx .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -682,13 +682,13 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#ntghbhynec .gt_bottom_border {
+#iirjrpfsqx .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ntghbhynec .gt_col_headings {
+#iirjrpfsqx .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -703,7 +703,7 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#ntghbhynec .gt_col_heading {
+#iirjrpfsqx .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -723,7 +723,7 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
   overflow-x: hidden;
 }
 
-#ntghbhynec .gt_column_spanner_outer {
+#iirjrpfsqx .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -735,15 +735,15 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
   padding-right: 4px;
 }
 
-#ntghbhynec .gt_column_spanner_outer:first-child {
+#iirjrpfsqx .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ntghbhynec .gt_column_spanner_outer:last-child {
+#iirjrpfsqx .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ntghbhynec .gt_column_spanner {
+#iirjrpfsqx .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -755,11 +755,11 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
   width: 100%;
 }
 
-#ntghbhynec .gt_spanner_row {
+#iirjrpfsqx .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ntghbhynec .gt_group_heading {
+#iirjrpfsqx .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -785,7 +785,7 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
   text-align: left;
 }
 
-#ntghbhynec .gt_empty_group_heading {
+#iirjrpfsqx .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -800,15 +800,15 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
   vertical-align: middle;
 }
 
-#ntghbhynec .gt_from_md > :first-child {
+#iirjrpfsqx .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ntghbhynec .gt_from_md > :last-child {
+#iirjrpfsqx .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ntghbhynec .gt_row {
+#iirjrpfsqx .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -827,7 +827,7 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
   overflow-x: hidden;
 }
 
-#ntghbhynec .gt_stub {
+#iirjrpfsqx .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -840,7 +840,7 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
   padding-right: 5px;
 }
 
-#ntghbhynec .gt_stub_row_group {
+#iirjrpfsqx .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -854,15 +854,15 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
   vertical-align: top;
 }
 
-#ntghbhynec .gt_row_group_first td {
+#iirjrpfsqx .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ntghbhynec .gt_row_group_first th {
+#iirjrpfsqx .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ntghbhynec .gt_summary_row {
+#iirjrpfsqx .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -872,16 +872,16 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
   padding-right: 5px;
 }
 
-#ntghbhynec .gt_first_summary_row {
+#iirjrpfsqx .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ntghbhynec .gt_first_summary_row.thick {
+#iirjrpfsqx .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ntghbhynec .gt_last_summary_row {
+#iirjrpfsqx .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -891,7 +891,7 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#ntghbhynec .gt_grand_summary_row {
+#iirjrpfsqx .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -901,7 +901,7 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
   padding-right: 5px;
 }
 
-#ntghbhynec .gt_first_grand_summary_row {
+#iirjrpfsqx .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -911,7 +911,7 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#ntghbhynec .gt_last_grand_summary_row_top {
+#iirjrpfsqx .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -921,11 +921,11 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#ntghbhynec .gt_striped {
+#iirjrpfsqx .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ntghbhynec .gt_table_body {
+#iirjrpfsqx .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -934,7 +934,7 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#ntghbhynec .gt_footnotes {
+#iirjrpfsqx .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -948,7 +948,7 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#ntghbhynec .gt_footnote {
+#iirjrpfsqx .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -957,7 +957,7 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
   padding-right: 5px;
 }
 
-#ntghbhynec .gt_sourcenotes {
+#iirjrpfsqx .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -971,7 +971,7 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#ntghbhynec .gt_sourcenote {
+#iirjrpfsqx .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -979,72 +979,72 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
   padding-right: 5px;
 }
 
-#ntghbhynec .gt_left {
+#iirjrpfsqx .gt_left {
   text-align: left;
 }
 
-#ntghbhynec .gt_center {
+#iirjrpfsqx .gt_center {
   text-align: center;
 }
 
-#ntghbhynec .gt_right {
+#iirjrpfsqx .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ntghbhynec .gt_font_normal {
+#iirjrpfsqx .gt_font_normal {
   font-weight: normal;
 }
 
-#ntghbhynec .gt_font_bold {
+#iirjrpfsqx .gt_font_bold {
   font-weight: bold;
 }
 
-#ntghbhynec .gt_font_italic {
+#iirjrpfsqx .gt_font_italic {
   font-style: italic;
 }
 
-#ntghbhynec .gt_super {
+#iirjrpfsqx .gt_super {
   font-size: 65%;
 }
 
-#ntghbhynec .gt_footnote_marks {
+#iirjrpfsqx .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ntghbhynec .gt_asterisk {
+#iirjrpfsqx .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ntghbhynec .gt_indent_1 {
+#iirjrpfsqx .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ntghbhynec .gt_indent_2 {
+#iirjrpfsqx .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ntghbhynec .gt_indent_3 {
+#iirjrpfsqx .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ntghbhynec .gt_indent_4 {
+#iirjrpfsqx .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ntghbhynec .gt_indent_5 {
+#iirjrpfsqx .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ntghbhynec .katex-display {
+#iirjrpfsqx .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ntghbhynec div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#iirjrpfsqx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1098,18 +1098,30 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
 <aside><div>
 <p>More on <code>tbl_regression()</code> by <code>gtsummary</code>: <a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html" class="uri">https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html</a></p>
 </div></aside></section>
-<section id="reporting-result-a-sample-regression-table-with-2-models" class="slide level2">
-<h2>Reporting result: A sample regression table with 2 models</h2>
+<section id="reporting-result-a-sample-regression-table" class="slide level2">
+<h2>Reporting result: A sample regression table</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p><img data-src="images/regression-table.jpg"></p>
+</div><div class="column" style="width:40%;">
+<p>You might encounter different table formats when reporting regression results, but there are some key elements that should generally be included.</p>
+<p>These are: the number of observations (<span class="math inline">\(N\)</span>), the <span class="math inline">\(\beta\)</span> coefficients, standard errors (SE), confidence intervals (95% CI), and p-values. Other metrics to include are the <span class="math inline">\(R^2\)</span> and <span class="math inline">\(F\)</span> statistics.</p>
+</div></div>
 
-<img data-src="images/regression-table.png" class="r-stretch"></section>
+<aside><div>
+<ul>
+<li>The above screenshot is taken from <a href="https://www.ncfr.org/system/files/2017-01/regression_0.pdf" class="uri">https://www.ncfr.org/system/files/2017-01/regression_0.pdf</a></li>
+<li><a href="https://apastyle.apa.org/style-grammar-guidelines/tables-figures/sample-tables#regression">APA recommended format</a></li>
+</ul>
+</div></aside></section>
 <section id="presenting-your-models" class="slide level2 scrollable">
 <h2>Presenting your models</h2>
 <p>Don’t forget to install the library by running this line in your terminal: <code>install.packages("huxtable")</code></p>
 <p>For more info about huxreg, go here: <a href="https://cran.r-project.org/web/packages/huxtable/vignettes/huxreg.html" class="uri">https://cran.r-project.org/web/packages/huxtable/vignettes/huxreg.html</a></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">library</span>(huxtable)</span>
-<span id="cb8-2"><a></a><span class="fu">huxreg</span>(<span class="st">"age"</span> <span class="ot">=</span> statsquo_model1, </span>
-<span id="cb8-3"><a></a>       <span class="st">"age + income"</span> <span class="ot">=</span> statsquo_model2,</span>
+<span id="cb8-2"><a></a><span class="fu">huxreg</span>(<span class="st">"statusquo (model1)"</span> <span class="ot">=</span> statsquo_model1, </span>
+<span id="cb8-3"><a></a>       <span class="st">"statusquo (model2)"</span> <span class="ot">=</span> statsquo_model2,</span>
 <span id="cb8-4"><a></a>       <span class="at">number_format =</span> <span class="dv">4</span>,</span>
 <span id="cb8-5"><a></a>       <span class="at">bold_signif =</span> <span class="fl">0.05</span>,</span>
 <span id="cb8-6"><a></a>       <span class="at">statistics =</span> <span class="fu">c</span>( <span class="st">"R squared"</span> <span class="ot">=</span> <span class="st">"r.squared"</span>, <span class="st">"N"</span> <span class="ot">=</span> <span class="st">"nobs"</span>, <span class="st">"F"</span> <span class="ot">=</span> <span class="st">"statistic"</span>,</span>
@@ -1117,7 +1129,7 @@ F-statistic: 16.76 on 2 and 2428 DF,  p-value: 5.93e-08</code></pre>
 <div class="cell-output-display">
 <table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  ">
 <colgroup><col><col><col></colgroup><tbody><tr>
-<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">age</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">age + income</th></tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">statusquo (model1)</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">statusquo (model2)</th></tr>
 <tr>
 <th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(Intercept)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">-0.3050 ***</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">-0.3357 ***</td></tr>
 <tr>
@@ -1241,7 +1253,7 @@ F-statistic: 10.75 on 1 and 2429 DF,  p-value: 0.001057</code></pre>
 <p>For more info about huxreg, go here: <a href="https://cran.r-project.org/web/packages/huxtable/vignettes/huxreg.html" class="uri">https://cran.r-project.org/web/packages/huxtable/vignettes/huxreg.html</a></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="fu">library</span>(huxtable)</span>
-<span id="cb17-2"><a></a><span class="fu">huxreg</span>(<span class="st">"sex"</span> <span class="ot">=</span> statusquo_model3,</span>
+<span id="cb17-2"><a></a><span class="fu">huxreg</span>(<span class="st">"statusquo (model3)"</span> <span class="ot">=</span> statusquo_model3,</span>
 <span id="cb17-3"><a></a>       <span class="at">number_format =</span> <span class="dv">4</span>,</span>
 <span id="cb17-4"><a></a>       <span class="at">bold_signif =</span> <span class="fl">0.05</span>,</span>
 <span id="cb17-5"><a></a>       <span class="at">statistics =</span> <span class="fu">c</span>( <span class="st">"R squared"</span> <span class="ot">=</span> <span class="st">"r.squared"</span>, <span class="st">"N"</span> <span class="ot">=</span> <span class="st">"nobs"</span>, <span class="st">"F"</span> <span class="ot">=</span> <span class="st">"statistic"</span>,</span>
@@ -1249,7 +1261,7 @@ F-statistic: 10.75 on 1 and 2429 DF,  p-value: 0.001057</code></pre>
 <div class="cell-output-display">
 <table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  ">
 <colgroup><col><col></colgroup><tbody><tr>
-<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">sex</th></tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">statusquo (model3)</th></tr>
 <tr>
 <th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(Intercept)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">-0.0799 **</td></tr>
 <tr>
@@ -1443,23 +1455,23 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <span id="cb28-2"><a></a>vote_age <span class="sc">|&gt;</span> <span class="fu">tbl_regression</span>(<span class="at">exponentiate =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> </span>
 <span id="cb28-3"><a></a>    <span class="fu">bold_p</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="rbgaigpeiu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#rbgaigpeiu table {
+<div id="svinievqkw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#svinievqkw table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#rbgaigpeiu thead, #rbgaigpeiu tbody, #rbgaigpeiu tfoot, #rbgaigpeiu tr, #rbgaigpeiu td, #rbgaigpeiu th {
+#svinievqkw thead, #svinievqkw tbody, #svinievqkw tfoot, #svinievqkw tr, #svinievqkw td, #svinievqkw th {
   border-style: none;
 }
 
-#rbgaigpeiu p {
+#svinievqkw p {
   margin: 0;
   padding: 0;
 }
 
-#rbgaigpeiu .gt_table {
+#svinievqkw .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1485,12 +1497,12 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#rbgaigpeiu .gt_caption {
+#svinievqkw .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#rbgaigpeiu .gt_title {
+#svinievqkw .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1502,7 +1514,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-bottom-width: 0;
 }
 
-#rbgaigpeiu .gt_subtitle {
+#svinievqkw .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1514,7 +1526,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-top-width: 0;
 }
 
-#rbgaigpeiu .gt_heading {
+#svinievqkw .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1526,13 +1538,13 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#rbgaigpeiu .gt_bottom_border {
+#svinievqkw .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#rbgaigpeiu .gt_col_headings {
+#svinievqkw .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1547,7 +1559,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#rbgaigpeiu .gt_col_heading {
+#svinievqkw .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1567,7 +1579,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   overflow-x: hidden;
 }
 
-#rbgaigpeiu .gt_column_spanner_outer {
+#svinievqkw .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1579,15 +1591,15 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 4px;
 }
 
-#rbgaigpeiu .gt_column_spanner_outer:first-child {
+#svinievqkw .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#rbgaigpeiu .gt_column_spanner_outer:last-child {
+#svinievqkw .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#rbgaigpeiu .gt_column_spanner {
+#svinievqkw .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1599,11 +1611,11 @@ Number of Fisher Scoring iterations: 4</code></pre>
   width: 100%;
 }
 
-#rbgaigpeiu .gt_spanner_row {
+#svinievqkw .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#rbgaigpeiu .gt_group_heading {
+#svinievqkw .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1629,7 +1641,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   text-align: left;
 }
 
-#rbgaigpeiu .gt_empty_group_heading {
+#svinievqkw .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1644,15 +1656,15 @@ Number of Fisher Scoring iterations: 4</code></pre>
   vertical-align: middle;
 }
 
-#rbgaigpeiu .gt_from_md > :first-child {
+#svinievqkw .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#rbgaigpeiu .gt_from_md > :last-child {
+#svinievqkw .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#rbgaigpeiu .gt_row {
+#svinievqkw .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1671,7 +1683,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   overflow-x: hidden;
 }
 
-#rbgaigpeiu .gt_stub {
+#svinievqkw .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1684,7 +1696,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#rbgaigpeiu .gt_stub_row_group {
+#svinievqkw .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1698,15 +1710,15 @@ Number of Fisher Scoring iterations: 4</code></pre>
   vertical-align: top;
 }
 
-#rbgaigpeiu .gt_row_group_first td {
+#svinievqkw .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#rbgaigpeiu .gt_row_group_first th {
+#svinievqkw .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#rbgaigpeiu .gt_summary_row {
+#svinievqkw .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1716,16 +1728,16 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#rbgaigpeiu .gt_first_summary_row {
+#svinievqkw .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#rbgaigpeiu .gt_first_summary_row.thick {
+#svinievqkw .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#rbgaigpeiu .gt_last_summary_row {
+#svinievqkw .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1735,7 +1747,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#rbgaigpeiu .gt_grand_summary_row {
+#svinievqkw .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1745,7 +1757,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#rbgaigpeiu .gt_first_grand_summary_row {
+#svinievqkw .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1755,7 +1767,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#rbgaigpeiu .gt_last_grand_summary_row_top {
+#svinievqkw .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1765,11 +1777,11 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#rbgaigpeiu .gt_striped {
+#svinievqkw .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#rbgaigpeiu .gt_table_body {
+#svinievqkw .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1778,7 +1790,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#rbgaigpeiu .gt_footnotes {
+#svinievqkw .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1792,7 +1804,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#rbgaigpeiu .gt_footnote {
+#svinievqkw .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1801,7 +1813,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#rbgaigpeiu .gt_sourcenotes {
+#svinievqkw .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1815,7 +1827,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#rbgaigpeiu .gt_sourcenote {
+#svinievqkw .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1823,72 +1835,72 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#rbgaigpeiu .gt_left {
+#svinievqkw .gt_left {
   text-align: left;
 }
 
-#rbgaigpeiu .gt_center {
+#svinievqkw .gt_center {
   text-align: center;
 }
 
-#rbgaigpeiu .gt_right {
+#svinievqkw .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#rbgaigpeiu .gt_font_normal {
+#svinievqkw .gt_font_normal {
   font-weight: normal;
 }
 
-#rbgaigpeiu .gt_font_bold {
+#svinievqkw .gt_font_bold {
   font-weight: bold;
 }
 
-#rbgaigpeiu .gt_font_italic {
+#svinievqkw .gt_font_italic {
   font-style: italic;
 }
 
-#rbgaigpeiu .gt_super {
+#svinievqkw .gt_super {
   font-size: 65%;
 }
 
-#rbgaigpeiu .gt_footnote_marks {
+#svinievqkw .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#rbgaigpeiu .gt_asterisk {
+#svinievqkw .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#rbgaigpeiu .gt_indent_1 {
+#svinievqkw .gt_indent_1 {
   text-indent: 5px;
 }
 
-#rbgaigpeiu .gt_indent_2 {
+#svinievqkw .gt_indent_2 {
   text-indent: 10px;
 }
 
-#rbgaigpeiu .gt_indent_3 {
+#svinievqkw .gt_indent_3 {
   text-indent: 15px;
 }
 
-#rbgaigpeiu .gt_indent_4 {
+#svinievqkw .gt_indent_4 {
   text-indent: 20px;
 }
 
-#rbgaigpeiu .gt_indent_5 {
+#svinievqkw .gt_indent_5 {
   text-indent: 25px;
 }
 
-#rbgaigpeiu .katex-display {
+#svinievqkw .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#rbgaigpeiu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#svinievqkw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1994,11 +2006,11 @@ VeallZimmermann           Efron McKelveyZavoina            Tjur             AIC
 <section id="reporting-result-regression-table" class="slide level2">
 <h2>Reporting result: regression table</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a></a><span class="fu">huxreg</span>(<span class="st">"age"</span> <span class="ot">=</span> vote_age, <span class="at">statistics =</span> <span class="fu">c</span>(<span class="at">R2 =</span> <span class="st">"r.squared"</span>, <span class="st">"logLik"</span>, <span class="st">"AIC"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a></a><span class="fu">huxreg</span>(<span class="st">"Vote 'Yes'"</span> <span class="ot">=</span> vote_age, <span class="at">statistics =</span> <span class="fu">c</span>(<span class="at">R2 =</span> <span class="st">"r.squared"</span>, <span class="st">"logLik"</span>, <span class="st">"AIC"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  ">
 <colgroup><col><col></colgroup><tbody><tr>
-<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">age</th></tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Vote 'Yes'</th></tr>
 <tr>
 <th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(Intercept)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-1.167 ***</td></tr>
 <tr>
@@ -2066,23 +2078,23 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <span id="cb38-2"><a></a>vote_region <span class="sc">|&gt;</span> <span class="fu">tbl_regression</span>(<span class="at">exponentiate =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span>  </span>
 <span id="cb38-3"><a></a>    <span class="fu">bold_p</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="ncpthtvczk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ncpthtvczk table {
+<div id="ocadsvpnms" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ocadsvpnms table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ncpthtvczk thead, #ncpthtvczk tbody, #ncpthtvczk tfoot, #ncpthtvczk tr, #ncpthtvczk td, #ncpthtvczk th {
+#ocadsvpnms thead, #ocadsvpnms tbody, #ocadsvpnms tfoot, #ocadsvpnms tr, #ocadsvpnms td, #ocadsvpnms th {
   border-style: none;
 }
 
-#ncpthtvczk p {
+#ocadsvpnms p {
   margin: 0;
   padding: 0;
 }
 
-#ncpthtvczk .gt_table {
+#ocadsvpnms .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2108,12 +2120,12 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#ncpthtvczk .gt_caption {
+#ocadsvpnms .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ncpthtvczk .gt_title {
+#ocadsvpnms .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2125,7 +2137,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-bottom-width: 0;
 }
 
-#ncpthtvczk .gt_subtitle {
+#ocadsvpnms .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2137,7 +2149,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-top-width: 0;
 }
 
-#ncpthtvczk .gt_heading {
+#ocadsvpnms .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2149,13 +2161,13 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#ncpthtvczk .gt_bottom_border {
+#ocadsvpnms .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ncpthtvczk .gt_col_headings {
+#ocadsvpnms .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2170,7 +2182,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#ncpthtvczk .gt_col_heading {
+#ocadsvpnms .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2190,7 +2202,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   overflow-x: hidden;
 }
 
-#ncpthtvczk .gt_column_spanner_outer {
+#ocadsvpnms .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2202,15 +2214,15 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 4px;
 }
 
-#ncpthtvczk .gt_column_spanner_outer:first-child {
+#ocadsvpnms .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ncpthtvczk .gt_column_spanner_outer:last-child {
+#ocadsvpnms .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ncpthtvczk .gt_column_spanner {
+#ocadsvpnms .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2222,11 +2234,11 @@ Number of Fisher Scoring iterations: 4</code></pre>
   width: 100%;
 }
 
-#ncpthtvczk .gt_spanner_row {
+#ocadsvpnms .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ncpthtvczk .gt_group_heading {
+#ocadsvpnms .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2252,7 +2264,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   text-align: left;
 }
 
-#ncpthtvczk .gt_empty_group_heading {
+#ocadsvpnms .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2267,15 +2279,15 @@ Number of Fisher Scoring iterations: 4</code></pre>
   vertical-align: middle;
 }
 
-#ncpthtvczk .gt_from_md > :first-child {
+#ocadsvpnms .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ncpthtvczk .gt_from_md > :last-child {
+#ocadsvpnms .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ncpthtvczk .gt_row {
+#ocadsvpnms .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2294,7 +2306,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   overflow-x: hidden;
 }
 
-#ncpthtvczk .gt_stub {
+#ocadsvpnms .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2307,7 +2319,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#ncpthtvczk .gt_stub_row_group {
+#ocadsvpnms .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2321,15 +2333,15 @@ Number of Fisher Scoring iterations: 4</code></pre>
   vertical-align: top;
 }
 
-#ncpthtvczk .gt_row_group_first td {
+#ocadsvpnms .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ncpthtvczk .gt_row_group_first th {
+#ocadsvpnms .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ncpthtvczk .gt_summary_row {
+#ocadsvpnms .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2339,16 +2351,16 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#ncpthtvczk .gt_first_summary_row {
+#ocadsvpnms .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ncpthtvczk .gt_first_summary_row.thick {
+#ocadsvpnms .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ncpthtvczk .gt_last_summary_row {
+#ocadsvpnms .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2358,7 +2370,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#ncpthtvczk .gt_grand_summary_row {
+#ocadsvpnms .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2368,7 +2380,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#ncpthtvczk .gt_first_grand_summary_row {
+#ocadsvpnms .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2378,7 +2390,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#ncpthtvczk .gt_last_grand_summary_row_top {
+#ocadsvpnms .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2388,11 +2400,11 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#ncpthtvczk .gt_striped {
+#ocadsvpnms .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ncpthtvczk .gt_table_body {
+#ocadsvpnms .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2401,7 +2413,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#ncpthtvczk .gt_footnotes {
+#ocadsvpnms .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2415,7 +2427,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#ncpthtvczk .gt_footnote {
+#ocadsvpnms .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2424,7 +2436,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#ncpthtvczk .gt_sourcenotes {
+#ocadsvpnms .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2438,7 +2450,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#ncpthtvczk .gt_sourcenote {
+#ocadsvpnms .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2446,72 +2458,72 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#ncpthtvczk .gt_left {
+#ocadsvpnms .gt_left {
   text-align: left;
 }
 
-#ncpthtvczk .gt_center {
+#ocadsvpnms .gt_center {
   text-align: center;
 }
 
-#ncpthtvczk .gt_right {
+#ocadsvpnms .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ncpthtvczk .gt_font_normal {
+#ocadsvpnms .gt_font_normal {
   font-weight: normal;
 }
 
-#ncpthtvczk .gt_font_bold {
+#ocadsvpnms .gt_font_bold {
   font-weight: bold;
 }
 
-#ncpthtvczk .gt_font_italic {
+#ocadsvpnms .gt_font_italic {
   font-style: italic;
 }
 
-#ncpthtvczk .gt_super {
+#ocadsvpnms .gt_super {
   font-size: 65%;
 }
 
-#ncpthtvczk .gt_footnote_marks {
+#ocadsvpnms .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ncpthtvczk .gt_asterisk {
+#ocadsvpnms .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ncpthtvczk .gt_indent_1 {
+#ocadsvpnms .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ncpthtvczk .gt_indent_2 {
+#ocadsvpnms .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ncpthtvczk .gt_indent_3 {
+#ocadsvpnms .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ncpthtvczk .gt_indent_4 {
+#ocadsvpnms .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ncpthtvczk .gt_indent_5 {
+#ocadsvpnms .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ncpthtvczk .katex-display {
+#ocadsvpnms .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ncpthtvczk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ocadsvpnms div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2641,11 +2653,11 @@ VeallZimmermann           Efron McKelveyZavoina            Tjur             AIC
 <p>Note that the R-squared is missing here, so be sure to put that in when you paste this table to your document.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a></a><span class="fu">library</span>(huxtable)</span>
-<span id="cb45-2"><a></a><span class="fu">huxreg</span>(<span class="st">"age"</span> <span class="ot">=</span> vote_age, <span class="st">"region"</span> <span class="ot">=</span> vote_region)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb45-2"><a></a><span class="fu">huxreg</span>(<span class="st">"vote 'Yes' (model1)"</span> <span class="ot">=</span> vote_age, <span class="st">"vote 'Yes' (model2)"</span> <span class="ot">=</span> vote_region)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  ">
 <colgroup><col><col><col></colgroup><tbody><tr>
-<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">age</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">region</th></tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">vote 'Yes' (model1)</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">vote 'Yes' (model2)</th></tr>
 <tr>
 <th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(Intercept)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-1.167 ***</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-0.027&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>

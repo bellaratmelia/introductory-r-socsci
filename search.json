@@ -123,7 +123,7 @@
     "href": "05-stats-quarto.html#present-the-regression-tables",
     "title": "Regression and Introduction to Quarto",
     "section": "Present the regression tables!",
-    "text": "Present the regression tables!\n\nhuxreg(\"age\" = statsquo_model1)\n\n\n\nage\n\n(Intercept)-0.305 ***\n\n(0.057)   \n\nage0.008 ***\n\n(0.001)   \n\nN2431        \n\nR20.013    \n\nlogLik-3444.614    \n\nAIC6895.227    \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
+    "text": "Present the regression tables!\n\nhuxreg(\"statusquo\" = statsquo_model1)\n\n\n\nstatusquo\n\n(Intercept)-0.305 ***\n\n(0.057)   \n\nage0.008 ***\n\n(0.001)   \n\nN2431        \n\nR20.013    \n\nlogLik-3444.614    \n\nAIC6895.227    \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
   },
   {
     "objectID": "05-stats-quarto.html#linear-regression-multiple-continuous-predictors",
@@ -147,18 +147,18 @@
     "text": "Alternative package to present regression result\n\nstatsquo_model2 |&gt; tbl_regression() |&gt; bold_p()\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nBeta\n95% CI\n1\np-value\n\n\n\n\nage\n0.01\n0.01, 0.01\n&lt;0.001\n\n\nincome_downscaled\n0.01\n0.00, 0.02\n0.10\n\n\n\n1\nCI = Confidence Interval\n\n\n\n\n\n\n\n\n\n\nMore on tbl_regression() by gtsummary: https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html"
   },
   {
-    "objectID": "05-stats-quarto.html#reporting-result-a-sample-regression-table-with-2-models",
-    "href": "05-stats-quarto.html#reporting-result-a-sample-regression-table-with-2-models",
+    "objectID": "05-stats-quarto.html#reporting-result-a-sample-regression-table",
+    "href": "05-stats-quarto.html#reporting-result-a-sample-regression-table",
     "title": "Regression and Introduction to Quarto",
-    "section": "Reporting result: A sample regression table with 2 models",
-    "text": "Reporting result: A sample regression table with 2 models"
+    "section": "Reporting result: A sample regression table",
+    "text": "Reporting result: A sample regression table\n\n\n\n\nYou might encounter different table formats when reporting regression results, but there are some key elements that should generally be included.\nThese are: the number of observations (\\(N\\)), the \\(\\beta\\) coefficients, standard errors (SE), confidence intervals (95% CI), and p-values. Other metrics to include are the \\(R^2\\) and \\(F\\) statistics.\n\n\n\n\nThe above screenshot is taken from https://www.ncfr.org/system/files/2017-01/regression_0.pdf\nAPA recommended format"
   },
   {
     "objectID": "05-stats-quarto.html#presenting-your-models",
     "href": "05-stats-quarto.html#presenting-your-models",
     "title": "Regression and Introduction to Quarto",
     "section": "Presenting your models",
-    "text": "Presenting your models\nDon’t forget to install the library by running this line in your terminal: install.packages(\"huxtable\")\nFor more info about huxreg, go here: https://cran.r-project.org/web/packages/huxtable/vignettes/huxreg.html\n\nlibrary(huxtable)\nhuxreg(\"age\" = statsquo_model1, \n       \"age + income\" = statsquo_model2,\n       number_format = 4,\n       bold_signif = 0.05,\n       statistics = c( \"R squared\" = \"r.squared\", \"N\" = \"nobs\", \"F\" = \"statistic\",\n      \"P value\" = \"p.value\"))\n\n\n\nageage + income\n\n(Intercept)-0.3050 ***-0.3357 ***\n\n(0.0566)   (0.0597)   \n\nage0.0077 ***0.0077 ***\n\n(0.0014)   (0.0014)   \n\nincome_downscaled         0.0083    \n\n         (0.0051)   \n\nR squared0.0125    0.0136    \n\nN2431         2431         \n\nF30.8532    16.7552    \n\nP value0.0000    0.0000    \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
+    "text": "Presenting your models\nDon’t forget to install the library by running this line in your terminal: install.packages(\"huxtable\")\nFor more info about huxreg, go here: https://cran.r-project.org/web/packages/huxtable/vignettes/huxreg.html\n\nlibrary(huxtable)\nhuxreg(\"statusquo (model1)\" = statsquo_model1, \n       \"statusquo (model2)\" = statsquo_model2,\n       number_format = 4,\n       bold_signif = 0.05,\n       statistics = c( \"R squared\" = \"r.squared\", \"N\" = \"nobs\", \"F\" = \"statistic\",\n      \"P value\" = \"p.value\"))\n\n\n\nstatusquo (model1)statusquo (model2)\n\n(Intercept)-0.3050 ***-0.3357 ***\n\n(0.0566)   (0.0597)   \n\nage0.0077 ***0.0077 ***\n\n(0.0014)   (0.0014)   \n\nincome_downscaled         0.0083    \n\n         (0.0051)   \n\nR squared0.0125    0.0136    \n\nN2431         2431         \n\nF30.8532    16.7552    \n\nP value0.0000    0.0000    \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
   },
   {
     "objectID": "05-stats-quarto.html#fyi-multicollinearity",
@@ -193,7 +193,7 @@
     "href": "05-stats-quarto.html#presenting-the-regression-table",
     "title": "Regression and Introduction to Quarto",
     "section": "Presenting the regression table",
-    "text": "Presenting the regression table\nFor more info about huxreg, go here: https://cran.r-project.org/web/packages/huxtable/vignettes/huxreg.html\n\nlibrary(huxtable)\nhuxreg(\"sex\" = statusquo_model3,\n       number_format = 4,\n       bold_signif = 0.05,\n       statistics = c( \"R squared\" = \"r.squared\", \"N\" = \"nobs\", \"F\" = \"statistic\",\n      \"P value\" = \"p.value\"))\n\n\n\nsex\n\n(Intercept)-0.0799 **\n\n(0.0292)  \n\nsexF0.1334 **\n\n(0.0407)  \n\nR squared0.0044   \n\nN2431        \n\nF10.7507   \n\nP value0.0011   \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
+    "text": "Presenting the regression table\nFor more info about huxreg, go here: https://cran.r-project.org/web/packages/huxtable/vignettes/huxreg.html\n\nlibrary(huxtable)\nhuxreg(\"statusquo (model3)\" = statusquo_model3,\n       number_format = 4,\n       bold_signif = 0.05,\n       statistics = c( \"R squared\" = \"r.squared\", \"N\" = \"nobs\", \"F\" = \"statistic\",\n      \"P value\" = \"p.value\"))\n\n\n\nstatusquo (model3)\n\n(Intercept)-0.0799 **\n\n(0.0292)  \n\nsexF0.1334 **\n\n(0.0407)  \n\nR squared0.0044   \n\nN2431        \n\nF10.7507   \n\nP value0.0011   \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
   },
   {
     "objectID": "05-stats-quarto.html#categorical-predictor-changing-the-reference",
@@ -291,7 +291,7 @@
     "href": "05-stats-quarto.html#reporting-result-regression-table",
     "title": "Regression and Introduction to Quarto",
     "section": "Reporting result: regression table",
-    "text": "Reporting result: regression table\n\nhuxreg(\"age\" = vote_age, statistics = c(R2 = \"r.squared\", \"logLik\", \"AIC\"))\n\n\n\nage\n\n(Intercept)-1.167 ***\n\n(0.121)   \n\nage0.013 ***\n\n(0.003)   \n\nlogLik-1553.776    \n\nAIC3111.552    \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
+    "text": "Reporting result: regression table\n\nhuxreg(\"Vote 'Yes'\" = vote_age, statistics = c(R2 = \"r.squared\", \"logLik\", \"AIC\"))\n\n\n\nVote 'Yes'\n\n(Intercept)-1.167 ***\n\n(0.121)   \n\nage0.013 ***\n\n(0.003)   \n\nlogLik-1553.776    \n\nAIC3111.552    \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
   },
   {
     "objectID": "05-stats-quarto.html#binary-logistic-regression-one-categorical-predictor",
@@ -333,7 +333,7 @@
     "href": "05-stats-quarto.html#present-both-models-in-a-table",
     "title": "Regression and Introduction to Quarto",
     "section": "Present both models in a table",
-    "text": "Present both models in a table\nNote that the R-squared is missing here, so be sure to put that in when you paste this table to your document.\n\nlibrary(huxtable)\nhuxreg(\"age\" = vote_age, \"region\" = vote_region)\n\n\n\nageregion\n\n(Intercept)-1.167 ***-0.027    \n\n(0.121)   (0.231)   \n\nage0.013 ***        \n\n(0.003)           \n\nregionN        -0.244    \n\n        (0.258)   \n\nregionC        -0.815 ** \n\n        (0.249)   \n\nregionS        -0.347    \n\n        (0.244)   \n\nregionSA        -0.932 ***\n\n        (0.243)   \n\nN2431        2431        \n\nlogLik-1553.776    -1539.159    \n\nAIC3111.552    3088.317    \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
+    "text": "Present both models in a table\nNote that the R-squared is missing here, so be sure to put that in when you paste this table to your document.\n\nlibrary(huxtable)\nhuxreg(\"vote 'Yes' (model1)\" = vote_age, \"vote 'Yes' (model2)\" = vote_region)\n\n\n\nvote 'Yes' (model1)vote 'Yes' (model2)\n\n(Intercept)-1.167 ***-0.027    \n\n(0.121)   (0.231)   \n\nage0.013 ***        \n\n(0.003)           \n\nregionN        -0.244    \n\n        (0.258)   \n\nregionC        -0.815 ** \n\n        (0.249)   \n\nregionS        -0.347    \n\n        (0.244)   \n\nregionSA        -0.932 ***\n\n        (0.243)   \n\nN2431        2431        \n\nlogLik-1553.776    -1539.159    \n\nAIC3111.552    3088.317    \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
   },
   {
     "objectID": "05-stats-quarto.html#lets-try-this-logistic-regression-exercise-5-mins",
@@ -1456,13 +1456,6 @@
     "text": "Question 14\nRecreate the following visualization using duncan dataset:\n\n\nShow Answer\nduncan |&gt; \n    ggplot(aes(x = prestige, y = income, color = type)) +\n    geom_jitter() +\n    geom_smooth(method = \"lm\") +\n    labs(\n        title = \"Relationship between Prestige and Income\",\n        subtitle = \"Grouped by Occupation Type\",\n        x = \"Prestige Score\",\n        y = \"Income\",\n        color = \"Occupation Type\"\n    ) + \n    theme_minimal()\n\n\n`geom_smooth()` using formula = 'y ~ x'"
   },
   {
-    "objectID": "resources.html",
-    "href": "resources.html",
-    "title": "Resources",
-    "section": "",
-    "text": "Further readings if you’d like to deepen your knowledge and skill after the workshop:\n\n\nIsmay, C., & Kim, A. Y. (2024). Statistical inference via data science. https://moderndive.com/This book offers a gentle introduction to R, while also covering foundational research methods such as sampling, hypothesis testing, and making inferences. I really like how it combines both programming and research basics; very suitable for beginners!\n\n\nWickham, H., Çetinkaya-Rundel, M., & Garrett Grolemund. (2024). R for data science (2e) (2nd ed.). https://r4ds.hadley.nz/A great book for R beginners! It introduces the popular tidyverse package and explains how to make the most of it. It also offers useful tips for managing projects and outlines recommended steps for transforming raw data into meaningful insights and discoveries.\n\n\nWilke, C. O. (2024). Fundamentals of data visualization. https://clauswilke.com/dataviz/I noticed that some of you are particularly interested in visualizations. While I couldn’t cover more of this topic during the workshops, if you’re eager to dive deeper, this book does a great job of covering foundational theories that I believe are both important and helpful."
-  },
-  {
     "objectID": "exercises.html#question-15",
     "href": "exercises.html#question-15",
     "title": "Post-workshop exercises",
@@ -1503,5 +1496,12 @@
     "title": "Post-workshop exercises",
     "section": "Question 20",
     "text": "Question 20\nUsing wvs dataset, compare the mean of age across different countries and age categories (see Question 7 to create age_category), and investigate if there is any significant difference. Conduct the post-hoc test if needed.\n\n\nShow Answer\nwvs_anova &lt;- aov(age ~ country + age_category, data = wvs)\nsummary(wvs_anova)\n\n\n               Df  Sum Sq Mean Sq F value Pr(&gt;F)    \ncountry         3   17399    5800   235.9 &lt;2e-16 ***\nage_category    3 1424858  474953 19319.9 &lt;2e-16 ***\nResiduals    5374  132113      25                   \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
+  },
+  {
+    "objectID": "resources.html",
+    "href": "resources.html",
+    "title": "Resources",
+    "section": "",
+    "text": "Further readings if you’d like to deepen your knowledge and skill after the workshop:\n\n\nIsmay, C., & Kim, A. Y. (2024). Statistical inference via data science. https://moderndive.com/This book offers a gentle introduction to R, while also covering foundational research methods such as sampling, hypothesis testing, and making inferences. I really like how it combines both programming and research basics; very suitable for beginners!\n\n\nWickham, H., Çetinkaya-Rundel, M., & Garrett Grolemund. (2024). R for data science (2e) (2nd ed.). https://r4ds.hadley.nz/A great book for R beginners! It introduces the popular tidyverse package and explains how to make the most of it. It also offers useful tips for managing projects and outlines recommended steps for transforming raw data into meaningful insights and discoveries.\n\n\nWilke, C. O. (2024). Fundamentals of data visualization. https://clauswilke.com/dataviz/I noticed that some of you are particularly interested in visualizations. While I couldn’t cover more of this topic during the workshops, if you’re eager to dive deeper, this book does a great job of covering foundational theories that I believe are both important and helpful."
   }
 ]
