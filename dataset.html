@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>About the workshop – Introductory R for Social Sciences</title>
+<title>The WVS Dataset – Introductory R for Social Sciences</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -106,8 +106,8 @@ gtag('config', 'G-G5L1RGYC4H', { 'anonymize_ip': true});
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./about.html" aria-current="page"> 
-<span class="menu-text">About</span></a>
+    <a class="nav-link active" href="./dataset.html" aria-current="page"> 
+<span class="menu-text">Dataset</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./coc.html"> 
@@ -148,11 +148,8 @@ gtag('config', 'G-G5L1RGYC4H', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#part-01-introduction-to-r-and-rstudio" id="toc-part-01-introduction-to-r-and-rstudio" class="nav-link active" data-scroll-target="#part-01-introduction-to-r-and-rstudio">Part 01: Introduction to R and RStudio</a></li>
-  <li><a href="#part-02-data-wrangling-with-tidyverse" id="toc-part-02-data-wrangling-with-tidyverse" class="nav-link" data-scroll-target="#part-02-data-wrangling-with-tidyverse">Part 02: Data wrangling with tidyverse</a></li>
-  <li><a href="#part-03-data-visualization-and-descriptive-statistics" id="toc-part-03-data-visualization-and-descriptive-statistics" class="nav-link" data-scroll-target="#part-03-data-visualization-and-descriptive-statistics">Part 03: Data visualization and Descriptive Statistics</a></li>
-  <li><a href="#part-04-basic-inferential-tests" id="toc-part-04-basic-inferential-tests" class="nav-link" data-scroll-target="#part-04-basic-inferential-tests">Part 04: Basic Inferential Tests</a></li>
-  <li><a href="#part-05-correlation-regression-and-introduction-to-quarto" id="toc-part-05-correlation-regression-and-introduction-to-quarto" class="nav-link" data-scroll-target="#part-05-correlation-regression-and-introduction-to-quarto">Part 05: Correlation, Regression, and Introduction to Quarto</a></li>
+  <li><a href="#data-dictionary-for-wvs-dataset" id="toc-data-dictionary-for-wvs-dataset" class="nav-link active" data-scroll-target="#data-dictionary-for-wvs-dataset">Data Dictionary for WVS dataset</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
     </div>
@@ -161,7 +158,7 @@ gtag('config', 'G-G5L1RGYC4H', { 'anonymize_ip': true});
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">About the workshop</h1>
+<h1 class="title">The WVS Dataset</h1>
 </div>
 
 
@@ -178,25 +175,101 @@ gtag('config', 'G-G5L1RGYC4H', { 'anonymize_ip': true});
 </header>
 
 
-<section id="part-01-introduction-to-r-and-rstudio" class="level2">
-<h2 class="anchored" data-anchor-id="part-01-introduction-to-r-and-rstudio">Part 01: Introduction to R and RStudio</h2>
-<p>Learn the fundamentals of R and RStudio, including how to set up your working directory and R projects, understand basic data types and structures in R such as vectors and data frames, and how to import data files into R.</p>
+<p>For this workshop, we will be using dataset stored in a CSV file called <code>wvs-wave7-sg-ca-nz.csv</code>.</p>
+<a href="https://raw.githubusercontent.com/bellaratmelia/introductory-r-workshop/refs/heads/main/data/wvs-wave7-sg-ca-nz.csv" type="button" class="btn btn-success">Click here to open wvs-wave7-sg-ca-nz.csv, and then Ctrl + S / Cmd + S to save it locally into your data folder</a>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+What is a CSV?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A CSV (Comma-Separated Values) file is a type of file that stores data in a plain text format. Each line in the file represents a row of data, and within each row, individual pieces of data (like numbers or words) are separated by commas.</p>
+<p>This format is commonly used for storing and transferring data, especially in spreadsheets and databases. Because it is literally just plain text, it is an ideal format if you have large amount of data.</p>
+<p>You can open CSV files in Excel, Google Sheets, or even Notepad!</p>
+</div>
+</div>
+<section id="data-dictionary-for-wvs-dataset" class="level3">
+<h3 class="anchored" data-anchor-id="data-dictionary-for-wvs-dataset">Data Dictionary for WVS dataset</h3>
+<p>The World Values Survey (&lt;www.worldvaluessurvey.org&gt;) is a global network of social scientists studying changing values and their impact on social and political life, led by an international team of scholars, with the WVS association and secretariat headquartered in Stockholm, Sweden.</p>
+<p>The actual questionnaire consists of over 200 questions with respondents from various countries. For the purpose of this workshop, we will only use 16 variables/questions with respondents from Canada, New Zealand, and Singapore. The 16 variables are:</p>
+<dl>
+<dt><code>country</code></dt>
+<dd>
+<p>Character variable containing three-letter country codes: <code>CAN</code>, <code>NZL</code>, and <code>SGP</code></p>
+</dd>
+<dt><code>ID</code></dt>
+<dd>
+<p>Numeric identifier unique to each survey respondent</p>
+</dd>
+<dt><code>family_importance</code></dt>
+<dd>
+<p>Numeric scale from 1 to 4 measuring importance of family, where 1 indicates highest importance</p>
+</dd>
+<dt><code>friends_importance</code></dt>
+<dd>
+<p>Numeric scale from 1 to 4 measuring importance of friends, where 1 indicates highest importance</p>
+</dd>
+<dt><code>leisure_importance</code></dt>
+<dd>
+<p>Numeric scale from 1 to 4 measuring importance of leisure time, where 1 indicates highest importance</p>
+</dd>
+<dt><code>work_importance</code></dt>
+<dd>
+<p>Numeric scale from 1 to 4 measuring importance of work, where 1 indicates highest importance</p>
+</dd>
+<dt><code>freedom</code></dt>
+<dd>
+<p>Numeric scale from 1-10 measuring perceived freedom of choice and control, where 10 indicates most freedom</p>
+</dd>
+<dt><code>life_satisfaction</code></dt>
+<dd>
+<p>Numeric scale from 1-10 measuring overall life satisfaction, where 10 indicates highest satisfaction</p>
+</dd>
+<dt><code>financial_satisfaction</code></dt>
+<dd>
+<p>Numeric scale from 1-10 measuring satisfaction with financial situation, where 10 indicates highest satisfaction</p>
+</dd>
+<dt><code>religiousity</code></dt>
+<dd>
+<p>indicates religious self-identification: <code>A religious person</code>, <code>Not a religious person</code>, <code>An atheist</code></p>
+</dd>
+<dt><code>political_scale</code></dt>
+<dd>
+<p>Numeric scale from 1-10 measuring left-right political orientation, where 1 is left and 10 is right</p>
+</dd>
+<dt><code>sex</code></dt>
+<dd>
+<p>indicates respondent’s gender: <code>male</code> or <code>female</code></p>
+</dd>
+<dt><code>birthyear</code></dt>
+<dd>
+<p>Numeric variable indicating year of birth</p>
+</dd>
+<dt><code>age</code></dt>
+<dd>
+<p>Numeric variable indicating respondent’s age</p>
+</dd>
+<dt><code>marital_status</code></dt>
+<dd>
+<p>indicates current marital status: <code>Married</code>, <code>Living together as married</code>, <code>Divorced</code>, <code>Separated</code>, <code>Widowed</code>, <code>Single</code></p>
+</dd>
+<dt><code>employment</code></dt>
+<dd>
+<p>indicates current employment status: <code>Full time</code>, <code>Part time</code>, <code>Self employed</code>, <code>Retired/pensioned</code>, <code>Housewife not otherwise employed</code>, <code>Student</code>, <code>Unemployed</code></p>
+</dd>
+</dl>
+<p>Below is the snapshot of the selected questions and how they appeared in the questionnaire:</p>
+<p><img src="images/Selected Questions for WVS-images-1.jpg" class="img-fluid"></p>
+<p><img src="images/Selected Questions for WVS-images-2.jpg" class="img-fluid"></p>
+<p>If you’d like to find out more about this data, including the original codebook and questionnaire, check out their homepage here: <a href="https://www.worldvaluessurvey.org/WVSDocumentationWV7.jsp" class="uri">https://www.worldvaluessurvey.org/WVSDocumentationWV7.jsp</a></p>
 </section>
-<section id="part-02-data-wrangling-with-tidyverse" class="level2">
-<h2 class="anchored" data-anchor-id="part-02-data-wrangling-with-tidyverse">Part 02: Data wrangling with tidyverse</h2>
-<p>Master the basics of data manipulation with tidyverse, including how to filter, select, mutate, and group data to prepare it for analysis.</p>
-</section>
-<section id="part-03-data-visualization-and-descriptive-statistics" class="level2">
-<h2 class="anchored" data-anchor-id="part-03-data-visualization-and-descriptive-statistics">Part 03: Data visualization and Descriptive Statistics</h2>
-<p>Learn how to create and customize data visualizations such as scatterplots, boxplots, and barplots using ggplot2. Explore methods for calculating and visualizing descriptive statistics like means, medians, and standard deviations in R.</p>
-</section>
-<section id="part-04-basic-inferential-tests" class="level2">
-<h2 class="anchored" data-anchor-id="part-04-basic-inferential-tests">Part 04: Basic Inferential Tests</h2>
-<p>Discover how to conduct fundamental statistical analysis in social sciences using R, including t-tests (independent and paired samples), chi-square tests of independence, and ANOVA. Learn how to interpret and report these results.</p>
-</section>
-<section id="part-05-correlation-regression-and-introduction-to-quarto" class="level2">
-<h2 class="anchored" data-anchor-id="part-05-correlation-regression-and-introduction-to-quarto">Part 05: Correlation, Regression, and Introduction to Quarto</h2>
-<p>Learn how to conduct correlation analysis and simple linear regression and binary logistic regression in R. Learn best practices to improve code readability and reproducibility. This session will also introduce you to Quarto, a powerful tool for creating dynamic documents that integrate R code, text, plots, and statistical output.</p>
+<section id="references" class="level3">
+<h3 class="anchored" data-anchor-id="references">References</h3>
+<p>Haerpfer, C., Inglehart, R., Moreno, A., Welzel, C., Kizilova, K., Diez-Medrano, J., Lagos, M., Norris, P., Ponarin, E. &amp; Puranen B. (2022): World Values Survey Wave 7 (2017-2022) Cross-National Data-Set. Version: 4.0.0. World Values Survey Association. DOI: <a href="https://doi.org/10.14281/18241.18">doi.org/10.14281/18241.18</a></p>
 
 
 </section>

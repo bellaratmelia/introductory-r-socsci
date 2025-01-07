@@ -53,21 +53,21 @@
     "href": "index.html#schedule",
     "title": "Introductory R for Social Sciences",
     "section": "Schedule",
-    "text": "Schedule\nSlides will be progressively made available\n\n\n\n\nSession\nDate and Time\nVenue\nTopic\n\n\n\n\n1\nFri, 17 Jan 2025, 3.30 - 5.30 PM\nYPHSL seminar room 3.1\nIntroduction to R and RStudio\n\n\n2\nFri, 24 Jan 2025, 3.30 - 5.30 PM\nYPHSL seminar room 3.1\nData wrangling with tidyverse\n\n\n3\nFri, 31 Jan 2025, 3.30 - 5.30 PM\nYPHSL seminar room 3.1\nData visualization and Descriptive Statistics\n\n\n4\nFri, 7 Feb 2025, 3.30 - 5.30 PM\nYPHSL seminar room 3.1\nBasic Inferential Tests\n\n\n5\nFri, 14 Feb 2025, 3.30 - 5.30 PM\nYPHSL seminar room 3.1\nRegression and Introduction to Quarto\n\n\n~\nAt your own pace\nAt your own choosing\nPost-workshop exercises"
+    "text": "Schedule\nVenue : YPHSL seminar room 3.1\nTime : 3:30 - 5:30 PM (All sessions)\nSlides will be progressively made available\n\n\n\n\nSession\nDate and Time\nTopic\nDesccription\n\n\n\n\nBefore the workshop\n\nPreparation\nComplete the Pre-workshop activities\n\n\n1\nFri, 17 Jan 2025\nIntroduction to R and RStudio\nLearn about setting up RStudio, basic data types and structures in R, and importing data files.\n\n\n2\nFri, 24 Jan 2025\nData wrangling with tidyverse\nLearn about manipulating data with tidyverse, including filtering, selecting, mutating, and grouping data.\n\n\n3\nFri, 31 Jan 2025\nData visualization and Descriptive Statistics\nLearn about creating visualizations with ggplot2 and calculating descriptive statistics like means.\n\n\n4\nFri, 7 Feb 2025\nBasic Inferential Tests\nLearn about conducting t-tests, chi-square tests, ANOVA, and interpreting statistical results in R.\n\n\n5\nFri, 14 Feb 2025\nRegression and Introduction to Quarto\nLearn about correlation, regression, and Quarto for creating dynamic, reproducible R documents.\n\n\nAfter the workshop\nAt your own pace\nPost-workshop exercises"
   },
   {
     "objectID": "index.html#pre-workshop-activities",
     "href": "index.html#pre-workshop-activities",
     "title": "Introductory R for Social Sciences",
     "section": "Pre-workshop activities",
-    "text": "Pre-workshop activities\n\nR and RStudio\nR and RStudio are two different but complementary tools used in data analysis and statistical computing. Understanding the difference between them is crucial (especially for beginners).\nR is a programming language and software environment specifically designed for statistical computing and graphics. It’s the core tool that actually processes your data and performs analyses.\nRStudio is an Integrated Development Environment (IDE) for R. Think of it as a user-friendly interface that makes it easier to write R code, manage projects, and visualize output. RStudio is not required to use R, but it significantly enhances the R programming experience!\n\n\n\n\n\n\nImportant\n\n\n\nAlways install R before installing RStudio, as RStudio requires R to function.\n\n\n\n\nStep 1: Install R\n\nGo to https://cran.rstudio.com/\nChoose your operating system (Windows, Mac, or Linux)\nDownload and install the latest version of R\n\n\n\nStep 2: Install RStudio\n\nVisit https://posit.co/download/rstudio-desktop/\nScroll down to “Download RStudio Desktop”\nClick “Download” and install the latest version of RStudio\n\n\n\nStep 3: Install the required packages\n\n\n\n\n\n\nNote\n\n\n\nPackages in R are collections of additional tools, functions, and datasets that extend R’s capabilities. Packages are created by contributors in the R community.\nThink of R as a smartphone, and packages as apps you download to add new features. Each package is designed to help with specific tasks or analyses, like creating graphs, analyzing particular types of data, or performing advanced statistical tests.\nPackages can save us time and leverage expert-created tools without having to write complex code from scratch. It’s very handy!\n\n\n\nOpen RStudio\nCopy the following code: install.packages(c( \"car\", \"rmarkdown\", \"huxtable\", \"gt\", \"gtsummary\", \"tidyverse\"))\nPaste it in the Console tab (see image below)\nPress Enter. Rstudio should proceed with installing the packages that we need."
+    "text": "Pre-workshop activities\n\nAbout R and RStudio\nR and RStudio are two different but complementary tools used in data analysis and statistical computing. Understanding the difference between them is crucial (especially for beginners).\nR is a programming language and software environment specifically designed for statistical computing and graphics. It’s the core tool that actually processes your data and performs analyses.\nRStudio is an Integrated Development Environment (IDE) for R. Think of it as a user-friendly interface that makes it easier to write R code, manage projects, and visualize output. RStudio is not required to use R, but it significantly enhances the R programming experience!\n\n\n\n\n\n\nImportant\n\n\n\nAlways install R before installing RStudio, as RStudio requires R to function.\n\n\n\n\nStep 1: Install R\n\nGo to https://cran.rstudio.com/\nChoose your operating system (Windows, Mac, or Linux)\nDownload and install the latest version of R\n\n\n\nStep 2: Install RStudio\n\nVisit https://posit.co/download/rstudio-desktop/\nScroll down to “Download RStudio Desktop”\nClick “Download” and install the latest version of RStudio\n\n\n\nStep 3: Install the required packages\n\n\n\n\n\n\nNote\n\n\n\nPackages in R are collections of additional tools, functions, and datasets that extend R’s capabilities. Packages are created by contributors in the R community.\nThink of R as a smartphone, and packages as apps you download to add new features. Each package is designed to help with specific tasks or analyses, like creating graphs, analyzing particular types of data, or performing advanced statistical tests.\nPackages can save us time and leverage expert-created tools without having to write complex code from scratch. It’s very handy!\n\n\n\nOpen RStudio\nCopy the following code: install.packages(c( \"car\", \"rmarkdown\", \"huxtable\", \"gt\", \"apaTable\", \"tidyverse\"))\nPaste it in the Console tab (see image below)\nPress Enter. Rstudio should proceed with installing the packages that we need.\n\n\n\n\nStep 4: Complete the pre-workshop survey\nPlease complete the pre-workshop survey here to share your goals and current knowledge. Your input will help to tailor the workshop contents and pace."
   },
   {
-    "objectID": "coc.html",
-    "href": "coc.html",
-    "title": "Code of conduct",
+    "objectID": "dataset.html",
+    "href": "dataset.html",
+    "title": "The WVS Dataset",
     "section": "",
-    "text": "In order to foster a positive and professional learning environment we encourage the following kinds of behaviours:\n\nUse welcoming and inclusive language\nBe respectful of different viewpoints and experiences\nGracefully accept constructive criticism\nFocus on what is best for the community\nShow courtesy and respect towards other community members\n\n(Adapted from The Carpentries’ Code of Conduct)"
+    "text": "For this workshop, we will be using dataset stored in a CSV file called wvs-wave7-sg-ca-nz.csv.\nClick here to open wvs-wave7-sg-ca-nz.csv, and then Ctrl + S / Cmd + S to save it locally into your data folder\n\n\n\n\n\n\nWhat is a CSV?\n\n\n\nA CSV (Comma-Separated Values) file is a type of file that stores data in a plain text format. Each line in the file represents a row of data, and within each row, individual pieces of data (like numbers or words) are separated by commas.\nThis format is commonly used for storing and transferring data, especially in spreadsheets and databases. Because it is literally just plain text, it is an ideal format if you have large amount of data.\nYou can open CSV files in Excel, Google Sheets, or even Notepad!\n\n\n\nData Dictionary for WVS dataset\nThe World Values Survey (&lt;www.worldvaluessurvey.org&gt;) is a global network of social scientists studying changing values and their impact on social and political life, led by an international team of scholars, with the WVS association and secretariat headquartered in Stockholm, Sweden.\nThe actual questionnaire consists of over 200 questions with respondents from various countries. For the purpose of this workshop, we will only use 16 variables/questions with respondents from Canada, New Zealand, and Singapore. The 16 variables are:\n\ncountry\n\nCharacter variable containing three-letter country codes: CAN, NZL, and SGP\n\nID\n\nNumeric identifier unique to each survey respondent\n\nfamily_importance\n\nNumeric scale from 1 to 4 measuring importance of family, where 1 indicates highest importance\n\nfriends_importance\n\nNumeric scale from 1 to 4 measuring importance of friends, where 1 indicates highest importance\n\nleisure_importance\n\nNumeric scale from 1 to 4 measuring importance of leisure time, where 1 indicates highest importance\n\nwork_importance\n\nNumeric scale from 1 to 4 measuring importance of work, where 1 indicates highest importance\n\nfreedom\n\nNumeric scale from 1-10 measuring perceived freedom of choice and control, where 10 indicates most freedom\n\nlife_satisfaction\n\nNumeric scale from 1-10 measuring overall life satisfaction, where 10 indicates highest satisfaction\n\nfinancial_satisfaction\n\nNumeric scale from 1-10 measuring satisfaction with financial situation, where 10 indicates highest satisfaction\n\nreligiousity\n\nindicates religious self-identification: A religious person, Not a religious person, An atheist\n\npolitical_scale\n\nNumeric scale from 1-10 measuring left-right political orientation, where 1 is left and 10 is right\n\nsex\n\nindicates respondent’s gender: male or female\n\nbirthyear\n\nNumeric variable indicating year of birth\n\nage\n\nNumeric variable indicating respondent’s age\n\nmarital_status\n\nindicates current marital status: Married, Living together as married, Divorced, Separated, Widowed, Single\n\nemployment\n\nindicates current employment status: Full time, Part time, Self employed, Retired/pensioned, Housewife not otherwise employed, Student, Unemployed\n\n\nBelow is the snapshot of the selected questions and how they appeared in the questionnaire:\n\n\nIf you’d like to find out more about this data, including the original codebook and questionnaire, check out their homepage here: https://www.worldvaluessurvey.org/WVSDocumentationWV7.jsp\n\n\nReferences\nHaerpfer, C., Inglehart, R., Moreno, A., Welzel, C., Kizilova, K., Diez-Medrano, J., Lagos, M., Norris, P., Ponarin, E. & Puranen B. (2022): World Values Survey Wave 7 (2017-2022) Cross-National Data-Set. Version: 4.0.0. World Values Survey Association. DOI: doi.org/10.14281/18241.18"
   },
   {
     "objectID": "05-stats-quarto.html#todays-outline",
@@ -662,7 +662,7 @@
     "href": "01-intro.html#preamble",
     "title": "Introduction to R and RStudio",
     "section": "Preamble",
-    "text": "Preamble\n\nAbout me:\n\nLibrarian, Research & Data Services team, SMU Libraries.\nBachelor of IT, MSc in Info Studies.\nHave been with SMU since the pandemic era (2021).\n\nAbout this workshop:\n\nLive-coding format; code along with me!\nGoal of workshop: to give you enough fundamentals (at least to the point that ChatGPT can’t bluff you so easily) and confidence to explore R on your own.\nDon’t be afraid to ask for help! We are all here to learn"
+    "text": "Preamble\n\nAbout me:\n\nLibrarian, Research & Data Services team, SMU Libraries.\nBachelor in Info Tech (IT), MSc in Info Studies.\nHave been with SMU since the pandemic era (2021).\n\nAbout this workshop:\n\nLive-coding format; code along with me!\nGoal of workshop: to give you enough fundamentals (at least to the point that ChatGPT can’t bluff you so easily) and confidence to explore R on your own.\nDon’t be afraid to ask for help! We are all here to learn."
   },
   {
     "objectID": "01-intro.html#what-is-r-what-is-r-studio",
@@ -1295,46 +1295,11 @@
     "text": "Let’s try this ANOVA exercise! (5 mins)\nIs there a significant difference in income between different regions and statusquo?\n\nVisualize the data as well\nTest for normality and homoskedasticity, and choose the appropriate test"
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About the workshop",
+    "objectID": "coc.html",
+    "href": "coc.html",
+    "title": "Code of conduct",
     "section": "",
-    "text": "Learn the fundamentals of R and RStudio, including how to set up your working directory and R projects, understand basic data types and structures in R such as vectors and data frames, and how to import data files into R."
-  },
-  {
-    "objectID": "about.html#part-01-introduction-to-r-and-rstudio",
-    "href": "about.html#part-01-introduction-to-r-and-rstudio",
-    "title": "About the workshop",
-    "section": "",
-    "text": "Learn the fundamentals of R and RStudio, including how to set up your working directory and R projects, understand basic data types and structures in R such as vectors and data frames, and how to import data files into R."
-  },
-  {
-    "objectID": "about.html#part-02-data-wrangling-with-tidyverse",
-    "href": "about.html#part-02-data-wrangling-with-tidyverse",
-    "title": "About the workshop",
-    "section": "Part 02: Data wrangling with tidyverse",
-    "text": "Part 02: Data wrangling with tidyverse\nMaster the basics of data manipulation with tidyverse, including how to filter, select, mutate, and group data to prepare it for analysis."
-  },
-  {
-    "objectID": "about.html#part-03-data-visualization-and-descriptive-statistics",
-    "href": "about.html#part-03-data-visualization-and-descriptive-statistics",
-    "title": "About the workshop",
-    "section": "Part 03: Data visualization and Descriptive Statistics",
-    "text": "Part 03: Data visualization and Descriptive Statistics\nLearn how to create and customize data visualizations such as scatterplots, boxplots, and barplots using ggplot2. Explore methods for calculating and visualizing descriptive statistics like means, medians, and standard deviations in R."
-  },
-  {
-    "objectID": "about.html#part-04-basic-inferential-tests",
-    "href": "about.html#part-04-basic-inferential-tests",
-    "title": "About the workshop",
-    "section": "Part 04: Basic Inferential Tests",
-    "text": "Part 04: Basic Inferential Tests\nDiscover how to conduct fundamental statistical analysis in social sciences using R, including t-tests (independent and paired samples), chi-square tests of independence, and ANOVA. Learn how to interpret and report these results."
-  },
-  {
-    "objectID": "about.html#part-05-correlation-regression-and-introduction-to-quarto",
-    "href": "about.html#part-05-correlation-regression-and-introduction-to-quarto",
-    "title": "About the workshop",
-    "section": "Part 05: Correlation, Regression, and Introduction to Quarto",
-    "text": "Part 05: Correlation, Regression, and Introduction to Quarto\nLearn how to conduct correlation analysis and simple linear regression and binary logistic regression in R. Learn best practices to improve code readability and reproducibility. This session will also introduce you to Quarto, a powerful tool for creating dynamic documents that integrate R code, text, plots, and statistical output."
+    "text": "In order to foster a positive and professional learning environment we encourage the following kinds of behaviours:\n\nUse welcoming and inclusive language\nBe respectful of different viewpoints and experiences\nGracefully accept constructive criticism\nFocus on what is best for the community\nShow courtesy and respect towards other community members\n\n(Adapted from The Carpentries’ Code of Conduct)"
   },
   {
     "objectID": "exercises.html",
