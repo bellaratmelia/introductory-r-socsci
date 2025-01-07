@@ -3,22 +3,32 @@ project:
 
 website:
   title: "Introductory R for Social Sciences"
-  page-footer: "Made with love and [Quarto](https://quarto.org/) by [Bella Ratmelia](https://bellaratmelia.github.io/) - Licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)."
+  page-footer: "Made with love and [Quarto](https://quarto.org/) by [Bella Ratmelia](https://bellaratmelia.github.io/) - [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)."
   navbar:
     left:
       - href: index.qmd
         text: Home
-      - href: about.qmd
-        text: About
+      - href: dataset.qmd
+        text: Dataset
       - href: coc.qmd
         text: Code of conduct
       - href: resources.qmd
         text: Resources
       - href: exercises.qmd
         text: Exercises
+      - sidebar:archive
+        
+  sidebar:
+    - id: archive
+      title: "Past workshops"
+      contents:
+        - href: "https://bellaratmelia.github.io/2024-08-Rworkshop/"
+          text: "AY 24/25 Term 1 (Aug - Sep)"
+        
   google-analytics:
     tracking-id: "G-G5L1RGYC4H"
     anonymize-ip: true
+    storage: none
 
 format:
   html:
@@ -36,4 +46,5 @@ format:
     logo: "images/smu logo.png"
     
 
-
+execute:
+  freeze: auto

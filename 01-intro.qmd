@@ -19,7 +19,7 @@ library(tidyverse)
 
     -   Librarian, Research & Data Services team, SMU Libraries.
 
-    -   Bachelor of IT, MSc in Info Studies.
+    -   Bachelor in Info Tech (IT), MSc in Info Studies.
 
     -   Have been with SMU since the pandemic era (2021).
 
@@ -29,7 +29,7 @@ library(tidyverse)
 
     -   Goal of workshop: to give you enough fundamentals (at least to the point that ChatGPT can't bluff you so easily) and confidence to explore R on your own.
 
-    -   Don't be afraid to ask for help! We are all here to learn
+    -   Don't be afraid to ask for help! We are all here to learn.
 
 ## What is R? What is R Studio?
 

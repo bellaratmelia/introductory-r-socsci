@@ -1,0 +1,17 @@
+{
+  "hash": "e4d8369aa3857431bcb32c0967a0e082",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Sample Quarto Document\"\nauthor: \"Bella Ratmelia\"\nformat: html\nbibliography: references.bib\n---\n\n\n\n# Hello Quarto!\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim\nveniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea\ncommodo consequat. Duis aute irure dolor in reprehenderit in voluptate\nvelit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint\noccaecat cupidatat non proident, sunt in culpa qui officia deserunt\nmollit anim id est laborum.\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(tidyverse)\n```\n\n::: {.cell-output .cell-output-stderr}\n\n```\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.1     ✔ tibble    3.2.1\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors\n```\n\n\n:::\n\n```{.r .cell-code}\ndiamonds = as_tibble(diamonds)\n```\n:::\n\n\n\n## Let's visualize the diamonds data\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\ndiamonds |> print(n = 10)\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n# A tibble: 53,940 × 10\n   carat cut       color clarity depth table price     x     y     z\n   <dbl> <ord>     <ord> <ord>   <dbl> <dbl> <int> <dbl> <dbl> <dbl>\n 1  0.23 Ideal     E     SI2      61.5    55   326  3.95  3.98  2.43\n 2  0.21 Premium   E     SI1      59.8    61   326  3.89  3.84  2.31\n 3  0.23 Good      E     VS1      56.9    65   327  4.05  4.07  2.31\n 4  0.29 Premium   I     VS2      62.4    58   334  4.2   4.23  2.63\n 5  0.31 Good      J     SI2      63.3    58   335  4.34  4.35  2.75\n 6  0.24 Very Good J     VVS2     62.8    57   336  3.94  3.96  2.48\n 7  0.24 Very Good I     VVS1     62.3    57   336  3.95  3.98  2.47\n 8  0.26 Very Good H     SI1      61.9    55   337  4.07  4.11  2.53\n 9  0.22 Fair      E     VS2      65.1    61   337  3.87  3.78  2.49\n10  0.23 Very Good H     VS1      59.4    61   338  4     4.05  2.39\n# ℹ 53,930 more rows\n```\n\n\n:::\n:::\n\n\n\nLet's create boxplots for carats for each cut quality:\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\ndiamonds |> ggplot(aes(x = cut, y = carat)) +\n    geom_boxplot() +\n    theme_minimal()\n```\n\n::: {.cell-output-display}\n![](sample-quarto_files/figure-html/unnamed-chunk-3-1.png){width=672}\n:::\n:::\n\n\n\n## Text with formulas\n\n$$\nE = mc^2\n$$\n\n## Text with citations\n\nA lot of people have been saying that R is pretty cool [@wickham].\n",
+    "supporting": [
+      "sample-quarto_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

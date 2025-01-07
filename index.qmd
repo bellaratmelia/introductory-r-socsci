@@ -1,6 +1,6 @@
 ---
 title: "Introductory R for Social Sciences"
-subtitle: "Academic Year 24/25 Term 1"
+subtitle: "Academic Year 24/25 Term 2 (Jan - Feb)"
 format: html
 ---
 
@@ -16,29 +16,37 @@ This site serves as a repository for the slides and codes developed for the 'Int
 
 ## Schedule
 
+**Venue** : YPHSL seminar room 3.1
+
+**Time** : 3:30 - 5:30 PM (All sessions)
+
+*Slides will be progressively made available*
+
 ::: table-schedule
-| Session | Date and Time                    | Venue                  | Topic                                              |
-|---------------|-----------------|---------------|---------------------------|
-| 1       | Fri, 23 Aug 2024, 3.30 - 5.30 PM | YPHSL seminar room 2.1 | [Introduction to R and RStudio](01-intro.html)     |
-| 2       | Fri, 30 Aug 2024, 3.30 - 5.30 PM | YPHSL seminar room 2.1 | [Data wrangling with tidyverse](02-tidyverse.html) |
-| 3       | Fri, 6 Sep 2024, 3.30 - 5.30 PM  | YPHSL seminar room 2.1 | [Data visualization and Descriptive Statistics](03-visualization.html)      |
-| 4       | Fri, 13 Sep 2024, 3.30 - 5.30 PM | YPHSL seminar room 2.2 | [Basic Inferential Tests](04-stats.html)                            |
-| 5       | Fri, 20 Sep 2024, 3.30 - 5.30 PM | YPHSL seminar room 2.1 | [Regression and Introduction to Quarto](05-stats-quarto.html)              |
-| ~       | At your own pace | At your own choosing | [Post-workshop exercises](exercises.html)              |
+| Session | Date and Time | Topic | Desccription |
+|----------------|----------------|----------------|------------------------|
+| Before the workshop |  | Preparation | Complete the [Pre-workshop activities](#pre-workshop-activities) |
+| 1 | Fri, 17 Jan 2025 | Introduction to R and RStudio | Learn about setting up RStudio, basic data types and structures in R, and importing data files. |
+| 2 | Fri, 24 Jan 2025 | Data wrangling with tidyverse | Learn about manipulating data with tidyverse, including filtering, selecting, mutating, and grouping data. |
+| 3 | Fri, 31 Jan 2025 | Data visualization and Descriptive Statistics | Learn about creating visualizations with ggplot2 and calculating descriptive statistics like means. |
+| 4 | Fri, 7 Feb 2025 | Basic Inferential Tests | Learn about conducting t-tests, chi-square tests, ANOVA, and interpreting statistical results in R. |
+| 5 | Fri, 14 Feb 2025 | Regression and Introduction to Quarto | Learn about correlation, regression, and Quarto for creating dynamic, reproducible R documents. |
+| After the workshop | At your own pace | [Post-workshop exercises](exercises.html) |  |
 :::
 
 ```{=html5}
 <style type="text/css">
     .table-schedule {width: 100%;}
     .table-schedule th:nth-child(1), .table-schedule td:nth-child(1) { width: 8%; }
-    .table-schedule th:nth-child(2), .table-schedule td:nth-child(2) { width: 30%; }
+    .table-schedule th:nth-child(2), .table-schedule td:nth-child(2) { width: 25%; }
     .table-schedule th:nth-child(3), .table-schedule td:nth-child(3) { width: 25%; }
-    .table-schedule th:nth-child(4), .table-schedule td:nth-child(4) { width: 35%; }
+    .table-schedule th:nth-child(4), .table-schedule td:nth-child(4) { width: 45%; }
 </style>
 ```
+
 ## Pre-workshop activities
 
-### R and RStudio
+### About R and RStudio
 
 **R** and **RStudio** are two different but complementary tools used in data analysis and statistical computing. Understanding the difference between them is crucial (especially for beginners).
 
@@ -78,7 +86,7 @@ Packages can save us time and leverage expert-created tools without having to wr
 
 1.  Open RStudio
 
-2.  Copy the following code: `install.packages(c( "car", "rmarkdown", "huxtable", "gt", "gtsummary", "tidyverse"))`
+2.  Copy the following code: `install.packages(c( "car", "rmarkdown", "huxtable", "gt", "apaTable", "tidyverse"))`
 
 3.  Paste it in the **Console** tab (see image below)
 
@@ -86,48 +94,6 @@ Packages can save us time and leverage expert-created tools without having to wr
 
 ![](images/install-packages.jpg)
 
-## Dataset
+### Step 4: Complete the pre-workshop survey
 
-### chile_voting
-For this workshop, we will be using dataset stored in a CSV file called `chile_voting.csv`.
-
-```{=html}
-<a href="https://raw.githubusercontent.com/bellaratmelia/introductory-r-socsci/main/data/chile_voting.csv" type="button" class="btn btn-success">Click here to open chile_voting.csv, and then Ctrl + S / Cmd + S to save it locally into your data folder</a>
-```
-
-::: {.callout-note appearance="simple"}
-### What is a CSV?
-
-A CSV (Comma-Separated Values) file is a type of file that stores data in a plain text format. Each line in the file represents a row of data, and within each row, individual pieces of data (like numbers or words) are separated by commas.
-
-This format is commonly used for storing and transferring data, especially in spreadsheets and databases. Because it is literally just plain text, it is an ideal format if you have large amount of data.
-
-You can open CSV files in Excel, Google Sheets, or even Notepad!
-:::
-
-#### Data dictionary for chile_voting
-The data is from a national survey conducted in April and May of 1988 by FLACSO/Chile, capturing voting intentions for the [1988 Chilean plebiscite](https://en.wikipedia.org/wiki/1988_Chilean_presidential_referendum). The dataset contains information about respondents' demographic characteristics and their voting intentions. This data can also be found from `carData` package, but for the purpose of this workshop, we will load the data from a CSV.
-
-Key variables in the dataset:
-
-------------------------------------------------------------------------
-
-| Variable     | Description                                                                                                          |
-|--------------|----------------------------------------------------------|
-| `region`     | Region of voters: `C` (Central), `M` (Metropolitan Santiago area), `N` (North), `S` (South), `SA` (city of Santiago) |
-| `population` | Population size of respondent's community                                                                            |
-| `sex`        | Sex of voters: `F` (female), `M` (male)                                                                              |
-| `age`        | Age in years                                                                                                         |
-| `education`  | Education level of voters: `P` (Primary), `PS` (Post-secondary), `S` (Secondary)                                     |
-| `income`     | Monthly income, in Pesos                                                                                             |
-| `statusquo`  | Scale of support for the status-quo in numerical value                                                               |
-| `vote`       | Voter's decision: `A` (will abstain), `N` (will vote no), `U` (undecided), `Y` (will vote yes)                       |
-
-: Explanatory notes on each column
-
-### chile_voting_processed
-For session 3 onwards, we will use `chile_voting_processed.csv`. This is the version that has been processed and cleaned. You can download this file below if you missed session 1 and 2. Save this inside the `data-output` folder of your project. 
-
-```{=html}
-<a href="https://raw.githubusercontent.com/bellaratmelia/introductory-r-socsci/main/data-output/chile_voting_processed.csv" type="button" class="btn btn-info">Click here to open chile_voting_processed.CSV, and then Ctrl + S / Cmd + S to save it locally into your data-output folder</a>
-```
+[Please complete the pre-workshop survey here](https://smusg.asia.qualtrics.com/jfe/form/SV_3jHynB80Kd6vWOG) to share your goals and current knowledge. Your input will help to tailor the workshop contents and pace. 

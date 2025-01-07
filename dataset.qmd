@@ -1,0 +1,118 @@
+---
+title: "The WVS Dataset"
+format: html
+---
+
+For this workshop, we will be using dataset stored in a CSV file called `wvs-wave7-sg-ca-nz.csv`.
+
+```{=html}
+<a href="https://raw.githubusercontent.com/bellaratmelia/introductory-r-workshop/refs/heads/main/data/wvs-wave7-sg-ca-nz.csv" type="button" class="btn btn-success">Click here to open wvs-wave7-sg-ca-nz.csv, and then Ctrl + S / Cmd + S to save it locally into your data folder</a>
+```
+
+::: {.callout-note appearance="simple"}
+### What is a CSV?
+
+A CSV (Comma-Separated Values) file is a type of file that stores data in a plain text format. Each line in the file represents a row of data, and within each row, individual pieces of data (like numbers or words) are separated by commas.
+
+This format is commonly used for storing and transferring data, especially in spreadsheets and databases. Because it is literally just plain text, it is an ideal format if you have large amount of data.
+
+You can open CSV files in Excel, Google Sheets, or even Notepad!
+:::
+
+### Data Dictionary for WVS dataset
+
+The World Values Survey (<www.worldvaluessurvey.org>) is a global network of social scientists studying changing values and their impact on social and political life, led by an international team of scholars, with the WVS association and secretariat headquartered in Stockholm, Sweden. 
+
+The actual questionnaire consists of over 200 questions with respondents from various countries. For the purpose of this workshop, we will only use 16 variables/questions with respondents from Canada, New Zealand, and Singapore. The 16 variables are:
+
+`country`
+
+:   Character variable containing three-letter country codes: `CAN`,
+    `NZL`, and `SGP`
+
+`ID`
+
+:   Numeric identifier unique to each survey respondent
+
+`family_importance`
+
+:   Numeric scale from 1 to 4 measuring importance of family, where 1
+    indicates highest importance
+
+`friends_importance`
+
+:   Numeric scale from 1 to 4 measuring importance of friends, where 1
+    indicates highest importance
+
+`leisure_importance`
+
+:   Numeric scale from 1 to 4 measuring importance of leisure time,
+    where 1 indicates highest importance
+
+`work_importance`
+
+:   Numeric scale from 1 to 4 measuring importance of work, where 1
+    indicates highest importance
+
+`freedom`
+
+:   Numeric scale from 1-10 measuring perceived freedom of choice and
+    control, where 10 indicates most freedom
+
+`life_satisfaction`
+
+:   Numeric scale from 1-10 measuring overall life satisfaction, where
+    10 indicates highest satisfaction
+
+`financial_satisfaction`
+
+:   Numeric scale from 1-10 measuring satisfaction with financial
+    situation, where 10 indicates highest satisfaction
+
+`religiousity`
+
+:   indicates religious self-identification: `A religious person`,
+    `Not a religious person`, `An atheist`
+
+`political_scale`
+
+:   Numeric scale from 1-10 measuring left-right political orientation,
+    where 1 is left and 10 is right
+
+`sex`
+
+:   indicates respondent's gender: `male` or `female`
+
+`birthyear`
+
+:   Numeric variable indicating year of birth
+
+`age`
+
+:   Numeric variable indicating respondent's age
+
+`marital_status`
+
+:   indicates current marital status: `Married`,
+    `Living together as married`, `Divorced`, `Separated`, `Widowed`,
+    `Single`
+
+`employment`
+
+:   indicates current employment status: `Full time`, `Part time`,
+    `Self employed`, `Retired/pensioned`,
+    `Housewife not otherwise employed`, `Student`, `Unemployed`
+
+Below is the snapshot of the selected questions and how they appeared in the questionnaire:
+
+![](images/Selected Questions for WVS-images-1.jpg)
+
+![](images/Selected Questions for WVS-images-2.jpg)
+
+If you'd like to find out more about this data, including the original
+codebook and questionnaire, check out their homepage here:
+<https://www.worldvaluessurvey.org/WVSDocumentationWV7.jsp>
+
+### References
+
+Haerpfer, C., Inglehart, R., Moreno, A., Welzel, C., Kizilova, K., Diez-Medrano, J., Lagos, M., Norris, P., Ponarin, E. & Puranen B. (2022): World Values Survey Wave 7 (2017-2022) Cross-National Data-Set. Version: 4.0.0. World Values Survey Association. DOI: [doi.org/10.14281/18241.18](https://doi.org/10.14281/18241.18)
