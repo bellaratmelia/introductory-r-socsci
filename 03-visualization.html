@@ -221,7 +221,7 @@ Bella Ratmelia
 <h2>Today’s Outline</h2>
 <ol type="1">
 <li>Descriptive Statistics</li>
-<li>Data Visualization in ggplot using Chile voting data, including guidelines on how to choose the appropriate visualization.</li>
+<li>Data Visualization in ggplot using World Values Survey data, including guidelines on how to choose the appropriate visualization.</li>
 </ol>
 </section>
 <section id="checklist-when-you-start-rstudio" class="slide level2">
@@ -240,20 +240,15 @@ Bella Ratmelia
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="co"># import tidyverse library</span></span>
 <span id="cb1-2"><a></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-3"><a></a></span>
-<span id="cb1-4"><a></a><span class="co"># read the CSV with Chile voting data</span></span>
-<span id="cb1-5"><a></a>chile_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data-output/chile_voting_processed.csv"</span>)</span>
+<span id="cb1-4"><a></a><span class="co"># read the CSV with WVS data</span></span>
+<span id="cb1-5"><a></a>wvs_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data-output/wvs_processed.csv"</span>)</span>
 <span id="cb1-6"><a></a></span>
-<span id="cb1-7"><a></a>chile_data <span class="ot">&lt;-</span> chile_data <span class="sc">|&gt;</span> </span>
-<span id="cb1-8"><a></a>    <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(<span class="st">"region"</span>, <span class="st">"sex"</span>, <span class="st">"education"</span>, <span class="st">"vote"</span>, <span class="st">"age_group"</span>, <span class="st">"support_level"</span>), as.factor))</span>
-<span id="cb1-9"><a></a></span>
-<span id="cb1-10"><a></a><span class="co">#reordering</span></span>
-<span id="cb1-11"><a></a>chile_data <span class="ot">&lt;-</span> chile_data <span class="sc">|&gt;</span> </span>
-<span id="cb1-12"><a></a>    <span class="fu">mutate</span>(<span class="at">education =</span> <span class="fu">factor</span>(education, </span>
-<span id="cb1-13"><a></a>                         <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"P"</span>, <span class="st">"S"</span>, <span class="st">"PS"</span>), </span>
-<span id="cb1-14"><a></a>                         <span class="at">ordered =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb1-15"><a></a></span>
-<span id="cb1-16"><a></a><span class="co"># peek at the data, pay attention to the data types!</span></span>
-<span id="cb1-17"><a></a><span class="fu">glimpse</span>(chile_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-7"><a></a><span class="co"># Convert categorical variables to factors</span></span>
+<span id="cb1-8"><a></a>wvs_data <span class="ot">&lt;-</span> wvs_data <span class="sc">|&gt;</span> </span>
+<span id="cb1-9"><a></a>    <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(<span class="st">"country"</span>, <span class="st">"sex"</span>, <span class="st">"marital_status"</span>, <span class="st">"employment"</span>, <span class="st">"religiousity"</span>), as.factor))</span>
+<span id="cb1-10"><a></a></span>
+<span id="cb1-11"><a></a><span class="co"># peek at the data, pay attention to the data types!</span></span>
+<span id="cb1-12"><a></a><span class="fu">glimpse</span>(wvs_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="basic-r-functions-for-descriptive-statistics" class="slide level2">
@@ -278,12 +273,12 @@ Bella Ratmelia
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">library</span>(DescTools)</span>
 <span id="cb2-2"><a></a></span>
 <span id="cb2-3"><a></a><span class="co"># Basic statistics</span></span>
-<span id="cb2-4"><a></a>mean_age <span class="ot">&lt;-</span> <span class="fu">mean</span>(chile_data<span class="sc">$</span>age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb2-5"><a></a>median_age <span class="ot">&lt;-</span> <span class="fu">median</span>(chile_data<span class="sc">$</span>age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb2-6"><a></a>sd_age <span class="ot">&lt;-</span> <span class="fu">sd</span>(chile_data<span class="sc">$</span>age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb2-7"><a></a>range_age <span class="ot">&lt;-</span> <span class="fu">range</span>(chile_data<span class="sc">$</span>age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb2-8"><a></a>iqr_age <span class="ot">&lt;-</span> <span class="fu">IQR</span>(chile_data<span class="sc">$</span>age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb2-9"><a></a>mode_age <span class="ot">&lt;-</span> DescTools<span class="sc">::</span><span class="fu">Mode</span>(chile_data<span class="sc">$</span>age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-4"><a></a>mean_age <span class="ot">&lt;-</span> <span class="fu">mean</span>(wvs_data<span class="sc">$</span>age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-5"><a></a>median_age <span class="ot">&lt;-</span> <span class="fu">median</span>(wvs_data<span class="sc">$</span>age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-6"><a></a>sd_age <span class="ot">&lt;-</span> <span class="fu">sd</span>(wvs_data<span class="sc">$</span>age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-7"><a></a>range_age <span class="ot">&lt;-</span> <span class="fu">range</span>(wvs_data<span class="sc">$</span>age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-8"><a></a>iqr_age <span class="ot">&lt;-</span> <span class="fu">IQR</span>(wvs_data<span class="sc">$</span>age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-9"><a></a>mode_age <span class="ot">&lt;-</span> DescTools<span class="sc">::</span><span class="fu">Mode</span>(wvs_data<span class="sc">$</span>age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb2-10"><a></a></span>
 <span id="cb2-11"><a></a><span class="co"># Print results</span></span>
 <span id="cb2-12"><a></a><span class="fu">cat</span>(<span class="st">"Mean age:"</span>, mean_age, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -292,42 +287,42 @@ Bella Ratmelia
 </section>
 <section id="exploring-age-distribution-output" class="slide level2 output-location-slide"><h2>Exploring Age Distribution</h2><div class="cell output-location-slide">
 <div class="cell-output cell-output-stdout">
-<pre><code>Mean age: 38.29 </code></pre>
+<pre><code>Mean age: 47.96408 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">cat</span>(<span class="st">"Median age:"</span>, median_age, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Median age: 36 </code></pre>
+<pre><code>Median age: 48 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="fu">cat</span>(<span class="st">"Standard deviation of age:"</span>, sd_age, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Standard deviation of age: 14.66718 </code></pre>
+<pre><code>Standard deviation of age: 16.72144 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">cat</span>(<span class="st">"Range of age:"</span>, range_age[<span class="dv">1</span>], <span class="st">"to"</span>, range_age[<span class="dv">2</span>], <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Range of age: 18 to 70 </code></pre>
+<pre><code>Range of age: 18 to 93 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="fu">cat</span>(<span class="st">"Interquartile range of age:"</span>, iqr_age, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Interquartile range of age: 24 </code></pre>
+<pre><code>Interquartile range of age: 28 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="fu">cat</span>(<span class="st">"Most frequently occuring age:"</span>, mode_age, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Most frequently occuring age: 21 36 </code></pre>
+<pre><code>Most frequently occuring age: 54 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="co"># Summary statistics</span></span>
-<span id="cb14-2"><a></a><span class="fu">summary</span>(chile_data<span class="sc">$</span>age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-2"><a></a><span class="fu">summary</span>(wvs_data<span class="sc">$</span>age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-  18.00   25.00   36.00   38.29   49.00   70.00 </code></pre>
+  18.00   34.00   48.00   47.96   62.00   93.00 </code></pre>
 </div>
 </div></section><section id="interpreting-age-statistics" class="slide level2">
 <h2>Interpreting Age Statistics</h2>
 <p>Some possible interpretation:</p>
 <ul>
-<li>Median is lower than mean, suggesting a slight skew towards older ages</li>
-<li>Mode is much lower than both mean and median, indicating a cluster of young adults</li>
-<li>With a standard deviation of about 14.67 years, we can expect roughly two-thirds of the participants to fall between 23.62 and 52.96 years old</li>
-<li>Middle 50% of participants fall between 25 and 49 years old</li>
+<li><p>The mean (47.99) and median (48) are very close, suggesting a fairly symmetric distribution</p></li>
+<li><p>The mode (54) is slightly higher than both mean and median</p></li>
+<li><p>With SD = 16.74, about two-thirds of participants fall between 31.26 and 64.72 years old (mean ± 1 SD)</p></li>
+<li><p>The distribution spans from 18 to 93 years, with an interquartile range of 28 years</p></li>
 </ul>
 <p>It’s much easier if we have a graph to visualize these interpretations!</p>
 </section>
@@ -338,7 +333,7 @@ Bella Ratmelia
 <li><p>works best with data in the long format, i.e., a column for all the dimensions/measures and another column for the value for each dimension/measure.</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a>chile_data <span class="sc">|&gt;</span> </span>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a>wvs_data <span class="sc">|&gt;</span> </span>
 <span id="cb16-2"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age)) <span class="sc">+</span></span>
 <span id="cb16-3"><a></a>    <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span></span>
 <span id="cb16-4"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Age distribution of respondents"</span>,</span>
@@ -359,7 +354,7 @@ Bella Ratmelia
 </div></section><section id="anatomy-of-ggplot-code" class="slide level2">
 <h2>Anatomy of ggplot code</h2>
 <p>Charts built with ggplot must include the following:</p>
-<div class="sourceCode" id="annotated-cell-10" data-code-line-numbers="|1|2|3|4-6|7"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-10-1" class="code-annotation-target"><a href="#annotated-cell-10-1"></a>chile_data <span class="sc">|&gt;</span></span>
+<div class="sourceCode" id="annotated-cell-10" data-code-line-numbers="|1|2|3|4-6|7"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-10-1" class="code-annotation-target"><a href="#annotated-cell-10-1"></a>wvs_data <span class="sc">|&gt;</span></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-10-2" class="code-annotation-target"><a href="#annotated-cell-10-2"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age)) <span class="sc">+</span></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-10-3" class="code-annotation-target"><a href="#annotated-cell-10-3"></a>    <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span></span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-10-4" class="code-annotation-target"><a href="#annotated-cell-10-4"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Age distribution of respondents"</span>,</span>
@@ -391,14 +386,14 @@ Bella Ratmelia
 </section>
 <section id="going-back-to-our-data" class="slide level2">
 <h2>Going back to our data</h2>
-<p>Our PI has asked us to generate visualizations to address these questions about the Chile voting data. The PI also has asked us to write down our interpretation of the visualizations.</p>
+<p>Our research team wants to understand patterns in life satisfaction and values across different countries and demographic groups. Let’s create visualizations to address these questions:</p>
 <ol type="1">
-<li>What’s the distribution of respondents’ <code>statusquo</code> support?</li>
-<li>What’s the distribution of <code>votes</code>?</li>
-<li>What’s the percentage of the voting intentions on each region?</li>
-<li>Is there any major divide in terms of support for the statusquo across age? Visualize the distribution of <code>age</code> and <code>statusquo</code>.</li>
-<li>What does the voting intention look like across different education level? Visualize the distribution of <code>vote</code> intention on various <code>education</code> level.</li>
-<li>Do people’s voting intention matches their level of support to the status quo? Compare the distribution of <code>statusquo</code> across different <code>vote</code> intentions.</li>
+<li>What’s the distribution of <code>life_satisfaction</code> scores across all respondents?</li>
+<li>How does <code>religiousity</code> vary across the three countries?</li>
+<li>What’s the distribution of <code>employment_status</code> by country?</li>
+<li>Is there a relationship between <code>political_scale</code> and <code>life_satisfaction</code>?</li>
+<li>How do <code>importance</code> ratings (family, friends, leisure, work) compare across <code>employment</code> status?</li>
+<li>Does <code>financial_satisfaction</code> correlate with <code>life satisfaction</code>? How does this vary by <code>country</code>?</li>
 </ol>
 </section>
 <section id="tip-open-the-ggplot-cheatsheet" class="slide level2">
@@ -421,14 +416,14 @@ Bella Ratmelia
 </section>
 <section id="task-1" class="slide level2">
 <h2>Task #1</h2>
-<p>What’s the distribution of our respondents’ <code>statusquo</code>?</p>
+<p>What’s the distribution of <code>life_satisfaction</code> scores?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="co"># One continuous variable</span></span>
-<span id="cb17-2"><a></a>chile_data <span class="sc">|&gt;</span> </span>
-<span id="cb17-3"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> statusquo)) <span class="sc">+</span></span>
-<span id="cb17-4"><a></a>    <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.1</span>, <span class="at">fill =</span> <span class="st">"pink"</span>, <span class="at">color =</span> <span class="st">"maroon"</span>) <span class="sc">+</span></span>
-<span id="cb17-5"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of Status Quo Scores"</span>,</span>
-<span id="cb17-6"><a></a>       <span class="at">x =</span> <span class="st">"Status Quo Score"</span>,</span>
+<span id="cb17-2"><a></a>wvs_data <span class="sc">|&gt;</span> </span>
+<span id="cb17-3"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> life_satisfaction)) <span class="sc">+</span></span>
+<span id="cb17-4"><a></a>    <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">fill =</span> <span class="st">"pink"</span>, <span class="at">color =</span> <span class="st">"maroon"</span>) <span class="sc">+</span></span>
+<span id="cb17-5"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of Life Satisfaction Scores"</span>,</span>
+<span id="cb17-6"><a></a>       <span class="at">x =</span> <span class="st">"Life Satisfaction (1-10)"</span>,</span>
 <span id="cb17-7"><a></a>       <span class="at">y =</span> <span class="st">"Count"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
@@ -443,15 +438,17 @@ Bella Ratmelia
 </div>
 </div></section><section id="task-2" class="slide level2">
 <h2>Task #2</h2>
-<p>What’s the distribution of <code>votes</code>?</p>
+<p>What’s the distribution of <code>religiousity</code>? Does it vary by country?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a><span class="co"># One discrete/categorical variable</span></span>
-<span id="cb18-2"><a></a>chile_data <span class="sc">|&gt;</span> </span>
-<span id="cb18-3"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> vote)) <span class="sc">+</span></span>
-<span id="cb18-4"><a></a>    <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"skyblue"</span>) <span class="sc">+</span></span>
-<span id="cb18-5"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of Votes"</span>,</span>
-<span id="cb18-6"><a></a>       <span class="at">x =</span> <span class="st">"Vote"</span>,</span>
-<span id="cb18-7"><a></a>       <span class="at">y =</span> <span class="st">"Count"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-2"><a></a>wvs_data <span class="sc">|&gt;</span> </span>
+<span id="cb18-3"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> country, <span class="at">fill =</span> religiousity)) <span class="sc">+</span></span>
+<span id="cb18-4"><a></a>    <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
+<span id="cb18-5"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of Religiosity Across Countries"</span>,</span>
+<span id="cb18-6"><a></a>       <span class="at">x =</span> <span class="st">"Country"</span>,</span>
+<span id="cb18-7"><a></a>       <span class="at">y =</span> <span class="st">"Proportion"</span>,</span>
+<span id="cb18-8"><a></a>       <span class="at">fill =</span> <span class="st">"Religious Identity"</span>) <span class="sc">+</span></span>
+<span id="cb18-9"><a></a>    <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 </section>
@@ -465,17 +462,17 @@ Bella Ratmelia
 </div>
 </div></section><section id="task-3" class="slide level2">
 <h2>Task #3</h2>
-<p>What’s the percentage of the voting intentions on each <code>region</code>?</p>
+<p>What’s the distribution of <code>employment_status</code> by country?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a><span class="co"># Showing proportions / percentage as part of whole</span></span>
-<span id="cb19-2"><a></a>chile_data <span class="sc">%&gt;%</span></span>
-<span id="cb19-3"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> vote, <span class="at">fill =</span> region)) <span class="sc">+</span></span>
-<span id="cb19-4"><a></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
-<span id="cb19-5"><a></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of Votes Across Regions"</span>,</span>
-<span id="cb19-6"><a></a>         <span class="at">x =</span> <span class="st">"Vote"</span>,</span>
-<span id="cb19-7"><a></a>         <span class="at">y =</span> <span class="st">"Proportion"</span>,</span>
-<span id="cb19-8"><a></a>         <span class="at">fill =</span> <span class="st">"Region"</span>) <span class="sc">+</span></span>
-<span id="cb19-9"><a></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-2"><a></a><span class="co"># Two categorical variables</span></span>
+<span id="cb19-3"><a></a>wvs_data <span class="sc">|&gt;</span> </span>
+<span id="cb19-4"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> country, <span class="at">fill =</span> employment)) <span class="sc">+</span></span>
+<span id="cb19-5"><a></a>    <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb19-6"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Employment Status Distribution by Country"</span>,</span>
+<span id="cb19-7"><a></a>       <span class="at">x =</span> <span class="st">"Country"</span>,</span>
+<span id="cb19-8"><a></a>       <span class="at">y =</span> <span class="st">"Count"</span>) <span class="sc">+</span></span>
+<span id="cb19-9"><a></a>    <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 </section>
@@ -489,17 +486,18 @@ Bella Ratmelia
 </div>
 </div></section><section id="group-exercise-1-solo-attempts-also-ok" class="slide level2">
 <h2>Group exercise #1 (solo attempts also ok)</h2>
-<p>Visualize the <code>vote</code> intention by <code>sex</code>. Make sure it is shown as proportion.</p>
+<p>Visualize marital status distribution by sex, showing the proportion for each gender.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a>chile_data <span class="sc">%&gt;%</span></span>
-<span id="cb20-2"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> vote, <span class="at">fill =</span> sex)) <span class="sc">+</span></span>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a>wvs_data <span class="sc">|&gt;</span></span>
+<span id="cb20-2"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sex, <span class="at">fill =</span> marital_status)) <span class="sc">+</span></span>
 <span id="cb20-3"><a></a>    <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span> </span>
-<span id="cb20-4"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Proportion of Sex for each voting intention"</span>,</span>
-<span id="cb20-5"><a></a>       <span class="at">x =</span> <span class="st">"vote intention"</span>,</span>
-<span id="cb20-6"><a></a>       <span class="at">y =</span> <span class="st">"percentage"</span>) <span class="sc">+</span></span>
-<span id="cb20-7"><a></a>    <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb20-4"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Proportion of Marital Status by Gender"</span>,</span>
+<span id="cb20-5"><a></a>       <span class="at">x =</span> <span class="st">"Sex"</span>,</span>
+<span id="cb20-6"><a></a>       <span class="at">y =</span> <span class="st">"Proportion"</span>,</span>
+<span id="cb20-7"><a></a>       <span class="at">fill =</span> <span class="st">"Marital Status"</span>) <span class="sc">+</span></span>
+<span id="cb20-8"><a></a>    <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 
@@ -514,15 +512,16 @@ Bella Ratmelia
 </div>
 </div></section><section id="task-4" class="slide level2">
 <h2>Task #4</h2>
-<p>Is there any major divide in terms of support for the statusquo across age? Visualize the distribution of <code>age</code> and <code>statusquo</code>.</p>
+<p>Is there a relationship between <code>political_scale</code> and <code>life_satisfaction</code>?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a><span class="co"># Two variables - both continuous</span></span>
-<span id="cb21-2"><a></a>chile_data <span class="sc">|&gt;</span></span>
-<span id="cb21-3"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> statusquo, <span class="at">y =</span> age, <span class="at">color=</span>support_level)) <span class="sc">+</span></span>
-<span id="cb21-4"><a></a>    <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb21-5"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Age vs Status Quo Score"</span>,</span>
-<span id="cb21-6"><a></a>       <span class="at">x =</span> <span class="st">"Status Quo Score"</span>,</span>
-<span id="cb21-7"><a></a>       <span class="at">y =</span> <span class="st">"Age"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb21-2"><a></a>wvs_data <span class="sc">|&gt;</span></span>
+<span id="cb21-3"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> political_scale, <span class="at">y =</span> life_satisfaction)) <span class="sc">+</span></span>
+<span id="cb21-4"><a></a>    <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb21-5"><a></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb21-6"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Political Leaning vs Life Satisfaction"</span>,</span>
+<span id="cb21-7"><a></a>       <span class="at">x =</span> <span class="st">"Political Leaning"</span>,</span>
+<span id="cb21-8"><a></a>       <span class="at">y =</span> <span class="st">"Life Satisfaction"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 </section>
@@ -536,17 +535,18 @@ Bella Ratmelia
 </div>
 </div></section><section id="task-5" class="slide level2">
 <h2>Task #5</h2>
-<p>What does the voting intention look like across different education level? Visualize the distribution of <code>vote</code> intention on various <code>education</code> level.</p>
-<p>We can achieve this in two ways!</p>
+<p>How do <code>religiousity</code> compare across <code>marital_status</code>?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a><span class="co"># Two variables - both discrete/categorical</span></span>
-<span id="cb22-2"><a></a></span>
-<span id="cb22-3"><a></a>chile_data <span class="sc">|&gt;</span> </span>
-<span id="cb22-4"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> education, <span class="at">y =</span> vote)) <span class="sc">+</span></span>
-<span id="cb22-5"><a></a>    <span class="fu">geom_jitter</span>(<span class="at">color=</span><span class="st">"tomato"</span>, <span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb22-6"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Voting intention Distribution by Education level"</span>,</span>
-<span id="cb22-7"><a></a>       <span class="at">x =</span> <span class="st">"Education Level"</span>,</span>
-<span id="cb22-8"><a></a>       <span class="at">y =</span> <span class="st">"Voting intention"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a><span class="co"># Two categorical variables: marital status and religiosity</span></span>
+<span id="cb22-2"><a></a>wvs_data <span class="sc">|&gt;</span> </span>
+<span id="cb22-3"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> marital_status, <span class="at">fill =</span> religiousity)) <span class="sc">+</span></span>
+<span id="cb22-4"><a></a>    <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
+<span id="cb22-5"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Religious Identity Distribution by Marital Status"</span>,</span>
+<span id="cb22-6"><a></a>         <span class="at">x =</span> <span class="st">"Marital Status"</span>,</span>
+<span id="cb22-7"><a></a>         <span class="at">y =</span> <span class="st">"Proportion"</span>,</span>
+<span id="cb22-8"><a></a>         <span class="at">fill =</span> <span class="st">"Religious Identity"</span>) <span class="sc">+</span></span>
+<span id="cb22-9"><a></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb22-10"><a></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 </section>
@@ -558,40 +558,19 @@ Bella Ratmelia
 </figure>
 </div>
 </div>
-</div></section><section id="alternative-way" class="slide level2">
-<h2>Alternative way</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a><span class="co"># Two variables - both discrete/categorical</span></span>
-<span id="cb23-2"><a></a><span class="co"># Alternative way</span></span>
-<span id="cb23-3"><a></a>chile_data <span class="sc">|&gt;</span> </span>
-<span id="cb23-4"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> education, <span class="at">fill =</span> vote)) <span class="sc">+</span></span>
-<span id="cb23-5"><a></a>    <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
-<span id="cb23-6"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Voting intention Distribution by Education Level"</span>,</span>
-<span id="cb23-7"><a></a>       <span class="at">x =</span> <span class="st">"Education Level"</span>,</span>
-<span id="cb23-8"><a></a>       <span class="at">y =</span> <span class="st">"Count"</span>) <span class="sc">+</span></span>
-<span id="cb23-9"><a></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-
-</section>
-<section id="alternative-way-output" class="slide level2 output-location-slide"><h2>Alternative way</h2><div class="cell output-location-slide">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-10-1.png" width="960"></p>
-</figure>
-</div>
-</div>
 </div></section><section id="facets-for-multiple-variables" class="slide level2">
 <h2>Facets for multiple variables</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a><span class="co"># Faceting and multiple variables</span></span>
-<span id="cb24-2"><a></a>chile_data <span class="sc">|&gt;</span> </span>
-<span id="cb24-3"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> statusquo, <span class="at">color =</span> vote)) <span class="sc">+</span></span>
-<span id="cb24-4"><a></a>    <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb24-5"><a></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span> education) <span class="sc">+</span></span>
-<span id="cb24-6"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Income vs Status Quo Score by Education Level"</span>,</span>
-<span id="cb24-7"><a></a>       <span class="at">x =</span> <span class="st">"Age"</span>,</span>
-<span id="cb24-8"><a></a>       <span class="at">y =</span> <span class="st">"Status Quo Score"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a><span class="co"># Faceting and multiple variables</span></span>
+<span id="cb23-2"><a></a>wvs_data <span class="sc">|&gt;</span> </span>
+<span id="cb23-3"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> marital_status, <span class="at">fill =</span> religiousity)) <span class="sc">+</span></span>
+<span id="cb23-4"><a></a>    <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
+<span id="cb23-5"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Religious Identity Distribution by Marital Status"</span>,</span>
+<span id="cb23-6"><a></a>         <span class="at">x =</span> <span class="st">"Marital Status"</span>,</span>
+<span id="cb23-7"><a></a>         <span class="at">y =</span> <span class="st">"Count"</span>,</span>
+<span id="cb23-8"><a></a>         <span class="at">fill =</span> <span class="st">"Religious Identity"</span>) <span class="sc">+</span></span>
+<span id="cb23-9"><a></a>    <span class="fu">facet_grid</span>( <span class="sc">~</span> country) <span class="sc">+</span></span>
+<span id="cb23-10"><a></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 </section>
@@ -599,23 +578,24 @@ Bella Ratmelia
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-11-1.png" width="960"></p>
+<p><img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-10-1.png" width="960"></p>
 </figure>
 </div>
 </div>
 </div></section><section id="task-6" class="slide level2">
 <h2>Task #6</h2>
-<p>Do people’s voting intention matches their level of support to the status quo? Compare the distribution of <code>statusquo</code> across different <code>vote</code> intentions.</p>
+<p>Does <code>financial_satisfaction</code> correlate with <code>life satisfaction</code>? How does this vary by <code>country</code>?</p>
 <p>Let’s layer two kinds of visualization here:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a><span class="co"># Two variables - one categorical, one continuous</span></span>
-<span id="cb25-2"><a></a>chile_data <span class="sc">|&gt;</span> </span>
-<span id="cb25-3"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> vote, <span class="at">y =</span> statusquo)) <span class="sc">+</span></span>
-<span id="cb25-4"><a></a>    <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">"pink"</span>) <span class="sc">+</span></span>
-<span id="cb25-5"><a></a>    <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>, <span class="at">color =</span> <span class="st">"maroon"</span>) <span class="sc">+</span> </span>
-<span id="cb25-6"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution Status Quo Score by voting intention"</span>,</span>
-<span id="cb25-7"><a></a>       <span class="at">x =</span> <span class="st">"Voting intention"</span>,</span>
-<span id="cb25-8"><a></a>       <span class="at">y =</span> <span class="st">"Status Quo Support level"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a><span class="co"># Two continuous variables with grouping</span></span>
+<span id="cb24-2"><a></a>wvs_data <span class="sc">|&gt;</span> </span>
+<span id="cb24-3"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> financial_satisfaction, <span class="at">y =</span> life_satisfaction, <span class="at">color =</span> country)) <span class="sc">+</span></span>
+<span id="cb24-4"><a></a>    <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb24-5"><a></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb24-6"><a></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span> country) <span class="sc">+</span></span>
+<span id="cb24-7"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Life Satisfaction vs Financial Satisfaction by Country"</span>,</span>
+<span id="cb24-8"><a></a>       <span class="at">x =</span> <span class="st">"Financial Satisfaction"</span>,</span>
+<span id="cb24-9"><a></a>       <span class="at">y =</span> <span class="st">"Life Satisfaction"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 </section>
@@ -623,64 +603,62 @@ Bella Ratmelia
 <div class="cell-output-display">
 <div>
 <figure>
+<p><img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-11-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div></section><section id="group-exercise-2" class="slide level2">
+<h2>Group Exercise #2</h2>
+<p>Create a violin plot showing the distribution of freedom scores by employment status, with points overlaid.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a>wvs_data <span class="sc">|&gt;</span> </span>
+<span id="cb25-2"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> employment, <span class="at">y =</span> freedom)) <span class="sc">+</span></span>
+<span id="cb25-3"><a></a>    <span class="fu">geom_violin</span>(<span class="at">fill =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span></span>
+<span id="cb25-4"><a></a>    <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>, <span class="at">color =</span> <span class="st">"navy"</span>) <span class="sc">+</span> </span>
+<span id="cb25-5"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of Freedom Scores by Employment Status"</span>,</span>
+<span id="cb25-6"><a></a>       <span class="at">x =</span> <span class="st">"Employment Status"</span>,</span>
+<span id="cb25-7"><a></a>       <span class="at">y =</span> <span class="st">"Freedom Score"</span>) <span class="sc">+</span></span>
+<span id="cb25-8"><a></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb25-9"><a></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+
+</section>
+<section id="group-exercise-2-output" class="slide level2 output-location-slide"><h2>Group Exercise #2</h2><div class="cell output-location-slide">
+<div class="cell-output-display">
+<div>
+<figure>
 <p><img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-12-1.png" width="960"></p>
 </figure>
 </div>
 </div>
-</div></section><section id="group-exercise-2-solo-attempts-ok" class="slide level2">
-<h2>Group Exercise #2 (solo attempts ok)</h2>
-<p>Update the visualization from task #6 to the following:</p>
-<ul>
-<li>Replace the boxplot with violin plot (check out ggplot documentation)</li>
-<li>Change the fill color for both the violin plot and jitters to other color of your choice.</li>
-</ul>
+</div></section><section id="group-exercise-3" class="slide level2">
+<h2>Group Exercise #3</h2>
+<p>Visualize the distribution of employment status across marital status categories, and use faceting to compare this relationship across countries.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a><span class="co"># Two variables - one categorical, one continuous</span></span>
-<span id="cb26-2"><a></a>chile_data <span class="sc">|&gt;</span> </span>
-<span id="cb26-3"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> vote, <span class="at">y =</span> statusquo)) <span class="sc">+</span></span>
-<span id="cb26-4"><a></a>    <span class="fu">geom_violin</span>(<span class="at">fill =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span></span>
-<span id="cb26-5"><a></a>    <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>, <span class="at">color =</span> <span class="st">"navy"</span>) <span class="sc">+</span> </span>
-<span id="cb26-6"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution Status Quo Score by voting intention"</span>,</span>
-<span id="cb26-7"><a></a>       <span class="at">x =</span> <span class="st">"Voting intention"</span>,</span>
-<span id="cb26-8"><a></a>       <span class="at">y =</span> <span class="st">"Status Quo Support level"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a>wvs_data <span class="sc">|&gt;</span> </span>
+<span id="cb26-2"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> marital_status, <span class="at">fill =</span> employment)) <span class="sc">+</span></span>
+<span id="cb26-3"><a></a>    <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
+<span id="cb26-4"><a></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span> country) <span class="sc">+</span> </span>
+<span id="cb26-5"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Employment Status Distribution by Marital Status and Country"</span>,</span>
+<span id="cb26-6"><a></a>       <span class="at">x =</span> <span class="st">"Marital Status"</span>,</span>
+<span id="cb26-7"><a></a>       <span class="at">y =</span> <span class="st">"Proportion"</span>,</span>
+<span id="cb26-8"><a></a>       <span class="at">fill =</span> <span class="st">"Employment Status"</span>) <span class="sc">+</span></span>
+<span id="cb26-9"><a></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb26-10"><a></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 
 </section>
-<section id="group-exercise-2-solo-attempts-ok-output" class="slide level2 output-location-slide"><h2>Group Exercise #2 (solo attempts ok)</h2><div class="cell output-location-slide">
+<section id="group-exercise-3-output" class="slide level2 output-location-slide"><h2>Group Exercise #3</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
 <div>
 <figure>
 <p><img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-13-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div></section><section id="group-exercise-3-solo-attempts-ok" class="slide level2">
-<h2>Group Exercise #3 (solo attempts ok)</h2>
-<p>Visualize the distribution of <code>age_group</code> for each <code>vote</code> intention. To show the difference between sex, show the visualization with <code>sex</code> facet.</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a>chile_data <span class="sc">|&gt;</span> </span>
-<span id="cb27-2"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> vote, <span class="at">fill =</span> age_group)) <span class="sc">+</span></span>
-<span id="cb27-3"><a></a>    <span class="fu">geom_bar</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>, <span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
-<span id="cb27-4"><a></a>    <span class="fu">facet_wrap</span>( <span class="sc">~</span> sex) <span class="sc">+</span> </span>
-<span id="cb27-5"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Proportion of age groups for each voting intentions by sex"</span>,</span>
-<span id="cb27-6"><a></a>       <span class="at">x =</span> <span class="st">"Voting intention"</span>,</span>
-<span id="cb27-7"><a></a>       <span class="at">y =</span> <span class="st">"Proportion"</span>,</span>
-<span id="cb27-8"><a></a>       <span class="at">fill =</span> <span class="st">"Age Group"</span>) <span class="sc">+</span></span>
-<span id="cb27-9"><a></a>    <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-
-</section>
-<section id="group-exercise-3-solo-attempts-ok-output" class="slide level2 output-location-slide"><h2>Group Exercise #3 (solo attempts ok)</h2><div class="cell output-location-slide">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-14-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -702,7 +680,7 @@ Bella Ratmelia
 <section id="end-of-session-3" class="title-slide slide level1 center">
 <h1>End of Session 3!</h1>
 <p>Check out the <a href="https://r-graph-gallery.com/">R Graph gallery</a> for inspiration and code samples!</p>
-<p>Next session: statistical tests in R using Chile voting data</p>
+<p>Next session: statistical tests in R using WVS data</p>
 
 
 </section>
