@@ -7,7 +7,7 @@ format: revealjs
 ## Today's Outline
 
 1.  Descriptive Statistics
-2.  Data Visualization in ggplot using Chile voting data, including guidelines on how to choose the appropriate visualization.
+2.  Data Visualization in ggplot using World Values Survey data, including guidelines on how to choose the appropriate visualization.
 
 ## Checklist when you start RStudio
 
@@ -29,25 +29,20 @@ Use `read_csv` from `readr` package (part of `tidyverse`) to load our data into 
 # import tidyverse library
 library(tidyverse)
 
-# read the CSV with Chile voting data
-chile_data <- read_csv("data-output/chile_voting_processed.csv")
+# read the CSV with WVS data
+wvs_data <- read_csv("data-output/wvs_processed.csv")
 
-chile_data <- chile_data |> 
-    mutate(across(c("region", "sex", "education", "vote", "age_group", "support_level"), as.factor))
-
-#reordering
-chile_data <- chile_data |> 
-    mutate(education = factor(education, 
-                         levels = c("P", "S", "PS"), 
-                         ordered = TRUE))
+# Convert categorical variables to factors
+wvs_data <- wvs_data |> 
+    mutate(across(c("country", "sex", "marital_status", "employment", "religiousity"), as.factor))
 
 # peek at the data, pay attention to the data types!
-glimpse(chile_data)
+glimpse(wvs_data)
 ```
 
 ## Basic R Functions for Descriptive Statistics
 
-Descriptive statistics provide summaries about the sample and observations made. These summaries can be quantitative (summary statistics) or visual (graphs). 
+Descriptive statistics provide summaries about the sample and observations made. These summaries can be quantitative (summary statistics) or visual (graphs).
 
 Let's explore some basic R functions for descriptive statistics using our Chile voting data.
 
@@ -58,7 +53,9 @@ Let's explore some basic R functions for descriptive statistics using our Chile 
 -   `range()`: range of values
 -   `IQR()`: interquartile range
 -   `summary()`: provides a summary of descriptive statistics
--   `Mode()` function from `DescTools` package: the most frequently occuring value ^[R doesn't have built-in functions for mode, so we need `DescTools` package to get this function]
+-   `Mode()` function from `DescTools` package: the most frequently occuring value [^1]
+
+[^1]: R doesn't have built-in functions for mode, so we need `DescTools` package to get this function
 
 ## Exploring Age Distribution
 
@@ -71,12 +68,12 @@ Let's start by examining the `age` variable in our dataset.
 library(DescTools)
 
 # Basic statistics
-mean_age <- mean(chile_data$age, na.rm = TRUE)
-median_age <- median(chile_data$age, na.rm = TRUE)
-sd_age <- sd(chile_data$age, na.rm = TRUE)
-range_age <- range(chile_data$age, na.rm = TRUE)
-iqr_age <- IQR(chile_data$age, na.rm = TRUE)
-mode_age <- DescTools::Mode(chile_data$age, na.rm = TRUE)
+mean_age <- mean(wvs_data$age, na.rm = TRUE)
+median_age <- median(wvs_data$age, na.rm = TRUE)
+sd_age <- sd(wvs_data$age, na.rm = TRUE)
+range_age <- range(wvs_data$age, na.rm = TRUE)
+iqr_age <- IQR(wvs_data$age, na.rm = TRUE)
+mode_age <- DescTools::Mode(wvs_data$age, na.rm = TRUE)
 
 # Print results
 cat("Mean age:", mean_age, "\n")
@@ -87,17 +84,20 @@ cat("Interquartile range of age:", iqr_age, "\n")
 cat("Most frequently occuring age:", mode_age, "\n")
 
 # Summary statistics
-summary(chile_data$age)
+summary(wvs_data$age)
 ```
 
 ## Interpreting Age Statistics
 
 Some possible interpretation:
 
--   Median is lower than mean, suggesting a slight skew towards older ages
--   Mode is much lower than both mean and median, indicating a cluster of young adults
--   With a standard deviation of about 14.67 years, we can expect roughly two-thirds of the participants to fall between 23.62 and 52.96 years old
--   Middle 50% of participants fall between 25 and 49 years old
+-   The mean (47.99) and median (48) are very close, suggesting a fairly symmetric distribution
+
+-   The mode (54) is slightly higher than both mean and median
+
+-   With SD = 16.74, about two-thirds of participants fall between 31.26 and 64.72 years old (mean ± 1 SD)
+
+-   The distribution spans from 18 to 93 years, with an interquartile range of 28 years
 
 It's much easier if we have a graph to visualize these interpretations!
 
@@ -110,7 +110,7 @@ It's much easier if we have a graph to visualize these interpretations!
 ```{r}
 #| echo: true
 #| output-location: slide
-chile_data |> 
+wvs_data |> 
     ggplot(aes(x = age)) +
     geom_bar(fill = "lightblue") +
     labs(title = "Age distribution of respondents",
@@ -123,8 +123,8 @@ chile_data |>
 
 Charts built with ggplot must include the following:
 
-```{.r code-line-numbers="|1|2|3|4-6|7"}
-chile_data |> # <1>
+``` {.r code-line-numbers="|1|2|3|4-6|7"}
+wvs_data |> # <1>
     ggplot(aes(x = age)) + # <2>
     geom_bar(fill = "lightblue") + # <3>
     labs(title = "Age distribution of respondents", # <4>
@@ -143,17 +143,16 @@ chile_data |> # <1>
 
 5.  (Optional) apply a theme/look to your graph
 
-
 ## Going back to our data
 
-Our PI has asked us to generate visualizations to address these questions about the Chile voting data. The PI also has asked us to write down our interpretation of the visualizations.
+Our research team wants to understand patterns in life satisfaction and values across different countries and demographic groups. Let's create visualizations to address these questions:
 
-1.  What's the distribution of respondents' `statusquo` support?
-2.  What's the distribution of `votes`?
-3.  What's the percentage of the voting intentions on each region?
-4.  Is there any major divide in terms of support for the statusquo across age? Visualize the distribution of `age` and `statusquo`.
-5.  What does the voting intention look like across different education level? Visualize the distribution of `vote` intention on various `education` level.
-6.  Do people's voting intention matches their level of support to the status quo? Compare the distribution of `statusquo` across different `vote` intentions.
+1.  What's the distribution of `life_satisfaction` scores across all respondents?
+2.  How does `religiousity` vary across the three countries?
+3.  What's the distribution of `employment_status` by country?
+4.  Is there a relationship between `political_scale` and `life_satisfaction`?
+5.  How do `importance` ratings (family, friends, leisure, work) compare across `employment` status?
+6.  Does `financial_satisfaction` correlate with `life satisfaction`? How does this vary by `country`?
 
 ## Tip: open the ggplot cheatsheet
 
@@ -167,129 +166,116 @@ Our PI has asked us to generate visualizations to address these questions about 
 
 ## Task #1
 
-What's the distribution of our respondents' `statusquo`?
+What's the distribution of `life_satisfaction` scores?
 
 ```{r}
 #| echo: true
 #| output-location: slide
 
 # One continuous variable
-chile_data |> 
-    ggplot(aes(x = statusquo)) +
-    geom_histogram(binwidth = 0.1, fill = "pink", color = "maroon") +
-    labs(title = "Distribution of Status Quo Scores",
-       x = "Status Quo Score",
+wvs_data |> 
+    ggplot(aes(x = life_satisfaction)) +
+    geom_histogram(binwidth = 1, fill = "pink", color = "maroon") +
+    labs(title = "Distribution of Life Satisfaction Scores",
+       x = "Life Satisfaction (1-10)",
        y = "Count")
 ```
 
 ## Task #2
 
-What's the distribution of `votes`?
+What's the distribution of `religiousity`? Does it vary by country?
 
 ```{r}
 #| echo: true
 #| output-location: slide
 
 # One discrete/categorical variable
-chile_data |> 
-    ggplot(aes(x = vote)) +
-    geom_bar(fill = "skyblue") +
-    labs(title = "Distribution of Votes",
-       x = "Vote",
-       y = "Count")
+wvs_data |> 
+    ggplot(aes(x = country, fill = religiousity)) +
+    geom_bar(position = "fill") +
+    labs(title = "Distribution of Religiosity Across Countries",
+       x = "Country",
+       y = "Proportion",
+       fill = "Religious Identity") +
+    theme_minimal()
 ```
-
 
 ## Task #3
 
-What's the percentage of the voting intentions on each `region`?
+What's the distribution of `employment_status` by country?
 
 ```{r}
 #| echo: true
 #| output-location: slide
 
 # Showing proportions / percentage as part of whole
-chile_data %>%
-  ggplot(aes(x = vote, fill = region)) +
-  geom_bar(position = "fill") +
-  labs(title = "Distribution of Votes Across Regions",
-         x = "Vote",
-         y = "Proportion",
-         fill = "Region") +
-  theme_minimal()
+# Two categorical variables
+wvs_data |> 
+    ggplot(aes(x = country, fill = employment)) +
+    geom_bar(position = "dodge") +
+    labs(title = "Employment Status Distribution by Country",
+       x = "Country",
+       y = "Count") +
+    theme_minimal()
 ```
+
 ## Group exercise #1 (solo attempts also ok)
 
-Visualize the `vote` intention by `sex`. Make sure it is shown as proportion. 
+Visualize marital status distribution by sex, showing the proportion for each gender.
 
 ```{r}
 #| echo: true
 #| output-location: slide
 #| code-fold: true
 
-chile_data %>%
-    ggplot(aes(x = vote, fill = sex)) +
+wvs_data |>
+    ggplot(aes(x = sex, fill = marital_status)) +
     geom_bar(position = "fill") + 
-    labs(title = "Proportion of Sex for each voting intention",
-       x = "vote intention",
-       y = "percentage") +
+    labs(title = "Proportion of Marital Status by Gender",
+       x = "Sex",
+       y = "Proportion",
+       fill = "Marital Status") +
     theme_minimal()
 ```
 
-
 ## Task #4
 
-Is there any major divide in terms of support for the statusquo across age? Visualize the distribution of `age` and `statusquo`.
+Is there a relationship between `political_scale` and `life_satisfaction`?
 
 ```{r}
 #| echo: true
 #| output-location: slide
 
 # Two variables - both continuous
-chile_data |>
-    ggplot(aes(x = statusquo, y = age, color=support_level)) +
-    geom_point(alpha = 0.5) +
-    labs(title = "Age vs Status Quo Score",
-       x = "Status Quo Score",
-       y = "Age")
+wvs_data |>
+    ggplot(aes(x = political_scale, y = life_satisfaction)) +
+    geom_jitter(alpha = 0.3) +
+    geom_smooth(method = "lm", color = "red") +
+    labs(title = "Political Leaning vs Life Satisfaction",
+       x = "Political Leaning",
+       y = "Life Satisfaction")
 ```
-
 
 ## Task #5
-What does the voting intention look like across different education level? Visualize the distribution of `vote` intention on various `education` level.
 
-We can achieve this in two ways!
-
-```{r}
-#| echo: true
-#| output-location: slide
-
-# Two variables - both discrete/categorical
-
-chile_data |> 
-    ggplot(aes(x = education, y = vote)) +
-    geom_jitter(color="tomato", alpha=0.5) +
-    labs(title = "Voting intention Distribution by Education level",
-       x = "Education Level",
-       y = "Voting intention")
-```
-
-## Alternative way
+How do `religiousity` compare across `marital_status`?
 
 ```{r}
 #| echo: true
 #| output-location: slide
 
-# Two variables - both discrete/categorical
-# Alternative way
-chile_data |> 
-    ggplot(aes(x = education, fill = vote)) +
-    geom_bar(position = "dodge") +
-    labs(title = "Voting intention Distribution by Education Level",
-       x = "Education Level",
-       y = "Count") +
+# Two categorical variables: marital status and religiosity
+wvs_data |> 
+    ggplot(aes(x = marital_status, fill = religiousity)) +
+    geom_bar(position = "fill") +
+    labs(title = "Religious Identity Distribution by Marital Status",
+         x = "Marital Status",
+         y = "Proportion",
+         fill = "Religious Identity") +
+    theme_minimal() +
     theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
+
 
 ## Facets for multiple variables
 
@@ -298,17 +284,20 @@ chile_data |>
 #| output-location: slide
 
 # Faceting and multiple variables
-chile_data |> 
-    ggplot(aes(x = age, y = statusquo, color = vote)) +
-    geom_point(alpha = 0.5) +
-    facet_wrap(~ education) +
-    labs(title = "Income vs Status Quo Score by Education Level",
-       x = "Age",
-       y = "Status Quo Score")
+wvs_data |> 
+    ggplot(aes(x = marital_status, fill = religiousity)) +
+    geom_bar(position = "fill") +
+    labs(title = "Religious Identity Distribution by Marital Status",
+         x = "Marital Status",
+         y = "Count",
+         fill = "Religious Identity") +
+    facet_grid( ~ country) +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 ## Task #6
-Do people's voting intention matches their level of support to the status quo? Compare the distribution of `statusquo` across different `vote` intentions.
+
+Does `financial_satisfaction` correlate with `life satisfaction`? How does this vary by `country`?
 
 Let's layer two kinds of visualization here:
 
@@ -316,58 +305,56 @@ Let's layer two kinds of visualization here:
 #| echo: true
 #| output-location: slide
 
-# Two variables - one categorical, one continuous
-chile_data |> 
-    ggplot(aes(x = vote, y = statusquo)) +
-    geom_boxplot(fill = "pink") +
-    geom_jitter(alpha = 0.4, color = "maroon") + 
-    labs(title = "Distribution Status Quo Score by voting intention",
-       x = "Voting intention",
-       y = "Status Quo Support level")
+# Two continuous variables with grouping
+wvs_data |> 
+    ggplot(aes(x = financial_satisfaction, y = life_satisfaction, color = country)) +
+    geom_point(alpha = 0.3) +
+    geom_smooth(method = "lm", se = FALSE) +
+    facet_wrap(~ country) +
+    labs(title = "Life Satisfaction vs Financial Satisfaction by Country",
+       x = "Financial Satisfaction",
+       y = "Life Satisfaction")
 ```
 
-## Group Exercise #2 (solo attempts ok)
+## Group Exercise #2
 
-Update the visualization from task #6 to the following:
-
--  Replace the boxplot with violin plot (check out ggplot documentation)
--  Change the fill color for both the violin plot and jitters to other color of your choice.
+Create a violin plot showing the distribution of freedom scores by employment status, with points overlaid.
 
 ```{r}
 #| echo: true
 #| output-location: slide
 #| code-fold: true
 
-# Two variables - one categorical, one continuous
-chile_data |> 
-    ggplot(aes(x = vote, y = statusquo)) +
+wvs_data |> 
+    ggplot(aes(x = employment, y = freedom)) +
     geom_violin(fill = "lightblue") +
-    geom_jitter(alpha = 0.4, color = "navy") + 
-    labs(title = "Distribution Status Quo Score by voting intention",
-       x = "Voting intention",
-       y = "Status Quo Support level")
+    geom_jitter(alpha = 0.2, color = "navy") + 
+    labs(title = "Distribution of Freedom Scores by Employment Status",
+       x = "Employment Status",
+       y = "Freedom Score") +
+    theme_minimal() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
-## Group Exercise #3 (solo attempts ok)
+## Group Exercise #3
 
-Visualize the distribution of `age_group` for each `vote` intention. To show the difference between sex, show the visualization with `sex` facet.
-
+Visualize the distribution of employment status across marital status categories, and use faceting to compare this relationship across countries.
 
 ```{r}
 #| echo: true
 #| output-location: slide
 #| code-fold: true
 
-chile_data |> 
-    ggplot(aes(x = vote, fill = age_group)) +
-    geom_bar(alpha = 0.7, position = "fill") +
-    facet_wrap( ~ sex) + 
-    labs(title = "Proportion of age groups for each voting intentions by sex",
-       x = "Voting intention",
+wvs_data |> 
+    ggplot(aes(x = marital_status, fill = employment)) +
+    geom_bar(position = "fill") +
+    facet_wrap(~ country) + 
+    labs(title = "Employment Status Distribution by Marital Status and Country",
+       x = "Marital Status",
        y = "Proportion",
-       fill = "Age Group") +
-    theme_minimal()
-
+       fill = "Employment Status") +
+    theme_minimal() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 ## Is fancier = better?
@@ -391,4 +378,4 @@ Take a look at this award-winning visualization by [Simon Scarr](http://www.simo
 
 Check out the [R Graph gallery](https://r-graph-gallery.com/) for inspiration and code samples!
 
-Next session: statistical tests in R using Chile voting data
+Next session: statistical tests in R using WVS data

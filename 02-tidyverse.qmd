@@ -18,7 +18,7 @@ format: revealjs
 
 ## Refresher: Loading from CSV into a dataframe
 
-Use `read_csv` from `readr` package (part of `tidyverse`) to load our data into a dataframe
+Use `read_csv` from `readr` package (part of `tidyverse`) to load our World Values Survey data. More information about the data can be found under the `Dataset` tab in the course website.
 
 ```{r}
 #| echo: true
@@ -28,11 +28,11 @@ Use `read_csv` from `readr` package (part of `tidyverse`) to load our data into 
 # import tidyverse library
 library(tidyverse)
 
-# read the CSV and save into a dataframe called chile_data
-chile_data <- read_csv("data/chile_voting.csv")
+# read the CSV and save into a dataframe called wvs_data
+wvs_data <- read_csv("data/wvs-wave7-sg-ca-nz.csv")
 
-# "peek at the data, pay attention to the data types!
-glimpse(chile_data)
+# "peek" at the data, pay attention to the data types!
+glimpse(wvs_data)
 ```
 
 ## Cleaning data for analysis
@@ -54,26 +54,6 @@ glimpse(chile_data)
 
     -   [tidyr cheatsheet](https://rstudio.github.io/cheatsheets/html/tidyr.html) \| [pdf version](https://rstudio.github.io/cheatsheets/tidyr.pdf)
 
-## About the data
-
-The data is from a national survey conducted in April and May of 1988 by FLACSO/Chile, capturing voting intentions for the [1988 Chilean plebiscite](https://en.wikipedia.org/wiki/1988_Chilean_presidential_referendum). The dataset contains information about respondents' demographic characteristics and their voting intentions. This data can also be found from `carData` package! (more on this later)
-
-Key variables in the dataset:
-
-------------------------------------------------------------------------
-
-| Variable     | Description                                                                                                          |
-|--------------|----------------------------------------------------------------------------------------------------------------------|
-| `region`     | Region of voters: `C` (Central), `M` (Metropolitan Santiago area), `N` (North), `S` (South), `SA` (city of Santiago) |
-| `population` | Population size of respondent's community                                                                            |
-| `sex`        | Sex of voters: `F` (female), `M` (male)                                                                              |
-| `age`        | Age in years                                                                                                         |
-| `education`  | Education level of voters: `P` (Primary), `PS` (Post-secondary), `S` (Secondary)                                     |
-| `income`     | Monthly income, in Pesos                                                                                             |
-| `statusquo`  | Scale of support for the status-quo in numerical value                                                               |
-| `vote`       | Voter's decision: `A` (will abstain), `N` (will vote no), `U` (undecided), `Y` (will vote yes)                       |
-
-: Explanatory notes on each column
 
 ## Prelim checks for your data
 
@@ -89,37 +69,38 @@ A few things that you can do:
 
 -   Plot the distribution of the numerical/continuous data
 
-## Data wrangling activities specific to our data
+# Data wrangling activities with WVS data
 
-**Scenario**: We are a junior Research Assistant (RA) in a research team currently studying about the 1988 Chilean plebiscite. The team's primary goal is to identify any discernible and interesting patterns in the voter demographic data.
+**Scenario**: We are research assistants analyzing patterns in values and satisfaction across different countries and demographic groups. Our team wants to understand how life satisfaction relates to various factors like employment, marital status, and religiosity.
 
-As a start, we have been asked to do the following data cleaning and processing tasks:
+Tasks we need to complete:
 
 ::: incremental
-1.  Remove all rows with empty values (NA)
+1. Remove all rows with missing values (NA)
 
-2.  Separate the demographic information (region, sex, age, education) into a separate CSV called `chile-demographics.csv`
+2. Create a demographics-only dataset with variables like country, sex, age, marital_status, and employment
 
-3.  Retrieve only respondents aged 30 or older, arrange it from oldest to youngest, and save it into a separate CSV called `chile-30plus.csv`
+3. Filter for respondents aged 30 or older, arrange by age (oldest to youngest)
 
-4.  Make the character columns such as `region`, `sex`, `education`, and `vote` to be in uppercase.
+4. Convert categorical variables (country, religiousity, sex, marital_status, employment) to factors
 
-5.  Convert all the categorical columns such as `region`, `sex`, `education`, and `vote` to Factor. Make sure `education` is ordered.
+5. Create age groups: "18-29", "30-44", "45-59", "60+"
 :::
 
 ------------------------------------------------------------------------
 
 ::: incremental
-6.  Create a new column called `age_group` that categorizes age into groups: "18-29", "30-44", "45-59", "60+".
+6. Create a new column `high_satisfaction` that is TRUE if life_satisfaction is above the median
 
-7.  Create a new column called `high_income` that is TRUE if income is above the median, FALSE otherwise.
+7. Reverse code scales for all the `importance` variables so that higher numbers consistently represent higher levels of the measured construct. In other words, 1 = Not at all important and 4 = Very important. 
 
-8.  Create a new column called `support_level` that categorizes `statusquo` into "Unsupportive" (\<= 0) and "Supportive" (\> 0). Save all of these changes you made from step 3 onwards into a new CSV called `chile_voting_processed.csv`
+8. Generate summary statistics of life_satisfaction grouped by country and employment status
 
-9.  Generate summary stats of `income` grouped by `region` and `education`. The summary stats should include mean, median, max, min, std, and n (number of observations).
+9. Create a cross-tabulation of religiousity by country
 
-10. Reshape the data to have `region` as rows and `vote` options as columns, with the values being the count of votes for each option in each region.
+10. Reshape the data to show average satisfaction scores by country and age group
 :::
+
 
 # Let's wrangle our data!
 
@@ -132,16 +113,15 @@ Remove all rows with empty values (NA)
 ```{r}
 #| echo: true
 #| output: false
-chile_data <- chile_data |> 
+wvs_data <- wvs_data |> 
   drop_na()
-
 ```
 
-The number of observations after all rows containing NAs are removed:
+The number of observations after removing NAs:
 
 ```{r}
 #| echo: true
-dim(chile_data)
+dim(wvs_data)
 ```
 
 ## Interlude: Pipe Operator ( \|\> )
@@ -159,9 +139,9 @@ dim(chile_data)
 Notice that we have to create a "temp" dataframes called `age_df` and `age_df_desc` in this method.
 
 ``` r
-age_df <- filter(chile_data, age >= 30)
+age_df <- filter(wvs_data, age >= 30)
 age_df_desc <- arrange(age_df, desc(age))
-write_csv(age_df_desc, "data-output/chile-30plus.csv")
+write_csv(age_df_desc, "data-output/wvs-30plus.csv")
 ```
 
 ### With pipe operator
@@ -169,134 +149,108 @@ write_csv(age_df_desc, "data-output/chile-30plus.csv")
 No "temp" dataframe needed here! :D
 
 ``` {.r code-overflow="overflow"}
-chile_data |> 
+wvs_data |> 
     filter(age >= 30) |> 
     arrange(desc(age)) |> 
-    write_csv("data-output/chile-30plus.csv")
+    write_csv("data-output/wvs-30plus.csv")
 ```
 :::
 
 ## Task #2
 
-Separate the demographic information (region, sex, age, education) into a separate CSV called `chile-demographics.csv`
+Create a demographics-only dataset:
 
 ```{r}
 #| echo: true
 #| output: false
 
-# not using the |> operator here!
-
-demographics_df <- select(chile_data, region, sex, age, education)
-write_csv(demographics_df, "data-output/chile-demographics.csv")
+demographics_df <- wvs_data |>
+    select(country, sex, age, marital_status, employment) |>
+    write_csv("data-output/wvs_demographics.csv")
 ```
 
-The first few rows in the CSV:
+First few rows of the demographics data:
 
 ```{r}
-chile_data |> 
-    select(region, sex, age, education) |> 
+demographics_df |>
     print(n = 3)
 ```
 
-## Task #3
+## Task #3: 
 
-Retrieve only respondents aged 30 or older, arrange it from oldest to youngest, and save it into a separate CSV called `chile-30plus.csv`
+Filter for 30+ age group and sort by age:
 
 ```{r}
 #| echo: true
 
-chile_data |> 
-    filter(age >= 30) |> 
-    arrange(desc(age)) |> 
-    write_csv("chile-30plus.csv")
+wvs_30plus <- wvs_data |>
+    filter(age >= 30) |>
+    arrange(desc(age)) |>
+    write_csv("data-output/wvs_30plus.csv")
 ```
 
-The first few rows in the resulting CSV:
+Preview of the filtered data:
 
 ```{r}
-#| echo: false
-
-chile_data |> 
-    filter(age >= 30) |> 
-    arrange(desc(age)) |> 
+wvs_30plus |>
+    select(country, age, employment) |>
     print(n = 3)
 ```
 
-## Group exercise 1 (solo attempts ok)
+## Group Exercise 1 (5 minutes)
 
-[**Time: 5 minutes!**]{.underline}
-
-Retrieve only respondents from the Metropolitan Santiago area (`M`), with Secondary education (`S`), and who are undecided (`U`) about their vote. Keep only their `region`, `education`, `vote`, and `income` columns in a new dataframe called `santiago_undecided` in **descending** order of `income`.
+Find all respondents who are:
+- From Singapore
+- Employed full-time
+- Have high life satisfaction (8 or higher)
+Save their country, employment, life_satisfaction, and freedom scores, arranged by life_satisfaction in descending order.
 
 ```{r}
 #| echo: true
 #| code-fold: true
 #| code-summary: "Show answer"
 
-santiago_undecided <- chile_data |> 
-    filter(region == "M" & education == "S" & vote == "U") |> 
-    select(region, education, vote, income) |> 
-    arrange(desc(income)) 
+singapore_satisfied <- wvs_data |>
+    filter(country == "SGP" & 
+           employment == "Full time" & 
+           life_satisfaction >= 8) |>
+    select(country, employment, life_satisfaction, freedom) |>
+    arrange(desc(life_satisfaction))
 ```
 
-The first few rows of `santiago_undecided`:
-
+Preview:
 ```{r}
-santiago_undecided |> 
+singapore_satisfied |>
     print(n = 3)
 ```
 
-## Task #4
+## Task #4: 
 
-Make all character columns such as `region`, `sex`, `education`, and `vote` to be in uppercase.
+Convert categorical variables to factors:
 
 ```{r}
 #| echo: true
 
-cols_to_change <- c("region", "sex", "education", "vote")
-chile_data <- chile_data |> 
-    mutate(across(cols_to_change, toupper))
+cols_to_factor <- c("country", "religiousity", "sex", 
+                    "marital_status", "employment")
+
+wvs_data <- wvs_data |>
+    mutate(across(all_of(cols_to_factor), as.factor))
 ```
 
-The end result:
-
+Checking the structure:
 ```{r}
-chile_data |> 
-    select(region, sex, education, vote) |> 
-    print(n = 3)
+str(wvs_data[cols_to_factor])
 ```
 
 ## Task #5
 
-Convert all the categorical columns such as `region`, `sex`, `education`, and `vote` to Factor. Make sure `education` is ordered.
+Add age groups to our dataset:
 
 ```{r}
 #| echo: true
 
-chile_data <- chile_data |> 
-    mutate(across(cols_to_change, as.factor))
-
-#reordering
-chile_data <- chile_data |> 
-    mutate(education = factor(education, 
-                         levels = c("P", "S", "PS"), 
-                         ordered = TRUE))
-```
-
-The structure of education column after the change:
-
-```{r}
-str(chile_data["education"])
-```
-
-## Task #6
-
-Add a new column to `chile_data` called `age_group` that categorizes age into groups: "18-29", "30-44", "45-59", "60+".
-
-```{r}
-#| echo: true
-
-chile_data <- chile_data |> 
+wvs_data <- wvs_data |>
     mutate(age_group = case_when(
         age < 30 ~ "18-29",
         age < 45 ~ "30-44",
@@ -305,96 +259,125 @@ chile_data <- chile_data |>
     ))
 ```
 
-The new age_group column should look something like this:
+Preview of age groups:
+```{r}
+wvs_data |>
+    select(age, age_group) |>
+    print(n = 4)
+```
+
+
+## Task #6
+
+Create a new column `high_satisfaction` that is TRUE if life_satisfaction is above the median:
 
 ```{r}
-chile_data |> 
-    select(age, age_group) |> 
-    print(n = 4)
+#| echo: true
+
+# Calculate median life satisfaction
+median_satisfaction <- median(wvs_data$life_satisfaction, na.rm = TRUE)
+
+# Create the high_satisfaction column
+wvs_data <- wvs_data |>
+    mutate(high_satisfaction = life_satisfaction > median_satisfaction)
+```
+
+Preview of satisfaction categorization:
+```{r}
+print(median_satisfaction)
+wvs_data |>
+    select(life_satisfaction, high_satisfaction) |>
+    slice(1:11) # print rows 1 to 10
 ```
 
 ## Task #7
 
-Create a new column called `high_income` that is TRUE if income is above the median, FALSE otherwise.
+In survey data, we often need to reverse code scales so that higher numbers consistently represent higher levels of the measured construct. In our WVS data:
 
-hint: you need to calculate the median income first.
+Original importance scale:
 
-```{r}
-#| echo: true
+- 1 = Very Important
 
-median_income <- median(chile_data$income, na.rm = TRUE)
-chile_data <- chile_data |> 
-    mutate(high_income = income > median_income)
-```
+- 2 = Rather Important
 
-The original income column and the new high_income column:
+- 3 = Not Very Important
 
-```{r}
-chile_data |> 
-    select(income, high_income) |> 
-    slice(9:11) #print row 9 to row 11
-```
+- 4 = Not at all Important
 
-## Task #8 - Can you solve this?
-
-Create a new column called `support_level` that categorizes `statusquo` into "Unsupportive" (\<= 0) and "Supportive" (\> 0).
-
-Save all of these changes you made from step 3 onwards into a new CSV called `chile_voting_processed.csv`
+Let's create reverse-coded versions where 4 = highest importance:
 
 ```{r}
 #| echo: true
-#| code-fold: true
-#| code-summary: "Show answer"
 
-chile_data <- chile_data |> 
-    mutate(support_level = case_when(
-        statusquo <= 0 ~ "Unsupportive",
-        statusquo > 0 ~ "Supportive",
-        TRUE ~ NA_character_
-    ))
-
-write_csv(chile_data, "data-output/chile_voting_processed.csv")
+wvs_data <- wvs_data |>
+    mutate(
+        # Reverse code each importance variable (5 minus original value)
+        family_importance_r = 5 - family_importance,
+        friends_importance_r = 5 - friends_importance,
+        leisure_importance_r = 5 - leisure_importance,
+        work_importance_r = 5 - work_importance
+    )
 ```
 
-The new support_level column:
+---
 
+Preview of original vs reverse-coded scales:
 ```{r}
-chile_data |> 
-    select(statusquo, support_level) |> 
+wvs_data |>
+    select(family_importance, family_importance_r,
+           friends_importance, friends_importance_r,
+           leisure_importance, leisure_importance_r,
+           work_importance, work_importance_r)|>
     print(n = 3)
 ```
 
+## Task #8 
+
+Save all our changes to a new CSV file:
+
+```{r}
+#| echo: true
+
+# Save the processed data
+write_csv(wvs_data, "data-output/wvs_processed.csv")
+
+```
+
+Let's check the `data-output` folder to see if the CSV has been properly created!
+
 ## Task #9
 
-Generate summary stats of `income` grouped by `region` and `education`. The summary stats should include mean, median, max, min, std, and n (number of observations).
+generate satisfaction statistics by country and employment:
 
 ```{r}
 #| echo: true
 #| output-location: slide
 
-library(gt)
-chile_data |> 
-    group_by(region, education) |> 
-    summarise(observation = n(), 
-              mean_income = mean(income, na.rm = TRUE),
-              median_income = median(income, na.rm = TRUE), 
-              highest = max(income, na.rm = TRUE),
-              lowest = min(income, na.rm = TRUE),
-              std_dev = sd(income, na.rm = TRUE))
+wvs_data |>
+    group_by(country, employment) |>
+    summarise(
+        n = n(),
+        mean_satisfaction = mean(life_satisfaction),
+        median_satisfaction = median(life_satisfaction),
+        sd_satisfaction = sd(life_satisfaction)
+    ) |>
+    arrange(country, desc(mean_satisfaction))
 ```
 
 ## Task #10
 
-Reshape the data to have `region` as rows and `vote` options as columns, with the values being the count of votes for each option in each region.
-
-To achieve this clean table look, we can use `gt` package or `knitr` package!
+Create a country by religiosity cross-tabulation:
 
 ```{r}
 #| echo: true
-chile_data |>
-    group_by(region, vote) |>
+wvs_data |>
+    group_by(country, religiousity) |>
     summarise(count = n(), .groups = "drop") |>
-    pivot_wider(names_from = vote, values_from = count, values_fill = 0) |> 
+    pivot_wider(
+        names_from = religiousity,
+        values_from = count,
+        values_fill = 0
+    ) |>
     knitr::kable()
 ```
 
@@ -433,8 +416,8 @@ chile_data |>
 #| echo: false
 
 # Creating the wide data frame
-long_data <- chile_data |>
-    group_by(region, vote) |>
+long_data <- wvs_data |>
+    group_by(country, religiousity) |>
     summarise(count = n(), .groups = "drop")
 
 # Display the wide data frame
@@ -449,7 +432,7 @@ print(long_data)
 #| echo: false
 
 long_data |>
-    pivot_wider(names_from = "vote", values_from = "count") 
+    pivot_wider(names_from = "religiousity", values_from = "count") 
 ```
 :::
 :::
@@ -458,7 +441,7 @@ long_data |>
 
 [**Time: 5 minutes**]{.underline}
 
-Generate a summary stats of `age` grouped by `region` and `sex`. The summary stats should include mean, median, max, min, std, and n (number of observations). It should look something like this:
+Generate a summary stats of `age` grouped by `country` and `sex`. The summary stats should include mean, median, max, min, std, and n (number of observations). It should look something like this:
 
 ```{r}
 #| echo: true
@@ -466,8 +449,8 @@ Generate a summary stats of `age` grouped by `region` and `sex`. The summary sta
 #| output-location: slide
 #| code-summary: "Show answer"
 
-chile_data |> 
-    group_by(region, sex) |> 
+wvs_data |> 
+    group_by(country, sex) |> 
     summarise(observation = n(), 
               mean_age = mean(age, na.rm = TRUE),
               median_age = median(age, na.rm = TRUE), 
@@ -483,22 +466,22 @@ Let's say I have this column called `wrong_column` that I want to remove:
 ```{r}
 #| echo: true
 
-chile_data <- chile_data |> mutate(wrong_column = "random values")
-chile_data |> select(region, wrong_column) |> print(n = 3)
+wvs_data <- wvs_data |> mutate(wrong_column = "random values")
+wvs_data |> select(country, wrong_column) |> print(n = 3)
 ```
 
 ## Remove the wrong column with subset `-`:
 
 ```{r}
 #| echo: true
-chile_data <- chile_data |> 
+wvs_data <- wvs_data |> 
     select(-wrong_column)
 ```
 
 ```{r}
-chile_data |> select(region) |> print(n = 3)
+wvs_data |> select(country) |> print(n = 3)
 ```
 
 # End of Session 2!
 
-Next session: Descriptive stats and data visualization with `ggplot2` package.
+Next session: Descriptive statistics and data visualization with `ggplot2` package - we'll create visualizations to explore patterns in life satisfaction, values, and demographics across countries!

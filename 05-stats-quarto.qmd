@@ -24,19 +24,15 @@ library(gtsummary)
 library(huxtable)
 
 # read the CSV with Chile voting data
-chile_data <- read_csv("data-output/chile_voting_processed.csv")
+wvs_data <- read_csv("data-output/wvs_processed.csv")
 
-chile_data <- chile_data |> 
-    mutate(across(c("region", "sex", "education", "vote", "age_group", "support_level"), as_factor))
+# Convert categorical variables to factors
+wvs_data <- wvs_data |> 
+    mutate(across(c("country", "sex", "marital_status", 
+                    "employment", "religiousity"), as.factor))
 
-#reordering
-chile_data <- chile_data |> 
-    mutate(education = factor(education, 
-                         levels = c("P", "S", "PS"), 
-                         ordered = TRUE))
-
-# peek at the data, pay attention to the data types!
-glimpse(chile_data)
+# peek at the data
+glimpse(wvs_data)
 ```
 
 # Simple Linear Regression 
@@ -68,16 +64,16 @@ Examples:
 
 ## Linear Regression: One continuous predictor
 
-**Research Question:** Does a person's **age** influence their **support to incumbent** in Chile?
+**Research Question:** Does a person's **financial satisfaction** influence their **life satisfaction**?
 
--   The outcome/DV ($Y$): `statusquo`
--   The predictor/IV ($X$): `age`
+- The outcome/DV ($Y$): `life_satisfaction`
+- The predictor/IV ($X$): `financial_satisfaction`
 
 ```{r}
 #| echo: true
 #| output-location: slide
-statsquo_model1 <- lm(statusquo ~ age, data = chile_data)
-summary(statsquo_model1) #summarize the result
+life_model1 <- lm(life_satisfaction ~ financial_satisfaction, data = wvs_data)
+summary(life_model1) #summarize the result
 ```
 
 ::: {style="font-size: 75%; width: 75%"}
@@ -101,33 +97,31 @@ Here is one possible way to narrate your result:
 
 ```{r}
 #| echo: true
-huxreg("statusquo" = statsquo_model1)
+huxreg("life satisfaction" = life_model1)
 
 ```
 
 ## Linear Regression: Multiple continuous predictors
 
-**Research Question:** Do a person's age and their income have an impact on their support for the incumbent?
+**Research Question:** Do a person's financial satisfaction and perceived freedom influence their life satisfaction?
 
--   The outcome/DV ($Y$): `statusquo`
--   The predictor/IV ($X$): `age` and `income`
+- The outcome/DV ($Y$): `life_satisfaction`
+- The predictors/IV ($X$): `financial_satisfaction` and `freedom`
 
 ```{r}
 #| echo: true
 #| output-location: slide
 
-# let's divide income by 1000 to make the scale bit more similar
-chile_data$income_downscaled <- chile_data$income / 10000
-
-statsquo_model2 <- lm(statusquo ~ age + income_downscaled, data = chile_data)
-summary(statsquo_model2)
+life_model2 <- lm(life_satisfaction ~ financial_satisfaction + freedom, 
+                  data = wvs_data)
+summary(life_model2)
 ```
 
 ## Alternative package to present regression result
 
 ```{r}
 #| echo: true
-statsquo_model2 |> tbl_regression() |> bold_p()
+life_model2 |> tbl_regression() |> bold_p()
 ```
 
 ::: aside
@@ -167,8 +161,8 @@ For more info about huxreg, go here: <https://cran.r-project.org/web/packages/hu
 ```{r}
 #| echo: true
 library(huxtable)
-huxreg("statusquo (model1)" = statsquo_model1, 
-       "statusquo (model2)" = statsquo_model2,
+huxreg("statusquo (model1)" = life_model1, 
+       "statusquo (model2)" = life_model2,
        number_format = 4,
        bold_signif = 0.05,
        statistics = c( "R squared" = "r.squared", "N" = "nobs", "F" = "statistic",
@@ -191,15 +185,15 @@ One way to check for it:
 
 ```{r}
 #| echo: true
-car::vif(statsquo_model2)
+car::vif(life_model2)
 ```
 
 ## Linear Regression: One categorical predictor
 
-**Research question**: Explore the difference of support for `statusquo` between different `sex`.
+**Research Question**: Explore the difference in life satisfaction between employment statuses.
 
--   The outcome/DV ($Y$): `statusquo`
--   The predictor/IV ($X$): `sex`
+- The outcome/DV ($Y$): `life_satisfaction`
+- The predictor/IV ($X$): `sex`
 
 ::: callout-note
 Before proceeding with analysis, ensure that all the categorical variables involved are cast as factors!
@@ -208,8 +202,8 @@ Before proceeding with analysis, ensure that all the categorical variables invol
 ```{r}
 #| echo: true
 
-str(chile_data$statusquo)
-str(chile_data$sex)
+str(wvs_data$life_satisfaction)
+str(wvs_data$sex)
 ```
 
 ## Continuing the analysis
@@ -218,8 +212,8 @@ The analysis summary should look like this:
 
 ```{r}
 #| echo: true
-statusquo_model3 <- lm(statusquo ~ sex, data = chile_data)
-summary(statusquo_model3)
+life_model3 <- lm(life_satisfaction ~ sex, data = wvs_data)
+summary(life_model3)
 ```
 
 When interpreting a categorical predictor in regression, one category is treated as the reference category, which serves as the baseline for comparison. In this case, the reference category corresponds to the intercept.
@@ -243,7 +237,7 @@ For more info about huxreg, go here: <https://cran.r-project.org/web/packages/hu
 ```{r}
 #| echo: true
 library(huxtable)
-huxreg("statusquo (model3)" = statusquo_model3,
+huxreg("life satisfaction (model3)" = life_model3,
        number_format = 4,
        bold_signif = 0.05,
        statistics = c( "R squared" = "r.squared", "N" = "nobs", "F" = "statistic",
@@ -252,15 +246,15 @@ huxreg("statusquo (model3)" = statusquo_model3,
 
 ## Categorical predictor: changing the reference
 
-Let's change the reference category for `sex` variable to "F".
+Let's change the reference category for `sex` variable to "Male".
 
 ```{r}
 #| echo: true
 
-chile_data <- chile_data |> 
-    mutate(sex = relevel(sex, ref = "F"))
+wvs_data <- wvs_data |> 
+    mutate(sex = relevel(sex, ref = "Male"))
 
-str(chile_data$sex)
+str(wvs_data$sex)
 ```
 
 Re-run the analysis with the new reference category
@@ -268,15 +262,15 @@ Re-run the analysis with the new reference category
 ```{r}
 #| echo: true
 #| output-location: slide
-statsquo_model3 <- lm(statusquo ~ sex, data = chile_data)
-summary(statsquo_model3)
+life_model3a<- lm(life_satisfaction ~ sex, data = wvs_data)
+summary(life_model3a)
 ```
 
 
 ## Changing baseline category for ordered factor
 
 ``` r
-chile_data <- chile_data |> 
+wvs_data <- wvs_data |> 
     mutate(education = factor(education, 
                          levels = c("S", "P", "PS"), 
                          ordered = TRUE))
@@ -288,18 +282,15 @@ Previously, we could use the `relevel()` function to change the reference catego
 
 ## Let's try this Linear Regression exercise! (5 mins)
 
-Create a regression model called `statusquo_model4` that predicts the `statusquo` score based on `region`. Make sure the reference category is region "M".
+Create a regression model called `life_model4` that predicts the `life_satisfaction` score based on `region`. Make sure the reference category is region "M".
 
 ```{r}
 #| echo: true
 #| output: false
 #| code-fold: true
 
-chile_data <- chile_data |> 
-    mutate(region = relevel(region, ref = "M"))
-
-statusquo_model4 <- lm(statusquo ~ region, data = chile_data)
-summary(statusquo_model4)
+life_model4 <- lm(life_satisfaction ~ employment, data = wvs_data)
+summary(life_model4)
 ```
 
 # Binary Logistic Regression
@@ -343,14 +334,14 @@ Before we proceed with the calculations, we need to **dummy code** the dependent
 ```{r}
 #| echo: true
 # First, we need to create a binary outcome
-chile_data <- chile_data |>
-    mutate(vote_yes = if_else(vote == "Y", 1, 0))
+wvs_data <- wvs_data |>
+    mutate(satisfied = if_else(life_satisfaction > 6, 1, 0))
 # the if_else is from dplyr package (from session 2)
 
 ```
 
 ```{r}
-chile_data |> select(vote, vote_yes) |> print(n = 3)
+wvs_data |> select(life_satisfaction, satisfied) |> print(n = 5)
 ```
 
 ## Conduct the analysis
@@ -360,11 +351,11 @@ Let's conduct the analysis!
 ```{r}
 #| echo: true
 
-vote_age <- glm(vote_yes ~ age,
+life_model5 <- glm(satisfied ~ age,
                 family = binomial, 
-                data = chile_data)
+                data = wvs_data)
 
-summary(vote_age)
+summary(life_model5)
 ```
 
 ## Exponentiate the coefficients
@@ -374,7 +365,7 @@ If you recall the formula, the results are expressed in Logit Probability. As we
 ```{r}
 #| echo: true
 library(gtsummary)
-vote_age |> tbl_regression(exponentiate = TRUE) |> 
+life_model5 |> tbl_regression(exponentiate = TRUE) |> 
     bold_p() 
 ```
 
@@ -405,20 +396,20 @@ In the report, the model's Chi square and Rsquared will be reported as well to i
 #| output-location: column
 
 # by default, McFadden will be used
-DescTools::PseudoR2(vote_age) 
+DescTools::PseudoR2(life_model5) 
 ```
 ```{r}
 #| echo: true
 #| output-location: column
 
-DescTools::PseudoR2(vote_age, 
+DescTools::PseudoR2(life_model5, 
                     which = "CoxSnell")
 ```
 
 ```{r}
 #| echo: true
 
-DescTools::PseudoR2(vote_age, 
+DescTools::PseudoR2(life_model5, 
                     which = "all")
 ```
 ## Reporting result: in-text narration
@@ -439,7 +430,7 @@ The screenshot is retrieved from <https://statistics.laerd.com/spss-tutorials/bi
 ```{r}
 #| echo: true
 
-huxreg("Vote 'Yes'" = vote_age, statistics = c(R2 = "r.squared", "logLik", "AIC"))
+huxreg("Vote 'Yes'" = life_model5, statistics = c(R2 = "r.squared", "logLik", "AIC"))
 ```
 
 ## Binary Logistic Regression: One Categorical Predictor
@@ -452,11 +443,11 @@ huxreg("Vote 'Yes'" = vote_age, statistics = c(R2 = "r.squared", "logLik", "AIC"
 ```{r}
 #| echo: true
 #| output-location: slide
-vote_region <- glm(vote_yes ~ region,
+life_model6 <- glm(satisfied ~ religiousity,
                       family = "binomial",
-                      data = chile_data)
+                      data = wvs_data)
 
-summary(vote_region)
+summary(life_model6)
 
 ```
 
@@ -468,7 +459,7 @@ If you recall the formula, the results are expressed in Logit Probability. As we
 #| echo: true
 
 library(gtsummary)
-vote_region |> tbl_regression(exponentiate = TRUE) |>  
+life_model6 |> tbl_regression(exponentiate = TRUE) |>  
     bold_p()
 ```
 
@@ -493,20 +484,20 @@ Let's retrieve the Rsquared value:
 #| output-location: column
 
 # the default is McFadden
-DescTools::PseudoR2(vote_region) 
+DescTools::PseudoR2(life_model6) 
 ```
 ```{r}
 #| echo: true
 #| output-location: column
 
-DescTools::PseudoR2(vote_region, 
+DescTools::PseudoR2(life_model6, 
                     which = "CoxSnell")
 ```
 
 ```{r}
 #| echo: true
 
-DescTools::PseudoR2(vote_region, 
+DescTools::PseudoR2(life_model6, 
                     which = "all")
 ```
 
@@ -517,7 +508,7 @@ Note that the R-squared is missing here, so be sure to put that in when you past
 ```{r}
 #| echo: true
 library(huxtable)
-huxreg("vote 'Yes' (model1)" = vote_age, "vote 'Yes' (model2)" = vote_region)
+huxreg("vote 'Yes' (model1)" = life_model5, "vote 'Yes' (model2)" = life_model6)
 ```
 
 
@@ -530,12 +521,12 @@ Create a regression model called `vote_model` that predicts the likelihood of vo
 #| output: false
 #| code-fold: true
 
-vote_model <- glm(vote_yes ~ sex,
+life_model7 <- glm(satisfied ~ sex,
                   family = "binomial", 
-                  data = chile_data) 
+                  data = wvs_data) 
 
-summary(vote_model)
-exp(coefficients(vote_model))
+summary(life_model7)
+exp(coefficients(life_model7))
 ```
 
 # What is Quarto? What is Markdown?

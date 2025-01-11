@@ -23,15 +23,15 @@ This site serves as a repository for the slides and codes developed for the 'Int
 *Slides will be progressively made available*
 
 ::: table-schedule
-| Session | Date and Time | Topic | Desccription |
-|----------------|----------------|----------------|------------------------|
-| Before the workshop |  | Preparation | Complete the [Pre-workshop activities](#pre-workshop-activities) |
-| 1 | Fri, 17 Jan 2025 | Introduction to R and RStudio | Learn about setting up RStudio, basic data types and structures in R, and importing data files. |
-| 2 | Fri, 24 Jan 2025 | Data wrangling with tidyverse | Learn about manipulating data with tidyverse, including filtering, selecting, mutating, and grouping data. |
-| 3 | Fri, 31 Jan 2025 | Data visualization and Descriptive Statistics | Learn about creating visualizations with ggplot2 and calculating descriptive statistics like means. |
-| 4 | Fri, 7 Feb 2025 | Basic Inferential Tests | Learn about conducting t-tests, chi-square tests, ANOVA, and interpreting statistical results in R. |
-| 5 | Fri, 14 Feb 2025 | Regression and Introduction to Quarto | Learn about correlation, regression, and Quarto for creating dynamic, reproducible R documents. |
-| After the workshop | At your own pace | [Post-workshop exercises](exercises.html) |  |
+| Session | Date | Topic | Desccription |
+|-----------------|-----------------|-----------------|---------------------|
+| \~ | Before the workshop | Preparation | Complete the [Pre-workshop activities](#pre-workshop-activities) |
+| 1 | Fri, 17 Jan 2025 | **Introduction to R and RStudio** | Learn about setting up RStudio, basic data types and structures in R, and importing data files. |
+| 2 | Fri, 24 Jan 2025 | **Data wrangling with tidyverse** | Learn about manipulating data with tidyverse, including filtering, selecting, mutating, and grouping data. |
+| 3 | Fri, 31 Jan 2025 | **Data visualization and Descriptive Statistics** | Learn about creating visualizations with ggplot2 and calculating descriptive statistics like means. |
+| 4 | Fri, 7 Feb 2025 | **Basic Inferential Tests** | Learn about conducting t-tests, chi-square tests, ANOVA, and interpreting statistical results in R. |
+| 5 | Fri, 14 Feb 2025 | **Regression and Introduction to Quarto** | Learn about correlation, regression, and Quarto for creating dynamic, reproducible R documents. |
+| \~ | After the workshop |  | [Post-workshop exercises](exercises.html) |
 :::
 
 ```{=html5}
@@ -44,7 +44,7 @@ This site serves as a repository for the slides and codes developed for the 'Int
 </style>
 ```
 
-## Pre-workshop activities
+## Pre-workshop activities {#pre-workshop-activities}
 
 ### About R and RStudio
 
@@ -86,7 +86,7 @@ Packages can save us time and leverage expert-created tools without having to wr
 
 1.  Open RStudio
 
-2.  Copy the following code: `install.packages(c( "car", "rmarkdown", "huxtable", "gt", "apaTable", "tidyverse"))`
+2.  Copy the following code: `install.packages(c( "car", "rmarkdown", "huxtable", "gt", "apaTables", "tidyverse"))`
 
 3.  Paste it in the **Console** tab (see image below)
 
@@ -96,4 +96,4 @@ Packages can save us time and leverage expert-created tools without having to wr
 
 ### Step 4: Complete the pre-workshop survey
 
-[Please complete the pre-workshop survey here](https://smusg.asia.qualtrics.com/jfe/form/SV_3jHynB80Kd6vWOG) to share your goals and current knowledge. Your input will help to tailor the workshop contents and pace. 
+[Please complete the pre-workshop survey here](https://smusg.asia.qualtrics.com/jfe/form/SV_3jHynB80Kd6vWOG) to share your goals and current knowledge. Your input will help to tailor the workshop contents and pace.

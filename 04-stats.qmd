@@ -78,20 +78,16 @@ Use `read_csv` from `readr` package (part of `tidyverse`) to load our data into 
 # import tidyverse library
 library(tidyverse)
 
-# read the CSV with Chile voting data
-chile_data <- read_csv("data-output/chile_voting_processed.csv")
+# read the WVS data
+wvs_data <- read_csv("data-output/wvs_processed.csv")
 
-chile_data <- chile_data |> 
-    mutate(across(c("region", "sex", "education", "vote", "age_group", "support_level"), as.factor))
+# Convert categorical variables to factors
+wvs_data <- wvs_data |> 
+    mutate(across(c("country", "sex", "marital_status", 
+                    "employment", "religiousity"), as.factor))
 
-#reordering
-chile_data <- chile_data |> 
-    mutate(education = factor(education, 
-                         levels = c("P", "S", "PS"), 
-                         ordered = TRUE))
-
-# peek at the data, pay attention to the data types!
-glimpse(chile_data)
+# peek at the data
+glimpse(wvs_data)
 ```
 
 ## Chi-square test of independence
@@ -100,21 +96,21 @@ The $X^2$ test of independence evaluates whether there is a statistically signif
 
 This is done by analyzing the frequency table (i.e., contingency table) formed by two categorical variables.
 
-**Example**: Is there any relationship between `education` and `vote` in our Chile voting data?
+**Example**: Is there a relationship between `religiousity` and `marital_status` in our WVS data?
 
 Typically, we can start with visualizing the data first!
 
 ```{r}
-table(chile_data$education, chile_data$vote)
+table(wvs_data$religiousity, wvs_data$marital_status)
 ```
 
 ## Chi-Square: Sample problem and results
 
-Is there any relationship between `education` and `vote` in our Chile voting data?
+Is there a relationship between religiosity and marital_status?
 
 ```{r}
 #| echo: true
-chisq.test(table(chile_data$education, chile_data$vote))
+chisq.test(table(wvs_data$religiousity, wvs_data$marital_status))
 ```
 
 ::: {style="font-size: 75%; width: 75%"}
@@ -160,17 +156,17 @@ For more info, you can refer to this reading: [Measures of Association - How to 
 
 ## Correlation: Sample problem and result
 
-RQ: **Is there a significant correlation between a respondent's age and statusquo?**
+RQ: **Is there a significant correlation between life satisfaction and financial satisfaction?**
 
 As both variables are numerical and continuous, we can use pearson correlation.
 
 Let's start with visualizing the data, which can be used to support the explanation.
 
 ```{r}
-chile_data |> 
-    ggplot(aes(x = age, y = statusquo)) +
+wvs_data |> 
+    ggplot(aes(x = financial_satisfaction, y = life_satisfaction)) +
     geom_jitter(color="maroon", alpha=0.5) +
-    geom_smooth(method = "lm", se = TRUE) # se is to show the confidence interval
+    geom_smooth(method = "lm", se = TRUE) # se shows the confidence interval
 ```
 
 ## Conduct the correlation test
@@ -178,7 +174,8 @@ chile_data |>
 ```{r}
 #| echo: true
 #| output-location: column
-cor.test(chile_data$age, chile_data$statusquo, 
+cor.test(wvs_data$life_satisfaction, 
+         wvs_data$financial_satisfaction, 
          method = "pearson")
 ```
 
@@ -193,7 +190,7 @@ cor.test(chile_data$age, chile_data$statusquo,
 
 ## Let's try this correlation exercise! (5 mins)
 
--   Calculate the correlation coefficient between age and income
+-   Calculate the correlation coefficient between life satisfaction and freedom
 
     -   Which method should you use for this?
 
@@ -208,7 +205,7 @@ cor.test(chile_data$age, chile_data$statusquo,
 ```{r}
 #| echo: false
 #| output: false
-cor.test(chile_data$age, chile_data$income, method = "pearson")
+cor.test(wvs_data$life_satisfaction, wvs_data$freedom, method = "pearson")
 
 ```
 
@@ -246,7 +243,7 @@ Examples: Before workshop vs After workshop.
 
 ## T-test: One-sample T-Test
 
-RQ: **Is the average age of participants who intend to vote "Yes" significantly greater than the overall mean age of voting population in Chile? Assume the population mean is 35.**
+RQ: **Is the average life satisfaction in our sample significantly different from the global average of 6.5?**
 
 Let's start with visualizing the data
 
@@ -254,17 +251,12 @@ Let's start with visualizing the data
 #| echo: true
 #| output-location: column-fragment
 
-yes_voters_age <- chile_data |> # <2>
-    filter(vote == "Y") |>      # <2>
-    select(age)   
-
-
-yes_voters_age |> 
-    ggplot(aes(y = age, x = 1)) +
+wvs_data |> 
+    ggplot(aes(y = life_satisfaction, x = 1)) +
     geom_boxplot(width = 0.2) + 
-    geom_hline(yintercept = 35, color="red") +
-    geom_label(label = "population mean", 
-               x = 1, y = 35.1, 
+    geom_hline(yintercept = 6.5, color="red") +
+    geom_label(label = "global mean", 
+               x = 1, y = 6.6, 
                label.size = 0.15) +
     coord_flip() +
     theme(aspect.ratio = 1/3) 
@@ -275,18 +267,19 @@ yes_voters_age |>
 ```{r}
 #| echo: true
 #| output-location: fragment
-population_mean_age = 35  
+global_mean_satisfaction = 6.5  
 
-t.test(yes_voters_age,          
-       alternative = "greater", 
-       mu = population_mean_age)
+t.test(wvs_data$life_satisfaction,          
+       alternative = "two.sided", 
+       mu = global_mean_satisfaction)
+
 ```
 
 *What if there is a hypothesis? How would you write this in the report?*
 
 ## T-Test: Independent Samples T-Test
 
-RQ: **Is there a significant difference in age between those who intend to vote "Yes" and those who intend to vote "No"?**
+RQ: **Is there a significant difference in life satisfaction between males and females?**
 
 Let's first take only the necessary columns and get some summary statistics, particularly on the number of samples for each group, as well as the mean, standard deviation, and variance.
 
@@ -294,17 +287,15 @@ Let's first take only the necessary columns and get some summary statistics, par
 #| echo: true
 #| output-location: column-fragment
 
-voters_age <- chile_data |> 
-    select(age, vote) |> 
-    filter(vote == "Y" | vote == "N") 
+satisfaction_by_gender <- wvs_data |> 
+    select(life_satisfaction, sex)
 
-voters_age |> 
-    group_by(vote) |> 
+satisfaction_by_gender |> 
+    group_by(sex) |> 
     summarise(total = n(), 
-              mean = mean(age),
-              variance = var(age),
-              stdeviation = sd(age))
-
+              mean = mean(life_satisfaction),
+              variance = var(life_satisfaction),
+              stdeviation = sd(life_satisfaction))
 ```
 
 ## Visualize the differences between two samples
@@ -312,8 +303,8 @@ voters_age |>
 The variance will be easier to see when we visualize it as well. As we can see, the variance for Y group is wider than the N group. This suggests that the variance might be heterogeneous (heteroskedastic).
 
 ```{r}
-voters_age |> 
-    ggplot(aes(x = vote, y = age)) +
+satisfaction_by_gender |> 
+    ggplot(aes(x = sex, y = life_satisfaction)) +
     geom_boxplot() +
     theme_minimal()
 ```
@@ -336,8 +327,8 @@ $H_1$: There is a significant difference in the mean age between those who inten
 #| echo: true
 #| output-location: column
 
-t.test(age ~ vote, 
-       data = voters_age, 
+t.test(life_satisfaction ~ sex, 
+       data = satisfaction_by_gender, 
        var.equal = FALSE)
 ```
 ::: {.callout-tip appearance="simple"}
@@ -432,17 +423,16 @@ There are two 'mainstream' ANOVA that will be covered in this workshop:
 
 ## One-Way ANOVA: Sample problem and result
 
-RQ: **Is there a significant difference in statusquo scores between different education levels?**
+RQ: **Is there a significant difference in life satisfaction between different religiousity?**
 
 Let's visualize the data first!
 
 ```{r}
-chile_data |> 
-    select(statusquo, education) |> 
-    ggplot(aes(x = education, y = statusquo)) +
+wvs_data |> 
+    ggplot(aes(x = religiousity, y = life_satisfaction)) +
     geom_boxplot() +
-    geom_hline(yintercept = 0, color = "maroon") +
-    theme_minimal()
+    theme_minimal() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 ## Conduct the one-way Anova test
@@ -450,8 +440,8 @@ chile_data |>
 ```{r}
 #| echo: true
 
-statusquo_edu_anova <- aov(statusquo ~ education, data = chile_data)
-summary(statusquo_edu_anova)
+satisfaction_religiousity_anova <- aov(life_satisfaction ~ religiousity, data = wvs_data)
+summary(satisfaction_religiousity_anova)
 ```
 
 ::: {style="font-size: 75%; width: 75%"}
@@ -471,7 +461,7 @@ Tukey's Honest Significant Difference (HSD) can help us figure that out! Other a
 ```{r}
 #| echo: true
 #| output-location: fragment
-TukeyHSD(statusquo_edu_anova)
+TukeyHSD(satisfaction_religiousity_anova)
 ```
 
 ## ANOVA Assumptions
@@ -501,8 +491,8 @@ TukeyHSD(statusquo_edu_anova)
 #| output-location: column
 
 library(car)
-leveneTest(income ~ education, 
-           data = chile_data)
+leveneTest(life_satisfaction ~ religiousity, 
+           data = wvs_data)
 ```
 
 The results indicate that the p-value is less than the significance level of 0.05, suggesting a significant difference in variance across the groups. Consequently, the assumption of homogeneity of variances is violated.
@@ -514,7 +504,7 @@ When we plot the residuals[^1], we can see some outliers as well:
 [^1]: Residual = difference between an observed value and the mean of all values for that group.
 
 ```{r}
-plot(statusquo_edu_anova, 1)
+plot(satisfaction_religiousity_anova, 1)
 
 ```
 
@@ -527,7 +517,7 @@ plot(statusquo_edu_anova, 1)
 #| output-location: column
 
 library(car)
-shapiro.test(chile_data$income)
+shapiro.test(wvs_data$age[0:5000])
 ```
 
 The p-value from the Shapiro-Wilk test is less than the significance level of 0.05, indicating that the data significantly deviates from normality. Therefore, the assumption of normality is not satisfied.
@@ -537,7 +527,7 @@ The p-value from the Shapiro-Wilk test is less than the significance level of 0.
 We can see this better from when we plot the residuals:
 
 ```{r}
-plot(statusquo_edu_anova, 2)
+plot(satisfaction_religiousity_anova, 2)
 
 ```
 
@@ -548,7 +538,7 @@ We can use **Kruskal-Wallis rank sum test** as an non-parametric alternative to 
 ```{r}
 #| echo: true 
 
-kruskal.test(statusquo ~ education, data = chile_data)
+kruskal.test(life_satisfaction ~ religiousity, data = wvs_data)
 ```
 
 Other alternative: **Welch's ANOVA** for when the homoskedasticity assumption is not met.
@@ -556,22 +546,23 @@ Other alternative: **Welch's ANOVA** for when the homoskedasticity assumption is
 ```{r}
 #| echo: true
 
-oneway.test(statusquo ~ education, data = chile_data, var.equal = FALSE)
+oneway.test(life_satisfaction ~ religiousity, data = wvs_data, var.equal = FALSE)
 ```
 
 ## Two-Way ANOVA: Sample problem and result
 
-RQ: **Is there a significant difference in statusquo scores between different education levels and sexes?**
+RQ: **Is there a significant difference in life satisfaction across religiousity and countries?**
 
 Let's visualize the data!
 
 ```{r}
 
-chile_data |> 
-    ggplot(aes(x = education, y = statusquo)) +
+wvs_data |> 
+    ggplot(aes(x = employment, y = life_satisfaction)) +
     geom_boxplot() +
-    geom_hline(yintercept = 0, color = "maroon") +
-    facet_wrap(~ sex) 
+    facet_wrap(~ country) +
+    theme_minimal() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 ```
 
@@ -580,8 +571,9 @@ chile_data |>
 ```{r}
 #| echo: true
 #| output-location: fragment
-statusquo_edu_sex_anova <- aov(statusquo ~ education + sex, data = chile_data)
-summary(statusquo_edu_sex_anova)
+satisfaction_relig_country_anova <- aov(life_satisfaction ~ religiousity + country, 
+                                    data = wvs_data)
+summary(satisfaction_relig_country_anova)
 ```
 
 ## Post-hoc test for Two-way ANOVA
@@ -589,12 +581,12 @@ summary(statusquo_edu_sex_anova)
 ```{r}
 #| echo: true
 #| output-location: fragment
-TukeyHSD(statusquo_edu_sex_anova)
+TukeyHSD(satisfaction_relig_country_anova)
 ```
 
 ## Let's try this ANOVA exercise! (5 mins)
 
-Is there a significant difference in income between different regions and statusquo?
+Is there a significant difference in political leaning between different sex?
 
 -   Visualize the data as well
 -   Test for normality and homoskedasticity, and choose the appropriate test
@@ -602,9 +594,9 @@ Is there a significant difference in income between different regions and status
 ```{r}
 #| echo: false
 #| output: false
-statusquo_region <- aov(statusquo ~ region, data = chile_data)
-summary(statusquo_region)
-TukeyHSD(statusquo_region)
+poli_sx_anova <- aov(political_scale ~ sex, data = wvs_data)
+summary(poli_sx_anova)
+TukeyHSD(poli_sx_anova)
 ```
 
 # End of Session 4!

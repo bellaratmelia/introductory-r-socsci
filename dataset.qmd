@@ -6,7 +6,7 @@ format: html
 For this workshop, we will be using dataset stored in a CSV file called `wvs-wave7-sg-ca-nz.csv`.
 
 ```{=html}
-<a href="https://raw.githubusercontent.com/bellaratmelia/introductory-r-workshop/refs/heads/main/data/wvs-wave7-sg-ca-nz.csv" type="button" class="btn btn-success">Click here to open wvs-wave7-sg-ca-nz.csv, and then Ctrl + S / Cmd + S to save it locally into your data folder</a>
+<a href="https://raw.githubusercontent.com/bellaratmelia/introductory-r-socsci/refs/heads/main/data/wvs-wave7-sg-ca-nz.csv" type="button" class="btn btn-success">Click here to open wvs-wave7-sg-ca-nz.csv, and then Ctrl + S / Cmd + S to save it locally into your data folder</a>
 ```
 
 ::: {.callout-note appearance="simple"}

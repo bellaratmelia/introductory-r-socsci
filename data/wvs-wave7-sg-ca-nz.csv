@@ -4543,7 +4543,7 @@ NZL,554070524,1,3,3,4,6,5,5,A religious person,3,Female,1928,91,Widowed,Retired/
 NZL,554070525,3,2,1,2,9,6,7,A religious person,9,Male,1947,72,Married,Full time
 NZL,554070526,1,1,1,2,9,8,7,A religious person,5,Female,1966,53,Divorced,Full time
 NZL,554070527,1,1,1,2,9,8,7,An atheist,7,Male,1973,46,Married,Full time
-NZL,554070528,1,2,2,2,7,6,6,A religious person,6,No answer,1962,57,Married,Other
+NZL,554070528,1,2,2,2,7,6,6,A religious person,6,,1962,57,Married,Other
 NZL,554070529,1,1,1,1,7,8,4,Not a religious person,8,Male,,,Married,Full time
 NZL,554070530,1,2,2,3,7,7,6,Not a religious person,2,Female,1988,31,Married,Homemaker not otherwise employed
 NZL,554070531,1,2,2,1,10,10,10,Not a religious person,,Male,1953,66,Married,Full time
@@ -4762,7 +4762,7 @@ NZL,554070743,1,1,2,1,9,8,7,A religious person,8,Female,1991,28,Single,Full time
 NZL,554070744,1,2,2,2,7,7,6,An atheist,7,Male,1963,56,Married,Full time
 NZL,554070745,1,1,2,1,8,9,10,Not a religious person,1,Female,1969,50,Single,Full time
 NZL,554070746,1,1,2,2,6,6,4,A religious person,8,Male,1953,66,Single,Unemployed
-NZL,554070747,1,1,1,4,7,8,6,A religious person,,No answer,1961,58,Married,Other
+NZL,554070747,1,1,1,4,7,8,6,A religious person,,,1961,58,Married,Other
 NZL,554070748,1,3,4,1,6,5,1,A religious person,5,Female,1990,29,Single,Full time
 NZL,554070749,,,,,,,,Don't know,,Female,1962,57,Divorced,Unemployed
 NZL,554070750,1,1,1,1,10,9,8,Not a religious person,6,Female,1957,62,Divorced,Part time
@@ -5196,7 +5196,7 @@ SGP,702070119,1,1,2,2,7,8,9,A religious person,,Female,1982,38,Married,Part time
 SGP,702070120,1,1,1,3,5,6,8,A religious person,6,Female,1964,55,Married,Retired/pensioned
 SGP,702070121,1,1,2,2,1,5,2,Not a religious person,5,Male,1973,46,Married,Full time
 SGP,702070122,1,1,1,2,8,8,8,An atheist,5,Female,1971,49,Married,Self employed
-SGP,702070123,1,1,1,-2,10,10,10,Not a religious person,7,Female,1944,76,Widowed,Retired/pensioned
+SGP,702070123,1,1,1,,10,10,10,Not a religious person,7,Female,1944,76,Widowed,Retired/pensioned
 SGP,702070124,1,2,1,1,3,3,3,Not a religious person,1,Female,1971,49,Married,Full time
 SGP,702070125,1,1,1,1,8,7,6,Not a religious person,6,Female,1996,23,Single,Full time
 SGP,702070126,1,2,2,2,7,7,6,An atheist,2,Male,1991,29,Married,Full time
@@ -5310,11 +5310,11 @@ SGP,702070233,1,1,2,2,8,8,6,Not a religious person,,Female,1943,77,Single,Retire
 SGP,702070234,1,3,3,1,7,10,5,A religious person,10,Female,1963,56,Married,Unemployed
 SGP,702070235,1,3,2,2,8,8,8,A religious person,10,Male,1968,51,Married,Unemployed
 SGP,702070236,2,2,3,3,2,4,1,An atheist,5,Male,1960,60,Divorced,Unemployed
-SGP,702070237,1,1,2,1,3,3,1,No answer,6,Male,1978,42,Married,Unemployed
+SGP,702070237,1,1,2,1,3,3,1,,6,Male,1978,42,Married,Unemployed
 SGP,702070238,1,1,1,1,2,5,2,A religious person,8,Female,1959,61,Married,Retired/pensioned
 SGP,702070239,1,2,3,2,9,8,7,A religious person,,Female,1965,55,Widowed,Part time
 SGP,702070240,1,3,3,3,10,10,10,A religious person,7,Female,1951,69,Widowed,Retired/pensioned
-SGP,702070241,2,2,1,2,7,7,1,No answer,7,Male,1984,36,Single,Part time
+SGP,702070241,2,2,1,2,7,7,1,,7,Male,1984,36,Single,Part time
 SGP,702070242,1,3,4,3,5,7,10,Not a religious person,10,Female,1978,42,Married,Full time
 SGP,702070243,1,1,1,3,10,9,8,A religious person,6,Female,1984,35,Married,Full time
 SGP,702070244,1,1,1,3,9,5,5,Not a religious person,3,Female,1990,30,Living together as married,Full time
@@ -5360,7 +5360,7 @@ SGP,702070283,1,1,2,2,10,10,10,A religious person,,Female,1968,52,Married,Full t
 SGP,702070284,1,1,3,2,9,8,8,Not a religious person,5,Male,1968,52,Married,Self employed
 SGP,702070285,1,1,1,4,7,7,7,An atheist,,Male,1978,42,Married,Unemployed
 SGP,702070286,1,1,3,3,7,5,2,Not a religious person,5,Male,1949,71,Married,Unemployed
-SGP,702070287,1,1,2,2,4,6,5,No answer,3,Male,1988,32,Single,Full time
+SGP,702070287,1,1,2,2,4,6,5,,3,Male,1988,32,Single,Full time
 SGP,702070288,1,1,1,3,8,8,8,Not a religious person,7,Male,1938,82,Widowed,Retired/pensioned
 SGP,702070289,1,2,4,1,6,3,4,Not a religious person,5,Female,1974,45,Separated,Full time
 SGP,702070290,1,2,2,3,8,8,8,A religious person,6,Female,1963,57,Married,Homemaker not otherwise employed
@@ -5376,14 +5376,14 @@ SGP,702070299,1,2,1,2,6,7,6,Not a religious person,6,Male,1984,36,Single,Full ti
 SGP,702070300,1,2,2,2,7,7,7,A religious person,6,Female,1968,52,Single,Full time
 SGP,702070301,1,2,2,2,8,8,9,A religious person,7,Male,1973,47,Married,Full time
 SGP,702070302,1,1,1,1,10,7,7,Not a religious person,,Female,1993,27,Single,Full time
-SGP,702070303,1,2,1,2,-2,1,4,Not a religious person,5,Female,1985,34,Single,Full time
+SGP,702070303,1,2,1,2,,1,4,Not a religious person,5,Female,1985,34,Single,Full time
 SGP,702070304,1,2,1,2,8,8,8,Not a religious person,5,Female,1976,43,Married,Homemaker not otherwise employed
 SGP,702070305,1,2,2,2,10,8,8,Not a religious person,5,Male,1983,36,Married,Full time
 SGP,702070306,1,1,2,2,6,5,5,Not a religious person,6,Male,1975,45,Single,Full time
 SGP,702070307,1,2,2,1,5,8,6,Not a religious person,2,Male,1962,58,Married,Self employed
 SGP,702070308,1,3,1,1,10,5,1,Not a religious person,1,Male,1964,55,Divorced,Full time
 SGP,702070309,1,1,3,1,10,10,10,A religious person,7,Male,1947,72,Single,Retired/pensioned
-SGP,702070310,-2,1,1,-2,-2,10,7,A religious person,2,Female,1930,89,Divorced,Retired/pensioned
+SGP,702070310,,1,1,,,10,7,A religious person,2,Female,1930,89,Divorced,Retired/pensioned
 SGP,702070311,3,1,3,1,10,5,7,Not a religious person,10,Male,1998,22,Single,Full time
 SGP,702070312,1,2,2,3,5,5,1,A religious person,3,Male,1998,22,Single,Part time
 SGP,702070313,1,2,2,2,5,5,3,A religious person,5,Male,1970,50,Single,Part time
@@ -5392,26 +5392,26 @@ SGP,702070315,1,2,1,3,6,9,7,A religious person,8,Male,1954,66,Married,Retired/pe
 SGP,702070316,1,2,1,3,8,8,9,An atheist,5,Female,1986,34,Married,Full time
 SGP,702070317,1,1,1,2,10,8,7,An atheist,,Female,1977,43,Separated,Full time
 SGP,702070318,1,2,1,2,9,8,6,Not a religious person,1,Female,1974,45,Married,Part time
-SGP,702070319,1,1,2,4,-2,7,8,An atheist,7,Female,1940,79,Widowed,Retired/pensioned
-SGP,702070320,1,1,2,1,8,7,7,No answer,,Male,1967,53,Married,Full time
+SGP,702070319,1,1,2,4,,7,8,An atheist,7,Female,1940,79,Widowed,Retired/pensioned
+SGP,702070320,1,1,2,1,8,7,7,,,Male,1967,53,Married,Full time
 SGP,702070321,1,1,2,3,5,7,6,Not a religious person,7,Female,1982,38,Married,Homemaker not otherwise employed
 SGP,702070322,1,1,2,2,8,8,7,Not a religious person,5,Male,1964,55,Married,Self employed
-SGP,702070323,1,2,2,1,7,8,7,No answer,8,Male,1969,51,Married,Self employed
+SGP,702070323,1,2,2,1,7,8,7,,8,Male,1969,51,Married,Self employed
 SGP,702070324,1,1,2,2,6,7,7,Not a religious person,5,Male,1995,25,Single,Part time
-SGP,702070325,1,3,1,-2,-2,7,10,Not a religious person,6,Female,1928,91,Widowed,Retired/pensioned
+SGP,702070325,1,3,1,,,7,10,Not a religious person,6,Female,1928,91,Widowed,Retired/pensioned
 SGP,702070326,1,3,2,2,6,8,6,An atheist,4,Male,1972,47,Married,Full time
 SGP,702070327,1,2,3,2,8,8,8,An atheist,5,Male,1954,65,Married,Retired/pensioned
-SGP,702070328,2,2,2,-2,7,6,7,A religious person,,Female,1957,62,Living together as married,Retired/pensioned
+SGP,702070328,2,2,2,,7,6,7,A religious person,,Female,1957,62,Living together as married,Retired/pensioned
 SGP,702070329,1,2,3,2,7,7,7,Not a religious person,7,Male,1961,59,Married,Full time
 SGP,702070330,1,2,2,2,7,7,6,An atheist,8,Male,1947,73,Married,Retired/pensioned
-SGP,702070331,1,2,1,1,6,8,7,No answer,8,Female,1946,74,Married,Retired/pensioned
+SGP,702070331,1,2,1,1,6,8,7,,8,Female,1946,74,Married,Retired/pensioned
 SGP,702070332,1,3,1,1,10,10,10,Not a religious person,5,Male,1966,54,Married,Full time
 SGP,702070333,1,1,1,2,9,9,10,Not a religious person,,Female,1960,60,Married,Retired/pensioned
 SGP,702070334,1,1,2,2,6,7,7,Not a religious person,7,Female,1951,69,Widowed,Retired/pensioned
 SGP,702070335,1,1,2,2,6,8,7,Not a religious person,-2,Female,1950,70,Married,Part time
 SGP,702070336,1,3,2,2,4,4,5,A religious person,6,Female,1960,60,Divorced,Full time
 SGP,702070337,2,2,2,3,5,5,6,Not a religious person,5,Male,1939,81,Married,Retired/pensioned
-SGP,702070338,1,2,2,2,5,5,5,No answer,5,Female,1970,50,Married,Self employed
+SGP,702070338,1,2,2,2,5,5,5,,5,Female,1970,50,Married,Self employed
 SGP,702070339,1,2,2,3,7,7,7,Not a religious person,7,Male,1964,56,Married,Part time
 SGP,702070340,1,2,2,2,8,7,5,A religious person,9,Male,1960,60,Married,Part time
 SGP,702070341,2,2,3,1,10,9,8,A religious person,7,Male,1991,29,Single,Full time
@@ -5425,7 +5425,7 @@ SGP,702070348,1,2,2,3,7,7,7,A religious person,5,Female,1960,60,Married,Retired/
 SGP,702070349,1,1,1,1,10,7,6,Not a religious person,3,Male,1998,22,Single,Other
 SGP,702070350,1,1,1,2,7,7,7,A religious person,5,Male,1964,56,Married,Full time
 SGP,702070351,1,2,1,2,4,7,8,A religious person,,Male,1998,22,Single,Student
-SGP,702070352,1,2,2,1,5,5,5,No answer,,Female,1975,45,Divorced,Unemployed
+SGP,702070352,1,2,2,1,5,5,5,,,Female,1975,45,Divorced,Unemployed
 SGP,702070353,1,1,3,1,9,9,8,Not a religious person,5,Male,1986,34,Living together as married,Full time
 SGP,702070354,1,2,2,2,6,7,7,An atheist,5,Male,1947,73,Married,Retired/pensioned
 SGP,702070355,1,2,1,2,7,8,5,A religious person,7,Male,1993,27,Single,Full time
@@ -5438,12 +5438,12 @@ SGP,702070361,1,1,1,2,8,8,6,An atheist,2,Male,1995,25,Single,Student
 SGP,702070362,1,2,2,1,8,3,3,A religious person,2,Female,1950,70,Married,Homemaker not otherwise employed
 SGP,702070363,1,2,2,2,6,8,9,A religious person,7,Female,1947,73,Single,Full time
 SGP,702070364,1,2,2,2,8,8,10,A religious person,7,Male,1953,67,Married,Retired/pensioned
-SGP,702070365,1,2,3,1,-2,6,6,Not a religious person,10,Male,1966,54,Married,Full time
+SGP,702070365,1,2,3,1,,6,6,Not a religious person,10,Male,1966,54,Married,Full time
 SGP,702070366,2,2,1,1,8,7,3,An atheist,4,Male,1984,36,Single,Full time
 SGP,702070367,1,1,1,2,8,8,8,Not a religious person,7,Male,1989,30,Single,Full time
 SGP,702070368,1,1,1,2,7,9,8,A religious person,5,Female,1980,39,Married,Full time
 SGP,702070369,1,2,2,1,10,7,8,A religious person,5,Female,1942,78,Married,Retired/pensioned
-SGP,702070370,1,2,3,1,5,10,7,No answer,3,Female,1944,76,Married,Retired/pensioned
+SGP,702070370,1,2,3,1,5,10,7,,3,Female,1944,76,Married,Retired/pensioned
 SGP,702070371,1,1,2,1,8,8,8,Not a religious person,5,Male,1962,58,Married,Full time
 SGP,702070372,1,1,1,1,10,7,9,A religious person,,Female,1954,66,Divorced,Full time
 SGP,702070373,1,1,1,1,7,8,9,Not a religious person,4,Female,1969,50,Married,Unemployed
@@ -5471,7 +5471,7 @@ SGP,702070394,1,2,2,1,10,7,9,A religious person,5,Female,1976,44,Single,Part tim
 SGP,702070395,1,2,2,2,7,7,10,A religious person,5,Female,1958,61,Single,Full time
 SGP,702070396,1,2,4,4,2,1,2,A religious person,9,Female,1937,82,Widowed,Homemaker not otherwise employed
 SGP,702070397,1,1,1,1,9,8,8,An atheist,10,Female,1970,49,Married,Homemaker not otherwise employed
-SGP,702070398,1,2,2,2,8,8,8,No answer,9,Female,1968,51,Divorced,Self employed
+SGP,702070398,1,2,2,2,8,8,8,,9,Female,1968,51,Divorced,Self employed
 SGP,702070399,1,2,2,2,8,7,8,Not a religious person,,Female,1989,31,Single,Full time
 SGP,702070400,1,1,2,2,7,7,5,An atheist,5,Male,1995,24,Single,Unemployed
 SGP,702070401,1,1,2,1,7,6,3,Not a religious person,4,Female,1996,24,Single,Full time
@@ -5492,7 +5492,7 @@ SGP,702070415,1,1,2,1,9,7,8,A religious person,4,Male,1997,22,Single,Student
 SGP,702070416,1,1,1,3,10,10,10,A religious person,3,Female,1942,78,Divorced,Retired/pensioned
 SGP,702070417,1,1,2,2,8,6,6,A religious person,8,Female,1935,84,Widowed,Retired/pensioned
 SGP,702070418,1,1,1,1,8,10,10,A religious person,3,Female,1958,61,Married,Retired/pensioned
-SGP,702070419,1,1,1,2,5,5,6,No answer,4,Female,1990,29,Single,Full time
+SGP,702070419,1,1,1,2,5,5,6,,4,Female,1990,29,Single,Full time
 SGP,702070420,1,2,2,1,7,7,7,Not a religious person,2,Female,1957,62,Single,Full time
 SGP,702070421,1,1,2,1,7,8,8,A religious person,4,Female,1982,38,Married,Full time
 SGP,702070422,1,1,1,1,10,10,10,An atheist,2,Female,1937,82,Widowed,Self employed
@@ -5660,8 +5660,8 @@ SGP,702070583,1,1,1,2,5,5,5,A religious person,,Male,1998,22,Single,Full time
 SGP,702070584,1,1,2,1,6,5,3,Not a religious person,3,Female,1995,24,Single,Full time
 SGP,702070585,1,1,1,1,10,10,10,A religious person,-2,Male,1980,39,Married,Full time
 SGP,702070586,3,3,2,3,6,6,4,An atheist,6,Male,1990,29,Single,Full time
-SGP,702070587,1,2,2,2,8,9,7,No answer,,Male,1990,29,Single,Full time
-SGP,702070588,1,2,1,3,-2,8,10,A religious person,8,Female,1958,62,Widowed,Retired/pensioned
+SGP,702070587,1,2,2,2,8,9,7,,,Male,1990,29,Single,Full time
+SGP,702070588,1,2,1,3,,8,10,A religious person,8,Female,1958,62,Widowed,Retired/pensioned
 SGP,702070589,1,2,2,2,6,6,6,A religious person,,Female,1956,64,Married,Retired/pensioned
 SGP,702070590,1,1,2,2,8,7,7,A religious person,3,Female,1996,24,Single,Student
 SGP,702070591,1,2,2,2,8,7,8,A religious person,8,Male,1997,22,Single,Student
@@ -5688,7 +5688,7 @@ SGP,702070611,1,2,2,2,10,7,5,A religious person,2,Female,1980,40,Married,Full ti
 SGP,702070612,1,1,2,2,10,10,10,A religious person,5,Female,1968,52,Married,Self employed
 SGP,702070613,1,1,1,2,10,7,4,A religious person,10,Female,1953,66,Single,Full time
 SGP,702070614,1,2,2,1,8,8,8,A religious person,5,Male,1981,38,Married,Full time
-SGP,702070615,1,1,1,2,8,7,9,No answer,,Female,1982,38,Single,Full time
+SGP,702070615,1,1,1,2,8,7,9,,,Female,1982,38,Single,Full time
 SGP,702070616,1,2,2,2,4,4,5,A religious person,5,Male,1953,66,Married,Retired/pensioned
 SGP,702070617,1,1,1,3,8,8,7,A religious person,4,Male,1964,55,Married,Full time
 SGP,702070618,1,1,1,1,4,5,3,A religious person,3,Male,1968,51,Married,Full time
@@ -5830,7 +5830,7 @@ SGP,702070753,1,2,2,2,8,8,7,A religious person,8,Female,1964,55,Married,Part tim
 SGP,702070754,1,1,2,2,7,6,6,A religious person,3,Female,1964,55,Widowed,Part time
 SGP,702070755,1,2,2,2,7,6,5,Not a religious person,5,Male,1959,60,Married,Retired/pensioned
 SGP,702070756,2,1,1,2,7,3,5,A religious person,3,Male,1995,24,Single,Part time
-SGP,702070757,1,3,1,1,7,8,6,No answer,5,Female,1974,45,Married,Full time
+SGP,702070757,1,3,1,1,7,8,6,,5,Female,1974,45,Married,Full time
 SGP,702070758,1,1,1,1,7,7,7,A religious person,8,Female,1992,27,Married,Homemaker not otherwise employed
 SGP,702070759,1,1,1,2,8,8,9,A religious person,9,Female,1984,35,Married,Full time
 SGP,702070760,1,3,2,1,5,6,6,A religious person,3,Male,1993,26,Single,Unemployed
@@ -5892,7 +5892,7 @@ SGP,702070815,1,3,2,2,9,9,8,A religious person,5,Female,1981,38,Married,Full tim
 SGP,702070816,1,2,2,1,7,7,7,A religious person,5,Male,1970,49,Single,Full time
 SGP,702070817,1,1,2,3,4,4,3,A religious person,5,Male,1951,68,Married,Retired/pensioned
 SGP,702070818,1,1,1,2,8,4,7,Not a religious person,7,Male,1993,26,Single,Student
-SGP,702070819,2,2,2,3,10,10,10,No answer,10,Female,1943,76,Widowed,Retired/pensioned
+SGP,702070819,2,2,2,3,10,10,10,,10,Female,1943,76,Widowed,Retired/pensioned
 SGP,702070820,1,2,2,1,10,10,10,A religious person,3,Male,1991,28,Married,Full time
 SGP,702070821,2,2,2,3,8,8,8,A religious person,2,Female,1956,63,Married,Part time
 SGP,702070822,1,2,2,2,6,7,7,A religious person,1,Male,1972,47,Single,Full time
@@ -5975,7 +5975,7 @@ SGP,702070898,2,3,3,2,6,6,7,Not a religious person,3,Male,1966,53,Married,Full t
 SGP,702070899,1,2,1,2,9,8,8,An atheist,4,Female,1970,49,Married,Full time
 SGP,702070900,1,2,1,1,8,8,8,A religious person,3,Female,1979,40,Married,Full time
 SGP,702070901,1,2,3,2,1,4,3,A religious person,5,Female,1991,28,Married,Unemployed
-SGP,702070902,2,3,1,4,-2,10,10,Not a religious person,,Male,1940,79,Single,Retired/pensioned
+SGP,702070902,2,3,1,4,,10,10,Not a religious person,,Male,1940,79,Single,Retired/pensioned
 SGP,702070903,1,1,1,2,8,8,6,Not a religious person,3,Female,1984,35,Married,Full time
 SGP,702070904,1,1,3,1,7,6,5,A religious person,5,Male,1966,53,Widowed,Self employed
 SGP,702070905,1,2,1,2,5,3,1,An atheist,2,Male,1961,58,Single,Part time
@@ -6014,7 +6014,7 @@ SGP,702070937,1,1,2,3,6,8,7,Not a religious person,,Male,1989,31,Single,Unemploy
 SGP,702070938,1,1,2,1,5,5,5,Not a religious person,,Male,1987,33,Single,Self employed
 SGP,702070939,1,1,2,3,5,5,4,Not a religious person,,Female,1970,50,Married,Homemaker not otherwise employed
 SGP,702070940,3,3,3,3,1,1,1,Not a religious person,10,Male,1965,55,Separated,Unemployed
-SGP,702070941,1,1,2,2,3,8,-2,A religious person,3,Male,1950,70,Married,Homemaker not otherwise employed
+SGP,702070941,1,1,2,2,3,8,,A religious person,3,Male,1950,70,Married,Homemaker not otherwise employed
 SGP,702070942,1,2,2,2,7,7,7,Not a religious person,4,Male,1981,39,Single,Full time
 SGP,702070943,2,2,2,3,8,10,7,A religious person,,Female,1941,78,Widowed,Homemaker not otherwise employed
 SGP,702070944,1,2,2,1,8,7,4,A religious person,5,Female,1978,42,Married,Full time
@@ -6031,7 +6031,7 @@ SGP,702070954,1,1,3,1,1,2,3,A religious person,3,Male,1973,47,Married,Full time
 SGP,702070955,1,1,2,2,6,7,8,A religious person,5,Female,1968,52,Married,Homemaker not otherwise employed
 SGP,702070956,1,2,2,2,7,7,6,Not a religious person,5,Female,1957,63,Married,Homemaker not otherwise employed
 SGP,702070957,1,1,1,1,7,8,8,A religious person,3,Male,1983,37,Married,Full time
-SGP,702070958,1,1,2,2,9,7,6,No answer,8,Male,1973,46,Married,Full time
+SGP,702070958,1,1,2,2,9,7,6,,8,Male,1973,46,Married,Full time
 SGP,702070959,1,1,4,1,5,8,5,A religious person,7,Female,1976,44,Married,Part time
 SGP,702070960,1,1,2,1,8,9,8,A religious person,2,Male,1970,50,Married,Full time
 SGP,702070961,1,1,1,1,9,9,5,A religious person,3,Female,1988,32,Married,Self employed
@@ -6054,7 +6054,7 @@ SGP,702070977,1,2,2,2,6,7,6,Not a religious person,4,Female,1984,36,Married,Full
 SGP,702070978,1,2,2,2,10,9,9,An atheist,5,Male,1967,53,Married,Full time
 SGP,702070979,1,2,2,2,5,5,5,A religious person,5,Female,1994,26,Single,Full time
 SGP,702070980,1,2,3,2,5,5,4,A religious person,5,Female,1981,39,Single,Full time
-SGP,702070981,1,2,2,2,-2,1,1,A religious person,6,Male,1983,37,Married,Full time
+SGP,702070981,1,2,2,2,,1,1,A religious person,6,Male,1983,37,Married,Full time
 SGP,702070982,1,2,2,2,4,5,4,A religious person,5,Male,1962,58,Married,Unemployed
 SGP,702070983,1,1,2,2,7,8,8,A religious person,5,Male,1971,49,Married,Full time
 SGP,702070984,1,2,3,2,8,8,8,A religious person,5,Female,1962,58,Married,Part time
@@ -6067,7 +6067,7 @@ SGP,702070990,1,2,2,2,8,7,8,Not a religious person,3,Female,1978,42,Married,Full
 SGP,702070991,1,1,1,2,7,7,7,Not a religious person,3,Female,1999,21,Single,Student
 SGP,702070992,1,2,3,2,5,9,8,An atheist,5,Male,1953,67,Married,Part time
 SGP,702070993,1,1,2,1,7,6,5,Not a religious person,4,Male,1984,36,Married,Full time
-SGP,702070994,1,2,2,3,8,8,7,No answer,6,Female,1983,37,Married,Homemaker not otherwise employed
+SGP,702070994,1,2,2,3,8,8,7,,6,Female,1983,37,Married,Homemaker not otherwise employed
 SGP,702070995,1,2,1,1,5,5,5,A religious person,5,Male,1990,30,Married,Full time
 SGP,702070996,1,1,1,2,5,7,6,A religious person,5,Male,1966,54,Single,Self employed
 SGP,702070997,1,2,2,1,5,7,5,Not a religious person,5,Female,1972,48,Married,Self employed
@@ -6215,7 +6215,7 @@ SGP,702071138,1,2,1,2,7,8,8,A religious person,7,Female,1988,31,Single,Full time
 SGP,702071139,1,1,2,1,4,6,6,Not a religious person,6,Female,1996,24,Married,Part time
 SGP,702071140,2,1,1,2,4,4,4,Not a religious person,5,Female,1994,26,Married,Full time
 SGP,702071141,1,2,3,1,7,8,7,A religious person,2,Male,1976,43,Married,Full time
-SGP,702071142,1,1,1,2,6,7,6,No answer,3,Male,1995,24,Single,Student
+SGP,702071142,1,1,1,2,6,7,6,,3,Male,1995,24,Single,Student
 SGP,702071143,1,2,1,1,8,10,8,Not a religious person,3,Male,1996,23,Single,Student
 SGP,702071144,1,2,2,2,7,7,8,A religious person,,Female,1956,64,Married,Homemaker not otherwise employed
 SGP,702071145,1,1,1,3,6,7,8,Not a religious person,4,Female,1977,43,Married,Homemaker not otherwise employed
@@ -6235,7 +6235,7 @@ SGP,702071158,1,2,2,3,10,1,1,A religious person,5,Male,1948,72,Married,Other
 SGP,702071159,1,2,1,3,7,7,7,A religious person,5,Female,1945,75,Widowed,Homemaker not otherwise employed
 SGP,702071160,1,2,1,1,5,6,6,A religious person,8,Male,1967,53,Married,Unemployed
 SGP,702071161,1,2,2,1,5,5,5,A religious person,5,Male,1959,61,Married,Retired/pensioned
-SGP,702071162,1,1,2,1,5,5,5,No answer,,Male,1998,22,Single,Student
+SGP,702071162,1,1,2,1,5,5,5,,,Male,1998,22,Single,Student
 SGP,702071163,1,1,1,1,5,5,5,Not a religious person,5,Female,1996,24,Single,Full time
 SGP,702071164,1,1,2,3,8,8,8,A religious person,7,Male,1958,61,Married,Retired/pensioned
 SGP,702071165,1,2,2,2,8,9,10,An atheist,5,Male,1982,38,Married,Full time
@@ -6271,7 +6271,7 @@ SGP,702071194,1,2,2,2,9,4,5,A religious person,8,Male,1963,56,Married,Self emplo
 SGP,702071195,3,1,1,1,5,4,8,A religious person,5,Female,1994,25,Single,Full time
 SGP,702071196,1,1,2,1,5,5,5,A religious person,,Male,1995,25,Single,Full time
 SGP,702071197,1,1,2,3,9,7,8,A religious person,3,Female,1984,35,Married,Full time
-SGP,702071198,1,1,1,1,5,5,5,No answer,,Female,1985,35,Married,Full time
+SGP,702071198,1,1,1,1,5,5,5,,,Female,1985,35,Married,Full time
 SGP,702071199,2,2,1,2,9,8,7,An atheist,,Male,1992,27,Single,Self employed
 SGP,702071200,1,2,2,2,5,5,1,A religious person,,Female,1973,46,Married,Part time
 SGP,702071201,1,2,2,1,5,5,3,Not a religious person,2,Male,1980,39,Living together as married,Full time
@@ -6316,7 +6316,7 @@ SGP,702071239,1,2,2,1,6,10,10,An atheist,7,Male,1980,40,Widowed,Full time
 SGP,702071240,1,2,2,2,10,10,6,A religious person,4,Male,1963,57,Married,Self employed
 SGP,702071241,1,2,1,1,2,6,3,A religious person,6,Male,1952,68,Married,Retired/pensioned
 SGP,702071242,1,2,1,1,7,8,7,A religious person,1,Female,1971,49,Married,Full time
-SGP,702071243,1,1,1,2,8,8,8,No answer,6,Female,1955,65,Married,Retired/pensioned
+SGP,702071243,1,1,1,2,8,8,8,,6,Female,1955,65,Married,Retired/pensioned
 SGP,702071244,1,1,1,1,6,5,5,An atheist,2,Male,1990,29,Single,Full time
 SGP,702071245,1,2,2,1,6,8,8,A religious person,2,Male,1984,36,Married,Full time
 SGP,702071246,1,1,1,3,10,8,7,An atheist,5,Female,1986,34,Single,Full time
@@ -6367,7 +6367,7 @@ SGP,702071290,1,2,2,2,8,8,10,A religious person,6,Male,1961,59,Married,Self empl
 SGP,702071291,1,2,1,2,7,8,9,A religious person,6,Female,1993,27,Single,Full time
 SGP,702071292,1,2,2,2,4,5,5,A religious person,3,Female,1963,57,Divorced,Retired/pensioned
 SGP,702071293,1,2,2,3,10,10,10,An atheist,,Male,1949,70,Married,Part time
-SGP,702071294,1,2,1,1,6,7,5,No answer,8,Female,1975,45,Married,Full time
+SGP,702071294,1,2,1,1,6,7,5,,8,Female,1975,45,Married,Full time
 SGP,702071295,1,2,2,2,6,7,8,Not a religious person,6,Male,1975,44,Married,Full time
 SGP,702071296,1,2,4,1,7,4,4,Not a religious person,5,Male,1973,46,Married,Unemployed
 SGP,702071297,1,2,2,4,2,4,5,An atheist,,Female,1945,74,Married,Retired/pensioned
@@ -6379,10 +6379,10 @@ SGP,702071302,1,1,1,1,3,8,6,A religious person,5,Female,1953,67,Single,Retired/p
 SGP,702071303,1,2,2,2,7,5,5,A religious person,,Female,1987,33,Single,Unemployed
 SGP,702071304,1,2,1,1,8,4,4,An atheist,5,Male,1974,46,Married,Full time
 SGP,702071305,1,2,2,4,2,9,8,A religious person,8,Male,1939,81,Married,Retired/pensioned
-SGP,702071306,1,1,1,-2,8,8,8,A religious person,5,Male,1948,72,Married,Retired/pensioned
-SGP,702071307,1,1,2,2,7,8,8,No answer,-2,Female,1983,37,Single,Full time
+SGP,702071306,1,1,1,,8,8,8,A religious person,5,Male,1948,72,Married,Retired/pensioned
+SGP,702071307,1,1,2,2,7,8,8,,-2,Female,1983,37,Single,Full time
 SGP,702071308,1,1,2,1,7,9,9,Not a religious person,7,Male,1960,60,Married,Full time
-SGP,702071309,2,3,3,-2,6,6,6,No answer,,Female,1955,65,Married,Retired/pensioned
+SGP,702071309,2,3,3,,6,6,6,,,Female,1955,65,Married,Retired/pensioned
 SGP,702071310,1,1,3,1,8,10,8,A religious person,9,Male,1978,42,Married,Full time
 SGP,702071311,1,2,2,4,7,8,8,Not a religious person,5,Female,1957,63,Married,Retired/pensioned
 SGP,702071312,1,2,4,1,8,8,6,A religious person,7,Female,1996,24,Single,Student
@@ -6416,7 +6416,7 @@ SGP,702071339,1,2,1,3,8,8,7,A religious person,2,Female,1957,63,Married,Homemake
 SGP,702071340,1,1,2,2,8,7,7,Not a religious person,5,Female,1997,23,Single,Student
 SGP,702071341,1,1,2,2,10,8,8,A religious person,5,Female,1955,65,Married,Full time
 SGP,702071342,1,1,1,2,10,9,5,Not a religious person,6,Female,1989,31,Single,Full time
-SGP,702071343,1,2,1,2,7,7,7,No answer,5,Male,1973,47,Married,Full time
+SGP,702071343,1,2,1,2,7,7,7,,5,Male,1973,47,Married,Full time
 SGP,702071344,1,1,1,1,10,10,6,A religious person,8,Male,1964,56,Married,Self employed
 SGP,702071345,1,2,3,1,10,10,10,A religious person,3,Female,1962,58,Married,Other
 SGP,702071346,1,1,1,1,8,7,5,A religious person,1,Male,1962,58,Married,Full time
@@ -6489,7 +6489,7 @@ SGP,702071412,1,2,2,2,1,1,1,Not a religious person,1,Female,1967,53,Married,Full
 SGP,702071413,2,2,2,2,7,5,5,A religious person,,Male,1961,59,Single,Student
 SGP,702071414,1,3,2,1,7,6,4,Not a religious person,,Female,1999,21,Married,Full time
 SGP,702071415,1,1,2,2,7,7,6,A religious person,5,Male,1974,45,Married,Full time
-SGP,702071416,1,2,2,2,5,5,5,No answer,5,Female,1986,34,Single,Full time
+SGP,702071416,1,2,2,2,5,5,5,,5,Female,1986,34,Single,Full time
 SGP,702071417,1,1,1,1,1,5,3,Not a religious person,,Female,1985,34,Widowed,Full time
 SGP,702071418,1,3,1,1,1,2,3,An atheist,-2,Female,1980,40,Single,Homemaker not otherwise employed
 SGP,702071419,1,2,3,2,8,8,8,Not a religious person,4,Male,1982,37,Married,Full time
@@ -6513,7 +6513,7 @@ SGP,702071436,1,2,1,1,7,9,7,A religious person,10,Male,1977,43,Married,Student
 SGP,702071437,2,2,1,1,7,7,7,Not a religious person,3,Male,1976,44,Single,Full time
 SGP,702071438,1,1,1,1,5,10,8,A religious person,-2,Male,1977,43,Married,Full time
 SGP,702071439,1,1,2,1,3,4,2,Not a religious person,3,Male,1969,51,Married,Full time
-SGP,702071440,1,1,3,3,2,6,5,No answer,5,Female,1993,27,Single,Student
+SGP,702071440,1,1,3,3,2,6,5,,5,Female,1993,27,Single,Student
 SGP,702071441,1,2,2,2,5,5,5,Not a religious person,4,Male,1988,32,Single,Full time
 SGP,702071442,1,2,2,2,7,4,3,Not a religious person,4,Male,1978,42,Married,Self employed
 SGP,702071443,1,1,2,2,7,8,7,Not a religious person,2,Male,1976,44,Married,Full time
@@ -6569,7 +6569,7 @@ SGP,702071492,1,2,2,2,7,10,10,A religious person,8,Female,1945,75,Married,Retire
 SGP,702071493,1,1,1,4,5,5,5,Not a religious person,1,Female,1948,71,Widowed,Retired/pensioned
 SGP,702071494,1,2,2,2,7,7,7,A religious person,-2,Female,1956,64,Married,Homemaker not otherwise employed
 SGP,702071495,1,2,2,3,9,9,9,Not a religious person,7,Male,1954,66,Married,Retired/pensioned
-SGP,702071496,1,2,3,2,7,5,5,No answer,6,Female,1960,60,Married,Retired/pensioned
+SGP,702071496,1,2,3,2,7,5,5,,6,Female,1960,60,Married,Retired/pensioned
 SGP,702071497,1,1,2,1,5,10,10,Not a religious person,5,Male,1948,72,Married,Retired/pensioned
 SGP,702071498,1,1,2,2,7,9,10,Not a religious person,5,Female,1961,58,Married,Part time
 SGP,702071499,1,1,2,2,8,7,7,An atheist,5,Female,1997,23,Single,Unemployed
@@ -6672,7 +6672,7 @@ SGP,702071595,1,2,2,2,4,4,2,Not a religious person,,Female,1970,49,Married,Full 
 SGP,702071596,2,1,1,2,6,6,4,Not a religious person,,Female,1996,24,Single,Student
 SGP,702071597,2,1,1,2,6,6,5,Not a religious person,5,Male,1996,24,Single,Other
 SGP,702071598,1,1,1,2,6,7,5,Not a religious person,,Female,1990,29,Married,Homemaker not otherwise employed
-SGP,702071599,1,2,2,2,5,5,5,No answer,,Female,1988,31,Single,Full time
+SGP,702071599,1,2,2,2,5,5,5,,,Female,1988,31,Single,Full time
 SGP,702071600,1,1,1,3,6,6,6,A religious person,6,Female,1952,67,Married,Retired/pensioned
 SGP,702071601,1,1,1,2,2,2,2,Not a religious person,5,Male,1981,39,Divorced,Unemployed
 SGP,702071602,1,1,1,2,7,8,7,Not a religious person,7,Female,1969,51,Married,Part time
@@ -6683,7 +6683,7 @@ SGP,702071606,2,1,1,2,6,7,6,Not a religious person,6,Male,1993,26,Single,Student
 SGP,702071607,2,1,1,2,7,7,6,Not a religious person,6,Male,1998,21,Single,Student
 SGP,702071608,2,2,2,2,7,8,7,Not a religious person,-2,Male,1988,31,Single,Full time
 SGP,702071609,1,2,2,1,5,5,5,A religious person,,Male,1996,24,Single,Full time
-SGP,702071610,1,2,2,2,-2,-2,5,Not a religious person,,Female,1997,23,Single,Full time
+SGP,702071610,1,2,2,2,,,5,Not a religious person,,Female,1997,23,Single,Full time
 SGP,702071611,1,2,2,3,8,8,7,Not a religious person,,Male,1974,46,Married,Full time
 SGP,702071612,1,1,1,1,5,5,5,A religious person,,Male,1959,61,Married,Retired/pensioned
 SGP,702071613,1,2,2,1,7,7,7,A religious person,2,Female,1982,37,Married,Part time
@@ -6753,16 +6753,16 @@ SGP,702071676,1,2,1,1,10,10,10,A religious person,8,Female,1966,54,Married,Part 
 SGP,702071677,1,2,2,3,8,8,6,An atheist,5,Female,1956,64,Single,Retired/pensioned
 SGP,702071678,1,1,2,3,8,7,4,Not a religious person,,Female,1987,33,Single,Part time
 SGP,702071679,1,2,3,1,5,6,6,Not a religious person,5,Male,1975,45,Married,Self employed
-SGP,702071680,1,2,2,1,6,5,5,No answer,7,Female,1994,26,Married,Full time
-SGP,702071681,1,2,2,1,8,5,10,No answer,7,Female,1960,60,Married,Unemployed
-SGP,702071682,1,1,1,1,7,7,5,No answer,7,Female,1965,55,Single,Full time
+SGP,702071680,1,2,2,1,6,5,5,,7,Female,1994,26,Married,Full time
+SGP,702071681,1,2,2,1,8,5,10,,7,Female,1960,60,Married,Unemployed
+SGP,702071682,1,1,1,1,7,7,5,,7,Female,1965,55,Single,Full time
 SGP,702071683,1,2,2,3,8,8,8,A religious person,5,Female,1993,27,Single,Full time
 SGP,702071684,1,2,1,2,8,2,5,Not a religious person,,Female,1998,22,Single,Student
 SGP,702071685,1,2,2,2,4,4,4,An atheist,5,Female,1963,57,Single,Full time
 SGP,702071686,1,1,3,3,7,5,5,Not a religious person,7,Male,1952,68,Married,Retired/pensioned
 SGP,702071687,1,2,1,1,4,8,7,A religious person,7,Female,1964,56,Married,Full time
 SGP,702071688,1,1,2,1,10,10,10,Not a religious person,10,Female,1963,57,Single,Full time
-SGP,702071689,1,1,2,1,7,9,7,No answer,8,Female,1959,61,Married,Retired/pensioned
+SGP,702071689,1,1,2,1,7,9,7,,8,Female,1959,61,Married,Retired/pensioned
 SGP,702071690,1,1,1,2,7,8,8,A religious person,5,Male,1953,67,Married,Full time
 SGP,702071691,1,1,2,2,8,8,7,A religious person,6,Female,1998,22,Single,Full time
 SGP,702071692,1,2,2,2,5,4,2,A religious person,6,Female,1978,42,Married,Homemaker not otherwise employed
@@ -6837,14 +6837,14 @@ SGP,702071760,1,1,2,1,7,7,3,A religious person,5,Female,1958,62,Widowed,Full tim
 SGP,702071761,1,2,1,2,10,9,9,Not a religious person,5,Female,1975,45,Married,Full time
 SGP,702071762,1,2,2,2,7,8,8,Not a religious person,,Female,1990,30,Married,Full time
 SGP,702071763,1,2,2,2,3,5,3,Not a religious person,5,Female,1999,21,Single,Student
-SGP,702071764,1,2,1,2,4,5,4,No answer,,Female,1999,21,Single,Part time
+SGP,702071764,1,2,1,2,4,5,4,,,Female,1999,21,Single,Part time
 SGP,702071765,2,2,2,4,7,7,5,A religious person,8,Female,1950,70,Single,Retired/pensioned
 SGP,702071766,1,1,2,1,10,10,10,A religious person,6,Female,1972,48,Divorced,Full time
 SGP,702071767,1,1,1,1,8,8,8,A religious person,,Male,1956,64,Married,Self employed
 SGP,702071768,1,2,2,1,5,5,1,Not a religious person,,Male,1966,54,Single,Unemployed
 SGP,702071769,1,1,1,1,5,5,5,Not a religious person,,Female,1959,61,Married,Homemaker not otherwise employed
 SGP,702071770,1,1,2,1,5,5,5,Not a religious person,,Male,1992,28,Single,Full time
-SGP,702071771,-2,4,2,1,5,5,5,No answer,,Male,1969,51,Single,Self employed
+SGP,702071771,,4,2,1,5,5,5,,,Male,1969,51,Single,Self employed
 SGP,702071772,1,1,2,1,5,5,5,A religious person,,Male,1990,30,Single,Self employed
 SGP,702071773,1,1,1,1,5,5,5,Not a religious person,,Male,1994,26,Single,Full time
 SGP,702071774,1,1,1,1,5,5,5,Not a religious person,,Male,1994,26,Single,Student
@@ -6858,7 +6858,7 @@ SGP,702071781,1,2,2,3,5,8,9,A religious person,10,Female,1956,64,Married,Part ti
 SGP,702071782,1,2,2,1,5,6,6,A religious person,5,Female,1979,41,Married,Full time
 SGP,702071783,1,2,3,1,6,8,7,A religious person,5,Female,1978,42,Married,Homemaker not otherwise employed
 SGP,702071784,1,2,3,1,6,5,3,A religious person,,Female,1981,39,Married,Part time
-SGP,702071785,1,2,3,2,5,4,5,No answer,,Female,1980,40,Married,Homemaker not otherwise employed
+SGP,702071785,1,2,3,2,5,4,5,,,Female,1980,40,Married,Homemaker not otherwise employed
 SGP,702071786,1,2,2,2,5,6,4,A religious person,5,Female,1997,23,Single,Student
 SGP,702071787,1,2,2,2,6,7,7,A religious person,5,Female,1951,69,Married,Homemaker not otherwise employed
 SGP,702071788,1,2,2,2,6,6,6,Not a religious person,,Male,1983,37,Married,Self employed
@@ -7015,10 +7015,10 @@ SGP,702071938,1,1,3,1,7,7,7,A religious person,4,Female,1967,53,Married,Full tim
 SGP,702071939,1,1,1,1,6,6,8,Not a religious person,,Female,1992,28,Single,Full time
 SGP,702071940,1,2,2,1,10,10,10,Not a religious person,6,Male,1952,68,Married,Full time
 SGP,702071941,1,1,2,3,7,7,7,Not a religious person,9,Female,1949,71,Single,Retired/pensioned
-SGP,702071942,1,1,1,1,6,7,3,No answer,9,Female,1970,50,Single,Full time
+SGP,702071942,1,1,1,1,6,7,3,,9,Female,1970,50,Single,Full time
 SGP,702071943,1,2,2,2,5,7,5,A religious person,5,Female,1966,54,Married,Part time
-SGP,702071944,1,2,2,3,6,6,5,No answer,8,Female,1937,83,Widowed,Retired/pensioned
-SGP,702071945,1,2,2,3,6,-2,-2,No answer,9,Female,1949,71,Married,Retired/pensioned
+SGP,702071944,1,2,2,3,6,6,5,,8,Female,1937,83,Widowed,Retired/pensioned
+SGP,702071945,1,2,2,3,6,,,,9,Female,1949,71,Married,Retired/pensioned
 SGP,702071946,1,2,2,2,7,7,7,Not a religious person,,Female,1963,57,Widowed,Part time
 SGP,702071947,1,2,2,1,8,9,8,Not a religious person,3,Female,1989,31,Married,Full time
 SGP,702071948,1,2,1,2,7,8,10,Not a religious person,8,Female,1985,35,Married,Full time
@@ -7029,12 +7029,12 @@ SGP,702071952,2,2,2,3,4,6,8,An atheist,1,Female,1996,24,Single,Full time
 SGP,702071953,1,2,4,2,4,4,4,An atheist,5,Female,1962,58,Single,Retired/pensioned
 SGP,702071954,1,2,2,1,7,9,9,A religious person,9,Male,1964,56,Married,Full time
 SGP,702071955,1,2,2,2,8,7,7,A religious person,3,Female,1991,29,Married,Full time
-SGP,702071956,1,2,2,1,8,-2,7,A religious person,-2,Male,1993,27,Single,Full time
+SGP,702071956,1,2,2,1,8,,7,A religious person,-2,Male,1993,27,Single,Full time
 SGP,702071957,1,2,3,3,5,6,6,An atheist,6,Female,1952,68,Married,Homemaker not otherwise employed
 SGP,702071958,1,1,1,2,10,10,10,A religious person,9,Female,1971,49,Married,Full time
 SGP,702071959,1,2,3,2,7,4,5,A religious person,7,Female,1975,45,Married,Retired/pensioned
 SGP,702071960,1,1,1,1,5,5,5,Not a religious person,5,Female,1993,27,Single,Full time
-SGP,702071961,1,2,1,2,5,5,5,No answer,,Female,1965,55,Married,Full time
+SGP,702071961,1,2,1,2,5,5,5,,,Female,1965,55,Married,Full time
 SGP,702071962,1,1,1,1,5,5,5,Not a religious person,,Male,1997,23,Single,Part time
 SGP,702071963,1,1,1,1,5,5,5,A religious person,,Female,1999,21,Single,Part time
 SGP,702071964,1,1,1,1,5,5,5,Not a religious person,,Male,1992,28,Single,Self employed
