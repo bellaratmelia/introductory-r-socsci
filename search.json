@@ -1377,5 +1377,19 @@
     "title": "Resources",
     "section": "",
     "text": "Further readings if you’d like to deepen your knowledge and skill after the workshop:\n\n\nIsmay, C., & Kim, A. Y. (2024). Statistical inference via data science. https://moderndive.com/This book offers a gentle introduction to R, while also covering foundational research methods such as sampling, hypothesis testing, and making inferences. I really like how it combines both programming and research basics; very suitable for beginners!\n\n\nWickham, H., Çetinkaya-Rundel, M., & Garrett Grolemund. (2024). R for data science (2e) (2nd ed.). https://r4ds.hadley.nz/A great book for R beginners! It introduces the popular tidyverse package and explains how to make the most of it. It also offers useful tips for managing projects and outlines recommended steps for transforming raw data into meaningful insights and discoveries.\n\n\nWilke, C. O. (2024). Fundamentals of data visualization. https://clauswilke.com/dataviz/I noticed that some of you are particularly interested in visualizations. While I couldn’t cover more of this topic during the workshops, if you’re eager to dive deeper, this book does a great job of covering foundational theories that I believe are both important and helpful."
+  },
+  {
+    "objectID": "01-intro.html#downloading-the-wvs-dataset",
+    "href": "01-intro.html#downloading-the-wvs-dataset",
+    "title": "Introduction to R and RStudio",
+    "section": "Downloading the WVS Dataset",
+    "text": "Downloading the WVS Dataset\nFor this workshop, we will try loading a dataset from a file.\nGo to the course website and go to the ‘Dataset’ tab to download the data.\nDownload this CSV and save it under your data folder in your R project!"
+  },
+  {
+    "objectID": "01-intro.html#downloading-the-world-values-survey-wvs-dataset",
+    "href": "01-intro.html#downloading-the-world-values-survey-wvs-dataset",
+    "title": "Introduction to R and RStudio",
+    "section": "Downloading the World Values Survey (WVS) Dataset",
+    "text": "Downloading the World Values Survey (WVS) Dataset\nFor this workshop, we will try loading a dataset from a file.\nGo to the course website and go to the ‘Dataset’ tab to download the data file and information about this WVS data\nDownload this CSV and save it under your data folder in your R project!"
   }
 ]
