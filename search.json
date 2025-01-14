@@ -697,7 +697,14 @@
     "href": "01-intro.html#r-objects-and-values",
     "title": "Introduction to R and RStudio",
     "section": "R Objects and Values",
-    "text": "R Objects and Values\nIn this line of code:\n\ncountry_name &lt;- \"Singapore\"\n\n\n\"Singapore\" is a value. This can be either a character, numeric, or boolean data type. (more on this soon)\ncountry_name is the object where we store this value. This is so that we can keep this value to be used later.\n&lt;- is the assignment operator to assign the value to the object.\n\nYou can also use =, but generally in R, &lt;- is the convention.\nKeyboard shortcut: Alt + - in Windows (Option + - in Mac)\n\n\n[Previous data types explanation remains the same]"
+    "text": "R Objects and Values\nIn this line of code:\n\ncountry_name &lt;- \"Singapore\"\n\n\n\"Singapore\" is a value. This can be either a character, numeric, or boolean data type. (more on this soon)\ncountry_name is the object where we store this value. This is so that we can keep this value to be used later.\n&lt;- is the assignment operator to assign the value to the object.\n\nYou can also use =, but generally in R, &lt;- is the convention.\nKeyboard shortcut: Alt + - in Windows (Option + - in Mac)"
+  },
+  {
+    "objectID": "01-intro.html#refresher-quantitative-data-types",
+    "href": "01-intro.html#refresher-quantitative-data-types",
+    "title": "Introduction to R and RStudio",
+    "section": "Refresher: Quantitative Data Types",
+    "text": "Refresher: Quantitative Data Types\n\nNon-Continuous Data\n\nNominal/Categorical: Non-ordered, non-numerical data, used to represent qualitative attribute.\n\nExample: nationality, neighborhood, employment status\n\nOrdinal: Ordered non-numerical data.\n\nExample: Nutri-grade ratings, frequency of exercise (daily, weekly, bi-weekly)\n\nDiscrete: Numerical data that can only take specific value (usually integers)\n\nExample: Shoe size, clothing size\n\nBinary: Nominal data with only two possible outcome\n\nExample: pass/fail, yes/no, survive/not survive"
   },
   {
     "objectID": "01-intro.html#data-types-in-r",
@@ -732,7 +739,21 @@
     "href": "01-intro.html#functions-in-r",
     "title": "Introduction to R and RStudio",
     "section": "Functions in R",
-    "text": "Functions in R\nFunctions take inputs (arguments/parameters), process them, and return a result. For example, calculating the mean satisfaction score:\n\nsatisfaction_scores &lt;- c(7.5, 8.0, 6.5, 9.0)\nround(mean(satisfaction_scores), digits = 1)\n\n[1] 7.8\n\n\nSaving the result to an object:\n\navg_satisfaction = round(mean(satisfaction_scores), digits = 1)\nprint(avg_satisfaction)\n\n[1] 7.8\n\n\n[Previous package installation instructions remain the same]"
+    "text": "Functions in R\nFunctions take inputs (arguments/parameters), process them, and return a result. For example, calculating the mean satisfaction score:\n\nsatisfaction_scores &lt;- c(7.5, 8.0, 6.5, 9.0)\nround(mean(satisfaction_scores), digits = 1)\n\n[1] 7.8\n\n\nSaving the result to an object:\n\navg_satisfaction = round(mean(satisfaction_scores), digits = 1)\nprint(avg_satisfaction)\n\n[1] 7.8\n\n\nin the example above, round is the function. 123.456 and digits = 2 are the arguments/parameters."
+  },
+  {
+    "objectID": "01-intro.html#how-do-i-find-out-more-about-a-particular-function",
+    "href": "01-intro.html#how-do-i-find-out-more-about-a-particular-function",
+    "title": "Introduction to R and RStudio",
+    "section": "How do I find out more about a particular function?",
+    "text": "How do I find out more about a particular function?\nYou can call the help page / vignette in R by prepending ? to the function name.\nE.g. if you want to find out more about the round function, you can run ?round in your R console (bottom left panel)"
+  },
+  {
+    "objectID": "01-intro.html#packages-in-r",
+    "href": "01-intro.html#packages-in-r",
+    "title": "Introduction to R and RStudio",
+    "section": "Packages in R",
+    "text": "Packages in R\n\nPackages are a collections of R functions, datasets, etc. Packages extend the functionality of R.\n\n(Closest analogy I can think of is that they’re equivalent of browser add-ons, in a way)\n\nPopular packages: tidyverse, caret, shiny, etc.\nInstallation (you only need to do this once): install.packages(\"package name\")\nLoading packages (you need to run this everytime you restart RStudio): library(package name) - let’s try to load tidyverse!"
   },
   {
     "objectID": "01-intro.html#data-structures-in-r-vectors",
@@ -753,14 +774,28 @@
     "href": "01-intro.html#vector-manipulations-retrieve-items-based-on-criteria",
     "title": "Introduction to R and RStudio",
     "section": "Vector Manipulations: Retrieve items based on criteria",
-    "text": "Vector Manipulations: Retrieve items based on criteria\nLet’s find high satisfaction scores (above 7):\n\n# Create boolean vector for our condition\nhigh_satisfaction &lt;- satisfaction_scores &gt; 7\nprint(high_satisfaction)\n\n[1] FALSE FALSE  TRUE FALSE  TRUE\n\n# Use the boolean vector to filter satisfaction scores\nsatisfaction_scores[high_satisfaction]\n\n[1] 9 8"
+    "text": "Vector Manipulations: Retrieve items based on criteria\nLet’s find high satisfaction scores (above 7):\n\n# Create boolean vector for our condition\nhigh_satisfaction &lt;- satisfaction_scores &gt; 7\nprint(high_satisfaction)\n\n[1] FALSE FALSE  TRUE FALSE  TRUE\n\n# Use the boolean vector to filter satisfaction scores\nsatisfaction_scores[high_satisfaction]\n\n[1] 9 8\n\n\nShortened version:\nsatisfaction_scores[satisfaction_scores &gt; 7]"
   },
   {
     "objectID": "01-intro.html#vector-manipulations-handling-na-values",
     "href": "01-intro.html#vector-manipulations-handling-na-values",
     "title": "Introduction to R and RStudio",
     "section": "Vector Manipulations: Handling NA values",
-    "text": "Vector Manipulations: Handling NA values\nSurvey data often contains missing values (NA):\n\nfinancial_satisfaction &lt;- c(8, 7, NA, 6, 9, NA, 7)\n\n# By default, mean() will return NA if there are any NA values\nmean(financial_satisfaction)\n\n[1] NA\n\n# Remove NA values before calculating mean\nmean(financial_satisfaction, na.rm = TRUE)\n\n[1] 7.4"
+    "text": "Vector Manipulations: Handling NA values\n\nNA values indicate null values, or the absence of a value (0 is still a value!)\nSummary functions like mean needs you to specify in the arguments how you want it to be handled.\n\nSurvey data often contains missing values (NA):\n\nfinancial_satisfaction &lt;- c(8, 7, NA, 6, 9, NA, 7)\n\n# By default, mean() will return NA if there are any NA values\nmean(financial_satisfaction)\n\n[1] NA\n\n# Remove NA values before calculating mean\nmean(financial_satisfaction, na.rm = TRUE)\n\n[1] 7.4"
+  },
+  {
+    "objectID": "01-intro.html#vector-manipulations-adding-items",
+    "href": "01-intro.html#vector-manipulations-adding-items",
+    "title": "Introduction to R and RStudio",
+    "section": "Vector Manipulations: Adding items",
+    "text": "Vector Manipulations: Adding items\nSeveral ways to add items to a vector\n\n1satisfaction_scores &lt;- c(satisfaction_scores, 7)\n2satisfaction_scores &lt;- c(satisfaction_scores, 8, 9, 10)\n3satisfaction_scores &lt;- c(8, satisfaction_scores)\n4satisfaction_scores &lt;- append(satisfaction_scores, 9, after = 2) # &lt;2&gt;\n\n\n1\n\nAdd a single score to the end of the vector using c()\n\n2\n\nAdd multiple scores to the end\n\n3\n\nAdd a score to the beginning\n\n4\n\nInsert a score at a specific position using append()"
+  },
+  {
+    "objectID": "01-intro.html#vector-manipulations-removing-items",
+    "href": "01-intro.html#vector-manipulations-removing-items",
+    "title": "Introduction to R and RStudio",
+    "section": "Vector Manipulations: Removing items",
+    "text": "Vector Manipulations: Removing items\n\n1satisfaction_scores &lt;- satisfaction_scores[-c(2, 4)]\n2satisfaction_scores &lt;- satisfaction_scores[satisfaction_scores &lt;= 7]\n3satisfaction_scores &lt;- na.omit(satisfaction_scores)\n\n\n1\n\nRemove elements by index using “negative indexing”\n\n2\n\nRemove elements based on a condition using logical indexing\n\n3\n\nRemove NA values from the vector"
   },
   {
     "objectID": "01-intro.html#data-structures-in-r-factors",
@@ -777,6 +812,13 @@
     "text": "Data Structures in R: Dataframe\nCreate a small dataframe with survey responses:\n\nsurvey_data &lt;- data.frame(\n    country = c(\"SGP\", \"CAN\", \"NZL\", \"SGP\", \"CAN\"),\n    life_satisfaction = c(8, 7, 9, 6, 8),\n    employment = c(\"Full time\", \"Student\", \"Part time\", \"Retired\", \"Full time\")\n)\nprint(survey_data)\n\n  country life_satisfaction employment\n1     SGP                 8  Full time\n2     CAN                 7    Student\n3     NZL                 9  Part time\n4     SGP                 6    Retired\n5     CAN                 8  Full time"
   },
   {
+    "objectID": "01-intro.html#downloading-the-world-values-survey-wvs-dataset",
+    "href": "01-intro.html#downloading-the-world-values-survey-wvs-dataset",
+    "title": "Introduction to R and RStudio",
+    "section": "Downloading the World Values Survey (WVS) Dataset",
+    "text": "Downloading the World Values Survey (WVS) Dataset\nFor this workshop, we will try loading a dataset from a file.\nGo to the course website and go to the ‘Dataset’ tab to download the data file and information about this WVS data\nDownload this CSV and save it under your data folder in your R project!"
+  },
+  {
     "objectID": "01-intro.html#loading-the-wvs-dataset",
     "href": "01-intro.html#loading-the-wvs-dataset",
     "title": "Introduction to R and RStudio",
@@ -788,7 +830,14 @@
     "href": "01-intro.html#exploring-the-wvs-dataset",
     "title": "Introduction to R and RStudio",
     "section": "Exploring the WVS Dataset",
-    "text": "Exploring the WVS Dataset\n\ndim(wvs_data) # Check dimensions (7061 rows, 16 columns)\nnames(wvs_data) # View all variable names\nstr(wvs_data) # Check structure and data types\nsummary(wvs_data) # Get summary statistics"
+    "text": "Exploring the WVS Dataset\n\n1dim(wvs_data)\n2names(wvs_data)\n3str(wvs_data)\n4summary(wvs_data)\n5head(wvs_data, n=5)\n6tail(wvs_data, n=5)\n\n\n1\n\nreturn a vector of number of rows and columns\n\n2\n\ninspect columns\n\n3\n\ninspect structure\n\n4\n\nprint the summary stats of the entire dataframe\n\n5\n\nview the first 5 rows\n\n6\n\nview the last 5 rows"
+  },
+  {
+    "objectID": "01-intro.html#basic-dataframe-manipulations-retrieving-values",
+    "href": "01-intro.html#basic-dataframe-manipulations-retrieving-values",
+    "title": "Introduction to R and RStudio",
+    "section": "Basic dataframe manipulations: Retrieving values",
+    "text": "Basic dataframe manipulations: Retrieving values\nSome basic dataframe functions before we move on to data wrangling next week:\n\n1wvs_data[\"country\"]\n2wvs_data$country\n3wvs_data[3]\n4wvs_data[1, 4]\n5wvs_data[3, ]\n\n\n1\n\nretrieve column by name (returns as tibble/dataframe)\n\n2\n\nanother way to retrieve column by name (returns as vector)\n\n3\n\nget an entire column by index\n\n4\n\nget a cell at this row, column coord\n\n5\n\nget an entire row"
   },
   {
     "objectID": "02-tidyverse.html#todays-outline",
@@ -1377,19 +1426,5 @@
     "title": "Resources",
     "section": "",
     "text": "Further readings if you’d like to deepen your knowledge and skill after the workshop:\n\n\nIsmay, C., & Kim, A. Y. (2024). Statistical inference via data science. https://moderndive.com/This book offers a gentle introduction to R, while also covering foundational research methods such as sampling, hypothesis testing, and making inferences. I really like how it combines both programming and research basics; very suitable for beginners!\n\n\nWickham, H., Çetinkaya-Rundel, M., & Garrett Grolemund. (2024). R for data science (2e) (2nd ed.). https://r4ds.hadley.nz/A great book for R beginners! It introduces the popular tidyverse package and explains how to make the most of it. It also offers useful tips for managing projects and outlines recommended steps for transforming raw data into meaningful insights and discoveries.\n\n\nWilke, C. O. (2024). Fundamentals of data visualization. https://clauswilke.com/dataviz/I noticed that some of you are particularly interested in visualizations. While I couldn’t cover more of this topic during the workshops, if you’re eager to dive deeper, this book does a great job of covering foundational theories that I believe are both important and helpful."
-  },
-  {
-    "objectID": "01-intro.html#downloading-the-wvs-dataset",
-    "href": "01-intro.html#downloading-the-wvs-dataset",
-    "title": "Introduction to R and RStudio",
-    "section": "Downloading the WVS Dataset",
-    "text": "Downloading the WVS Dataset\nFor this workshop, we will try loading a dataset from a file.\nGo to the course website and go to the ‘Dataset’ tab to download the data.\nDownload this CSV and save it under your data folder in your R project!"
-  },
-  {
-    "objectID": "01-intro.html#downloading-the-world-values-survey-wvs-dataset",
-    "href": "01-intro.html#downloading-the-world-values-survey-wvs-dataset",
-    "title": "Introduction to R and RStudio",
-    "section": "Downloading the World Values Survey (WVS) Dataset",
-    "text": "Downloading the World Values Survey (WVS) Dataset\nFor this workshop, we will try loading a dataset from a file.\nGo to the course website and go to the ‘Dataset’ tab to download the data file and information about this WVS data\nDownload this CSV and save it under your data folder in your R project!"
   }
 ]
