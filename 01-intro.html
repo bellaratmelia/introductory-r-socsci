@@ -239,6 +239,35 @@ Bella Ratmelia
 </ul></li>
 </ul>
 </section>
+<section id="the-outline-for-these-workshops" class="slide level2">
+<h2>The outline for these workshops</h2>
+<p>The workshops are structured to follow this workflow when dealing with data</p>
+<p><img data-src="images/data-workflow.png"></p>
+
+<aside><div>
+<p>Image is taken from <a href="https://r4ds.hadley.nz/intro">R for Data Science (2e)</a> by Hadley Wickham.</p>
+</div></aside></section>
+<section id="the-outline-for-these-workshops-explained" class="slide level2">
+<h2>The outline for these workshops (explained)</h2>
+<div>
+<ol type="1">
+<li class="fragment"><strong>Import</strong> data into R, which means take data (stored in a file, via API, etc) and load it into a dataframe in R</li>
+<li class="fragment"><strong>Tidy</strong> the imported data.
+<ul>
+<li class="fragment">Tidy = storing it in a consistent form that matches the semantics of the dataset.</li>
+<li class="fragment">Tidy data = each column is a variable, each row is an observation</li>
+</ul></li>
+<li class="fragment">Once a data it tidy, we can <strong>transform</strong> it. Transformation includes:
+<ul>
+<li class="fragment">narrowing in on observations of interest (like all people in one city or all data from the last year)</li>
+<li class="fragment">creating new variables that are functions of existing variables (like computing speed from distance and time)</li>
+<li class="fragment">calculating a set of summary statistics (like counts or means).</li>
+</ul></li>
+<li class="fragment">Once we have tidy data with the info we need, we can <strong>visualize</strong> it and <strong>model</strong> it.</li>
+<li class="fragment"><strong>Communicate</strong> the result. It doesn’t matter how well your models and visualization have led you to understand the data unless you can also communicate your results to others.</li>
+</ol>
+</div>
+</section>
 <section id="what-is-r-what-is-r-studio" class="slide level2">
 <h2>What is R? What is R Studio?</h2>
 <p><strong>R</strong>: The programming language and the software that interprets the R script</p>
@@ -247,18 +276,6 @@ Bella Ratmelia
 <p>You will need to install <strong>both</strong> for this workshop. Go to <a href="https://posit.co/download/rstudio-desktop" class="uri">https://posit.co/download/rstudio-desktop</a> to download and install both if you have not done so.</p>
 <p>Check out the course website for a step-by-step guide.</p>
 </div>
-</section>
-<section id="reasons-to-learn-r" class="slide level2">
-<h2>7 Reasons to learn R</h2>
-<ol type="1">
-<li><p>R is free, open-source, and cross-platform.</p></li>
-<li><p>R does not involve lots of pointing and clicking - you don’t have to remember a complicated sequence of clicks to re-run your analysis.</p></li>
-<li><p>R code is great for reproducibility - when someone else (including your future self) can obtain the same results from the same dataset and same analysis.</p></li>
-<li><p>R is interdisciplinary and extensible</p></li>
-<li><p>R is scalable and works on data of all shapes and sizes (though admittedly, it is not best at some scenarios and other languages such as python would be preferred.)</p></li>
-<li><p>R produces high-quality and publication-ready graphics</p></li>
-<li><p>R has a large and welcoming community - which means there are lots of help available!</p></li>
-</ol>
 </section>
 <section id="a-tour-of-rstudio" class="slide level2">
 <h2>A Tour of RStudio</h2>

@@ -651,18 +651,25 @@
     "text": "Preamble\n\nAbout me:\n\nLibrarian, Research & Data Services team, SMU Libraries.\nBachelor in Info Tech (IT), MSc in Info Studies.\nHave been with SMU since the pandemic era (2021).\n\nAbout this workshop:\n\nLive-coding format; code along with me!\nGoal of workshop: to give you enough fundamentals (at least to the point that ChatGPT can’t bluff you so easily) and confidence to explore R on your own.\nDon’t be afraid to ask for help! We are all here to learn."
   },
   {
+    "objectID": "01-intro.html#the-outline-for-these-workshops",
+    "href": "01-intro.html#the-outline-for-these-workshops",
+    "title": "Introduction to R and RStudio",
+    "section": "The outline for these workshops",
+    "text": "The outline for these workshops\nThe workshops are structured to follow this workflow when dealing with data\n\n\n\nImage is taken from R for Data Science (2e) by Hadley Wickham."
+  },
+  {
+    "objectID": "01-intro.html#the-outline-for-these-workshops-explained",
+    "href": "01-intro.html#the-outline-for-these-workshops-explained",
+    "title": "Introduction to R and RStudio",
+    "section": "The outline for these workshops (explained)",
+    "text": "The outline for these workshops (explained)\n\n\nImport data into R, which means take data (stored in a file, via API, etc) and load it into a dataframe in R\nTidy the imported data.\n\nTidy = storing it in a consistent form that matches the semantics of the dataset.\nTidy data = each column is a variable, each row is an observation\n\nOnce a data it tidy, we can transform it. Transformation includes:\n\nnarrowing in on observations of interest (like all people in one city or all data from the last year)\ncreating new variables that are functions of existing variables (like computing speed from distance and time)\ncalculating a set of summary statistics (like counts or means).\n\nOnce we have tidy data with the info we need, we can visualize it and model it.\nCommunicate the result. It doesn’t matter how well your models and visualization have led you to understand the data unless you can also communicate your results to others."
+  },
+  {
     "objectID": "01-intro.html#what-is-r-what-is-r-studio",
     "href": "01-intro.html#what-is-r-what-is-r-studio",
     "title": "Introduction to R and RStudio",
     "section": "What is R? What is R Studio?",
     "text": "What is R? What is R Studio?\nR: The programming language and the software that interprets the R script\nRStudio: An IDE (Integrated Development Environment) that we use to interact more easily with R language and scripts.\n\nYou will need to install both for this workshop. Go to https://posit.co/download/rstudio-desktop to download and install both if you have not done so.\nCheck out the course website for a step-by-step guide."
-  },
-  {
-    "objectID": "01-intro.html#reasons-to-learn-r",
-    "href": "01-intro.html#reasons-to-learn-r",
-    "title": "Introduction to R and RStudio",
-    "section": "7 Reasons to learn R",
-    "text": "7 Reasons to learn R\n\nR is free, open-source, and cross-platform.\nR does not involve lots of pointing and clicking - you don’t have to remember a complicated sequence of clicks to re-run your analysis.\nR code is great for reproducibility - when someone else (including your future self) can obtain the same results from the same dataset and same analysis.\nR is interdisciplinary and extensible\nR is scalable and works on data of all shapes and sizes (though admittedly, it is not best at some scenarios and other languages such as python would be preferred.)\nR produces high-quality and publication-ready graphics\nR has a large and welcoming community - which means there are lots of help available!"
   },
   {
     "objectID": "01-intro.html#a-tour-of-rstudio",
