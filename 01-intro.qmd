@@ -17,11 +17,13 @@ library(tidyverse)
 
 -   About me:
 
-    -   Librarian, Research & Data Services team, SMU Libraries.
+    -   Senior Librarian, Research & Data Services team, SMU Libraries.
 
-    -   Bachelor in Info Tech (IT), MSc in Info Studies.
+    -   Bachelor in Info Tech (IT), MSc in Info Studies from NTU.
 
     -   Have been with SMU since the pandemic era (2021).
+    
+    -   Have been doing this workshop since Aug 2023.
 
 -   About this workshop:
 
@@ -30,6 +32,31 @@ library(tidyverse)
     -   Goal of workshop: to give you enough fundamentals (at least to the point that ChatGPT can't bluff you so easily) and confidence to explore R on your own.
 
     -   Don't be afraid to ask for help! We are all here to learn.
+
+## The outline for these workshops
+
+The workshops are structured to follow this workflow when dealing with data
+
+![](images/data-workflow.png)
+
+::: aside
+Image is taken from [R for Data Science (2e)](https://r4ds.hadley.nz/intro) by Hadley Wickham.
+:::
+
+## The outline for these workshops (explained)
+
+::: incremental
+1.  **Import** data into R, which means take data (stored in a file, via API, etc) and load it into a dataframe in R
+2.  **Tidy** the imported data.
+    -   Tidy = storing it in a consistent form that matches the semantics of the dataset.
+    -   Tidy data = each column is a variable, each row is an observation
+3.  Once a data it tidy, we can **transform** it. Transformation includes:
+    -   narrowing in on observations of interest (like all people in one city or all data from the last year)
+    -   creating new variables that are functions of existing variables (like computing speed from distance and time)
+    -   calculating a set of summary statistics (like counts or means).
+4.  Once we have tidy data with the info we need, we can **visualize** it and **model** it.
+5.  **Communicate** the result. It doesn’t matter how well your models and visualization have led you to understand the data unless you can also communicate your results to others.
+:::
 
 ## What is R? What is R Studio?
 
@@ -41,23 +68,7 @@ library(tidyverse)
 
 You will need to install **both** for this workshop. Go to <https://posit.co/download/rstudio-desktop> to download and install both if you have not done so.
 
-Check out the course website for a step-by-step guide. 
-
-## 7 Reasons to learn R
-
-1.  R is free, open-source, and cross-platform.
-
-2.  R does not involve lots of pointing and clicking - you don't have to remember a complicated sequence of clicks to re-run your analysis.
-
-3.  R code is great for reproducibility - when someone else (including your future self) can obtain the same results from the same dataset and same analysis.
-
-4.  R is interdisciplinary and extensible
-
-5.  R is scalable and works on data of all shapes and sizes (though admittedly, it is not best at some scenarios and other languages such as python would be preferred.)
-
-6.  R produces high-quality and publication-ready graphics
-
-7.  R has a large and welcoming community - which means there are lots of help available!
+Check out the course website for a step-by-step guide.
 
 ## A Tour of RStudio
 
@@ -95,7 +106,7 @@ Don't put your R projects inside your OneDrive folder as that may cause issues s
 
 # Let's Code!
 
-Create a new R script - `File` > `New File` > `R script`.
+Create a new R script - `File` \> `New File` \> `R script`.
 
 **Note: RStudio does not autosave your progress, so remember to save from time to time!**
 
@@ -108,13 +119,43 @@ In this line of code:
 country_name <- "Singapore"
 ```
 
-- `"Singapore"` is a value. This can be either a character, numeric, or boolean data type. (more on this soon)
-- `country_name` is the object where we store this value. This is so that we can keep this value to be used later.
-- `<-` is the assignment operator to assign the value to the object.
-    - You can also use `=`, but generally in R, `<-` is the convention.
-    - Keyboard shortcut: `Alt` + `-` in Windows (`Option` + `-` in Mac)
+-   `"Singapore"` is a **value**. This can be either a character, numeric, or boolean data type. (more on this soon)
+-   `country_name` is the **object** where we store this value. This is so that we can keep this value to be used later.
+-   `<-` is the assignment operator to assign the value to the object.
+    -   You can also use `=`, but generally in R, `<-` is the convention.
+    -   Keyboard shortcut: `Alt` + `-` in Windows (`Option` + `-` in Mac)
 
-[Previous data types explanation remains the same]
+## Refresher: Quantitative Data Types
+
+-   [**Non-Continuous Data**]{.underline}
+
+    -   **Nominal/Categorical**: Non-ordered, non-numerical data, used to represent qualitative attribute.
+
+        -   Example: nationality, neighborhood, employment status
+
+    -   **Ordinal**: Ordered non-numerical data.
+
+        -   Example: Nutri-grade ratings, frequency of exercise (daily, weekly, bi-weekly)
+
+    -   **Discrete**: Numerical data that can only take specific value (usually integers)
+
+        -   Example: Shoe size, clothing size
+
+    -   **Binary**: Nominal data with only two possible outcome
+
+        -   Example: pass/fail, yes/no, survive/not survive
+
+------------------------------------------------------------------------
+
+-   [**Continuous Data**]{.underline}
+
+    -   **Interval**: Numerical data that can take any value within a range. [It does not have a "true zero".]{.underline}
+
+        -   Example: Celsius scale. Temperature of 0 C does not represent absence of heat.
+
+    -   **Ratio**: Numerical data that can take any value within a range. [it has a "true zero".]{.underline}
+
+        -   Example: Annual income. annual income of 0 represents no income.
 
 ## Data Types in R
 
@@ -158,47 +199,160 @@ You can do arithmetic operations in R. For example, let's calculate average sati
 2025 - 1990  # Calculate age from birth year
 ```
 
-## Boolean operations in R
+## Boolean operations in R - Simple TRUE/FALSE statements
 
-Boolean operations in R are useful for filtering survey data:
+Boolean operations in R are useful for filtering survey data. Before that, let's look at how R evaluates simple TRUE/FALSE statements
 
-**AND** operations (both conditions must be TRUE)
+Is life_satisfaction greater than 8?
+```{r}
+#| echo: true
 
-```r
-# Check if someone is both highly satisfied (>8) AND from Singapore
-(life_satisfaction > 8) & (country_code == "SGP")
+life_satisfaction <- 8.5 # assign a value of 8.5 to life_satisfaction
+life_satisfaction > 8  #
 ```
 
-**OR** operations (at least one condition must be TRUE)
+Is the country Singapore?
+```{r}
+#| echo: true
 
-```r
-# Check if someone is either married OR living together as married
-marital_status == "Married" | marital_status == "Living together as married"
+country_code == "SGP"  
 ```
+
+Is the country NOT Singapore?
+```{r}
+#| echo: true
+
+country_code != "SGP"  
+```
+
+## Boolean operations in R - AND operator
+
+Sometimes, we may have multiple statements to evaluate. This is where the Boolean Operators will come handy.
+
+**AND** operations (both conditions must be TRUE). In R, it is represented by ampersand `&`
+
+Is the country New Zealand AND is the life satisfaction more than 8?
+```{r}
+#| echo: true
+
+(country_code == "NZL") & (life_satisfaction > 8) 
+```
+
+`country_code == "NZL"` is FALSE while `life_satisfaction > 8` is TRUE
+
+The whole statement will return FALSE because not all conditions TRUE. 
+
+## Boolean operations in R - OR operator
+
+**OR** operations (at least one condition must be TRUE). In R, it is represented by pipe symbol `|`
+
+Is the country New Zealand OR is the life satisfaction more than 8?
+```{r}
+#| echo: true
+
+(country_code == "NZL") | (life_satisfaction > 8) 
+```
+As long as one condition is met, this will be TRUE.
 
 ## Functions in R
 
-Functions take inputs (arguments/parameters), process them, and return a result. For example, calculating the mean satisfaction score:
+-   A function is like a recipe in cooking.
+
+-   It takes some ingredients (inputs) and uses a set of instructions to produce a result (output).
+
+-   In R, a function is a pre-written set of recipes/instructions that performs a specific task. Function name will always be followed by round brackets `()`
+
+Example: `round()` function in R will round up numbers.
 
 ```{r}
 #| echo: true
-satisfaction_scores <- c(7.5, 8.0, 6.5, 9.0)
-round(mean(satisfaction_scores), digits = 1)
+round(3.1415926)
 ```
+
+-   `round()` is the "recipe", while `3.1415926` is the "ingredients"
 
 Saving the result to an object:
 
 ```{r}
 #| echo: true
-avg_satisfaction = round(mean(satisfaction_scores), digits = 1)
-print(avg_satisfaction)
+rounded_pi <- round(3.1415926)
+print(rounded_pi)
 ```
 
-[Previous package installation instructions remain the same]
+## Functions with Arguments in R
+
+-   Following the recipe analogy, arguments are the ingredients you provide to a function.
+
+-   Some arguments are required, while others are optional (they have default values).
+
+-   Each argument tells the function what to use or how to perform the task.
+
+- Example: Think of a bubble tea order as a function. The possible arguments/ingredients here are:
+
+    -   Tea - required ingredient
+
+    -   Milk - optional, the default is to include
+
+    -   Toppings - optional, the default choice is "pearls"
+
+In R:
+```{r}
+#| echo: true
+round(3.1415926, digits = 2)
+```
+
+-   `3.1415926` is the required argument (if this is not provided, the function will not run)
+
+-   `digits` is an optional argument specifying how many decimal places to round to (the default is 0)
+
+## How do I find out more about a particular function?
+
+You can call the help page / vignette in R by prepending `?` to the function name.
+
+E.g. if you want to find out more about the `round` function, you can run `?round` in your R console (bottom left panel)
+
+## Packages in R
+
+-   Packages are a collections of R functions, datasets, etc. Packages extend the functionality of R.
+
+    -   (Closest analogy I can think of is that they're equivalent of browser add-ons, in a way)
+
+-   Popular packages: `tidyverse`, `caret`, `shiny`, etc.
+
+-   Installation (you only need to do this once): `install.packages("package name")`
+
+-   Loading packages (you need to run this everytime you restart RStudio): `library(package name)` - let's try to load `tidyverse`!
+
+## Data Structures in R
+
+In today's session, we will explore 3 basic types of data **structures** in R:
+
+:::: {.columns}
+
+::: {.column width="40%"}
+1.  **Vector** - can hold multiple values in a single variable/object.
+
+2.  **Factor** - Special data structure in R to handle categorical variables.
+
+3.  **Data frame** - De facto data structure for tabular data in R, and what we use for data processing, plotting, and statistics.
+:::
+
+::: {.column width="60%"}
+![](images/data-structures.svg)
+:::
+
+::::
+
+
+
+
 
 ## Data Structures in R: Vectors
 
-Vectors can store multiple values. Let's create vectors using our survey data:
+-   Basic objects in R can only contain one value. But quite often you may want to group a bunch of values together and save it in a single object.
+
+-   A vector is a data structure that can do this. It is the most common and basic data structure in R. (pretty much the workhorse of R!)
+
 
 ```{r}
 #| echo: true
@@ -209,34 +363,63 @@ employment_status <- c("Full time", "Student", "Part time", "Retired", "Full tim
 
 ## Vector Manipulations: Retrieve and update items
 
+Retrieve the first country in the vector
 ```{r}
 #| echo: true
-# retrieve the first country in the vector
 countries[1]
+```
 
-# retrieves the first three satisfaction scores
+Retrieves the first three satisfaction scores
+```{r}
+#| echo: true
+# 
 satisfaction_scores[1:3]
+```
 
-# update the first satisfaction score
+Update the first satisfaction score
+```{r}
+#| echo: true
+
 satisfaction_scores[1] <- 7
 print(satisfaction_scores)
 ```
 
+## Why square brackets and not round brackets?
+
+Round brackets `()` are for running functions, like using a tool: `mean()` or `sum()`.
+
+Square brackets `[]` are for accessing specific parts of your data, where we pass the index number(s) of the element(s) we want. For dataframes, we can use either index numbers or column names (more on this later!)
+
+
 ## Vector Manipulations: Retrieve items based on criteria
 
-Let's find high satisfaction scores (above 7):
+Let's find high satisfaction scores (above 7)!
+
+-   The code below will create a boolean vector called `criteria` that basically keep tracks on whether each items inside `satisfaction_scores` fulfil our condition.
+
+-   The condition is "value must be \> 7". e.g. if item 1 fulfils our condition, then item 1 is 'marked' as `TRUE`. Otherwise, it will be `FALSE`
 
 ```{r}
 #| echo: true
 # Create boolean vector for our condition
-high_satisfaction <- satisfaction_scores > 7
-print(high_satisfaction)
-
-# Use the boolean vector to filter satisfaction scores
-satisfaction_scores[high_satisfaction]
+criteria <- satisfaction_scores > 7
+print(criteria)
 ```
 
+-   This line of code applies the boolean vector `criteria` to `satisfaction_scores`, and only retrieve items that fulfils the condition. i.e. items whose position is marked as `TRUE` by `criteria` vector
+
+```{r}
+#| echo: true
+# Use the boolean vector to filter satisfaction scores
+satisfaction_scores[criteria]
+```
+
+
 ## Vector Manipulations: Handling NA values
+
+-   NA values indicate null values, or the absence of a value (0 is still a value!)
+
+-   Summary functions like `mean` needs you to specify in the optional argument called `na.rm` on how you want it to be handled.
 
 Survey data often contains missing values (NA):
 
@@ -247,13 +430,52 @@ financial_satisfaction <- c(8, 7, NA, 6, 9, NA, 7)
 # By default, mean() will return NA if there are any NA values
 mean(financial_satisfaction)
 
-# Remove NA values before calculating mean
+# Remove NA values before calculating mean by specifying that na.rm = TRUE
 mean(financial_satisfaction, na.rm = TRUE)
 ```
 
+## Vector Manipulations: Adding items
+
+Several ways to add items to a vector
+
+```{r}
+#| echo: true
+#| eval: false
+
+satisfaction_scores <- c(satisfaction_scores, 7) # <1>
+satisfaction_scores <- c(satisfaction_scores, 8, 9, 10) # <2>
+satisfaction_scores <- c(8, satisfaction_scores) # <3>
+satisfaction_scores <- append(satisfaction_scores, 9, after = 2) # <2> # <4>
+```
+
+1.  Add a single score to the end of the vector using c()
+2.  Add multiple scores to the end
+3.  Add a score to the beginning
+4.  Insert a score at a specific position using append()
+
+## Vector Manipulations: Removing items
+
+```{r}
+#| echo: true
+#| eval: false
+
+satisfaction_scores <- satisfaction_scores[-c(2, 4)] # <1>
+satisfaction_scores <- satisfaction_scores[satisfaction_scores <= 7] # <2>
+satisfaction_scores <- na.omit(satisfaction_scores) # <3>
+
+```
+
+1.  Remove elements by index using "negative indexing"
+2.  Remove elements based on a condition using logical indexing
+3.  Remove NA values from the vector
+
 ## Data Structures in R: Factors
 
-Factors are perfect for categorical survey variables:
+-   Special data structure in R to deal with categorical data.
+
+-   Can be ordered (ordinal) or unordered (nominal).
+
+-   May look like a normal vector at first glance, so use `str()` to check.
 
 Unordered (Nominal):
 
@@ -277,7 +499,11 @@ str(importance_factor)
 
 ## Data Structures in R: Dataframe
 
-Create a small dataframe with survey responses:
+-   De facto data structure for tabular data in R, and what we use for data processing, plotting, and statistics.
+
+-   Similar to spreadsheets!
+
+-   You can create it by hand like so:
 
 ```{r}
 #| echo: true
@@ -289,6 +515,14 @@ survey_data <- data.frame(
 print(survey_data)
 ```
 
+## Downloading the World Values Survey (WVS) Dataset
+
+For this workshop, we will try loading a dataset from a file.
+
+Go to the course website and go to the ['Dataset'](https://bellaratmelia.github.io/introductory-r-socsci/dataset.html) tab to download the data file and information about this WVS data
+
+Download this CSV and save it under your `data` folder in your R project!
+
 ## Loading the WVS Dataset
 
 Let's load our actual World Values Survey dataset:
@@ -298,9 +532,11 @@ Let's load our actual World Values Survey dataset:
 #| output: false
 library(tidyverse)
 
-wvs_data <- read_csv("data/wvs-wave7-sg-ca-nz.csv") # Make sure to save the WVS data in your data folder
+wvs_data <- read_csv("data/wvs-wave7-sg-ca-nz.csv") # 
 head(wvs_data)
 ```
+
+Make sure to save the CSV file in your data folder!
 
 ## Exploring the WVS Dataset
 
@@ -309,17 +545,53 @@ head(wvs_data)
 #| output: false
 #| eval: false
 
-dim(wvs_data) # Check dimensions (7061 rows, 16 columns)
-names(wvs_data) # View all variable names
-str(wvs_data) # Check structure and data types
-summary(wvs_data) # Get summary statistics
+dim(wvs_data) # <1>
+names(wvs_data) # <2>
+str(wvs_data) # <3>
+summary(wvs_data) # <4> 
+head(wvs_data, n=5) # <5>
+tail(wvs_data, n=5) # <6>
 ```
+
+1.  return a vector of number of rows and columns
+2.  inspect columns
+3.  inspect structure
+4.  print the summary stats of the entire dataframe
+5.  view the first 5 rows
+6.  view the last 5 rows
+
+## Basic dataframe manipulations: Retrieving values
+
+Some basic dataframe functions before we move on to data wrangling next week:
+
+```{r}
+#| echo: true
+#| output: false
+#| eval: false
+
+wvs_data["country"] # <1>
+wvs_data$country # <2>
+wvs_data[3] # <3>
+wvs_data[1, 4] # <4> 
+wvs_data[3, ] # <5>
+```
+
+1.  retrieve column by name (returns as tibble/dataframe)
+2.  another way to retrieve column by name (returns as vector)
+3.  get an entire column by index
+4.  get a cell at this row, column coord
+5.  get an entire row
 
 # End of Session 1!
 
 Next Session: Data wrangling with `dplyr` and `tidyr` packages - we'll learn how to:
-- Filter survey responses by country
-- Calculate average satisfaction scores by demographic groups
-- Create new variables from existing ones
-- Handle missing values in survey data
-- And much more!
+
+-   Filter survey responses by country
+
+-   Calculate average satisfaction scores by demographic groups
+
+-   Create new variables from existing ones
+
+-   Handle missing values in survey data
+
+-   And much more!
