@@ -227,10 +227,10 @@ Bella Ratmelia
 <section id="checklist-when-you-start-rstudio" class="slide level2">
 <h2>Checklist when you start RStudio</h2>
 <ul>
-<li>Load the project we created last session and open the R script file.</li>
-<li>Make sure that <code>Environment</code> panel is empty (click on broom icon to clean it up)</li>
+<li>Load the project we created last session and open the R script file. Click on <code>File</code> &gt; <code>Recent Projects...</code> &gt; Select the our project from last week.</li>
+<li>Make sure that <code>Environment</code> panel is empty (click on broom icon to clean it up).</li>
 <li>Clear the <code>Console</code> and <code>Plots</code> too.</li>
-<li>Re-run the <code>library(tidyverse)</code> and <code>read_csv</code> portion in the previous session</li>
+<li>Re-run the <code>library(tidyverse)</code> and <code>read_csv</code> portion in the previous session (the code is also on the next slide if you missed last week’s session)</li>
 </ul>
 </section>
 <section id="refresher-loading-from-csv-into-a-dataframe" class="slide level2">
@@ -251,7 +251,7 @@ Bella Ratmelia
 <h2>Cleaning data for analysis</h2>
 <div>
 <ul>
-<li class="fragment"><strong>Why do it in R?</strong> Because it’s much efficient to do so in R, especially if your data is large (e.g.&nbsp;millions of rows, hundreds of columns) and you have repetitive clean up tasks.</li>
+<li class="fragment"><strong>Why do it in R?</strong> Because it’s much efficient to do so in R, especially if your data is large (e.g.&nbsp;millions of rows, thousands of columns) and you have repetitive clean up tasks.</li>
 <li class="fragment">Incorrect or inconsistent data can lead to false conclusions, so it’s important to clean and prep it correctly.</li>
 <li class="fragment">Having a clear understanding of the desired data shape is essential as real data often differs from what you imagine! <strong>Refer to codebook, actual questionnaire, appendix for guidance.</strong></li>
 <li class="fragment">Data cleaning techniques differ based on the problems, data type, and the research questions you are trying to answer. Various methods are available, each with its own trade-offs.</li>
@@ -267,46 +267,35 @@ Bella Ratmelia
 <li><p><a href="https://rstudio.github.io/cheatsheets/html/data-transformation.html">dplyr cheatsheet</a> | <a href="https://rstudio.github.io/cheatsheets/data-transformation.pdf">pdf version</a> (I personally prefer this PDF version since it’s more visual)</p></li>
 <li><p><a href="https://rstudio.github.io/cheatsheets/html/tidyr.html">tidyr cheatsheet</a> | <a href="https://rstudio.github.io/cheatsheets/tidyr.pdf">pdf version</a></p></li>
 </ul></li>
-</ul>
-</section>
-<section id="prelim-checks-for-your-data" class="slide level2">
-<h2>Prelim checks for your data</h2>
-<p>It’s good practice to do some preliminary checks on your data to get a better sense of it!</p>
-<p>A few things that you can do:</p>
+<li><p>Most of the time, these are the ones that you will use quite often:</p>
 <ul>
-<li><p>Check for duplicates</p></li>
-<li><p>Check for missing values</p></li>
-<li><p>Check on overall distributions of the categorical data</p></li>
-<li><p>Plot the distribution of the numerical/continuous data</p></li>
+<li><p><code>drop_na()</code> - remove rows with null values</p></li>
+<li><p><code>select()</code> - to select column(s) from a dataframe</p></li>
+<li><p><code>filter()</code> - to filter rows based on criteria</p></li>
+<li><p><code>mutate()</code> - to compute new columns or edit existing ones</p></li>
+<li><p><code>if_else()</code> and <code>case_when()</code> - to be used with mutate when we want to compute/edit columns based on multiple criteria</p></li>
+<li><p><code>group_by()</code> and <code>summarize()</code> - group data and summarize each group</p></li>
+</ul></li>
 </ul>
 </section>
-<section>
-<section id="data-wrangling-activities-with-wvs-data" class="title-slide slide level1 center">
-<h1>Data wrangling activities with WVS data</h1>
-<p><strong>Scenario</strong>: We are research assistants analyzing patterns in values and satisfaction across different countries and demographic groups. Our team wants to understand how life satisfaction relates to various factors like employment, marital status, and religiosity.</p>
-<p>Tasks we need to complete:</p>
+<section id="scenario-data-wrangling-activities-with-wvs-data" class="slide level2 smaller">
+<h2>Scenario: Data wrangling activities with WVS data</h2>
+<p><strong>Scenario</strong>: We are research assistants analyzing patterns in values and satisfaction across different countries and demographic groups.</p>
+<p>Our team has been assigned to explore and get insights on how specific factors (employment, work importance, marital status, political alignment, financial satisfaction, and religiosity) may relate to life satisfaction among different generations (Gen Z, Millennials, Gen X, and Baby Boomer), including how they may differ between the 3 countries.</p>
+<p>To ensure the analysis quality, we were instructed to discard incomplete data.</p>
+<p>We can break down the tasks as such:</p>
 <div>
 <ol type="1">
 <li class="fragment"><p>Remove all rows with missing values (NA)</p></li>
-<li class="fragment"><p>Create a demographics-only dataset with variables like country, sex, age, marital_status, and employment</p></li>
-<li class="fragment"><p>Filter for respondents aged 30 or older, arrange by age (oldest to youngest)</p></li>
-<li class="fragment"><p>Convert categorical variables (country, religiousity, sex, marital_status, employment) to factors</p></li>
-<li class="fragment"><p>Create age groups: “18-29”, “30-44”, “45-59”, “60+”</p></li>
+<li class="fragment"><p>Check for duplicates</p></li>
+<li class="fragment"><p>Select only the relevant columns: demographic columns, <code>work_importance</code>, <code>life_satisfaction</code>, <code>financial_satisfaction</code>, <code>religiousity</code>, <code>political_scale</code>, <code>marital_status</code>, and <code>employment</code>.</p></li>
+<li class="fragment"><p>Filter for respondents aged 18 or older. Optionally, we can then arrange the dataset by age (oldest to youngest)</p></li>
+<li class="fragment"><p>Reverse-code <code>importance</code> variables so that higher numbers consistently represent higher levels of the measured construct. In other words, 1 = Not at all important and 4 = Very important.</p></li>
+<li class="fragment"><p>Create age groups for each generation: “18-28”, “29-44”, “45-60”, “61+”</p></li>
 </ol>
 </div>
+<p>Once we did all of the wrangling above, we can save this “wrangled” version into another CSV</p>
 </section>
-<section class="slide level2">
-
-<div>
-<ol start="6" type="1">
-<li class="fragment"><p>Create a new column <code>high_satisfaction</code> that is TRUE if life_satisfaction is above the median</p></li>
-<li class="fragment"><p>Reverse code scales for all the <code>importance</code> variables so that higher numbers consistently represent higher levels of the measured construct. In other words, 1 = Not at all important and 4 = Very important.</p></li>
-<li class="fragment"><p>Generate summary statistics of life_satisfaction grouped by country and employment status</p></li>
-<li class="fragment"><p>Create a cross-tabulation of religiousity by country</p></li>
-<li class="fragment"><p>Reshape the data to show average satisfaction scores by country and age group</p></li>
-</ol>
-</div>
-</section></section>
 <section>
 <section id="lets-wrangle-our-data" class="title-slide slide level1 center">
 <h1>Let’s wrangle our data!</h1>
@@ -317,7 +306,7 @@ Bella Ratmelia
 <blockquote>
 <p><strong>A strategy I’d like to recommend:</strong> briefly read over the <code>dplyr</code> + <code>tidyr</code> documentation, either the PDF or HTML version, and have them open on a separate tab so that you can refer to it quickly.</p>
 </blockquote>
-<p>Remove all rows with empty values (NA)</p>
+<p>Remove all rows with empty values (NA) with <code>drop_na()</code></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>wvs_data <span class="ot">&lt;-</span> wvs_data <span class="sc">|&gt;</span> </span>
 <span id="cb2-2"><a></a>  <span class="fu">drop_na</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -330,10 +319,19 @@ Bella Ratmelia
 </div>
 </div>
 </section>
+<section id="task-2" class="slide level2">
+<h2>Task #2</h2>
+<p>Check for duplicates with <code>distinct()</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>wvs_data <span class="ot">&lt;-</span> wvs_data <span class="sc">|&gt;</span> </span>
+<span id="cb5-2"><a></a>  <span class="fu">distinct</span>(ID, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>(Our data has no duplicates, but this is still a good practice to do, especially if we were combining data from multipe sources)</p>
+</section>
 <section id="interlude-pipe-operator" class="slide level2">
 <h2>Interlude: Pipe Operator ( |&gt; )</h2>
 <ul>
-<li><p>The pipe operator (|&gt;) allows us to chain multiple operations without creating intermediate dataframes.</p></li>
+<li><p>The pipe operator (|&gt;) allows us to chain multiple operations without creating intermediate / temporary dataframes.</p></li>
 <li><p>Super handy when we perform several data wrangling tasks using tidyverse in sequence.</p></li>
 <li><p>Helps with readability, especially for complex operations.</p></li>
 <li><p>Keyboard shortcut: <code>Ctrl</code>+<code>Shift</code>+<code>M</code> on Windows, <code>Cmd</code>+<code>Shift</code>+<code>M</code> on Mac</p></li>
@@ -342,311 +340,359 @@ Bella Ratmelia
 <ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Without pipe operator</a></li><li><a href="#tabset-1-2">With pipe operator</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1">
-<p>Notice that we have to create a “temp” dataframes called <code>age_df</code> and <code>age_df_desc</code> in this method.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>age_df <span class="ot">&lt;-</span> <span class="fu">filter</span>(wvs_data, age <span class="sc">&gt;=</span> <span class="dv">30</span>)</span>
-<span id="cb5-2"><a></a>age_df_desc <span class="ot">&lt;-</span> <span class="fu">arrange</span>(age_df, <span class="fu">desc</span>(age))</span>
-<span id="cb5-3"><a></a><span class="fu">write_csv</span>(age_df_desc, <span class="st">"data-output/wvs-30plus.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Notice that we have to create a “temp” dataframes called <code>wvs_data_clean</code> in this method.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>wvs_data <span class="ot">&lt;-</span> <span class="fu">drop_na</span>(wvs_data)</span>
+<span id="cb6-2"><a></a>wvs_data_clean <span class="ot">&lt;-</span> <span class="fu">wvs_data_clean</span>(wvs_data, <span class="fu">desc</span>(age))</span>
+<span id="cb6-3"><a></a><span class="fu">write_csv</span>(wvs_data_clean, <span class="st">"data-output/wvs-clean.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="tabset-1-2">
-<p>No “temp” dataframe needed here! :D</p>
-<div class="sourceCode" id="cb6" data-code-overflow="overflow"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>wvs_data <span class="sc">|&gt;</span> </span>
-<span id="cb6-2"><a></a>    <span class="fu">filter</span>(age <span class="sc">&gt;=</span> <span class="dv">30</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb6-3"><a></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(age)) <span class="sc">|&gt;</span> </span>
-<span id="cb6-4"><a></a>    <span class="fu">write_csv</span>(<span class="st">"data-output/wvs-30plus.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>No “temporary” dataframe needed here! :D</p>
+<div class="sourceCode" id="cb7" data-code-overflow="overflow"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>wvs_data <span class="sc">|&gt;</span> </span>
+<span id="cb7-2"><a></a>    <span class="fu">drop_na</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb7-3"><a></a>    <span class="fu">distinct</span>(ID, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb7-4"><a></a>    <span class="fu">write_csv</span>(<span class="st">"data-output/wvs-30plus.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-</div>
-</section>
-<section id="task-2" class="slide level2">
-<h2>Task #2</h2>
-<p>Create a demographics-only dataset:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>demographics_df <span class="ot">&lt;-</span> wvs_data <span class="sc">|&gt;</span></span>
-<span id="cb7-2"><a></a>    <span class="fu">select</span>(country, sex, age, marital_status, employment) <span class="sc">|&gt;</span></span>
-<span id="cb7-3"><a></a>    <span class="fu">write_csv</span>(<span class="st">"data-output/wvs_demographics.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>First few rows of the demographics data:</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6,403 × 5
-  country sex      age marital_status             employment       
-  &lt;chr&gt;   &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;                      &lt;chr&gt;            
-1 CAN     Female    76 Separated                  Retired/pensioned
-2 CAN     Male      69 Married                    Retired/pensioned
-3 CAN     Female    35 Living together as married Part time        
-# ℹ 6,400 more rows</code></pre>
 </div>
 </div>
 </section>
 <section id="task-3" class="slide level2">
 <h2>Task #3:</h2>
-<p>Filter for 30+ age group and sort by age:</p>
+<p>Select only the relevant columns: demographic columns, <code>life_satisfaction</code>, <code>work_importance</code>, <code>financial_satisfaction</code>, <code>religiousity</code>, <code>political_scale</code>, <code>marital_status</code>, and <code>employment</code>.</p>
+<p>We can achieve this with <code>select()</code>!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>wvs_30plus <span class="ot">&lt;-</span> wvs_data <span class="sc">|&gt;</span></span>
-<span id="cb9-2"><a></a>    <span class="fu">filter</span>(age <span class="sc">&gt;=</span> <span class="dv">30</span>) <span class="sc">|&gt;</span></span>
-<span id="cb9-3"><a></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(age)) <span class="sc">|&gt;</span></span>
-<span id="cb9-4"><a></a>    <span class="fu">write_csv</span>(<span class="st">"data-output/wvs_30plus.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>wvs_data <span class="ot">&lt;-</span> wvs_data <span class="sc">|&gt;</span></span>
+<span id="cb8-2"><a></a>    <span class="fu">select</span>(country, sex, birthyear, age, life_satisfaction, work_importance, financial_satisfaction, religiousity, political_scale, marital_status, employment) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Preview of the filtered data:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>wvs_data <span class="sc">|&gt;</span> <span class="fu">glimpse</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 5,319 × 3
-  country   age employment       
-  &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;            
-1 CAN        93 Part time        
-2 NZL        91 Retired/pensioned
-3 SGP        90 Retired/pensioned
-# ℹ 5,316 more rows</code></pre>
-</div>
-</div>
-</section>
-<section id="group-exercise-1-5-minutes" class="slide level2">
-<h2>Group Exercise 1 (5 minutes)</h2>
-<p>Find all respondents who are: - From Singapore - Employed full-time - Have high life satisfaction (8 or higher) Save their country, employment, life_satisfaction, and freedom scores, arranged by life_satisfaction in descending order.</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Show answer</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>singapore_satisfied <span class="ot">&lt;-</span> wvs_data <span class="sc">|&gt;</span></span>
-<span id="cb11-2"><a></a>    <span class="fu">filter</span>(country <span class="sc">==</span> <span class="st">"SGP"</span> <span class="sc">&amp;</span> </span>
-<span id="cb11-3"><a></a>           employment <span class="sc">==</span> <span class="st">"Full time"</span> <span class="sc">&amp;</span> </span>
-<span id="cb11-4"><a></a>           life_satisfaction <span class="sc">&gt;=</span> <span class="dv">8</span>) <span class="sc">|&gt;</span></span>
-<span id="cb11-5"><a></a>    <span class="fu">select</span>(country, employment, life_satisfaction, freedom) <span class="sc">|&gt;</span></span>
-<span id="cb11-6"><a></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(life_satisfaction))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<p>Preview:</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 361 × 4
-  country employment life_satisfaction freedom
-  &lt;chr&gt;   &lt;chr&gt;                  &lt;dbl&gt;   &lt;dbl&gt;
-1 SGP     Full time                 10       1
-2 SGP     Full time                 10      10
-3 SGP     Full time                 10      10
-# ℹ 358 more rows</code></pre>
+<pre><code>Rows: 6,403
+Columns: 11
+$ country                &lt;chr&gt; "CAN", "CAN", "CAN", "CAN", "CAN", "CAN", "CAN"…
+$ sex                    &lt;chr&gt; "Female", "Male", "Female", "Male", "Male", "Ma…
+$ birthyear              &lt;dbl&gt; 1944, 1951, 1984, 1975, 1988, 1982, 1981, 1985,…
+$ age                    &lt;dbl&gt; 76, 69, 35, 45, 32, 38, 38, 34, 65, 31, 27, 33,…
+$ life_satisfaction      &lt;dbl&gt; 5, 8, 9, 7, 1, 7, 9, 6, 7, 6, 7, 10, 8, 10, 6, …
+$ work_importance        &lt;dbl&gt; 1, 1, 2, 2, 2, 1, 1, 2, 1, 2, 1, 2, 4, 1, 3, 3,…
+$ financial_satisfaction &lt;dbl&gt; 8, 2, 8, 8, 9, 8, 9, 5, 6, 9, 5, 7, 9, 9, 7, 8,…
+$ religiousity           &lt;chr&gt; "A religious person", "A religious person", "An…
+$ political_scale        &lt;dbl&gt; 10, 5, 2, 8, 6, 6, 7, 5, 6, 4, 5, 4, 1, 7, 2, 8…
+$ marital_status         &lt;chr&gt; "Separated", "Married", "Living together as mar…
+$ employment             &lt;chr&gt; "Retired/pensioned", "Retired/pensioned", "Part…</code></pre>
 </div>
 </div>
 </section>
 <section id="task-4" class="slide level2">
 <h2>Task #4:</h2>
-<p>Convert categorical variables to factors:</p>
+<p>Filter for respondents aged 18 or older. Optionally, we can then arrange the dataset by age (oldest to youngest)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>cols_to_factor <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"country"</span>, <span class="st">"religiousity"</span>, <span class="st">"sex"</span>, </span>
-<span id="cb13-2"><a></a>                    <span class="st">"marital_status"</span>, <span class="st">"employment"</span>)</span>
-<span id="cb13-3"><a></a></span>
-<span id="cb13-4"><a></a>wvs_data <span class="ot">&lt;-</span> wvs_data <span class="sc">|&gt;</span></span>
-<span id="cb13-5"><a></a>    <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">all_of</span>(cols_to_factor), as.factor))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>wvs_data <span class="ot">&lt;-</span> wvs_data <span class="sc">|&gt;</span> </span>
+<span id="cb11-2"><a></a>    <span class="fu">filter</span>(age <span class="sc">&gt;=</span> <span class="dv">18</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb11-3"><a></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(age))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Checking the structure:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="fu">head</span>(wvs_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>tibble [6,403 × 5] (S3: tbl_df/tbl/data.frame)
- $ country       : Factor w/ 3 levels "CAN","NZL","SGP": 1 1 1 1 1 1 1 1 1 1 ...
- $ religiousity  : Factor w/ 4 levels "A religious person",..: 1 1 2 1 4 2 2 1 4 1 ...
- $ sex           : Factor w/ 2 levels "Female","Male": 1 2 1 2 2 2 2 1 2 2 ...
- $ marital_status: Factor w/ 6 levels "Divorced","Living together as married",..: 4 3 2 3 1 3 3 3 6 5 ...
- $ employment    : Factor w/ 8 levels "Full time","Homemaker not otherwise employed",..: 5 5 4 1 1 1 6 8 6 1 ...</code></pre>
+<pre><code># A tibble: 6 × 11
+  country sex    birthyear   age life_satisfaction work_importance
+  &lt;chr&gt;   &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt;             &lt;dbl&gt;           &lt;dbl&gt;
+1 CAN     Male        1927    93                 7               1
+2 NZL     Female      1928    91                 5               4
+3 SGP     Male        1930    90                 8               1
+4 CAN     Female      1931    89                 6               3
+5 CAN     Female      1930    89                 6               4
+6 CAN     Male        1931    89                 8               4
+# ℹ 5 more variables: financial_satisfaction &lt;dbl&gt;, religiousity &lt;chr&gt;,
+#   political_scale &lt;dbl&gt;, marital_status &lt;chr&gt;, employment &lt;chr&gt;</code></pre>
 </div>
 </div>
 </section>
 <section id="task-5" class="slide level2">
 <h2>Task #5</h2>
-<p>Add age groups to our dataset:</p>
+<p>Reverse-code <code>work_importance</code> variables so that higher numbers consistently represent higher levels of the measured construct. In other words, 1 = Not at all important and 4 = Very important.</p>
+<p>We can achieve this with <code>mutate()</code>!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>wvs_data <span class="ot">&lt;-</span> wvs_data <span class="sc">|&gt;</span></span>
-<span id="cb15-2"><a></a>    <span class="fu">mutate</span>(<span class="at">age_group =</span> <span class="fu">case_when</span>(</span>
-<span id="cb15-3"><a></a>        age <span class="sc">&lt;</span> <span class="dv">30</span> <span class="sc">~</span> <span class="st">"18-29"</span>,</span>
-<span id="cb15-4"><a></a>        age <span class="sc">&lt;</span> <span class="dv">45</span> <span class="sc">~</span> <span class="st">"30-44"</span>,</span>
-<span id="cb15-5"><a></a>        age <span class="sc">&lt;</span> <span class="dv">60</span> <span class="sc">~</span> <span class="st">"45-59"</span>,</span>
-<span id="cb15-6"><a></a>        <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"60+"</span></span>
-<span id="cb15-7"><a></a>    ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>wvs_data <span class="ot">&lt;-</span> wvs_data <span class="sc">|&gt;</span></span>
+<span id="cb14-2"><a></a>    <span class="fu">mutate</span>(<span class="at">work_importance_r =</span> <span class="dv">5</span> <span class="sc">-</span> work_importance)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Preview of age groups:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>wvs_data <span class="sc">|&gt;</span></span>
+<span id="cb15-2"><a></a>    <span class="fu">select</span>(work_importance_r, work_importance) <span class="sc">|&gt;</span></span>
+<span id="cb15-3"><a></a>    <span class="fu">print</span>(<span class="at">n =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6,403 × 2
-    age age_group
-  &lt;dbl&gt; &lt;chr&gt;    
-1    76 60+      
-2    69 60+      
-3    35 30-44    
-4    45 45-59    
-# ℹ 6,399 more rows</code></pre>
+  work_importance_r work_importance
+              &lt;dbl&gt;           &lt;dbl&gt;
+1                 4               1
+2                 1               4
+3                 4               1
+4                 2               3
+5                 1               4
+# ℹ 6,398 more rows</code></pre>
 </div>
 </div>
 </section>
 <section id="task-6" class="slide level2">
 <h2>Task #6</h2>
-<p>Create a new column <code>high_satisfaction</code> that is TRUE if life_satisfaction is above the median:</p>
+<p>Create age groups for each generation: “18-28”, “29-44”, “45-60”, “61+”</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="co"># Calculate median life satisfaction</span></span>
-<span id="cb17-2"><a></a>median_satisfaction <span class="ot">&lt;-</span> <span class="fu">median</span>(wvs_data<span class="sc">$</span>life_satisfaction, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb17-3"><a></a></span>
-<span id="cb17-4"><a></a><span class="co"># Create the high_satisfaction column</span></span>
-<span id="cb17-5"><a></a>wvs_data <span class="ot">&lt;-</span> wvs_data <span class="sc">|&gt;</span></span>
-<span id="cb17-6"><a></a>    <span class="fu">mutate</span>(<span class="at">high_satisfaction =</span> life_satisfaction <span class="sc">&gt;</span> median_satisfaction)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a>wvs_data <span class="ot">&lt;-</span> wvs_data <span class="sc">|&gt;</span></span>
+<span id="cb17-2"><a></a>    <span class="fu">mutate</span>(<span class="at">age_group =</span> <span class="fu">case_when</span>(</span>
+<span id="cb17-3"><a></a>        age <span class="sc">&lt;=</span> <span class="dv">28</span> <span class="sc">~</span> <span class="st">"18-28"</span>,</span>
+<span id="cb17-4"><a></a>        age <span class="sc">&lt;=</span> <span class="dv">44</span> <span class="sc">~</span> <span class="st">"29-44"</span>,</span>
+<span id="cb17-5"><a></a>        age <span class="sc">&lt;=</span> <span class="dv">60</span> <span class="sc">~</span> <span class="st">"45-60"</span>,</span>
+<span id="cb17-6"><a></a>        <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"61+"</span></span>
+<span id="cb17-7"><a></a>    ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Preview of satisfaction categorization:</p>
+<p>Preview of age groups:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>wvs_data <span class="sc">|&gt;</span></span>
+<span id="cb18-2"><a></a>    <span class="fu">select</span>(age, age_group) <span class="sc">|&gt;</span></span>
+<span id="cb18-3"><a></a>    <span class="fu">print</span>(<span class="at">n =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 7</code></pre>
+<pre><code># A tibble: 6,403 × 2
+    age age_group
+  &lt;dbl&gt; &lt;chr&gt;    
+1    93 61+      
+2    91 61+      
+3    90 61+      
+4    89 61+      
+# ℹ 6,399 more rows</code></pre>
 </div>
+</div>
+</section>
+<section id="checkpoint-1---saving-our-hard-work-into-a-csv-file" class="slide level2">
+<h2>Checkpoint 1 - saving our hard work into a CSV file</h2>
+<p>We have done some cleaning! Let’s save this cleaned data into a separate CSV file called “wvs_cleaned_v1.csv”</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a>wvs_data <span class="sc">|&gt;</span> <span class="fu">write_csv</span>(<span class="st">"data-output/wvs_cleaned_v1.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Check the data output folder to make sure the CSV is created!</p>
+</section>
+<section id="group-exercise-1-5-minutes" class="slide level2">
+<h2>Group Exercise 1 (5 minutes)</h2>
+<p>Now that we have a new file, load this new <code>wvs_cleaned_v1.csv</code> into a new dataframe called <code>wvs_cleaned</code>. Filter to respondents from Singapore who are currently employed full time. Show only the country, the employment status, and age. Use <code>glimpse()</code> or <code>print()</code> to check the result! (you can chain these functions at the end)</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show answer</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb21-2"><a></a>wvs_cleaned <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data-output/wvs_cleaned_v1.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 6403 Columns: 13
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (6): country, sex, religiousity, marital_status, employment, age_group
+dbl (7): birthyear, age, life_satisfaction, work_importance, financial_satis...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<details class="code-fold">
+<summary>Show answer</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a>wvs_cleaned <span class="sc">|&gt;</span> </span>
+<span id="cb23-2"><a></a>    <span class="fu">filter</span>(country <span class="sc">==</span> <span class="st">"SGP"</span> <span class="sc">&amp;</span> employment <span class="sc">==</span> <span class="st">"Full time"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb23-3"><a></a>    <span class="fu">select</span>(country, employment, age) <span class="sc">|&gt;</span> </span>
+<span id="cb23-4"><a></a>    <span class="fu">glimpse</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 11 × 2
-   life_satisfaction high_satisfaction
-               &lt;dbl&gt; &lt;lgl&gt;            
- 1                 5 FALSE            
- 2                 8 TRUE             
- 3                 9 TRUE             
- 4                 7 FALSE            
- 5                 1 FALSE            
- 6                 7 FALSE            
- 7                 9 TRUE             
- 8                 6 FALSE            
- 9                 7 FALSE            
-10                 6 FALSE            
-11                 7 FALSE            </code></pre>
+<pre><code>Rows: 857
+Columns: 3
+$ country    &lt;chr&gt; "SGP", "SGP", "SGP", "SGP", "SGP", "SGP", "SGP", "SGP", "SG…
+$ employment &lt;chr&gt; "Full time", "Full time", "Full time", "Full time", "Full t…
+$ age        &lt;dbl&gt; 81, 79, 73, 70, 69, 68, 68, 68, 68, 68, 68, 67, 67, 67, 67,…</code></pre>
 </div>
+</div>
+</section>
+<section id="scenario-data-wrangling-activities-with-wvs-data-continued" class="slide level2">
+<h2>Scenario: Data wrangling activities with WVS data (continued)</h2>
+<p>Once we are done with the wrangling part, we can proceed with simple descriptive analysis!</p>
+<div>
+<ol start="7" type="1">
+<li class="fragment"><p>Before we proceed further, convert the appropriate categorical variables (country, religiousity, sex, marital_status, employment) to <strong>Factor</strong></p></li>
+<li class="fragment"><p>Generate summary statistics of life_satisfaction grouped by country</p></li>
+<li class="fragment"><p>Create a new column called <code>satisfaction_group</code> that indicate whether each respondent has higher or lower than average <code>life_satisfaction</code></p></li>
+<li class="fragment"><p>Reshape the data to show average satisfaction scores by country and age group</p></li>
+</ol>
 </div>
 </section>
 <section id="task-7" class="slide level2">
 <h2>Task #7</h2>
-<p>In survey data, we often need to reverse code scales so that higher numbers consistently represent higher levels of the measured construct. In our WVS data:</p>
-<p>Original importance scale:</p>
-<ul>
-<li><p>1 = Very Important</p></li>
-<li><p>2 = Rather Important</p></li>
-<li><p>3 = Not Very Important</p></li>
-<li><p>4 = Not at all Important</p></li>
-</ul>
-<p>Let’s create reverse-coded versions where 4 = highest importance:</p>
+<p>Let’s use the <code>wvs_cleaned</code> dataframe for this task.</p>
+<p>Convert the appropriate categorical variables (country, religiousity, sex, marital_status, employment) to <strong>Factor</strong>.</p>
+<p>We can do this with <code>mutate()</code> and <code>as_factor()</code> from forcats, another sub-package within tidyverse.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a>wvs_data <span class="ot">&lt;-</span> wvs_data <span class="sc">|&gt;</span></span>
-<span id="cb20-2"><a></a>    <span class="fu">mutate</span>(</span>
-<span id="cb20-3"><a></a>        <span class="co"># Reverse code each importance variable (5 minus original value)</span></span>
-<span id="cb20-4"><a></a>        <span class="at">family_importance_r =</span> <span class="dv">5</span> <span class="sc">-</span> family_importance,</span>
-<span id="cb20-5"><a></a>        <span class="at">friends_importance_r =</span> <span class="dv">5</span> <span class="sc">-</span> friends_importance,</span>
-<span id="cb20-6"><a></a>        <span class="at">leisure_importance_r =</span> <span class="dv">5</span> <span class="sc">-</span> leisure_importance,</span>
-<span id="cb20-7"><a></a>        <span class="at">work_importance_r =</span> <span class="dv">5</span> <span class="sc">-</span> work_importance</span>
-<span id="cb20-8"><a></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a>wvs_cleaned <span class="ot">&lt;-</span> wvs_cleaned <span class="sc">|&gt;</span> </span>
+<span id="cb25-2"><a></a>    <span class="fu">mutate</span>(</span>
+<span id="cb25-3"><a></a>        <span class="at">country =</span> <span class="fu">as_factor</span>(country),</span>
+<span id="cb25-4"><a></a>        <span class="at">religiousity =</span> <span class="fu">as_factor</span>(religiousity),</span>
+<span id="cb25-5"><a></a>        <span class="at">sex =</span> <span class="fu">as_factor</span>(sex),</span>
+<span id="cb25-6"><a></a>        <span class="at">marital_status =</span> <span class="fu">as_factor</span>(marital_status),</span>
+<span id="cb25-7"><a></a>        <span class="at">employment =</span> <span class="fu">as_factor</span>(employment)</span>
+<span id="cb25-8"><a></a>    )</span>
+<span id="cb25-9"><a></a></span>
+<span id="cb25-10"><a></a><span class="co"># check conversion result</span></span>
+<span id="cb25-11"><a></a><span class="fu">str</span>(wvs_cleaned)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section class="slide level2">
 
-<p>Preview of original vs reverse-coded scales:</p>
-<div class="cell">
+<p>Rstudio may auto-suggest <code>as.factor()</code> from base R. You can use this as well, but <code>as_factor()</code> is preferred since we are using tidyverse approach.</p>
+</section>
+<section id="task-7-output" class="slide level2 output-location-slide"><h2>Task #7</h2><div class="cell output-location-slide">
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6,403 × 8
-  family_importance family_importance_r friends_importance friends_importance_r
-              &lt;dbl&gt;               &lt;dbl&gt;              &lt;dbl&gt;                &lt;dbl&gt;
-1                 1                   4                  1                    4
-2                 1                   4                  1                    4
-3                 2                   3                  2                    3
-# ℹ 6,400 more rows
-# ℹ 4 more variables: leisure_importance &lt;dbl&gt;, leisure_importance_r &lt;dbl&gt;,
-#   work_importance &lt;dbl&gt;, work_importance_r &lt;dbl&gt;</code></pre>
+<pre><code>tibble [6,403 × 13] (S3: tbl_df/tbl/data.frame)
+ $ country               : Factor w/ 3 levels "CAN","NZL","SGP": 1 2 3 1 1 1 2 1 1 2 ...
+ $ sex                   : Factor w/ 2 levels "Male","Female": 1 2 1 2 2 1 2 1 2 1 ...
+ $ birthyear             : num [1:6403] 1927 1928 1930 1931 1930 ...
+ $ age                   : num [1:6403] 93 91 90 89 89 89 89 88 88 88 ...
+ $ life_satisfaction     : num [1:6403] 7 5 8 6 6 8 9 8 8 10 ...
+ $ work_importance       : num [1:6403] 1 4 1 3 4 4 2 1 4 2 ...
+ $ financial_satisfaction: num [1:6403] 7 5 9 9 8 8 10 10 5 10 ...
+ $ religiousity          : Factor w/ 4 levels "Not a religious person",..: 1 2 2 1 1 2 2 2 2 2 ...
+ $ political_scale       : num [1:6403] 5 3 3 2 5 5 8 10 5 5 ...
+ $ marital_status        : Factor w/ 6 levels "Widowed","Single",..: 1 1 1 1 2 3 1 1 1 1 ...
+ $ employment            : Factor w/ 8 levels "Part time","Retired/pensioned",..: 1 2 2 2 2 2 2 2 2 2 ...
+ $ work_importance_r     : num [1:6403] 4 1 4 2 1 1 3 4 1 3 ...
+ $ age_group             : chr [1:6403] "61+" "61+" "61+" "61+" ...</code></pre>
 </div>
+</div></section><section id="task-7---the-shortcut" class="slide level2">
+<h2>Task #7 - the shortcut</h2>
+<p>If we have a lot of columns to convert, that might be troublesome to type! This is where <code>across()</code> can come in handy.</p>
+<p>Let’s first define a character vector that contains the names of columns we plan to convert.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a>columns_to_convert <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"country"</span>, <span class="st">"religiousity"</span>, <span class="st">"sex"</span>, <span class="st">"marital_status"</span>, <span class="st">"employment"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>We will use this vector with <code>mutate()</code> and <code>across()</code>. We tell tidyverse to convert all of the columns with the help of <code>all_of()</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a>wvs_cleaned <span class="ot">&lt;-</span> wvs_cleaned <span class="sc">|&gt;</span> </span>
+<span id="cb28-2"><a></a>    <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">all_of</span>(columns_to_convert), as_factor))</span>
+<span id="cb28-3"><a></a></span>
+<span id="cb28-4"><a></a><span class="co"># check conversion result</span></span>
+<span id="cb28-5"><a></a><span class="fu">str</span>(wvs_cleaned)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<p><code>across()</code> is used for applying the same function to multiple columns in a single <code>mutate()</code> or <code>summarise()</code> operation.</p>
 </section>
-<section id="task-8" class="slide level2">
+<section id="task-7---the-shortcut-output" class="slide level2 output-location-slide"><h2>Task #7 - the shortcut</h2><div class="cell output-location-slide">
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [6,403 × 13] (S3: tbl_df/tbl/data.frame)
+ $ country               : Factor w/ 3 levels "CAN","NZL","SGP": 1 2 3 1 1 1 2 1 1 2 ...
+ $ sex                   : Factor w/ 2 levels "Male","Female": 1 2 1 2 2 1 2 1 2 1 ...
+ $ birthyear             : num [1:6403] 1927 1928 1930 1931 1930 ...
+ $ age                   : num [1:6403] 93 91 90 89 89 89 89 88 88 88 ...
+ $ life_satisfaction     : num [1:6403] 7 5 8 6 6 8 9 8 8 10 ...
+ $ work_importance       : num [1:6403] 1 4 1 3 4 4 2 1 4 2 ...
+ $ financial_satisfaction: num [1:6403] 7 5 9 9 8 8 10 10 5 10 ...
+ $ religiousity          : Factor w/ 4 levels "Not a religious person",..: 1 2 2 1 1 2 2 2 2 2 ...
+ $ political_scale       : num [1:6403] 5 3 3 2 5 5 8 10 5 5 ...
+ $ marital_status        : Factor w/ 6 levels "Widowed","Single",..: 1 1 1 1 2 3 1 1 1 1 ...
+ $ employment            : Factor w/ 8 levels "Part time","Retired/pensioned",..: 1 2 2 2 2 2 2 2 2 2 ...
+ $ work_importance_r     : num [1:6403] 4 1 4 2 1 1 3 4 1 3 ...
+ $ age_group             : chr [1:6403] "61+" "61+" "61+" "61+" ...</code></pre>
+</div>
+</div></section><section id="task-8" class="slide level2">
 <h2>Task #8</h2>
-<p>Save all our changes to a new CSV file:</p>
+<p>Generate summary statistics such as count (n), mean, median, and standard deviation of life_satisfaction grouped by country.</p>
+<p>We can achieve this with <code>group_by()</code> and <code>summarise()</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a><span class="co"># Save the processed data</span></span>
-<span id="cb22-2"><a></a><span class="fu">write_csv</span>(wvs_data, <span class="st">"data-output/wvs_processed.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a>wvs_data <span class="sc">|&gt;</span></span>
+<span id="cb30-2"><a></a>    <span class="fu">group_by</span>(country, age_group) <span class="sc">|&gt;</span></span>
+<span id="cb30-3"><a></a>    <span class="fu">summarise</span>(</span>
+<span id="cb30-4"><a></a>        <span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb30-5"><a></a>        <span class="at">mean_satisfaction =</span> <span class="fu">mean</span>(life_satisfaction),</span>
+<span id="cb30-6"><a></a>        <span class="at">median_satisfaction =</span> <span class="fu">median</span>(life_satisfaction),</span>
+<span id="cb30-7"><a></a>        <span class="at">sd_satisfaction =</span> <span class="fu">sd</span>(life_satisfaction)</span>
+<span id="cb30-8"><a></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb30-9"><a></a>    <span class="fu">arrange</span>(country, <span class="fu">desc</span>(mean_satisfaction))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Let’s check the <code>data-output</code> folder to see if the CSV has been properly created!</p>
+
+<p><em>What if we want to save this into a CSV? What if we also want to group by country AND age_group?</em></p>
 </section>
-<section id="task-9" class="slide level2">
+<section id="task-8-output" class="slide level2 output-location-slide"><h2>Task #8</h2><div class="cell output-location-slide">
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'country'. You can override using the
+`.groups` argument.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 12 × 6
+# Groups:   country [3]
+   country age_group     n mean_satisfaction median_satisfaction sd_satisfaction
+   &lt;chr&gt;   &lt;chr&gt;     &lt;int&gt;             &lt;dbl&gt;               &lt;dbl&gt;           &lt;dbl&gt;
+ 1 CAN     61+        1013              7.55                   8            1.59
+ 2 CAN     29-44      1232              6.99                   7            1.80
+ 3 CAN     45-60      1061              6.92                   7            1.87
+ 4 CAN     18-28       712              6.60                   7            1.86
+ 5 NZL     61+         292              7.96                   8            1.66
+ 6 NZL     45-60       222              7.38                   8            1.90
+ 7 NZL     29-44       119              7.32                   8            1.69
+ 8 NZL     18-28        27              6.70                   7            1.98
+ 9 SGP     61+         418              7.17                   7            1.84
+10 SGP     29-44       511              7.09                   7            1.70
+11 SGP     45-60       550              7.05                   7            1.83
+12 SGP     18-28       246              6.85                   7            1.68</code></pre>
+</div>
+</div></section><section id="task-9" class="slide level2">
 <h2>Task #9</h2>
-<p>generate satisfaction statistics by country and employment:</p>
+<p>Create a new column called <code>satisfaction_group</code> that indicate whether each respondent has higher or lower than average <code>life_satisfaction</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a>wvs_data <span class="sc">|&gt;</span></span>
-<span id="cb23-2"><a></a>    <span class="fu">group_by</span>(country, employment) <span class="sc">|&gt;</span></span>
-<span id="cb23-3"><a></a>    <span class="fu">summarise</span>(</span>
-<span id="cb23-4"><a></a>        <span class="at">n =</span> <span class="fu">n</span>(),</span>
-<span id="cb23-5"><a></a>        <span class="at">mean_satisfaction =</span> <span class="fu">mean</span>(life_satisfaction),</span>
-<span id="cb23-6"><a></a>        <span class="at">median_satisfaction =</span> <span class="fu">median</span>(life_satisfaction),</span>
-<span id="cb23-7"><a></a>        <span class="at">sd_satisfaction =</span> <span class="fu">sd</span>(life_satisfaction)</span>
-<span id="cb23-8"><a></a>    ) <span class="sc">|&gt;</span></span>
-<span id="cb23-9"><a></a>    <span class="fu">arrange</span>(country, <span class="fu">desc</span>(mean_satisfaction))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a></a>mean_satisfaction <span class="ot">&lt;-</span> <span class="fu">mean</span>(wvs_data<span class="sc">$</span>life_satisfaction, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb33-2"><a></a></span>
+<span id="cb33-3"><a></a>wvs_data <span class="sc">|&gt;</span></span>
+<span id="cb33-4"><a></a>    <span class="fu">mutate</span>(<span class="at">satisfaction_group =</span> <span class="fu">if_else</span>(</span>
+<span id="cb33-5"><a></a>        life_satisfaction <span class="sc">&gt;</span> mean_satisfaction,</span>
+<span id="cb33-6"><a></a>        <span class="st">"higher"</span>, <span class="co"># if condition is fulfilled, do this</span></span>
+<span id="cb33-7"><a></a>        <span class="st">"lower"</span> <span class="co"># otherwise, do this</span></span>
+<span id="cb33-8"><a></a>    )) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 </section>
 <section id="task-9-output" class="slide level2 output-location-slide"><h2>Task #9</h2><div class="cell output-location-slide">
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 24 × 6
-# Groups:   country [3]
-   country employment                    n mean_satisfaction median_satisfaction
-   &lt;fct&gt;   &lt;fct&gt;                     &lt;int&gt;             &lt;dbl&gt;               &lt;dbl&gt;
- 1 CAN     Retired/pensioned           914              7.58                 8  
- 2 CAN     Self employed               225              7.32                 8  
- 3 CAN     Full time                  1808              7.10                 7  
- 4 CAN     Homemaker not otherwise …   143              6.96                 7  
- 5 CAN     Part time                   290              6.92                 7  
- 6 CAN     Student                     320              6.53                 7  
- 7 CAN     Other                        78              5.87                 6.5
- 8 CAN     Unemployed                  240              5.53                 6  
- 9 NZL     Self employed                 7              8.71                 9  
-10 NZL     Retired/pensioned           179              8                    8  
-# ℹ 14 more rows
-# ℹ 1 more variable: sd_satisfaction &lt;dbl&gt;</code></pre>
+<pre><code># A tibble: 6,403 × 14
+   country sex    birthyear   age life_satisfaction work_importance
+   &lt;chr&gt;   &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt;             &lt;dbl&gt;           &lt;dbl&gt;
+ 1 CAN     Male        1927    93                 7               1
+ 2 NZL     Female      1928    91                 5               4
+ 3 SGP     Male        1930    90                 8               1
+ 4 CAN     Female      1931    89                 6               3
+ 5 CAN     Female      1930    89                 6               4
+ 6 CAN     Male        1931    89                 8               4
+ 7 NZL     Female      1930    89                 9               2
+ 8 CAN     Male        1932    88                 8               1
+ 9 CAN     Female      1958    88                 8               4
+10 NZL     Male        1931    88                10               2
+# ℹ 6,393 more rows
+# ℹ 8 more variables: financial_satisfaction &lt;dbl&gt;, religiousity &lt;chr&gt;,
+#   political_scale &lt;dbl&gt;, marital_status &lt;chr&gt;, employment &lt;chr&gt;,
+#   work_importance_r &lt;dbl&gt;, age_group &lt;chr&gt;, satisfaction_group &lt;chr&gt;</code></pre>
 </div>
 </div></section><section id="task-10" class="slide level2">
 <h2>Task #10</h2>
-<p>Create a country by religiosity cross-tabulation:</p>
+<p>Show the average satisfaction scores by country and age group in wide data format</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a>wvs_data <span class="sc">|&gt;</span></span>
-<span id="cb25-2"><a></a>    <span class="fu">group_by</span>(country, religiousity) <span class="sc">|&gt;</span></span>
-<span id="cb25-3"><a></a>    <span class="fu">summarise</span>(<span class="at">count =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb25-4"><a></a>    <span class="fu">pivot_wider</span>(</span>
-<span id="cb25-5"><a></a>        <span class="at">names_from =</span> religiousity,</span>
-<span id="cb25-6"><a></a>        <span class="at">values_from =</span> count,</span>
-<span id="cb25-7"><a></a>        <span class="at">values_fill =</span> <span class="dv">0</span></span>
-<span id="cb25-8"><a></a>    ) <span class="sc">|&gt;</span></span>
-<span id="cb25-9"><a></a>    knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<table class="caption-top">
-<colgroup>
-<col style="width: 11%">
-<col style="width: 26%">
-<col style="width: 15%">
-<col style="width: 31%">
-<col style="width: 15%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">country</th>
-<th style="text-align: right;">A religious person</th>
-<th style="text-align: right;">An atheist</th>
-<th style="text-align: right;">Not a religious person</th>
-<th style="text-align: right;">Don’t know</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">CAN</td>
-<td style="text-align: right;">1406</td>
-<td style="text-align: right;">818</td>
-<td style="text-align: right;">1794</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">NZL</td>
-<td style="text-align: right;">209</td>
-<td style="text-align: right;">97</td>
-<td style="text-align: right;">310</td>
-<td style="text-align: right;">44</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">SGP</td>
-<td style="text-align: right;">990</td>
-<td style="text-align: right;">172</td>
-<td style="text-align: right;">563</td>
-<td style="text-align: right;">0</td>
-</tr>
-</tbody>
-</table>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a></a>wvs_data <span class="sc">|&gt;</span></span>
+<span id="cb35-2"><a></a>    <span class="fu">group_by</span>(country, age_group) <span class="sc">|&gt;</span></span>
+<span id="cb35-3"><a></a>    <span class="fu">summarise</span>(</span>
+<span id="cb35-4"><a></a>        <span class="at">avg_satisfaction =</span> <span class="fu">mean</span>(life_satisfaction, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb35-5"><a></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb35-6"><a></a>    <span class="fu">pivot_wider</span>(</span>
+<span id="cb35-7"><a></a>        <span class="at">names_from =</span> age_group,</span>
+<span id="cb35-8"><a></a>        <span class="at">values_from =</span> avg_satisfaction</span>
+<span id="cb35-9"><a></a>    ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'country'. You can override using the
+`.groups` argument.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 5
+# Groups:   country [3]
+  country `18-28` `29-44` `45-60` `61+`
+  &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;
+1 CAN        6.60    6.99    6.92  7.55
+2 NZL        6.70    7.32    7.38  7.96
+3 SGP        6.85    7.09    7.05  7.17</code></pre>
 </div>
 </div>
 </section>
@@ -675,20 +721,27 @@ Bella Ratmelia
 <div class="column" style="width:50%;">
 <p><strong>Long data:</strong></p>
 <div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'country'. You can override using the
+`.groups` argument.</code></pre>
+</div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 10 × 3
-   country religiousity           count
-   &lt;fct&gt;   &lt;fct&gt;                  &lt;int&gt;
- 1 CAN     A religious person      1406
- 2 CAN     An atheist               818
- 3 CAN     Not a religious person  1794
- 4 NZL     A religious person       209
- 5 NZL     An atheist                97
- 6 NZL     Don't know                44
- 7 NZL     Not a religious person   310
- 8 SGP     A religious person       990
- 9 SGP     An atheist               172
-10 SGP     Not a religious person   563</code></pre>
+<pre><code># A tibble: 12 × 3
+# Groups:   country [3]
+   country age_group count
+   &lt;chr&gt;   &lt;chr&gt;     &lt;int&gt;
+ 1 CAN     18-28       712
+ 2 CAN     29-44      1232
+ 3 CAN     45-60      1061
+ 4 CAN     61+        1013
+ 5 NZL     18-28        27
+ 6 NZL     29-44       119
+ 7 NZL     45-60       222
+ 8 NZL     61+         292
+ 9 SGP     18-28       246
+10 SGP     29-44       511
+11 SGP     45-60       550
+12 SGP     61+         418</code></pre>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
@@ -696,41 +749,45 @@ Bella Ratmelia
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 5
-  country `A religious person` `An atheist` Not a religious perso…¹ `Don't know`
-  &lt;fct&gt;                  &lt;int&gt;        &lt;int&gt;                   &lt;int&gt;        &lt;int&gt;
-1 CAN                     1406          818                    1794           NA
-2 NZL                      209           97                     310           44
-3 SGP                      990          172                     563           NA
-# ℹ abbreviated name: ¹​`Not a religious person`</code></pre>
+# Groups:   country [3]
+  country `18-28` `29-44` `45-60` `61+`
+  &lt;chr&gt;     &lt;int&gt;   &lt;int&gt;   &lt;int&gt; &lt;int&gt;
+1 CAN         712    1232    1061  1013
+2 NZL          27     119     222   292
+3 SGP         246     511     550   418</code></pre>
 </div>
 </div>
 </div></div>
 </section>
-<section id="group-exercise-3-solo-attempts-ok" class="slide level2">
-<h2>Group exercise 3 (solo attempts ok)</h2>
+<section id="group-exercise-2-solo-attempts-ok" class="slide level2">
+<h2>Group exercise 2 (solo attempts ok)</h2>
 <p><u><strong>Time: 5 minutes</strong></u></p>
 <p>Generate a summary stats of <code>age</code> grouped by <code>country</code> and <code>sex</code>. The summary stats should include mean, median, max, min, std, and n (number of observations). It should look something like this:</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show answer</summary>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a>wvs_data <span class="sc">|&gt;</span> </span>
-<span id="cb28-2"><a></a>    <span class="fu">group_by</span>(country, sex) <span class="sc">|&gt;</span> </span>
-<span id="cb28-3"><a></a>    <span class="fu">summarise</span>(<span class="at">observation =</span> <span class="fu">n</span>(), </span>
-<span id="cb28-4"><a></a>              <span class="at">mean_age =</span> <span class="fu">mean</span>(age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb28-5"><a></a>              <span class="at">median_age =</span> <span class="fu">median</span>(age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
-<span id="cb28-6"><a></a>              <span class="at">oldest =</span> <span class="fu">max</span>(age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb28-7"><a></a>              <span class="at">youngest =</span> <span class="fu">min</span>(age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb28-8"><a></a>              <span class="at">std_dev =</span> <span class="fu">sd</span>(age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a></a>wvs_data <span class="sc">|&gt;</span> </span>
+<span id="cb41-2"><a></a>    <span class="fu">group_by</span>(country, sex) <span class="sc">|&gt;</span> </span>
+<span id="cb41-3"><a></a>    <span class="fu">summarise</span>(<span class="at">observation =</span> <span class="fu">n</span>(), </span>
+<span id="cb41-4"><a></a>              <span class="at">mean_age =</span> <span class="fu">mean</span>(age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb41-5"><a></a>              <span class="at">median_age =</span> <span class="fu">median</span>(age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb41-6"><a></a>              <span class="at">oldest =</span> <span class="fu">max</span>(age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb41-7"><a></a>              <span class="at">youngest =</span> <span class="fu">min</span>(age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb41-8"><a></a>              <span class="at">std_dev =</span> <span class="fu">sd</span>(age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 
 </section>
-<section id="group-exercise-3-solo-attempts-ok-output" class="slide level2 output-location-slide"><h2>Group exercise 3 (solo attempts ok)</h2><div class="cell output-location-slide">
+<section id="group-exercise-2-solo-attempts-ok-output" class="slide level2 output-location-slide"><h2>Group exercise 2 (solo attempts ok)</h2><div class="cell output-location-slide">
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'country'. You can override using the
+`.groups` argument.</code></pre>
+</div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 8
 # Groups:   country [3]
   country sex    observation mean_age median_age oldest youngest std_dev
-  &lt;fct&gt;   &lt;fct&gt;        &lt;int&gt;    &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
+  &lt;chr&gt;   &lt;chr&gt;        &lt;int&gt;    &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
 1 CAN     Female        1959     44.2         42     89       18    17.0
 2 CAN     Male          2059     48.8         49     93       18    16.4
 3 NZL     Female         354     56.6         58     91       19    15.5
@@ -742,15 +799,15 @@ Bella Ratmelia
 <h2>Bonus: Deleting columns from dataframe</h2>
 <p>Let’s say I have this column called <code>wrong_column</code> that I want to remove:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a>wvs_data <span class="ot">&lt;-</span> wvs_data <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">wrong_column =</span> <span class="st">"random values"</span>)</span>
-<span id="cb30-2"><a></a>wvs_data <span class="sc">|&gt;</span> <span class="fu">select</span>(country, wrong_column) <span class="sc">|&gt;</span> <span class="fu">print</span>(<span class="at">n =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a></a>wvs_data <span class="ot">&lt;-</span> wvs_data <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">wrong_column =</span> <span class="st">"random values"</span>)</span>
+<span id="cb44-2"><a></a>wvs_data <span class="sc">|&gt;</span> <span class="fu">select</span>(country, wrong_column) <span class="sc">|&gt;</span> <span class="fu">print</span>(<span class="at">n =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6,403 × 2
   country wrong_column 
-  &lt;fct&gt;   &lt;chr&gt;        
+  &lt;chr&gt;   &lt;chr&gt;        
 1 CAN     random values
-2 CAN     random values
-3 CAN     random values
+2 NZL     random values
+3 SGP     random values
 # ℹ 6,400 more rows</code></pre>
 </div>
 </div>
@@ -758,17 +815,18 @@ Bella Ratmelia
 <section id="remove-the-wrong-column-with-subset--" class="slide level2">
 <h2>Remove the wrong column with subset <code>-</code>:</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a>wvs_data <span class="ot">&lt;-</span> wvs_data <span class="sc">|&gt;</span> </span>
-<span id="cb32-2"><a></a>    <span class="fu">select</span>(<span class="sc">-</span>wrong_column)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a></a>wvs_data <span class="ot">&lt;-</span> wvs_data <span class="sc">|&gt;</span> </span>
+<span id="cb46-2"><a></a>    <span class="fu">select</span>(<span class="sc">-</span>wrong_column)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a></a>wvs_data <span class="sc">|&gt;</span> <span class="fu">select</span>(country) <span class="sc">|&gt;</span> <span class="fu">print</span>(<span class="at">n =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6,403 × 1
   country
-  &lt;fct&gt;  
+  &lt;chr&gt;  
 1 CAN    
-2 CAN    
-3 CAN    
+2 NZL    
+3 SGP    
 # ℹ 6,400 more rows</code></pre>
 </div>
 </div>
@@ -995,82 +1053,6 @@ Bella Ratmelia
         ]
       });
     </script>
-    
-
-    <script>
-
-      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
-
-      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
-
-      // slide changes (different for each slide format).
-
-      (function () {
-
-        // dispatch for htmlwidgets
-
-        function fireSlideEnter() {
-
-          const event = window.document.createEvent("Event");
-
-          event.initEvent("slideenter", true, true);
-
-          window.document.dispatchEvent(event);
-
-        }
-
-    
-
-        function fireSlideChanged(previousSlide, currentSlide) {
-
-          fireSlideEnter();
-
-    
-
-          // dispatch for shiny
-
-          if (window.jQuery) {
-
-            if (previousSlide) {
-
-              window.jQuery(previousSlide).trigger("hidden");
-
-            }
-
-            if (currentSlide) {
-
-              window.jQuery(currentSlide).trigger("shown");
-
-            }
-
-          }
-
-        }
-
-    
-
-        // hookup for slidy
-
-        if (window.w3c_slidy) {
-
-          window.w3c_slidy.add_observer(function (slide_num) {
-
-            // slide_num starts at position 1
-
-            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
-
-          });
-
-        }
-
-    
-
-      })();
-
-    </script>
-
-    
-
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {
