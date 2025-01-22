@@ -11,10 +11,10 @@ format: revealjs
 
 ## Checklist when you start RStudio
 
--   Load the project we created last session and open the R script file.
--   Make sure that `Environment` panel is empty (click on broom icon to clean it up)
+-   Load the project we created last session and open the R script file. Click on `File` \> `Recent Projects...` \> Select the our project from last week.
+-   Make sure that `Environment` panel is empty (click on broom icon to clean it up).
 -   Clear the `Console` and `Plots` too.
--   Re-run the `library(tidyverse)` and `read_csv` portion in the previous session
+-   Re-run the `library(tidyverse)` and `read_csv` portion in the previous session (the code is also on the next slide if you missed last week's session)
 
 ## Refresher: Loading from CSV into a dataframe
 
@@ -38,7 +38,7 @@ glimpse(wvs_data)
 ## Cleaning data for analysis
 
 ::: incremental
--   **Why do it in R?** Because it's much efficient to do so in R, especially if your data is large (e.g. millions of rows, hundreds of columns) and you have repetitive clean up tasks.
+-   **Why do it in R?** Because it's much efficient to do so in R, especially if your data is large (e.g. millions of rows, thousands of columns) and you have repetitive clean up tasks.
 -   Incorrect or inconsistent data can lead to false conclusions, so it's important to clean and prep it correctly.
 -   Having a clear understanding of the desired data shape is essential as real data often differs from what you imagine! **Refer to codebook, actual questionnaire, appendix for guidance.**
 -   Data cleaning techniques differ based on the problems, data type, and the research questions you are trying to answer. Various methods are available, each with its own trade-offs.
@@ -54,52 +54,45 @@ glimpse(wvs_data)
 
     -   [tidyr cheatsheet](https://rstudio.github.io/cheatsheets/html/tidyr.html) \| [pdf version](https://rstudio.github.io/cheatsheets/tidyr.pdf)
 
+-   Most of the time, these are the ones that you will use quite often:
 
-## Prelim checks for your data
+    -   `drop_na()` - remove rows with null values
 
-It's good practice to do some preliminary checks on your data to get a better sense of it!
+    -   `select()` - to select column(s) from a dataframe
 
-A few things that you can do:
+    -   `filter()` - to filter rows based on criteria
 
--   Check for duplicates
+    -   `mutate()` - to compute new columns or edit existing ones
 
--   Check for missing values
+    -   `if_else()` and `case_when()` - to be used with mutate when we want to compute/edit columns based on multiple criteria
 
--   Check on overall distributions of the categorical data
+    -   `group_by()` and `summarize()` - group data and summarize each group
 
--   Plot the distribution of the numerical/continuous data
+## Scenario: Data wrangling activities with WVS data {.smaller}
 
-# Data wrangling activities with WVS data
+**Scenario**: We are research assistants analyzing patterns in values and satisfaction across different countries and demographic groups. 
 
-**Scenario**: We are research assistants analyzing patterns in values and satisfaction across different countries and demographic groups. Our team wants to understand how life satisfaction relates to various factors like employment, marital status, and religiosity.
+Our team has been assigned to explore and get insights on how specific factors (employment, work importance, marital status, political alignment, financial satisfaction, and religiosity) may relate to life satisfaction among different generations (Gen Z, Millennials, Gen X, and Baby Boomer), including how they may differ between the 3 countries. 
 
-Tasks we need to complete:
+To ensure the analysis quality, we were instructed to discard incomplete data.
 
-::: incremental
-1. Remove all rows with missing values (NA)
-
-2. Create a demographics-only dataset with variables like country, sex, age, marital_status, and employment
-
-3. Filter for respondents aged 30 or older, arrange by age (oldest to youngest)
-
-4. Convert categorical variables (country, religiousity, sex, marital_status, employment) to factors
-
-5. Create age groups: "18-29", "30-44", "45-59", "60+"
-:::
-
-------------------------------------------------------------------------
+We can break down the tasks as such:
 
 ::: incremental
-6. Create a new column `high_satisfaction` that is TRUE if life_satisfaction is above the median
+1.  Remove all rows with missing values (NA)
 
-7. Reverse code scales for all the `importance` variables so that higher numbers consistently represent higher levels of the measured construct. In other words, 1 = Not at all important and 4 = Very important. 
+2.  Check for duplicates
 
-8. Generate summary statistics of life_satisfaction grouped by country and employment status
+3.  Select only the relevant columns: demographic columns, `work_importance`, `life_satisfaction`, `financial_satisfaction`, `religiousity`, `political_scale`, `marital_status`, and `employment`. 
 
-9. Create a cross-tabulation of religiousity by country
+4.  Filter for respondents aged 18 or older. Optionally, we can then arrange the dataset by age (oldest to youngest)
 
-10. Reshape the data to show average satisfaction scores by country and age group
+5.  Reverse-code `importance` variables so that higher numbers consistently represent higher levels of the measured construct. In other words, 1 = Not at all important and 4 = Very important.
+
+6.  Create age groups for each generation: "18-28", "29-44", "45-60", "61+"
 :::
+
+Once we did all of the wrangling above, we can save this "wrangled" version into another CSV
 
 
 # Let's wrangle our data!
@@ -108,7 +101,7 @@ Tasks we need to complete:
 
 > **A strategy I'd like to recommend:** briefly read over the `dplyr` + `tidyr` documentation, either the PDF or HTML version, and have them open on a separate tab so that you can refer to it quickly.
 
-Remove all rows with empty values (NA)
+Remove all rows with empty values (NA) with `drop_na()`
 
 ```{r}
 #| echo: true
@@ -124,9 +117,25 @@ The number of observations after removing NAs:
 dim(wvs_data)
 ```
 
+## Task #2
+
+Check for duplicates with `distinct()`
+
+```{r}
+#| echo: true
+#| output: false
+
+wvs_data <- wvs_data |> 
+  distinct(ID, .keep_all = TRUE)
+```
+
+
+(Our data has no duplicates, but this is still a good practice to do, especially if we were combining data from multipe sources)
+
+
 ## Interlude: Pipe Operator ( \|\> )
 
--   The pipe operator (\|\>) allows us to chain multiple operations without creating intermediate dataframes.
+-   The pipe operator (\|\>) allows us to chain multiple operations without creating intermediate / temporary dataframes.
 
 -   Super handy when we perform several data wrangling tasks using tidyverse in sequence.
 
@@ -136,225 +145,229 @@ dim(wvs_data)
 
 ::: panel-tabset
 ### Without pipe operator
-Notice that we have to create a "temp" dataframes called `age_df` and `age_df_desc` in this method.
+
+Notice that we have to create a "temp" dataframes called `wvs_data_clean` in this method.
 
 ``` r
-age_df <- filter(wvs_data, age >= 30)
-age_df_desc <- arrange(age_df, desc(age))
-write_csv(age_df_desc, "data-output/wvs-30plus.csv")
+wvs_data <- drop_na(wvs_data)
+wvs_data_clean <- wvs_data_clean(wvs_data, desc(age))
+write_csv(wvs_data_clean, "data-output/wvs-clean.csv")
 ```
 
 ### With pipe operator
 
-No "temp" dataframe needed here! :D
+No "temporary" dataframe needed here! :D
 
 ``` {.r code-overflow="overflow"}
 wvs_data |> 
-    filter(age >= 30) |> 
-    arrange(desc(age)) |> 
+    drop_na() |> 
+    distinct(ID, .keep_all = TRUE) |> 
     write_csv("data-output/wvs-30plus.csv")
 ```
 :::
 
-## Task #2
+## Task #3:
 
-Create a demographics-only dataset:
+Select only the relevant columns: demographic columns,  `life_satisfaction`, `work_importance`, `financial_satisfaction`, `religiousity`, `political_scale`, `marital_status`, and `employment`.
 
-```{r}
-#| echo: true
-#| output: false
-
-demographics_df <- wvs_data |>
-    select(country, sex, age, marital_status, employment) |>
-    write_csv("data-output/wvs_demographics.csv")
-```
-
-First few rows of the demographics data:
-
-```{r}
-demographics_df |>
-    print(n = 3)
-```
-
-## Task #3: 
-
-Filter for 30+ age group and sort by age:
+We can achieve this with `select()`!
 
 ```{r}
 #| echo: true
 
-wvs_30plus <- wvs_data |>
-    filter(age >= 30) |>
-    arrange(desc(age)) |>
-    write_csv("data-output/wvs_30plus.csv")
+wvs_data <- wvs_data |>
+    select(country, sex, birthyear, age, life_satisfaction, work_importance, financial_satisfaction, religiousity, political_scale, marital_status, employment) 
 ```
 
 Preview of the filtered data:
 
 ```{r}
-wvs_30plus |>
-    select(country, age, employment) |>
-    print(n = 3)
+wvs_data |> glimpse()
 ```
 
-## Group Exercise 1 (5 minutes)
 
-Find all respondents who are:
-- From Singapore
-- Employed full-time
-- Have high life satisfaction (8 or higher)
-Save their country, employment, life_satisfaction, and freedom scores, arranged by life_satisfaction in descending order.
+## Task #4:
 
-```{r}
-#| echo: true
-#| code-fold: true
-#| code-summary: "Show answer"
+Filter for respondents aged 18 or older. Optionally, we can then arrange the dataset by age (oldest to youngest)
 
-singapore_satisfied <- wvs_data |>
-    filter(country == "SGP" & 
-           employment == "Full time" & 
-           life_satisfaction >= 8) |>
-    select(country, employment, life_satisfaction, freedom) |>
-    arrange(desc(life_satisfaction))
-```
-
-Preview:
-```{r}
-singapore_satisfied |>
-    print(n = 3)
-```
-
-## Task #4: 
-
-Convert categorical variables to factors:
 
 ```{r}
 #| echo: true
 
-cols_to_factor <- c("country", "religiousity", "sex", 
-                    "marital_status", "employment")
-
-wvs_data <- wvs_data |>
-    mutate(across(all_of(cols_to_factor), as.factor))
+wvs_data <- wvs_data |> 
+    filter(age >= 18) |> 
+    arrange(desc(age))
 ```
 
 Checking the structure:
+
 ```{r}
-str(wvs_data[cols_to_factor])
+head(wvs_data)
 ```
 
 ## Task #5
 
-Add age groups to our dataset:
+Reverse-code `work_importance` variables so that higher numbers consistently represent higher levels of the measured construct. In other words, 1 = Not at all important and 4 = Very important.
+
+We can achieve this with `mutate()`!
+
+```{r}
+#| echo: true
+
+wvs_data <- wvs_data |>
+    mutate(work_importance_r = 5 - work_importance)
+```
+
+Preview of age groups:
+
+```{r}
+wvs_data |>
+    select(work_importance_r, work_importance) |>
+    print(n = 5)
+```
+
+## Task #6
+
+Create age groups for each generation: "18-28", "29-44", "45-60", "61+"
 
 ```{r}
 #| echo: true
 
 wvs_data <- wvs_data |>
     mutate(age_group = case_when(
-        age < 30 ~ "18-29",
-        age < 45 ~ "30-44",
-        age < 60 ~ "45-59",
-        TRUE ~ "60+"
+        age <= 28 ~ "18-28",
+        age <= 44 ~ "29-44",
+        age <= 60 ~ "45-60",
+        TRUE ~ "61+"
     ))
 ```
 
 Preview of age groups:
+
 ```{r}
 wvs_data |>
     select(age, age_group) |>
     print(n = 4)
 ```
 
+## Checkpoint 1 - saving our hard work into a CSV file
 
-## Task #6
-
-Create a new column `high_satisfaction` that is TRUE if life_satisfaction is above the median:
+We have done some cleaning! Let's save this cleaned data into a separate CSV file called "wvs_cleaned_v1.csv"
 
 ```{r}
 #| echo: true
 
-# Calculate median life satisfaction
-median_satisfaction <- median(wvs_data$life_satisfaction, na.rm = TRUE)
+wvs_data |> write_csv("data-output/wvs_cleaned_v1.csv")
 
-# Create the high_satisfaction column
-wvs_data <- wvs_data |>
-    mutate(high_satisfaction = life_satisfaction > median_satisfaction)
 ```
 
-Preview of satisfaction categorization:
+Check the data output folder to make sure the CSV is created!
+
+## Group Exercise 1 (5 minutes)
+
+Now that we have a new file, load this new `wvs_cleaned_v1.csv` into a new dataframe called `wvs_cleaned`. Filter to respondents from Singapore who are currently employed full time. Show only the country, the employment status, and age. Use `glimpse()` or `print()` to check the result! (you can chain these functions at the end)
+
 ```{r}
-print(median_satisfaction)
-wvs_data |>
-    select(life_satisfaction, high_satisfaction) |>
-    slice(1:11) # print rows 1 to 10
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show answer"
+
+library(tidyverse)
+wvs_cleaned <- read_csv("data-output/wvs_cleaned_v1.csv")
+
+wvs_cleaned |> 
+    filter(country == "SGP" & employment == "Full time") |> 
+    select(country, employment, age) |> 
+    glimpse()
+
 ```
+
+
+## Scenario: Data wrangling activities with WVS data (continued)
+
+Once we are done with the wrangling part, we can proceed with simple descriptive analysis!
+
+::: incremental
+
+7.  Before we proceed further, convert the appropriate categorical variables (country, religiousity, sex, marital_status, employment) to **Factor**
+
+8.  Generate summary statistics of life_satisfaction grouped by country
+
+9.  Create a new column called `satisfaction_group` that indicate whether each respondent has higher or lower than average `life_satisfaction` 
+
+10. Reshape the data to show average satisfaction scores by country and age group
+:::
 
 ## Task #7
 
-In survey data, we often need to reverse code scales so that higher numbers consistently represent higher levels of the measured construct. In our WVS data:
+Let's use the `wvs_cleaned` dataframe for this task.
 
-Original importance scale:
+Convert the appropriate categorical variables (country, religiousity, sex, marital_status, employment) to **Factor**.
 
-- 1 = Very Important
-
-- 2 = Rather Important
-
-- 3 = Not Very Important
-
-- 4 = Not at all Important
-
-Let's create reverse-coded versions where 4 = highest importance:
+We can do this with `mutate()` and `as_factor()` from forcats, another sub-package within tidyverse. 
 
 ```{r}
 #| echo: true
+#| output-location: slide
 
-wvs_data <- wvs_data |>
+wvs_cleaned <- wvs_cleaned |> 
     mutate(
-        # Reverse code each importance variable (5 minus original value)
-        family_importance_r = 5 - family_importance,
-        friends_importance_r = 5 - friends_importance,
-        leisure_importance_r = 5 - leisure_importance,
-        work_importance_r = 5 - work_importance
+        country = as_factor(country),
+        religiousity = as_factor(religiousity),
+        sex = as_factor(sex),
+        marital_status = as_factor(marital_status),
+        employment = as_factor(employment)
     )
+
+# check conversion result
+str(wvs_cleaned)
 ```
 
----
+Rstudio may auto-suggest `as.factor()` from base R. You can use this as well, but `as_factor()` is preferred since we are using tidyverse approach. 
 
-Preview of original vs reverse-coded scales:
-```{r}
-wvs_data |>
-    select(family_importance, family_importance_r,
-           friends_importance, friends_importance_r,
-           leisure_importance, leisure_importance_r,
-           work_importance, work_importance_r)|>
-    print(n = 3)
-```
+## Task #7 - the shortcut
 
-## Task #8 
+If we have a lot of columns to convert, that might be troublesome to type! This is where `across()` can come in handy. 
 
-Save all our changes to a new CSV file:
+Let's first define a character vector that contains the names of columns we plan to convert.
+
 
 ```{r}
 #| echo: true
 
-# Save the processed data
-write_csv(wvs_data, "data-output/wvs_processed.csv")
+columns_to_convert <- c("country", "religiousity", "sex", "marital_status", "employment")
 
 ```
 
-Let's check the `data-output` folder to see if the CSV has been properly created!
+We will use this vector with `mutate()` and `across()`. We tell tidyverse to convert all of the columns with the help of `all_of()`
 
-## Task #9
+```{r}
+#| echo: true
+#| output-location: slide
 
-generate satisfaction statistics by country and employment:
+wvs_cleaned <- wvs_cleaned |> 
+    mutate(across(all_of(columns_to_convert), as_factor))
+
+# check conversion result
+str(wvs_cleaned)
+
+```
+
+`across()` is used for applying the same function to multiple columns in a single `mutate()` or `summarise()` operation.
+
+
+## Task #8
+
+Generate summary statistics  such as count (n), mean, median, and standard deviation of life_satisfaction grouped by country. 
+
+We can achieve this with `group_by()` and `summarise()`
 
 ```{r}
 #| echo: true
 #| output-location: slide
 
 wvs_data |>
-    group_by(country, employment) |>
+    group_by(country, age_group) |>
     summarise(
         n = n(),
         mean_satisfaction = mean(life_satisfaction),
@@ -362,28 +375,49 @@ wvs_data |>
         sd_satisfaction = sd(life_satisfaction)
     ) |>
     arrange(country, desc(mean_satisfaction))
+
+```
+
+*What if we want to save this into a CSV? What if we also want to group by country AND age_group?*
+
+## Task #9
+
+Create a new column called `satisfaction_group` that indicate whether each respondent has higher or lower than average `life_satisfaction` 
+
+```{r}
+#| echo: true
+#| output-location: slide
+
+mean_satisfaction <- mean(wvs_data$life_satisfaction, na.rm = TRUE)
+
+wvs_data |>
+    mutate(satisfaction_group = if_else(
+        life_satisfaction > mean_satisfaction,
+        "higher", # if condition is fulfilled, do this
+        "lower" # otherwise, do this
+    )) 
 ```
 
 ## Task #10
 
-Create a country by religiosity cross-tabulation:
+Show the average satisfaction scores by country and age group in wide data format
 
 ```{r}
 #| echo: true
 wvs_data |>
-    group_by(country, religiousity) |>
-    summarise(count = n(), .groups = "drop") |>
-    pivot_wider(
-        names_from = religiousity,
-        values_from = count,
-        values_fill = 0
+    group_by(country, age_group) |>
+    summarise(
+        avg_satisfaction = mean(life_satisfaction, na.rm = TRUE),
     ) |>
-    knitr::kable()
+    pivot_wider(
+        names_from = age_group,
+        values_from = avg_satisfaction
+    ) 
 ```
 
 ## Long vs Wide Data
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 **Long data:**
 
@@ -392,7 +426,6 @@ wvs_data |>
 -   There is a separate column indicating the variable or type of measurements
 
 -   This format is more "understandable" by R, more suitable for visualizations.
-
 :::
 
 ::: {.column width="50%"}
@@ -404,11 +437,11 @@ wvs_data |>
 
 -   This format is more intuitive for humans!
 :::
-:::
+:::::
 
 ## Long vs Wide Data: Examples
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 **Long data:**
 
@@ -417,8 +450,8 @@ wvs_data |>
 
 # Creating the wide data frame
 long_data <- wvs_data |>
-    group_by(country, religiousity) |>
-    summarise(count = n(), .groups = "drop")
+    group_by(country, age_group) |>
+    summarise(count = n())
 
 # Display the wide data frame
 print(long_data)
@@ -432,12 +465,12 @@ print(long_data)
 #| echo: false
 
 long_data |>
-    pivot_wider(names_from = "religiousity", values_from = "count") 
+    pivot_wider(names_from = "age_group", values_from = "count") 
 ```
 :::
-:::
+:::::
 
-## Group exercise 3 (solo attempts ok)
+## Group exercise 2 (solo attempts ok)
 
 [**Time: 5 minutes**]{.underline}
 
@@ -481,6 +514,7 @@ wvs_data <- wvs_data |>
 ```{r}
 wvs_data |> select(country) |> print(n = 3)
 ```
+
 
 # End of Session 2!
 
