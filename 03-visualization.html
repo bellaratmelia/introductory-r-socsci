@@ -241,20 +241,41 @@ Bella Ratmelia
 <span id="cb1-2"><a></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-3"><a></a></span>
 <span id="cb1-4"><a></a><span class="co"># read the CSV with WVS data</span></span>
-<span id="cb1-5"><a></a>wvs_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data-output/wvs_processed.csv"</span>)</span>
+<span id="cb1-5"><a></a>wvs_cleaned <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data-output/wvs_processed.csv"</span>)</span>
 <span id="cb1-6"><a></a></span>
 <span id="cb1-7"><a></a><span class="co"># Convert categorical variables to factors</span></span>
-<span id="cb1-8"><a></a>wvs_data <span class="ot">&lt;-</span> wvs_data <span class="sc">|&gt;</span> </span>
-<span id="cb1-9"><a></a>    <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(<span class="st">"country"</span>, <span class="st">"sex"</span>, <span class="st">"marital_status"</span>, <span class="st">"employment"</span>, <span class="st">"religiousity"</span>), as.factor))</span>
-<span id="cb1-10"><a></a></span>
-<span id="cb1-11"><a></a><span class="co"># peek at the data, pay attention to the data types!</span></span>
-<span id="cb1-12"><a></a><span class="fu">glimpse</span>(wvs_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-8"><a></a>columns_to_convert <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"country"</span>, <span class="st">"religiousity"</span>, <span class="st">"sex"</span>, <span class="st">"marital_status"</span>, <span class="st">"employment"</span>)</span>
+<span id="cb1-9"><a></a></span>
+<span id="cb1-10"><a></a>wvs_cleaned <span class="ot">&lt;-</span> wvs_cleaned <span class="sc">|&gt;</span> </span>
+<span id="cb1-11"><a></a>    <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">all_of</span>(columns_to_convert), as_factor))</span>
+<span id="cb1-12"><a></a></span>
+<span id="cb1-13"><a></a><span class="co"># peek at the data, pay attention to the data types!</span></span>
+<span id="cb1-14"><a></a><span class="fu">glimpse</span>(wvs_cleaned)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="basic-r-functions-for-descriptive-statistics" class="slide level2">
-<h2>Basic R Functions for Descriptive Statistics</h2>
-<p>Descriptive statistics provide summaries about the sample and observations made. These summaries can be quantitative (summary statistics) or visual (graphs).</p>
-<p>Let’s explore some basic R functions for descriptive statistics using our Chile voting data.</p>
+<section id="recap-descriptive-statistics" class="slide level2">
+<h2>Recap: Descriptive Statistics</h2>
+<div>
+<ul>
+<li class="fragment"><p>Univariate (i.e.&nbsp;single variable) Descriptive Stats</p>
+<ul>
+<li class="fragment">Measures of central tendency: <code>mean()</code>, <code>median()</code>, <code>Mode()</code></li>
+<li class="fragment">Measures of Variability: <code>min()</code>, <code>max()</code>, <code>range()</code>, <code>IQR()</code>, <code>sd()</code> (standard deviation), <code>var()</code> (variance)</li>
+<li class="fragment">Distribution shape: <code>skewness()</code> and <code>kurtosis()</code> from <code>moments</code> library. This is easier to see with histogram</li>
+</ul></li>
+<li class="fragment"><p>Bivariate (i.e.&nbsp;two variables) Descriptive Stats</p>
+<ul>
+<li class="fragment">Contingency table / cross tab (for categorical data)</li>
+<li class="fragment">Covariance - describe how two variables vary together</li>
+<li class="fragment">Correlation - describe relationship strength and direction <strong>in a sample</strong>. (If we want to use this to infer about a population from a sample, it would fall under inferential stats)</li>
+<li class="fragment">Visualizations e.g.&nbsp;Scatterplots, side-by-side boxplots, stacked bar charts, etc.</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="from-last-week-basic-r-functions-for-descriptive-stats" class="slide level2">
+<h2>From last week: Basic R Functions for Descriptive Stats</h2>
+<p>Last week, we explored some basic R functions for descriptive statistics.</p>
 <ul>
 <li><code>mean()</code>: arithmetic average</li>
 <li><code>median()</code>: middle value</li>
@@ -266,26 +287,26 @@ Bella Ratmelia
 <li><code>Mode()</code> function from <code>DescTools</code> package: the most frequently occuring value <sup>1</sup></li>
 </ul>
 <aside><ol class="aside-footnotes"><li id="fn1"><p>R doesn’t have built-in functions for mode, so we need <code>DescTools</code> package to get this function</p></li></ol></aside></section>
-<section id="exploring-age-distribution" class="slide level2">
-<h2>Exploring Age Distribution</h2>
+<section>
+<section id="univariate-descriptive-stats" class="title-slide slide level1 center">
+<h1>Univariate Descriptive Stats</h1>
+
+</section>
+<section id="univariate-descriptive-stats---measures-of-central-tendency" class="slide level2">
+<h2>Univariate Descriptive Stats - Measures of Central Tendency</h2>
 <p>Let’s start by examining the <code>age</code> variable in our dataset.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">library</span>(DescTools)</span>
 <span id="cb2-2"><a></a></span>
 <span id="cb2-3"><a></a><span class="co"># Basic statistics</span></span>
-<span id="cb2-4"><a></a>mean_age <span class="ot">&lt;-</span> <span class="fu">mean</span>(wvs_data<span class="sc">$</span>age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb2-5"><a></a>median_age <span class="ot">&lt;-</span> <span class="fu">median</span>(wvs_data<span class="sc">$</span>age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb2-6"><a></a>sd_age <span class="ot">&lt;-</span> <span class="fu">sd</span>(wvs_data<span class="sc">$</span>age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb2-7"><a></a>range_age <span class="ot">&lt;-</span> <span class="fu">range</span>(wvs_data<span class="sc">$</span>age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb2-8"><a></a>iqr_age <span class="ot">&lt;-</span> <span class="fu">IQR</span>(wvs_data<span class="sc">$</span>age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb2-9"><a></a>mode_age <span class="ot">&lt;-</span> DescTools<span class="sc">::</span><span class="fu">Mode</span>(wvs_data<span class="sc">$</span>age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb2-10"><a></a></span>
-<span id="cb2-11"><a></a><span class="co"># Print results</span></span>
-<span id="cb2-12"><a></a><span class="fu">cat</span>(<span class="st">"Mean age:"</span>, mean_age, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-4"><a></a>mean_age <span class="ot">&lt;-</span> <span class="fu">mean</span>(wvs_cleaned<span class="sc">$</span>age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-5"><a></a>median_age <span class="ot">&lt;-</span> <span class="fu">median</span>(wvs_cleaned<span class="sc">$</span>age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-6"><a></a>mode_age <span class="ot">&lt;-</span> DescTools<span class="sc">::</span><span class="fu">Mode</span>(wvs_cleaned<span class="sc">$</span>age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-7"><a></a></span>
+<span id="cb2-8"><a></a><span class="co"># Print results</span></span>
+<span id="cb2-9"><a></a><span class="fu">cat</span>(<span class="st">"Mean age:"</span>, mean_age, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-
-</section>
-<section id="exploring-age-distribution-output" class="slide level2 output-location-slide"><h2>Exploring Age Distribution</h2><div class="cell output-location-slide">
+<div class="cell fragment">
 <div class="cell-output cell-output-stdout">
 <pre><code>Mean age: 47.96408 </code></pre>
 </div>
@@ -293,108 +314,134 @@ Bella Ratmelia
 <div class="cell-output cell-output-stdout">
 <pre><code>Median age: 48 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="fu">cat</span>(<span class="st">"Standard deviation of age:"</span>, sd_age, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Standard deviation of age: 16.72144 </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">cat</span>(<span class="st">"Range of age:"</span>, range_age[<span class="dv">1</span>], <span class="st">"to"</span>, range_age[<span class="dv">2</span>], <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Range of age: 18 to 93 </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="fu">cat</span>(<span class="st">"Interquartile range of age:"</span>, iqr_age, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Interquartile range of age: 28 </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="fu">cat</span>(<span class="st">"Most frequently occuring age:"</span>, mode_age, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="fu">cat</span>(<span class="st">"Most frequently occuring age:"</span>, mode_age, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>) <span class="co"># this is here just for demo purposes</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Most frequently occuring age: 54 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="co"># Summary statistics</span></span>
-<span id="cb14-2"><a></a><span class="fu">summary</span>(wvs_data<span class="sc">$</span>age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-  18.00   34.00   48.00   47.96   62.00   93.00 </code></pre>
 </div>
-</div></section><section id="interpreting-age-statistics" class="slide level2">
-<h2>Interpreting Age Statistics</h2>
-<p>Some possible interpretation:</p>
-<ul>
-<li><p>The mean (47.99) and median (48) are very close, suggesting a fairly symmetric distribution</p></li>
-<li><p>The mode (54) is slightly higher than both mean and median</p></li>
-<li><p>With SD = 16.74, about two-thirds of participants fall between 31.26 and 64.72 years old (mean ± 1 SD)</p></li>
-<li><p>The distribution spans from 18 to 93 years, with an interquartile range of 28 years</p></li>
-</ul>
-<p>It’s much easier if we have a graph to visualize these interpretations!</p>
 </section>
-<section id="visualizing-data-with-ggplot" class="slide level2">
-<h2>Visualizing data with ggplot</h2>
+<section class="slide level2">
+
+<p>How we can interpret / report this:</p>
+<p><em>“The age distribution of this sample is fairly symmetrical, as indicated by the very close mean (48 years) and median (48 years) values. The mode of 54 years suggests a slight right-skew in the age distribution, with a cluster of participants in their mid-50s.”</em></p>
+</section>
+<section id="univariate-descriptive-stats---measures-of-variability-or-dispersion" class="slide level2">
+<h2>Univariate Descriptive Stats - Measures of Variability or Dispersion</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>var_age <span class="ot">&lt;-</span> <span class="fu">var</span>(wvs_cleaned<span class="sc">$</span>age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb8-2"><a></a>sd_age <span class="ot">&lt;-</span> <span class="fu">sd</span>(wvs_cleaned<span class="sc">$</span>age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb8-3"><a></a>range_age <span class="ot">&lt;-</span> <span class="fu">range</span>(wvs_cleaned<span class="sc">$</span>age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb8-4"><a></a>iqr_age <span class="ot">&lt;-</span> <span class="fu">IQR</span>(wvs_cleaned<span class="sc">$</span>age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb8-5"><a></a></span>
+<span id="cb8-6"><a></a><span class="fu">cat</span>(<span class="st">"Variance of age:"</span>, var_age, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>Variance of age: 279.6066 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="fu">cat</span>(<span class="st">"Standard deviation of age:"</span>, sd_age, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Standard deviation of age: 16.72144 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="fu">cat</span>(<span class="st">"Range of age:"</span>, range_age[<span class="dv">1</span>], <span class="st">"to"</span>, range_age[<span class="dv">2</span>], <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Range of age: 18 to 93 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="fu">cat</span>(<span class="st">"Interquartile range of age:"</span>, iqr_age, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Interquartile range of age: 28 </code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>How we can interpret / report this:</p>
+<p><em>“The age distribution of this sample is fairly wide spread. With a standard deviation of 16.72144, suggesting that most individuals’ ages deviate from the mean by approximately 16.72 years. The range of ages spans from 18 to 93 years, which covers a wide range of age groups within the sample. The interquartile range (IQR) of 28 years, which represents the middle 50% of the data, indicates a moderately wide distribution of ages in the central portion of the dataset.”</em></p>
+</section>
+<section id="univariate-descriptive-stats---distribution-shape" class="slide level2">
+<h2>Univariate Descriptive Stats - Distribution Shape</h2>
+<p>The function <code>skewness()</code> and <code>kurtosis()</code> is available through R package called <code>moments</code>. You may need to install it first before calling the library and its functions like in this code below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="fu">library</span>(moments)</span>
+<span id="cb16-2"><a></a></span>
+<span id="cb16-3"><a></a>skew_age <span class="ot">&lt;-</span> <span class="fu">skewness</span>(wvs_cleaned<span class="sc">$</span>age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb16-4"><a></a>kurtosis_age <span class="ot">&lt;-</span> <span class="fu">kurtosis</span>(wvs_cleaned<span class="sc">$</span>age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb16-5"><a></a></span>
+<span id="cb16-6"><a></a><span class="fu">cat</span>(<span class="st">"Skewness of age:"</span>, skew_age, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>Skewness of age: 0.1009475 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a><span class="fu">cat</span>(<span class="st">"Kurtosis of age:"</span>, kurtosis_age, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Kurtosis of age: 2.018238 </code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>How we can interpret / report this:</p>
+<p><em>“The age distribution has a very slight right skew (skewness = 0.10), meaning there are slightly more outliers toward older ages, but the skew is minimal since values between -0.5 and 0.5 are considered approximately symmetric. The kurtosis of 2.02 is lower than a normal distribution’s kurtosis of 3, indicating this distribution is platykurtic - it has lighter tails and is more uniform or”flatter” than a normal distribution.”</em></p>
+</section>
+<section id="visualizing-with-ggplot" class="slide level2">
+<h2>Visualizing with ggplot</h2>
 <ul>
+<li><p>Describing the spread and shape of distribution with just words is not very productive, so typically it is accompanied with visualization.</p></li>
 <li><p><code>ggplot</code> is plotting package that is included inside <code>tidyverse</code> package</p></li>
 <li><p>works best with data in the long format, i.e., a column for all the dimensions/measures and another column for the value for each dimension/measure.</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a>wvs_data <span class="sc">|&gt;</span> </span>
-<span id="cb16-2"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age)) <span class="sc">+</span></span>
-<span id="cb16-3"><a></a>    <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span></span>
-<span id="cb16-4"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Age distribution of respondents"</span>,</span>
-<span id="cb16-5"><a></a>         <span class="at">x =</span> <span class="st">"Age"</span>,</span>
-<span id="cb16-6"><a></a>         <span class="at">y =</span> <span class="st">"Number of Respondents"</span>) <span class="sc">+</span></span>
-<span id="cb16-7"><a></a>    <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a>wvs_cleaned <span class="sc">|&gt;</span> </span>
+<span id="cb20-2"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age)) <span class="sc">+</span></span>
+<span id="cb20-3"><a></a>    <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">fill =</span> <span class="st">"lightblue"</span>, <span class="at">color =</span> <span class="st">"navy"</span>) <span class="sc">+</span></span>
+<span id="cb20-4"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Age distribution of respondents"</span>,</span>
+<span id="cb20-5"><a></a>         <span class="at">x =</span> <span class="st">"Age"</span>,</span>
+<span id="cb20-6"><a></a>         <span class="at">y =</span> <span class="st">"Count"</span>) <span class="sc">+</span></span>
+<span id="cb20-7"><a></a>    <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 </section>
-<section id="visualizing-data-with-ggplot-output" class="slide level2 output-location-slide"><h2>Visualizing data with ggplot</h2><div class="cell output-location-slide">
+<section id="visualizing-with-ggplot-output" class="slide level2 output-location-slide"><h2>Visualizing with ggplot</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-3-1.png" width="960"></p>
+<p><img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-5-1.png" width="1344"></p>
 </figure>
 </div>
 </div>
 </div></section><section id="anatomy-of-ggplot-code" class="slide level2">
 <h2>Anatomy of ggplot code</h2>
 <p>Charts built with ggplot must include the following:</p>
-<div class="sourceCode" id="annotated-cell-10" data-code-line-numbers="|1|2|3|4-6|7"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-10-1" class="code-annotation-target"><a href="#annotated-cell-10-1"></a>wvs_data <span class="sc">|&gt;</span></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-10-2" class="code-annotation-target"><a href="#annotated-cell-10-2"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age)) <span class="sc">+</span></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-10-3" class="code-annotation-target"><a href="#annotated-cell-10-3"></a>    <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-10-4" class="code-annotation-target"><a href="#annotated-cell-10-4"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Age distribution of respondents"</span>,</span>
-<span id="annotated-cell-10-5"><a href="#annotated-cell-10-5"></a>         <span class="at">x =</span> <span class="st">"Age"</span>,</span>
-<span id="annotated-cell-10-6"><a href="#annotated-cell-10-6"></a>         <span class="at">y =</span> <span class="st">"Count"</span>) <span class="sc">+</span></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-10-7" class="code-annotation-target"><a href="#annotated-cell-10-7"></a>    <span class="fu">theme_minimal</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="annotated-cell-12" data-code-line-numbers="|1|2|3|4-6|7"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-12-1" class="code-annotation-target"><a href="#annotated-cell-12-1"></a>wvs_cleaned <span class="sc">|&gt;</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-12-2" class="code-annotation-target"><a href="#annotated-cell-12-2"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age)) <span class="sc">+</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-12-3" class="code-annotation-target"><a href="#annotated-cell-12-3"></a>    <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">fill =</span> <span class="st">"lightblue"</span>, <span class="at">color =</span> <span class="st">"navy"</span>) <span class="sc">+</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-12-4" class="code-annotation-target"><a href="#annotated-cell-12-4"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Age distribution of respondents"</span>,</span>
+<span id="annotated-cell-12-5"><a href="#annotated-cell-12-5"></a>         <span class="at">x =</span> <span class="st">"Age"</span>,</span>
+<span id="annotated-cell-12-6"><a href="#annotated-cell-12-6"></a>         <span class="at">y =</span> <span class="st">"Count"</span>) <span class="sc">+</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-12-7" class="code-annotation-target"><a href="#annotated-cell-12-7"></a>    <span class="fu">theme_minimal</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-10" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-12" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-10" data-code-lines="1" data-code-annotation="1"><strong>Data</strong> - the dataframe/tibble to visualize.</span>
+<span data-code-cell="annotated-cell-12" data-code-lines="1" data-code-annotation="1"><strong>Data</strong> - the dataframe/tibble to visualize.</span>
 </dd>
-<dt data-target-cell="annotated-cell-10" data-target-annotation="2">2</dt>
+<dt data-target-cell="annotated-cell-12" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-10" data-code-lines="2" data-code-annotation="2"><strong>Aesthetic mappings (aes)</strong> - describes which variables are mapped to the x, y axes, alpha (transparency) and other visual aesthetics.</span>
+<span data-code-cell="annotated-cell-12" data-code-lines="2" data-code-annotation="2"><strong>Aesthetic mappings (aes)</strong> - describes which variables are mapped to the x, y axes, alpha (transparency) and other visual aesthetics.</span>
 </dd>
-<dt data-target-cell="annotated-cell-10" data-target-annotation="3">3</dt>
+<dt data-target-cell="annotated-cell-12" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-cell="annotated-cell-10" data-code-lines="3" data-code-annotation="3"><strong>Geometric objects (geom)</strong> - describes how values are rendered; as bars, scatterplot, lines, etc.</span>
+<span data-code-cell="annotated-cell-12" data-code-lines="3" data-code-annotation="3"><strong>Geometric objects (geom)</strong> - describes how values are rendered; as bars, scatterplot, lines, etc.</span>
 </dd>
-<dt data-target-cell="annotated-cell-10" data-target-annotation="4">4</dt>
+<dt data-target-cell="annotated-cell-12" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-cell="annotated-cell-10" data-code-lines="4,5,6" data-code-annotation="4">Provide titles and labels to your graph</span>
+<span data-code-cell="annotated-cell-12" data-code-lines="4,5,6" data-code-annotation="4">Provide titles and labels to your graph</span>
 </dd>
-<dt data-target-cell="annotated-cell-10" data-target-annotation="5">5</dt>
+<dt data-target-cell="annotated-cell-12" data-target-annotation="5">5</dt>
 <dd>
-<span data-code-cell="annotated-cell-10" data-code-lines="7" data-code-annotation="5">(Optional) apply a theme/look to your graph</span>
+<span data-code-cell="annotated-cell-12" data-code-lines="7" data-code-annotation="5">(Optional) apply a theme/look to your graph</span>
 </dd>
 </dl>
-</section>
-<section id="going-back-to-our-data" class="slide level2">
-<h2>Going back to our data</h2>
-<p>Our research team wants to understand patterns in life satisfaction and values across different countries and demographic groups. Let’s create visualizations to address these questions:</p>
-<ol type="1">
-<li>What’s the distribution of <code>life_satisfaction</code> scores across all respondents?</li>
-<li>How does <code>religiousity</code> vary across the three countries?</li>
-<li>What’s the distribution of <code>employment_status</code> by country?</li>
-<li>Is there a relationship between <code>political_scale</code> and <code>life_satisfaction</code>?</li>
-<li>How do <code>importance</code> ratings (family, friends, leisure, work) compare across <code>employment</code> status?</li>
-<li>Does <code>financial_satisfaction</code> correlate with <code>life satisfaction</code>? How does this vary by <code>country</code>?</li>
-</ol>
 </section>
 <section id="tip-open-the-ggplot-cheatsheet" class="slide level2">
 <h2>Tip: open the ggplot cheatsheet</h2>
@@ -414,251 +461,381 @@ Bella Ratmelia
 
 <img data-src="images/ggplot-cheatsheet.jpg" style="width:60.0%" class="r-stretch"><p><a href="https://rstudio.github.io/cheatsheets/html/data-visualization.html">ggplot documentation link</a></p>
 </section>
-<section id="task-1" class="slide level2">
-<h2>Task #1</h2>
-<p>What’s the distribution of <code>life_satisfaction</code> scores?</p>
+<section id="going-back-to-our-univariate-descriptive-stats-on-age-variable" class="slide level2">
+<h2>Going back to our univariate descriptive stats on <code>age</code> variable</h2>
+<p>Let’s visualize the variability with boxplot to get a better sense of the spread.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="co"># One continuous variable</span></span>
-<span id="cb17-2"><a></a>wvs_data <span class="sc">|&gt;</span> </span>
-<span id="cb17-3"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> life_satisfaction)) <span class="sc">+</span></span>
-<span id="cb17-4"><a></a>    <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">fill =</span> <span class="st">"pink"</span>, <span class="at">color =</span> <span class="st">"maroon"</span>) <span class="sc">+</span></span>
-<span id="cb17-5"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of Life Satisfaction Scores"</span>,</span>
-<span id="cb17-6"><a></a>       <span class="at">x =</span> <span class="st">"Life Satisfaction (1-10)"</span>,</span>
-<span id="cb17-7"><a></a>       <span class="at">y =</span> <span class="st">"Count"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a>wvs_cleaned <span class="sc">|&gt;</span> </span>
+<span id="cb21-2"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age)) <span class="sc">+</span></span>
+<span id="cb21-3"><a></a>    <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">"lightblue"</span>, <span class="at">color =</span> <span class="st">"navy"</span>) <span class="sc">+</span></span>
+<span id="cb21-4"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Age distribution of respondents"</span>,</span>
+<span id="cb21-5"><a></a>         <span class="at">x =</span> <span class="st">"Age"</span>) <span class="sc">+</span></span>
+<span id="cb21-6"><a></a>    <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 </section>
-<section id="task-1-output" class="slide level2 output-location-slide"><h2>Task #1</h2><div class="cell output-location-slide">
+<section id="going-back-to-our-univariate-descriptive-stats-on-age-variable-output" class="slide level2 output-location-slide"><h2>Going back to our univariate descriptive stats on <code>age</code> variable</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-4-1.png" width="960"></p>
+<p><img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-6-1.png" width="1344"></p>
 </figure>
 </div>
 </div>
-</div></section><section id="task-2" class="slide level2">
-<h2>Task #2</h2>
-<p>What’s the distribution of <code>religiousity</code>? Does it vary by country?</p>
+</div></section><section id="univariate-descriptive-stats-for-categorical-data" class="slide level2">
+<h2>Univariate Descriptive Stats for Categorical Data</h2>
+<p>The <code>age</code> variable is a numerical / continuous data. We can’t apply <code>mean()</code>, <code>median()</code> and other central tendency measures to categorical data such as <code>age_group</code> or <code>employment_status</code>. We can, however, visualize them.</p>
+<p>When dealing with categorical data, first take note on whether you want to visualize the <strong>proportion</strong> or the <strong>frequency</strong>. Let’s visualize the absolute values of the survey participants by <code>country</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a><span class="co"># One discrete/categorical variable</span></span>
-<span id="cb18-2"><a></a>wvs_data <span class="sc">|&gt;</span> </span>
-<span id="cb18-3"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> country, <span class="at">fill =</span> religiousity)) <span class="sc">+</span></span>
-<span id="cb18-4"><a></a>    <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
-<span id="cb18-5"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of Religiosity Across Countries"</span>,</span>
-<span id="cb18-6"><a></a>       <span class="at">x =</span> <span class="st">"Country"</span>,</span>
-<span id="cb18-7"><a></a>       <span class="at">y =</span> <span class="st">"Proportion"</span>,</span>
-<span id="cb18-8"><a></a>       <span class="at">fill =</span> <span class="st">"Religious Identity"</span>) <span class="sc">+</span></span>
-<span id="cb18-9"><a></a>    <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a>wvs_cleaned <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> country, <span class="at">fill =</span> country)) <span class="sc">+</span></span>
+<span id="cb22-2"><a></a>    <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb22-3"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Participants by Country"</span>,</span>
+<span id="cb22-4"><a></a>       <span class="at">x =</span> <span class="st">"Country"</span>,</span>
+<span id="cb22-5"><a></a>       <span class="at">y =</span> <span class="st">"Participants"</span>) <span class="sc">+</span></span>
+<span id="cb22-6"><a></a>    <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 </section>
-<section id="task-2-output" class="slide level2 output-location-slide"><h2>Task #2</h2><div class="cell output-location-slide">
+<section id="univariate-descriptive-stats-for-categorical-data-output" class="slide level2 output-location-slide"><h2>Univariate Descriptive Stats for Categorical Data</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></p>
+<p><img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-7-1.png" width="1344"></p>
 </figure>
 </div>
 </div>
-</div></section><section id="task-3" class="slide level2">
-<h2>Task #3</h2>
-<p>What’s the distribution of <code>employment_status</code> by country?</p>
+</div></section><section id="univariate-descriptive-stats-for-categorical-data---proportion" class="slide level2">
+<h2>Univariate Descriptive Stats for Categorical Data - Proportion</h2>
+<p>When we want to show proportion (i.e.&nbsp;in terms of “parts of whole”), we must first quickly calculate the proportion with <code>count()</code></p>
+<p>Let’s create a new dataframe called <code>wvs_country_proportion</code> to hold this data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a><span class="co"># Showing proportions / percentage as part of whole</span></span>
-<span id="cb19-2"><a></a><span class="co"># Two categorical variables</span></span>
-<span id="cb19-3"><a></a>wvs_data <span class="sc">|&gt;</span> </span>
-<span id="cb19-4"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> country, <span class="at">fill =</span> employment)) <span class="sc">+</span></span>
-<span id="cb19-5"><a></a>    <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
-<span id="cb19-6"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Employment Status Distribution by Country"</span>,</span>
-<span id="cb19-7"><a></a>       <span class="at">x =</span> <span class="st">"Country"</span>,</span>
-<span id="cb19-8"><a></a>       <span class="at">y =</span> <span class="st">"Count"</span>) <span class="sc">+</span></span>
-<span id="cb19-9"><a></a>    <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a>wvs_country_proportion <span class="ot">&lt;-</span> wvs_cleaned <span class="sc">|&gt;</span> </span>
+<span id="cb23-2"><a></a>    <span class="fu">count</span>(country) <span class="sc">|&gt;</span></span>
+<span id="cb23-3"><a></a>    <span class="fu">mutate</span>(<span class="at">proportion =</span> n<span class="sc">/</span><span class="fu">sum</span>(n))</span>
+<span id="cb23-4"><a></a></span>
+<span id="cb23-5"><a></a><span class="fu">print</span>(wvs_country_proportion)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  country     n proportion
+  &lt;fct&gt;   &lt;int&gt;      &lt;dbl&gt;
+1 CAN      4018      0.628
+2 NZL       660      0.103
+3 SGP      1725      0.269</code></pre>
+</div>
+</div>
+</section>
+<section id="univariate-descriptive-stats-for-categorical-data---proportion-contd" class="slide level2">
+<h2>Univariate Descriptive Stats for Categorical Data - Proportion (cont’d)</h2>
+<p>And then, we use this proportion table to create a pie chart by adding <code>coord_polar()</code> layer after <code>geom_bar()</code> and some changes in <code>aes()</code> and <code>geom_bar()</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a>wvs_country_proportion <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> proportion, <span class="at">fill =</span> country)) <span class="sc">+</span></span>
+<span id="cb25-2"><a></a>    <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">width =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb25-3"><a></a>    <span class="fu">coord_polar</span>(<span class="st">"y"</span>, <span class="at">start =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb25-4"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Proportion of Participants by Country"</span>) <span class="sc">+</span></span>
+<span id="cb25-5"><a></a>    <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
-</section>
-<section id="task-3-output" class="slide level2 output-location-slide"><h2>Task #3</h2><div class="cell output-location-slide">
+
+<aside><div>
+<p>Note: if you have lots of categories, pie chart is not always the best option.</p>
+</div></aside></section>
+<section id="univariate-descriptive-stats-for-categorical-data---proportion-contd-output" class="slide level2 output-location-slide"><h2>Univariate Descriptive Stats for Categorical Data - Proportion (cont’d)</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></p>
+<p><img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-9-1.png" width="1344"></p>
 </figure>
 </div>
 </div>
-</div></section><section id="group-exercise-1-solo-attempts-also-ok" class="slide level2">
-<h2>Group exercise #1 (solo attempts also ok)</h2>
-<p>Visualize marital status distribution by sex, showing the proportion for each gender.</p>
+</div></section><section id="learning-check-1a" class="slide level2">
+<h2>Learning Check 1A</h2>
+<p>Using the <code>wvs_cleaned</code> dataset:</p>
+<p>Create a histogram that visualizes the distribution of <code>financial_satisfaction</code></p>
 <div class="cell">
 <details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a>wvs_data <span class="sc">|&gt;</span></span>
-<span id="cb20-2"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sex, <span class="at">fill =</span> marital_status)) <span class="sc">+</span></span>
-<span id="cb20-3"><a></a>    <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span> </span>
-<span id="cb20-4"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Proportion of Marital Status by Gender"</span>,</span>
-<span id="cb20-5"><a></a>       <span class="at">x =</span> <span class="st">"Sex"</span>,</span>
-<span id="cb20-6"><a></a>       <span class="at">y =</span> <span class="st">"Proportion"</span>,</span>
-<span id="cb20-7"><a></a>       <span class="at">fill =</span> <span class="st">"Marital Status"</span>) <span class="sc">+</span></span>
-<span id="cb20-8"><a></a>    <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<summary>Show answer</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a>wvs_cleaned <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> financial_satisfaction)) <span class="sc">+</span></span>
+<span id="cb26-2"><a></a>  <span class="fu">geom_histogram</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">binwidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb26-3"><a></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of Financial Satisfaction"</span>,</span>
+<span id="cb26-4"><a></a>       <span class="at">x =</span> <span class="st">"Financial Satisfaction"</span>,</span>
+<span id="cb26-5"><a></a>       <span class="at">y =</span> <span class="st">"Count"</span>) <span class="sc">+</span></span>
+<span id="cb26-6"><a></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 
 </section>
-<section id="group-exercise-1-solo-attempts-also-ok-output" class="slide level2 output-location-slide"><h2>Group exercise #1 (solo attempts also ok)</h2><div class="cell output-location-slide">
+<section id="learning-check-1a-output" class="slide level2 output-location-slide"><h2>Learning Check 1A</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></p>
+<p><img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-10-1.png" width="1344"></p>
 </figure>
 </div>
 </div>
-</div></section><section id="task-4" class="slide level2">
-<h2>Task #4</h2>
-<p>Is there a relationship between <code>political_scale</code> and <code>life_satisfaction</code>?</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a><span class="co"># Two variables - both continuous</span></span>
-<span id="cb21-2"><a></a>wvs_data <span class="sc">|&gt;</span></span>
-<span id="cb21-3"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> political_scale, <span class="at">y =</span> life_satisfaction)) <span class="sc">+</span></span>
-<span id="cb21-4"><a></a>    <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb21-5"><a></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
-<span id="cb21-6"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Political Leaning vs Life Satisfaction"</span>,</span>
-<span id="cb21-7"><a></a>       <span class="at">x =</span> <span class="st">"Political Leaning"</span>,</span>
-<span id="cb21-8"><a></a>       <span class="at">y =</span> <span class="st">"Life Satisfaction"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-
-</section>
-<section id="task-4-output" class="slide level2 output-location-slide"><h2>Task #4</h2><div class="cell output-location-slide">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div></section><section id="task-5" class="slide level2">
-<h2>Task #5</h2>
-<p>How do <code>religiousity</code> compare across <code>marital_status</code>?</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a><span class="co"># Two categorical variables: marital status and religiosity</span></span>
-<span id="cb22-2"><a></a>wvs_data <span class="sc">|&gt;</span> </span>
-<span id="cb22-3"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> marital_status, <span class="at">fill =</span> religiousity)) <span class="sc">+</span></span>
-<span id="cb22-4"><a></a>    <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
-<span id="cb22-5"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Religious Identity Distribution by Marital Status"</span>,</span>
-<span id="cb22-6"><a></a>         <span class="at">x =</span> <span class="st">"Marital Status"</span>,</span>
-<span id="cb22-7"><a></a>         <span class="at">y =</span> <span class="st">"Proportion"</span>,</span>
-<span id="cb22-8"><a></a>         <span class="at">fill =</span> <span class="st">"Religious Identity"</span>) <span class="sc">+</span></span>
-<span id="cb22-9"><a></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb22-10"><a></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-
-</section>
-<section id="task-5-output" class="slide level2 output-location-slide"><h2>Task #5</h2><div class="cell output-location-slide">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-9-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div></section><section id="facets-for-multiple-variables" class="slide level2">
-<h2>Facets for multiple variables</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a><span class="co"># Faceting and multiple variables</span></span>
-<span id="cb23-2"><a></a>wvs_data <span class="sc">|&gt;</span> </span>
-<span id="cb23-3"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> marital_status, <span class="at">fill =</span> religiousity)) <span class="sc">+</span></span>
-<span id="cb23-4"><a></a>    <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
-<span id="cb23-5"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Religious Identity Distribution by Marital Status"</span>,</span>
-<span id="cb23-6"><a></a>         <span class="at">x =</span> <span class="st">"Marital Status"</span>,</span>
-<span id="cb23-7"><a></a>         <span class="at">y =</span> <span class="st">"Count"</span>,</span>
-<span id="cb23-8"><a></a>         <span class="at">fill =</span> <span class="st">"Religious Identity"</span>) <span class="sc">+</span></span>
-<span id="cb23-9"><a></a>    <span class="fu">facet_grid</span>( <span class="sc">~</span> country) <span class="sc">+</span></span>
-<span id="cb23-10"><a></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-
-</section>
-<section id="facets-for-multiple-variables-output" class="slide level2 output-location-slide"><h2>Facets for multiple variables</h2><div class="cell output-location-slide">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-10-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div></section><section id="task-6" class="slide level2">
-<h2>Task #6</h2>
-<p>Does <code>financial_satisfaction</code> correlate with <code>life satisfaction</code>? How does this vary by <code>country</code>?</p>
-<p>Let’s layer two kinds of visualization here:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a><span class="co"># Two continuous variables with grouping</span></span>
-<span id="cb24-2"><a></a>wvs_data <span class="sc">|&gt;</span> </span>
-<span id="cb24-3"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> financial_satisfaction, <span class="at">y =</span> life_satisfaction, <span class="at">color =</span> country)) <span class="sc">+</span></span>
-<span id="cb24-4"><a></a>    <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb24-5"><a></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb24-6"><a></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span> country) <span class="sc">+</span></span>
-<span id="cb24-7"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Life Satisfaction vs Financial Satisfaction by Country"</span>,</span>
-<span id="cb24-8"><a></a>       <span class="at">x =</span> <span class="st">"Financial Satisfaction"</span>,</span>
-<span id="cb24-9"><a></a>       <span class="at">y =</span> <span class="st">"Life Satisfaction"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-
-</section>
-<section id="task-6-output" class="slide level2 output-location-slide"><h2>Task #6</h2><div class="cell output-location-slide">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-11-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div></section><section id="group-exercise-2" class="slide level2">
-<h2>Group Exercise #2</h2>
-<p>Create a violin plot showing the distribution of freedom scores by employment status, with points overlaid.</p>
+</div></section><section id="learning-check-1b" class="slide level2">
+<h2>Learning Check 1B</h2>
+<p>Create a barchart that visualizes the frequency of <code>religiousity</code></p>
 <div class="cell">
 <details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a>wvs_data <span class="sc">|&gt;</span> </span>
-<span id="cb25-2"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> employment, <span class="at">y =</span> freedom)) <span class="sc">+</span></span>
-<span id="cb25-3"><a></a>    <span class="fu">geom_violin</span>(<span class="at">fill =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span></span>
-<span id="cb25-4"><a></a>    <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>, <span class="at">color =</span> <span class="st">"navy"</span>) <span class="sc">+</span> </span>
-<span id="cb25-5"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of Freedom Scores by Employment Status"</span>,</span>
-<span id="cb25-6"><a></a>       <span class="at">x =</span> <span class="st">"Employment Status"</span>,</span>
-<span id="cb25-7"><a></a>       <span class="at">y =</span> <span class="st">"Freedom Score"</span>) <span class="sc">+</span></span>
-<span id="cb25-8"><a></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb25-9"><a></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<summary>Show answer</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a>wvs_cleaned <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> religiousity, <span class="at">fill =</span> religiousity)) <span class="sc">+</span></span>
+<span id="cb27-2"><a></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb27-3"><a></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Frequency of Religiosity Levels"</span>,</span>
+<span id="cb27-4"><a></a>       <span class="at">x =</span> <span class="st">"Religiosity"</span>,</span>
+<span id="cb27-5"><a></a>       <span class="at">y =</span> <span class="st">"Count"</span>) <span class="sc">+</span></span>
+<span id="cb27-6"><a></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 
-</section>
-<section id="group-exercise-2-output" class="slide level2 output-location-slide"><h2>Group Exercise #2</h2><div class="cell output-location-slide">
+</section><section id="learning-check-1b-output" class="slide level2 output-location-slide"><h2>Learning Check 1B</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-12-1.png" width="960"></p>
+<p><img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-11-1.png" width="1344"></p>
 </figure>
 </div>
 </div>
-</div></section><section id="group-exercise-3" class="slide level2">
-<h2>Group Exercise #3</h2>
-<p>Visualize the distribution of employment status across marital status categories, and use faceting to compare this relationship across countries.</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a>wvs_data <span class="sc">|&gt;</span> </span>
-<span id="cb26-2"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> marital_status, <span class="at">fill =</span> employment)) <span class="sc">+</span></span>
-<span id="cb26-3"><a></a>    <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
-<span id="cb26-4"><a></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span> country) <span class="sc">+</span> </span>
-<span id="cb26-5"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Employment Status Distribution by Marital Status and Country"</span>,</span>
-<span id="cb26-6"><a></a>       <span class="at">x =</span> <span class="st">"Marital Status"</span>,</span>
-<span id="cb26-7"><a></a>       <span class="at">y =</span> <span class="st">"Proportion"</span>,</span>
-<span id="cb26-8"><a></a>       <span class="at">fill =</span> <span class="st">"Employment Status"</span>) <span class="sc">+</span></span>
-<span id="cb26-9"><a></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb26-10"><a></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
+</div></section></section>
+<section>
+<section id="bivariate-descriptive-stats" class="title-slide slide level1 center">
+<h1>Bivariate Descriptive Stats</h1>
 
 </section>
-<section id="group-exercise-3-output" class="slide level2 output-location-slide"><h2>Group Exercise #3</h2><div class="cell output-location-slide">
+<section id="bivariate-descriptive-stats-1" class="slide level2">
+<h2>Bivariate Descriptive Stats</h2>
+<p>Bivariate descriptive statistics describe and summarize relationships between two variables in your dataset <strong>without making inferences about a larger population</strong>. They include numeric measures like correlation or covariance, and visualizations like scatterplots, side-by-side boxplots, or contingency tables.</p>
+<p>Think of them as taking a snapshot of how two variables relate to each other in your current data.</p>
+<p>Since data can be continuous or categorical, there can be three combinations when we deal with bivariate descriptive stats:</p>
+<ol type="1">
+<li>Both categorical (e.g.&nbsp;<code>age_group</code> and <code>country</code>)</li>
+<li>Both continuous (e.g.&nbsp;<code>financial_satisfaction</code> and <code>life_satisfaction</code>)</li>
+<li>One continuous, one categorical (e.g.&nbsp;<code>country</code> and <code>life_satisfaction</code>)</li>
+</ol>
+</section>
+<section id="bivariate-descriptive-stats---both-categorical" class="slide level2">
+<h2>Bivariate Descriptive Stats - Both categorical</h2>
+<ul>
+<li><p>Examine relationships between categorical variables</p></li>
+<li><p>Look at joint distributions and proportions</p></li>
+<li><p>Compare group compositions</p></li>
+</ul>
+<p>First, let’s create a contingency table of <code>age_group</code> and <code>country</code>!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a><span class="fu">table</span>(wvs_cleaned<span class="sc">$</span>age_group, wvs_cleaned<span class="sc">$</span>country)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       
+         CAN  NZL  SGP
+  18-29  780   32  272
+  30-44 1164  114  485
+  45-59  992  196  519
+  60+   1082  318  449</code></pre>
+</div>
+</div>
+</section>
+<section id="bivariate-descriptive-stats---both-categorical-contd" class="slide level2">
+<h2>Bivariate Descriptive Stats - Both categorical (cont’d)</h2>
+<p>We can also create a proportion table just like we did earlier</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a>wvs_cleaned <span class="sc">%&gt;%</span></span>
+<span id="cb30-2"><a></a>  <span class="fu">count</span>(age_group, country) <span class="sc">%&gt;%</span></span>
+<span id="cb30-3"><a></a>  <span class="fu">group_by</span>(country) <span class="sc">%&gt;%</span></span>
+<span id="cb30-4"><a></a>  <span class="fu">mutate</span>(<span class="at">prop =</span> n<span class="sc">/</span><span class="fu">sum</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 12 × 4
+# Groups:   country [3]
+   age_group country     n   prop
+   &lt;chr&gt;     &lt;fct&gt;   &lt;int&gt;  &lt;dbl&gt;
+ 1 18-29     CAN       780 0.194 
+ 2 18-29     NZL        32 0.0485
+ 3 18-29     SGP       272 0.158 
+ 4 30-44     CAN      1164 0.290 
+ 5 30-44     NZL       114 0.173 
+ 6 30-44     SGP       485 0.281 
+ 7 45-59     CAN       992 0.247 
+ 8 45-59     NZL       196 0.297 
+ 9 45-59     SGP       519 0.301 
+10 60+       CAN      1082 0.269 
+11 60+       NZL       318 0.482 
+12 60+       SGP       449 0.260 </code></pre>
+</div>
+</div>
+</section>
+<section id="bivariate-descriptive-stats---both-categorical-contd-1" class="slide level2">
+<h2>Bivariate Descriptive Stats - Both categorical (cont’d)</h2>
+<p>For categorical data like this, we can use barchart to visualize the frequency distribution. Stacked bar chart can be used to visualize proportion.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a>wvs_cleaned <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> country, <span class="at">fill =</span> age_group)) <span class="sc">+</span></span>
+<span id="cb32-2"><a></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span> </span>
+<span id="cb32-3"><a></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Count"</span>, <span class="at">title =</span> <span class="st">"Age Groups by Country"</span>) <span class="sc">+</span></span>
+<span id="cb32-4"><a></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<p>Change <code>position = "dodge"</code> to <code>position = "stack"</code> to stack the bar chart</p>
+</section>
+<section id="bivariate-descriptive-stats---both-categorical-contd-1-output" class="slide level2 output-location-slide"><h2>Bivariate Descriptive Stats - Both categorical (cont’d)</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-13-1.png" width="960"></p>
+<p><img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-14-1.png" width="1344"></p>
+</figure>
+</div>
+</div>
+</div></section><section id="bivariate-descriptive-stats---both-categorical-contd-2" class="slide level2">
+<h2>Bivariate Descriptive Stats - Both categorical (cont’d)</h2>
+<p>To get a better sense of the proportion for each country, we can use percent stacked bar chart.</p>
+<p>The code is similar to previous bar charts; we just have to change the <code>position</code> argument to <code>position = "fill"</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a></a>wvs_cleaned <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> country, <span class="at">fill =</span> age_group)) <span class="sc">+</span></span>
+<span id="cb33-2"><a></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span> </span>
+<span id="cb33-3"><a></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Proportion"</span>, <span class="at">title =</span> <span class="st">"Age Groups by Country"</span>) <span class="sc">+</span></span>
+<span id="cb33-4"><a></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+</section>
+<section id="bivariate-descriptive-stats---both-categorical-contd-2-output" class="slide level2 output-location-slide"><h2>Bivariate Descriptive Stats - Both categorical (cont’d)</h2><div class="cell output-location-slide">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-15-1.png" width="1344"></p>
+</figure>
+</div>
+</div>
+</div></section><section id="bivariate-descriptive-stats---both-continuous" class="slide level2">
+<h2>Bivariate Descriptive Stats - Both continuous</h2>
+<ul>
+<li><p>Examine linear relationships</p></li>
+<li><p>Look for patterns and trends</p></li>
+<li><p>Identify potential outliers</p></li>
+</ul>
+<p>Let’s first examine the correlation between <code>financial_satisfaction</code> and <code>life_satisfaction</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a></a><span class="fu">cor</span>(wvs_cleaned<span class="sc">$</span>financial_satisfaction, wvs_cleaned<span class="sc">$</span>life_satisfaction)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6420311</code></pre>
+</div>
+</div>
+</section>
+<section id="bivariate-descriptive-stats---both-continuous-contd" class="slide level2">
+<h2>Bivariate Descriptive Stats - Both continuous (cont’d)</h2>
+<p>Let’s visualize the two variables together with a jitter / scatterplot!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a></a>wvs_cleaned <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> financial_satisfaction, <span class="at">y =</span> life_satisfaction)) <span class="sc">+</span></span>
+<span id="cb36-2"><a></a>  <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb36-3"><a></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span> <span class="co"># layer with geom_smooth</span></span>
+<span id="cb36-4"><a></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Financial vs Life Satisfaction"</span>) <span class="sc">+</span></span>
+<span id="cb36-5"><a></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+</section>
+<section id="bivariate-descriptive-stats---both-continuous-contd-output" class="slide level2 output-location-slide"><h2>Bivariate Descriptive Stats - Both continuous (cont’d)</h2><div class="cell output-location-slide">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-17-1.png" width="1344"></p>
+</figure>
+</div>
+</div>
+</div></section><section id="bivariate-descriptive-stats---one-continuous-one-categorical" class="slide level2">
+<h2>Bivariate Descriptive Stats - One continuous, one categorical</h2>
+<ul>
+<li><p>Compare distributions across groups</p></li>
+<li><p>Identify group differences</p></li>
+<li><p>Examine spread within groups</p></li>
+</ul>
+<p>Let’s do a recap from last week and get the summary stats for <code>life_satisfaction</code> for each <code>country</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a></a>wvs_cleaned <span class="sc">|&gt;</span> </span>
+<span id="cb37-2"><a></a>  <span class="fu">group_by</span>(country) <span class="sc">|&gt;</span> </span>
+<span id="cb37-3"><a></a>  <span class="fu">summarise</span>(</span>
+<span id="cb37-4"><a></a>    <span class="at">mean_satisfaction =</span> <span class="fu">mean</span>(life_satisfaction, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb37-5"><a></a>    <span class="at">median_satisfaction =</span> <span class="fu">median</span>(life_satisfaction, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb37-6"><a></a>    <span class="at">sd_satisfaction =</span> <span class="fu">sd</span>(life_satisfaction, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb37-7"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 4
+  country mean_satisfaction median_satisfaction sd_satisfaction
+  &lt;fct&gt;               &lt;dbl&gt;               &lt;dbl&gt;           &lt;dbl&gt;
+1 CAN                  7.04                   7            1.81
+2 NZL                  7.60                   8            1.79
+3 SGP                  7.06                   7            1.78</code></pre>
+</div>
+</div>
+</section>
+<section id="bivariate-descriptive-stats---one-continuous-one-categorical-contd" class="slide level2">
+<h2>Bivariate Descriptive Stats - One continuous, one categorical (cont’d)</h2>
+<p>To get a better sense of how the data is varied and spread, let’s visualize them with a side-by-side boxplot</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a></a>wvs_cleaned <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> country, <span class="at">y =</span> life_satisfaction)) <span class="sc">+</span></span>
+<span id="cb39-2"><a></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb39-3"><a></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Life Satisfaction by Country"</span>) <span class="sc">+</span></span>
+<span id="cb39-4"><a></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+</section>
+<section id="bivariate-descriptive-stats---one-continuous-one-categorical-contd-output" class="slide level2 output-location-slide"><h2>Bivariate Descriptive Stats - One continuous, one categorical (cont’d)</h2><div class="cell output-location-slide">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-19-1.png" width="1344"></p>
+</figure>
+</div>
+</div>
+</div></section><section id="bivariate-descriptive-stats---one-continuous-one-categorical-contd-1" class="slide level2">
+<h2>Bivariate Descriptive Stats - One continuous, one categorical (cont’d)</h2>
+<p>We could also layer our boxplots with violin plots to get a better sense of the distribution of each group.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a></a>wvs_cleaned <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> country, <span class="at">y =</span> life_satisfaction)) <span class="sc">+</span></span>
+<span id="cb40-2"><a></a>  <span class="fu">geom_violin</span>(<span class="at">fill =</span> <span class="st">"lightblue"</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb40-3"><a></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="at">fill =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb40-4"><a></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Life Satisfaction Distribution by Country"</span>) <span class="sc">+</span></span>
+<span id="cb40-5"><a></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+</section>
+<section id="bivariate-descriptive-stats---one-continuous-one-categorical-contd-1-output" class="slide level2 output-location-slide"><h2>Bivariate Descriptive Stats - One continuous, one categorical (cont’d)</h2><div class="cell output-location-slide">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-20-1.png" width="1344"></p>
+</figure>
+</div>
+</div>
+</div></section><section id="learning-check-2" class="slide level2">
+<h2>Learning Check #2</h2>
+<p>Create a side-by-side boxplots that visualizes <code>political_scale</code> for each <code>age_group</code>.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show answer</summary>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a></a>wvs_cleaned <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> political_scale, <span class="at">y =</span> age_group)) <span class="sc">+</span></span>
+<span id="cb41-2"><a></a>  <span class="fu">geom_violin</span>(<span class="at">fill =</span> <span class="st">"lightblue"</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb41-3"><a></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="at">fill =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb41-4"><a></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Political scale Distribution by Age Groups"</span>) <span class="sc">+</span></span>
+<span id="cb41-5"><a></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
+</div>
+<img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-21-1.png" width="1344" class="r-stretch"></section>
+<section id="using-facets-for-more-complex-visual" class="slide level2">
+<h2>Using Facets for more complex visual</h2>
+<ul>
+<li><p>Compare patterns across multiple subgroups</p></li>
+<li><p>Identify interaction effects</p></li>
+<li><p>Maintain visual clarity with complex relationships</p></li>
+</ul>
+<p>Facet grids are useful when we have more than two variables to visualize. However, if used excessively they may become too complex</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a></a>wvs_cleaned <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> financial_satisfaction, <span class="at">y =</span> life_satisfaction)) <span class="sc">+</span></span>
+<span id="cb42-2"><a></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb42-3"><a></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
+<span id="cb42-4"><a></a>  <span class="fu">facet_grid</span>(country <span class="sc">~</span> religiousity)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+</section>
+<section id="using-facets-for-more-complex-visual-output" class="slide level2 output-location-slide"><h2>Using Facets for more complex visual</h2><div class="cell output-location-slide">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-22-1.png" width="1344"></p>
 </figure>
 </div>
 </div>
@@ -667,20 +844,18 @@ Bella Ratmelia
 <p>Fancier, more complicated visualization does not necessarily mean better!</p>
 <p>Take a look at this award-winning visualization by <a href="http://www.simonscarr.com/iraqs-bloody-toll">Simon Scarr</a></p>
 <iframe width="1500" height="600" src="http://www.simonscarr.com/iraqs-bloody-toll" title="Simon Scarr's visualization"></iframe>
-</section>
-<section id="strategy-for-data-visualization-with-ggplot" class="slide level2">
-<h2>Strategy for data visualization with ggplot</h2>
+</section></section>
+<section id="end-of-session-3" class="title-slide slide level1 center">
+<h1>End of Session 3!</h1>
+<p>Remember the strategy:</p>
 <ol type="1">
 <li>Have the ggplot documentation/cheatsheet open</li>
 <li>Decide on how many variables are involved. Is it just one? two? more than two?</li>
 <li>Determine whether the variables are categorical or continuous. If you have more than one, are they both categorical? one categorical + one continuous?</li>
 <li>Refer to the documentation to see which type of visualization would make sense for your variables.</li>
 </ol>
-</section>
-<section id="end-of-session-3" class="title-slide slide level1 center">
-<h1>End of Session 3!</h1>
 <p>Check out the <a href="https://r-graph-gallery.com/">R Graph gallery</a> for inspiration and code samples!</p>
-<p>Next session: statistical tests in R using WVS data</p>
+<p>Next session: inferential stats in R using WVS data</p>
 
 
 </section>

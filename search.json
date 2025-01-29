@@ -53,7 +53,7 @@
     "href": "index.html#schedule",
     "title": "Introductory R for Social Sciences",
     "section": "Schedule",
-    "text": "Schedule\nVenue : YPHSL seminar room 3.1\nTime : 3:30 - 5:30 PM (All sessions)\nClick on the link under “Topic” to access the slides. Slides will be progressively made available throughout the sessions.\n\n\n\n\nSession\nDate\nTopic\nDesccription\n\n\n\n\n~\nBefore the workshop\nPreparation\nComplete the Pre-workshop activities\n\n\n1\nFri, 17 Jan 2025\nIntroduction to R and RStudio (+ updated on 18/1/25)\nLearn about setting up RStudio, basic data types and structures in R, and importing data files.\n\n\n2\nFri, 24 Jan 2025\nData wrangling with tidyverse\nLearn about manipulating data with tidyverse, including filtering, selecting, mutating, and grouping data.\n\n\n3\nFri, 31 Jan 2025\nData visualization and Descriptive Statistics\nLearn about creating visualizations with ggplot2 and calculating descriptive statistics like means.\n\n\n4\nFri, 7 Feb 2025\nBasic Inferential Tests\nLearn about conducting t-tests, chi-square tests, ANOVA, and interpreting statistical results in R.\n\n\n5\nFri, 14 Feb 2025\nRegression and Introduction to Quarto\nLearn about correlation, regression, and Quarto for creating dynamic, reproducible R documents.\n\n\n~\nAfter the workshop\n\nPost-workshop exercises"
+    "text": "Schedule\nVenue : YPHSL seminar room 3.1\nTime : 3:30 - 5:30 PM (All sessions)\nClick on the link under “Topic” to access the slides. Slides will be progressively made available throughout the sessions.\n\n\n\n\nSession\nDate\nTopic\nDesccription\n\n\n\n\n~\nBefore the workshop\nPreparation\nComplete the Pre-workshop activities\n\n\n1\nFri, 17 Jan 2025\nIntroduction to R and RStudio (+ updated on 18/1/25)\nLearn about setting up RStudio, basic data types and structures in R, and importing data files.\n\n\n2\nFri, 24 Jan 2025\nData wrangling with tidyverse\nLearn about manipulating data with tidyverse, including filtering, selecting, mutating, and grouping data.\n\n\n3\nFri, 31 Jan 2025\nData visualization and Descriptive Statistics\nLearn about creating visualizations with ggplot2 and calculating descriptive statistics like mean, median, etc.\n\n\n4\nFri, 7 Feb 2025\nBasic Inferential Tests\nLearn about conducting t-tests, chi-square tests, ANOVA, and interpreting statistical results in R.\n\n\n5\nFri, 14 Feb 2025\nRegression and Introduction to Quarto\nLearn about correlation, regression, and Quarto for creating dynamic, reproducible R documents.\n\n\n~\nAfter the workshop\n\nPost-workshop exercises"
   },
   {
     "objectID": "index.html#pre-workshop-activities",
@@ -424,63 +424,63 @@
     "href": "03-visualization.html#refresher-loading-from-csv-into-a-dataframe",
     "title": "Data Visualization and Descriptive Stats",
     "section": "Refresher: Loading from CSV into a dataframe",
-    "text": "Refresher: Loading from CSV into a dataframe\nUse read_csv from readr package (part of tidyverse) to load our data into a dataframe\n\n# import tidyverse library\nlibrary(tidyverse)\n\n# read the CSV with WVS data\nwvs_data &lt;- read_csv(\"data-output/wvs_processed.csv\")\n\n# Convert categorical variables to factors\nwvs_data &lt;- wvs_data |&gt; \n    mutate(across(c(\"country\", \"sex\", \"marital_status\", \"employment\", \"religiousity\"), as.factor))\n\n# peek at the data, pay attention to the data types!\nglimpse(wvs_data)"
+    "text": "Refresher: Loading from CSV into a dataframe\nUse read_csv from readr package (part of tidyverse) to load our data into a dataframe\n\n# import tidyverse library\nlibrary(tidyverse)\n\n# read the CSV with WVS data\nwvs_cleaned &lt;- read_csv(\"data-output/wvs_processed.csv\")\n\n# Convert categorical variables to factors\ncolumns_to_convert &lt;- c(\"country\", \"religiousity\", \"sex\", \"marital_status\", \"employment\")\n\nwvs_cleaned &lt;- wvs_cleaned |&gt; \n    mutate(across(all_of(columns_to_convert), as_factor))\n\n# peek at the data, pay attention to the data types!\nglimpse(wvs_cleaned)"
   },
   {
-    "objectID": "03-visualization.html#basic-r-functions-for-descriptive-statistics",
-    "href": "03-visualization.html#basic-r-functions-for-descriptive-statistics",
+    "objectID": "03-visualization.html#recap-descriptive-statistics",
+    "href": "03-visualization.html#recap-descriptive-statistics",
     "title": "Data Visualization and Descriptive Stats",
-    "section": "Basic R Functions for Descriptive Statistics",
-    "text": "Basic R Functions for Descriptive Statistics\nDescriptive statistics provide summaries about the sample and observations made. These summaries can be quantitative (summary statistics) or visual (graphs).\nLet’s explore some basic R functions for descriptive statistics using our Chile voting data.\n\nmean(): arithmetic average\nmedian(): middle value\nsd(): standard deviation\nvar(): variance\nrange(): range of values\nIQR(): interquartile range\nsummary(): provides a summary of descriptive statistics\nMode() function from DescTools package: the most frequently occuring value 1\n\nR doesn’t have built-in functions for mode, so we need DescTools package to get this function"
+    "section": "Recap: Descriptive Statistics",
+    "text": "Recap: Descriptive Statistics\n\n\nUnivariate (i.e. single variable) Descriptive Stats\n\nMeasures of central tendency: mean(), median(), Mode()\nMeasures of Variability: min(), max(), range(), IQR(), sd() (standard deviation), var() (variance)\nDistribution shape: skewness() and kurtosis() from moments library. This is easier to see with histogram\n\nBivariate (i.e. two variables) Descriptive Stats\n\nContingency table / cross tab (for categorical data)\nCovariance - describe how two variables vary together\nCorrelation - describe relationship strength and direction in a sample. (If we want to use this to infer about a population from a sample, it would fall under inferential stats)\nVisualizations e.g. Scatterplots, side-by-side boxplots, stacked bar charts, etc."
   },
   {
-    "objectID": "03-visualization.html#exploring-age-distribution",
-    "href": "03-visualization.html#exploring-age-distribution",
+    "objectID": "03-visualization.html#from-last-week-basic-r-functions-for-descriptive-stats",
+    "href": "03-visualization.html#from-last-week-basic-r-functions-for-descriptive-stats",
     "title": "Data Visualization and Descriptive Stats",
-    "section": "Exploring Age Distribution",
-    "text": "Exploring Age Distribution\nLet’s start by examining the age variable in our dataset.\n\nlibrary(DescTools)\n\n# Basic statistics\nmean_age &lt;- mean(wvs_data$age, na.rm = TRUE)\nmedian_age &lt;- median(wvs_data$age, na.rm = TRUE)\nsd_age &lt;- sd(wvs_data$age, na.rm = TRUE)\nrange_age &lt;- range(wvs_data$age, na.rm = TRUE)\niqr_age &lt;- IQR(wvs_data$age, na.rm = TRUE)\nmode_age &lt;- DescTools::Mode(wvs_data$age, na.rm = TRUE)\n\n# Print results\ncat(\"Mean age:\", mean_age, \"\\n\")"
+    "section": "From last week: Basic R Functions for Descriptive Stats",
+    "text": "From last week: Basic R Functions for Descriptive Stats\nLast week, we explored some basic R functions for descriptive statistics.\n\nmean(): arithmetic average\nmedian(): middle value\nsd(): standard deviation\nvar(): variance\nrange(): range of values\nIQR(): interquartile range\nsummary(): provides a summary of descriptive statistics\nMode() function from DescTools package: the most frequently occuring value 1\n\nR doesn’t have built-in functions for mode, so we need DescTools package to get this function"
   },
   {
-    "objectID": "03-visualization.html#exploring-age-distribution-output",
-    "href": "03-visualization.html#exploring-age-distribution-output",
+    "objectID": "03-visualization.html#univariate-descriptive-stats---measures-of-central-tendency",
+    "href": "03-visualization.html#univariate-descriptive-stats---measures-of-central-tendency",
     "title": "Data Visualization and Descriptive Stats",
-    "section": "Exploring Age Distribution",
-    "text": "Exploring Age Distribution\n\nMean age: 47.96408 \n\ncat(\"Median age:\", median_age, \"\\n\")\n\nMedian age: 48 \n\ncat(\"Standard deviation of age:\", sd_age, \"\\n\")\n\nStandard deviation of age: 16.72144 \n\ncat(\"Range of age:\", range_age[1], \"to\", range_age[2], \"\\n\")\n\nRange of age: 18 to 93 \n\ncat(\"Interquartile range of age:\", iqr_age, \"\\n\")\n\nInterquartile range of age: 28 \n\ncat(\"Most frequently occuring age:\", mode_age, \"\\n\")\n\nMost frequently occuring age: 54 \n\n# Summary statistics\nsummary(wvs_data$age)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  18.00   34.00   48.00   47.96   62.00   93.00"
+    "section": "Univariate Descriptive Stats - Measures of Central Tendency",
+    "text": "Univariate Descriptive Stats - Measures of Central Tendency\nLet’s start by examining the age variable in our dataset.\n\nlibrary(DescTools)\n\n# Basic statistics\nmean_age &lt;- mean(wvs_cleaned$age, na.rm = TRUE)\nmedian_age &lt;- median(wvs_cleaned$age, na.rm = TRUE)\nmode_age &lt;- DescTools::Mode(wvs_cleaned$age, na.rm = TRUE)\n\n# Print results\ncat(\"Mean age:\", mean_age, \"\\n\")\n\n\n\nMean age: 47.96408 \n\ncat(\"Median age:\", median_age, \"\\n\")\n\nMedian age: 48 \n\ncat(\"Most frequently occuring age:\", mode_age, \"\\n\") # this is here just for demo purposes\n\nMost frequently occuring age: 54"
   },
   {
-    "objectID": "03-visualization.html#interpreting-age-statistics",
-    "href": "03-visualization.html#interpreting-age-statistics",
+    "objectID": "03-visualization.html#univariate-descriptive-stats---measures-of-variability-or-dispersion",
+    "href": "03-visualization.html#univariate-descriptive-stats---measures-of-variability-or-dispersion",
     "title": "Data Visualization and Descriptive Stats",
-    "section": "Interpreting Age Statistics",
-    "text": "Interpreting Age Statistics\nSome possible interpretation:\n\nThe mean (47.99) and median (48) are very close, suggesting a fairly symmetric distribution\nThe mode (54) is slightly higher than both mean and median\nWith SD = 16.74, about two-thirds of participants fall between 31.26 and 64.72 years old (mean ± 1 SD)\nThe distribution spans from 18 to 93 years, with an interquartile range of 28 years\n\nIt’s much easier if we have a graph to visualize these interpretations!"
+    "section": "Univariate Descriptive Stats - Measures of Variability or Dispersion",
+    "text": "Univariate Descriptive Stats - Measures of Variability or Dispersion\n\nvar_age &lt;- var(wvs_cleaned$age, na.rm = TRUE)\nsd_age &lt;- sd(wvs_cleaned$age, na.rm = TRUE)\nrange_age &lt;- range(wvs_cleaned$age, na.rm = TRUE)\niqr_age &lt;- IQR(wvs_cleaned$age, na.rm = TRUE)\n\ncat(\"Variance of age:\", var_age, \"\\n\")\n\n\n\nVariance of age: 279.6066 \n\ncat(\"Standard deviation of age:\", sd_age, \"\\n\")\n\nStandard deviation of age: 16.72144 \n\ncat(\"Range of age:\", range_age[1], \"to\", range_age[2], \"\\n\")\n\nRange of age: 18 to 93 \n\ncat(\"Interquartile range of age:\", iqr_age, \"\\n\")\n\nInterquartile range of age: 28"
   },
   {
-    "objectID": "03-visualization.html#visualizing-data-with-ggplot",
-    "href": "03-visualization.html#visualizing-data-with-ggplot",
+    "objectID": "03-visualization.html#univariate-descriptive-stats---distribution-shape",
+    "href": "03-visualization.html#univariate-descriptive-stats---distribution-shape",
     "title": "Data Visualization and Descriptive Stats",
-    "section": "Visualizing data with ggplot",
-    "text": "Visualizing data with ggplot\n\nggplot is plotting package that is included inside tidyverse package\nworks best with data in the long format, i.e., a column for all the dimensions/measures and another column for the value for each dimension/measure.\n\n\nwvs_data |&gt; \n    ggplot(aes(x = age)) +\n    geom_bar(fill = \"lightblue\") +\n    labs(title = \"Age distribution of respondents\",\n         x = \"Age\",\n         y = \"Number of Respondents\") +\n    theme_minimal()"
+    "section": "Univariate Descriptive Stats - Distribution Shape",
+    "text": "Univariate Descriptive Stats - Distribution Shape\nThe function skewness() and kurtosis() is available through R package called moments. You may need to install it first before calling the library and its functions like in this code below.\n\nlibrary(moments)\n\nskew_age &lt;- skewness(wvs_cleaned$age, na.rm = TRUE)\nkurtosis_age &lt;- kurtosis(wvs_cleaned$age, na.rm = TRUE)\n\ncat(\"Skewness of age:\", skew_age, \"\\n\")\n\n\n\nSkewness of age: 0.1009475 \n\ncat(\"Kurtosis of age:\", kurtosis_age, \"\\n\")\n\nKurtosis of age: 2.018238"
   },
   {
-    "objectID": "03-visualization.html#visualizing-data-with-ggplot-output",
-    "href": "03-visualization.html#visualizing-data-with-ggplot-output",
+    "objectID": "03-visualization.html#visualizing-with-ggplot",
+    "href": "03-visualization.html#visualizing-with-ggplot",
     "title": "Data Visualization and Descriptive Stats",
-    "section": "Visualizing data with ggplot",
-    "text": "Visualizing data with ggplot"
+    "section": "Visualizing with ggplot",
+    "text": "Visualizing with ggplot\n\nDescribing the spread and shape of distribution with just words is not very productive, so typically it is accompanied with visualization.\nggplot is plotting package that is included inside tidyverse package\nworks best with data in the long format, i.e., a column for all the dimensions/measures and another column for the value for each dimension/measure.\n\n\nwvs_cleaned |&gt; \n    ggplot(aes(x = age)) +\n    geom_histogram(binwidth = 1, fill = \"lightblue\", color = \"navy\") +\n    labs(title = \"Age distribution of respondents\",\n         x = \"Age\",\n         y = \"Count\") +\n    theme_minimal()"
+  },
+  {
+    "objectID": "03-visualization.html#visualizing-with-ggplot-output",
+    "href": "03-visualization.html#visualizing-with-ggplot-output",
+    "title": "Data Visualization and Descriptive Stats",
+    "section": "Visualizing with ggplot",
+    "text": "Visualizing with ggplot"
   },
   {
     "objectID": "03-visualization.html#anatomy-of-ggplot-code",
     "href": "03-visualization.html#anatomy-of-ggplot-code",
     "title": "Data Visualization and Descriptive Stats",
     "section": "Anatomy of ggplot code",
-    "text": "Anatomy of ggplot code\nCharts built with ggplot must include the following:\n1wvs_data |&gt;\n2    ggplot(aes(x = age)) +\n3    geom_bar(fill = \"lightblue\") +\n4    labs(title = \"Age distribution of respondents\",\n         x = \"Age\",\n         y = \"Count\") +\n5    theme_minimal()\n\n1\n\nData - the dataframe/tibble to visualize.\n\n2\n\nAesthetic mappings (aes) - describes which variables are mapped to the x, y axes, alpha (transparency) and other visual aesthetics.\n\n3\n\nGeometric objects (geom) - describes how values are rendered; as bars, scatterplot, lines, etc.\n\n4\n\nProvide titles and labels to your graph\n\n5\n\n(Optional) apply a theme/look to your graph"
-  },
-  {
-    "objectID": "03-visualization.html#going-back-to-our-data",
-    "href": "03-visualization.html#going-back-to-our-data",
-    "title": "Data Visualization and Descriptive Stats",
-    "section": "Going back to our data",
-    "text": "Going back to our data\nOur research team wants to understand patterns in life satisfaction and values across different countries and demographic groups. Let’s create visualizations to address these questions:\n\nWhat’s the distribution of life_satisfaction scores across all respondents?\nHow does religiousity vary across the three countries?\nWhat’s the distribution of employment_status by country?\nIs there a relationship between political_scale and life_satisfaction?\nHow do importance ratings (family, friends, leisure, work) compare across employment status?\nDoes financial_satisfaction correlate with life satisfaction? How does this vary by country?"
+    "text": "Anatomy of ggplot code\nCharts built with ggplot must include the following:\n1wvs_cleaned |&gt;\n2    ggplot(aes(x = age)) +\n3    geom_histogram(binwidth = 1, fill = \"lightblue\", color = \"navy\") +\n4    labs(title = \"Age distribution of respondents\",\n         x = \"Age\",\n         y = \"Count\") +\n5    theme_minimal()\n\n1\n\nData - the dataframe/tibble to visualize.\n\n2\n\nAesthetic mappings (aes) - describes which variables are mapped to the x, y axes, alpha (transparency) and other visual aesthetics.\n\n3\n\nGeometric objects (geom) - describes how values are rendered; as bars, scatterplot, lines, etc.\n\n4\n\nProvide titles and labels to your graph\n\n5\n\n(Optional) apply a theme/look to your graph"
   },
   {
     "objectID": "03-visualization.html#tip-open-the-ggplot-cheatsheet",
@@ -490,144 +490,207 @@
     "text": "Tip: open the ggplot cheatsheet\n\n\n\n\n\n\nTip\n\n\nA strategy I’d like to recommend: briefly read over the ggplot2 documentation and have them open on a separate tab. Figure out the type of variables you need to visualize (discrete or continuous) to quickly identify which visualization would make sense.\n\n\n\n\nggplot documentation link"
   },
   {
-    "objectID": "03-visualization.html#task-1",
-    "href": "03-visualization.html#task-1",
+    "objectID": "03-visualization.html#going-back-to-our-univariate-descriptive-stats-on-age-variable",
+    "href": "03-visualization.html#going-back-to-our-univariate-descriptive-stats-on-age-variable",
     "title": "Data Visualization and Descriptive Stats",
-    "section": "Task #1",
-    "text": "Task #1\nWhat’s the distribution of life_satisfaction scores?\n\n# One continuous variable\nwvs_data |&gt; \n    ggplot(aes(x = life_satisfaction)) +\n    geom_histogram(binwidth = 1, fill = \"pink\", color = \"maroon\") +\n    labs(title = \"Distribution of Life Satisfaction Scores\",\n       x = \"Life Satisfaction (1-10)\",\n       y = \"Count\")"
+    "section": "Going back to our univariate descriptive stats on age variable",
+    "text": "Going back to our univariate descriptive stats on age variable\nLet’s visualize the variability with boxplot to get a better sense of the spread.\n\nwvs_cleaned |&gt; \n    ggplot(aes(x = age)) +\n    geom_boxplot(fill = \"lightblue\", color = \"navy\") +\n    labs(title = \"Age distribution of respondents\",\n         x = \"Age\") +\n    theme_minimal()"
   },
   {
-    "objectID": "03-visualization.html#task-1-output",
-    "href": "03-visualization.html#task-1-output",
+    "objectID": "03-visualization.html#going-back-to-our-univariate-descriptive-stats-on-age-variable-output",
+    "href": "03-visualization.html#going-back-to-our-univariate-descriptive-stats-on-age-variable-output",
     "title": "Data Visualization and Descriptive Stats",
-    "section": "Task #1",
-    "text": "Task #1"
+    "section": "Going back to our univariate descriptive stats on age variable",
+    "text": "Going back to our univariate descriptive stats on age variable"
   },
   {
-    "objectID": "03-visualization.html#task-2",
-    "href": "03-visualization.html#task-2",
+    "objectID": "03-visualization.html#univariate-descriptive-stats-for-categorical-data",
+    "href": "03-visualization.html#univariate-descriptive-stats-for-categorical-data",
     "title": "Data Visualization and Descriptive Stats",
-    "section": "Task #2",
-    "text": "Task #2\nWhat’s the distribution of religiousity? Does it vary by country?\n\n# One discrete/categorical variable\nwvs_data |&gt; \n    ggplot(aes(x = country, fill = religiousity)) +\n    geom_bar(position = \"fill\") +\n    labs(title = \"Distribution of Religiosity Across Countries\",\n       x = \"Country\",\n       y = \"Proportion\",\n       fill = \"Religious Identity\") +\n    theme_minimal()"
+    "section": "Univariate Descriptive Stats for Categorical Data",
+    "text": "Univariate Descriptive Stats for Categorical Data\nThe age variable is a numerical / continuous data. We can’t apply mean(), median() and other central tendency measures to categorical data such as age_group or employment_status. We can, however, visualize them.\nWhen dealing with categorical data, first take note on whether you want to visualize the proportion or the frequency. Let’s visualize the absolute values of the survey participants by country:\n\nwvs_cleaned |&gt; ggplot(aes(x = country, fill = country)) +\n    geom_bar() +\n    labs(title = \"Participants by Country\",\n       x = \"Country\",\n       y = \"Participants\") +\n    theme_minimal()"
   },
   {
-    "objectID": "03-visualization.html#task-2-output",
-    "href": "03-visualization.html#task-2-output",
+    "objectID": "03-visualization.html#univariate-descriptive-stats-for-categorical-data-output",
+    "href": "03-visualization.html#univariate-descriptive-stats-for-categorical-data-output",
     "title": "Data Visualization and Descriptive Stats",
-    "section": "Task #2",
-    "text": "Task #2"
+    "section": "Univariate Descriptive Stats for Categorical Data",
+    "text": "Univariate Descriptive Stats for Categorical Data"
   },
   {
-    "objectID": "03-visualization.html#task-3",
-    "href": "03-visualization.html#task-3",
+    "objectID": "03-visualization.html#univariate-descriptive-stats-for-categorical-data---proportion",
+    "href": "03-visualization.html#univariate-descriptive-stats-for-categorical-data---proportion",
     "title": "Data Visualization and Descriptive Stats",
-    "section": "Task #3",
-    "text": "Task #3\nWhat’s the distribution of employment_status by country?\n\n# Showing proportions / percentage as part of whole\n# Two categorical variables\nwvs_data |&gt; \n    ggplot(aes(x = country, fill = employment)) +\n    geom_bar(position = \"dodge\") +\n    labs(title = \"Employment Status Distribution by Country\",\n       x = \"Country\",\n       y = \"Count\") +\n    theme_minimal()"
+    "section": "Univariate Descriptive Stats for Categorical Data - Proportion",
+    "text": "Univariate Descriptive Stats for Categorical Data - Proportion\nWhen we want to show proportion (i.e. in terms of “parts of whole”), we must first quickly calculate the proportion with count()\nLet’s create a new dataframe called wvs_country_proportion to hold this data.\n\nwvs_country_proportion &lt;- wvs_cleaned |&gt; \n    count(country) |&gt;\n    mutate(proportion = n/sum(n))\n\nprint(wvs_country_proportion)\n\n# A tibble: 3 × 3\n  country     n proportion\n  &lt;fct&gt;   &lt;int&gt;      &lt;dbl&gt;\n1 CAN      4018      0.628\n2 NZL       660      0.103\n3 SGP      1725      0.269"
   },
   {
-    "objectID": "03-visualization.html#task-3-output",
-    "href": "03-visualization.html#task-3-output",
+    "objectID": "03-visualization.html#univariate-descriptive-stats-for-categorical-data---proportion-contd",
+    "href": "03-visualization.html#univariate-descriptive-stats-for-categorical-data---proportion-contd",
     "title": "Data Visualization and Descriptive Stats",
-    "section": "Task #3",
-    "text": "Task #3"
+    "section": "Univariate Descriptive Stats for Categorical Data - Proportion (cont’d)",
+    "text": "Univariate Descriptive Stats for Categorical Data - Proportion (cont’d)\nAnd then, we use this proportion table to create a pie chart by adding coord_polar() layer after geom_bar() and some changes in aes() and geom_bar()\n\nwvs_country_proportion |&gt; ggplot(aes(x = \"\", y = proportion, fill = country)) +\n    geom_bar(stat = \"identity\", width = 1) +\n    coord_polar(\"y\", start = 0) +\n    labs(title = \"Proportion of Participants by Country\") +\n    theme_minimal()\n\n\n\n\nNote: if you have lots of categories, pie chart is not always the best option."
   },
   {
-    "objectID": "03-visualization.html#group-exercise-1-solo-attempts-also-ok",
-    "href": "03-visualization.html#group-exercise-1-solo-attempts-also-ok",
+    "objectID": "03-visualization.html#univariate-descriptive-stats-for-categorical-data---proportion-contd-output",
+    "href": "03-visualization.html#univariate-descriptive-stats-for-categorical-data---proportion-contd-output",
     "title": "Data Visualization and Descriptive Stats",
-    "section": "Group exercise #1 (solo attempts also ok)",
-    "text": "Group exercise #1 (solo attempts also ok)\nVisualize marital status distribution by sex, showing the proportion for each gender.\n\n\nCode\nwvs_data |&gt;\n    ggplot(aes(x = sex, fill = marital_status)) +\n    geom_bar(position = \"fill\") + \n    labs(title = \"Proportion of Marital Status by Gender\",\n       x = \"Sex\",\n       y = \"Proportion\",\n       fill = \"Marital Status\") +\n    theme_minimal()"
+    "section": "Univariate Descriptive Stats for Categorical Data - Proportion (cont’d)",
+    "text": "Univariate Descriptive Stats for Categorical Data - Proportion (cont’d)"
   },
   {
-    "objectID": "03-visualization.html#group-exercise-1-solo-attempts-also-ok-output",
-    "href": "03-visualization.html#group-exercise-1-solo-attempts-also-ok-output",
+    "objectID": "03-visualization.html#learning-check-1a",
+    "href": "03-visualization.html#learning-check-1a",
     "title": "Data Visualization and Descriptive Stats",
-    "section": "Group exercise #1 (solo attempts also ok)",
-    "text": "Group exercise #1 (solo attempts also ok)"
+    "section": "Learning Check 1A",
+    "text": "Learning Check 1A\nUsing the wvs_cleaned dataset:\nCreate a histogram that visualizes the distribution of financial_satisfaction\n\n\nShow answer\nwvs_cleaned |&gt; ggplot(aes(x = financial_satisfaction)) +\n  geom_histogram(fill = \"steelblue\", color = \"white\", binwidth = 1) +\n  labs(title = \"Distribution of Financial Satisfaction\",\n       x = \"Financial Satisfaction\",\n       y = \"Count\") +\n  theme_minimal()"
   },
   {
-    "objectID": "03-visualization.html#task-4",
-    "href": "03-visualization.html#task-4",
+    "objectID": "03-visualization.html#learning-check-1a-output",
+    "href": "03-visualization.html#learning-check-1a-output",
     "title": "Data Visualization and Descriptive Stats",
-    "section": "Task #4",
-    "text": "Task #4\nIs there a relationship between political_scale and life_satisfaction?\n\n# Two variables - both continuous\nwvs_data |&gt;\n    ggplot(aes(x = political_scale, y = life_satisfaction)) +\n    geom_jitter(alpha = 0.3) +\n    geom_smooth(method = \"lm\", color = \"red\") +\n    labs(title = \"Political Leaning vs Life Satisfaction\",\n       x = \"Political Leaning\",\n       y = \"Life Satisfaction\")"
+    "section": "Learning Check 1A",
+    "text": "Learning Check 1A"
   },
   {
-    "objectID": "03-visualization.html#task-4-output",
-    "href": "03-visualization.html#task-4-output",
+    "objectID": "03-visualization.html#learning-check-1b",
+    "href": "03-visualization.html#learning-check-1b",
     "title": "Data Visualization and Descriptive Stats",
-    "section": "Task #4",
-    "text": "Task #4"
+    "section": "Learning Check 1B",
+    "text": "Learning Check 1B\nCreate a barchart that visualizes the frequency of religiousity\n\n\nShow answer\nwvs_cleaned |&gt; ggplot(aes(x = religiousity, fill = religiousity)) +\n  geom_bar() +\n  labs(title = \"Frequency of Religiosity Levels\",\n       x = \"Religiosity\",\n       y = \"Count\") +\n  theme_minimal()"
   },
   {
-    "objectID": "03-visualization.html#task-5",
-    "href": "03-visualization.html#task-5",
+    "objectID": "03-visualization.html#learning-check-1b-output",
+    "href": "03-visualization.html#learning-check-1b-output",
     "title": "Data Visualization and Descriptive Stats",
-    "section": "Task #5",
-    "text": "Task #5\nHow do religiousity compare across marital_status?\n\n# Two categorical variables: marital status and religiosity\nwvs_data |&gt; \n    ggplot(aes(x = marital_status, fill = religiousity)) +\n    geom_bar(position = \"fill\") +\n    labs(title = \"Religious Identity Distribution by Marital Status\",\n         x = \"Marital Status\",\n         y = \"Proportion\",\n         fill = \"Religious Identity\") +\n    theme_minimal() +\n    theme(axis.text.x = element_text(angle = 45, hjust = 1))"
+    "section": "Learning Check 1B",
+    "text": "Learning Check 1B"
   },
   {
-    "objectID": "03-visualization.html#task-5-output",
-    "href": "03-visualization.html#task-5-output",
+    "objectID": "03-visualization.html#bivariate-descriptive-stats-1",
+    "href": "03-visualization.html#bivariate-descriptive-stats-1",
     "title": "Data Visualization and Descriptive Stats",
-    "section": "Task #5",
-    "text": "Task #5"
+    "section": "Bivariate Descriptive Stats",
+    "text": "Bivariate Descriptive Stats\nBivariate descriptive statistics describe and summarize relationships between two variables in your dataset without making inferences about a larger population. They include numeric measures like correlation or covariance, and visualizations like scatterplots, side-by-side boxplots, or contingency tables.\nThink of them as taking a snapshot of how two variables relate to each other in your current data.\nSince data can be continuous or categorical, there can be three combinations when we deal with bivariate descriptive stats:\n\nBoth categorical (e.g. age_group and country)\nBoth continuous (e.g. financial_satisfaction and life_satisfaction)\nOne continuous, one categorical (e.g. country and life_satisfaction)"
   },
   {
-    "objectID": "03-visualization.html#facets-for-multiple-variables",
-    "href": "03-visualization.html#facets-for-multiple-variables",
+    "objectID": "03-visualization.html#bivariate-descriptive-stats---both-categorical",
+    "href": "03-visualization.html#bivariate-descriptive-stats---both-categorical",
     "title": "Data Visualization and Descriptive Stats",
-    "section": "Facets for multiple variables",
-    "text": "Facets for multiple variables\n\n# Faceting and multiple variables\nwvs_data |&gt; \n    ggplot(aes(x = marital_status, fill = religiousity)) +\n    geom_bar(position = \"fill\") +\n    labs(title = \"Religious Identity Distribution by Marital Status\",\n         x = \"Marital Status\",\n         y = \"Count\",\n         fill = \"Religious Identity\") +\n    facet_grid( ~ country) +\n    theme(axis.text.x = element_text(angle = 45, hjust = 1))"
+    "section": "Bivariate Descriptive Stats - Both categorical",
+    "text": "Bivariate Descriptive Stats - Both categorical\n\nExamine relationships between categorical variables\nLook at joint distributions and proportions\nCompare group compositions\n\nFirst, let’s create a contingency table of age_group and country!\n\ntable(wvs_cleaned$age_group, wvs_cleaned$country)\n\n       \n         CAN  NZL  SGP\n  18-29  780   32  272\n  30-44 1164  114  485\n  45-59  992  196  519\n  60+   1082  318  449"
   },
   {
-    "objectID": "03-visualization.html#facets-for-multiple-variables-output",
-    "href": "03-visualization.html#facets-for-multiple-variables-output",
+    "objectID": "03-visualization.html#bivariate-descriptive-stats---both-categorical-contd",
+    "href": "03-visualization.html#bivariate-descriptive-stats---both-categorical-contd",
     "title": "Data Visualization and Descriptive Stats",
-    "section": "Facets for multiple variables",
-    "text": "Facets for multiple variables"
+    "section": "Bivariate Descriptive Stats - Both categorical (cont’d)",
+    "text": "Bivariate Descriptive Stats - Both categorical (cont’d)\nWe can also create a proportion table just like we did earlier\n\nwvs_cleaned %&gt;%\n  count(age_group, country) %&gt;%\n  group_by(country) %&gt;%\n  mutate(prop = n/sum(n))\n\n# A tibble: 12 × 4\n# Groups:   country [3]\n   age_group country     n   prop\n   &lt;chr&gt;     &lt;fct&gt;   &lt;int&gt;  &lt;dbl&gt;\n 1 18-29     CAN       780 0.194 \n 2 18-29     NZL        32 0.0485\n 3 18-29     SGP       272 0.158 \n 4 30-44     CAN      1164 0.290 \n 5 30-44     NZL       114 0.173 \n 6 30-44     SGP       485 0.281 \n 7 45-59     CAN       992 0.247 \n 8 45-59     NZL       196 0.297 \n 9 45-59     SGP       519 0.301 \n10 60+       CAN      1082 0.269 \n11 60+       NZL       318 0.482 \n12 60+       SGP       449 0.260"
   },
   {
-    "objectID": "03-visualization.html#task-6",
-    "href": "03-visualization.html#task-6",
+    "objectID": "03-visualization.html#bivariate-descriptive-stats---both-categorical-contd-1",
+    "href": "03-visualization.html#bivariate-descriptive-stats---both-categorical-contd-1",
     "title": "Data Visualization and Descriptive Stats",
-    "section": "Task #6",
-    "text": "Task #6\nDoes financial_satisfaction correlate with life satisfaction? How does this vary by country?\nLet’s layer two kinds of visualization here:\n\n# Two continuous variables with grouping\nwvs_data |&gt; \n    ggplot(aes(x = financial_satisfaction, y = life_satisfaction, color = country)) +\n    geom_point(alpha = 0.3) +\n    geom_smooth(method = \"lm\", se = FALSE) +\n    facet_wrap(~ country) +\n    labs(title = \"Life Satisfaction vs Financial Satisfaction by Country\",\n       x = \"Financial Satisfaction\",\n       y = \"Life Satisfaction\")"
+    "section": "Bivariate Descriptive Stats - Both categorical (cont’d)",
+    "text": "Bivariate Descriptive Stats - Both categorical (cont’d)\nFor categorical data like this, we can use barchart to visualize the frequency distribution. Stacked bar chart can be used to visualize proportion.\n\nwvs_cleaned |&gt; ggplot(aes(x = country, fill = age_group)) +\n  geom_bar(position = \"dodge\") + \n  labs(y = \"Count\", title = \"Age Groups by Country\") +\n  theme_minimal()\n\n\nChange position = \"dodge\" to position = \"stack\" to stack the bar chart"
   },
   {
-    "objectID": "03-visualization.html#task-6-output",
-    "href": "03-visualization.html#task-6-output",
+    "objectID": "03-visualization.html#bivariate-descriptive-stats---both-categorical-contd-1-output",
+    "href": "03-visualization.html#bivariate-descriptive-stats---both-categorical-contd-1-output",
     "title": "Data Visualization and Descriptive Stats",
-    "section": "Task #6",
-    "text": "Task #6"
+    "section": "Bivariate Descriptive Stats - Both categorical (cont’d)",
+    "text": "Bivariate Descriptive Stats - Both categorical (cont’d)"
   },
   {
-    "objectID": "03-visualization.html#group-exercise-2",
-    "href": "03-visualization.html#group-exercise-2",
+    "objectID": "03-visualization.html#bivariate-descriptive-stats---both-categorical-contd-2",
+    "href": "03-visualization.html#bivariate-descriptive-stats---both-categorical-contd-2",
     "title": "Data Visualization and Descriptive Stats",
-    "section": "Group Exercise #2",
-    "text": "Group Exercise #2\nCreate a violin plot showing the distribution of freedom scores by employment status, with points overlaid.\n\n\nCode\nwvs_data |&gt; \n    ggplot(aes(x = employment, y = freedom)) +\n    geom_violin(fill = \"lightblue\") +\n    geom_jitter(alpha = 0.2, color = \"navy\") + \n    labs(title = \"Distribution of Freedom Scores by Employment Status\",\n       x = \"Employment Status\",\n       y = \"Freedom Score\") +\n    theme_minimal() +\n    theme(axis.text.x = element_text(angle = 45, hjust = 1))"
+    "section": "Bivariate Descriptive Stats - Both categorical (cont’d)",
+    "text": "Bivariate Descriptive Stats - Both categorical (cont’d)\nTo get a better sense of the proportion for each country, we can use percent stacked bar chart.\nThe code is similar to previous bar charts; we just have to change the position argument to position = \"fill\"\n\nwvs_cleaned |&gt; ggplot(aes(x = country, fill = age_group)) +\n  geom_bar(position = \"fill\") + \n  labs(y = \"Proportion\", title = \"Age Groups by Country\") +\n  theme_minimal()"
   },
   {
-    "objectID": "03-visualization.html#group-exercise-2-output",
-    "href": "03-visualization.html#group-exercise-2-output",
+    "objectID": "03-visualization.html#bivariate-descriptive-stats---both-categorical-contd-2-output",
+    "href": "03-visualization.html#bivariate-descriptive-stats---both-categorical-contd-2-output",
     "title": "Data Visualization and Descriptive Stats",
-    "section": "Group Exercise #2",
-    "text": "Group Exercise #2"
+    "section": "Bivariate Descriptive Stats - Both categorical (cont’d)",
+    "text": "Bivariate Descriptive Stats - Both categorical (cont’d)"
   },
   {
-    "objectID": "03-visualization.html#group-exercise-3",
-    "href": "03-visualization.html#group-exercise-3",
+    "objectID": "03-visualization.html#bivariate-descriptive-stats---both-continuous",
+    "href": "03-visualization.html#bivariate-descriptive-stats---both-continuous",
     "title": "Data Visualization and Descriptive Stats",
-    "section": "Group Exercise #3",
-    "text": "Group Exercise #3\nVisualize the distribution of employment status across marital status categories, and use faceting to compare this relationship across countries.\n\n\nCode\nwvs_data |&gt; \n    ggplot(aes(x = marital_status, fill = employment)) +\n    geom_bar(position = \"fill\") +\n    facet_wrap(~ country) + \n    labs(title = \"Employment Status Distribution by Marital Status and Country\",\n       x = \"Marital Status\",\n       y = \"Proportion\",\n       fill = \"Employment Status\") +\n    theme_minimal() +\n    theme(axis.text.x = element_text(angle = 45, hjust = 1))"
+    "section": "Bivariate Descriptive Stats - Both continuous",
+    "text": "Bivariate Descriptive Stats - Both continuous\n\nExamine linear relationships\nLook for patterns and trends\nIdentify potential outliers\n\nLet’s first examine the correlation between financial_satisfaction and life_satisfaction\n\ncor(wvs_cleaned$financial_satisfaction, wvs_cleaned$life_satisfaction)\n\n[1] 0.6420311"
   },
   {
-    "objectID": "03-visualization.html#group-exercise-3-output",
-    "href": "03-visualization.html#group-exercise-3-output",
+    "objectID": "03-visualization.html#bivariate-descriptive-stats---both-continuous-contd",
+    "href": "03-visualization.html#bivariate-descriptive-stats---both-continuous-contd",
     "title": "Data Visualization and Descriptive Stats",
-    "section": "Group Exercise #3",
-    "text": "Group Exercise #3"
+    "section": "Bivariate Descriptive Stats - Both continuous (cont’d)",
+    "text": "Bivariate Descriptive Stats - Both continuous (cont’d)\nLet’s visualize the two variables together with a jitter / scatterplot!\n\nwvs_cleaned |&gt; ggplot(aes(x = financial_satisfaction, y = life_satisfaction)) +\n  geom_jitter(alpha = 0.3) +\n  geom_smooth(method = \"lm\") + # layer with geom_smooth\n  labs(title = \"Financial vs Life Satisfaction\") +\n  theme_minimal()"
+  },
+  {
+    "objectID": "03-visualization.html#bivariate-descriptive-stats---both-continuous-contd-output",
+    "href": "03-visualization.html#bivariate-descriptive-stats---both-continuous-contd-output",
+    "title": "Data Visualization and Descriptive Stats",
+    "section": "Bivariate Descriptive Stats - Both continuous (cont’d)",
+    "text": "Bivariate Descriptive Stats - Both continuous (cont’d)"
+  },
+  {
+    "objectID": "03-visualization.html#bivariate-descriptive-stats---one-continuous-one-categorical",
+    "href": "03-visualization.html#bivariate-descriptive-stats---one-continuous-one-categorical",
+    "title": "Data Visualization and Descriptive Stats",
+    "section": "Bivariate Descriptive Stats - One continuous, one categorical",
+    "text": "Bivariate Descriptive Stats - One continuous, one categorical\n\nCompare distributions across groups\nIdentify group differences\nExamine spread within groups\n\nLet’s do a recap from last week and get the summary stats for life_satisfaction for each country\n\nwvs_cleaned |&gt; \n  group_by(country) |&gt; \n  summarise(\n    mean_satisfaction = mean(life_satisfaction, na.rm = TRUE),\n    median_satisfaction = median(life_satisfaction, na.rm = TRUE),\n    sd_satisfaction = sd(life_satisfaction, na.rm = TRUE)\n  )\n\n# A tibble: 3 × 4\n  country mean_satisfaction median_satisfaction sd_satisfaction\n  &lt;fct&gt;               &lt;dbl&gt;               &lt;dbl&gt;           &lt;dbl&gt;\n1 CAN                  7.04                   7            1.81\n2 NZL                  7.60                   8            1.79\n3 SGP                  7.06                   7            1.78"
+  },
+  {
+    "objectID": "03-visualization.html#bivariate-descriptive-stats---one-continuous-one-categorical-contd",
+    "href": "03-visualization.html#bivariate-descriptive-stats---one-continuous-one-categorical-contd",
+    "title": "Data Visualization and Descriptive Stats",
+    "section": "Bivariate Descriptive Stats - One continuous, one categorical (cont’d)",
+    "text": "Bivariate Descriptive Stats - One continuous, one categorical (cont’d)\nTo get a better sense of how the data is varied and spread, let’s visualize them with a side-by-side boxplot\n\nwvs_cleaned |&gt; ggplot(aes(x = country, y = life_satisfaction)) +\n  geom_boxplot() +\n  labs(title = \"Life Satisfaction by Country\") +\n  theme_minimal()"
+  },
+  {
+    "objectID": "03-visualization.html#bivariate-descriptive-stats---one-continuous-one-categorical-contd-output",
+    "href": "03-visualization.html#bivariate-descriptive-stats---one-continuous-one-categorical-contd-output",
+    "title": "Data Visualization and Descriptive Stats",
+    "section": "Bivariate Descriptive Stats - One continuous, one categorical (cont’d)",
+    "text": "Bivariate Descriptive Stats - One continuous, one categorical (cont’d)"
+  },
+  {
+    "objectID": "03-visualization.html#bivariate-descriptive-stats---one-continuous-one-categorical-contd-1",
+    "href": "03-visualization.html#bivariate-descriptive-stats---one-continuous-one-categorical-contd-1",
+    "title": "Data Visualization and Descriptive Stats",
+    "section": "Bivariate Descriptive Stats - One continuous, one categorical (cont’d)",
+    "text": "Bivariate Descriptive Stats - One continuous, one categorical (cont’d)\nWe could also layer our boxplots with violin plots to get a better sense of the distribution of each group.\n\nwvs_cleaned |&gt; ggplot(aes(x = country, y = life_satisfaction)) +\n  geom_violin(fill = \"lightblue\", alpha = 0.5) +\n  geom_boxplot(width = 0.1, fill = \"white\") +\n  labs(title = \"Life Satisfaction Distribution by Country\") +\n  theme_minimal()"
+  },
+  {
+    "objectID": "03-visualization.html#bivariate-descriptive-stats---one-continuous-one-categorical-contd-1-output",
+    "href": "03-visualization.html#bivariate-descriptive-stats---one-continuous-one-categorical-contd-1-output",
+    "title": "Data Visualization and Descriptive Stats",
+    "section": "Bivariate Descriptive Stats - One continuous, one categorical (cont’d)",
+    "text": "Bivariate Descriptive Stats - One continuous, one categorical (cont’d)"
+  },
+  {
+    "objectID": "03-visualization.html#learning-check-2",
+    "href": "03-visualization.html#learning-check-2",
+    "title": "Data Visualization and Descriptive Stats",
+    "section": "Learning Check #2",
+    "text": "Learning Check #2\nCreate a side-by-side boxplots that visualizes political_scale for each age_group.\n\n\nShow answer\nwvs_cleaned |&gt; ggplot(aes(x = political_scale, y = age_group)) +\n  geom_violin(fill = \"lightblue\", alpha = 0.5) +\n  geom_boxplot(width = 0.1, fill = \"white\") +\n  labs(title = \"Political scale Distribution by Age Groups\") +\n  theme_minimal()"
+  },
+  {
+    "objectID": "03-visualization.html#using-facets-for-more-complex-visual",
+    "href": "03-visualization.html#using-facets-for-more-complex-visual",
+    "title": "Data Visualization and Descriptive Stats",
+    "section": "Using Facets for more complex visual",
+    "text": "Using Facets for more complex visual\n\nCompare patterns across multiple subgroups\nIdentify interaction effects\nMaintain visual clarity with complex relationships\n\nFacet grids are useful when we have more than two variables to visualize. However, if used excessively they may become too complex\n\nwvs_cleaned |&gt; ggplot(aes(x = financial_satisfaction, y = life_satisfaction)) +\n  geom_point(alpha = 0.3) +\n  geom_smooth(method = \"lm\") +\n  facet_grid(country ~ religiousity)"
+  },
+  {
+    "objectID": "03-visualization.html#using-facets-for-more-complex-visual-output",
+    "href": "03-visualization.html#using-facets-for-more-complex-visual-output",
+    "title": "Data Visualization and Descriptive Stats",
+    "section": "Using Facets for more complex visual",
+    "text": "Using Facets for more complex visual"
   },
   {
     "objectID": "03-visualization.html#is-fancier-better",
@@ -635,13 +698,6 @@
     "title": "Data Visualization and Descriptive Stats",
     "section": "Is fancier = better?",
     "text": "Is fancier = better?\nFancier, more complicated visualization does not necessarily mean better!\nTake a look at this award-winning visualization by Simon Scarr"
-  },
-  {
-    "objectID": "03-visualization.html#strategy-for-data-visualization-with-ggplot",
-    "href": "03-visualization.html#strategy-for-data-visualization-with-ggplot",
-    "title": "Data Visualization and Descriptive Stats",
-    "section": "Strategy for data visualization with ggplot",
-    "text": "Strategy for data visualization with ggplot\n\nHave the ggplot documentation/cheatsheet open\nDecide on how many variables are involved. Is it just one? two? more than two?\nDetermine whether the variables are categorical or continuous. If you have more than one, are they both categorical? one categorical + one continuous?\nRefer to the documentation to see which type of visualization would make sense for your variables."
   },
   {
     "objectID": "01-intro.html#preamble",
