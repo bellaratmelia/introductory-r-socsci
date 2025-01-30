@@ -292,8 +292,8 @@ Bella Ratmelia
 <h1>Univariate Descriptive Stats</h1>
 
 </section>
-<section id="univariate-descriptive-stats---measures-of-central-tendency" class="slide level2">
-<h2>Univariate Descriptive Stats - Measures of Central Tendency</h2>
+<section id="measures-of-central-tendency" class="slide level2">
+<h2>Measures of Central Tendency</h2>
 <p>Let’s start by examining the <code>age</code> variable in our dataset.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">library</span>(DescTools)</span>
@@ -325,8 +325,8 @@ Bella Ratmelia
 <p>How we can interpret / report this:</p>
 <p><em>“The age distribution of this sample is fairly symmetrical, as indicated by the very close mean (48 years) and median (48 years) values. The mode of 54 years suggests a slight right-skew in the age distribution, with a cluster of participants in their mid-50s.”</em></p>
 </section>
-<section id="univariate-descriptive-stats---measures-of-variability-or-dispersion" class="slide level2">
-<h2>Univariate Descriptive Stats - Measures of Variability or Dispersion</h2>
+<section id="measures-of-variability-or-dispersion" class="slide level2">
+<h2>Measures of Variability or Dispersion</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>var_age <span class="ot">&lt;-</span> <span class="fu">var</span>(wvs_cleaned<span class="sc">$</span>age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb8-2"><a></a>sd_age <span class="ot">&lt;-</span> <span class="fu">sd</span>(wvs_cleaned<span class="sc">$</span>age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
@@ -358,8 +358,8 @@ Bella Ratmelia
 <p>How we can interpret / report this:</p>
 <p><em>“The age distribution of this sample is fairly wide spread. With a standard deviation of 16.72144, suggesting that most individuals’ ages deviate from the mean by approximately 16.72 years. The range of ages spans from 18 to 93 years, which covers a wide range of age groups within the sample. The interquartile range (IQR) of 28 years, which represents the middle 50% of the data, indicates a moderately wide distribution of ages in the central portion of the dataset.”</em></p>
 </section>
-<section id="univariate-descriptive-stats---distribution-shape" class="slide level2">
-<h2>Univariate Descriptive Stats - Distribution Shape</h2>
+<section id="distribution-shape" class="slide level2">
+<h2>Distribution Shape</h2>
 <p>The function <code>skewness()</code> and <code>kurtosis()</code> is available through R package called <code>moments</code>. You may need to install it first before calling the library and its functions like in this code below.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="fu">library</span>(moments)</span>
@@ -482,10 +482,13 @@ Bella Ratmelia
 </figure>
 </div>
 </div>
-</div></section><section id="univariate-descriptive-stats-for-categorical-data" class="slide level2">
-<h2>Univariate Descriptive Stats for Categorical Data</h2>
-<p>The <code>age</code> variable is a numerical / continuous data. We can’t apply <code>mean()</code>, <code>median()</code> and other central tendency measures to categorical data such as <code>age_group</code> or <code>employment_status</code>. We can, however, visualize them.</p>
-<p>When dealing with categorical data, first take note on whether you want to visualize the <strong>proportion</strong> or the <strong>frequency</strong>. Let’s visualize the absolute values of the survey participants by <code>country</code>:</p>
+</div></section><section id="categorical-data---frequency-distribution" class="slide level2">
+<h2>Categorical Data - Frequency Distribution</h2>
+<ul>
+<li><p>The <code>age</code> variable is a numerical / continuous data. We can’t apply <code>mean()</code>, <code>median()</code> and other central tendency measures to categorical data such as <code>age_group</code> or <code>employment_status</code>. We can, however, visualize them.</p></li>
+<li><p>When dealing with categorical data, first take note on whether you want to visualize the <strong>proportion</strong> or the <strong>frequency distribution</strong>.</p></li>
+<li><p>Let’s visualize the frequency distribution of survey participants by <code>country</code>:</p></li>
+</ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a>wvs_cleaned <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> country, <span class="at">fill =</span> country)) <span class="sc">+</span></span>
 <span id="cb22-2"><a></a>    <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
@@ -496,7 +499,7 @@ Bella Ratmelia
 </div>
 
 </section>
-<section id="univariate-descriptive-stats-for-categorical-data-output" class="slide level2 output-location-slide"><h2>Univariate Descriptive Stats for Categorical Data</h2><div class="cell output-location-slide">
+<section id="categorical-data---frequency-distribution-output" class="slide level2 output-location-slide"><h2>Categorical Data - Frequency Distribution</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
 <div>
 <figure>
@@ -504,16 +507,17 @@ Bella Ratmelia
 </figure>
 </div>
 </div>
-</div></section><section id="univariate-descriptive-stats-for-categorical-data---proportion" class="slide level2">
-<h2>Univariate Descriptive Stats for Categorical Data - Proportion</h2>
+</div></section><section id="categorical-data---proportion" class="slide level2">
+<h2>Categorical Data - Proportion</h2>
 <p>When we want to show proportion (i.e.&nbsp;in terms of “parts of whole”), we must first quickly calculate the proportion with <code>count()</code></p>
 <p>Let’s create a new dataframe called <code>wvs_country_proportion</code> to hold this data.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a>wvs_country_proportion <span class="ot">&lt;-</span> wvs_cleaned <span class="sc">|&gt;</span> </span>
-<span id="cb23-2"><a></a>    <span class="fu">count</span>(country) <span class="sc">|&gt;</span></span>
-<span id="cb23-3"><a></a>    <span class="fu">mutate</span>(<span class="at">proportion =</span> n<span class="sc">/</span><span class="fu">sum</span>(n))</span>
-<span id="cb23-4"><a></a></span>
-<span id="cb23-5"><a></a><span class="fu">print</span>(wvs_country_proportion)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb23-2"><a></a>    <span class="fu">group_by</span>(country) <span class="sc">|&gt;</span></span>
+<span id="cb23-3"><a></a>    <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span> <span class="co"># count the number of participants each country</span></span>
+<span id="cb23-4"><a></a>    <span class="fu">mutate</span>(<span class="at">proportion =</span> n<span class="sc">/</span><span class="fu">sum</span>(n)) <span class="co"># calculate proportion</span></span>
+<span id="cb23-5"><a></a></span>
+<span id="cb23-6"><a></a><span class="fu">print</span>(wvs_country_proportion)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 3
   country     n proportion
@@ -524,8 +528,8 @@ Bella Ratmelia
 </div>
 </div>
 </section>
-<section id="univariate-descriptive-stats-for-categorical-data---proportion-contd" class="slide level2">
-<h2>Univariate Descriptive Stats for Categorical Data - Proportion (cont’d)</h2>
+<section id="categorical-data---proportion-contd" class="slide level2">
+<h2>Categorical Data - Proportion (cont’d)</h2>
 <p>And then, we use this proportion table to create a pie chart by adding <code>coord_polar()</code> layer after <code>geom_bar()</code> and some changes in <code>aes()</code> and <code>geom_bar()</code></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a>wvs_country_proportion <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> proportion, <span class="at">fill =</span> country)) <span class="sc">+</span></span>
@@ -537,9 +541,9 @@ Bella Ratmelia
 
 
 <aside><div>
-<p>Note: if you have lots of categories, pie chart is not always the best option.</p>
+<p>Note: if you have lots of categories, pie chart is not always the best option. The code for this pie chart is from <a href="https://r-graph-gallery.com/piechart-ggplot2.html">R Graph Gallery</a></p>
 </div></aside></section>
-<section id="univariate-descriptive-stats-for-categorical-data---proportion-contd-output" class="slide level2 output-location-slide"><h2>Univariate Descriptive Stats for Categorical Data - Proportion (cont’d)</h2><div class="cell output-location-slide">
+<section id="categorical-data---proportion-contd-output" class="slide level2 output-location-slide"><h2>Categorical Data - Proportion (cont’d)</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
 <div>
 <figure>
@@ -580,7 +584,7 @@ Bella Ratmelia
 <summary>Show answer</summary>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a>wvs_cleaned <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> religiousity, <span class="at">fill =</span> religiousity)) <span class="sc">+</span></span>
 <span id="cb27-2"><a></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
-<span id="cb27-3"><a></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Frequency of Religiosity Levels"</span>,</span>
+<span id="cb27-3"><a></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Frequency of Religiosity"</span>,</span>
 <span id="cb27-4"><a></a>       <span class="at">x =</span> <span class="st">"Religiosity"</span>,</span>
 <span id="cb27-5"><a></a>       <span class="at">y =</span> <span class="st">"Count"</span>) <span class="sc">+</span></span>
 <span id="cb27-6"><a></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -601,8 +605,8 @@ Bella Ratmelia
 <h1>Bivariate Descriptive Stats</h1>
 
 </section>
-<section id="bivariate-descriptive-stats-1" class="slide level2">
-<h2>Bivariate Descriptive Stats</h2>
+<section id="three-combinations-in-bivariate-descriptive-stats" class="slide level2">
+<h2>Three Combinations in Bivariate Descriptive Stats</h2>
 <p>Bivariate descriptive statistics describe and summarize relationships between two variables in your dataset <strong>without making inferences about a larger population</strong>. They include numeric measures like correlation or covariance, and visualizations like scatterplots, side-by-side boxplots, or contingency tables.</p>
 <p>Think of them as taking a snapshot of how two variables relate to each other in your current data.</p>
 <p>Since data can be continuous or categorical, there can be three combinations when we deal with bivariate descriptive stats:</p>
@@ -612,8 +616,8 @@ Bella Ratmelia
 <li>One continuous, one categorical (e.g.&nbsp;<code>country</code> and <code>life_satisfaction</code>)</li>
 </ol>
 </section>
-<section id="bivariate-descriptive-stats---both-categorical" class="slide level2">
-<h2>Bivariate Descriptive Stats - Both categorical</h2>
+<section id="both-categorical" class="slide level2">
+<h2>Both categorical</h2>
 <ul>
 <li><p>Examine relationships between categorical variables</p></li>
 <li><p>Look at joint distributions and proportions</p></li>
@@ -632,36 +636,36 @@ Bella Ratmelia
 </div>
 </div>
 </section>
-<section id="bivariate-descriptive-stats---both-categorical-contd" class="slide level2">
-<h2>Bivariate Descriptive Stats - Both categorical (cont’d)</h2>
+<section id="both-categorical-contd" class="slide level2">
+<h2>Both categorical (cont’d)</h2>
 <p>We can also create a proportion table just like we did earlier</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a>wvs_cleaned <span class="sc">%&gt;%</span></span>
-<span id="cb30-2"><a></a>  <span class="fu">count</span>(age_group, country) <span class="sc">%&gt;%</span></span>
-<span id="cb30-3"><a></a>  <span class="fu">group_by</span>(country) <span class="sc">%&gt;%</span></span>
-<span id="cb30-4"><a></a>  <span class="fu">mutate</span>(<span class="at">prop =</span> n<span class="sc">/</span><span class="fu">sum</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a>wvs_cleaned <span class="sc">|&gt;</span> </span>
+<span id="cb30-2"><a></a>  <span class="fu">group_by</span>(country, age_group) <span class="sc">|&gt;</span> </span>
+<span id="cb30-3"><a></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span> <span class="co"># count the frequency of participants by age group and country </span></span>
+<span id="cb30-4"><a></a>  <span class="fu">mutate</span>(<span class="at">prop =</span> n<span class="sc">/</span><span class="fu">sum</span>(n)) <span class="co"># calculate proportion</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 12 × 4
 # Groups:   country [3]
-   age_group country     n   prop
-   &lt;chr&gt;     &lt;fct&gt;   &lt;int&gt;  &lt;dbl&gt;
- 1 18-29     CAN       780 0.194 
- 2 18-29     NZL        32 0.0485
- 3 18-29     SGP       272 0.158 
- 4 30-44     CAN      1164 0.290 
- 5 30-44     NZL       114 0.173 
- 6 30-44     SGP       485 0.281 
- 7 45-59     CAN       992 0.247 
- 8 45-59     NZL       196 0.297 
- 9 45-59     SGP       519 0.301 
-10 60+       CAN      1082 0.269 
-11 60+       NZL       318 0.482 
-12 60+       SGP       449 0.260 </code></pre>
+   country age_group     n   prop
+   &lt;fct&gt;   &lt;chr&gt;     &lt;int&gt;  &lt;dbl&gt;
+ 1 CAN     18-29       780 0.194 
+ 2 CAN     30-44      1164 0.290 
+ 3 CAN     45-59       992 0.247 
+ 4 CAN     60+        1082 0.269 
+ 5 NZL     18-29        32 0.0485
+ 6 NZL     30-44       114 0.173 
+ 7 NZL     45-59       196 0.297 
+ 8 NZL     60+         318 0.482 
+ 9 SGP     18-29       272 0.158 
+10 SGP     30-44       485 0.281 
+11 SGP     45-59       519 0.301 
+12 SGP     60+         449 0.260 </code></pre>
 </div>
 </div>
 </section>
-<section id="bivariate-descriptive-stats---both-categorical-contd-1" class="slide level2">
-<h2>Bivariate Descriptive Stats - Both categorical (cont’d)</h2>
+<section id="both-categorical-contd-1" class="slide level2">
+<h2>Both categorical (cont’d)</h2>
 <p>For categorical data like this, we can use barchart to visualize the frequency distribution. Stacked bar chart can be used to visualize proportion.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a>wvs_cleaned <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> country, <span class="at">fill =</span> age_group)) <span class="sc">+</span></span>
@@ -672,7 +676,7 @@ Bella Ratmelia
 
 <p>Change <code>position = "dodge"</code> to <code>position = "stack"</code> to stack the bar chart</p>
 </section>
-<section id="bivariate-descriptive-stats---both-categorical-contd-1-output" class="slide level2 output-location-slide"><h2>Bivariate Descriptive Stats - Both categorical (cont’d)</h2><div class="cell output-location-slide">
+<section id="both-categorical-contd-1-output" class="slide level2 output-location-slide"><h2>Both categorical (cont’d)</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
 <div>
 <figure>
@@ -680,8 +684,8 @@ Bella Ratmelia
 </figure>
 </div>
 </div>
-</div></section><section id="bivariate-descriptive-stats---both-categorical-contd-2" class="slide level2">
-<h2>Bivariate Descriptive Stats - Both categorical (cont’d)</h2>
+</div></section><section id="both-categorical-contd-2" class="slide level2">
+<h2>Both categorical (cont’d)</h2>
 <p>To get a better sense of the proportion for each country, we can use percent stacked bar chart.</p>
 <p>The code is similar to previous bar charts; we just have to change the <code>position</code> argument to <code>position = "fill"</code></p>
 <div class="cell">
@@ -692,7 +696,7 @@ Bella Ratmelia
 </div>
 
 </section>
-<section id="bivariate-descriptive-stats---both-categorical-contd-2-output" class="slide level2 output-location-slide"><h2>Bivariate Descriptive Stats - Both categorical (cont’d)</h2><div class="cell output-location-slide">
+<section id="both-categorical-contd-2-output" class="slide level2 output-location-slide"><h2>Both categorical (cont’d)</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
 <div>
 <figure>
@@ -700,8 +704,8 @@ Bella Ratmelia
 </figure>
 </div>
 </div>
-</div></section><section id="bivariate-descriptive-stats---both-continuous" class="slide level2">
-<h2>Bivariate Descriptive Stats - Both continuous</h2>
+</div></section><section id="both-continuous" class="slide level2">
+<h2>Both continuous</h2>
 <ul>
 <li><p>Examine linear relationships</p></li>
 <li><p>Look for patterns and trends</p></li>
@@ -715,8 +719,8 @@ Bella Ratmelia
 </div>
 </div>
 </section>
-<section id="bivariate-descriptive-stats---both-continuous-contd" class="slide level2">
-<h2>Bivariate Descriptive Stats - Both continuous (cont’d)</h2>
+<section id="both-continuous-contd" class="slide level2">
+<h2>Both continuous (cont’d)</h2>
 <p>Let’s visualize the two variables together with a jitter / scatterplot!</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a></a>wvs_cleaned <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> financial_satisfaction, <span class="at">y =</span> life_satisfaction)) <span class="sc">+</span></span>
@@ -727,7 +731,7 @@ Bella Ratmelia
 </div>
 
 </section>
-<section id="bivariate-descriptive-stats---both-continuous-contd-output" class="slide level2 output-location-slide"><h2>Bivariate Descriptive Stats - Both continuous (cont’d)</h2><div class="cell output-location-slide">
+<section id="both-continuous-contd-output" class="slide level2 output-location-slide"><h2>Both continuous (cont’d)</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
 <div>
 <figure>
@@ -735,8 +739,8 @@ Bella Ratmelia
 </figure>
 </div>
 </div>
-</div></section><section id="bivariate-descriptive-stats---one-continuous-one-categorical" class="slide level2">
-<h2>Bivariate Descriptive Stats - One continuous, one categorical</h2>
+</div></section><section id="one-continuous-one-categorical" class="slide level2">
+<h2>One continuous, one categorical</h2>
 <ul>
 <li><p>Compare distributions across groups</p></li>
 <li><p>Identify group differences</p></li>
@@ -761,8 +765,8 @@ Bella Ratmelia
 </div>
 </div>
 </section>
-<section id="bivariate-descriptive-stats---one-continuous-one-categorical-contd" class="slide level2">
-<h2>Bivariate Descriptive Stats - One continuous, one categorical (cont’d)</h2>
+<section id="one-continuous-one-categorical-contd" class="slide level2">
+<h2>One continuous, one categorical (cont’d)</h2>
 <p>To get a better sense of how the data is varied and spread, let’s visualize them with a side-by-side boxplot</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a></a>wvs_cleaned <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> country, <span class="at">y =</span> life_satisfaction)) <span class="sc">+</span></span>
@@ -772,7 +776,7 @@ Bella Ratmelia
 </div>
 
 </section>
-<section id="bivariate-descriptive-stats---one-continuous-one-categorical-contd-output" class="slide level2 output-location-slide"><h2>Bivariate Descriptive Stats - One continuous, one categorical (cont’d)</h2><div class="cell output-location-slide">
+<section id="one-continuous-one-categorical-contd-output" class="slide level2 output-location-slide"><h2>One continuous, one categorical (cont’d)</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
 <div>
 <figure>
@@ -780,8 +784,8 @@ Bella Ratmelia
 </figure>
 </div>
 </div>
-</div></section><section id="bivariate-descriptive-stats---one-continuous-one-categorical-contd-1" class="slide level2">
-<h2>Bivariate Descriptive Stats - One continuous, one categorical (cont’d)</h2>
+</div></section><section id="one-continuous-one-categorical-contd-1" class="slide level2">
+<h2>One continuous, one categorical (cont’d)</h2>
 <p>We could also layer our boxplots with violin plots to get a better sense of the distribution of each group.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a></a>wvs_cleaned <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> country, <span class="at">y =</span> life_satisfaction)) <span class="sc">+</span></span>
@@ -792,7 +796,7 @@ Bella Ratmelia
 </div>
 
 </section>
-<section id="bivariate-descriptive-stats---one-continuous-one-categorical-contd-1-output" class="slide level2 output-location-slide"><h2>Bivariate Descriptive Stats - One continuous, one categorical (cont’d)</h2><div class="cell output-location-slide">
+<section id="one-continuous-one-categorical-contd-1-output" class="slide level2 output-location-slide"><h2>One continuous, one categorical (cont’d)</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
 <div>
 <figure>
@@ -802,14 +806,14 @@ Bella Ratmelia
 </div>
 </div></section><section id="learning-check-2" class="slide level2">
 <h2>Learning Check #2</h2>
-<p>Create a side-by-side boxplots that visualizes <code>political_scale</code> for each <code>age_group</code>.</p>
+<p>Create a side-by-side boxplots that visualizes <code>political_scale</code> for each <code>sex</code>.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show answer</summary>
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a></a>wvs_cleaned <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> political_scale, <span class="at">y =</span> age_group)) <span class="sc">+</span></span>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a></a>wvs_cleaned <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> political_scale, <span class="at">y =</span> sex)) <span class="sc">+</span></span>
 <span id="cb41-2"><a></a>  <span class="fu">geom_violin</span>(<span class="at">fill =</span> <span class="st">"lightblue"</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
 <span id="cb41-3"><a></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="at">fill =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
-<span id="cb41-4"><a></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Political scale Distribution by Age Groups"</span>) <span class="sc">+</span></span>
+<span id="cb41-4"><a></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Political scale Distribution by Sex"</span>) <span class="sc">+</span></span>
 <span id="cb41-5"><a></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 
@@ -843,8 +847,8 @@ Bella Ratmelia
 <h2>Is fancier = better?</h2>
 <p>Fancier, more complicated visualization does not necessarily mean better!</p>
 <p>Take a look at this award-winning visualization by <a href="http://www.simonscarr.com/iraqs-bloody-toll">Simon Scarr</a></p>
-<iframe width="1500" height="600" src="http://www.simonscarr.com/iraqs-bloody-toll" title="Simon Scarr's visualization"></iframe>
-</section></section>
+
+<img data-src="https://images.squarespace-cdn.com/content/v1/54b5070de4b01c9a0176b5fd/1428238676197-BAJMDLGPHID08CCOHVDN/image-asset.png?format=1000w" class="r-stretch"></section></section>
 <section id="end-of-session-3" class="title-slide slide level1 center">
 <h1>End of Session 3!</h1>
 <p>Remember the strategy:</p>
