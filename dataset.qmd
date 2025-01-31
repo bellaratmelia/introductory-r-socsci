@@ -9,6 +9,12 @@ For this workshop, we will be using dataset stored in a CSV file called `wvs-wav
 <a href="https://raw.githubusercontent.com/bellaratmelia/introductory-r-socsci/refs/heads/main/data/wvs-wave7-sg-ca-nz.csv" type="button" class="btn btn-success">Click here to open wvs-wave7-sg-ca-nz.csv, and then Ctrl + S / Cmd + S to save it locally into your data folder</a>
 ```
 
+
+### Data for session 3 onwards
+
+If you missed Session 2 where we cleaned and tidy our data, you can download the cleaned data here: [wvs_cleaned_v1.csv](https://raw.githubusercontent.com/bellaratmelia/introductory-r-socsci/refs/heads/main/data-output/wvs_cleaned_v1.csv)
+
+
 ::: {.callout-note appearance="simple"}
 ### What is a CSV?
 

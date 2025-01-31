@@ -30,21 +30,38 @@ Use `read_csv` from `readr` package (part of `tidyverse`) to load our data into 
 library(tidyverse)
 
 # read the CSV with WVS data
-wvs_data <- read_csv("data-output/wvs_processed.csv")
+wvs_cleaned <- read_csv("data-output/wvs_cleaned_v1.csv")
 
 # Convert categorical variables to factors
-wvs_data <- wvs_data |> 
-    mutate(across(c("country", "sex", "marital_status", "employment", "religiousity"), as.factor))
+columns_to_convert <- c("country", "religiousity", "sex", "marital_status", "employment")
+
+wvs_cleaned <- wvs_cleaned |> 
+    mutate(across(all_of(columns_to_convert), as_factor))
 
 # peek at the data, pay attention to the data types!
-glimpse(wvs_data)
+glimpse(wvs_cleaned)
 ```
 
-## Basic R Functions for Descriptive Statistics
+## Recap: Descriptive Statistics
 
-Descriptive statistics provide summaries about the sample and observations made. These summaries can be quantitative (summary statistics) or visual (graphs).
+::: incremental
+-   Univariate (i.e. single variable) Descriptive Stats
 
-Let's explore some basic R functions for descriptive statistics using our Chile voting data.
+    -   Measures of central tendency: `mean()`, `median()`, `Mode()`
+    -   Measures of Variability: `min()`, `max()`, `range()`, `IQR()`, `sd()` (standard deviation), `var()` (variance)
+    -   Distribution shape: `skewness()` and `kurtosis()` from `moments` library. This is easier to see with histogram
+
+-   Bivariate (i.e. two variables) Descriptive Stats
+
+    -   Contingency table / cross tab (for categorical data)
+    -   Covariance - describe how two variables vary together
+    -   Correlation - describe relationship strength and direction **in a sample**. (If we want to use this to infer about a population from a sample, it would fall under inferential stats)
+    -   Visualizations e.g. Scatterplots, side-by-side boxplots, stacked bar charts, etc.
+:::
+
+## From last week: Basic R Functions for Descriptive Stats
+
+Last week, we explored some basic R functions for descriptive statistics.
 
 -   `mean()`: arithmetic average
 -   `median()`: middle value
@@ -57,51 +74,87 @@ Let's explore some basic R functions for descriptive statistics using our Chile 
 
 [^1]: R doesn't have built-in functions for mode, so we need `DescTools` package to get this function
 
-## Exploring Age Distribution
+# Univariate Descriptive Stats
+
+## Measures of Central Tendency
 
 Let's start by examining the `age` variable in our dataset.
 
 ```{r}
 #| echo: true
-#| output-location: slide
+#| output-location: fragment
 
 library(DescTools)
 
 # Basic statistics
-mean_age <- mean(wvs_data$age, na.rm = TRUE)
-median_age <- median(wvs_data$age, na.rm = TRUE)
-sd_age <- sd(wvs_data$age, na.rm = TRUE)
-range_age <- range(wvs_data$age, na.rm = TRUE)
-iqr_age <- IQR(wvs_data$age, na.rm = TRUE)
-mode_age <- DescTools::Mode(wvs_data$age, na.rm = TRUE)
+mean_age <- mean(wvs_cleaned$age, na.rm = TRUE)
+median_age <- median(wvs_cleaned$age, na.rm = TRUE)
+mode_age <- DescTools::Mode(wvs_cleaned$age, na.rm = TRUE)
 
 # Print results
 cat("Mean age:", mean_age, "\n")
 cat("Median age:", median_age, "\n")
+cat("Most frequently occuring age:", mode_age, "\n") # this is here just for demo purposes
+
+```
+
+------------------------------------------------------------------------
+
+How we can interpret / report this:
+
+*"The age distribution of this sample is fairly symmetrical, as indicated by the very close mean (48 years) and median (48 years) values. The mode of 54 years suggests a slight right-skew in the age distribution, with a cluster of participants in their mid-50s."*
+
+## Measures of Variability or Dispersion
+
+```{r}
+#| echo: true
+#| output-location: fragment
+
+var_age <- var(wvs_cleaned$age, na.rm = TRUE)
+sd_age <- sd(wvs_cleaned$age, na.rm = TRUE)
+range_age <- range(wvs_cleaned$age, na.rm = TRUE)
+iqr_age <- IQR(wvs_cleaned$age, na.rm = TRUE)
+
+cat("Variance of age:", var_age, "\n")
 cat("Standard deviation of age:", sd_age, "\n")
 cat("Range of age:", range_age[1], "to", range_age[2], "\n")
 cat("Interquartile range of age:", iqr_age, "\n")
-cat("Most frequently occuring age:", mode_age, "\n")
 
-# Summary statistics
-summary(wvs_data$age)
 ```
 
-## Interpreting Age Statistics
+------------------------------------------------------------------------
 
-Some possible interpretation:
+How we can interpret / report this:
 
--   The mean (47.99) and median (48) are very close, suggesting a fairly symmetric distribution
+*"The age distribution of this sample is fairly wide spread. With a standard deviation of 16.72144, suggesting that most individuals' ages deviate from the mean by approximately 16.72 years. The range of ages spans from 18 to 93 years, which covers a wide range of age groups within the sample. The interquartile range (IQR) of 28 years, which represents the middle 50% of the data, indicates a moderately wide distribution of ages in the central portion of the dataset."*
 
--   The mode (54) is slightly higher than both mean and median
+## Distribution Shape
 
--   With SD = 16.74, about two-thirds of participants fall between 31.26 and 64.72 years old (mean ± 1 SD)
+The function `skewness()` and `kurtosis()` is available through R package called `moments`. You may need to install it first before calling the library and its functions like in this code below.
 
--   The distribution spans from 18 to 93 years, with an interquartile range of 28 years
+```{r}
+#| echo: true
+#| output-location: fragment
 
-It's much easier if we have a graph to visualize these interpretations!
+library(moments)
 
-## Visualizing data with ggplot
+skew_age <- skewness(wvs_cleaned$age, na.rm = TRUE)
+kurtosis_age <- kurtosis(wvs_cleaned$age, na.rm = TRUE)
+
+cat("Skewness of age:", skew_age, "\n")
+cat("Kurtosis of age:", kurtosis_age, "\n")
+
+```
+
+------------------------------------------------------------------------
+
+How we can interpret / report this:
+
+*"The age distribution has a very slight right skew (skewness = 0.10), meaning there are slightly more outliers toward older ages, but the skew is minimal since values between -0.5 and 0.5 are considered approximately symmetric. The kurtosis of 2.02 is lower than a normal distribution's kurtosis of 3, indicating this distribution is platykurtic - it has lighter tails and is more uniform or "flatter" than a normal distribution."*
+
+## Visualizing with ggplot
+
+-   Describing the spread and shape of distribution with just words is not very productive, so typically it is accompanied with visualization.
 
 -   `ggplot` is plotting package that is included inside `tidyverse` package
 
@@ -110,12 +163,13 @@ It's much easier if we have a graph to visualize these interpretations!
 ```{r}
 #| echo: true
 #| output-location: slide
-wvs_data |> 
+
+wvs_cleaned |> 
     ggplot(aes(x = age)) +
-    geom_bar(fill = "lightblue") +
+    geom_histogram(binwidth = 1, fill = "lightblue", color = "navy") +
     labs(title = "Age distribution of respondents",
          x = "Age",
-         y = "Number of Respondents") +
+         y = "Count") +
     theme_minimal()
 ```
 
@@ -124,9 +178,9 @@ wvs_data |>
 Charts built with ggplot must include the following:
 
 ``` {.r code-line-numbers="|1|2|3|4-6|7"}
-wvs_data |> # <1>
+wvs_cleaned |> # <1>
     ggplot(aes(x = age)) + # <2>
-    geom_bar(fill = "lightblue") + # <3>
+    geom_histogram(binwidth = 1, fill = "lightblue", color = "navy") + # <3>
     labs(title = "Age distribution of respondents", # <4>
          x = "Age", # <4>
          y = "Count") + # <4>
@@ -143,17 +197,6 @@ wvs_data |> # <1>
 
 5.  (Optional) apply a theme/look to your graph
 
-## Going back to our data
-
-Our research team wants to understand patterns in life satisfaction and values across different countries and demographic groups. Let's create visualizations to address these questions:
-
-1.  What's the distribution of `life_satisfaction` scores across all respondents?
-2.  How does `religiousity` vary across the three countries?
-3.  What's the distribution of `employment_status` by country?
-4.  Is there a relationship between `political_scale` and `life_satisfaction`?
-5.  How do `importance` ratings (family, friends, leisure, work) compare across `employment` status?
-6.  Does `financial_satisfaction` correlate with `life satisfaction`? How does this vary by `country`?
-
 ## Tip: open the ggplot cheatsheet
 
 ::: callout-tip
@@ -164,197 +207,323 @@ Our research team wants to understand patterns in life satisfaction and values a
 
 [ggplot documentation link](https://rstudio.github.io/cheatsheets/html/data-visualization.html)
 
-## Task #1
+## Going back to our univariate descriptive stats on `age` variable
 
-What's the distribution of `life_satisfaction` scores?
-
-```{r}
-#| echo: true
-#| output-location: slide
-
-# One continuous variable
-wvs_data |> 
-    ggplot(aes(x = life_satisfaction)) +
-    geom_histogram(binwidth = 1, fill = "pink", color = "maroon") +
-    labs(title = "Distribution of Life Satisfaction Scores",
-       x = "Life Satisfaction (1-10)",
-       y = "Count")
-```
-
-## Task #2
-
-What's the distribution of `religiousity`? Does it vary by country?
+Let's visualize the variability with boxplot to get a better sense of the spread.
 
 ```{r}
 #| echo: true
 #| output-location: slide
 
-# One discrete/categorical variable
-wvs_data |> 
-    ggplot(aes(x = country, fill = religiousity)) +
-    geom_bar(position = "fill") +
-    labs(title = "Distribution of Religiosity Across Countries",
-       x = "Country",
-       y = "Proportion",
-       fill = "Religious Identity") +
+wvs_cleaned |> 
+    ggplot(aes(x = age)) +
+    geom_boxplot(fill = "lightblue", color = "navy") +
+    labs(title = "Age distribution of respondents",
+         x = "Age") +
     theme_minimal()
+
+
 ```
 
-## Task #3
+## Categorical Data - Frequency Distribution
 
-What's the distribution of `employment_status` by country?
+-   The `age` variable is a numerical / continuous data. We can't apply `mean()`, `median()` and other central tendency measures to categorical data such as `age_group` or `employment_status`. We can, however, visualize them.
+
+-   When dealing with categorical data, first take note on whether you want to visualize the **proportion** or the **frequency distribution**. 
+
+-   Let's visualize the frequency distribution of survey participants by `country`:
 
 ```{r}
 #| echo: true
 #| output-location: slide
 
-# Showing proportions / percentage as part of whole
-# Two categorical variables
-wvs_data |> 
-    ggplot(aes(x = country, fill = employment)) +
-    geom_bar(position = "dodge") +
-    labs(title = "Employment Status Distribution by Country",
+wvs_cleaned |> ggplot(aes(x = country, fill = country)) +
+    geom_bar() +
+    labs(title = "Participants by Country",
        x = "Country",
-       y = "Count") +
+       y = "Participants") +
     theme_minimal()
+
 ```
 
-## Group exercise #1 (solo attempts also ok)
+## Categorical Data - Proportion
 
-Visualize marital status distribution by sex, showing the proportion for each gender.
+When we want to show proportion (i.e. in terms of "parts of whole"), we must first quickly calculate the proportion with `count()`
+
+Let's create a new dataframe called `wvs_country_proportion` to hold this data.
+
+```{r}
+#| echo: true
+
+wvs_country_proportion <- wvs_cleaned |> 
+    group_by(country) |>
+    summarize(n = n()) |> # count the number of participants each country
+    mutate(proportion = n/sum(n)) # calculate proportion
+
+print(wvs_country_proportion)
+
+```
+
+## Categorical Data - Proportion (cont'd)
+
+And then, we use this proportion table to create a pie chart by adding `coord_polar()` layer after `geom_bar()` and some changes in `aes()` and `geom_bar()`
+
+```{r}
+#| echo: true
+#| output-location: slide
+
+wvs_country_proportion |> ggplot(aes(x = "", y = proportion, fill = country)) +
+    geom_bar(stat = "identity", width = 1) +
+    coord_polar("y", start = 0) +
+    labs(title = "Proportion of Participants by Country") +
+    theme_minimal()
+
+```
+
+::: aside
+Note: if you have lots of categories, pie chart is not always the best option. The code for this pie chart is from [R Graph Gallery](https://r-graph-gallery.com/piechart-ggplot2.html)
+:::
+
+## Learning Check 1A 
+
+Using the `wvs_cleaned` dataset:
+
+Create a histogram that visualizes the distribution of `financial_satisfaction`
 
 ```{r}
 #| echo: true
 #| output-location: slide
 #| code-fold: true
+#| code-summary: "Show answer"
 
-wvs_data |>
-    ggplot(aes(x = sex, fill = marital_status)) +
-    geom_bar(position = "fill") + 
-    labs(title = "Proportion of Marital Status by Gender",
-       x = "Sex",
-       y = "Proportion",
-       fill = "Marital Status") +
-    theme_minimal()
-```
-
-## Task #4
-
-Is there a relationship between `political_scale` and `life_satisfaction`?
-
-```{r}
-#| echo: true
-#| output-location: slide
-
-# Two variables - both continuous
-wvs_data |>
-    ggplot(aes(x = political_scale, y = life_satisfaction)) +
-    geom_jitter(alpha = 0.3) +
-    geom_smooth(method = "lm", color = "red") +
-    labs(title = "Political Leaning vs Life Satisfaction",
-       x = "Political Leaning",
-       y = "Life Satisfaction")
-```
-
-## Task #5
-
-How do `religiousity` compare across `marital_status`?
-
-```{r}
-#| echo: true
-#| output-location: slide
-
-# Two categorical variables: marital status and religiosity
-wvs_data |> 
-    ggplot(aes(x = marital_status, fill = religiousity)) +
-    geom_bar(position = "fill") +
-    labs(title = "Religious Identity Distribution by Marital Status",
-         x = "Marital Status",
-         y = "Proportion",
-         fill = "Religious Identity") +
-    theme_minimal() +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1))
-```
-
-
-## Facets for multiple variables
-
-```{r}
-#| echo: true
-#| output-location: slide
-
-# Faceting and multiple variables
-wvs_data |> 
-    ggplot(aes(x = marital_status, fill = religiousity)) +
-    geom_bar(position = "fill") +
-    labs(title = "Religious Identity Distribution by Marital Status",
-         x = "Marital Status",
-         y = "Count",
-         fill = "Religious Identity") +
-    facet_grid( ~ country) +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1))
-```
-
-## Task #6
-
-Does `financial_satisfaction` correlate with `life satisfaction`? How does this vary by `country`?
-
-Let's layer two kinds of visualization here:
-
-```{r}
-#| echo: true
-#| output-location: slide
-
-# Two continuous variables with grouping
-wvs_data |> 
-    ggplot(aes(x = financial_satisfaction, y = life_satisfaction, color = country)) +
-    geom_point(alpha = 0.3) +
-    geom_smooth(method = "lm", se = FALSE) +
-    facet_wrap(~ country) +
-    labs(title = "Life Satisfaction vs Financial Satisfaction by Country",
+wvs_cleaned |> ggplot(aes(x = financial_satisfaction)) +
+  geom_histogram(fill = "steelblue", color = "white", binwidth = 1) +
+  labs(title = "Distribution of Financial Satisfaction",
        x = "Financial Satisfaction",
-       y = "Life Satisfaction")
+       y = "Count") +
+  theme_minimal()
+
 ```
+## Learning Check 1B
 
-## Group Exercise #2
-
-Create a violin plot showing the distribution of freedom scores by employment status, with points overlaid.
+Create a barchart that visualizes the frequency of `religiousity`
 
 ```{r}
 #| echo: true
 #| output-location: slide
 #| code-fold: true
+#| code-summary: "Show answer"
 
-wvs_data |> 
-    ggplot(aes(x = employment, y = freedom)) +
-    geom_violin(fill = "lightblue") +
-    geom_jitter(alpha = 0.2, color = "navy") + 
-    labs(title = "Distribution of Freedom Scores by Employment Status",
-       x = "Employment Status",
-       y = "Freedom Score") +
-    theme_minimal() +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1))
+wvs_cleaned |> ggplot(aes(x = religiousity, fill = religiousity)) +
+  geom_bar() +
+  labs(title = "Frequency of Religiosity",
+       x = "Religiosity",
+       y = "Count") +
+  theme_minimal()
+
 ```
 
-## Group Exercise #3
+# Bivariate Descriptive Stats
 
-Visualize the distribution of employment status across marital status categories, and use faceting to compare this relationship across countries.
+## Three Combinations in Bivariate Descriptive Stats
+
+Bivariate descriptive statistics describe and summarize relationships between two variables in your dataset **without making inferences about a larger population**. They include numeric measures like correlation or covariance, and visualizations like scatterplots, side-by-side boxplots, or contingency tables.
+
+Think of them as taking a snapshot of how two variables relate to each other in your current data.
+
+Since data can be continuous or categorical, there can be three combinations when we deal with bivariate descriptive stats:
+
+1.  Both categorical (e.g. `age_group` and `country`)
+2.  Both continuous (e.g. `financial_satisfaction` and `life_satisfaction`)
+3.  One continuous, one categorical (e.g. `country` and `life_satisfaction`)
+
+## Both categorical
+
+-   Examine relationships between categorical variables
+
+-   Look at joint distributions and proportions
+
+-   Compare group compositions
+
+First, let's create a contingency table of `age_group` and `country`!
+
+```{r}
+#| echo: true
+
+table(wvs_cleaned$age_group, wvs_cleaned$country)
+
+```
+
+## Both categorical (cont'd)
+We can also create a proportion table just like we did earlier
+
+```{r}
+#| echo: true
+
+wvs_cleaned |> 
+  group_by(country, age_group) |> 
+  summarise(n = n()) |> # count the frequency of participants by age group and country 
+  mutate(prop = n/sum(n)) # calculate proportion
+
+```
+
+## Both categorical (cont'd)
+
+For categorical data like this, we can use barchart to visualize the frequency distribution. Stacked bar chart can be used to visualize proportion.
 
 ```{r}
 #| echo: true
 #| output-location: slide
-#| code-fold: true
 
-wvs_data |> 
-    ggplot(aes(x = marital_status, fill = employment)) +
-    geom_bar(position = "fill") +
-    facet_wrap(~ country) + 
-    labs(title = "Employment Status Distribution by Marital Status and Country",
-       x = "Marital Status",
-       y = "Proportion",
-       fill = "Employment Status") +
-    theme_minimal() +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1))
+wvs_cleaned |> ggplot(aes(x = country, fill = age_group)) +
+  geom_bar(position = "dodge") + 
+  labs(y = "Count", title = "Age Groups by Country") +
+  theme_minimal()
+
+```
+
+Change `position = "dodge"` to `position = "stack"` to stack the bar chart
+
+## Both categorical (cont'd)
+
+To get a better sense of the proportion for each country, we can use percent stacked bar chart.
+
+The code is similar to previous bar charts; we just have to change the `position` argument to `position = "fill"`
+
+```{r}
+#| echo: true
+#| output-location: slide
+
+wvs_cleaned |> ggplot(aes(x = country, fill = age_group)) +
+  geom_bar(position = "fill") + 
+  labs(y = "Proportion", title = "Age Groups by Country") +
+  theme_minimal()
+
+```
+
+## Both continuous
+
+-   Examine linear relationships
+
+-   Look for patterns and trends
+
+-   Identify potential outliers
+
+Let's first examine the correlation between `financial_satisfaction` and `life_satisfaction`
+
+```{r}
+#| echo: true
+
+cor(wvs_cleaned$financial_satisfaction, wvs_cleaned$life_satisfaction)
+
+```
+## Both continuous (cont'd)
+
+Let's visualize the two variables together with a jitter / scatterplot!
+
+```{r}
+#| echo: true
+#| output-location: slide
+
+wvs_cleaned |> ggplot(aes(x = financial_satisfaction, y = life_satisfaction)) +
+  geom_jitter(alpha = 0.3) +
+  geom_smooth(method = "lm") + # layer with geom_smooth
+  labs(title = "Financial vs Life Satisfaction") +
+  theme_minimal()
+
+```
+
+## One continuous, one categorical
+
+-   Compare distributions across groups
+
+-   Identify group differences
+
+-   Examine spread within groups
+
+Let's do a recap from last week and get the summary stats for `life_satisfaction` for each `country`
+
+```{r}
+#| echo: true
+
+wvs_cleaned |> 
+  group_by(country) |> 
+  summarise(
+    mean_satisfaction = mean(life_satisfaction, na.rm = TRUE),
+    median_satisfaction = median(life_satisfaction, na.rm = TRUE),
+    sd_satisfaction = sd(life_satisfaction, na.rm = TRUE)
+  )
+
+```
+
+## One continuous, one categorical (cont'd)
+
+To get a better sense of how the data is varied and spread, let's visualize them with a side-by-side boxplot
+
+```{r}
+#| echo: true
+#| output-location: slide
+
+wvs_cleaned |> ggplot(aes(x = country, y = life_satisfaction)) +
+  geom_boxplot() +
+  labs(title = "Life Satisfaction by Country") +
+  theme_minimal()
+
+```
+
+## One continuous, one categorical (cont'd)
+
+We could also layer our boxplots with violin plots to get a better sense of the distribution of each group. 
+
+```{r}
+#| echo: true
+#| output-location: slide
+
+wvs_cleaned |> ggplot(aes(x = country, y = life_satisfaction)) +
+  geom_violin(fill = "lightblue", alpha = 0.5) +
+  geom_boxplot(width = 0.1, fill = "white") +
+  labs(title = "Life Satisfaction Distribution by Country") +
+  theme_minimal()
+
+```
+
+## Learning Check #2
+
+Create a side-by-side boxplots that visualizes `political_scale` for each `sex`.
+
+```{r}
+#| echo: true
+#| output-location: true
+#| code-fold: true
+#| code-summary: "Show answer"
+
+wvs_cleaned |> ggplot(aes(x = political_scale, y = sex)) +
+  geom_violin(fill = "lightblue", alpha = 0.5) +
+  geom_boxplot(width = 0.1, fill = "white") +
+  labs(title = "Political scale Distribution by Sex") +
+  theme_minimal()
+
+```
+
+## Using Facets for more complex visual
+
+-   Compare patterns across multiple subgroups
+
+-   Identify interaction effects
+
+-   Maintain visual clarity with complex relationships
+
+Facet grids are useful when we have more than two variables to visualize. However, if used excessively they may become too complex
+
+```{r}
+#| echo: true
+#| output-location: slide
+
+wvs_cleaned |> ggplot(aes(x = financial_satisfaction, y = life_satisfaction)) +
+  geom_point(alpha = 0.3) +
+  geom_smooth(method = "lm") +
+  facet_grid(country ~ religiousity)
+
 ```
 
 ## Is fancier = better?
@@ -363,19 +532,18 @@ Fancier, more complicated visualization does not necessarily mean better!
 
 Take a look at this award-winning visualization by [Simon Scarr](http://www.simonscarr.com/iraqs-bloody-toll)
 
-```{=html}
-<iframe width="1500" height="600" src="http://www.simonscarr.com/iraqs-bloody-toll" title="Simon Scarr's visualization"></iframe>
-```
+![](https://images.squarespace-cdn.com/content/v1/54b5070de4b01c9a0176b5fd/1428238676197-BAJMDLGPHID08CCOHVDN/image-asset.png?format=1000w)
 
-## Strategy for data visualization with ggplot
+
+# End of Session 3!
+
+Remember the strategy:
 
 1.  Have the ggplot documentation/cheatsheet open
 2.  Decide on how many variables are involved. Is it just one? two? more than two?
 3.  Determine whether the variables are categorical or continuous. If you have more than one, are they both categorical? one categorical + one continuous?
 4.  Refer to the documentation to see which type of visualization would make sense for your variables.
 
-# End of Session 3!
-
 Check out the [R Graph gallery](https://r-graph-gallery.com/) for inspiration and code samples!
 
-Next session: statistical tests in R using WVS data
+Next session: inferential stats in R using WVS data

@@ -117,22 +117,6 @@ The number of observations after removing NAs:
 dim(wvs_data)
 ```
 
-## Task #2
-
-Check for duplicates with `distinct()`
-
-```{r}
-#| echo: true
-#| output: false
-
-wvs_data <- wvs_data |> 
-  distinct(ID, .keep_all = TRUE)
-```
-
-
-(Our data has no duplicates, but this is still a good practice to do, especially if we were combining data from multipe sources)
-
-
 ## Interlude: Pipe Operator ( \|\> )
 
 -   The pipe operator (\|\>) allows us to chain multiple operations without creating intermediate / temporary dataframes.
@@ -166,6 +150,22 @@ wvs_data |>
 ```
 :::
 
+## Task #2
+
+Check for duplicates with `distinct()`
+
+```{r}
+#| echo: true
+#| output: false
+
+wvs_data <- wvs_data |> 
+  distinct(ID, .keep_all = TRUE)
+```
+
+
+(Our data has no duplicates, but this is still a good practice to do, especially if we were combining data from multipe sources)
+
+
 ## Task #3:
 
 Select only the relevant columns: demographic columns,  `life_satisfaction`, `work_importance`, `financial_satisfaction`, `religiousity`, `political_scale`, `marital_status`, and `employment`.
@@ -176,7 +176,7 @@ We can achieve this with `select()`!
 #| echo: true
 
 wvs_data <- wvs_data |>
-    select(country, sex, birthyear, age, life_satisfaction, work_importance, financial_satisfaction, religiousity, political_scale, marital_status, employment) 
+    select(ID, country, sex, birthyear, age, life_satisfaction, work_importance, financial_satisfaction, religiousity, political_scale, marital_status, employment) 
 ```
 
 Preview of the filtered data:
@@ -265,7 +265,23 @@ Check the data output folder to make sure the CSV is created!
 
 ## Group Exercise 1 (5 minutes)
 
-Now that we have a new file, load this new `wvs_cleaned_v1.csv` into a new dataframe called `wvs_cleaned`. Filter to respondents from Singapore who are currently employed full time. Show only the country, the employment status, and age. Use `glimpse()` or `print()` to check the result! (you can chain these functions at the end)
+Now that we have a new file, load this new `wvs_cleaned_v1.csv` into a new dataframe called `wvs_cleaned`. Filter to respondents from Singapore who are currently employed full time. Show only the Respondent ID, country, the employment status, and age. Use `glimpse()` or `print()` to check the result! (you can chain these functions at the end)
+
+**Step 1**: Load the new file
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show answer"
+#| output: false
+
+library(tidyverse)
+wvs_cleaned <- read_csv("data-output/wvs_cleaned_v1.csv")
+```
+
+----
+
+**Step 2**: Do the filtering and selecting, and then show result
 
 ```{r}
 #| echo: true
@@ -277,7 +293,7 @@ wvs_cleaned <- read_csv("data-output/wvs_cleaned_v1.csv")
 
 wvs_cleaned |> 
     filter(country == "SGP" & employment == "Full time") |> 
-    select(country, employment, age) |> 
+    select(ID, country, employment, age) |> 
     glimpse()
 
 ```
@@ -392,7 +408,7 @@ mean_satisfaction <- mean(wvs_data$life_satisfaction, na.rm = TRUE)
 
 wvs_data |>
     mutate(satisfaction_group = if_else(
-        life_satisfaction > mean_satisfaction,
+        life_satisfaction > mean_satisfaction, # the condition to evaluate
         "higher", # if condition is fulfilled, do this
         "lower" # otherwise, do this
     )) 
@@ -431,11 +447,11 @@ wvs_data |>
 ::: {.column width="50%"}
 **Wide data:**
 
--   Each row is a unique observation.
+-   Each row is a value in variables.
 
--   Each column is a variable --\> the more variables you have, the "wider" is the data
+-   Each column is a value in variables --\> the more values you have, the "wider" is the data
 
--   This format is more intuitive for humans!
+-   The cells represent theThis format is more intuitive for humans!
 :::
 :::::
 
@@ -448,13 +464,17 @@ wvs_data |>
 ```{r}
 #| echo: false
 
+library(kableExtra)
+
 # Creating the wide data frame
 long_data <- wvs_data |>
     group_by(country, age_group) |>
-    summarise(count = n())
+    summarise(count = n()) 
 
-# Display the wide data frame
-print(long_data)
+long_data |> 
+    kbl(caption = "Observations (Long)")  |> 
+    kable_styling(bootstrap_options = c("striped", "bordered"), font_size = "85%")
+
 ```
 :::
 
@@ -465,7 +485,9 @@ print(long_data)
 #| echo: false
 
 long_data |>
-    pivot_wider(names_from = "age_group", values_from = "count") 
+    pivot_wider(names_from = "age_group", values_from = "count") |> 
+    kbl(caption = "Observations (Wide)") |> 
+    kable_styling(bootstrap_options = c("striped", "bordered"), font_size = "85%")
 ```
 :::
 :::::

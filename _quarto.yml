@@ -44,6 +44,8 @@ format:
     slide-number: true
     footer: "[Introductory R for Social Science](https://bellaratmelia.github.io/introductory-r-socsci/)"
     logo: "images/smu logo.png"
+    fig-height: 7
+    fig-width: 14
     
 
 execute:
