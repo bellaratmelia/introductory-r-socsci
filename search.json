@@ -53,7 +53,7 @@
     "href": "index.html#schedule",
     "title": "Introductory R for Social Sciences",
     "section": "Schedule",
-    "text": "Schedule\nVenue : YPHSL seminar room 3.1\nTime : 3:30 - 5:30 PM (All sessions)\nClick on the link under “Topic” to access the slides. Slides will be progressively made available throughout the sessions.\n\n\n\n\nSession\nDate\nTopic\nDesccription\n\n\n\n\n~\nBefore the workshop\nPreparation\nComplete the Pre-workshop activities\n\n\n1\nFri, 17 Jan 2025\nIntroduction to R and RStudio (+ updated on 18/1/25)\nLearn about setting up RStudio, basic data types and structures in R, and importing data files.\n\n\n2\nFri, 24 Jan 2025\nData wrangling with tidyverse\nLearn about manipulating data with tidyverse, including filtering, selecting, mutating, and grouping data.\n\n\n3\nFri, 31 Jan 2025\nData visualization and Descriptive Statistics\nLearn about creating visualizations with ggplot2 and calculating descriptive statistics like mean, median, etc.\n\n\n4\nFri, 7 Feb 2025\nBasic Inferential Tests\nLearn about conducting t-tests, chi-square tests, ANOVA, and interpreting statistical results in R.\n\n\n5\nFri, 14 Feb 2025\nRegression and Introduction to Quarto\nLearn about correlation, regression, and Quarto for creating dynamic, reproducible R documents.\n\n\n~\nAfter the workshop\n\nPost-workshop exercises"
+    "text": "Schedule\nVenue : YPHSL seminar room 3.1\nTime : 3:30 - 5:30 PM (All sessions)\nClick on the link under “Topic” to access the slides. Slides will be progressively made available throughout the sessions.\n\n\n\n\nSession\nDate\nTopic\nDesccription\n\n\n\n\n~\nBefore the workshop\nPreparation\nComplete the Pre-workshop activities\n\n\n1\nFri, 17 Jan 2025\nIntroduction to R and RStudio (+ updated on 18/1/25)\nLearn about setting up RStudio, basic data types and structures in R, and importing data files.\n\n\n2\nFri, 24 Jan 2025\nData wrangling with tidyverse\nLearn about manipulating data with tidyverse, including filtering, selecting, mutating, and grouping data.\n\n\n3\nFri, 31 Jan 2025\nData visualization and Descriptive Statistics (+ updated on 2/2/25)\nLearn about creating visualizations with ggplot2 and calculating descriptive statistics like mean, median, etc.\n\n\n4\nFri, 7 Feb 2025\nBasic Inferential Tests\nLearn about conducting t-tests, chi-square tests, ANOVA, and interpreting statistical results in R.\n\n\n5\nFri, 14 Feb 2025\nRegression and Introduction to Quarto\nLearn about correlation, regression, and Quarto for creating dynamic, reproducible R documents.\n\n\n~\nAfter the workshop\n\nPost-workshop exercises"
   },
   {
     "objectID": "index.html#pre-workshop-activities",
@@ -637,6 +637,34 @@
     "text": "Both continuous (cont’d)"
   },
   {
+    "objectID": "03-visualization.html#correlation-plot",
+    "href": "03-visualization.html#correlation-plot",
+    "title": "Data Visualization and Descriptive Stats",
+    "section": "Correlation Plot",
+    "text": "Correlation Plot\nWhen there are more than two continuous variables to explore, correlation map is sometimes used. We can achieve this with ggplot, but it’s much easier to use the corrplot() function from the corrplot package.\nLet’s visualize the correlation map for these three variables.\n\nlibrary(corrplot)\n\n# select all the columns for correlation calculation, save it to columns_for_corr\ncolumns_for_corr &lt;- wvs_cleaned |&gt; \n  select(financial_satisfaction, life_satisfaction, age)\n\n# pass the columns_for_corr to cor() function, and save the result to cor_matrix\ncor_matrix &lt;- cor(columns_for_corr)\n\n# visualize the cor_matrix with corrplot()!\ncorrplot(cor_matrix,\n         method = \"shade\", # show the correlation strength as color shades\n         addCoef.col = \"black\", tl.col = \"black\") # label the coefficients\n\n\n\n\nif you get an error saying “corrplot function not found” or something along that line, that means you need to install the corrplot package first! Run this line in your RStudio Console (bottom left area): install.packages(\"corrplot\")"
+  },
+  {
+    "objectID": "03-visualization.html#correlation-plot-output",
+    "href": "03-visualization.html#correlation-plot-output",
+    "title": "Data Visualization and Descriptive Stats",
+    "section": "Correlation Plot",
+    "text": "Correlation Plot"
+  },
+  {
+    "objectID": "03-visualization.html#correlation-plot---shorter-code",
+    "href": "03-visualization.html#correlation-plot---shorter-code",
+    "title": "Data Visualization and Descriptive Stats",
+    "section": "Correlation Plot - shorter code",
+    "text": "Correlation Plot - shorter code\nWe can shorten the code in the previous slide using the maggritr pipe |&gt; like so:\n\nwvs_cleaned |&gt; \n    select(financial_satisfaction, life_satisfaction, age) |&gt; \n    cor() |&gt; \n    corrplot(method = \"shade\", # show the correlation strength as color shades\n         addCoef.col = \"black\", tl.col = \"black\")\n\n\nRefresher:\nNotice that we don’t have to pass the column names to cor() and corrplot() function. This is because the maggritr pipe |&gt;, acts as a “conveyor belt” that take output from one step and then immediately feed it to the next step."
+  },
+  {
+    "objectID": "03-visualization.html#correlation-plot---shorter-code-output",
+    "href": "03-visualization.html#correlation-plot---shorter-code-output",
+    "title": "Data Visualization and Descriptive Stats",
+    "section": "Correlation Plot - shorter code",
+    "text": "Correlation Plot - shorter code"
+  },
+  {
     "objectID": "03-visualization.html#one-continuous-one-categorical",
     "href": "03-visualization.html#one-continuous-one-categorical",
     "title": "Data Visualization and Descriptive Stats",
@@ -670,6 +698,20 @@
     "title": "Data Visualization and Descriptive Stats",
     "section": "One continuous, one categorical (cont’d)",
     "text": "One continuous, one categorical (cont’d)"
+  },
+  {
+    "objectID": "03-visualization.html#how-to-save-your-images---ggsave",
+    "href": "03-visualization.html#how-to-save-your-images---ggsave",
+    "title": "Data Visualization and Descriptive Stats",
+    "section": "How to save your images - ggsave",
+    "text": "How to save your images - ggsave\nThere are two ways to do this:\n\nVia ggsave\nThe point-and-click way in RStudio\n\nBelow is the ggsave way:\n# save the chart into an object instead of viewing it like we have been doing\nboxplot_obj &lt;- wvs_cleaned |&gt; \n    ggplot(aes(x = age)) +\n    geom_boxplot(fill = \"lightblue\", color = \"navy\") +\n    labs(title = \"Age distribution of respondents\",\n         x = \"Age\") +\n    theme_minimal()\n\n# pass the saved chart into ggsave and give it a filename\nggsave(\"fig-output/boxplot_1.jpg\", boxplot_obj)"
+  },
+  {
+    "objectID": "03-visualization.html#how-to-save-your-images---point-and-click",
+    "href": "03-visualization.html#how-to-save-your-images---point-and-click",
+    "title": "Data Visualization and Descriptive Stats",
+    "section": "How to save your images - point-and-click",
+    "text": "How to save your images - point-and-click"
   },
   {
     "objectID": "03-visualization.html#learning-check-2",

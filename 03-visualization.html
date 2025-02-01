@@ -739,6 +739,60 @@ Bella Ratmelia
 </figure>
 </div>
 </div>
+</div></section><section id="correlation-plot" class="slide level2">
+<h2>Correlation Plot</h2>
+<p>When there are more than two continuous variables to explore, correlation map is sometimes used. We can achieve this with ggplot, but it’s much easier to use the <code>corrplot()</code> function from the <code>corrplot</code> package.</p>
+<p>Let’s visualize the correlation map for these three variables.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a></a><span class="fu">library</span>(corrplot)</span>
+<span id="cb37-2"><a></a></span>
+<span id="cb37-3"><a></a><span class="co"># select all the columns for correlation calculation, save it to columns_for_corr</span></span>
+<span id="cb37-4"><a></a>columns_for_corr <span class="ot">&lt;-</span> wvs_cleaned <span class="sc">|&gt;</span> </span>
+<span id="cb37-5"><a></a>  <span class="fu">select</span>(financial_satisfaction, life_satisfaction, age)</span>
+<span id="cb37-6"><a></a></span>
+<span id="cb37-7"><a></a><span class="co"># pass the columns_for_corr to cor() function, and save the result to cor_matrix</span></span>
+<span id="cb37-8"><a></a>cor_matrix <span class="ot">&lt;-</span> <span class="fu">cor</span>(columns_for_corr)</span>
+<span id="cb37-9"><a></a></span>
+<span id="cb37-10"><a></a><span class="co"># visualize the cor_matrix with corrplot()!</span></span>
+<span id="cb37-11"><a></a><span class="fu">corrplot</span>(cor_matrix,</span>
+<span id="cb37-12"><a></a>         <span class="at">method =</span> <span class="st">"shade"</span>, <span class="co"># show the correlation strength as color shades</span></span>
+<span id="cb37-13"><a></a>         <span class="at">addCoef.col =</span> <span class="st">"black"</span>, <span class="at">tl.col =</span> <span class="st">"black"</span>) <span class="co"># label the coefficients</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+
+<aside><div>
+<p>if you get an error saying “corrplot function not found” or something along that line, that means you need to install the corrplot package first! Run this line in your RStudio Console (bottom left area): <code>install.packages("corrplot")</code></p>
+</div></aside></section>
+<section id="correlation-plot-output" class="slide level2 output-location-slide"><h2>Correlation Plot</h2><div class="cell output-location-slide">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-18-1.png" width="1344"></p>
+</figure>
+</div>
+</div>
+</div></section><section id="correlation-plot---shorter-code" class="slide level2">
+<h2>Correlation Plot - shorter code</h2>
+<p>We can shorten the code in the previous slide using the maggritr pipe <code>|&gt;</code> like so:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a></a>wvs_cleaned <span class="sc">|&gt;</span> </span>
+<span id="cb38-2"><a></a>    <span class="fu">select</span>(financial_satisfaction, life_satisfaction, age) <span class="sc">|&gt;</span> </span>
+<span id="cb38-3"><a></a>    <span class="fu">cor</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb38-4"><a></a>    <span class="fu">corrplot</span>(<span class="at">method =</span> <span class="st">"shade"</span>, <span class="co"># show the correlation strength as color shades</span></span>
+<span id="cb38-5"><a></a>         <span class="at">addCoef.col =</span> <span class="st">"black"</span>, <span class="at">tl.col =</span> <span class="st">"black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<p><strong>Refresher:</strong></p>
+<p>Notice that we don’t have to pass the column names to <code>cor()</code> and <code>corrplot()</code> function. This is because the maggritr pipe <code>|&gt;</code>, acts as a “conveyor belt” that take output from one step and then immediately feed it to the next step.</p>
+</section>
+<section id="correlation-plot---shorter-code-output" class="slide level2 output-location-slide"><h2>Correlation Plot - shorter code</h2><div class="cell output-location-slide">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-19-1.png" width="1344"></p>
+</figure>
+</div>
+</div>
 </div></section><section id="one-continuous-one-categorical" class="slide level2">
 <h2>One continuous, one categorical</h2>
 <ul>
@@ -748,13 +802,13 @@ Bella Ratmelia
 </ul>
 <p>Let’s do a recap from last week and get the summary stats for <code>life_satisfaction</code> for each <code>country</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a></a>wvs_cleaned <span class="sc">|&gt;</span> </span>
-<span id="cb37-2"><a></a>  <span class="fu">group_by</span>(country) <span class="sc">|&gt;</span> </span>
-<span id="cb37-3"><a></a>  <span class="fu">summarise</span>(</span>
-<span id="cb37-4"><a></a>    <span class="at">mean_satisfaction =</span> <span class="fu">mean</span>(life_satisfaction, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb37-5"><a></a>    <span class="at">median_satisfaction =</span> <span class="fu">median</span>(life_satisfaction, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb37-6"><a></a>    <span class="at">sd_satisfaction =</span> <span class="fu">sd</span>(life_satisfaction, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb37-7"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a></a>wvs_cleaned <span class="sc">|&gt;</span> </span>
+<span id="cb39-2"><a></a>  <span class="fu">group_by</span>(country) <span class="sc">|&gt;</span> </span>
+<span id="cb39-3"><a></a>  <span class="fu">summarise</span>(</span>
+<span id="cb39-4"><a></a>    <span class="at">mean_satisfaction =</span> <span class="fu">mean</span>(life_satisfaction, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb39-5"><a></a>    <span class="at">median_satisfaction =</span> <span class="fu">median</span>(life_satisfaction, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb39-6"><a></a>    <span class="at">sd_satisfaction =</span> <span class="fu">sd</span>(life_satisfaction, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb39-7"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 4
   country mean_satisfaction median_satisfaction sd_satisfaction
@@ -769,10 +823,10 @@ Bella Ratmelia
 <h2>One continuous, one categorical (cont’d)</h2>
 <p>To get a better sense of how the data is varied and spread, let’s visualize them with a side-by-side boxplot</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a></a>wvs_cleaned <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> country, <span class="at">y =</span> life_satisfaction)) <span class="sc">+</span></span>
-<span id="cb39-2"><a></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb39-3"><a></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Life Satisfaction by Country"</span>) <span class="sc">+</span></span>
-<span id="cb39-4"><a></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a></a>wvs_cleaned <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> country, <span class="at">y =</span> life_satisfaction)) <span class="sc">+</span></span>
+<span id="cb41-2"><a></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb41-3"><a></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Life Satisfaction by Country"</span>) <span class="sc">+</span></span>
+<span id="cb41-4"><a></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 </section>
@@ -780,7 +834,7 @@ Bella Ratmelia
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-19-1.png" width="1344"></p>
+<p><img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-21-1.png" width="1344"></p>
 </figure>
 </div>
 </div>
@@ -788,11 +842,11 @@ Bella Ratmelia
 <h2>One continuous, one categorical (cont’d)</h2>
 <p>We could also layer our boxplots with violin plots to get a better sense of the distribution of each group.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a></a>wvs_cleaned <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> country, <span class="at">y =</span> life_satisfaction)) <span class="sc">+</span></span>
-<span id="cb40-2"><a></a>  <span class="fu">geom_violin</span>(<span class="at">fill =</span> <span class="st">"lightblue"</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb40-3"><a></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="at">fill =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
-<span id="cb40-4"><a></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Life Satisfaction Distribution by Country"</span>) <span class="sc">+</span></span>
-<span id="cb40-5"><a></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a></a>wvs_cleaned <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> country, <span class="at">y =</span> life_satisfaction)) <span class="sc">+</span></span>
+<span id="cb42-2"><a></a>  <span class="fu">geom_violin</span>(<span class="at">fill =</span> <span class="st">"lightblue"</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb42-3"><a></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="at">fill =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb42-4"><a></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Life Satisfaction Distribution by Country"</span>) <span class="sc">+</span></span>
+<span id="cb42-5"><a></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 </section>
@@ -800,25 +854,48 @@ Bella Ratmelia
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-20-1.png" width="1344"></p>
+<p><img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-22-1.png" width="1344"></p>
 </figure>
 </div>
 </div>
-</div></section><section id="learning-check-2" class="slide level2">
+</div></section><section id="how-to-save-your-images---ggsave" class="slide level2">
+<h2>How to save your images - ggsave</h2>
+<p>There are two ways to do this:</p>
+<ol type="1">
+<li><p>Via <code>ggsave</code></p></li>
+<li><p>The point-and-click way in RStudio</p></li>
+</ol>
+<p>Below is the <code>ggsave</code> way:</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a></a><span class="co"># save the chart into an object instead of viewing it like we have been doing</span></span>
+<span id="cb43-2"><a></a>boxplot_obj <span class="ot">&lt;-</span> wvs_cleaned <span class="sc">|&gt;</span> </span>
+<span id="cb43-3"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age)) <span class="sc">+</span></span>
+<span id="cb43-4"><a></a>    <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">"lightblue"</span>, <span class="at">color =</span> <span class="st">"navy"</span>) <span class="sc">+</span></span>
+<span id="cb43-5"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Age distribution of respondents"</span>,</span>
+<span id="cb43-6"><a></a>         <span class="at">x =</span> <span class="st">"Age"</span>) <span class="sc">+</span></span>
+<span id="cb43-7"><a></a>    <span class="fu">theme_minimal</span>()</span>
+<span id="cb43-8"><a></a></span>
+<span id="cb43-9"><a></a><span class="co"># pass the saved chart into ggsave and give it a filename</span></span>
+<span id="cb43-10"><a></a><span class="fu">ggsave</span>(<span class="st">"fig-output/boxplot_1.jpg"</span>, boxplot_obj) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="how-to-save-your-images---point-and-click" class="slide level2">
+<h2>How to save your images - point-and-click</h2>
+
+<img data-src="images/howto-save-charts.jpg" class="r-stretch"></section>
+<section id="learning-check-2" class="slide level2">
 <h2>Learning Check #2</h2>
 <p>Create a side-by-side boxplots that visualizes <code>political_scale</code> for each <code>sex</code>.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show answer</summary>
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a></a>wvs_cleaned <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> political_scale, <span class="at">y =</span> sex)) <span class="sc">+</span></span>
-<span id="cb41-2"><a></a>  <span class="fu">geom_violin</span>(<span class="at">fill =</span> <span class="st">"lightblue"</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb41-3"><a></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="at">fill =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
-<span id="cb41-4"><a></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Political scale Distribution by Sex"</span>) <span class="sc">+</span></span>
-<span id="cb41-5"><a></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a></a>wvs_cleaned <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> political_scale, <span class="at">y =</span> sex)) <span class="sc">+</span></span>
+<span id="cb44-2"><a></a>  <span class="fu">geom_violin</span>(<span class="at">fill =</span> <span class="st">"lightblue"</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb44-3"><a></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="at">fill =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb44-4"><a></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Political scale Distribution by Sex"</span>) <span class="sc">+</span></span>
+<span id="cb44-5"><a></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 
 </div>
-<img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-21-1.png" width="1344" class="r-stretch"></section>
+<img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-23-1.png" width="1344" class="r-stretch"></section>
 <section id="using-facets-for-more-complex-visual" class="slide level2">
 <h2>Using Facets for more complex visual</h2>
 <ul>
@@ -828,10 +905,10 @@ Bella Ratmelia
 </ul>
 <p>Facet grids are useful when we have more than two variables to visualize. However, if used excessively they may become too complex</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a></a>wvs_cleaned <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> financial_satisfaction, <span class="at">y =</span> life_satisfaction)) <span class="sc">+</span></span>
-<span id="cb42-2"><a></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb42-3"><a></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
-<span id="cb42-4"><a></a>  <span class="fu">facet_grid</span>(country <span class="sc">~</span> religiousity)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a></a>wvs_cleaned <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> financial_satisfaction, <span class="at">y =</span> life_satisfaction)) <span class="sc">+</span></span>
+<span id="cb45-2"><a></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb45-3"><a></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
+<span id="cb45-4"><a></a>  <span class="fu">facet_grid</span>(country <span class="sc">~</span> religiousity)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 </section>
@@ -839,7 +916,7 @@ Bella Ratmelia
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-22-1.png" width="1344"></p>
+<p><img data-src="03-visualization_files/figure-revealjs/unnamed-chunk-24-1.png" width="1344"></p>
 </figure>
 </div>
 </div>
