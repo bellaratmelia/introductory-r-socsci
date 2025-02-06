@@ -229,7 +229,7 @@ Bella Ratmelia
 <h2>Refresher: Data Distribution</h2>
 <p>The choice of appropriate statistical tests and methods often depends on the distribution of the data. Understanding the distribution helps in selecting the right and validity of the tests.</p>
 
-<img data-src="04-stats_files/figure-revealjs/unnamed-chunk-1-1.png" width="960" class="r-stretch"></section>
+<img data-src="04-stats_files/figure-revealjs/unnamed-chunk-1-1.png" width="1344" class="r-stretch"></section>
 <section id="refresher-research-variables" class="slide level2">
 <h2>Refresher: Research Variables</h2>
 <div class="columns">
@@ -256,17 +256,23 @@ Bella Ratmelia
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="co"># import tidyverse library</span></span>
 <span id="cb1-2"><a></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-3"><a></a></span>
-<span id="cb1-4"><a></a><span class="co"># read the WVS data</span></span>
-<span id="cb1-5"><a></a>wvs_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data-output/wvs_processed.csv"</span>)</span>
+<span id="cb1-4"><a></a><span class="co"># read the CSV with WVS data</span></span>
+<span id="cb1-5"><a></a>wvs_cleaned <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data-output/wvs_cleaned_v1.csv"</span>)</span>
 <span id="cb1-6"><a></a></span>
 <span id="cb1-7"><a></a><span class="co"># Convert categorical variables to factors</span></span>
-<span id="cb1-8"><a></a>wvs_data <span class="ot">&lt;-</span> wvs_data <span class="sc">|&gt;</span> </span>
-<span id="cb1-9"><a></a>    <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(<span class="st">"country"</span>, <span class="st">"sex"</span>, <span class="st">"marital_status"</span>, </span>
-<span id="cb1-10"><a></a>                    <span class="st">"employment"</span>, <span class="st">"religiousity"</span>), as.factor))</span>
-<span id="cb1-11"><a></a></span>
-<span id="cb1-12"><a></a><span class="co"># peek at the data</span></span>
-<span id="cb1-13"><a></a><span class="fu">glimpse</span>(wvs_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-8"><a></a>columns_to_convert <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"country"</span>, <span class="st">"religiousity"</span>, <span class="st">"sex"</span>, <span class="st">"marital_status"</span>, <span class="st">"employment"</span>)</span>
+<span id="cb1-9"><a></a></span>
+<span id="cb1-10"><a></a>wvs_cleaned <span class="ot">&lt;-</span> wvs_cleaned <span class="sc">|&gt;</span> </span>
+<span id="cb1-11"><a></a>    <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">all_of</span>(columns_to_convert), as_factor))</span>
+<span id="cb1-12"><a></a></span>
+<span id="cb1-13"><a></a><span class="co"># peek at the data, pay attention to the data types!</span></span>
+<span id="cb1-14"><a></a><span class="fu">glimpse</span>(wvs_cleaned)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section>
+<section id="both-categorical-variables---the-x2-test" class="title-slide slide level1 center">
+<h1>Both Categorical variables - The <span class="math inline">\(X^2\)</span> test</h1>
+
 </section>
 <section id="chi-square-test-of-independence" class="slide level2">
 <h2>Chi-square test of independence</h2>
@@ -277,31 +283,31 @@ Bella Ratmelia
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>                        
-                         Divorced Living together as married Married Separated
-  A religious person          135                        154    1562        46
-  An atheist                   56                        204     431        34
-  Don't know                    1                          7      23         0
-  Not a religious person      152                        398    1261        59
+                         Widowed Single Married Divorced
+  Not a religious person      66    731    1261      152
+  A religious person         118    590    1562      135
+  An atheist                  24    338     431       56
+  Don't know                   4      9      23        1
                         
-                         Single Widowed
-  A religious person        590     118
-  An atheist                338      24
-  Don't know                  9       4
-  Not a religious person    731      66</code></pre>
+                         Living together as married Separated
+  Not a religious person                        398        59
+  A religious person                            154        46
+  An atheist                                    204        34
+  Don't know                                      7         0</code></pre>
 </div>
 </div>
 </section>
 <section id="chi-square-sample-problem-and-results" class="slide level2">
 <h2>Chi-Square: Sample problem and results</h2>
-<p>Is there a relationship between religiosity and marital_status?</p>
+<p>Is there a relationship between religiosity and country?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">chisq.test</span>(<span class="fu">table</span>(wvs_data<span class="sc">$</span>religiousity, wvs_data<span class="sc">$</span>marital_status))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">chisq.test</span>(<span class="fu">table</span>(wvs_cleaned<span class="sc">$</span>religiousity, wvs_cleaned<span class="sc">$</span>country))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's Chi-squared test
 
-data:  table(wvs_data$religiousity, wvs_data$marital_status)
-X-squared = 277.36, df = 15, p-value &lt; 2.2e-16</code></pre>
+data:  table(wvs_cleaned$religiousity, wvs_cleaned$country)
+X-squared = 672.16, df = 6, p-value &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <div style="font-size: 75%; width: 75%">
@@ -312,6 +318,11 @@ X-squared = 277.36, df = 15, p-value &lt; 2.2e-16</code></pre>
 </ul>
 </div>
 <p><em>What if there is a hypothesis? How would you write this in the report?</em></p>
+</section></section>
+<section>
+<section id="both-continuous-variables---correlation" class="title-slide slide level1 center">
+<h1>Both Continuous variables - Correlation</h1>
+
 </section>
 <section id="correlation" class="slide level2">
 <h2>Correlation</h2>
@@ -347,21 +358,35 @@ X-squared = 277.36, df = 15, p-value &lt; 2.2e-16</code></pre>
 <p>RQ: <strong>Is there a significant correlation between life satisfaction and financial satisfaction?</strong></p>
 <p>As both variables are numerical and continuous, we can use pearson correlation.</p>
 <p>Let’s start with visualizing the data, which can be used to support the explanation.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>wvs_cleaned <span class="sc">|&gt;</span> </span>
+<span id="cb5-2"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> financial_satisfaction, <span class="at">y =</span> life_satisfaction)) <span class="sc">+</span></span>
+<span id="cb5-3"><a></a>    <span class="fu">geom_jitter</span>(<span class="at">color=</span><span class="st">"maroon"</span>, <span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb5-4"><a></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>) <span class="co"># se shows the confidence interval</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
-<img data-src="04-stats_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"></section>
-<section id="conduct-the-correlation-test" class="slide level2">
+</section>
+<section id="correlation-sample-problem-and-result-output" class="slide level2 output-location-slide"><h2>Correlation: Sample problem and result</h2><div class="cell output-location-slide">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="04-stats_files/figure-revealjs/unnamed-chunk-5-1.png" width="1344"></p>
+</figure>
+</div>
+</div>
+</div></section><section id="conduct-the-correlation-test" class="slide level2">
 <h2>Conduct the correlation test</h2>
 <div class="cell columns column-output-location">
 <div class="column">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">cor.test</span>(wvs_data<span class="sc">$</span>life_satisfaction, </span>
-<span id="cb5-2"><a></a>         wvs_data<span class="sc">$</span>financial_satisfaction, </span>
-<span id="cb5-3"><a></a>         <span class="at">method =</span> <span class="st">"pearson"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="fu">cor.test</span>(wvs_cleaned<span class="sc">$</span>life_satisfaction, </span>
+<span id="cb6-2"><a></a>         wvs_cleaned<span class="sc">$</span>financial_satisfaction, </span>
+<span id="cb6-3"><a></a>         <span class="at">method =</span> <span class="st">"pearson"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's product-moment correlation
 
-data:  wvs_data$life_satisfaction and wvs_data$financial_satisfaction
+data:  wvs_cleaned$life_satisfaction and wvs_cleaned$financial_satisfaction
 t = 66.999, df = 6401, p-value &lt; 2.2e-16
 alternative hypothesis: true correlation is not equal to 0
 95 percent confidence interval:
@@ -382,18 +407,48 @@ sample estimates:
 </ul>
 </div>
 </section>
-<section id="lets-try-this-correlation-exercise-5-mins" class="slide level2">
-<h2>Let’s try this correlation exercise! (5 mins)</h2>
-<ul>
-<li><p>Calculate the correlation coefficient between life satisfaction and freedom</p>
-<ul>
-<li><p>Which method should you use for this?</p></li>
-<li><p>How strong is the correlation? i.e.&nbsp;would you say it’s a strong correlation?</p></li>
-<li><p>In which direction is the correlation?</p></li>
-<li><p>Is the correlation coefficient statistically significant?</p></li>
-<li><p>Visualize the relationship!</p></li>
-</ul></li>
-</ul>
+<section id="learning-check-1" class="slide level2">
+<h2>Learning Check #1</h2>
+<p>Is there a relationship between religiousity and age group? Calculate the chi-square test!</p>
+<p>optional: Visualize the proportion of age group for each religiousity category.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show answer</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">chisq.test</span>(<span class="fu">table</span>(wvs_cleaned<span class="sc">$</span>religiousity, wvs_cleaned<span class="sc">$</span>age_group))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's Chi-squared test
+
+data:  table(wvs_cleaned$religiousity, wvs_cleaned$age_group)
+X-squared = 97.449, df = 9, p-value &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p><strong>Visualization:</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show answer</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>wvs_cleaned <span class="sc">|&gt;</span> </span>
+<span id="cb10-2"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> religiousity, <span class="at">fill =</span> age_group)) <span class="sc">+</span></span>
+<span id="cb10-3"><a></a>    <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
+<span id="cb10-4"><a></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Proportion of age groups for each religiousity"</span>) <span class="sc">+</span></span>
+<span id="cb10-5"><a></a>    <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+
+</section><section id="learning-check-1-output" class="slide level2 output-location-slide"><h2>Learning Check #1</h2><div class="cell output-location-slide">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="04-stats_files/figure-revealjs/unnamed-chunk-8-1.png" width="1344"></p>
+</figure>
+</div>
+</div>
+</div></section></section>
+<section>
+<section id="comparing-means-between-groups---t-tests-and-anova" class="title-slide slide level1 center">
+<h1>Comparing Means Between Groups - T-Tests and ANOVA</h1>
+
 </section>
 <section id="t-tests" class="slide level2">
 <h2>T-Tests</h2>
@@ -422,42 +477,37 @@ sample estimates:
 <h2>T-test: One-sample T-Test</h2>
 <p>RQ: <strong>Is the average life satisfaction in our sample significantly different from the global average of 6.5?</strong></p>
 <p>Let’s start with visualizing the data</p>
-<div class="cell columns column-output-location">
-<div class="column">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>wvs_data <span class="sc">|&gt;</span> </span>
-<span id="cb7-2"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> life_satisfaction, <span class="at">x =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb7-3"><a></a>    <span class="fu">geom_boxplot</span>(<span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span> </span>
-<span id="cb7-4"><a></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">6.5</span>, <span class="at">color=</span><span class="st">"red"</span>) <span class="sc">+</span></span>
-<span id="cb7-5"><a></a>    <span class="fu">geom_label</span>(<span class="at">label =</span> <span class="st">"global mean"</span>, </span>
-<span id="cb7-6"><a></a>               <span class="at">x =</span> <span class="dv">1</span>, <span class="at">y =</span> <span class="fl">6.6</span>, </span>
-<span id="cb7-7"><a></a>               <span class="at">label.size =</span> <span class="fl">0.15</span>) <span class="sc">+</span></span>
-<span id="cb7-8"><a></a>    <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb7-9"><a></a>    <span class="fu">theme</span>(<span class="at">aspect.ratio =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div><div class="column fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>wvs_cleaned <span class="sc">|&gt;</span> </span>
+<span id="cb11-2"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> life_satisfaction)) <span class="sc">+</span></span>
+<span id="cb11-3"><a></a>    <span class="fu">geom_boxplot</span>(<span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span> </span>
+<span id="cb11-4"><a></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">6.5</span>, <span class="at">color=</span><span class="st">"red"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="04-stats_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></p>
+<p><img data-src="04-stats_files/figure-revealjs/unnamed-chunk-9-1.png" width="1344"></p>
 </figure>
 </div>
 </div>
-</div></div>
+</div>
 </section>
 <section id="conduct-the-one-sample-t-test" class="slide level2">
 <h2>Conduct the One-sample T-Test</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>global_mean_satisfaction <span class="ot">=</span> <span class="fl">6.5</span>  </span>
-<span id="cb8-2"><a></a></span>
-<span id="cb8-3"><a></a><span class="fu">t.test</span>(wvs_data<span class="sc">$</span>life_satisfaction,          </span>
-<span id="cb8-4"><a></a>       <span class="at">alternative =</span> <span class="st">"two.sided"</span>, </span>
-<span id="cb8-5"><a></a>       <span class="at">mu =</span> global_mean_satisfaction)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>global_mean_satisfaction <span class="ot">=</span> <span class="fl">6.5</span>  </span>
+<span id="cb12-2"><a></a></span>
+<span id="cb12-3"><a></a><span class="fu">t.test</span>(wvs_cleaned<span class="sc">$</span>life_satisfaction,          </span>
+<span id="cb12-4"><a></a>       <span class="at">alternative =</span> <span class="st">"two.sided"</span>, </span>
+<span id="cb12-5"><a></a>       <span class="at">mu =</span> global_mean_satisfaction)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
 <pre><code>
     One Sample t-test
 
-data:  wvs_data$life_satisfaction
+data:  wvs_cleaned$life_satisfaction
 t = 26.776, df = 6402, p-value &lt; 2.2e-16
 alternative hypothesis: true mean is not equal to 6.5
 95 percent confidence interval:
@@ -473,32 +523,43 @@ mean of x
 <h2>T-Test: Independent Samples T-Test</h2>
 <p>RQ: <strong>Is there a significant difference in life satisfaction between males and females?</strong></p>
 <p>Let’s first take only the necessary columns and get some summary statistics, particularly on the number of samples for each group, as well as the mean, standard deviation, and variance.</p>
-<div class="cell columns column-output-location">
-<div class="column">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>satisfaction_by_gender <span class="ot">&lt;-</span> wvs_data <span class="sc">|&gt;</span> </span>
-<span id="cb10-2"><a></a>    <span class="fu">select</span>(life_satisfaction, sex)</span>
-<span id="cb10-3"><a></a></span>
-<span id="cb10-4"><a></a>satisfaction_by_gender <span class="sc">|&gt;</span> </span>
-<span id="cb10-5"><a></a>    <span class="fu">group_by</span>(sex) <span class="sc">|&gt;</span> </span>
-<span id="cb10-6"><a></a>    <span class="fu">summarise</span>(<span class="at">total =</span> <span class="fu">n</span>(), </span>
-<span id="cb10-7"><a></a>              <span class="at">mean =</span> <span class="fu">mean</span>(life_satisfaction),</span>
-<span id="cb10-8"><a></a>              <span class="at">variance =</span> <span class="fu">var</span>(life_satisfaction),</span>
-<span id="cb10-9"><a></a>              <span class="at">stdeviation =</span> <span class="fu">sd</span>(life_satisfaction))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div><div class="column fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>wvs_cleaned <span class="sc">|&gt;</span> </span>
+<span id="cb14-2"><a></a>    <span class="fu">group_by</span>(sex) <span class="sc">|&gt;</span> </span>
+<span id="cb14-3"><a></a>    <span class="fu">summarise</span>(<span class="at">total =</span> <span class="fu">n</span>(), </span>
+<span id="cb14-4"><a></a>              <span class="at">mean =</span> <span class="fu">mean</span>(life_satisfaction),</span>
+<span id="cb14-5"><a></a>              <span class="at">variance =</span> <span class="fu">var</span>(life_satisfaction),</span>
+<span id="cb14-6"><a></a>              <span class="at">stdeviation =</span> <span class="fu">sd</span>(life_satisfaction))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 5
   sex    total  mean variance stdeviation
   &lt;fct&gt;  &lt;int&gt; &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;
-1 Female  3232  7.11     3.18        1.78
-2 Male    3171  7.09     3.35        1.83</code></pre>
+1 Male    3171  7.09     3.35        1.83
+2 Female  3232  7.11     3.18        1.78</code></pre>
 </div>
-</div></div>
+</div>
 </section>
 <section id="visualize-the-differences-between-two-samples" class="slide level2">
 <h2>Visualize the differences between two samples</h2>
-<p>The variance will be easier to see when we visualize it as well. As we can see, the variance for Y group is wider than the N group. This suggests that the variance might be heterogeneous (heteroskedastic).</p>
-
-<img data-src="04-stats_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
+<p>The variance will be easier to see when we visualize it as well. As we can see, the variance for both groups are about the same. This suggests that the variance might be homoegeneous.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a>wvs_cleaned <span class="sc">|&gt;</span> </span>
+<span id="cb16-2"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sex, <span class="at">y =</span> life_satisfaction)) <span class="sc">+</span></span>
+<span id="cb16-3"><a></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb16-4"><a></a>    <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="04-stats_files/figure-revealjs/unnamed-chunk-12-1.png" width="1344"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
 <section id="conduct-the-independent-samples-t-test" class="slide level2">
 <h2>Conduct the independent samples T-test</h2>
 <p>Remember, the hypotheses are:</p>
@@ -510,22 +571,22 @@ mean of x
 </div></div>
 <div class="cell columns column-output-location">
 <div class="column">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="fu">t.test</span>(life_satisfaction <span class="sc">~</span> sex, </span>
-<span id="cb12-2"><a></a>       <span class="at">data =</span> satisfaction_by_gender, </span>
-<span id="cb12-3"><a></a>       <span class="at">var.equal =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="fu">t.test</span>(life_satisfaction <span class="sc">~</span> sex, </span>
+<span id="cb17-2"><a></a>       <span class="at">data =</span> wvs_cleaned, </span>
+<span id="cb17-3"><a></a>       <span class="at">var.equal =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Welch Two Sample t-test
 
 data:  life_satisfaction by sex
-t = 0.41256, df = 6387.7, p-value = 0.6799
-alternative hypothesis: true difference in means between group Female and group Male is not equal to 0
+t = -0.41256, df = 6387.7, p-value = 0.6799
+alternative hypothesis: true difference in means between group Male and group Female is not equal to 0
 95 percent confidence interval:
- -0.06988992  0.10714841
+ -0.10714841  0.06988992
 sample estimates:
-mean in group Female   mean in group Male 
-            7.113552             7.094923 </code></pre>
+  mean in group Male mean in group Female 
+            7.094923             7.113552 </code></pre>
 </div>
 </div></div>
 <div class="callout callout-tip callout-titled callout-style-simple">
@@ -552,18 +613,43 @@ mean in group Female   mean in group Male
 <li>type <code>data()</code> in your console to see what are the available datasets that you can use for practice!</li>
 </ul>
 <div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>Rows: 20
-Columns: 3
-$ extra &lt;dbl&gt; 0.7, -1.6, -0.2, -1.2, -0.1, 3.4, 3.7, 0.8, 0.0, 2.0, 1.9, 0.8, …
-$ group &lt;fct&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2
-$ ID    &lt;fct&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10</code></pre>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a>sleep <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(sleep)</span>
+<span id="cb19-2"><a></a><span class="fu">print</span>(sleep)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
+
 </section>
-<section id="visualise-the-before-group-1-and-after-group-2" class="slide level2">
+<section id="t-test-paired-sample-t-test-output" class="slide level2 output-location-slide"><h2>T-Test: Paired Sample T-Test</h2><div class="cell output-location-slide">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 20 × 3
+   extra group ID   
+   &lt;dbl&gt; &lt;fct&gt; &lt;fct&gt;
+ 1   0.7 1     1    
+ 2  -1.6 1     2    
+ 3  -0.2 1     3    
+ 4  -1.2 1     4    
+ 5  -0.1 1     5    
+ 6   3.4 1     6    
+ 7   3.7 1     7    
+ 8   0.8 1     8    
+ 9   0   1     9    
+10   2   1     10   
+11   1.9 2     1    
+12   0.8 2     2    
+13   1.1 2     3    
+14   0.1 2     4    
+15  -0.1 2     5    
+16   4.4 2     6    
+17   5.5 2     7    
+18   1.6 2     8    
+19   4.6 2     9    
+20   3.4 2     10   </code></pre>
+</div>
+</div></section><section id="visualise-the-before-group-1-and-after-group-2" class="slide level2">
 <h2>Visualise the before (group 1) and after (group 2)</h2>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a>sleep <span class="sc">|&gt;</span> </span>
+<span id="cb21-2"><a></a>    <span class="fu">group_by</span>(group) <span class="sc">|&gt;</span> </span>
+<span id="cb21-3"><a></a>    <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="at">mean =</span> <span class="fu">mean</span>(extra), <span class="at">sd =</span> <span class="fu">sd</span>(extra), <span class="at">variance =</span> <span class="fu">var</span>(extra))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 5
   group     n  mean    sd variance
@@ -572,24 +658,47 @@ $ ID    &lt;fct&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
 2 2        10  2.33  2.00     4.01</code></pre>
 </div>
 </div>
+<p>Visualization:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a>sleep <span class="sc">|&gt;</span> </span>
+<span id="cb23-2"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> group, <span class="at">y =</span> extra)) <span class="sc">+</span></span>
+<span id="cb23-3"><a></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb23-4"><a></a>    <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
-<img data-src="04-stats_files/figure-revealjs/unnamed-chunk-15-1.png" width="960" class="r-stretch"></section>
-<section id="transform-the-data-shape" class="slide level2">
+</section>
+<section id="visualise-the-before-group-1-and-after-group-2-output" class="slide level2 output-location-slide"><h2>Visualise the before (group 1) and after (group 2)</h2><div class="cell output-location-slide">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="04-stats_files/figure-revealjs/unnamed-chunk-16-1.png" width="1344"></p>
+</figure>
+</div>
+</div>
+</div></section><section id="transform-the-data-shape" class="slide level2">
 <h2>Transform the data shape</h2>
 <p>The data is in long format. let’s transform it into wide format so that we can conduct the analysis more easily.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a>sleep_wide <span class="ot">&lt;-</span> sleep <span class="sc">|&gt;</span> </span>
-<span id="cb16-2"><a></a>    <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> group, <span class="at">values_from =</span> extra, </span>
-<span id="cb16-3"><a></a>                <span class="at">names_prefix =</span> <span class="st">"group_"</span>)</span>
-<span id="cb16-4"><a></a><span class="fu">glimpse</span>(sleep_wide)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a>sleep_wide <span class="ot">&lt;-</span> sleep <span class="sc">|&gt;</span> </span>
+<span id="cb24-2"><a></a>    <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> group, <span class="at">values_from =</span> extra, </span>
+<span id="cb24-3"><a></a>                <span class="at">names_prefix =</span> <span class="st">"group_"</span>)</span>
+<span id="cb24-4"><a></a><span class="fu">print</span>(sleep_wide)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code>Rows: 10
-Columns: 3
-$ ID      &lt;fct&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-$ group_1 &lt;dbl&gt; 0.7, -1.6, -0.2, -1.2, -0.1, 3.4, 3.7, 0.8, 0.0, 2.0
-$ group_2 &lt;dbl&gt; 1.9, 0.8, 1.1, 0.1, -0.1, 4.4, 5.5, 1.6, 4.6, 3.4</code></pre>
+<pre><code># A tibble: 10 × 3
+   ID    group_1 group_2
+   &lt;fct&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+ 1 1         0.7     1.9
+ 2 2        -1.6     0.8
+ 3 3        -0.2     1.1
+ 4 4        -1.2     0.1
+ 5 5        -0.1    -0.1
+ 6 6         3.4     4.4
+ 7 7         3.7     5.5
+ 8 8         0.8     1.6
+ 9 9         0       4.6
+10 10        2       3.4</code></pre>
 </div>
 </div>
 </section>
@@ -603,8 +712,8 @@ $ group_2 &lt;dbl&gt; 1.9, 0.8, 1.1, 0.1, -0.1, 4.4, 5.5, 1.6, 4.6, 3.4</code></
 <p><span class="math inline">\(H_1\)</span>: There is a significant difference in the increase in hours of sleep.</p>
 </div></div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a><span class="fu">t.test</span>(<span class="fu">Pair</span>(sleep_wide<span class="sc">$</span>group_1, sleep_wide<span class="sc">$</span>group_2) <span class="sc">~</span> <span class="dv">1</span>,</span>
-<span id="cb18-2"><a></a>       <span class="at">data =</span> sleep)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a><span class="fu">t.test</span>(<span class="fu">Pair</span>(sleep_wide<span class="sc">$</span>group_1, sleep_wide<span class="sc">$</span>group_2) <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb26-2"><a></a>       <span class="at">data =</span> sleep)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -622,7 +731,48 @@ mean difference
 </div>
 </div>
 </section>
-<section id="anova-analysis-of-variance" class="slide level2">
+<section id="learning-check-2" class="slide level2">
+<h2>Learning Check #2</h2>
+<p>Using the pre-loaded dataset called <code>CO2</code>, conduct the T-test betwen the two different <code>Treatment</code> to compare if there’s any difference in the carbon dioxide <code>uptake</code> between the two treatments. Type <code>?CO2</code> in your Console to retrieve the vignette of this data.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show answer</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a><span class="fu">t.test</span>(uptake <span class="sc">~</span> Treatment, <span class="at">data =</span> CO2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  uptake by Treatment
+t = 3.0485, df = 80.945, p-value = 0.003107
+alternative hypothesis: true difference in means between group nonchilled and group chilled is not equal to 0
+95 percent confidence interval:
+  2.382366 11.336682
+sample estimates:
+mean in group nonchilled    mean in group chilled 
+                30.64286                 23.78333 </code></pre>
+</div>
+</div>
+<p>Visualize the data:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show answer</summary>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a>CO2 <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Treatment, <span class="at">y =</span> uptake)) <span class="sc">+</span></span>
+<span id="cb30-2"><a></a>    <span class="fu">geom_boxplot</span>(<span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb30-3"><a></a>    <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+
+</section>
+<section id="learning-check-2-output" class="slide level2 output-location-slide"><h2>Learning Check #2</h2><div class="cell output-location-slide">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="04-stats_files/figure-revealjs/unnamed-chunk-20-1.png" width="1344"></p>
+</figure>
+</div>
+</div>
+</div></section><section id="anova-analysis-of-variance" class="slide level2">
 <h2>ANOVA (Analysis of Variance)</h2>
 <p>ANOVA (Analysis of Variance) is a statistical test used to compare the means of three or more groups or samples and determine if the differences are statistically significant.</p>
 <p>There are two ‘mainstream’ ANOVA that will be covered in this workshop:</p>
@@ -636,19 +786,36 @@ mean difference
 </section>
 <section id="one-way-anova-sample-problem-and-result" class="slide level2">
 <h2>One-Way ANOVA: Sample problem and result</h2>
-<p>RQ: <strong>Is there a significant difference in life satisfaction between different religiousity?</strong></p>
+<p>RQ: <strong>Is there a significant difference in life satisfaction between different country?</strong></p>
 <p>Let’s visualize the data first!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a>wvs_cleaned <span class="sc">|&gt;</span> </span>
+<span id="cb31-2"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> country, <span class="at">y =</span> life_satisfaction)) <span class="sc">+</span></span>
+<span id="cb31-3"><a></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb31-4"><a></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb31-5"><a></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
-<img data-src="04-stats_files/figure-revealjs/unnamed-chunk-18-1.png" width="960" class="r-stretch"></section>
-<section id="conduct-the-one-way-anova-test" class="slide level2">
+</section>
+<section id="one-way-anova-sample-problem-and-result-output" class="slide level2 output-location-slide"><h2>One-Way ANOVA: Sample problem and result</h2><div class="cell output-location-slide">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="04-stats_files/figure-revealjs/unnamed-chunk-21-1.png" width="1344"></p>
+</figure>
+</div>
+</div>
+</div></section><section id="conduct-the-one-way-anova-test" class="slide level2">
 <h2>Conduct the one-way Anova test</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a>satisfaction_religiousity_anova <span class="ot">&lt;-</span> <span class="fu">aov</span>(life_satisfaction <span class="sc">~</span> religiousity, <span class="at">data =</span> wvs_data)</span>
-<span id="cb20-2"><a></a><span class="fu">summary</span>(satisfaction_religiousity_anova)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a>satisfaction_country_anova <span class="ot">&lt;-</span> <span class="fu">aov</span>(life_satisfaction <span class="sc">~</span> country, <span class="at">data =</span> wvs_cleaned)</span>
+<span id="cb32-2"><a></a><span class="fu">summary</span>(satisfaction_country_anova)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code>               Df Sum Sq Mean Sq F value   Pr(&gt;F)    
-religiousity    3    128   42.82    13.2 1.36e-08 ***
-Residuals    6399  20752    3.24                     
+<pre><code>              Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+country        2    179   89.55   27.68 1.07e-12 ***
+Residuals   6400  20701    3.23                     
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
@@ -668,30 +835,20 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>If your ANOVA test indicates significant result, the next step is to figure out which category pairings are yielding the significant result.</p>
 <p>Tukey’s Honest Significant Difference (HSD) can help us figure that out! Other alternative is the <code>pairwise.t.test</code>, but let’s try Tukey’s for now.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a><span class="fu">TukeyHSD</span>(satisfaction_religiousity_anova)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a></a><span class="fu">TukeyHSD</span>(satisfaction_country_anova)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
 <pre><code>  Tukey multiple comparisons of means
     95% family-wise confidence level
 
-Fit: aov(formula = life_satisfaction ~ religiousity, data = wvs_data)
+Fit: aov(formula = life_satisfaction ~ country, data = wvs_cleaned)
 
-$religiousity
-                                                diff         lwr         upr
-An atheist-A religious person             -0.3673683 -0.53446513 -0.20027152
-Don't know-A religious person              0.1029838 -0.60052046  0.80648800
-Not a religious person-A religious person -0.2272818 -0.35475772 -0.09980581
-Don't know-An atheist                      0.4703521 -0.24126460  1.18196879
-Not a religious person-An atheist          0.1400866 -0.02643742  0.30661054
-Not a religious person-Don't know         -0.3302655 -1.03363393  0.37310286
-                                              p adj
-An atheist-A religious person             0.0000001
-Don't know-A religious person             0.9818620
-Not a religious person-A religious person 0.0000279
-Don't know-An atheist                     0.3245019
-Not a religious person-An atheist         0.1341519
-Not a religious person-Don't know         0.6226518</code></pre>
+$country
+               diff        lwr        upr     p adj
+NZL-CAN  0.55540673  0.3783288  0.7324847 0.0000000
+SGP-CAN  0.02046602 -0.1008956  0.1418276 0.9174716
+SGP-NZL -0.53494071 -0.7279104 -0.3419711 0.0000000</code></pre>
 </div>
 </div>
 </section>
@@ -717,27 +874,30 @@ Not a religious person-Don't know         0.6226518</code></pre>
 <p><strong>Levene’s Test</strong> to test for homogeneity of variance i.e.&nbsp;homoskedasticity</p>
 <div class="cell columns column-output-location">
 <div class="column">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a><span class="fu">library</span>(car)</span>
-<span id="cb24-2"><a></a><span class="fu">leveneTest</span>(life_satisfaction <span class="sc">~</span> religiousity, </span>
-<span id="cb24-3"><a></a>           <span class="at">data =</span> wvs_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a></a><span class="fu">library</span>(car)</span>
+<span id="cb36-2"><a></a><span class="fu">leveneTest</span>(life_satisfaction <span class="sc">~</span> country, </span>
+<span id="cb36-3"><a></a>           <span class="at">data =</span> wvs_cleaned)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output cell-output-stdout">
 <pre><code>Levene's Test for Homogeneity of Variance (center = median)
         Df F value Pr(&gt;F)
-group    3  0.6941 0.5555
-      6399               </code></pre>
+group    2  1.9408 0.1437
+      6400               </code></pre>
 </div>
 </div></div>
-<p>The results indicate that the p-value is less than the significance level of 0.05, suggesting a significant difference in variance across the groups. Consequently, the assumption of homogeneity of variances is violated.</p>
+<p>The results indicate that the p-value is more than the significance level of 0.05, suggesting that there is NO significant difference in variance across the groups. Consequently, the assumption of homogeneity of variances is NOT violated.</p>
 </section>
 <section id="plotting-residuals-residual-vs-fitted" class="slide level2">
 <h2>Plotting Residuals: Residual vs Fitted</h2>
 <p>When we plot the residuals<sup>1</sup>, we can see some outliers as well:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a></a><span class="fu">plot</span>(satisfaction_country_anova, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="04-stats_files/figure-revealjs/unnamed-chunk-22-1.png" width="960"></p>
+<p><img data-src="04-stats_files/figure-revealjs/unnamed-chunk-25-1.png" width="1344"></p>
 </figure>
 </div>
 </div>
@@ -748,46 +908,57 @@ group    3  0.6941 0.5555
 <p><strong>Shapiro-Wilk Test</strong> to test for normality.</p>
 <div class="cell columns column-output-location">
 <div class="column">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a><span class="fu">library</span>(car)</span>
-<span id="cb26-2"><a></a><span class="fu">shapiro.test</span>(wvs_data<span class="sc">$</span>age[<span class="dv">0</span><span class="sc">:</span><span class="dv">5000</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a></a><span class="fu">library</span>(car)</span>
+<span id="cb39-2"><a></a><span class="fu">shapiro.test</span>(wvs_cleaned<span class="sc">$</span>age[<span class="dv">0</span><span class="sc">:</span><span class="dv">5000</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Shapiro-Wilk normality test
 
-data:  wvs_data$age[0:5000]
-W = 0.9726, p-value &lt; 2.2e-16</code></pre>
+data:  wvs_cleaned$age[0:5000]
+W = 0.97084, p-value &lt; 2.2e-16</code></pre>
 </div>
 </div></div>
-<p>The p-value from the Shapiro-Wilk test is less than the significance level of 0.05, indicating that the data significantly deviates from normality. Therefore, the assumption of normality is not satisfied.</p>
+<p>The p-value from the Shapiro-Wilk test is more than the significance level of 0.05, indicating that the data idoes NOT significantly deviates from normality. Therefore, the assumption of normality is satisfied.</p>
 </section>
 <section id="plotting-residuals-q-q-plot" class="slide level2">
 <h2>Plotting Residuals: Q-Q Plot</h2>
 <p>We can see this better from when we plot the residuals:</p>
-
-<img data-src="04-stats_files/figure-revealjs/unnamed-chunk-24-1.png" width="960" class="r-stretch"></section>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a></a><span class="fu">plot</span>(satisfaction_country_anova, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="04-stats_files/figure-revealjs/unnamed-chunk-27-1.png" width="1344"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
 <section id="when-the-assumptions-are-not-met" class="slide level2">
 <h2>When the assumptions are not met…</h2>
 <p>We can use <strong>Kruskal-Wallis rank sum test</strong> as an non-parametric alternative to One-Way ANOVA!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a><span class="fu">kruskal.test</span>(life_satisfaction <span class="sc">~</span> religiousity, <span class="at">data =</span> wvs_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a></a><span class="fu">kruskal.test</span>(life_satisfaction <span class="sc">~</span> country, <span class="at">data =</span> wvs_cleaned)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Kruskal-Wallis rank sum test
 
-data:  life_satisfaction by religiousity
-Kruskal-Wallis chi-squared = 41.101, df = 3, p-value = 6.224e-09</code></pre>
+data:  life_satisfaction by country
+Kruskal-Wallis chi-squared = 80.746, df = 2, p-value &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>Other alternative: <strong>Welch’s ANOVA</strong> for when the homoskedasticity assumption is not met.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a><span class="fu">oneway.test</span>(life_satisfaction <span class="sc">~</span> religiousity, <span class="at">data =</span> wvs_data, <span class="at">var.equal =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a></a><span class="fu">oneway.test</span>(life_satisfaction <span class="sc">~</span> country, <span class="at">data =</span> wvs_cleaned, <span class="at">var.equal =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     One-way analysis of means (not assuming equal variances)
 
-data:  life_satisfaction and religiousity
-F = 12.736, num df = 3.00, denom df = 209.51, p-value = 1.116e-07</code></pre>
+data:  life_satisfaction and country
+F = 27.783, num df = 2.0, denom df = 1710.5, p-value = 1.336e-12</code></pre>
 </div>
 </div>
 </section>
@@ -795,14 +966,30 @@ F = 12.736, num df = 3.00, denom df = 209.51, p-value = 1.116e-07</code></pre>
 <h2>Two-Way ANOVA: Sample problem and result</h2>
 <p>RQ: <strong>Is there a significant difference in life satisfaction across religiousity and countries?</strong></p>
 <p>Let’s visualize the data!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a></a>wvs_cleaned <span class="sc">|&gt;</span> </span>
+<span id="cb46-2"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> religiousity, <span class="at">y =</span> life_satisfaction)) <span class="sc">+</span></span>
+<span id="cb46-3"><a></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb46-4"><a></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span> country) <span class="sc">+</span></span>
+<span id="cb46-5"><a></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb46-6"><a></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
-<img data-src="04-stats_files/figure-revealjs/unnamed-chunk-27-1.png" width="960" class="r-stretch"></section>
-<section id="conduct-the-two-way-anova-test" class="slide level2">
+</section>
+<section id="two-way-anova-sample-problem-and-result-output" class="slide level2 output-location-slide"><h2>Two-Way ANOVA: Sample problem and result</h2><div class="cell output-location-slide">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="04-stats_files/figure-revealjs/unnamed-chunk-30-1.png" width="1344"></p>
+</figure>
+</div>
+</div>
+</div></section><section id="conduct-the-two-way-anova-test" class="slide level2">
 <h2>Conduct the Two-way ANOVA test</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a>satisfaction_relig_country_anova <span class="ot">&lt;-</span> <span class="fu">aov</span>(life_satisfaction <span class="sc">~</span> religiousity <span class="sc">+</span> country, </span>
-<span id="cb32-2"><a></a>                                    <span class="at">data =</span> wvs_data)</span>
-<span id="cb32-3"><a></a><span class="fu">summary</span>(satisfaction_relig_country_anova)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a></a>satisfaction_relig_country_anova <span class="ot">&lt;-</span> <span class="fu">aov</span>(life_satisfaction <span class="sc">~</span> religiousity <span class="sc">+</span> country, </span>
+<span id="cb47-2"><a></a>                                    <span class="at">data =</span> wvs_cleaned)</span>
+<span id="cb47-3"><a></a><span class="fu">summary</span>(satisfaction_relig_country_anova)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -818,30 +1005,30 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <section id="post-hoc-test-for-two-way-anova" class="slide level2">
 <h2>Post-hoc test for Two-way ANOVA</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a></a><span class="fu">TukeyHSD</span>(satisfaction_relig_country_anova)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a></a><span class="fu">TukeyHSD</span>(satisfaction_relig_country_anova)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
 <pre><code>  Tukey multiple comparisons of means
     95% family-wise confidence level
 
-Fit: aov(formula = life_satisfaction ~ religiousity + country, data = wvs_data)
+Fit: aov(formula = life_satisfaction ~ religiousity + country, data = wvs_cleaned)
 
 $religiousity
-                                                diff         lwr        upr
-An atheist-A religious person             -0.3673683 -0.53371770 -0.2010189
-Don't know-A religious person              0.1029838 -0.59737368  0.8033412
-Not a religious person-A religious person -0.2272818 -0.35418751 -0.1003760
-Don't know-An atheist                      0.4703521 -0.23808153  1.1787857
-Not a religious person-An atheist          0.1400866 -0.02569256  0.3058657
-Not a religious person-Don't know         -0.3302655 -1.03048776  0.3699567
+                                                diff        lwr         upr
+A religious person-Not a religious person  0.2272818  0.1003760  0.35418751
+An atheist-Not a religious person         -0.1400866 -0.3058657  0.02569256
+Don't know-Not a religious person          0.3302655 -0.3699567  1.03048776
+An atheist-A religious person             -0.3673683 -0.5337177 -0.20101894
+Don't know-A religious person              0.1029838 -0.5973737  0.80334122
+Don't know-An atheist                      0.4703521 -0.2380815  1.17878572
                                               p adj
+A religious person-Not a religious person 0.0000253
+An atheist-Not a religious person         0.1313305
+Don't know-Not a religious person         0.6191993
 An atheist-A religious person             0.0000001
 Don't know-A religious person             0.9816251
-Not a religious person-A religious person 0.0000253
 Don't know-An atheist                     0.3204859
-Not a religious person-An atheist         0.1313305
-Not a religious person-Don't know         0.6191993
 
 $country
                diff        lwr         upr     p adj
@@ -851,14 +1038,42 @@ SGP-NZL -0.57801085 -0.7703672 -0.38565452 0.0000000</code></pre>
 </div>
 </div>
 </section>
-<section id="lets-try-this-anova-exercise-5-mins" class="slide level2">
-<h2>Let’s try this ANOVA exercise! (5 mins)</h2>
+<section id="learning-check-3" class="slide level2">
+<h2>Learning Check #3</h2>
 <p>Is there a significant difference in political leaning between different sex?</p>
 <ul>
 <li>Visualize the data as well</li>
 <li>Test for normality and homoskedasticity, and choose the appropriate test</li>
 </ul>
-</section>
+<div class="cell">
+<details class="code-fold">
+<summary>Show answer</summary>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a></a>poli_sx_anova <span class="ot">&lt;-</span> <span class="fu">aov</span>(political_scale <span class="sc">~</span> sex, <span class="at">data =</span> wvs_cleaned)</span>
+<span id="cb51-2"><a></a><span class="fu">summary</span>(poli_sx_anova)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>              Df Sum Sq Mean Sq F value Pr(&gt;F)    
+sex            1    310  310.10   71.28 &lt;2e-16 ***
+Residuals   6401  27848    4.35                   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<details class="code-fold">
+<summary>Show answer</summary>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a></a><span class="fu">TukeyHSD</span>(poli_sx_anova)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = political_scale ~ sex, data = wvs_cleaned)
+
+$sex
+                  diff        lwr        upr p adj
+Female-Male -0.4401562 -0.5423583 -0.3379542     0</code></pre>
+</div>
+</div>
+</section></section>
 <section id="end-of-session-4" class="title-slide slide level1 center">
 <h1>End of Session 4!</h1>
 <p>Next session: Linear and Logistic Regressions!</p>

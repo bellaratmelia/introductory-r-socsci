@@ -1215,21 +1215,21 @@
     "href": "04-stats.html#load-our-data-for-today",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "Load our data for today!",
-    "text": "Load our data for today!\nUse read_csv from readr package (part of tidyverse) to load our data into a dataframe\n\n# import tidyverse library\nlibrary(tidyverse)\n\n# read the WVS data\nwvs_data &lt;- read_csv(\"data-output/wvs_processed.csv\")\n\n# Convert categorical variables to factors\nwvs_data &lt;- wvs_data |&gt; \n    mutate(across(c(\"country\", \"sex\", \"marital_status\", \n                    \"employment\", \"religiousity\"), as.factor))\n\n# peek at the data\nglimpse(wvs_data)"
+    "text": "Load our data for today!\nUse read_csv from readr package (part of tidyverse) to load our data into a dataframe\n\n# import tidyverse library\nlibrary(tidyverse)\n\n# read the CSV with WVS data\nwvs_cleaned &lt;- read_csv(\"data-output/wvs_cleaned_v1.csv\")\n\n# Convert categorical variables to factors\ncolumns_to_convert &lt;- c(\"country\", \"religiousity\", \"sex\", \"marital_status\", \"employment\")\n\nwvs_cleaned &lt;- wvs_cleaned |&gt; \n    mutate(across(all_of(columns_to_convert), as_factor))\n\n# peek at the data, pay attention to the data types!\nglimpse(wvs_cleaned)"
   },
   {
     "objectID": "04-stats.html#chi-square-test-of-independence",
     "href": "04-stats.html#chi-square-test-of-independence",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "Chi-square test of independence",
-    "text": "Chi-square test of independence\nThe \\(X^2\\) test of independence evaluates whether there is a statistically significant relationship between two categorical variables.\nThis is done by analyzing the frequency table (i.e., contingency table) formed by two categorical variables.\nExample: Is there a relationship between religiousity and marital_status in our WVS data?\nTypically, we can start with visualizing the data first!\n\n\n                        \n                         Divorced Living together as married Married Separated\n  A religious person          135                        154    1562        46\n  An atheist                   56                        204     431        34\n  Don't know                    1                          7      23         0\n  Not a religious person      152                        398    1261        59\n                        \n                         Single Widowed\n  A religious person        590     118\n  An atheist                338      24\n  Don't know                  9       4\n  Not a religious person    731      66"
+    "text": "Chi-square test of independence\nThe \\(X^2\\) test of independence evaluates whether there is a statistically significant relationship between two categorical variables.\nThis is done by analyzing the frequency table (i.e., contingency table) formed by two categorical variables.\nExample: Is there a relationship between religiousity and marital_status in our WVS data?\nTypically, we can start with visualizing the data first!\n\n\n                        \n                         Widowed Single Married Divorced\n  Not a religious person      66    731    1261      152\n  A religious person         118    590    1562      135\n  An atheist                  24    338     431       56\n  Don't know                   4      9      23        1\n                        \n                         Living together as married Separated\n  Not a religious person                        398        59\n  A religious person                            154        46\n  An atheist                                    204        34\n  Don't know                                      7         0"
   },
   {
     "objectID": "04-stats.html#chi-square-sample-problem-and-results",
     "href": "04-stats.html#chi-square-sample-problem-and-results",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "Chi-Square: Sample problem and results",
-    "text": "Chi-Square: Sample problem and results\nIs there a relationship between religiosity and marital_status?\n\nchisq.test(table(wvs_data$religiousity, wvs_data$marital_status))\n\n\n    Pearson's Chi-squared test\n\ndata:  table(wvs_data$religiousity, wvs_data$marital_status)\nX-squared = 277.36, df = 15, p-value &lt; 2.2e-16\n\n\n\n\nX-squared = the coefficient\ndf = degree of freedom\np-value = the probability of getting more extreme results than what was observed. Generally, if this value is less than the pre-determined significance level (also called alpha), the result would be considered “statistically significant”\n\n\nWhat if there is a hypothesis? How would you write this in the report?"
+    "text": "Chi-Square: Sample problem and results\nIs there a relationship between religiosity and country?\n\nchisq.test(table(wvs_cleaned$religiousity, wvs_cleaned$country))\n\n\n    Pearson's Chi-squared test\n\ndata:  table(wvs_cleaned$religiousity, wvs_cleaned$country)\nX-squared = 672.16, df = 6, p-value &lt; 2.2e-16\n\n\n\n\nX-squared = the coefficient\ndf = degree of freedom\np-value = the probability of getting more extreme results than what was observed. Generally, if this value is less than the pre-determined significance level (also called alpha), the result would be considered “statistically significant”\n\n\nWhat if there is a hypothesis? How would you write this in the report?"
   },
   {
     "objectID": "04-stats.html#correlation",
@@ -1243,21 +1243,35 @@
     "href": "04-stats.html#correlation-sample-problem-and-result",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "Correlation: Sample problem and result",
-    "text": "Correlation: Sample problem and result\nRQ: Is there a significant correlation between life satisfaction and financial satisfaction?\nAs both variables are numerical and continuous, we can use pearson correlation.\nLet’s start with visualizing the data, which can be used to support the explanation."
+    "text": "Correlation: Sample problem and result\nRQ: Is there a significant correlation between life satisfaction and financial satisfaction?\nAs both variables are numerical and continuous, we can use pearson correlation.\nLet’s start with visualizing the data, which can be used to support the explanation.\n\nwvs_cleaned |&gt; \n    ggplot(aes(x = financial_satisfaction, y = life_satisfaction)) +\n    geom_jitter(color=\"maroon\", alpha=0.5) +\n    geom_smooth(method = \"lm\", se = TRUE) # se shows the confidence interval"
+  },
+  {
+    "objectID": "04-stats.html#correlation-sample-problem-and-result-output",
+    "href": "04-stats.html#correlation-sample-problem-and-result-output",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "Correlation: Sample problem and result",
+    "text": "Correlation: Sample problem and result"
   },
   {
     "objectID": "04-stats.html#conduct-the-correlation-test",
     "href": "04-stats.html#conduct-the-correlation-test",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "Conduct the correlation test",
-    "text": "Conduct the correlation test\n\n\ncor.test(wvs_data$life_satisfaction, \n         wvs_data$financial_satisfaction, \n         method = \"pearson\")\n\n\n\n    Pearson's product-moment correlation\n\ndata:  wvs_data$life_satisfaction and wvs_data$financial_satisfaction\nt = 66.999, df = 6401, p-value &lt; 2.2e-16\nalternative hypothesis: true correlation is not equal to 0\n95 percent confidence interval:\n 0.6274032 0.6562061\nsample estimates:\n      cor \n0.6420311 \n\n\n\n\ncor is the correlation coefficient - this is the number that you want to report.\nt is the t-test statistic\ndf is the degrees of freedom\np-value is the significance level of the t-test\nconf.int is the confidence interval of the coefficient at 95%\nsample estimates is the correlation coefficient"
+    "text": "Conduct the correlation test\n\n\ncor.test(wvs_cleaned$life_satisfaction, \n         wvs_cleaned$financial_satisfaction, \n         method = \"pearson\")\n\n\n\n    Pearson's product-moment correlation\n\ndata:  wvs_cleaned$life_satisfaction and wvs_cleaned$financial_satisfaction\nt = 66.999, df = 6401, p-value &lt; 2.2e-16\nalternative hypothesis: true correlation is not equal to 0\n95 percent confidence interval:\n 0.6274032 0.6562061\nsample estimates:\n      cor \n0.6420311 \n\n\n\n\ncor is the correlation coefficient - this is the number that you want to report.\nt is the t-test statistic\ndf is the degrees of freedom\np-value is the significance level of the t-test\nconf.int is the confidence interval of the coefficient at 95%\nsample estimates is the correlation coefficient"
   },
   {
-    "objectID": "04-stats.html#lets-try-this-correlation-exercise-5-mins",
-    "href": "04-stats.html#lets-try-this-correlation-exercise-5-mins",
+    "objectID": "04-stats.html#learning-check-1",
+    "href": "04-stats.html#learning-check-1",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
-    "section": "Let’s try this correlation exercise! (5 mins)",
-    "text": "Let’s try this correlation exercise! (5 mins)\n\nCalculate the correlation coefficient between life satisfaction and freedom\n\nWhich method should you use for this?\nHow strong is the correlation? i.e. would you say it’s a strong correlation?\nIn which direction is the correlation?\nIs the correlation coefficient statistically significant?\nVisualize the relationship!"
+    "section": "Learning Check #1",
+    "text": "Learning Check #1\nIs there a relationship between religiousity and age group? Calculate the chi-square test!\noptional: Visualize the proportion of age group for each religiousity category.\n\n\nShow answer\nchisq.test(table(wvs_cleaned$religiousity, wvs_cleaned$age_group))\n\n\n\n    Pearson's Chi-squared test\n\ndata:  table(wvs_cleaned$religiousity, wvs_cleaned$age_group)\nX-squared = 97.449, df = 9, p-value &lt; 2.2e-16\n\n\nVisualization:\n\n\nShow answer\nwvs_cleaned |&gt; \n    ggplot(aes(x = religiousity, fill = age_group)) +\n    geom_bar(position = \"fill\") +\n    labs(title = \"Proportion of age groups for each religiousity\") +\n    theme_minimal()"
+  },
+  {
+    "objectID": "04-stats.html#learning-check-1-output",
+    "href": "04-stats.html#learning-check-1-output",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "Learning Check #1",
+    "text": "Learning Check #1"
   },
   {
     "objectID": "04-stats.html#t-tests",
@@ -1278,56 +1292,70 @@
     "href": "04-stats.html#t-test-one-sample-t-test",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "T-test: One-sample T-Test",
-    "text": "T-test: One-sample T-Test\nRQ: Is the average life satisfaction in our sample significantly different from the global average of 6.5?\nLet’s start with visualizing the data\n\n\nwvs_data |&gt; \n    ggplot(aes(y = life_satisfaction, x = 1)) +\n    geom_boxplot(width = 0.2) + \n    geom_hline(yintercept = 6.5, color=\"red\") +\n    geom_label(label = \"global mean\", \n               x = 1, y = 6.6, \n               label.size = 0.15) +\n    coord_flip() +\n    theme(aspect.ratio = 1/3)"
+    "text": "T-test: One-sample T-Test\nRQ: Is the average life satisfaction in our sample significantly different from the global average of 6.5?\nLet’s start with visualizing the data\n\nwvs_cleaned |&gt; \n    ggplot(aes(y = life_satisfaction)) +\n    geom_boxplot(width = 0.2) + \n    geom_hline(yintercept = 6.5, color=\"red\")"
   },
   {
     "objectID": "04-stats.html#conduct-the-one-sample-t-test",
     "href": "04-stats.html#conduct-the-one-sample-t-test",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "Conduct the One-sample T-Test",
-    "text": "Conduct the One-sample T-Test\n\nglobal_mean_satisfaction = 6.5  \n\nt.test(wvs_data$life_satisfaction,          \n       alternative = \"two.sided\", \n       mu = global_mean_satisfaction)\n\n\n\n\n    One Sample t-test\n\ndata:  wvs_data$life_satisfaction\nt = 26.776, df = 6402, p-value &lt; 2.2e-16\nalternative hypothesis: true mean is not equal to 6.5\n95 percent confidence interval:\n 7.060083 7.148570\nsample estimates:\nmean of x \n 7.104326 \n\n\nWhat if there is a hypothesis? How would you write this in the report?"
+    "text": "Conduct the One-sample T-Test\n\nglobal_mean_satisfaction = 6.5  \n\nt.test(wvs_cleaned$life_satisfaction,          \n       alternative = \"two.sided\", \n       mu = global_mean_satisfaction)\n\n\n\n\n    One Sample t-test\n\ndata:  wvs_cleaned$life_satisfaction\nt = 26.776, df = 6402, p-value &lt; 2.2e-16\nalternative hypothesis: true mean is not equal to 6.5\n95 percent confidence interval:\n 7.060083 7.148570\nsample estimates:\nmean of x \n 7.104326 \n\n\nWhat if there is a hypothesis? How would you write this in the report?"
   },
   {
     "objectID": "04-stats.html#t-test-independent-samples-t-test",
     "href": "04-stats.html#t-test-independent-samples-t-test",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "T-Test: Independent Samples T-Test",
-    "text": "T-Test: Independent Samples T-Test\nRQ: Is there a significant difference in life satisfaction between males and females?\nLet’s first take only the necessary columns and get some summary statistics, particularly on the number of samples for each group, as well as the mean, standard deviation, and variance.\n\n\nsatisfaction_by_gender &lt;- wvs_data |&gt; \n    select(life_satisfaction, sex)\n\nsatisfaction_by_gender |&gt; \n    group_by(sex) |&gt; \n    summarise(total = n(), \n              mean = mean(life_satisfaction),\n              variance = var(life_satisfaction),\n              stdeviation = sd(life_satisfaction))\n\n\n# A tibble: 2 × 5\n  sex    total  mean variance stdeviation\n  &lt;fct&gt;  &lt;int&gt; &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;\n1 Female  3232  7.11     3.18        1.78\n2 Male    3171  7.09     3.35        1.83"
+    "text": "T-Test: Independent Samples T-Test\nRQ: Is there a significant difference in life satisfaction between males and females?\nLet’s first take only the necessary columns and get some summary statistics, particularly on the number of samples for each group, as well as the mean, standard deviation, and variance.\n\nwvs_cleaned |&gt; \n    group_by(sex) |&gt; \n    summarise(total = n(), \n              mean = mean(life_satisfaction),\n              variance = var(life_satisfaction),\n              stdeviation = sd(life_satisfaction))\n\n\n\n# A tibble: 2 × 5\n  sex    total  mean variance stdeviation\n  &lt;fct&gt;  &lt;int&gt; &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;\n1 Male    3171  7.09     3.35        1.83\n2 Female  3232  7.11     3.18        1.78"
   },
   {
     "objectID": "04-stats.html#visualize-the-differences-between-two-samples",
     "href": "04-stats.html#visualize-the-differences-between-two-samples",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "Visualize the differences between two samples",
-    "text": "Visualize the differences between two samples\nThe variance will be easier to see when we visualize it as well. As we can see, the variance for Y group is wider than the N group. This suggests that the variance might be heterogeneous (heteroskedastic)."
+    "text": "Visualize the differences between two samples\nThe variance will be easier to see when we visualize it as well. As we can see, the variance for both groups are about the same. This suggests that the variance might be homoegeneous.\n\nwvs_cleaned |&gt; \n    ggplot(aes(x = sex, y = life_satisfaction)) +\n    geom_boxplot() +\n    theme_minimal()"
   },
   {
     "objectID": "04-stats.html#conduct-the-independent-samples-t-test",
     "href": "04-stats.html#conduct-the-independent-samples-t-test",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "Conduct the independent samples T-test",
-    "text": "Conduct the independent samples T-test\nRemember, the hypotheses are:\n\n\n\\(H_0\\): There is no significant difference in the mean age between those who intend to vote “Yes” and those who intend to vote “No”.\n\n\\(H_1\\): There is a significant difference in the mean age between those who intend to vote “Yes” and those who intend to vote “No”.\n\n\n\nt.test(life_satisfaction ~ sex, \n       data = satisfaction_by_gender, \n       var.equal = FALSE)\n\n\n\n    Welch Two Sample t-test\n\ndata:  life_satisfaction by sex\nt = 0.41256, df = 6387.7, p-value = 0.6799\nalternative hypothesis: true difference in means between group Female and group Male is not equal to 0\n95 percent confidence interval:\n -0.06988992  0.10714841\nsample estimates:\nmean in group Female   mean in group Male \n            7.113552             7.094923 \n\n\n\n\n\n\n\n\nNotice that we are using Welch’s t-test instead of Students’ t-test\n\n\nWelch’s t-test (also known as unequal variances t-test, is a more robust alternative to Student’s t-test. It is often used when two samples have unequal variances and possibly unequal sample sizes."
+    "text": "Conduct the independent samples T-test\nRemember, the hypotheses are:\n\n\n\\(H_0\\): There is no significant difference in the mean age between those who intend to vote “Yes” and those who intend to vote “No”.\n\n\\(H_1\\): There is a significant difference in the mean age between those who intend to vote “Yes” and those who intend to vote “No”.\n\n\n\nt.test(life_satisfaction ~ sex, \n       data = wvs_cleaned, \n       var.equal = FALSE)\n\n\n\n    Welch Two Sample t-test\n\ndata:  life_satisfaction by sex\nt = -0.41256, df = 6387.7, p-value = 0.6799\nalternative hypothesis: true difference in means between group Male and group Female is not equal to 0\n95 percent confidence interval:\n -0.10714841  0.06988992\nsample estimates:\n  mean in group Male mean in group Female \n            7.094923             7.113552 \n\n\n\n\n\n\n\n\nNotice that we are using Welch’s t-test instead of Students’ t-test\n\n\nWelch’s t-test (also known as unequal variances t-test, is a more robust alternative to Student’s t-test. It is often used when two samples have unequal variances and possibly unequal sample sizes."
   },
   {
     "objectID": "04-stats.html#t-test-paired-sample-t-test",
     "href": "04-stats.html#t-test-paired-sample-t-test",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "T-Test: Paired Sample T-Test",
-    "text": "T-Test: Paired Sample T-Test\nUnfortunately, our data is not suitable for paired T-Test. For demo purposes, we are going to use a built-in sample datasets called sleep from the base R dataset.\nThe dataset is already loaded, so you can use it right away!\n\ntype View(sleep) in your R console (bottom left), and then press enter. RStudio will open up the preview of the dataset.\ntype ?sleep in your R console to view the help page (a.k.a vignette) about this dataset.\ntype data() in your console to see what are the available datasets that you can use for practice!\n\n\n\nRows: 20\nColumns: 3\n$ extra &lt;dbl&gt; 0.7, -1.6, -0.2, -1.2, -0.1, 3.4, 3.7, 0.8, 0.0, 2.0, 1.9, 0.8, …\n$ group &lt;fct&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2\n$ ID    &lt;fct&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10"
+    "text": "T-Test: Paired Sample T-Test\nUnfortunately, our data is not suitable for paired T-Test. For demo purposes, we are going to use a built-in sample datasets called sleep from the base R dataset.\nThe dataset is already loaded, so you can use it right away!\n\ntype View(sleep) in your R console (bottom left), and then press enter. RStudio will open up the preview of the dataset.\ntype ?sleep in your R console to view the help page (a.k.a vignette) about this dataset.\ntype data() in your console to see what are the available datasets that you can use for practice!\n\n\nsleep &lt;- as_tibble(sleep)\nprint(sleep)"
+  },
+  {
+    "objectID": "04-stats.html#t-test-paired-sample-t-test-output",
+    "href": "04-stats.html#t-test-paired-sample-t-test-output",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "T-Test: Paired Sample T-Test",
+    "text": "T-Test: Paired Sample T-Test\n\n# A tibble: 20 × 3\n   extra group ID   \n   &lt;dbl&gt; &lt;fct&gt; &lt;fct&gt;\n 1   0.7 1     1    \n 2  -1.6 1     2    \n 3  -0.2 1     3    \n 4  -1.2 1     4    \n 5  -0.1 1     5    \n 6   3.4 1     6    \n 7   3.7 1     7    \n 8   0.8 1     8    \n 9   0   1     9    \n10   2   1     10   \n11   1.9 2     1    \n12   0.8 2     2    \n13   1.1 2     3    \n14   0.1 2     4    \n15  -0.1 2     5    \n16   4.4 2     6    \n17   5.5 2     7    \n18   1.6 2     8    \n19   4.6 2     9    \n20   3.4 2     10"
   },
   {
     "objectID": "04-stats.html#visualise-the-before-group-1-and-after-group-2",
     "href": "04-stats.html#visualise-the-before-group-1-and-after-group-2",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "Visualise the before (group 1) and after (group 2)",
-    "text": "Visualise the before (group 1) and after (group 2)\n\n\n# A tibble: 2 × 5\n  group     n  mean    sd variance\n  &lt;fct&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;\n1 1        10  0.75  1.79     3.20\n2 2        10  2.33  2.00     4.01"
+    "text": "Visualise the before (group 1) and after (group 2)\n\nsleep |&gt; \n    group_by(group) |&gt; \n    summarise(n = n(), mean = mean(extra), sd = sd(extra), variance = var(extra))\n\n# A tibble: 2 × 5\n  group     n  mean    sd variance\n  &lt;fct&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;\n1 1        10  0.75  1.79     3.20\n2 2        10  2.33  2.00     4.01\n\n\nVisualization:\n\nsleep |&gt; \n    ggplot(aes(x = group, y = extra)) +\n    geom_boxplot() +\n    theme_minimal()"
+  },
+  {
+    "objectID": "04-stats.html#visualise-the-before-group-1-and-after-group-2-output",
+    "href": "04-stats.html#visualise-the-before-group-1-and-after-group-2-output",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "Visualise the before (group 1) and after (group 2)",
+    "text": "Visualise the before (group 1) and after (group 2)"
   },
   {
     "objectID": "04-stats.html#transform-the-data-shape",
     "href": "04-stats.html#transform-the-data-shape",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "Transform the data shape",
-    "text": "Transform the data shape\nThe data is in long format. let’s transform it into wide format so that we can conduct the analysis more easily.\n\nsleep_wide &lt;- sleep |&gt; \n    pivot_wider(names_from = group, values_from = extra, \n                names_prefix = \"group_\")\nglimpse(sleep_wide)\n\n\n\nRows: 10\nColumns: 3\n$ ID      &lt;fct&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\n$ group_1 &lt;dbl&gt; 0.7, -1.6, -0.2, -1.2, -0.1, 3.4, 3.7, 0.8, 0.0, 2.0\n$ group_2 &lt;dbl&gt; 1.9, 0.8, 1.1, 0.1, -0.1, 4.4, 5.5, 1.6, 4.6, 3.4"
+    "text": "Transform the data shape\nThe data is in long format. let’s transform it into wide format so that we can conduct the analysis more easily.\n\nsleep_wide &lt;- sleep |&gt; \n    pivot_wider(names_from = group, values_from = extra, \n                names_prefix = \"group_\")\nprint(sleep_wide)\n\n\n\n# A tibble: 10 × 3\n   ID    group_1 group_2\n   &lt;fct&gt;   &lt;dbl&gt;   &lt;dbl&gt;\n 1 1         0.7     1.9\n 2 2        -1.6     0.8\n 3 3        -0.2     1.1\n 4 4        -1.2     0.1\n 5 5        -0.1    -0.1\n 6 6         3.4     4.4\n 7 7         3.7     5.5\n 8 8         0.8     1.6\n 9 9         0       4.6\n10 10        2       3.4"
   },
   {
     "objectID": "04-stats.html#conduct-the-paired-sample-t-test",
@@ -1335,6 +1363,20 @@
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "Conduct the paired-sample T-test",
     "text": "Conduct the paired-sample T-test\nRemember, the hypotheses are:\n\n\n\\(H_0\\): There is no significant difference in the increase in hours of sleep.\n\n\\(H_1\\): There is a significant difference in the increase in hours of sleep.\n\n\nt.test(Pair(sleep_wide$group_1, sleep_wide$group_2) ~ 1,\n       data = sleep)\n\n\n\n\n    Paired t-test\n\ndata:  Pair(sleep_wide$group_1, sleep_wide$group_2)\nt = -4.0621, df = 9, p-value = 0.002833\nalternative hypothesis: true mean difference is not equal to 0\n95 percent confidence interval:\n -2.4598858 -0.7001142\nsample estimates:\nmean difference \n          -1.58"
+  },
+  {
+    "objectID": "04-stats.html#learning-check-2",
+    "href": "04-stats.html#learning-check-2",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "Learning Check #2",
+    "text": "Learning Check #2\nUsing the pre-loaded dataset called CO2, conduct the T-test betwen the two different Treatment to compare if there’s any difference in the carbon dioxide uptake between the two treatments. Type ?CO2 in your Console to retrieve the vignette of this data.\n\n\nShow answer\nt.test(uptake ~ Treatment, data = CO2)\n\n\n\n    Welch Two Sample t-test\n\ndata:  uptake by Treatment\nt = 3.0485, df = 80.945, p-value = 0.003107\nalternative hypothesis: true difference in means between group nonchilled and group chilled is not equal to 0\n95 percent confidence interval:\n  2.382366 11.336682\nsample estimates:\nmean in group nonchilled    mean in group chilled \n                30.64286                 23.78333 \n\n\nVisualize the data:\n\n\nShow answer\nCO2 |&gt; ggplot(aes(x = Treatment, y = uptake)) +\n    geom_boxplot(width = 0.2) +\n    theme_minimal()"
+  },
+  {
+    "objectID": "04-stats.html#learning-check-2-output",
+    "href": "04-stats.html#learning-check-2-output",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "Learning Check #2",
+    "text": "Learning Check #2"
   },
   {
     "objectID": "04-stats.html#anova-analysis-of-variance",
@@ -1348,21 +1390,28 @@
     "href": "04-stats.html#one-way-anova-sample-problem-and-result",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "One-Way ANOVA: Sample problem and result",
-    "text": "One-Way ANOVA: Sample problem and result\nRQ: Is there a significant difference in life satisfaction between different religiousity?\nLet’s visualize the data first!"
+    "text": "One-Way ANOVA: Sample problem and result\nRQ: Is there a significant difference in life satisfaction between different country?\nLet’s visualize the data first!\n\nwvs_cleaned |&gt; \n    ggplot(aes(x = country, y = life_satisfaction)) +\n    geom_boxplot() +\n    theme_minimal() +\n    theme(axis.text.x = element_text(angle = 45, hjust = 1))"
+  },
+  {
+    "objectID": "04-stats.html#one-way-anova-sample-problem-and-result-output",
+    "href": "04-stats.html#one-way-anova-sample-problem-and-result-output",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "One-Way ANOVA: Sample problem and result",
+    "text": "One-Way ANOVA: Sample problem and result"
   },
   {
     "objectID": "04-stats.html#conduct-the-one-way-anova-test",
     "href": "04-stats.html#conduct-the-one-way-anova-test",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "Conduct the one-way Anova test",
-    "text": "Conduct the one-way Anova test\n\nsatisfaction_religiousity_anova &lt;- aov(life_satisfaction ~ religiousity, data = wvs_data)\nsummary(satisfaction_religiousity_anova)\n\n               Df Sum Sq Mean Sq F value   Pr(&gt;F)    \nreligiousity    3    128   42.82    13.2 1.36e-08 ***\nResiduals    6399  20752    3.24                     \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\n\nF-value: the coefficient value\nPr(&gt;F): the p-value\nSum Sq: Sum of Squares\nMean Sq : Mean Squares\nDf: Degrees of Freedom"
+    "text": "Conduct the one-way Anova test\n\nsatisfaction_country_anova &lt;- aov(life_satisfaction ~ country, data = wvs_cleaned)\nsummary(satisfaction_country_anova)\n\n\n\n              Df Sum Sq Mean Sq F value   Pr(&gt;F)    \ncountry        2    179   89.55   27.68 1.07e-12 ***\nResiduals   6400  20701    3.23                     \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\n\nF-value: the coefficient value\nPr(&gt;F): the p-value\nSum Sq: Sum of Squares\nMean Sq : Mean Squares\nDf: Degrees of Freedom"
   },
   {
     "objectID": "04-stats.html#post-hoc-test-only-when-result-is-significant",
     "href": "04-stats.html#post-hoc-test-only-when-result-is-significant",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "Post-hoc test (only when result is significant)",
-    "text": "Post-hoc test (only when result is significant)\nIf your ANOVA test indicates significant result, the next step is to figure out which category pairings are yielding the significant result.\nTukey’s Honest Significant Difference (HSD) can help us figure that out! Other alternative is the pairwise.t.test, but let’s try Tukey’s for now.\n\nTukeyHSD(satisfaction_religiousity_anova)\n\n\n\n  Tukey multiple comparisons of means\n    95% family-wise confidence level\n\nFit: aov(formula = life_satisfaction ~ religiousity, data = wvs_data)\n\n$religiousity\n                                                diff         lwr         upr\nAn atheist-A religious person             -0.3673683 -0.53446513 -0.20027152\nDon't know-A religious person              0.1029838 -0.60052046  0.80648800\nNot a religious person-A religious person -0.2272818 -0.35475772 -0.09980581\nDon't know-An atheist                      0.4703521 -0.24126460  1.18196879\nNot a religious person-An atheist          0.1400866 -0.02643742  0.30661054\nNot a religious person-Don't know         -0.3302655 -1.03363393  0.37310286\n                                              p adj\nAn atheist-A religious person             0.0000001\nDon't know-A religious person             0.9818620\nNot a religious person-A religious person 0.0000279\nDon't know-An atheist                     0.3245019\nNot a religious person-An atheist         0.1341519\nNot a religious person-Don't know         0.6226518"
+    "text": "Post-hoc test (only when result is significant)\nIf your ANOVA test indicates significant result, the next step is to figure out which category pairings are yielding the significant result.\nTukey’s Honest Significant Difference (HSD) can help us figure that out! Other alternative is the pairwise.t.test, but let’s try Tukey’s for now.\n\nTukeyHSD(satisfaction_country_anova)\n\n\n\n  Tukey multiple comparisons of means\n    95% family-wise confidence level\n\nFit: aov(formula = life_satisfaction ~ country, data = wvs_cleaned)\n\n$country\n               diff        lwr        upr     p adj\nNZL-CAN  0.55540673  0.3783288  0.7324847 0.0000000\nSGP-CAN  0.02046602 -0.1008956  0.1418276 0.9174716\nSGP-NZL -0.53494071 -0.7279104 -0.3419711 0.0000000"
   },
   {
     "objectID": "04-stats.html#anova-assumptions",
@@ -1376,63 +1425,70 @@
     "href": "04-stats.html#verifying-the-assumption-test-for-homogeneity-of-variance",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "Verifying the assumption: Test for Homogeneity of variance",
-    "text": "Verifying the assumption: Test for Homogeneity of variance\nLevene’s Test to test for homogeneity of variance i.e. homoskedasticity\n\n\nlibrary(car)\nleveneTest(life_satisfaction ~ religiousity, \n           data = wvs_data)\n\n\nLevene's Test for Homogeneity of Variance (center = median)\n        Df F value Pr(&gt;F)\ngroup    3  0.6941 0.5555\n      6399               \n\n\nThe results indicate that the p-value is less than the significance level of 0.05, suggesting a significant difference in variance across the groups. Consequently, the assumption of homogeneity of variances is violated."
+    "text": "Verifying the assumption: Test for Homogeneity of variance\nLevene’s Test to test for homogeneity of variance i.e. homoskedasticity\n\n\nlibrary(car)\nleveneTest(life_satisfaction ~ country, \n           data = wvs_cleaned)\n\n\nLevene's Test for Homogeneity of Variance (center = median)\n        Df F value Pr(&gt;F)\ngroup    2  1.9408 0.1437\n      6400               \n\n\nThe results indicate that the p-value is more than the significance level of 0.05, suggesting that there is NO significant difference in variance across the groups. Consequently, the assumption of homogeneity of variances is NOT violated."
   },
   {
     "objectID": "04-stats.html#plotting-residuals-residual-vs-fitted",
     "href": "04-stats.html#plotting-residuals-residual-vs-fitted",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "Plotting Residuals: Residual vs Fitted",
-    "text": "Plotting Residuals: Residual vs Fitted\nWhen we plot the residuals1, we can see some outliers as well:\n\n\n\n\n\n\n\n\n\nResidual = difference between an observed value and the mean of all values for that group."
+    "text": "Plotting Residuals: Residual vs Fitted\nWhen we plot the residuals1, we can see some outliers as well:\n\nplot(satisfaction_country_anova, 1)\n\n\n\n\n\n\n\n\n\n\nResidual = difference between an observed value and the mean of all values for that group."
   },
   {
     "objectID": "04-stats.html#verifying-the-assumptions-test-for-normality",
     "href": "04-stats.html#verifying-the-assumptions-test-for-normality",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "Verifying the assumptions: Test for Normality",
-    "text": "Verifying the assumptions: Test for Normality\nShapiro-Wilk Test to test for normality.\n\n\nlibrary(car)\nshapiro.test(wvs_data$age[0:5000])\n\n\n\n    Shapiro-Wilk normality test\n\ndata:  wvs_data$age[0:5000]\nW = 0.9726, p-value &lt; 2.2e-16\n\n\nThe p-value from the Shapiro-Wilk test is less than the significance level of 0.05, indicating that the data significantly deviates from normality. Therefore, the assumption of normality is not satisfied."
+    "text": "Verifying the assumptions: Test for Normality\nShapiro-Wilk Test to test for normality.\n\n\nlibrary(car)\nshapiro.test(wvs_cleaned$age[0:5000])\n\n\n\n    Shapiro-Wilk normality test\n\ndata:  wvs_cleaned$age[0:5000]\nW = 0.97084, p-value &lt; 2.2e-16\n\n\nThe p-value from the Shapiro-Wilk test is more than the significance level of 0.05, indicating that the data idoes NOT significantly deviates from normality. Therefore, the assumption of normality is satisfied."
   },
   {
     "objectID": "04-stats.html#plotting-residuals-q-q-plot",
     "href": "04-stats.html#plotting-residuals-q-q-plot",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "Plotting Residuals: Q-Q Plot",
-    "text": "Plotting Residuals: Q-Q Plot\nWe can see this better from when we plot the residuals:"
+    "text": "Plotting Residuals: Q-Q Plot\nWe can see this better from when we plot the residuals:\n\nplot(satisfaction_country_anova, 2)"
   },
   {
     "objectID": "04-stats.html#when-the-assumptions-are-not-met",
     "href": "04-stats.html#when-the-assumptions-are-not-met",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "When the assumptions are not met…",
-    "text": "When the assumptions are not met…\nWe can use Kruskal-Wallis rank sum test as an non-parametric alternative to One-Way ANOVA!\n\nkruskal.test(life_satisfaction ~ religiousity, data = wvs_data)\n\n\n    Kruskal-Wallis rank sum test\n\ndata:  life_satisfaction by religiousity\nKruskal-Wallis chi-squared = 41.101, df = 3, p-value = 6.224e-09\n\n\nOther alternative: Welch’s ANOVA for when the homoskedasticity assumption is not met.\n\noneway.test(life_satisfaction ~ religiousity, data = wvs_data, var.equal = FALSE)\n\n\n    One-way analysis of means (not assuming equal variances)\n\ndata:  life_satisfaction and religiousity\nF = 12.736, num df = 3.00, denom df = 209.51, p-value = 1.116e-07"
+    "text": "When the assumptions are not met…\nWe can use Kruskal-Wallis rank sum test as an non-parametric alternative to One-Way ANOVA!\n\nkruskal.test(life_satisfaction ~ country, data = wvs_cleaned)\n\n\n    Kruskal-Wallis rank sum test\n\ndata:  life_satisfaction by country\nKruskal-Wallis chi-squared = 80.746, df = 2, p-value &lt; 2.2e-16\n\n\nOther alternative: Welch’s ANOVA for when the homoskedasticity assumption is not met.\n\noneway.test(life_satisfaction ~ country, data = wvs_cleaned, var.equal = FALSE)\n\n\n    One-way analysis of means (not assuming equal variances)\n\ndata:  life_satisfaction and country\nF = 27.783, num df = 2.0, denom df = 1710.5, p-value = 1.336e-12"
   },
   {
     "objectID": "04-stats.html#two-way-anova-sample-problem-and-result",
     "href": "04-stats.html#two-way-anova-sample-problem-and-result",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "Two-Way ANOVA: Sample problem and result",
-    "text": "Two-Way ANOVA: Sample problem and result\nRQ: Is there a significant difference in life satisfaction across religiousity and countries?\nLet’s visualize the data!"
+    "text": "Two-Way ANOVA: Sample problem and result\nRQ: Is there a significant difference in life satisfaction across religiousity and countries?\nLet’s visualize the data!\n\nwvs_cleaned |&gt; \n    ggplot(aes(x = religiousity, y = life_satisfaction)) +\n    geom_boxplot() +\n    facet_wrap(~ country) +\n    theme_minimal() +\n    theme(axis.text.x = element_text(angle = 45, hjust = 1))"
+  },
+  {
+    "objectID": "04-stats.html#two-way-anova-sample-problem-and-result-output",
+    "href": "04-stats.html#two-way-anova-sample-problem-and-result-output",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "Two-Way ANOVA: Sample problem and result",
+    "text": "Two-Way ANOVA: Sample problem and result"
   },
   {
     "objectID": "04-stats.html#conduct-the-two-way-anova-test",
     "href": "04-stats.html#conduct-the-two-way-anova-test",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "Conduct the Two-way ANOVA test",
-    "text": "Conduct the Two-way ANOVA test\n\nsatisfaction_relig_country_anova &lt;- aov(life_satisfaction ~ religiousity + country, \n                                    data = wvs_data)\nsummary(satisfaction_relig_country_anova)\n\n\n\n               Df Sum Sq Mean Sq F value   Pr(&gt;F)    \nreligiousity    3    128   42.82   13.32 1.15e-08 ***\ncountry         2    192   95.83   29.82 1.29e-13 ***\nResiduals    6397  20560    3.21                     \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
+    "text": "Conduct the Two-way ANOVA test\n\nsatisfaction_relig_country_anova &lt;- aov(life_satisfaction ~ religiousity + country, \n                                    data = wvs_cleaned)\nsummary(satisfaction_relig_country_anova)\n\n\n\n               Df Sum Sq Mean Sq F value   Pr(&gt;F)    \nreligiousity    3    128   42.82   13.32 1.15e-08 ***\ncountry         2    192   95.83   29.82 1.29e-13 ***\nResiduals    6397  20560    3.21                     \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
   },
   {
     "objectID": "04-stats.html#post-hoc-test-for-two-way-anova",
     "href": "04-stats.html#post-hoc-test-for-two-way-anova",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "Post-hoc test for Two-way ANOVA",
-    "text": "Post-hoc test for Two-way ANOVA\n\nTukeyHSD(satisfaction_relig_country_anova)\n\n\n\n  Tukey multiple comparisons of means\n    95% family-wise confidence level\n\nFit: aov(formula = life_satisfaction ~ religiousity + country, data = wvs_data)\n\n$religiousity\n                                                diff         lwr        upr\nAn atheist-A religious person             -0.3673683 -0.53371770 -0.2010189\nDon't know-A religious person              0.1029838 -0.59737368  0.8033412\nNot a religious person-A religious person -0.2272818 -0.35418751 -0.1003760\nDon't know-An atheist                      0.4703521 -0.23808153  1.1787857\nNot a religious person-An atheist          0.1400866 -0.02569256  0.3058657\nNot a religious person-Don't know         -0.3302655 -1.03048776  0.3699567\n                                              p adj\nAn atheist-A religious person             0.0000001\nDon't know-A religious person             0.9816251\nNot a religious person-A religious person 0.0000253\nDon't know-An atheist                     0.3204859\nNot a religious person-An atheist         0.1313305\nNot a religious person-Don't know         0.6191993\n\n$country\n               diff        lwr         upr     p adj\nNZL-CAN  0.53301723  0.3565021  0.70953237 0.0000000\nSGP-CAN -0.04499362 -0.1659695  0.07598224 0.6580925\nSGP-NZL -0.57801085 -0.7703672 -0.38565452 0.0000000"
+    "text": "Post-hoc test for Two-way ANOVA\n\nTukeyHSD(satisfaction_relig_country_anova)\n\n\n\n  Tukey multiple comparisons of means\n    95% family-wise confidence level\n\nFit: aov(formula = life_satisfaction ~ religiousity + country, data = wvs_cleaned)\n\n$religiousity\n                                                diff        lwr         upr\nA religious person-Not a religious person  0.2272818  0.1003760  0.35418751\nAn atheist-Not a religious person         -0.1400866 -0.3058657  0.02569256\nDon't know-Not a religious person          0.3302655 -0.3699567  1.03048776\nAn atheist-A religious person             -0.3673683 -0.5337177 -0.20101894\nDon't know-A religious person              0.1029838 -0.5973737  0.80334122\nDon't know-An atheist                      0.4703521 -0.2380815  1.17878572\n                                              p adj\nA religious person-Not a religious person 0.0000253\nAn atheist-Not a religious person         0.1313305\nDon't know-Not a religious person         0.6191993\nAn atheist-A religious person             0.0000001\nDon't know-A religious person             0.9816251\nDon't know-An atheist                     0.3204859\n\n$country\n               diff        lwr         upr     p adj\nNZL-CAN  0.53301723  0.3565021  0.70953237 0.0000000\nSGP-CAN -0.04499362 -0.1659695  0.07598224 0.6580925\nSGP-NZL -0.57801085 -0.7703672 -0.38565452 0.0000000"
   },
   {
-    "objectID": "04-stats.html#lets-try-this-anova-exercise-5-mins",
-    "href": "04-stats.html#lets-try-this-anova-exercise-5-mins",
+    "objectID": "04-stats.html#learning-check-3",
+    "href": "04-stats.html#learning-check-3",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
-    "section": "Let’s try this ANOVA exercise! (5 mins)",
-    "text": "Let’s try this ANOVA exercise! (5 mins)\nIs there a significant difference in political leaning between different sex?\n\nVisualize the data as well\nTest for normality and homoskedasticity, and choose the appropriate test"
+    "section": "Learning Check #3",
+    "text": "Learning Check #3\nIs there a significant difference in political leaning between different sex?\n\nVisualize the data as well\nTest for normality and homoskedasticity, and choose the appropriate test\n\n\n\nShow answer\npoli_sx_anova &lt;- aov(political_scale ~ sex, data = wvs_cleaned)\nsummary(poli_sx_anova)\n\n\n              Df Sum Sq Mean Sq F value Pr(&gt;F)    \nsex            1    310  310.10   71.28 &lt;2e-16 ***\nResiduals   6401  27848    4.35                   \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nShow answer\nTukeyHSD(poli_sx_anova)\n\n\n  Tukey multiple comparisons of means\n    95% family-wise confidence level\n\nFit: aov(formula = political_scale ~ sex, data = wvs_cleaned)\n\n$sex\n                  diff        lwr        upr p adj\nFemale-Male -0.4401562 -0.5423583 -0.3379542     0"
   },
   {
     "objectID": "coc.html",
