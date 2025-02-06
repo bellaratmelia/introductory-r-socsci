@@ -1040,7 +1040,7 @@ SGP-NZL -0.57801085 -0.7703672 -0.38565452 0.0000000</code></pre>
 </section>
 <section id="learning-check-3" class="slide level2">
 <h2>Learning Check #3</h2>
-<p>Is there a significant difference in political leaning between different sex?</p>
+<p>Is there a significant difference in political leaning between different age groups?</p>
 <ul>
 <li>Visualize the data as well</li>
 <li>Test for normality and homoskedasticity, and choose the appropriate test</li>
@@ -1048,32 +1048,584 @@ SGP-NZL -0.57801085 -0.7703672 -0.38565452 0.0000000</code></pre>
 <div class="cell">
 <details class="code-fold">
 <summary>Show answer</summary>
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a></a>poli_sx_anova <span class="ot">&lt;-</span> <span class="fu">aov</span>(political_scale <span class="sc">~</span> sex, <span class="at">data =</span> wvs_cleaned)</span>
-<span id="cb51-2"><a></a><span class="fu">summary</span>(poli_sx_anova)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a></a>poli_age_anova <span class="ot">&lt;-</span> <span class="fu">aov</span>(political_scale <span class="sc">~</span> age_group, <span class="at">data =</span> wvs_cleaned)</span>
+<span id="cb51-2"><a></a><span class="fu">summary</span>(poli_age_anova)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>              Df Sum Sq Mean Sq F value Pr(&gt;F)    
-sex            1    310  310.10   71.28 &lt;2e-16 ***
-Residuals   6401  27848    4.35                   
+<pre><code>              Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+age_group      3    260   86.62   19.87 8.16e-13 ***
+Residuals   6399  27898    4.36                     
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>TukeyHSD:</p>
+<div class="cell">
 <details class="code-fold">
 <summary>Show answer</summary>
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a></a><span class="fu">TukeyHSD</span>(poli_sx_anova)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a></a><span class="fu">TukeyHSD</span>(poli_age_anova)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Tukey multiple comparisons of means
     95% family-wise confidence level
 
-Fit: aov(formula = political_scale ~ sex, data = wvs_cleaned)
+Fit: aov(formula = political_scale ~ age_group, data = wvs_cleaned)
 
-$sex
-                  diff        lwr        upr p adj
-Female-Male -0.4401562 -0.5423583 -0.3379542     0</code></pre>
+$age_group
+                  diff          lwr       upr     p adj
+29-44-18-28 0.43031509  0.218917533 0.6417127 0.0000010
+45-60-18-28 0.54558808  0.333612739 0.7575634 0.0000000
+61+-18-28   0.60813361  0.393806178 0.8224610 0.0000000
+45-60-29-44 0.11527298 -0.061269949 0.2918159 0.3354767
+61+-29-44   0.17781852 -0.001541767 0.3571788 0.0530024
+61+-45-60   0.06254554 -0.117495372 0.2425864 0.8086582</code></pre>
 </div>
 </div>
 </section></section>
+<section>
+<section id="reporting-result-with-apatables-and-gtsummary" class="title-slide slide level1 center">
+<h1>Reporting result with apaTables and gtsummary</h1>
+
+</section>
+<section id="reporting-with-apatables" class="slide level2">
+<h2>Reporting with apaTables</h2>
+<p><code>apaTables</code> is a package that will generate APA-formatted report table for correlation, ANOVA, and regression. It has limited customisations and few varity of tables. The documentation online is not really up to date, so we need to rely on vignette more.</p>
+<p>Example: get the correlation table for <code>political_scale</code>, <code>life_satisfaction</code>, and <code>financial_satisfaction</code></p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a></a><span class="fu">library</span>(apaTable)</span>
+<span id="cb55-2"><a></a></span>
+<span id="cb55-3"><a></a>wvs_cleaned <span class="sc">|&gt;</span> </span>
+<span id="cb55-4"><a></a>    <span class="fu">select</span>(life_satisfaction, financial_satisfaction, political_scale) <span class="sc">|&gt;</span> </span>
+<span id="cb55-5"><a></a>    <span class="fu">apa.cor.table</span>( <span class="at">table.number =</span> <span class="dv">1</span>, <span class="at">filename =</span> <span class="st">"fig-output/table-cor.doc"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="reporting-with-gtsummary" class="slide level2">
+<h2>Reporting with gtsummary</h2>
+<p>Another popular packages is <code>gt</code> (stands for “great tables”) and its ‘add-on’, <code>gtsummary</code>. It has lots of customizations (which can get overwhelming!) but fortunately the documentation is pretty good and there are plenty of code samples.</p>
+<p>Example: get the mean differences table for <code>political_scale</code>, <code>life_satisfaction</code>, and <code>financial_satisfaction</code>, grouped by <code>sex</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a></a><span class="fu">library</span>(gtsummary)</span>
+<span id="cb56-2"><a></a></span>
+<span id="cb56-3"><a></a>wvs_cleaned <span class="sc">|&gt;</span> </span>
+<span id="cb56-4"><a></a>    <span class="fu">select</span>(life_satisfaction, financial_satisfaction, political_scale, sex) <span class="sc">|&gt;</span> </span>
+<span id="cb56-5"><a></a>    <span class="fu">tbl_summary</span>(<span class="at">by =</span> sex) <span class="sc">|&gt;</span> </span>
+<span id="cb56-6"><a></a>    <span class="fu">add_difference</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+</section><section id="reporting-with-gtsummary-output" class="slide level2 output-location-slide"><h2>Reporting with gtsummary</h2><div class="cell output-location-slide">
+<div class="cell-output-display">
+<div id="hysrztkjoh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#hysrztkjoh table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#hysrztkjoh thead, #hysrztkjoh tbody, #hysrztkjoh tfoot, #hysrztkjoh tr, #hysrztkjoh td, #hysrztkjoh th {
+  border-style: none;
+}
+
+#hysrztkjoh p {
+  margin: 0;
+  padding: 0;
+}
+
+#hysrztkjoh .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#hysrztkjoh .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#hysrztkjoh .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#hysrztkjoh .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#hysrztkjoh .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#hysrztkjoh .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hysrztkjoh .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#hysrztkjoh .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#hysrztkjoh .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#hysrztkjoh .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#hysrztkjoh .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#hysrztkjoh .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#hysrztkjoh .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#hysrztkjoh .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#hysrztkjoh .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#hysrztkjoh .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#hysrztkjoh .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#hysrztkjoh .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#hysrztkjoh .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hysrztkjoh .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#hysrztkjoh .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#hysrztkjoh .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#hysrztkjoh .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hysrztkjoh .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#hysrztkjoh .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#hysrztkjoh .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hysrztkjoh .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hysrztkjoh .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#hysrztkjoh .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hysrztkjoh .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#hysrztkjoh .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hysrztkjoh .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#hysrztkjoh .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hysrztkjoh .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#hysrztkjoh .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hysrztkjoh .gt_left {
+  text-align: left;
+}
+
+#hysrztkjoh .gt_center {
+  text-align: center;
+}
+
+#hysrztkjoh .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#hysrztkjoh .gt_font_normal {
+  font-weight: normal;
+}
+
+#hysrztkjoh .gt_font_bold {
+  font-weight: bold;
+}
+
+#hysrztkjoh .gt_font_italic {
+  font-style: italic;
+}
+
+#hysrztkjoh .gt_super {
+  font-size: 65%;
+}
+
+#hysrztkjoh .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#hysrztkjoh .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#hysrztkjoh .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#hysrztkjoh .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#hysrztkjoh .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#hysrztkjoh .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#hysrztkjoh .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#hysrztkjoh .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#hysrztkjoh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" style="width:100%;" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="gt_col_headings header">
+<th id="label" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Characteristic</strong></th>
+<th id="stat_1" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>Male</strong><br> N = 3,171<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+<th id="stat_2" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>Female</strong><br> N = 3,232<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+<th id="estimate" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>Difference</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>2</sup></span></th>
+<th id="conf.low" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>95% CI</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>2,3</sup></span></th>
+<th id="p.value" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>p-value</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>2</sup></span></th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">life_satisfaction</td>
+<td class="gt_row gt_center" headers="stat_1">7.00 (6.00, 8.00)</td>
+<td class="gt_row gt_center" headers="stat_2">7.00 (6.00, 8.00)</td>
+<td class="gt_row gt_center" headers="estimate">-0.02</td>
+<td class="gt_row gt_center" headers="conf.low">-0.11, 0.07</td>
+<td class="gt_row gt_center" headers="p.value">0.7</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">financial_satisfaction</td>
+<td class="gt_row gt_center" headers="stat_1">7.00 (5.00, 8.00)</td>
+<td class="gt_row gt_center" headers="stat_2">7.00 (5.00, 8.00)</td>
+<td class="gt_row gt_center" headers="estimate">0.07</td>
+<td class="gt_row gt_center" headers="conf.low">-0.04, 0.17</td>
+<td class="gt_row gt_center" headers="p.value">0.2</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">political_scale</td>
+<td class="gt_row gt_center" headers="stat_1">5.00 (4.00, 7.00)</td>
+<td class="gt_row gt_center" headers="stat_2">5.00 (4.00, 6.00)</td>
+<td class="gt_row gt_center" headers="estimate">0.44</td>
+<td class="gt_row gt_center" headers="conf.low">0.34, 0.54</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
+</tr>
+</tbody><tfoot class="gt_footnotes">
+<tr class="odd">
+<td colspan="6" class="gt_footnote"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> Median (Q1, Q3)</td>
+</tr>
+<tr class="even">
+<td colspan="6" class="gt_footnote"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>2</sup></span> Welch Two Sample t-test</td>
+</tr>
+<tr class="odd">
+<td colspan="6" class="gt_footnote"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>3</sup></span> CI = Confidence Interval</td>
+</tr>
+</tfoot>
+
+</table>
+
+</div>
+</div>
+</div></section></section>
 <section id="end-of-session-4" class="title-slide slide level1 center">
 <h1>End of Session 4!</h1>
 <p>Next session: Linear and Logistic Regressions!</p>

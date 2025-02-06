@@ -1488,7 +1488,28 @@
     "href": "04-stats.html#learning-check-3",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "Learning Check #3",
-    "text": "Learning Check #3\nIs there a significant difference in political leaning between different sex?\n\nVisualize the data as well\nTest for normality and homoskedasticity, and choose the appropriate test\n\n\n\nShow answer\npoli_sx_anova &lt;- aov(political_scale ~ sex, data = wvs_cleaned)\nsummary(poli_sx_anova)\n\n\n              Df Sum Sq Mean Sq F value Pr(&gt;F)    \nsex            1    310  310.10   71.28 &lt;2e-16 ***\nResiduals   6401  27848    4.35                   \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nShow answer\nTukeyHSD(poli_sx_anova)\n\n\n  Tukey multiple comparisons of means\n    95% family-wise confidence level\n\nFit: aov(formula = political_scale ~ sex, data = wvs_cleaned)\n\n$sex\n                  diff        lwr        upr p adj\nFemale-Male -0.4401562 -0.5423583 -0.3379542     0"
+    "text": "Learning Check #3\nIs there a significant difference in political leaning between different age groups?\n\nVisualize the data as well\nTest for normality and homoskedasticity, and choose the appropriate test\n\n\n\nShow answer\npoli_age_anova &lt;- aov(political_scale ~ age_group, data = wvs_cleaned)\nsummary(poli_age_anova)\n\n\n              Df Sum Sq Mean Sq F value   Pr(&gt;F)    \nage_group      3    260   86.62   19.87 8.16e-13 ***\nResiduals   6399  27898    4.36                     \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
+  },
+  {
+    "objectID": "04-stats.html#reporting-with-apatables",
+    "href": "04-stats.html#reporting-with-apatables",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "Reporting with apaTables",
+    "text": "Reporting with apaTables\napaTables is a package that will generate APA-formatted report table for correlation, ANOVA, and regression. It has limited customisations and few varity of tables. The documentation online is not really up to date, so we need to rely on vignette more.\nExample: get the correlation table for political_scale, life_satisfaction, and financial_satisfaction\nlibrary(apaTable)\n\nwvs_cleaned |&gt; \n    select(life_satisfaction, financial_satisfaction, political_scale) |&gt; \n    apa.cor.table( table.number = 1, filename = \"fig-output/table-cor.doc\")"
+  },
+  {
+    "objectID": "04-stats.html#reporting-with-gtsummary",
+    "href": "04-stats.html#reporting-with-gtsummary",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "Reporting with gtsummary",
+    "text": "Reporting with gtsummary\nAnother popular packages is gt (stands for “great tables”) and its ‘add-on’, gtsummary. It has lots of customizations (which can get overwhelming!) but fortunately the documentation is pretty good and there are plenty of code samples.\nExample: get the mean differences table for political_scale, life_satisfaction, and financial_satisfaction, grouped by sex\n\nlibrary(gtsummary)\n\nwvs_cleaned |&gt; \n    select(life_satisfaction, financial_satisfaction, political_scale, sex) |&gt; \n    tbl_summary(by = sex) |&gt; \n    add_difference()"
+  },
+  {
+    "objectID": "04-stats.html#reporting-with-gtsummary-output",
+    "href": "04-stats.html#reporting-with-gtsummary-output",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "Reporting with gtsummary",
+    "text": "Reporting with gtsummary\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nMale N = 3,1711\nFemale N = 3,2321\nDifference2\n95% CI2,3\np-value2\n\n\n\n\nlife_satisfaction\n7.00 (6.00, 8.00)\n7.00 (6.00, 8.00)\n-0.02\n-0.11, 0.07\n0.7\n\n\nfinancial_satisfaction\n7.00 (5.00, 8.00)\n7.00 (5.00, 8.00)\n0.07\n-0.04, 0.17\n0.2\n\n\npolitical_scale\n5.00 (4.00, 7.00)\n5.00 (4.00, 6.00)\n0.44\n0.34, 0.54\n&lt;0.001\n\n\n\n1 Median (Q1, Q3)\n\n\n2 Welch Two Sample t-test\n\n\n3 CI = Confidence Interval"
   },
   {
     "objectID": "coc.html",
