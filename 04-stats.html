@@ -1003,8 +1003,8 @@ F = 27.783, num df = 2.0, denom df = 1710.5, p-value = 1.336e-12</code></pre>
 </figure>
 </div>
 </div>
-</div></section><section id="conduct-the-two-way-anova-test" class="slide level2">
-<h2>Conduct the Two-way ANOVA test</h2>
+</div></section><section id="conduct-the-two-way-anova-test-additive-model" class="slide level2">
+<h2>Conduct the Two-way ANOVA test (Additive model)</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a></a>satisfaction_relig_country_anova <span class="ot">&lt;-</span> <span class="fu">aov</span>(life_satisfaction <span class="sc">~</span> religiousity <span class="sc">+</span> country, </span>
 <span id="cb49-2"><a></a>                                    <span class="at">data =</span> wvs_cleaned)</span>
@@ -1057,6 +1057,56 @@ SGP-NZL -0.57801085 -0.7703672 -0.38565452 0.0000000</code></pre>
 </div>
 </div>
 </section>
+<section id="conduct-the-two-way-anova-test-with-interaction" class="slide level2">
+<h2>Conduct the Two-way ANOVA test (with Interaction)</h2>
+<p>“With interaction” means we are testing whether the effect of one variable (religiosity) on the outcome (life satisfaction) depends on the level of the other variable (country), or vice versa. For the R code, we use <code>religiousity * country</code> instead of <code>religiousity + country</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a></a>satisfaction_relig_country_anova <span class="ot">&lt;-</span> <span class="fu">aov</span>(life_satisfaction <span class="sc">~</span> religiousity <span class="sc">*</span> country, </span>
+<span id="cb53-2"><a></a>                                    <span class="at">data =</span> wvs_cleaned)</span>
+<span id="cb53-3"><a></a><span class="fu">summary</span>(satisfaction_relig_country_anova)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>                       Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+religiousity            3    128   42.82  13.339 1.12e-08 ***
+country                 2    192   95.83  29.853 1.25e-13 ***
+religiousity:country    4     38    9.42   2.936   0.0194 *  
+Residuals            6393  20522    3.21                     
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+</section>
+<section id="interaction-plot" class="slide level2">
+<h2>Interaction plot</h2>
+<p>To better see this effect, let’s plot the interaction.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a></a>wvs_cleaned <span class="sc">|&gt;</span> </span>
+<span id="cb55-2"><a></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> religiousity, <span class="at">y =</span> life_satisfaction, </span>
+<span id="cb55-3"><a></a>                          <span class="at">group =</span> country, <span class="at">color =</span> country)) <span class="sc">+</span> <span class="co"># lines will be grouped and colored by country</span></span>
+<span id="cb55-4"><a></a>    <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"point"</span>) <span class="sc">+</span> <span class="co"># Add points to show mean life_satisfaction for each religiosity by country</span></span>
+<span id="cb55-5"><a></a>    <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"line"</span>) <span class="sc">+</span> <span class="co"># Connect the points with lines </span></span>
+<span id="cb55-6"><a></a>    <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+</section>
+<section id="interaction-plot-output" class="slide level2 output-location-slide"><h2>Interaction plot</h2><div class="cell output-location-slide">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="04-stats_files/figure-revealjs/unnamed-chunk-35-1.png" width="1344"></p>
+</figure>
+</div>
+</div>
+</div></section><section id="interpreting-our-interaction-plot" class="slide level2">
+<h2>Interpreting our interaction plot</h2>
+<p>Some observations that we can make:</p>
+<ul>
+<li>New Zealand’s pattern is distinctly different from the other two countries; NZ hows highest life satisfaction for “Not a religious person” but drops sharply for “A religious person”, while for Canada and Singapore, there is a similar patterns with peaks at “A religious person”</li>
+<li>The interaction is most visible in how religious vs non-religious people differ across countries, with the largest difference between countries appears among non-religious people. “An atheist” category shows relatively similar life satisfaction across countries.</li>
+<li>The relationship between religiosity and life satisfaction clearly varies by country.</li>
+</ul>
+</section>
 <section id="learning-check-3" class="slide level2">
 <h2>Learning Check #3</h2>
 <p>Is there a significant difference in political leaning between different age groups?</p>
@@ -1067,8 +1117,8 @@ SGP-NZL -0.57801085 -0.7703672 -0.38565452 0.0000000</code></pre>
 <div class="cell">
 <details class="code-fold">
 <summary>Show answer</summary>
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a></a>poli_age_anova <span class="ot">&lt;-</span> <span class="fu">aov</span>(political_scale <span class="sc">~</span> age_group, <span class="at">data =</span> wvs_cleaned)</span>
-<span id="cb53-2"><a></a><span class="fu">summary</span>(poli_age_anova)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a></a>poli_age_anova <span class="ot">&lt;-</span> <span class="fu">aov</span>(political_scale <span class="sc">~</span> age_group, <span class="at">data =</span> wvs_cleaned)</span>
+<span id="cb56-2"><a></a><span class="fu">summary</span>(poli_age_anova)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>              Df Sum Sq Mean Sq F value   Pr(&gt;F)    
@@ -1085,7 +1135,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <div class="cell">
 <details class="code-fold">
 <summary>Show answer</summary>
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a></a><span class="fu">TukeyHSD</span>(poli_age_anova)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a></a><span class="fu">TukeyHSD</span>(poli_age_anova)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Tukey multiple comparisons of means
@@ -1111,25 +1161,25 @@ $age_group
 </section>
 <section id="reporting-with-apatables" class="slide level2">
 <h2>Reporting with apaTables</h2>
-<p><code>apaTables</code> is a package that will generate APA-formatted report table for correlation, ANOVA, and regression. It has limited customisations and few varity of tables. The documentation online is not really up to date, so we need to rely on vignette more. <a href="https://dstanley4.github.io/apaTables/index.html"><strong>View the documentation here</strong></a></p>
+<p><code>apaTables</code> is a package that will generate APA-formatted report table for correlation, ANOVA, and regression. It has limited customisations and few varity of tables. The documentation online is for the “devlopment” version which is not what we will get if we install normally with <code>install.packages()</code>, so we need to rely on the vignette more. <a href="https://dstanley4.github.io/apaTables/index.html"><strong>View the documentation here</strong></a></p>
 <p>Example: get the correlation table for <code>political_scale</code>, <code>life_satisfaction</code>, and <code>financial_satisfaction</code></p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a></a><span class="fu">library</span>(apaTable)</span>
-<span id="cb57-2"><a></a></span>
-<span id="cb57-3"><a></a>wvs_cleaned <span class="sc">|&gt;</span> </span>
-<span id="cb57-4"><a></a>    <span class="fu">select</span>(life_satisfaction, financial_satisfaction, political_scale) <span class="sc">|&gt;</span> </span>
-<span id="cb57-5"><a></a>    <span class="fu">apa.cor.table</span>( <span class="at">table.number =</span> <span class="dv">1</span>, <span class="at">filename =</span> <span class="st">"fig-output/table-cor.doc"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a></a><span class="fu">library</span>(apaTable)</span>
+<span id="cb60-2"><a></a></span>
+<span id="cb60-3"><a></a>wvs_cleaned <span class="sc">|&gt;</span> </span>
+<span id="cb60-4"><a></a>    <span class="fu">select</span>(life_satisfaction, financial_satisfaction, political_scale) <span class="sc">|&gt;</span> </span>
+<span id="cb60-5"><a></a>    <span class="fu">apa.cor.table</span>( <span class="at">table.number =</span> <span class="dv">1</span>, <span class="at">filename =</span> <span class="st">"fig-output/table-cor.doc"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="reporting-with-gtsummary" class="slide level2">
 <h2>Reporting with gtsummary</h2>
 <p>Another popular packages is <code>gt</code> (stands for “great tables”) and its ‘add-on’, <code>gtsummary</code>. It has lots of customizations (which can get overwhelming!) but fortunately the documentation is pretty good and there are plenty of code samples. <a href="https://www.danieldsjoberg.com/gtsummary/index.html"><strong>View the documentation here</strong></a></p>
 <p>Example: get the mean differences table for <code>political_scale</code>, <code>life_satisfaction</code>, and <code>financial_satisfaction</code>, grouped by <code>sex</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a></a><span class="fu">library</span>(gtsummary)</span>
-<span id="cb58-2"><a></a></span>
-<span id="cb58-3"><a></a>wvs_cleaned <span class="sc">|&gt;</span> </span>
-<span id="cb58-4"><a></a>    <span class="fu">select</span>(life_satisfaction, financial_satisfaction, political_scale, sex) <span class="sc">|&gt;</span> </span>
-<span id="cb58-5"><a></a>    <span class="fu">tbl_summary</span>(<span class="at">by =</span> sex) <span class="sc">|&gt;</span> </span>
-<span id="cb58-6"><a></a>    <span class="fu">add_difference</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a></a><span class="fu">library</span>(gtsummary)</span>
+<span id="cb61-2"><a></a></span>
+<span id="cb61-3"><a></a>wvs_cleaned <span class="sc">|&gt;</span> </span>
+<span id="cb61-4"><a></a>    <span class="fu">select</span>(life_satisfaction, financial_satisfaction, political_scale, sex) <span class="sc">|&gt;</span> </span>
+<span id="cb61-5"><a></a>    <span class="fu">tbl_summary</span>(<span class="at">by =</span> sex) <span class="sc">|&gt;</span> </span>
+<span id="cb61-6"><a></a>    <span class="fu">add_difference</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 </section><section id="reporting-with-gtsummary-output" class="slide level2 output-location-slide"><h2>Reporting with gtsummary</h2><div class="cell output-location-slide">

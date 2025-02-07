@@ -1484,11 +1484,11 @@
     "text": "Two-Way ANOVA: Sample problem and result"
   },
   {
-    "objectID": "04-stats.html#conduct-the-two-way-anova-test",
-    "href": "04-stats.html#conduct-the-two-way-anova-test",
+    "objectID": "04-stats.html#conduct-the-two-way-anova-test-additive-model",
+    "href": "04-stats.html#conduct-the-two-way-anova-test-additive-model",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
-    "section": "Conduct the Two-way ANOVA test",
-    "text": "Conduct the Two-way ANOVA test\n\nsatisfaction_relig_country_anova &lt;- aov(life_satisfaction ~ religiousity + country, \n                                    data = wvs_cleaned)\nsummary(satisfaction_relig_country_anova)\n\n\n\n               Df Sum Sq Mean Sq F value   Pr(&gt;F)    \nreligiousity    3    128   42.82   13.32 1.15e-08 ***\ncountry         2    192   95.83   29.82 1.29e-13 ***\nResiduals    6397  20560    3.21                     \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
+    "section": "Conduct the Two-way ANOVA test (Additive model)",
+    "text": "Conduct the Two-way ANOVA test (Additive model)\n\nsatisfaction_relig_country_anova &lt;- aov(life_satisfaction ~ religiousity + country, \n                                    data = wvs_cleaned)\nsummary(satisfaction_relig_country_anova)\n\n\n\n               Df Sum Sq Mean Sq F value   Pr(&gt;F)    \nreligiousity    3    128   42.82   13.32 1.15e-08 ***\ncountry         2    192   95.83   29.82 1.29e-13 ***\nResiduals    6397  20560    3.21                     \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
   },
   {
     "objectID": "04-stats.html#post-hoc-test-for-two-way-anova",
@@ -1496,6 +1496,34 @@
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "Post-hoc test for Two-way ANOVA",
     "text": "Post-hoc test for Two-way ANOVA\n\nTukeyHSD(satisfaction_relig_country_anova)\n\n\n\n  Tukey multiple comparisons of means\n    95% family-wise confidence level\n\nFit: aov(formula = life_satisfaction ~ religiousity + country, data = wvs_cleaned)\n\n$religiousity\n                                                diff        lwr         upr\nA religious person-Not a religious person  0.2272818  0.1003760  0.35418751\nAn atheist-Not a religious person         -0.1400866 -0.3058657  0.02569256\nDon't know-Not a religious person          0.3302655 -0.3699567  1.03048776\nAn atheist-A religious person             -0.3673683 -0.5337177 -0.20101894\nDon't know-A religious person              0.1029838 -0.5973737  0.80334122\nDon't know-An atheist                      0.4703521 -0.2380815  1.17878572\n                                              p adj\nA religious person-Not a religious person 0.0000253\nAn atheist-Not a religious person         0.1313305\nDon't know-Not a religious person         0.6191993\nAn atheist-A religious person             0.0000001\nDon't know-A religious person             0.9816251\nDon't know-An atheist                     0.3204859\n\n$country\n               diff        lwr         upr     p adj\nNZL-CAN  0.53301723  0.3565021  0.70953237 0.0000000\nSGP-CAN -0.04499362 -0.1659695  0.07598224 0.6580925\nSGP-NZL -0.57801085 -0.7703672 -0.38565452 0.0000000"
+  },
+  {
+    "objectID": "04-stats.html#conduct-the-two-way-anova-test-with-interaction",
+    "href": "04-stats.html#conduct-the-two-way-anova-test-with-interaction",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "Conduct the Two-way ANOVA test (with Interaction)",
+    "text": "Conduct the Two-way ANOVA test (with Interaction)\n“With interaction” means we are testing whether the effect of one variable (religiosity) on the outcome (life satisfaction) depends on the level of the other variable (country), or vice versa. For the R code, we use religiousity * country instead of religiousity + country\n\nsatisfaction_relig_country_anova &lt;- aov(life_satisfaction ~ religiousity * country, \n                                    data = wvs_cleaned)\nsummary(satisfaction_relig_country_anova)\n\n\n\n                       Df Sum Sq Mean Sq F value   Pr(&gt;F)    \nreligiousity            3    128   42.82  13.339 1.12e-08 ***\ncountry                 2    192   95.83  29.853 1.25e-13 ***\nreligiousity:country    4     38    9.42   2.936   0.0194 *  \nResiduals            6393  20522    3.21                     \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
+  },
+  {
+    "objectID": "04-stats.html#interaction-plot",
+    "href": "04-stats.html#interaction-plot",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "Interaction plot",
+    "text": "Interaction plot\nTo better see this effect, let’s plot the interaction.\n\nwvs_cleaned |&gt; \n    ggplot(aes(x = religiousity, y = life_satisfaction, \n                          group = country, color = country)) + # lines will be grouped and colored by country\n    stat_summary(fun = mean, geom = \"point\") + # Add points to show mean life_satisfaction for each religiosity by country\n    stat_summary(fun = mean, geom = \"line\") + # Connect the points with lines \n    theme_minimal()"
+  },
+  {
+    "objectID": "04-stats.html#interaction-plot-output",
+    "href": "04-stats.html#interaction-plot-output",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "Interaction plot",
+    "text": "Interaction plot"
+  },
+  {
+    "objectID": "04-stats.html#interpreting-our-interaction-plot",
+    "href": "04-stats.html#interpreting-our-interaction-plot",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "Interpreting our interaction plot",
+    "text": "Interpreting our interaction plot\nSome observations that we can make:\n\nNew Zealand’s pattern is distinctly different from the other two countries; NZ hows highest life satisfaction for “Not a religious person” but drops sharply for “A religious person”, while for Canada and Singapore, there is a similar patterns with peaks at “A religious person”\nThe interaction is most visible in how religious vs non-religious people differ across countries, with the largest difference between countries appears among non-religious people. “An atheist” category shows relatively similar life satisfaction across countries.\nThe relationship between religiosity and life satisfaction clearly varies by country."
   },
   {
     "objectID": "04-stats.html#learning-check-3",
@@ -1509,7 +1537,7 @@
     "href": "04-stats.html#reporting-with-apatables",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "Reporting with apaTables",
-    "text": "Reporting with apaTables\napaTables is a package that will generate APA-formatted report table for correlation, ANOVA, and regression. It has limited customisations and few varity of tables. The documentation online is not really up to date, so we need to rely on vignette more. View the documentation here\nExample: get the correlation table for political_scale, life_satisfaction, and financial_satisfaction\nlibrary(apaTable)\n\nwvs_cleaned |&gt; \n    select(life_satisfaction, financial_satisfaction, political_scale) |&gt; \n    apa.cor.table( table.number = 1, filename = \"fig-output/table-cor.doc\")"
+    "text": "Reporting with apaTables\napaTables is a package that will generate APA-formatted report table for correlation, ANOVA, and regression. It has limited customisations and few varity of tables. The documentation online is for the “devlopment” version which is not what we will get if we install normally with install.packages(), so we need to rely on the vignette more. View the documentation here\nExample: get the correlation table for political_scale, life_satisfaction, and financial_satisfaction\nlibrary(apaTable)\n\nwvs_cleaned |&gt; \n    select(life_satisfaction, financial_satisfaction, political_scale) |&gt; \n    apa.cor.table( table.number = 1, filename = \"fig-output/table-cor.doc\")"
   },
   {
     "objectID": "04-stats.html#reporting-with-gtsummary",
