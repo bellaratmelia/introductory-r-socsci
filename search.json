@@ -1236,7 +1236,7 @@
     "href": "04-stats.html#chi-square-test-of-independence---visualizing-data",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "Chi-square test of independence - visualizing data",
-    "text": "Chi-square test of independence - visualizing data\nWe can use barchart to visualize this (remember from last week!)\n\nwvs_cleaned |&gt; \n    ggplot(aes(x = country, fill = religiousity)) +\n    geom_bar(position = \"dodge\") +\n    labs(title = \"Proportion of religiousity for each country\") +\n    theme_minimal()"
+    "text": "Chi-square test of independence - visualizing data\nWe can use barchart to visualize this (remember from last week!)\n\nwvs_cleaned |&gt; \n    ggplot(aes(x = country, fill = religiousity)) +\n    geom_bar(position = \"fill\") +\n    labs(title = \"Proportion of religiousity for each country\") +\n    theme_minimal()"
   },
   {
     "objectID": "04-stats.html#chi-square-sample-problem-and-results",
