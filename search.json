@@ -1453,7 +1453,7 @@
     "href": "04-stats.html#verifying-the-assumptions-test-for-normality",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "Verifying the assumptions: Test for Normality",
-    "text": "Verifying the assumptions: Test for Normality\nShapiro-Wilk Test to test for normality.\n\n\nlibrary(car)\nshapiro.test(wvs_cleaned$age[0:5000])\n\n\n\n    Shapiro-Wilk normality test\n\ndata:  wvs_cleaned$age[0:5000]\nW = 0.97084, p-value &lt; 2.2e-16\n\n\nThe p-value from the Shapiro-Wilk test is more than the significance level of 0.05, indicating that the data idoes NOT significantly deviates from normality. Therefore, the assumption of normality is satisfied."
+    "text": "Verifying the assumptions: Test for Normality\nShapiro-Wilk Test to test for normality.\n\n\nlibrary(car)\nset.seed(123) # set seed for reproducibility, make sure it samples the same way everytime.\nshapiro.test(sample(residuals(satisfaction_country_anova), 5000))\n\n\n\n    Shapiro-Wilk normality test\n\ndata:  sample(residuals(satisfaction_country_anova), 5000)\nW = 0.92998, p-value &lt; 2.2e-16\n\n\nThe p-value from the Shapiro-Wilk test is less than the significance level of 0.05, indicating that the data significantly deviates from normality. Therefore, the assumption of normality is NOT satisfied."
   },
   {
     "objectID": "04-stats.html#plotting-residuals-q-q-plot",
