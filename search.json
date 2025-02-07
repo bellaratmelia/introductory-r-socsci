@@ -1211,18 +1211,32 @@
     "text": "Refresher: Research Variables\n\n\nDependent Variable (DV)\nThe variables that will be affected as a result of manipulation/changes in the IVs\n\nOther names for it: Outcome, Response, Output, etc.\nOften denoted as \\(y\\)\n\n\nIndependent Variable (IV)\nThe variables that researchers will manipulate.\n\nOther names for it: Predictor, Covariate, Treatment, Regressor, Input, etc.\nOften denoted as \\(x\\)"
   },
   {
+    "objectID": "04-stats.html#open-your-project---the-possibly-easier-way",
+    "href": "04-stats.html#open-your-project---the-possibly-easier-way",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "Open your project - the (possibly) easier way",
+    "text": "Open your project - the (possibly) easier way\n\nGo to the folder where you put your project for this workshop\nFind a file with .Rproj extension - this is the R project file that holds all the information about your project.\n\n\n\nDouble click on the file. Rstudio should launch with your project loaded! This should be easier to ensure that you are loading the correct project when opening Rstudio."
+  },
+  {
     "objectID": "04-stats.html#load-our-data-for-today",
     "href": "04-stats.html#load-our-data-for-today",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "Load our data for today!",
-    "text": "Load our data for today!\nUse read_csv from readr package (part of tidyverse) to load our data into a dataframe\n\n# import tidyverse library\nlibrary(tidyverse)\n\n# read the CSV with WVS data\nwvs_cleaned &lt;- read_csv(\"data-output/wvs_cleaned_v1.csv\")\n\n# Convert categorical variables to factors\ncolumns_to_convert &lt;- c(\"country\", \"religiousity\", \"sex\", \"marital_status\", \"employment\")\n\nwvs_cleaned &lt;- wvs_cleaned |&gt; \n    mutate(across(all_of(columns_to_convert), as_factor))\n\n# peek at the data, pay attention to the data types!\nglimpse(wvs_cleaned)"
+    "text": "Load our data for today!\nLet’s create a new R script called session-3.R, and then copy the code below to load our data for today. This code uses read_csv from readr package (part of tidyverse) to load our cleaned CSV (from the first checkpoint)\n\n# import tidyverse library\nlibrary(tidyverse)\n\n# read the CSV with WVS data\nwvs_cleaned &lt;- read_csv(\"data-output/wvs_cleaned_v1.csv\")\n\n# Convert categorical variables to factors\ncolumns_to_convert &lt;- c(\"country\", \"religiousity\", \"sex\", \"marital_status\", \"employment\")\n\nwvs_cleaned &lt;- wvs_cleaned |&gt; \n    mutate(across(all_of(columns_to_convert), as_factor))\n\n# peek at the data, pay attention to the data types!\nglimpse(wvs_cleaned)"
   },
   {
     "objectID": "04-stats.html#chi-square-test-of-independence",
     "href": "04-stats.html#chi-square-test-of-independence",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "Chi-square test of independence",
-    "text": "Chi-square test of independence\nThe \\(X^2\\) test of independence evaluates whether there is a statistically significant relationship between two categorical variables.\nThis is done by analyzing the frequency table (i.e., contingency table) formed by two categorical variables.\nExample: Is there a relationship between religiousity and marital_status in our WVS data?\nTypically, we can start with visualizing the data first!\n\n\n                        \n                         Widowed Single Married Divorced\n  Not a religious person      66    731    1261      152\n  A religious person         118    590    1562      135\n  An atheist                  24    338     431       56\n  Don't know                   4      9      23        1\n                        \n                         Living together as married Separated\n  Not a religious person                        398        59\n  A religious person                            154        46\n  An atheist                                    204        34\n  Don't know                                      7         0"
+    "text": "Chi-square test of independence\nThe \\(X^2\\) test of independence evaluates whether there is a statistically significant relationship between two categorical variables.\nThis is done by analyzing the frequency table (i.e., contingency table) formed by two categorical variables.\nExample: Is there a relationship between religiousity and country in our WVS data?\nTypically, we can start with the contigency table first, and then the visualization\n\ntable(wvs_cleaned$religiousity, wvs_cleaned$country)\n\n                        \n                          CAN  NZL  SGP\n  Not a religious person 1794  310  563\n  A religious person     1406  209  990\n  An atheist              818   97  172\n  Don't know                0   44    0"
+  },
+  {
+    "objectID": "04-stats.html#chi-square-test-of-independence---visualizing-data",
+    "href": "04-stats.html#chi-square-test-of-independence---visualizing-data",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "Chi-square test of independence - visualizing data",
+    "text": "Chi-square test of independence - visualizing data\nWe can use barchart to visualize this (remember from last week!)\n\nwvs_cleaned |&gt; \n    ggplot(aes(x = country, fill = religiousity)) +\n    geom_bar(position = \"dodge\") +\n    labs(title = \"Proportion of religiousity for each country\") +\n    theme_minimal()"
   },
   {
     "objectID": "04-stats.html#chi-square-sample-problem-and-results",
