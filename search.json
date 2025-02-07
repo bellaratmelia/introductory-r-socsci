@@ -1509,14 +1509,14 @@
     "href": "04-stats.html#reporting-with-apatables",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "Reporting with apaTables",
-    "text": "Reporting with apaTables\napaTables is a package that will generate APA-formatted report table for correlation, ANOVA, and regression. It has limited customisations and few varity of tables. The documentation online is not really up to date, so we need to rely on vignette more.\nExample: get the correlation table for political_scale, life_satisfaction, and financial_satisfaction\nlibrary(apaTable)\n\nwvs_cleaned |&gt; \n    select(life_satisfaction, financial_satisfaction, political_scale) |&gt; \n    apa.cor.table( table.number = 1, filename = \"fig-output/table-cor.doc\")"
+    "text": "Reporting with apaTables\napaTables is a package that will generate APA-formatted report table for correlation, ANOVA, and regression. It has limited customisations and few varity of tables. The documentation online is not really up to date, so we need to rely on vignette more. View the documentation here\nExample: get the correlation table for political_scale, life_satisfaction, and financial_satisfaction\nlibrary(apaTable)\n\nwvs_cleaned |&gt; \n    select(life_satisfaction, financial_satisfaction, political_scale) |&gt; \n    apa.cor.table( table.number = 1, filename = \"fig-output/table-cor.doc\")"
   },
   {
     "objectID": "04-stats.html#reporting-with-gtsummary",
     "href": "04-stats.html#reporting-with-gtsummary",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "Reporting with gtsummary",
-    "text": "Reporting with gtsummary\nAnother popular packages is gt (stands for “great tables”) and its ‘add-on’, gtsummary. It has lots of customizations (which can get overwhelming!) but fortunately the documentation is pretty good and there are plenty of code samples.\nExample: get the mean differences table for political_scale, life_satisfaction, and financial_satisfaction, grouped by sex\n\nlibrary(gtsummary)\n\nwvs_cleaned |&gt; \n    select(life_satisfaction, financial_satisfaction, political_scale, sex) |&gt; \n    tbl_summary(by = sex) |&gt; \n    add_difference()"
+    "text": "Reporting with gtsummary\nAnother popular packages is gt (stands for “great tables”) and its ‘add-on’, gtsummary. It has lots of customizations (which can get overwhelming!) but fortunately the documentation is pretty good and there are plenty of code samples. View the documentation here\nExample: get the mean differences table for political_scale, life_satisfaction, and financial_satisfaction, grouped by sex\n\nlibrary(gtsummary)\n\nwvs_cleaned |&gt; \n    select(life_satisfaction, financial_satisfaction, political_scale, sex) |&gt; \n    tbl_summary(by = sex) |&gt; \n    add_difference()"
   },
   {
     "objectID": "04-stats.html#reporting-with-gtsummary-output",
