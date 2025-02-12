@@ -1103,8 +1103,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>Some observations that we can make:</p>
 <ul>
 <li>New Zealand’s pattern is distinctly different from the other two countries; NZ hows highest life satisfaction for “Not a religious person” but drops sharply for “A religious person”, while for Canada and Singapore, there is a similar patterns with peaks at “A religious person”</li>
-<li>The interaction is most visible in how religious vs non-religious people differ across countries, with the largest difference between countries appears among non-religious people. “An atheist” category shows relatively similar life satisfaction across countries.</li>
-<li>The relationship between religiosity and life satisfaction clearly varies by country.</li>
+<li>The interaction is most visible in how religious vs non-religious people differ across countries, with the largest difference between countries appears among non-religious people.</li>
+<li>The relationship between religiosity and life satisfaction clearly varies by country. We know this because the lines are not parallel with each other.</li>
 </ul>
 </section>
 <section id="learning-check-3" class="slide level2">
@@ -1161,9 +1161,9 @@ $age_group
 </section>
 <section id="reporting-with-apatables" class="slide level2">
 <h2>Reporting with apaTables</h2>
-<p><code>apaTables</code> is a package that will generate APA-formatted report table for correlation, ANOVA, and regression. It has limited customisations and few varity of tables. The documentation online is for the “devlopment” version which is not what we will get if we install normally with <code>install.packages()</code>, so we need to rely on the vignette more. <a href="https://dstanley4.github.io/apaTables/index.html"><strong>View the documentation here</strong></a></p>
+<p><code>apaTables</code> is a package that will generate APA-formatted report table for correlation, ANOVA, and regression. It has limited customisations and few varity of tables. The documentation online is for the “development” version which is not what we will get if we install normally with <code>install.packages()</code>, so we need to rely on the vignette more. <a href="https://dstanley4.github.io/apaTables/index.html"><strong>View the documentation here</strong></a></p>
 <p>Example: get the correlation table for <code>political_scale</code>, <code>life_satisfaction</code>, and <code>financial_satisfaction</code></p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a></a><span class="fu">library</span>(apaTable)</span>
+<div class="sourceCode" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a></a><span class="fu">library</span>(apaTables)</span>
 <span id="cb60-2"><a></a></span>
 <span id="cb60-3"><a></a>wvs_cleaned <span class="sc">|&gt;</span> </span>
 <span id="cb60-4"><a></a>    <span class="fu">select</span>(life_satisfaction, financial_satisfaction, political_scale) <span class="sc">|&gt;</span> </span>
@@ -1177,7 +1177,7 @@ $age_group
 <div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a></a><span class="fu">library</span>(gtsummary)</span>
 <span id="cb61-2"><a></a></span>
 <span id="cb61-3"><a></a>wvs_cleaned <span class="sc">|&gt;</span> </span>
-<span id="cb61-4"><a></a>    <span class="fu">select</span>(life_satisfaction, financial_satisfaction, political_scale, sex) <span class="sc">|&gt;</span> </span>
+<span id="cb61-4"><a></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(life_satisfaction, financial_satisfaction, political_scale, sex) <span class="sc">|&gt;</span> </span>
 <span id="cb61-5"><a></a>    <span class="fu">tbl_summary</span>(<span class="at">by =</span> sex) <span class="sc">|&gt;</span> </span>
 <span id="cb61-6"><a></a>    <span class="fu">add_difference</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>

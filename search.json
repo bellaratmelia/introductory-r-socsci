@@ -53,7 +53,7 @@
     "href": "index.html#schedule",
     "title": "Introductory R for Social Sciences",
     "section": "Schedule",
-    "text": "Schedule\nVenue : YPHSL seminar room 3.1\nTime : 3:30 - 5:30 PM (All sessions)\nClick on the link under “Topic” to access the slides. Slides will be progressively made available throughout the sessions.\n\n\n\n\nSession\nDate\nTopic\nDesccription\n\n\n\n\n~\nBefore the workshop\nPreparation\nComplete the Pre-workshop activities\n\n\n1\nFri, 17 Jan 2025\nIntroduction to R and RStudio (+ updated on 18/1/25)\nLearn about setting up RStudio, basic data types and structures in R, and importing data files.\n\n\n2\nFri, 24 Jan 2025\nData wrangling with tidyverse\nLearn about manipulating data with tidyverse, including filtering, selecting, mutating, and grouping data.\n\n\n3\nFri, 31 Jan 2025\nData visualization and Descriptive Statistics (+ updated on 2/2/25)\nLearn about creating visualizations with ggplot2 and calculating descriptive statistics like mean, median, etc.\n\n\n4\nFri, 7 Feb 2025\nBasic Inferential Tests\nLearn about conducting t-tests, chi-square tests, ANOVA, and interpreting statistical results in R.\n\n\n5\nFri, 14 Feb 2025\nRegression and Introduction to Quarto\nLearn about correlation, regression, and Quarto for creating dynamic, reproducible R documents.\n\n\n~\nAfter the workshop\n\nPost-workshop exercises"
+    "text": "Schedule\nVenue : YPHSL seminar room 3.1\nTime : 3:30 - 5:30 PM (All sessions)\nClick on the link under “Topic” to access the slides. Slides will be progressively made available throughout the sessions.\n\n\n\n\nSession\nDate\nTopic\nDesccription\n\n\n\n\n~\nBefore the workshop\nPreparation\nComplete the Pre-workshop activities\n\n\n1\nFri, 17 Jan 2025\nIntroduction to R and RStudio (+ updated on 18/1/25)\nLearn about setting up RStudio, basic data types and structures in R, and importing data files.\n\n\n2\nFri, 24 Jan 2025\nData wrangling with tidyverse\nLearn about manipulating data with tidyverse, including filtering, selecting, mutating, and grouping data.\n\n\n3\nFri, 31 Jan 2025\nData visualization and Descriptive Statistics (+ updated on 2/2/25)\nLearn about creating visualizations with ggplot2 and calculating descriptive statistics like mean, median, etc.\n\n\n4\nFri, 7 Feb 2025\nBasic Inferential Tests\nLearn about conducting t-tests, chi-square tests, ANOVA, and interpreting statistical results in R.\n\n\n5\nFri, 14 Feb 2025\nRegression and Presenting Your Result\nLearn about correlation, regression, and how you can present your results in tables or narration.\n\n\n~\nAfter the workshop\n\nPost-workshop exercises"
   },
   {
     "objectID": "index.html#pre-workshop-activities",
@@ -70,340 +70,403 @@
     "text": "For this workshop, we will be using dataset stored in a CSV file called wvs-wave7-sg-ca-nz.csv.\nClick here to open wvs-wave7-sg-ca-nz.csv, and then Ctrl + S / Cmd + S to save it locally into your data folder\n\nData for session 3 onwards\nIf you missed Session 2 where we cleaned and tidy our data, you can download the cleaned data here: wvs_cleaned_v1.csv\n\n\n\n\n\n\nWhat is a CSV?\n\n\n\nA CSV (Comma-Separated Values) file is a type of file that stores data in a plain text format. Each line in the file represents a row of data, and within each row, individual pieces of data (like numbers or words) are separated by commas.\nThis format is commonly used for storing and transferring data, especially in spreadsheets and databases. Because it is literally just plain text, it is an ideal format if you have large amount of data.\nYou can open CSV files in Excel, Google Sheets, or even Notepad!\n\n\n\n\nData Dictionary for WVS dataset\nThe World Values Survey (&lt;www.worldvaluessurvey.org&gt;) is a global network of social scientists studying changing values and their impact on social and political life, led by an international team of scholars, with the WVS association and secretariat headquartered in Stockholm, Sweden.\nThe actual questionnaire consists of over 200 questions with respondents from various countries. For the purpose of this workshop, we will only use 16 variables/questions with respondents from Canada, New Zealand, and Singapore. The 16 variables are:\n\ncountry\n\nCharacter variable containing three-letter country codes: CAN, NZL, and SGP\n\nID\n\nNumeric identifier unique to each survey respondent\n\nfamily_importance\n\nNumeric scale from 1 to 4 measuring importance of family, where 1 indicates highest importance\n\nfriends_importance\n\nNumeric scale from 1 to 4 measuring importance of friends, where 1 indicates highest importance\n\nleisure_importance\n\nNumeric scale from 1 to 4 measuring importance of leisure time, where 1 indicates highest importance\n\nwork_importance\n\nNumeric scale from 1 to 4 measuring importance of work, where 1 indicates highest importance\n\nfreedom\n\nNumeric scale from 1-10 measuring perceived freedom of choice and control, where 10 indicates most freedom\n\nlife_satisfaction\n\nNumeric scale from 1-10 measuring overall life satisfaction, where 10 indicates highest satisfaction\n\nfinancial_satisfaction\n\nNumeric scale from 1-10 measuring satisfaction with financial situation, where 10 indicates highest satisfaction\n\nreligiousity\n\nindicates religious self-identification: A religious person, Not a religious person, An atheist\n\npolitical_scale\n\nNumeric scale from 1-10 measuring left-right political orientation, where 1 is left and 10 is right\n\nsex\n\nindicates respondent’s gender: male or female\n\nbirthyear\n\nNumeric variable indicating year of birth\n\nage\n\nNumeric variable indicating respondent’s age\n\nmarital_status\n\nindicates current marital status: Married, Living together as married, Divorced, Separated, Widowed, Single\n\nemployment\n\nindicates current employment status: Full time, Part time, Self employed, Retired/pensioned, Housewife not otherwise employed, Student, Unemployed\n\n\nBelow is the snapshot of the selected questions and how they appeared in the questionnaire:\n\n\nIf you’d like to find out more about this data, including the original codebook and questionnaire, check out their homepage here: https://www.worldvaluessurvey.org/WVSDocumentationWV7.jsp\n\n\nReferences\nHaerpfer, C., Inglehart, R., Moreno, A., Welzel, C., Kizilova, K., Diez-Medrano, J., Lagos, M., Norris, P., Ponarin, E. & Puranen B. (2022): World Values Survey Wave 7 (2017-2022) Cross-National Data-Set. Version: 4.0.0. World Values Survey Association. DOI: doi.org/10.14281/18241.18"
   },
   {
-    "objectID": "05-stats-quarto.html#todays-outline",
-    "href": "05-stats-quarto.html#todays-outline",
-    "title": "Regression and Introduction to Quarto",
+    "objectID": "05-more-stats.html#todays-outline",
+    "href": "05-more-stats.html#todays-outline",
+    "title": "Regression and Presenting Your Result",
     "section": "Today’s Outline",
-    "text": "Today’s Outline\n\nSimple Linear Regression in R\nBinary Logistic Regression in R\nCreate your manuscript with Quarto"
+    "text": "Today’s Outline\n\nRecap: The various packages for tables\nSimple Linear Regression in R\nBinary Logistic Regression in R\n(if time permits) Coding your analysis and writing your report in one place with Quarto."
   },
   {
-    "objectID": "05-stats-quarto.html#load-our-data-for-today",
-    "href": "05-stats-quarto.html#load-our-data-for-today",
-    "title": "Regression and Introduction to Quarto",
+    "objectID": "05-more-stats.html#open-your-project---the-possibly-easier-way",
+    "href": "05-more-stats.html#open-your-project---the-possibly-easier-way",
+    "title": "Regression and Presenting Your Result",
+    "section": "Open your project - the (possibly) easier way",
+    "text": "Open your project - the (possibly) easier way\n\nGo to the folder where you put your project for this workshop\nFind a file with .Rproj extension - this is the R project file that holds all the information about your project.\n\n\n\nDouble click on the file. Rstudio should launch with your project loaded! This should be easier to ensure that you are loading the correct project when opening Rstudio."
+  },
+  {
+    "objectID": "05-more-stats.html#install-and-load-extra-packages-we-need-today",
+    "href": "05-more-stats.html#install-and-load-extra-packages-we-need-today",
+    "title": "Regression and Presenting Your Result",
+    "section": "Install and load extra packages we need today",
+    "text": "Install and load extra packages we need today\n\nType the following line in your R console (bottom left section). Type them one by one.\n\ninstall.packages(\"apaTables\")\ninstall.packages(\"huxtable\")\ninstall.packages(\"gtsummary\")\ninstall.packages(\"car\")\n\nCreate a new R script called session-5.R\nPaste the following lines into the script:\n\n\n# loading the packages\nlibrary(apaTables)\nlibrary(huxtable)\nlibrary(gtsummary)\nlibrary(car)\nlibrary(tidyverse)"
+  },
+  {
+    "objectID": "05-more-stats.html#load-our-data-for-today",
+    "href": "05-more-stats.html#load-our-data-for-today",
+    "title": "Regression and Presenting Your Result",
     "section": "Load our data for today!",
-    "text": "Load our data for today!\n\n# import tidyverse library\nlibrary(tidyverse)\nlibrary(gtsummary)\nlibrary(huxtable)\n\n# read the CSV with Chile voting data\nwvs_data &lt;- read_csv(\"data-output/wvs_processed.csv\")\n\n# Convert categorical variables to factors\nwvs_data &lt;- wvs_data |&gt; \n    mutate(across(c(\"country\", \"sex\", \"marital_status\", \n                    \"employment\", \"religiousity\"), as.factor))\n\n# peek at the data\nglimpse(wvs_data)"
+    "text": "Load our data for today!\n\n# read the CSV with WVS data\nwvs_cleaned &lt;- read_csv(\"data-output/wvs_cleaned_v1.csv\")\n\n# Convert categorical variables to factors\ncolumns_to_convert &lt;- c(\"country\", \"religiousity\", \"sex\", \"marital_status\", \"employment\", \"age_group\")\n\nwvs_cleaned &lt;- wvs_cleaned |&gt; \n    mutate(across(all_of(columns_to_convert), as_factor))\n\n# peek at the data, pay attention to the data types!\nglimpse(wvs_cleaned)"
   },
   {
-    "objectID": "05-stats-quarto.html#simple-linear-regression-what-is-it",
-    "href": "05-stats-quarto.html#simple-linear-regression-what-is-it",
-    "title": "Regression and Introduction to Quarto",
+    "objectID": "05-more-stats.html#from-last-week-apatables",
+    "href": "05-more-stats.html#from-last-week-apatables",
+    "title": "Regression and Presenting Your Result",
+    "section": "From last week: apaTables",
+    "text": "From last week: apaTables\napaTables is a package that will generate APA-formatted report table for correlation, ANOVA, and regression. It has limited customisations and few varity of tables. The documentation online is for the “development” version which is not what we will get if we install normally with install.packages(), so we need to rely on the vignette more. View the documentation here\nExample: get the correlation table for political_scale, life_satisfaction, and financial_satisfaction\nlibrary(apaTables)\n\nwvs_cleaned |&gt; \n    select(life_satisfaction, financial_satisfaction, political_scale) |&gt; \n    apa.cor.table( table.number = 1, filename = \"fig-output/table-cor.doc\")\nThis code will create a word document with the tables already formatted in APA style inside."
+  },
+  {
+    "objectID": "05-more-stats.html#from-last-week-gtsummary",
+    "href": "05-more-stats.html#from-last-week-gtsummary",
+    "title": "Regression and Presenting Your Result",
+    "section": "From last week: gtsummary",
+    "text": "From last week: gtsummary\nAnother popular packages is gt (stands for “great tables”) and its ‘add-on’, gtsummary. It has lots of customizations (which can get overwhelming!) but fortunately the documentation is pretty good and there are plenty of code samples. View the documentation here\nExample: get the mean differences table for political_scale, life_satisfaction, and financial_satisfaction, grouped by sex\n\nlibrary(gtsummary)\n\nwvs_cleaned |&gt; \n    dplyr::select(life_satisfaction, financial_satisfaction, political_scale, sex) |&gt; \n    tbl_summary(by = sex) |&gt; \n    add_difference()"
+  },
+  {
+    "objectID": "05-more-stats.html#from-last-week-gtsummary-output",
+    "href": "05-more-stats.html#from-last-week-gtsummary-output",
+    "title": "Regression and Presenting Your Result",
+    "section": "From last week: gtsummary",
+    "text": "From last week: gtsummary\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nMale N = 3,1711\nFemale N = 3,2321\nDifference2\n95% CI2,3\np-value2\n\n\n\n\nlife_satisfaction\n7.00 (6.00, 8.00)\n7.00 (6.00, 8.00)\n-0.02\n-0.11, 0.07\n0.7\n\n\nfinancial_satisfaction\n7.00 (5.00, 8.00)\n7.00 (5.00, 8.00)\n0.07\n-0.04, 0.17\n0.2\n\n\npolitical_scale\n5.00 (4.00, 7.00)\n5.00 (4.00, 6.00)\n0.44\n0.34, 0.54\n&lt;0.001\n\n\n\n1 Median (Q1, Q3)\n\n\n2 Welch Two Sample t-test\n\n\n3 CI = Confidence Interval"
+  },
+  {
+    "objectID": "05-more-stats.html#how-to-save-gtsummary-tables",
+    "href": "05-more-stats.html#how-to-save-gtsummary-tables",
+    "title": "Regression and Presenting Your Result",
+    "section": "How to save gtsummary() tables",
+    "text": "How to save gtsummary() tables\n\nThe tables will be displayed under the “Viewer” tab on the lower right hand side of Rstudio.\nSelect the entire tables, and then copy it with Ctrl + C (or Cmd + C on Macbook)\nPaste the table with Ctrl + V (or Cmd + V on Macbook) to your word document or Google doc."
+  },
+  {
+    "objectID": "05-more-stats.html#simple-linear-regression-what-is-it",
+    "href": "05-more-stats.html#simple-linear-regression-what-is-it",
+    "title": "Regression and Presenting Your Result",
     "section": "Simple Linear Regression: what is it?",
-    "text": "Simple Linear Regression: what is it?\nLinear regression is a statistical method used to model the relationship between a dependent variable (outcome) and one or more independent variables (predictors) by fitting a linear equation to the observed data. The math formula looks like this:\n\n\n\\[\nY = \\beta_0 + \\beta_1X + \\varepsilon\n\\]\n\n\n\\(Y\\) - the dependent variable; must be continuous\n\\(X\\) - the independent variable (if there are more than one, there will be \\(X_1\\) , \\(X_2\\) , and so on. This can be ordinal, nominal, or continuous\n\\(\\beta_0\\) - the y-intercept. Represents the expected value of independent variable \\(Y\\) when independent variable(s) \\(X\\) are set to zero.\n\\(\\beta_1\\) - the slope / coefficient for independent variable\n\\(\\varepsilon\\) - the error term. (In some examples you might see this omitted from the formula).\n\n\nExamples:\n\nDoes a person’s age affect their income?\nDo a person’s age and education level affect their income?"
+    "text": "Simple Linear Regression: what is it?\nLinear regression is a statistical method used to model the relationship between a dependent variable (outcome) and one or more independent variables (predictors) by fitting a linear equation to the observed data. The math formula looks like this:\n\n\n\\[\nY = \\beta_0 + \\beta_1X + \\varepsilon\n\\]\n\n\n\\(Y\\) - the dependent variable; must be continuous\n\\(X\\) - the independent variable (if there are more than one, there will be \\(X_1\\) , \\(X_2\\) , and so on. This can be ordinal, nominal, or continuous\n\\(\\beta_0\\) - the y-intercept. Represents the expected value of independent variable \\(Y\\) when independent variable(s) \\(X\\) are set to zero.\n\\(\\beta_1\\) - the slope / coefficient for independent variable\n\\(\\varepsilon\\) - the error term. (In some examples you might see this omitted from the formula).\n\n\nExamples:\n\nDoes a person’s age affect their life satisfaction?\nDo a person’s age and country affect their life satisfaction?"
   },
   {
-    "objectID": "05-stats-quarto.html#linear-regression-one-continuous-predictor",
-    "href": "05-stats-quarto.html#linear-regression-one-continuous-predictor",
-    "title": "Regression and Introduction to Quarto",
+    "objectID": "05-more-stats.html#linear-regression-one-continuous-predictor",
+    "href": "05-more-stats.html#linear-regression-one-continuous-predictor",
+    "title": "Regression and Presenting Your Result",
     "section": "Linear Regression: One continuous predictor",
-    "text": "Linear Regression: One continuous predictor\nResearch Question: Does a person’s financial satisfaction influence their life satisfaction?\n\nThe outcome/DV (\\(Y\\)): life_satisfaction\nThe predictor/IV (\\(X\\)): financial_satisfaction\n\n\nlife_model1 &lt;- lm(life_satisfaction ~ financial_satisfaction, data = wvs_data)\nsummary(life_model1) #summarize the result\n\n\n\n\nCall: the formula\nResiduals: overview on the distribution of residuals (expected value minus observed value) – we can plot this to check for homoscedasticity -\nCoefficients: shows the intercept, the regression coefficients for the predictor variables, and their statistical significance\nResidual standard error: the average difference between observed and expected outcome by the model. Generally the lower, the better.\nR-squared & Adjusted R-squared: indicates the proportion of variation in the outcome that can be explained by the model (i.e. goodness of fit).\nF-statistics: indicates whether the model as a whole is statistically significant and whether it explains more variance than just the baseline (intercept-only) model."
+    "text": "Linear Regression: One continuous predictor\nResearch Question: Does a person’s age influence their life satisfaction?\n\nThe outcome/DV (\\(Y\\)): life_satisfaction\nThe predictor/IV (\\(X\\)): age\n\n\nlife_model1 &lt;- lm(life_satisfaction ~ age, data = wvs_cleaned)\nsummary(life_model1) #summarize the result\n\n\n\n\nCall:\nlm(formula = life_satisfaction ~ age, data = wvs_cleaned)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-6.6563 -0.9265  0.2681  1.1546  3.3816 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) 6.326442   0.067792   93.32   &lt;2e-16 ***\nage         0.016218   0.001335   12.15   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.786 on 6401 degrees of freedom\nMultiple R-squared:  0.02255,   Adjusted R-squared:  0.0224 \nF-statistic: 147.7 on 1 and 6401 DF,  p-value: &lt; 2.2e-16"
   },
   {
-    "objectID": "05-stats-quarto.html#linear-regression-one-continuous-predictor-output",
-    "href": "05-stats-quarto.html#linear-regression-one-continuous-predictor-output",
-    "title": "Regression and Introduction to Quarto",
-    "section": "Linear Regression: One continuous predictor",
-    "text": "Linear Regression: One continuous predictor\n\n\nCall:\nlm(formula = life_satisfaction ~ financial_satisfaction, data = wvs_data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-7.9299 -0.7854  0.1423  0.7507  5.8953 \n\nCoefficients:\n                       Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)            3.568566   0.055538   64.25   &lt;2e-16 ***\nfinancial_satisfaction 0.536137   0.008002   67.00   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.385 on 6401 degrees of freedom\nMultiple R-squared:  0.4122,    Adjusted R-squared:  0.4121 \nF-statistic:  4489 on 1 and 6401 DF,  p-value: &lt; 2.2e-16"
-  },
-  {
-    "objectID": "05-stats-quarto.html#narrating-the-results",
-    "href": "05-stats-quarto.html#narrating-the-results",
-    "title": "Regression and Introduction to Quarto",
+    "objectID": "05-more-stats.html#narrating-the-results",
+    "href": "05-more-stats.html#narrating-the-results",
+    "title": "Regression and Presenting Your Result",
     "section": "Narrating the results",
-    "text": "Narrating the results\nHere is one possible way to narrate your result:\n\nA linear regression analysis was conducted to assess the influence of age on support for the incumbent (statusquo) in Chile. The coefficient for age was 0.008 (SE = 0.001), indicating that for each additional year of age, support for the incumbent increased by 0.008 units. This effect was statistically significant at p &lt; 0.001.\n\n\nThe model explained a small portion of the variance in support for the statusquo (R² = 0.013, Adjusted R² = 0.012). The F-statistic was 30.85 (p &lt; 0.001), further suggesting that age is a significant predictor of support for the incumbent."
+    "text": "Narrating the results\nHere is one possible way to narrate your result:\n\nA linear regression analysis was conducted to assess the influence of age on life satisfaction in Canada, Singapore, and New Zealand. Age is a statistically significant but weak predictor (B = 0.016, SE = 0.001, p &lt; 0.001), indicating that for each additional year of age, the life satisfaction is increased by 0.016 units.\n\n\nThe model was statistically significant (F(1, 6401) = 147.7, p &lt; 0.001) and explained approximately 2% of the variance in life satisfaction (R² = 0.022, Adjusted R² = 0.0224)."
   },
   {
-    "objectID": "05-stats-quarto.html#present-the-regression-tables",
-    "href": "05-stats-quarto.html#present-the-regression-tables",
-    "title": "Regression and Introduction to Quarto",
-    "section": "Present the regression tables!",
-    "text": "Present the regression tables!\n\nhuxreg(\"life satisfaction\" = life_model1)\n\n\n\nlife satisfaction\n\n(Intercept)3.569 ***\n\n(0.056)   \n\nfinancial_satisfaction0.536 ***\n\n(0.008)   \n\nN6403        \n\nR20.412    \n\nlogLik-11168.566    \n\nAIC22343.133    \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
+    "objectID": "05-more-stats.html#present-your-regression-result---huxtable",
+    "href": "05-more-stats.html#present-your-regression-result---huxtable",
+    "title": "Regression and Presenting Your Result",
+    "section": "Present your regression result - huxtable",
+    "text": "Present your regression result - huxtable\n\nhuxreg(\"life satisfaction\" = life_model1)\n\n\n\nlife satisfaction\n\n(Intercept)6.326 ***\n\n(0.068)   \n\nage0.016 ***\n\n(0.001)   \n\nN6403        \n\nR20.023    \n\nlogLik-12796.748    \n\nAIC25599.496    \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
   },
   {
-    "objectID": "05-stats-quarto.html#linear-regression-multiple-continuous-predictors",
-    "href": "05-stats-quarto.html#linear-regression-multiple-continuous-predictors",
-    "title": "Regression and Introduction to Quarto",
+    "objectID": "05-more-stats.html#linear-regression-multiple-continuous-predictors",
+    "href": "05-more-stats.html#linear-regression-multiple-continuous-predictors",
+    "title": "Regression and Presenting Your Result",
     "section": "Linear Regression: Multiple continuous predictors",
-    "text": "Linear Regression: Multiple continuous predictors\nResearch Question: Do a person’s financial satisfaction and perceived freedom influence their life satisfaction?\n\nThe outcome/DV (\\(Y\\)): life_satisfaction\nThe predictors/IV (\\(X\\)): financial_satisfaction and freedom\n\n\nlife_model2 &lt;- lm(life_satisfaction ~ financial_satisfaction + freedom, \n                  data = wvs_data)\nsummary(life_model2)"
+    "text": "Linear Regression: Multiple continuous predictors\nResearch Question: Do a person’s age and financial satisfaction their life satisfaction?\n\nThe outcome/DV (\\(Y\\)): life_satisfaction\nThe predictors/IV (\\(X\\)): financial_satisfaction and age\n\n\nlife_model2 &lt;- lm(life_satisfaction ~ financial_satisfaction + age, \n                  data = wvs_cleaned)\nsummary(life_model2)"
   },
   {
-    "objectID": "05-stats-quarto.html#linear-regression-multiple-continuous-predictors-output",
-    "href": "05-stats-quarto.html#linear-regression-multiple-continuous-predictors-output",
-    "title": "Regression and Introduction to Quarto",
+    "objectID": "05-more-stats.html#linear-regression-multiple-continuous-predictors-output",
+    "href": "05-more-stats.html#linear-regression-multiple-continuous-predictors-output",
+    "title": "Regression and Presenting Your Result",
     "section": "Linear Regression: Multiple continuous predictors",
-    "text": "Linear Regression: Multiple continuous predictors\n\n\nCall:\nlm(formula = life_satisfaction ~ financial_satisfaction + freedom, \n    data = wvs_data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-6.9109 -0.5966  0.0904  0.7042  5.9467 \n\nCoefficients:\n                       Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)            1.741475   0.068268   25.51   &lt;2e-16 ***\nfinancial_satisfaction 0.386127   0.008142   47.42   &lt;2e-16 ***\nfreedom                0.384892   0.009819   39.20   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.244 on 6400 degrees of freedom\nMultiple R-squared:  0.526, Adjusted R-squared:  0.5258 \nF-statistic:  3551 on 2 and 6400 DF,  p-value: &lt; 2.2e-16"
+    "text": "Linear Regression: Multiple continuous predictors\n\n\nCall:\nlm(formula = life_satisfaction ~ financial_satisfaction + age, \n    data = wvs_cleaned)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-8.0571 -0.7459  0.1272  0.7919  5.8965 \n\nCoefficients:\n                       Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)            3.346623   0.069441  48.194  &lt; 2e-16 ***\nfinancial_satisfaction 0.529454   0.008084  65.494  &lt; 2e-16 ***\nage                    0.005546   0.001046   5.305 1.17e-07 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.382 on 6400 degrees of freedom\nMultiple R-squared:  0.4148,    Adjusted R-squared:  0.4146 \nF-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16"
   },
   {
-    "objectID": "05-stats-quarto.html#alternative-package-to-present-regression-result",
-    "href": "05-stats-quarto.html#alternative-package-to-present-regression-result",
-    "title": "Regression and Introduction to Quarto",
-    "section": "Alternative package to present regression result",
-    "text": "Alternative package to present regression result\n\nlife_model2 |&gt; tbl_regression() |&gt; bold_p()\n\n\n\n\n\n\n\nCharacteristic\nBeta\n95% CI1\np-value\n\n\n\n\nfinancial_satisfaction\n0.39\n0.37, 0.40\n&lt;0.001\n\n\nfreedom\n0.38\n0.37, 0.40\n&lt;0.001\n\n\n\n1 CI = Confidence Interval\n\n\n\n\n\n\n\n\n\n\nMore on tbl_regression() by gtsummary: https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html"
+    "objectID": "05-more-stats.html#possible-way-to-explain-the-result",
+    "href": "05-more-stats.html#possible-way-to-explain-the-result",
+    "title": "Regression and Presenting Your Result",
+    "section": "Possible way to explain the result",
+    "text": "Possible way to explain the result\n\nA multiple regression analysis was conducted to examine how financial satisfaction and age predict life satisfaction. Financial satisfaction was a strong predictor (B = 0.529, SE = 0.008, p &lt; 0.001), indicating that for each one-unit increase in financial satisfaction, life satisfaction increased by 0.529 units. Age was also a significant but weaker predictor (B = 0.006, SE = 0.001, p &lt; 0.001), with each additional year of age associated with a 0.006-unit increase in life satisfaction.\n\n\nThe model was statistically significant (F(2, 6400) = 2268, p &lt; 0.001) and explained 41.5% of the variance in life satisfaction (R² = 0.415, Adjusted R² = 0.415)."
   },
   {
-    "objectID": "05-stats-quarto.html#reporting-result-a-sample-regression-table",
-    "href": "05-stats-quarto.html#reporting-result-a-sample-regression-table",
-    "title": "Regression and Introduction to Quarto",
+    "objectID": "05-more-stats.html#present-your-regression-result---tbl_regression-from-gtsummary",
+    "href": "05-more-stats.html#present-your-regression-result---tbl_regression-from-gtsummary",
+    "title": "Regression and Presenting Your Result",
+    "section": "Present your regression result - tbl_regression() from gtsummary",
+    "text": "Present your regression result - tbl_regression() from gtsummary\n\nlife_model2 |&gt; tbl_regression() |&gt; bold_p()\n\n\n\n\n\n\n\nCharacteristic\nBeta\n95% CI1\np-value\n\n\n\n\nfinancial_satisfaction\n0.53\n0.51, 0.55\n&lt;0.001\n\n\nage\n0.01\n0.00, 0.01\n&lt;0.001\n\n\n\n1 CI = Confidence Interval\n\n\n\n\n\n\n\n\n\n\nMore on tbl_regression() by gtsummary: https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html"
+  },
+  {
+    "objectID": "05-more-stats.html#reporting-result-a-sample-regression-table",
+    "href": "05-more-stats.html#reporting-result-a-sample-regression-table",
+    "title": "Regression and Presenting Your Result",
     "section": "Reporting result: A sample regression table",
-    "text": "Reporting result: A sample regression table\n\n\n\n\nYou might encounter different table formats when reporting regression results, but there are some key elements that should generally be included.\nThese are: the number of observations (\\(N\\)), the \\(\\beta\\) coefficients, standard errors (SE), confidence intervals (95% CI), and p-values. Other metrics to include are the \\(R^2\\) and \\(F\\) statistics.\n\n\n\n\nThe above screenshot is taken from https://www.ncfr.org/system/files/2017-01/regression_0.pdf\nAPA recommended format"
+    "text": "Reporting result: A sample regression table\n\n\n\n\nYou might encounter different table formats when reporting regression results, but there are some key elements that should generally be included.\nThese are: the number of observations (\\(N\\)), the coefficients (B = unstandardized, raw coeff in original unit of measurements; \\(\\beta\\) = standardized, converted to standard deviation units), standard errors (SE), confidence intervals (95% CI), and p-values. Other metrics to include are the \\(R^2\\) and \\(F\\) statistics.\n\n\n\n\nThe above screenshot is taken from https://www.ncfr.org/system/files/2017-01/regression_0.pdf\nAPA recommended format"
   },
   {
-    "objectID": "05-stats-quarto.html#presenting-your-models",
-    "href": "05-stats-quarto.html#presenting-your-models",
-    "title": "Regression and Introduction to Quarto",
+    "objectID": "05-more-stats.html#presenting-your-models",
+    "href": "05-more-stats.html#presenting-your-models",
+    "title": "Regression and Presenting Your Result",
     "section": "Presenting your models",
-    "text": "Presenting your models\nDon’t forget to install the library by running this line in your terminal: install.packages(\"huxtable\")\nFor more info about huxreg, go here: https://cran.r-project.org/web/packages/huxtable/vignettes/huxreg.html\n\nlibrary(huxtable)\nhuxreg(\"statusquo (model1)\" = life_model1, \n       \"statusquo (model2)\" = life_model2,\n       number_format = 4,\n       bold_signif = 0.05,\n       statistics = c( \"R squared\" = \"r.squared\", \"N\" = \"nobs\", \"F\" = \"statistic\",\n      \"P value\" = \"p.value\"))\n\n\n\nstatusquo (model1)statusquo (model2)\n\n(Intercept)3.5686 ***1.7415 ***\n\n(0.0555)   (0.0683)   \n\nfinancial_satisfaction0.5361 ***0.3861 ***\n\n(0.0080)   (0.0081)   \n\nfreedom         0.3849 ***\n\n         (0.0098)   \n\nR squared0.4122    0.5260    \n\nN6403         6403         \n\nF4488.8321    3550.9921    \n\nP value0.0000    0.0000    \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
+    "text": "Presenting your models\nIf you get an error saying “huxreg not found”, you may need to:\n\nInstall the library by running this line in your terminal: install.packages(\"huxtable\")\nAnd then load them to your script with this line: library(huxtable)\n\nFor more info about huxreg, go here: https://cran.r-project.org/web/packages/huxtable/vignettes/huxreg.html\n\nhuxreg(\"life_satisfaction (model1)\" = life_model1, \n       \"life_satisfaction (model2)\" = life_model2,\n       number_format = 4,\n       bold_signif = 0.05,\n       statistics = c( \"R squared\" = \"r.squared\", \"N\" = \"nobs\", \"F\" = \"statistic\",\n      \"P value\" = \"p.value\"))"
   },
   {
-    "objectID": "05-stats-quarto.html#fyi-multicollinearity",
-    "href": "05-stats-quarto.html#fyi-multicollinearity",
-    "title": "Regression and Introduction to Quarto",
+    "objectID": "05-more-stats.html#presenting-your-models-output",
+    "href": "05-more-stats.html#presenting-your-models-output",
+    "title": "Regression and Presenting Your Result",
+    "section": "Presenting your models",
+    "text": "Presenting your models\n\n\n\nlife_satisfaction (model1)life_satisfaction (model2)\n\n(Intercept)6.3264 ***3.3466 ***\n\n(0.0678)   (0.0694)   \n\nage0.0162 ***0.0055 ***\n\n(0.0013)   (0.0010)   \n\nfinancial_satisfaction         0.5295 ***\n\n         (0.0081)   \n\nR squared0.0225    0.4148    \n\nN6403         6403         \n\nF147.6646    2268.0004    \n\nP value0.0000    0.0000    \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
+  },
+  {
+    "objectID": "05-more-stats.html#fyi-multicollinearity",
+    "href": "05-more-stats.html#fyi-multicollinearity",
+    "title": "Regression and Presenting Your Result",
     "section": "FYI: Multicollinearity",
-    "text": "FYI: Multicollinearity\nCaution! When doing regression-type of tests, watch out for multicollinearity.\nMulticollinearity is a situation in which two or more predictor variables are highly correlated with each other. This makes it difficult to determine the specific contribution of each predictor variable to the relationship.\nOne way to check for it:\n\nAssess the correlation between your predictor variables in your model using Variance Inflation Factor (VIF)\nIf they seem to be highly correlated (&gt; 5 or so), one of the easiest (and somewhat acceptable) way is to simply remove the less significant predictor from your model :D\n\n\ncar::vif(life_model2)\n\nfinancial_satisfaction                freedom \n               1.28359                1.28359"
+    "text": "FYI: Multicollinearity\nCaution! When doing regression-type of tests, watch out for multicollinearity.\nMulticollinearity is a situation in which two or more predictor variables are highly correlated with each other. This makes it difficult to determine the specific contribution of each predictor variable to the relationship.\nOne way to check for it:\n\nAssess the correlation between your predictor variables in your model using Variance Inflation Factor (VIF)\nIf they seem to be highly correlated (&gt; 5 or so), one of the easiest (and somewhat acceptable) way is to simply remove the less significant predictor from your model :D\n\n\ncar::vif(life_model2)\n\nfinancial_satisfaction                    age \n              1.024893               1.024893"
   },
   {
-    "objectID": "05-stats-quarto.html#linear-regression-one-categorical-predictor",
-    "href": "05-stats-quarto.html#linear-regression-one-categorical-predictor",
-    "title": "Regression and Introduction to Quarto",
+    "objectID": "05-more-stats.html#linear-regression-one-categorical-predictor",
+    "href": "05-more-stats.html#linear-regression-one-categorical-predictor",
+    "title": "Regression and Presenting Your Result",
     "section": "Linear Regression: One categorical predictor",
-    "text": "Linear Regression: One categorical predictor\nResearch Question: Explore the difference in life satisfaction between employment statuses.\n\nThe outcome/DV (\\(Y\\)): life_satisfaction\nThe predictor/IV (\\(X\\)): sex\n\n\n\n\n\n\n\nNote\n\n\nBefore proceeding with analysis, ensure that all the categorical variables involved are cast as factors!\n\n\n\n\nstr(wvs_data$life_satisfaction)\n\n num [1:6403] 5 8 9 7 1 7 9 6 7 6 ...\n\nstr(wvs_data$sex)\n\n Factor w/ 2 levels \"Female\",\"Male\": 1 2 1 2 2 2 2 1 2 2 ..."
+    "text": "Linear Regression: One categorical predictor\nResearch Question: Explore the difference in life satisfaction between age groups\n\nThe outcome/DV (\\(Y\\)): life_satisfaction\nThe predictor/IV (\\(X\\)): age_group\n\n\n\n\n\n\n\nNote\n\n\nBefore proceeding with analysis, ensure that all the categorical variables involved are cast as factors!\n\n\n\n\nstr(wvs_cleaned$life_satisfaction)\n\n num [1:6403] 7 5 8 6 6 8 9 8 8 10 ...\n\nstr(wvs_cleaned$age_group)\n\n Factor w/ 4 levels \"61+\",\"45-60\",..: 1 1 1 1 1 1 1 1 1 1 ..."
   },
   {
-    "objectID": "05-stats-quarto.html#continuing-the-analysis",
-    "href": "05-stats-quarto.html#continuing-the-analysis",
-    "title": "Regression and Introduction to Quarto",
+    "objectID": "05-more-stats.html#continuing-the-analysis",
+    "href": "05-more-stats.html#continuing-the-analysis",
+    "title": "Regression and Presenting Your Result",
     "section": "Continuing the analysis",
-    "text": "Continuing the analysis\nThe analysis summary should look like this:\n\nlife_model3 &lt;- lm(life_satisfaction ~ sex, data = wvs_data)\nsummary(life_model3)\n\n\nCall:\nlm(formula = life_satisfaction ~ sex, data = wvs_data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-6.1136 -1.0949 -0.0949  0.9051  2.9051 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  7.11355    0.03177 223.915   &lt;2e-16 ***\nsexMale     -0.01863    0.04514  -0.413     0.68    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.806 on 6401 degrees of freedom\nMultiple R-squared:  2.66e-05,  Adjusted R-squared:  -0.0001296 \nF-statistic: 0.1703 on 1 and 6401 DF,  p-value: 0.6799\n\n\nWhen interpreting a categorical predictor in regression, one category is treated as the reference category, which serves as the baseline for comparison. In this case, the reference category corresponds to the intercept.\nBy default, the first category in the data is used as the reference category, unless specified otherwise."
+    "text": "Continuing the analysis\nThe analysis summary should look like this:\n\nlife_model3 &lt;- lm(life_satisfaction ~ age_group, data = wvs_cleaned)\nsummary(life_model3)\n\n\nCall:\nlm(formula = life_satisfaction ~ age_group, data = wvs_cleaned)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-6.5293 -1.0131  0.3391  0.9869  3.3391 \n\nCoefficients:\n               Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)     7.52931    0.04296 175.250   &lt;2e-16 ***\nage_group45-60 -0.51622    0.05984  -8.626   &lt;2e-16 ***\nage_group29-44 -0.49386    0.05961  -8.284   &lt;2e-16 ***\nage_group18-28 -0.86840    0.07124 -12.190   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.783 on 6399 degrees of freedom\nMultiple R-squared:  0.02533,   Adjusted R-squared:  0.02488 \nF-statistic: 55.44 on 3 and 6399 DF,  p-value: &lt; 2.2e-16\n\n\n\nWhen interpreting a categorical predictor in regression, one category is treated as the reference category, which serves as the baseline for comparison. In this case, the reference category corresponds to the intercept.\nBy default, the first category in the data is used as the reference category, unless specified."
   },
   {
-    "objectID": "05-stats-quarto.html#narrating-the-result",
-    "href": "05-stats-quarto.html#narrating-the-result",
-    "title": "Regression and Introduction to Quarto",
+    "objectID": "05-more-stats.html#narrating-the-result",
+    "href": "05-more-stats.html#narrating-the-result",
+    "title": "Regression and Presenting Your Result",
     "section": "Narrating the result",
-    "text": "Narrating the result\nHere is one possible way to narrate your result:\n\nA linear regression analysis was conducted to explore the relationship between gender (male vs. female) of voters and support for the status quo in Chile (statusquo). The model includes gender as the only predictor. Results revealed that the intercept, representing the mean statusquo score for male voters, was -0.080 (SE = 0.030). This was statistically significant at p &lt; 0.01, indicating that on average, male voters showed a negative inclination towards the status quo.\n\n\nThe coefficient for female voters was 0.134 (SE = 0.041), indicating that being female was associated with an increase of 0.134 units in support for the status quo compared to male voters. This effect was statistically significant p &lt; 0.01\n\n\nThe model explain a small portion of the variance in support for the status quo (R^2 = 0.004, Adjusted R^2 = 0.004). The F-statistic (10.75, p &lt; 0.01) suggests that gender is a significant predictor of support for the status quo."
+    "text": "Narrating the result\nHere is one possible way to narrate your result:\n\nA linear regression analysis was conducted to examine how age groups predict life satisfaction. With the youngest age group (15-28) as the reference group (intercept = 6.66, SE = 0.06), all other age groups showed significantly higher life satisfaction. The 29-44 age group scored 0.37 units higher (SE = 0.07, p &lt; 0.001), the 45-60 age group scored 0.35 units higher (SE = 0.07, p &lt; 0.001), and the 61+ age group showed the largest difference, scoring 0.87 units higher (SE = 0.07, p &lt; 0.001) than the reference group.\n\n\nThe model was statistically significant (F(3, 6399) = 55.44, p &lt; 0.001) but only explained 2.5% of the variance in life satisfaction (R² = 0.025, Adjusted R² = 0.025)."
   },
   {
-    "objectID": "05-stats-quarto.html#presenting-the-regression-table",
-    "href": "05-stats-quarto.html#presenting-the-regression-table",
-    "title": "Regression and Introduction to Quarto",
+    "objectID": "05-more-stats.html#presenting-the-regression-table",
+    "href": "05-more-stats.html#presenting-the-regression-table",
+    "title": "Regression and Presenting Your Result",
     "section": "Presenting the regression table",
-    "text": "Presenting the regression table\nFor more info about huxreg, go here: https://cran.r-project.org/web/packages/huxtable/vignettes/huxreg.html\n\nlibrary(huxtable)\nhuxreg(\"life satisfaction (model3)\" = life_model3,\n       number_format = 4,\n       bold_signif = 0.05,\n       statistics = c( \"R squared\" = \"r.squared\", \"N\" = \"nobs\", \"F\" = \"statistic\",\n      \"P value\" = \"p.value\"))\n\n\n\nlife satisfaction (model3)\n\n(Intercept)7.1136 ***\n\n(0.0318)   \n\nsexMale-0.0186    \n\n(0.0451)   \n\nR squared0.0000    \n\nN6403         \n\nF0.1703    \n\nP value0.6799    \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
+    "text": "Presenting the regression table\n\nhuxreg(\"life satisfaction (model3)\" = life_model3,\n       number_format = 4,\n       bold_signif = 0.05,\n       statistics = c( \"R squared\" = \"r.squared\", \"N\" = \"nobs\", \"F\" = \"statistic\",\n      \"P value\" = \"p.value\"))"
   },
   {
-    "objectID": "05-stats-quarto.html#categorical-predictor-changing-the-reference",
-    "href": "05-stats-quarto.html#categorical-predictor-changing-the-reference",
-    "title": "Regression and Introduction to Quarto",
+    "objectID": "05-more-stats.html#presenting-the-regression-table-output",
+    "href": "05-more-stats.html#presenting-the-regression-table-output",
+    "title": "Regression and Presenting Your Result",
+    "section": "Presenting the regression table",
+    "text": "Presenting the regression table\n\n\n\nlife satisfaction (model3)\n\n(Intercept)7.5293 ***\n\n(0.0430)   \n\nage_group45-60-0.5162 ***\n\n(0.0598)   \n\nage_group29-44-0.4939 ***\n\n(0.0596)   \n\nage_group18-28-0.8684 ***\n\n(0.0712)   \n\nR squared0.0253    \n\nN6403         \n\nF55.4384    \n\nP value0.0000    \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
+  },
+  {
+    "objectID": "05-more-stats.html#categorical-predictor-changing-the-reference",
+    "href": "05-more-stats.html#categorical-predictor-changing-the-reference",
+    "title": "Regression and Presenting Your Result",
     "section": "Categorical predictor: changing the reference",
-    "text": "Categorical predictor: changing the reference\nLet’s change the reference category for sex variable to “Male”.\n\nwvs_data &lt;- wvs_data |&gt; \n    mutate(sex = relevel(sex, ref = \"Male\"))\n\nstr(wvs_data$sex)\n\n Factor w/ 2 levels \"Male\",\"Female\": 2 1 2 1 1 1 1 2 1 1 ...\n\n\nRe-run the analysis with the new reference category\n\nlife_model3a&lt;- lm(life_satisfaction ~ sex, data = wvs_data)\nsummary(life_model3a)"
+    "text": "Categorical predictor: changing the reference\nLet’s change the reference category for age_group variable to “61+”.\n\nwvs_cleaned &lt;- wvs_cleaned |&gt; \n    mutate(age_group = relevel(age_group, ref = \"61+\"))\n\nstr(wvs_cleaned$age_group)\n\n Factor w/ 4 levels \"61+\",\"45-60\",..: 1 1 1 1 1 1 1 1 1 1 ...\n\n\nRe-run the analysis with the new reference category\n\nlife_model3a&lt;- lm(life_satisfaction ~ age_group, data = wvs_cleaned)\nsummary(life_model3a)"
   },
   {
-    "objectID": "05-stats-quarto.html#categorical-predictor-changing-the-reference-output",
-    "href": "05-stats-quarto.html#categorical-predictor-changing-the-reference-output",
-    "title": "Regression and Introduction to Quarto",
+    "objectID": "05-more-stats.html#categorical-predictor-changing-the-reference-output",
+    "href": "05-more-stats.html#categorical-predictor-changing-the-reference-output",
+    "title": "Regression and Presenting Your Result",
     "section": "Categorical predictor: changing the reference",
-    "text": "Categorical predictor: changing the reference\n\n\nCall:\nlm(formula = life_satisfaction ~ sex, data = wvs_data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-6.1136 -1.0949 -0.0949  0.9051  2.9051 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  7.09492    0.03207 221.211   &lt;2e-16 ***\nsexFemale    0.01863    0.04514   0.413     0.68    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.806 on 6401 degrees of freedom\nMultiple R-squared:  2.66e-05,  Adjusted R-squared:  -0.0001296 \nF-statistic: 0.1703 on 1 and 6401 DF,  p-value: 0.6799"
+    "text": "Categorical predictor: changing the reference\n\n\nCall:\nlm(formula = life_satisfaction ~ age_group, data = wvs_cleaned)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-6.5293 -1.0131  0.3391  0.9869  3.3391 \n\nCoefficients:\n               Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)     7.52931    0.04296 175.250   &lt;2e-16 ***\nage_group45-60 -0.51622    0.05984  -8.626   &lt;2e-16 ***\nage_group29-44 -0.49386    0.05961  -8.284   &lt;2e-16 ***\nage_group18-28 -0.86840    0.07124 -12.190   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.783 on 6399 degrees of freedom\nMultiple R-squared:  0.02533,   Adjusted R-squared:  0.02488 \nF-statistic: 55.44 on 3 and 6399 DF,  p-value: &lt; 2.2e-16"
   },
   {
-    "objectID": "05-stats-quarto.html#changing-baseline-category-for-ordered-factor",
-    "href": "05-stats-quarto.html#changing-baseline-category-for-ordered-factor",
-    "title": "Regression and Introduction to Quarto",
+    "objectID": "05-more-stats.html#changing-baseline-category-for-ordered-factor",
+    "href": "05-more-stats.html#changing-baseline-category-for-ordered-factor",
+    "title": "Regression and Presenting Your Result",
     "section": "Changing baseline category for ordered factor",
-    "text": "Changing baseline category for ordered factor\nwvs_data &lt;- wvs_data |&gt; \n    mutate(education = factor(education, \n                         levels = c(\"S\", \"P\", \"PS\"), \n                         ordered = TRUE))\n\n\n\n\n\n\n\nReleveling ordered factor\n\n\nPreviously, we could use the relevel() function to change the reference category for ordered factors. However, in recent R versions, this no longer works for ordered factors, so we now use the method shown in the code above. The relevel() function still works for unordered factors."
+    "text": "Changing baseline category for ordered factor\nAssuming we have a column with ordered factor in our data called education with the level of Primary, Secondary, and Tertiary. This is how we can change the order, if we want to put Secondary before Primary.\nwvs_cleaned &lt;- wvs_cleaned |&gt; \n    mutate(education = factor(education, \n                         levels = c(\"Secondary\", \"Primary\", \"Tertiary\"), \n                         ordered = TRUE))\n\n\n\n\n\n\n\nReleveling ordered factor\n\n\nPreviously, we could use the relevel() function to change the reference category for ordered factors. However, in recent R versions, this no longer works for ordered factors, so we now use the method shown in the code above. The relevel() function still works for unordered factors."
   },
   {
-    "objectID": "05-stats-quarto.html#lets-try-this-linear-regression-exercise-5-mins",
-    "href": "05-stats-quarto.html#lets-try-this-linear-regression-exercise-5-mins",
-    "title": "Regression and Introduction to Quarto",
+    "objectID": "05-more-stats.html#lets-try-this-linear-regression-exercise-5-mins",
+    "href": "05-more-stats.html#lets-try-this-linear-regression-exercise-5-mins",
+    "title": "Regression and Presenting Your Result",
     "section": "Let’s try this Linear Regression exercise! (5 mins)",
-    "text": "Let’s try this Linear Regression exercise! (5 mins)\nCreate a regression model called life_model4 that predicts the life_satisfaction score based on region. Make sure the reference category is region “M”.\n\n\nCode\nlife_model4 &lt;- lm(life_satisfaction ~ employment, data = wvs_data)\nsummary(life_model4)"
+    "text": "Let’s try this Linear Regression exercise! (5 mins)\nCreate a regression model called life_model4 that predicts the life_satisfaction score based on sex. The reference category should be ‘Male’\n\n\nCode\nlife_model4 &lt;- lm(life_satisfaction ~ sex, data = wvs_cleaned)\nsummary(life_model4)\n\n\n\nCall:\nlm(formula = life_satisfaction ~ sex, data = wvs_cleaned)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-6.1136 -1.0949 -0.0949  0.9051  2.9051 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  7.09492    0.03207 221.211   &lt;2e-16 ***\nsexFemale    0.01863    0.04514   0.413     0.68    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.806 on 6401 degrees of freedom\nMultiple R-squared:  2.66e-05,  Adjusted R-squared:  -0.0001296 \nF-statistic: 0.1703 on 1 and 6401 DF,  p-value: 0.6799"
   },
   {
-    "objectID": "05-stats-quarto.html#binary-logistic-regression---what-is-it",
-    "href": "05-stats-quarto.html#binary-logistic-regression---what-is-it",
-    "title": "Regression and Introduction to Quarto",
+    "objectID": "05-more-stats.html#binary-logistic-regression---what-is-it",
+    "href": "05-more-stats.html#binary-logistic-regression---what-is-it",
+    "title": "Regression and Presenting Your Result",
     "section": "Binary Logistic Regression - what is it?",
     "text": "Binary Logistic Regression - what is it?\nAlso known as simply logistic regression, it is used to model the relationship between a set of independent variables and a binary outcome.\nThese independent variables can be either categorical or continuous.\nBinary Logistics Regression formula:\n\\[\nlogit(P) = \\beta_0 + \\beta_1X_1 + \\beta_2X_2 + … + \\beta_nX_n\n\\]\nIt can also be written like below, in which the \\(logit(P)\\) part is expanded:\n\\[\nP = \\frac{1}{1 + e^{-(\\beta_0 + \\beta_1X)}}\n\\]"
   },
   {
-    "objectID": "05-stats-quarto.html#binary-logistic-regression-examples",
-    "href": "05-stats-quarto.html#binary-logistic-regression-examples",
-    "title": "Regression and Introduction to Quarto",
+    "objectID": "05-more-stats.html#binary-logistic-regression-examples",
+    "href": "05-more-stats.html#binary-logistic-regression-examples",
+    "title": "Regression and Presenting Your Result",
     "section": "Binary Logistic Regression Examples",
-    "text": "Binary Logistic Regression Examples\n\nDoes a person’s age and education level influence whether they will vote Yes or No in a referendum?\nDoes the number of hours spent studying impact a student’s likelihood of passing a module? (pass/fail outcome)\n\nIn essence, the goal of binary logistic regression is to estimate the probability of a specific event happening when there are only two possible outcomes (hence the term “binary”)."
+    "text": "Binary Logistic Regression Examples\n\nDoes a person’s age and education level influence whether they will vote Democrat or Republican in the US election?\nDoes the number of hours spent studying impact a student’s likelihood of passing a module? (pass/fail outcome)\n\nIn essence, the goal of binary logistic regression is to estimate the probability of a specific event happening when there are only two possible outcomes (hence the term “binary”)."
   },
   {
-    "objectID": "05-stats-quarto.html#binary-logistic-regression-one-continuous-predictor",
-    "href": "05-stats-quarto.html#binary-logistic-regression-one-continuous-predictor",
-    "title": "Regression and Introduction to Quarto",
+    "objectID": "05-more-stats.html#binary-logistic-regression-one-continuous-predictor",
+    "href": "05-more-stats.html#binary-logistic-regression-one-continuous-predictor",
+    "title": "Regression and Presenting Your Result",
     "section": "Binary Logistic Regression: One Continuous Predictor",
-    "text": "Binary Logistic Regression: One Continuous Predictor\nResearch Question: Does age affect the likelihood of voting “Yes” in the plebiscite?\n\nThe outcome/DV (\\(Y\\)): vote - there are 4 outcomes here, but for the purpose of this workshop practice, let’s define the outcome as “Yes” and “not Yes” outcome\nThe predictor/IV (\\(X\\)): age"
+    "text": "Binary Logistic Regression: One Continuous Predictor\nResearch Question: Does a participant’s political alignment affect the likelihood of being satisfied with life?\n\nThe outcome/DV (\\(Y\\)): satisfied\n\nOur outcome is a continuous variable, but for the purpose of this workshop practice, let’s define the outcome as “Satisfied” if the life_satisfaction score is more than 7 (inclusive), and “not Satisfied” if the score is less than 7.\n\nThe predictor/IV (\\(X\\)): political_scale"
   },
   {
-    "objectID": "05-stats-quarto.html#dummy-coding-dependent-variable",
-    "href": "05-stats-quarto.html#dummy-coding-dependent-variable",
-    "title": "Regression and Introduction to Quarto",
+    "objectID": "05-more-stats.html#dummy-coding-dependent-variable",
+    "href": "05-more-stats.html#dummy-coding-dependent-variable",
+    "title": "Regression and Presenting Your Result",
     "section": "Dummy-coding dependent variable",
-    "text": "Dummy-coding dependent variable\nBefore we proceed with the calculations, we need to dummy code the dependent variable into 1 and 0, with 1 = Yes and 0 = Not Yes. More info on dummy coding here\n\n# First, we need to create a binary outcome\nwvs_data &lt;- wvs_data |&gt;\n    mutate(satisfied = if_else(life_satisfaction &gt; 6, 1, 0))\n# the if_else is from dplyr package (from session 2)\n\n\n\n# A tibble: 6,403 × 2\n  life_satisfaction satisfied\n              &lt;dbl&gt;     &lt;dbl&gt;\n1                 5         0\n2                 8         1\n3                 9         1\n4                 7         1\n5                 1         0\n# ℹ 6,398 more rows"
+    "text": "Dummy-coding dependent variable\nBefore we proceed with the calculations, we need to dummy code the dependent variable into 1 and 0, with 1 = Satisfied and 0 = Not Satisfied. More info on dummy coding here\n\n# First, we need to create a binary outcome\nwvs_cleaned &lt;- wvs_cleaned |&gt;\n    mutate(satisfied = if_else(life_satisfaction &gt;= 7, 1, 0))\n# the if_else is from dplyr package (from session 2)\n\n\n\n# A tibble: 6,403 × 2\n  life_satisfaction satisfied\n              &lt;dbl&gt;     &lt;dbl&gt;\n1                 7         1\n2                 5         0\n3                 8         1\n4                 6         0\n5                 6         0\n# ℹ 6,398 more rows"
   },
   {
-    "objectID": "05-stats-quarto.html#conduct-the-analysis",
-    "href": "05-stats-quarto.html#conduct-the-analysis",
-    "title": "Regression and Introduction to Quarto",
+    "objectID": "05-more-stats.html#conduct-the-analysis",
+    "href": "05-more-stats.html#conduct-the-analysis",
+    "title": "Regression and Presenting Your Result",
     "section": "Conduct the analysis",
-    "text": "Conduct the analysis\nLet’s conduct the analysis!\n\nlife_model5 &lt;- glm(satisfied ~ age,\n                family = binomial, \n                data = wvs_data)\n\nsummary(life_model5)\n\n\nCall:\nglm(formula = satisfied ~ age, family = binomial, data = wvs_data)\n\nCoefficients:\n            Estimate Std. Error z value Pr(&gt;|z|)    \n(Intercept) 0.153938   0.082380   1.869   0.0617 .  \nage         0.015577   0.001681   9.267   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 7731.0  on 6402  degrees of freedom\nResidual deviance: 7643.4  on 6401  degrees of freedom\nAIC: 7647.4\n\nNumber of Fisher Scoring iterations: 4"
+    "text": "Conduct the analysis\nLet’s conduct the analysis!\n\nlife_model5 &lt;- glm(satisfied ~ political_scale,\n                family = binomial, \n                data = wvs_cleaned)\n\nsummary(life_model5)\n\n\nCall:\nglm(formula = satisfied ~ political_scale, family = binomial, \n    data = wvs_cleaned)\n\nCoefficients:\n                Estimate Std. Error z value Pr(&gt;|z|)    \n(Intercept)      0.45438    0.07236   6.279 3.41e-10 ***\npolitical_scale  0.08448    0.01326   6.370 1.89e-10 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 7731  on 6402  degrees of freedom\nResidual deviance: 7690  on 6401  degrees of freedom\nAIC: 7694\n\nNumber of Fisher Scoring iterations: 4"
   },
   {
-    "objectID": "05-stats-quarto.html#exponentiate-the-coefficients",
-    "href": "05-stats-quarto.html#exponentiate-the-coefficients",
-    "title": "Regression and Introduction to Quarto",
+    "objectID": "05-more-stats.html#exponentiate-the-coefficients",
+    "href": "05-more-stats.html#exponentiate-the-coefficients",
+    "title": "Regression and Presenting Your Result",
     "section": "Exponentiate the coefficients",
-    "text": "Exponentiate the coefficients\nIf you recall the formula, the results are expressed in Logit Probability. As we typically report the result in terms of Odd Ratios (OR), perform exponentiation on the coefficients.\n\nlibrary(gtsummary)\nlife_model5 |&gt; tbl_regression(exponentiate = TRUE) |&gt; \n    bold_p() \n\n\n\n\n\n\n\nCharacteristic\nOR1\n95% CI1\np-value\n\n\n\n\nage\n1.02\n1.01, 1.02\n&lt;0.001\n\n\n\n1 OR = Odds Ratio, CI = Confidence Interval\n\n\n\n\n\n\n\n\n\n\nMore on tbl_regression() by gtsummary: https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html"
+    "text": "Exponentiate the coefficients\nIf you recall the formula, the results are expressed in Logit Probability. As we typically report the result in terms of Odd Ratios (OR), perform exponentiation on the coefficients.\n\nexp(coef(life_model5))\n\n    (Intercept) political_scale \n       1.575194        1.088155 \n\n\nWe can also use tbl_regression() to do this for us:\n\nlibrary(gtsummary)\nlife_model5 |&gt; tbl_regression(exponentiate = TRUE) |&gt; \n    bold_p() \n\n\n\n\n\n\n\nCharacteristic\nOR1\n95% CI1\np-value\n\n\n\n\npolitical_scale\n1.09\n1.06, 1.12\n&lt;0.001\n\n\n\n1 OR = Odds Ratio, CI = Confidence Interval\n\n\n\n\n\n\n\n\n\n\nMore on tbl_regression() by gtsummary: https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html"
   },
   {
-    "objectID": "05-stats-quarto.html#exponentiate-the-coefficients-interpretation",
-    "href": "05-stats-quarto.html#exponentiate-the-coefficients-interpretation",
-    "title": "Regression and Introduction to Quarto",
-    "section": "Exponentiate the coefficients: interpretation",
-    "text": "Exponentiate the coefficients: interpretation\nPossible interpretation:\n(The intercept isn’t typically interpreted as an odds ratio, so we’ll ignore that for now)\nThe result above indicates that like one unit increase of age will increase the odds of voting “Yes” by a factor of 1.0135. i.e. for each year increase in age, there is a 1.35% increase in the odds of voting “Yes”. \\(((1.0135 - 1) * 100 = 1.35)\\) . This positive effect is very small.\n\n\nMore on interpreting Odds Ratio: https://stats.oarc.ucla.edu/other/mult-pkg/faq/general/faq-how-do-i-interpret-odds-ratios-in-logistic-regression/"
-  },
-  {
-    "objectID": "05-stats-quarto.html#for-reporting-purposes-get-the-rsquared",
-    "href": "05-stats-quarto.html#for-reporting-purposes-get-the-rsquared",
-    "title": "Regression and Introduction to Quarto",
+    "objectID": "05-more-stats.html#for-reporting-purposes-get-the-rsquared",
+    "href": "05-more-stats.html#for-reporting-purposes-get-the-rsquared",
+    "title": "Regression and Presenting Your Result",
     "section": "For reporting purposes: get the Rsquared",
-    "text": "For reporting purposes: get the Rsquared\nIn the report, the model’s Chi square and Rsquared will be reported as well to indicate the model fit. However, since the resulting item does not have this info, we will call upon DescTools’ PseudoR2() function to help!\n\n\n# by default, McFadden will be used\nDescTools::PseudoR2(life_model5) \n\n\n  McFadden \n0.01133402 \n\n\n\n\nDescTools::PseudoR2(life_model5, \n                    which = \"CoxSnell\")\n\n\n  CoxSnell \n0.01359151 \n\n\n\nDescTools::PseudoR2(life_model5, \n                    which = \"all\")\n\n       McFadden     McFaddenAdj        CoxSnell      Nagelkerke   AldrichNelson \n   1.133402e-02    1.081663e-02    1.359151e-02    1.938800e-02    1.349998e-02 \nVeallZimmermann           Efron McKelveyZavoina            Tjur             AIC \n   2.468099e-02    1.344444e-02    2.020244e-02    1.352298e-02    7.647369e+03 \n            BIC          logLik         logLik0              G2 \n   7.660898e+03   -3.821684e+03   -3.865496e+03    8.762325e+01"
+    "text": "For reporting purposes: get the Rsquared\nIn the report, the model’s Chi square and Rsquared will be reported as well to indicate the model fit. However, since the resulting item does not have this info, we will call upon DescTools’ PseudoR2() function to help!\n\n\n# by default, McFadden will be used\nDescTools::PseudoR2(life_model5) \n\n\n   McFadden \n0.005306369 \n\n\nLet’s retrieve the R-squared value and the Chi-square value (also known as the G2 value, which stands for Goodness-of-fit)\n\n\nDescTools::PseudoR2(life_model5, \n                    which = c(\"G2\", \"Nagelkerke\"))\n\n\n          G2   Nagelkerke \n41.023494851  0.009110118"
   },
   {
-    "objectID": "05-stats-quarto.html#reporting-result-in-text-narration",
-    "href": "05-stats-quarto.html#reporting-result-in-text-narration",
-    "title": "Regression and Introduction to Quarto",
-    "section": "Reporting result: in-text narration",
-    "text": "Reporting result: in-text narration\nBelow is a sample of how you may want to narrate your result. Note the resulting values mentioned in the paragraph below.\n\nIn a nutshell, you will most likely have to mention the p-value, the \\(\\beta\\) coefficients (for linear regressions), the Odd Ratios (for logistic regression) with the confidence intervals, and the adjusted R-squared. You should also include these information in your regression table.\n\n\nThe screenshot is retrieved from https://statistics.laerd.com/spss-tutorials/binomial-logistic-regression-using-spss-statistics.php"
+    "objectID": "05-more-stats.html#in-case-you-need-to-get-the-rsquared-with-other-methods",
+    "href": "05-more-stats.html#in-case-you-need-to-get-the-rsquared-with-other-methods",
+    "title": "Regression and Presenting Your Result",
+    "section": "In case you need to get the Rsquared with other methods",
+    "text": "In case you need to get the Rsquared with other methods\n\nDescTools::PseudoR2(life_model5, \n                    which = \"all\")\n\n       McFadden     McFaddenAdj        CoxSnell      Nagelkerke   AldrichNelson \n   5.306369e-03    4.788971e-03    6.386437e-03    9.110118e-03    6.366131e-03 \nVeallZimmermann           Efron McKelveyZavoina            Tjur             AIC \n   1.163872e-02    5.980444e-03    9.450630e-03    6.188032e-03    7.693968e+03 \n            BIC          logLik         logLik0              G2 \n   7.707497e+03   -3.844984e+03   -3.865496e+03    4.102349e+01"
   },
   {
-    "objectID": "05-stats-quarto.html#reporting-result-regression-table",
-    "href": "05-stats-quarto.html#reporting-result-regression-table",
-    "title": "Regression and Introduction to Quarto",
-    "section": "Reporting result: regression table",
-    "text": "Reporting result: regression table\n\nhuxreg(\"Vote 'Yes'\" = life_model5, statistics = c(R2 = \"r.squared\", \"logLik\", \"AIC\"))\n\n\n\nVote 'Yes'\n\n(Intercept)0.154    \n\n(0.082)   \n\nage0.016 ***\n\n(0.002)   \n\nlogLik-3821.684    \n\nAIC7647.369    \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
+    "objectID": "05-more-stats.html#possible-interpretation-of-the-result",
+    "href": "05-more-stats.html#possible-interpretation-of-the-result",
+    "title": "Regression and Presenting Your Result",
+    "section": "Possible interpretation of the result",
+    "text": "Possible interpretation of the result\nPossible interpretation:\n(The intercept isn’t typically interpreted as an odds ratio, so we’ll ignore that for now)\n\nA logistic regression was performed to ascertain the effects of political scale alignment on the likelihood that individuals will be satisfied with life versus not satisfied. The logistic regression model was statistically significant, χ² (1, N = 6403) = 41.02, p &lt; .001.\n\n\nThe model explained 0.9% (Nagelkerke R²) of the variance in life satisfaction. Political scale alignment was associated with an increased likelihood of being satisfied with life (OR = 1.09, 95% CI [1.06, 1.12], p &lt; .001), indicating that for each one-unit increase in political scale alignment (1-10), the odds of being satisfied with life increased by 9%.\n\n\n\nMore on interpreting Odds Ratio: https://stats.oarc.ucla.edu/other/mult-pkg/faq/general/faq-how-do-i-interpret-odds-ratios-in-logistic-regression/"
   },
   {
-    "objectID": "05-stats-quarto.html#binary-logistic-regression-one-categorical-predictor",
-    "href": "05-stats-quarto.html#binary-logistic-regression-one-categorical-predictor",
-    "title": "Regression and Introduction to Quarto",
+    "objectID": "05-more-stats.html#fyi---irl-sample-of-reporting-logistic-regression",
+    "href": "05-more-stats.html#fyi---irl-sample-of-reporting-logistic-regression",
+    "title": "Regression and Presenting Your Result",
+    "section": "FYI - IRL sample of reporting Logistic Regression",
+    "text": "FYI - IRL sample of reporting Logistic Regression\nBelow is a sample of how you may want to narrate your result. Note the resulting values mentioned in the paragraph below.\n\nIn a nutshell, you will most likely have to mention the p-value, the coefficients (for linear regressions), the Odd Ratios (for logistic regression) with the confidence intervals, the chi-squared (χ²), and the R-squared. You should also include these information in your regression table.\n\n\nThe screenshot is retrieved from https://statistics.laerd.com/spss-tutorials/binomial-logistic-regression-using-spss-statistics.php"
+  },
+  {
+    "objectID": "05-more-stats.html#regression-tables",
+    "href": "05-more-stats.html#regression-tables",
+    "title": "Regression and Presenting Your Result",
+    "section": "Regression tables",
+    "text": "Regression tables\nEven with huxtable, you may need to edit the table further to include the missing stats\n\nhuxreg(\"life_satisfaction\" = life_model5, statistics = c(\"R2\" = \"r.squared\", \"logLik\", \"AIC\"))\n\n\n\nlife_satisfaction\n\n(Intercept)0.454 ***\n\n(0.072)   \n\npolitical_scale0.084 ***\n\n(0.013)   \n\nlogLik-3844.984    \n\nAIC7693.968    \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
+  },
+  {
+    "objectID": "05-more-stats.html#binary-logistic-regression-one-categorical-predictor",
+    "href": "05-more-stats.html#binary-logistic-regression-one-categorical-predictor",
+    "title": "Regression and Presenting Your Result",
     "section": "Binary Logistic Regression: One Categorical Predictor",
-    "text": "Binary Logistic Regression: One Categorical Predictor\nResearch Question: Does region affect the likelihood of voting “Yes” in the plebiscite?\n\nThe outcome/DV (\\(Y\\)): vote - there are 4 outcomes here, but for the purpose of this workshop practice, let’s define the outcome as “Yes” and “not Yes” outcome\nThe predictor/IV (\\(X\\)): region\n\n\nlife_model6 &lt;- glm(satisfied ~ religiousity,\n                      family = \"binomial\",\n                      data = wvs_data)\n\nsummary(life_model6)"
+    "text": "Binary Logistic Regression: One Categorical Predictor\nResearch Question: Does religiousity affect the likelihood of being satisfied with life?\n\nThe outcome/DV (\\(Y\\)): satisfied\nThe predictor/IV (\\(X\\)): religiousity - let’s set “A religious person” as the reference category!\n\n\nwvs_cleaned &lt;- wvs_cleaned |&gt; \n    mutate(religiousity = relevel(religiousity, ref = \"A religious person\"))\n\nlife_model6 &lt;- glm(satisfied ~ religiousity,\n                      family = \"binomial\",\n                      data = wvs_cleaned)\n\nsummary(life_model6)"
   },
   {
-    "objectID": "05-stats-quarto.html#binary-logistic-regression-one-categorical-predictor-output",
-    "href": "05-stats-quarto.html#binary-logistic-regression-one-categorical-predictor-output",
-    "title": "Regression and Introduction to Quarto",
+    "objectID": "05-more-stats.html#binary-logistic-regression-one-categorical-predictor-output",
+    "href": "05-more-stats.html#binary-logistic-regression-one-categorical-predictor-output",
+    "title": "Regression and Presenting Your Result",
     "section": "Binary Logistic Regression: One Categorical Predictor",
-    "text": "Binary Logistic Regression: One Categorical Predictor\n\n\nCall:\nglm(formula = satisfied ~ religiousity, family = \"binomial\", \n    data = wvs_data)\n\nCoefficients:\n                                   Estimate Std. Error z value Pr(&gt;|z|)    \n(Intercept)                         1.00703    0.04426  22.753  &lt; 2e-16 ***\nreligiousityAn atheist             -0.27498    0.07845  -3.505 0.000456 ***\nreligiousityDon't know              0.21675    0.36245   0.598 0.549832    \nreligiousityNot a religious person -0.17379    0.06111  -2.844 0.004456 ** \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 7731.0  on 6402  degrees of freedom\nResidual deviance: 7715.3  on 6399  degrees of freedom\nAIC: 7723.3\n\nNumber of Fisher Scoring iterations: 4"
+    "text": "Binary Logistic Regression: One Categorical Predictor\n\n\nCall:\nglm(formula = satisfied ~ religiousity, family = \"binomial\", \n    data = wvs_cleaned)\n\nCoefficients:\n                                   Estimate Std. Error z value Pr(&gt;|z|)    \n(Intercept)                         1.00703    0.04426  22.753  &lt; 2e-16 ***\nreligiousityNot a religious person -0.17379    0.06111  -2.844 0.004456 ** \nreligiousityAn atheist             -0.27498    0.07845  -3.505 0.000456 ***\nreligiousityDon't know              0.21675    0.36245   0.598 0.549832    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 7731.0  on 6402  degrees of freedom\nResidual deviance: 7715.3  on 6399  degrees of freedom\nAIC: 7723.3\n\nNumber of Fisher Scoring iterations: 4\n\nexp(coef(life_model6))\n\n                       (Intercept) religiousityNot a religious person \n                         2.7374462                          0.8404704 \n            religiousityAn atheist             religiousityDon't know \n                         0.7595839                          1.2420335"
   },
   {
-    "objectID": "05-stats-quarto.html#exponentiate-the-coefficients-1",
-    "href": "05-stats-quarto.html#exponentiate-the-coefficients-1",
-    "title": "Regression and Introduction to Quarto",
+    "objectID": "05-more-stats.html#exponentiate-the-coefficients-1",
+    "href": "05-more-stats.html#exponentiate-the-coefficients-1",
+    "title": "Regression and Presenting Your Result",
     "section": "Exponentiate the coefficients",
-    "text": "Exponentiate the coefficients\nIf you recall the formula, the results are expressed in Logit Probability. As we typically report the result in terms of Odd Ratios (OR), perform exponentiation on the coefficients.\n\nlibrary(gtsummary)\nlife_model6 |&gt; tbl_regression(exponentiate = TRUE) |&gt;  \n    bold_p()\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nOR1\n95% CI1\np-value\n\n\n\n\nreligiousity\n\n\n\n\n\n\n\n\n    A religious person\n—\n—\n\n\n\n\n    An atheist\n0.76\n0.65, 0.89\n&lt;0.001\n\n\n    Don't know\n1.24\n0.63, 2.67\n0.5\n\n\n    Not a religious person\n0.84\n0.75, 0.95\n0.004\n\n\n\n1 OR = Odds Ratio, CI = Confidence Interval"
+    "text": "Exponentiate the coefficients\nIf you recall the formula, the results are expressed in Logit Probability. As we typically report the result in terms of Odd Ratios (OR), perform exponentiation on the coefficients.\n\nlibrary(gtsummary)\nlife_model6 |&gt; tbl_regression(exponentiate = TRUE) |&gt;  \n    bold_p()\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nOR1\n95% CI1\np-value\n\n\n\n\nreligiousity\n\n\n\n\n\n\n\n\n    A religious person\n—\n—\n\n\n\n\n    Not a religious person\n0.84\n0.75, 0.95\n0.004\n\n\n    An atheist\n0.76\n0.65, 0.89\n&lt;0.001\n\n\n    Don't know\n1.24\n0.63, 2.67\n0.5\n\n\n\n1 OR = Odds Ratio, CI = Confidence Interval"
   },
   {
-    "objectID": "05-stats-quarto.html#narrating-the-results-1",
-    "href": "05-stats-quarto.html#narrating-the-results-1",
-    "title": "Regression and Introduction to Quarto",
-    "section": "Narrating the results",
-    "text": "Narrating the results\nPossible interpretation for region C:\n(The intercept isn’t typically interpreted as an odds ratio, so we’ll ignore that for now)\nThe result above indicates that the odds for people in region C to vote “Yes” are about 0.56 times the odds of people in region N (the reference category). i.e., There is a 43.54% decrease in odds for region C residents to vote “Yes” compared to region N residents. \\(((0.5646 - 1) * 100 = -43.54)\\)\n\n\nMore on logistic regression: https://stats.oarc.ucla.edu/r/dae/logit-regression/"
-  },
-  {
-    "objectID": "05-stats-quarto.html#get-the-rsquared",
-    "href": "05-stats-quarto.html#get-the-rsquared",
-    "title": "Regression and Introduction to Quarto",
+    "objectID": "05-more-stats.html#get-the-rsquared",
+    "href": "05-more-stats.html#get-the-rsquared",
+    "title": "Regression and Presenting Your Result",
     "section": "Get the Rsquared",
-    "text": "Get the Rsquared\nLet’s retrieve the Rsquared value:\n\n\n# the default is McFadden\nDescTools::PseudoR2(life_model6) \n\n\n  McFadden \n0.00202459 \n\n\n\n\nDescTools::PseudoR2(life_model6, \n                    which = \"CoxSnell\")\n\n\n   CoxSnell \n0.002441508 \n\n\n\nDescTools::PseudoR2(life_model6, \n                    which = \"all\")\n\n       McFadden     McFaddenAdj        CoxSnell      Nagelkerke   AldrichNelson \n   2.024590e-03    9.897938e-04    2.441508e-03    3.482759e-03    2.438532e-03 \nVeallZimmermann           Efron McKelveyZavoina            Tjur             AIC \n   4.458185e-03    2.438152e-03    3.608656e-03    2.438152e-03    7.723340e+03 \n            BIC          logLik         logLik0              G2 \n   7.750398e+03   -3.857670e+03   -3.865496e+03    1.565209e+01"
+    "text": "Get the Rsquared\nLet’s retrieve the R-squared value and the Chi-square χ² value (also known as the G2 value, which stands for Goodness-of-fit)\n\nDescTools::PseudoR2(life_model6, \n                    which = c(\"G2\", \"Nagelkerke\"))\n\n          G2   Nagelkerke \n15.652088008  0.003482759 \n\n\n\n# get the other R-squared if you like\nDescTools::PseudoR2(life_model6, \n                    which = \"all\")\n\n       McFadden     McFaddenAdj        CoxSnell      Nagelkerke   AldrichNelson \n   2.024590e-03    9.897938e-04    2.441508e-03    3.482759e-03    2.438532e-03 \nVeallZimmermann           Efron McKelveyZavoina            Tjur             AIC \n   4.458185e-03    2.438152e-03    3.608656e-03    2.438152e-03    7.723340e+03 \n            BIC          logLik         logLik0              G2 \n   7.750398e+03   -3.857670e+03   -3.865496e+03    1.565209e+01"
   },
   {
-    "objectID": "05-stats-quarto.html#present-both-models-in-a-table",
-    "href": "05-stats-quarto.html#present-both-models-in-a-table",
-    "title": "Regression and Introduction to Quarto",
+    "objectID": "05-more-stats.html#narrating-the-results-1",
+    "href": "05-more-stats.html#narrating-the-results-1",
+    "title": "Regression and Presenting Your Result",
+    "section": "Narrating the results",
+    "text": "Narrating the results\nPossible interpretation for region C:\n(The intercept isn’t typically interpreted as an odds ratio, so we’ll ignore that for now)\n\nA logistic regression was performed to ascertain the effects of religiosity on the likelihood that individuals will be satisfied with life versus not satisfied. The logistic regression model was statistically significant, χ² (3, N = 6403) = 15.65, p &lt; .001.\n\n\nThe model explained 0.3% (Nagelkerke R²) of the variance in life satisfaction. Compared to religious persons (reference group), being non-religious was associated with lower odds of life satisfaction (OR = 0.84, 95% CI [0.74, 0.95], p = .004), and being an atheist was also associated with lower odds of life satisfaction (OR = 0.76, 95% CI [0.65, 0.89], p &lt; .001). There was no significant difference in life satisfaction for those who were unsure about their religious beliefs compared to religious persons (OR = 1.24, 95% CI [0.61, 2.52], p = .550).\n\n\n\nMore on logistic regression: https://stats.oarc.ucla.edu/r/dae/logit-regression/"
+  },
+  {
+    "objectID": "05-more-stats.html#present-both-models-in-a-table",
+    "href": "05-more-stats.html#present-both-models-in-a-table",
+    "title": "Regression and Presenting Your Result",
     "section": "Present both models in a table",
-    "text": "Present both models in a table\nNote that the R-squared is missing here, so be sure to put that in when you paste this table to your document.\n\nlibrary(huxtable)\nhuxreg(\"vote 'Yes' (model1)\" = life_model5, \"vote 'Yes' (model2)\" = life_model6)\n\n\n\nvote 'Yes' (model1)vote 'Yes' (model2)\n\n(Intercept)0.154    1.007 ***\n\n(0.082)   (0.044)   \n\nage0.016 ***        \n\n(0.002)           \n\nreligiousityAn atheist        -0.275 ***\n\n        (0.078)   \n\nreligiousityDon't know        0.217    \n\n        (0.362)   \n\nreligiousityNot a religious person        -0.174 ** \n\n        (0.061)   \n\nN6403        6403        \n\nlogLik-3821.684    -3857.670    \n\nAIC7647.369    7723.340    \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
+    "text": "Present both models in a table\nNote that the R-squared is missing here, so be sure to put that in when you paste this table to your document.\n\nlibrary(huxtable)\nhuxreg(life_model5, life_model6)\n\n\n\n(1)(2)\n\n(Intercept)0.454 ***1.007 ***\n\n(0.072)   (0.044)   \n\npolitical_scale0.084 ***        \n\n(0.013)           \n\nreligiousityNot a religious person        -0.174 ** \n\n        (0.061)   \n\nreligiousityAn atheist        -0.275 ***\n\n        (0.078)   \n\nreligiousityDon't know        0.217    \n\n        (0.362)   \n\nN6403        6403        \n\nlogLik-3844.984    -3857.670    \n\nAIC7693.968    7723.340    \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
   },
   {
-    "objectID": "05-stats-quarto.html#lets-try-this-logistic-regression-exercise-5-mins",
-    "href": "05-stats-quarto.html#lets-try-this-logistic-regression-exercise-5-mins",
-    "title": "Regression and Introduction to Quarto",
+    "objectID": "05-more-stats.html#lets-try-this-logistic-regression-exercise-5-mins",
+    "href": "05-more-stats.html#lets-try-this-logistic-regression-exercise-5-mins",
+    "title": "Regression and Presenting Your Result",
     "section": "Let’s try this Logistic Regression exercise! (5 mins)",
-    "text": "Let’s try this Logistic Regression exercise! (5 mins)\nCreate a regression model called vote_model that predicts the likelihood of voting “Yes” based on sex.\n\n\nCode\nlife_model7 &lt;- glm(satisfied ~ sex,\n                  family = \"binomial\", \n                  data = wvs_data) \n\nsummary(life_model7)\nexp(coefficients(life_model7))"
+    "text": "Let’s try this Logistic Regression exercise! (5 mins)\nCreate a regression model called life_model7 that predicts the likelihood of being satisfied with life based on sex.\n\n\nCode\nlife_model7 &lt;- glm(satisfied ~ sex,\n                  family = \"binomial\", \n                  data = wvs_cleaned) \n\nsummary(life_model7)\nexp(coefficients(life_model7))"
   },
   {
-    "objectID": "05-stats-quarto.html#markdown-specifically-r-markdown",
-    "href": "05-stats-quarto.html#markdown-specifically-r-markdown",
-    "title": "Regression and Introduction to Quarto",
+    "objectID": "05-more-stats.html#markdown-specifically-r-markdown",
+    "href": "05-more-stats.html#markdown-specifically-r-markdown",
+    "title": "Regression and Presenting Your Result",
     "section": "Markdown (Specifically, R Markdown)",
     "text": "Markdown (Specifically, R Markdown)\n\nMarkdown is a lightweight markup language that provides a simple and readable way to write formatted text without using complex HTML or LaTeX. It is designed to make authoring content easy for everyone!\n\nMarkdown files can be converted into HTML or other formats.\nGeneric Markdown file will have .md extension.\n\nR Markdown is an extension of Markdown that incorporates R code chunks and allows you to create dynamic documents that integrate text, code, and output (such as tables and plots).\n\nRMarkdown file will have .Rmd extension."
   },
   {
-    "objectID": "05-stats-quarto.html#rmarkdown-in-action",
-    "href": "05-stats-quarto.html#rmarkdown-in-action",
-    "title": "Regression and Introduction to Quarto",
+    "objectID": "05-more-stats.html#rmarkdown-in-action",
+    "href": "05-more-stats.html#rmarkdown-in-action",
+    "title": "Regression and Presenting Your Result",
     "section": "RMarkdown in action",
     "text": "RMarkdown in action"
   },
   {
-    "objectID": "05-stats-quarto.html#how-it-all-works",
-    "href": "05-stats-quarto.html#how-it-all-works",
-    "title": "Regression and Introduction to Quarto",
+    "objectID": "05-more-stats.html#how-it-all-works",
+    "href": "05-more-stats.html#how-it-all-works",
+    "title": "Regression and Presenting Your Result",
     "section": "How it all works",
     "text": "How it all works\n\nIllustration by Allison Horst (www.allisonhorst.com)"
   },
   {
-    "objectID": "05-stats-quarto.html#quarto",
-    "href": "05-stats-quarto.html#quarto",
-    "title": "Regression and Introduction to Quarto",
+    "objectID": "05-more-stats.html#quarto",
+    "href": "05-more-stats.html#quarto",
+    "title": "Regression and Presenting Your Result",
     "section": "Quarto",
     "text": "Quarto\n\nQuarto is a multi-language, next-generation version of R Markdown from Posit and includes dozens of new features and capabilities while at the same being able to render most existing Rmd files without modification.\n\n\nIllustration by Allison Horst (www.allisonhorst.com)"
   },
   {
-    "objectID": "05-stats-quarto.html#quarto-in-action-r-scripts-markdown",
-    "href": "05-stats-quarto.html#quarto-in-action-r-scripts-markdown",
-    "title": "Regression and Introduction to Quarto",
+    "objectID": "05-more-stats.html#quarto-in-action-r-scripts-markdown",
+    "href": "05-more-stats.html#quarto-in-action-r-scripts-markdown",
+    "title": "Regression and Presenting Your Result",
     "section": "Quarto in action: R scripts + Markdown",
     "text": "Quarto in action: R scripts + Markdown"
   },
   {
-    "objectID": "05-stats-quarto.html#r-scripts-vs-quarto",
-    "href": "05-stats-quarto.html#r-scripts-vs-quarto",
-    "title": "Regression and Introduction to Quarto",
+    "objectID": "05-more-stats.html#r-scripts-vs-quarto",
+    "href": "05-more-stats.html#r-scripts-vs-quarto",
+    "title": "Regression and Presenting Your Result",
     "section": "R Scripts vs Quarto",
-    "text": "R Scripts vs Quarto\n\n\nR Scripts\n\nGreat for quick debugging, experiment\nPreferred format if you are archiving your code to GitHub or data repository\nMore suitable for “production” tasks e.g. automating your data cleaning and processing, custom functions, etc.\n\n\nQuarto\n\nGreat for report and presentation to showcase your research insights/process as it integrates code, narrative text, visualizations, and results.\nVery handy when you need your report in multiple format, e.g. in Word and PPT."
+    "text": "R Scripts vs Quarto\n\n\nR Scripts\n\nGreat for quick debugging, experiment\nPreferred format if you are archiving your code to GitHub or data repository\nMore suitable for “production” tasks e.g. automating your data cleaning and processing, custom functions, etc.\n\n\nQuarto\n\nGreat for report and presentation to showcase your research insights/process as it integrates code, narrative text, visualizations, and results.\nVery handy when you need your report in multiple format, e.g. in Word and PPT.\nFun fact: the course website and slides are all made in Quarto"
   },
   {
-    "objectID": "05-stats-quarto.html#lets-create-our-first-quarto-document",
-    "href": "05-stats-quarto.html#lets-create-our-first-quarto-document",
-    "title": "Regression and Introduction to Quarto",
-    "section": "Let’s create our first Quarto document!",
-    "text": "Let’s create our first Quarto document!\n\nGo to File &gt; New File &gt; Quarto Document\nPut any title you like, and put your name as the author\nCheck HTML as the end result for now\nClick on Create!\nOptional: collapse the console and environment tab (bottom left and top right) to make it easier to view the quarto document and the output.\nQuarto Tour + Hands On! (Open this cheatsheet on another tab if you’d like!). We will explore how to:\n\nAdd narrative text\nAdd code chunks\nAdd math formulas with LaTeX\nAdd citations (you need to have Zotero installed)"
+    "objectID": "05-more-stats.html#if-you-are-interested-to-learn-more-about-this",
+    "href": "05-more-stats.html#if-you-are-interested-to-learn-more-about-this",
+    "title": "Regression and Presenting Your Result",
+    "section": "If you are interested to learn more about this…",
+    "text": "If you are interested to learn more about this…\nSMU Libraries regularly host Quarto workshops every semester from week 2 to week 6, taught by Prof Kam Tin Seong.\nKeep a lookout for these titles:\n\nR Ep.1: Making Your Research Reproducible with Quarto in RStudio\nR Ep.7: Creating Awesome Web Slides in Quarto with Revealjs\nR Ep.9: Building Website and Blog with Quarto"
   },
   {
-    "objectID": "05-stats-quarto.html#rendering-quarto-to-html-word-and-pdf",
-    "href": "05-stats-quarto.html#rendering-quarto-to-html-word-and-pdf",
-    "title": "Regression and Introduction to Quarto",
-    "section": "Rendering Quarto to HTML, Word, and PDF",
-    "text": "Rendering Quarto to HTML, Word, and PDF\nYou can change the final result of rendering in the YAML section of your document.\n\nRendering to HTML is the default option.\n\nYou can also render as presentation (fun fact: my slides is made from Quarto!)\n\nRendering to Word: You have to have MS Word installed in your laptop\nRendering to PDF: If you encounter an error when converting your result to PDF, the faster (and easier) alternative is to render your doc to Word, and save to PDF from there."
-  },
-  {
-    "objectID": "05-stats-quarto.html#r-best-practices",
-    "href": "05-stats-quarto.html#r-best-practices",
-    "title": "Regression and Introduction to Quarto",
+    "objectID": "05-more-stats.html#r-best-practices",
+    "href": "05-more-stats.html#r-best-practices",
+    "title": "Regression and Presenting Your Result",
     "section": "R Best Practices",
     "text": "R Best Practices\n\nUse &lt;- for assigning values to objects.\n\nOnly use = when passing values to a function parameter.\n\nDo not alter your raw data; save your wrangled/cleaned data into a new file and keep it separate from the raw data.\nMake use of R projects to organize your data and make it easier to send over to your collaborators.\n\nHaving said that, when it comes to coding project, the best way to collaborate is using GitHub or similar platforms.\n\nWhenever possible and makes sense for your project, follow the common convention when naming your objects, scripts, and functions. One guide that you can follow is Hadley Wickham’s tidyverse style guide."
   },
   {
-    "objectID": "05-stats-quarto.html#post-workshop-survey",
-    "href": "05-stats-quarto.html#post-workshop-survey",
-    "title": "Regression and Introduction to Quarto",
+    "objectID": "05-more-stats.html#references-for-apa-guidelines-on-reporting-statistics",
+    "href": "05-more-stats.html#references-for-apa-guidelines-on-reporting-statistics",
+    "title": "Regression and Presenting Your Result",
+    "section": "References for APA Guidelines on Reporting statistics",
+    "text": "References for APA Guidelines on Reporting statistics\nDo check with your professor on how closely you should follow the guidelines, or if there is any specific format required.\n\nAPA Style 7th Edition Numbers and Statistics Guide\nUniversity of Washington - Reporting Results of Common Statistical Tests in APA Format\nIllinois State University - A Short Guide to Handling Numbers and Statistics in APA Format (in 6th Edition)\nStatistic Tables in APA recommended format"
+  },
+  {
+    "objectID": "05-more-stats.html#post-workshop-survey",
+    "href": "05-more-stats.html#post-workshop-survey",
+    "title": "Regression and Presenting Your Result",
     "section": "Post-workshop survey",
-    "text": "Post-workshop survey\nPlease scan this QR code or click on the link below to fill in the post-workshop survey. It should not take more than 2-3 minutes.\nSurvey link: https://smusg.asia.qualtrics.com/jfe/form/SV_1TYE6ntFBi3lwbQ"
+    "text": "Post-workshop survey\nPlease scan this QR code or click on the link below to fill in the post-workshop survey. It should not take more than 2-3 minutes.\nSurvey link: https://smusg.asia.qualtrics.com/jfe/form/SV_ai0mSfHjwWZWC2y"
   },
   {
     "objectID": "03-visualization.html#todays-outline",
@@ -1523,7 +1586,7 @@
     "href": "04-stats.html#interpreting-our-interaction-plot",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "Interpreting our interaction plot",
-    "text": "Interpreting our interaction plot\nSome observations that we can make:\n\nNew Zealand’s pattern is distinctly different from the other two countries; NZ hows highest life satisfaction for “Not a religious person” but drops sharply for “A religious person”, while for Canada and Singapore, there is a similar patterns with peaks at “A religious person”\nThe interaction is most visible in how religious vs non-religious people differ across countries, with the largest difference between countries appears among non-religious people. “An atheist” category shows relatively similar life satisfaction across countries.\nThe relationship between religiosity and life satisfaction clearly varies by country."
+    "text": "Interpreting our interaction plot\nSome observations that we can make:\n\nNew Zealand’s pattern is distinctly different from the other two countries; NZ hows highest life satisfaction for “Not a religious person” but drops sharply for “A religious person”, while for Canada and Singapore, there is a similar patterns with peaks at “A religious person”\nThe interaction is most visible in how religious vs non-religious people differ across countries, with the largest difference between countries appears among non-religious people.\nThe relationship between religiosity and life satisfaction clearly varies by country. We know this because the lines are not parallel with each other."
   },
   {
     "objectID": "04-stats.html#learning-check-3",
@@ -1537,14 +1600,14 @@
     "href": "04-stats.html#reporting-with-apatables",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "Reporting with apaTables",
-    "text": "Reporting with apaTables\napaTables is a package that will generate APA-formatted report table for correlation, ANOVA, and regression. It has limited customisations and few varity of tables. The documentation online is for the “devlopment” version which is not what we will get if we install normally with install.packages(), so we need to rely on the vignette more. View the documentation here\nExample: get the correlation table for political_scale, life_satisfaction, and financial_satisfaction\nlibrary(apaTable)\n\nwvs_cleaned |&gt; \n    select(life_satisfaction, financial_satisfaction, political_scale) |&gt; \n    apa.cor.table( table.number = 1, filename = \"fig-output/table-cor.doc\")"
+    "text": "Reporting with apaTables\napaTables is a package that will generate APA-formatted report table for correlation, ANOVA, and regression. It has limited customisations and few varity of tables. The documentation online is for the “development” version which is not what we will get if we install normally with install.packages(), so we need to rely on the vignette more. View the documentation here\nExample: get the correlation table for political_scale, life_satisfaction, and financial_satisfaction\nlibrary(apaTables)\n\nwvs_cleaned |&gt; \n    select(life_satisfaction, financial_satisfaction, political_scale) |&gt; \n    apa.cor.table( table.number = 1, filename = \"fig-output/table-cor.doc\")"
   },
   {
     "objectID": "04-stats.html#reporting-with-gtsummary",
     "href": "04-stats.html#reporting-with-gtsummary",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "Reporting with gtsummary",
-    "text": "Reporting with gtsummary\nAnother popular packages is gt (stands for “great tables”) and its ‘add-on’, gtsummary. It has lots of customizations (which can get overwhelming!) but fortunately the documentation is pretty good and there are plenty of code samples. View the documentation here\nExample: get the mean differences table for political_scale, life_satisfaction, and financial_satisfaction, grouped by sex\n\nlibrary(gtsummary)\n\nwvs_cleaned |&gt; \n    select(life_satisfaction, financial_satisfaction, political_scale, sex) |&gt; \n    tbl_summary(by = sex) |&gt; \n    add_difference()"
+    "text": "Reporting with gtsummary\nAnother popular packages is gt (stands for “great tables”) and its ‘add-on’, gtsummary. It has lots of customizations (which can get overwhelming!) but fortunately the documentation is pretty good and there are plenty of code samples. View the documentation here\nExample: get the mean differences table for political_scale, life_satisfaction, and financial_satisfaction, grouped by sex\n\nlibrary(gtsummary)\n\nwvs_cleaned |&gt; \n    dplyr::select(life_satisfaction, financial_satisfaction, political_scale, sex) |&gt; \n    tbl_summary(by = sex) |&gt; \n    add_difference()"
   },
   {
     "objectID": "04-stats.html#reporting-with-gtsummary-output",
