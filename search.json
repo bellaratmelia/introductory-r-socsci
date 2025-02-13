@@ -315,18 +315,25 @@
     "text": "Exponentiate the coefficients\nIf you recall the formula, the results are expressed in Logit Probability. As we typically report the result in terms of Odd Ratios (OR), perform exponentiation on the coefficients.\n\nexp(coef(life_model5))\n\n    (Intercept) political_scale \n       1.575194        1.088155 \n\n\nWe can also use tbl_regression() to do this for us:\n\nlibrary(gtsummary)\nlife_model5 |&gt; tbl_regression(exponentiate = TRUE) |&gt; \n    bold_p() \n\n\n\n\n\n\n\nCharacteristic\nOR1\n95% CI1\np-value\n\n\n\n\npolitical_scale\n1.09\n1.06, 1.12\n&lt;0.001\n\n\n\n1 OR = Odds Ratio, CI = Confidence Interval\n\n\n\n\n\n\n\n\n\n\nMore on tbl_regression() by gtsummary: https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html"
   },
   {
-    "objectID": "05-more-stats.html#for-reporting-purposes-get-the-rsquared",
-    "href": "05-more-stats.html#for-reporting-purposes-get-the-rsquared",
+    "objectID": "05-more-stats.html#get-the-χ²-chi-squared-to-report-model-significance",
+    "href": "05-more-stats.html#get-the-χ²-chi-squared-to-report-model-significance",
     "title": "Regression and Presenting Your Result",
-    "section": "For reporting purposes: get the Rsquared",
-    "text": "For reporting purposes: get the Rsquared\nIn the report, the model’s Chi square and Rsquared will be reported as well to indicate the model fit. However, since the resulting item does not have this info, we will call upon DescTools’ PseudoR2() function to help!\n\n\n# by default, McFadden will be used\nDescTools::PseudoR2(life_model5) \n\n\n   McFadden \n0.005306369 \n\n\nLet’s retrieve the R-squared value and the Chi-square value (also known as the G2 value, which stands for Goodness-of-fit)\n\n\nDescTools::PseudoR2(life_model5, \n                    which = c(\"G2\", \"Nagelkerke\"))\n\n\n          G2   Nagelkerke \n41.023494851  0.009110118"
+    "section": "Get the χ² (chi-squared) to report model significance",
+    "text": "Get the χ² (chi-squared) to report model significance\nχ² (Chi-squared) goodness of fit tests whether your model fits the data significantly better than a null model (model with no predictors). As you can see, it is not in the glm() result, but we can calculate this somewhat manually using the Null and Residual deviance and df like so:\n\nNull deviance: 7731\nResidual deviance: 7690\nDifference: 7731 - 7690 = 41 (this is the χ² value)\n\nTo get the p-value, we need the degree of freedom and the χ²:\n\ndf = difference in degrees of freedom (6402 - 6401 = 1)\nχ² = 41\n\n\npchisq(41, df=1, lower.tail=FALSE)  # will give p-value\n\n[1] 1.522292e-10"
   },
   {
-    "objectID": "05-more-stats.html#in-case-you-need-to-get-the-rsquared-with-other-methods",
-    "href": "05-more-stats.html#in-case-you-need-to-get-the-rsquared-with-other-methods",
+    "objectID": "05-more-stats.html#get-the-χ²-chi-squared-and-pseudo-r-squared-for-reporting-purposes",
+    "href": "05-more-stats.html#get-the-χ²-chi-squared-and-pseudo-r-squared-for-reporting-purposes",
     "title": "Regression and Presenting Your Result",
-    "section": "In case you need to get the Rsquared with other methods",
-    "text": "In case you need to get the Rsquared with other methods\n\nDescTools::PseudoR2(life_model5, \n                    which = \"all\")\n\n       McFadden     McFaddenAdj        CoxSnell      Nagelkerke   AldrichNelson \n   5.306369e-03    4.788971e-03    6.386437e-03    9.110118e-03    6.366131e-03 \nVeallZimmermann           Efron McKelveyZavoina            Tjur             AIC \n   1.163872e-02    5.980444e-03    9.450630e-03    6.188032e-03    7.693968e+03 \n            BIC          logLik         logLik0              G2 \n   7.707497e+03   -3.844984e+03   -3.865496e+03    4.102349e+01"
+    "section": "Get the χ² (chi-squared) and Pseudo R-squared (for reporting purposes)",
+    "text": "Get the χ² (chi-squared) and Pseudo R-squared (for reporting purposes)\nIn the report, the model’s χ² (chi-squared) and R-squared (indicating the proportion of variance that can be explained by the model) should be included. However, since the resulting item does not have this info, we will call upon DescTools’ PseudoR2() function to help!\n\n\n# by default, McFadden will be used\nDescTools::PseudoR2(life_model5) \n\n\n   McFadden \n0.005306369 \n\n\nWe can retrieve the R-squared value and the χ² (also known as the G2 value, which stands for Goodness-of-fit) at the same time like so:\n\n\nDescTools::PseudoR2(life_model5, \n                    which = c(\"G2\", \"Nagelkerke\"))\n\n\n          G2   Nagelkerke \n41.023494851  0.009110118"
+  },
+  {
+    "objectID": "05-more-stats.html#in-case-you-need-to-get-other-rsquared-methods",
+    "href": "05-more-stats.html#in-case-you-need-to-get-other-rsquared-methods",
+    "title": "Regression and Presenting Your Result",
+    "section": "In case you need to get other Rsquared methods",
+    "text": "In case you need to get other Rsquared methods\n\nDescTools::PseudoR2(life_model5, \n                    which = \"all\")\n\n       McFadden     McFaddenAdj        CoxSnell      Nagelkerke   AldrichNelson \n   5.306369e-03    4.788971e-03    6.386437e-03    9.110118e-03    6.366131e-03 \nVeallZimmermann           Efron McKelveyZavoina            Tjur             AIC \n   1.163872e-02    5.980444e-03    9.450630e-03    6.188032e-03    7.693968e+03 \n            BIC          logLik         logLik0              G2 \n   7.707497e+03   -3.844984e+03   -3.865496e+03    4.102349e+01"
   },
   {
     "objectID": "05-more-stats.html#possible-interpretation-of-the-result",
@@ -334,6 +341,13 @@
     "title": "Regression and Presenting Your Result",
     "section": "Possible interpretation of the result",
     "text": "Possible interpretation of the result\nPossible interpretation:\n(The intercept isn’t typically interpreted as an odds ratio, so we’ll ignore that for now)\n\nA logistic regression was performed to ascertain the effects of political scale alignment on the likelihood that individuals will be satisfied with life versus not satisfied. The logistic regression model was statistically significant, χ² (1, N = 6403) = 41.02, p &lt; .001.\n\n\nThe model explained 0.9% (Nagelkerke R²) of the variance in life satisfaction. Political scale alignment was associated with an increased likelihood of being satisfied with life (OR = 1.09, 95% CI [1.06, 1.12], p &lt; .001), indicating that for each one-unit increase in political scale alignment (1-10), the odds of being satisfied with life increased by 9%.\n\n\n\nMore on interpreting Odds Ratio: https://stats.oarc.ucla.edu/other/mult-pkg/faq/general/faq-how-do-i-interpret-odds-ratios-in-logistic-regression/"
+  },
+  {
+    "objectID": "05-more-stats.html#recap---why-do-i-need-to-report-these",
+    "href": "05-more-stats.html#recap---why-do-i-need-to-report-these",
+    "title": "Regression and Presenting Your Result",
+    "section": "Recap - why do I need to report these?",
+    "text": "Recap - why do I need to report these?\n\nχ² (Chi-squared) goodness of fit tests whether your model fits the data significantly better than a null model (model with no predictors).\n“Standard” R-squared isn’t typically reported for logistic regression because it’s not as meaningful as it is in linear regression. But we do still want to see how much of the variance in the data can be explained by the model.\nPseudo R-squared tries to mimic traditional R-squared by showing how much of the variation in the outcome your model explains, but it’s adjusted to work with binary outcomes. It’s sort of answering the question of “How well does my model explain the data?”\nIt is possible to have a significant χ² (meaning your model is statistically significant and better than nothing) but a low Pseudo R-squared (showing it still doesn’t explain much variation). This isn’t contradictory - it just means your model is better than random guessing but there’s still a lot of unexplained variation. (Pretty common in social sciences; after all, human behaviours are complex!)"
   },
   {
     "objectID": "05-more-stats.html#fyi---irl-sample-of-reporting-logistic-regression",
@@ -382,7 +396,7 @@
     "href": "05-more-stats.html#narrating-the-results-1",
     "title": "Regression and Presenting Your Result",
     "section": "Narrating the results",
-    "text": "Narrating the results\nPossible interpretation for region C:\n(The intercept isn’t typically interpreted as an odds ratio, so we’ll ignore that for now)\n\nA logistic regression was performed to ascertain the effects of religiosity on the likelihood that individuals will be satisfied with life versus not satisfied. The logistic regression model was statistically significant, χ² (3, N = 6403) = 15.65, p &lt; .001.\n\n\nThe model explained 0.3% (Nagelkerke R²) of the variance in life satisfaction. Compared to religious persons (reference group), being non-religious was associated with lower odds of life satisfaction (OR = 0.84, 95% CI [0.74, 0.95], p = .004), and being an atheist was also associated with lower odds of life satisfaction (OR = 0.76, 95% CI [0.65, 0.89], p &lt; .001). There was no significant difference in life satisfaction for those who were unsure about their religious beliefs compared to religious persons (OR = 1.24, 95% CI [0.61, 2.52], p = .550).\n\n\n\nMore on logistic regression: https://stats.oarc.ucla.edu/r/dae/logit-regression/"
+    "text": "Narrating the results\nPossible interpretation:\n(The intercept isn’t typically interpreted as an odds ratio, so we’ll ignore that for now)\n\nA logistic regression was performed to ascertain the effects of religiosity on the likelihood that individuals will be satisfied with life versus not satisfied. The logistic regression model was statistically significant, χ² (3, N = 6403) = 15.65, p &lt; .001.\n\n\nThe model explained 0.3% (Nagelkerke R²) of the variance in life satisfaction. Compared to religious persons (reference group), being non-religious was associated with lower odds of life satisfaction (OR = 0.84, 95% CI [0.74, 0.95], p = .004), and being an atheist was also associated with lower odds of life satisfaction (OR = 0.76, 95% CI [0.65, 0.89], p &lt; .001). There was no significant difference in life satisfaction for those who were unsure about their religious beliefs compared to religious persons (OR = 1.24, 95% CI [0.61, 2.52], p = .550).\n\n\n\nMore on logistic regression: https://stats.oarc.ucla.edu/r/dae/logit-regression/"
   },
   {
     "objectID": "05-more-stats.html#present-both-models-in-a-table",
