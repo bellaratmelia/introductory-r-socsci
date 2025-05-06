@@ -165,13 +165,31 @@ country_name <- "Singapore"
 
 ## R Objects and Values
 
--   To create an object we need to give it an object name followed by the assignment operator \<- , and the value we want to give it.
+In this line of code:
+
+```{r}
+#| echo: true
+country_name <- "Singapore"
+```
+
+-   `"Singapore"` is a **value**. This can be either a character, numeric, or boolean data type. (more on this soon)
+
+-   `country_name` is the **object** where we store this value. This is so that we can keep this value to be used later.
+
+-   `<-` is the assignment operator to assign the value to the object.
+
+    -   You can also use `=`, but generally in R, `<-` is the convention.
+    -   Keyboard shortcut: `Alt` + `-` in Windows (`Option` + `-` in Mac)
+
 -   Object name rules:
+
     -   Can’t start with numbers
+
     -   Case sensitive
+
     -   No spaces
+
     -   Some reserved words (like some function names in R)
-    -   Good practices: use nouns for object names, and verbs for function names.
 
 ## Refresher: Quantitative Data Types
 
@@ -501,10 +519,11 @@ satisfaction_scores <- c(8, satisfaction_scores) # <3>
 satisfaction_scores <- append(satisfaction_scores, 9, after = 2) # <4>
 
 ```
-1. Add a single score to the end of the vector using c()
-2. Add multiple scores to the end
-3. Add a score to the beginning
-4. Insert a score at a specific position using append(vector_name, elements_to_be_added, from_the_position)
+
+1.  Add a single score to the end of the vector using c()
+2.  Add multiple scores to the end
+3.  Add a score to the beginning
+4.  Insert a score at a specific position using append(vector_name, elements_to_be_added, from_the_position)
 
 ## Vector Manipulations: Remove items
 
