@@ -70,9 +70,9 @@ glimpse(wvs_data)
 
 ## Scenario: Data wrangling activities with WVS data {.smaller}
 
-**Scenario**: We are research assistants analyzing patterns in values and satisfaction across different countries and demographic groups. 
+**Scenario**: We are research assistants analyzing patterns in values and satisfaction across different countries and demographic groups.
 
-Our team has been assigned to explore and get insights on how specific factors (employment, work importance, marital status, political alignment, financial satisfaction, and religiosity) may relate to life satisfaction among different generations (Gen Z, Millennials, Gen X, and Baby Boomer), including how they may differ between the 3 countries. 
+Our team has been assigned to explore and get insights on how specific factors (employment, work importance, marital status, political alignment, financial satisfaction, and religiosity) may relate to life satisfaction among different generations (Gen Z, Millennials, Gen X, and Baby Boomer), including how they may differ between the 3 countries.
 
 To ensure the analysis quality, we were instructed to discard incomplete data.
 
@@ -83,7 +83,7 @@ We can break down the tasks as such:
 
 2.  Check for duplicates
 
-3.  Select only the relevant columns: demographic columns, `work_importance`, `life_satisfaction`, `financial_satisfaction`, `religiousity`, `political_scale`, `marital_status`, and `employment`. 
+3.  Select only the relevant columns: demographic columns, `work_importance`, `life_satisfaction`, `financial_satisfaction`, `religiousity`, `political_scale`, `marital_status`, and `employment`.
 
 4.  Filter for respondents aged 18 or older. Optionally, we can then arrange the dataset by age (oldest to youngest)
 
@@ -93,7 +93,6 @@ We can break down the tasks as such:
 :::
 
 Once we did all of the wrangling above, we can save this "wrangled" version into another CSV
-
 
 # Let's wrangle our data!
 
@@ -162,13 +161,11 @@ wvs_data <- wvs_data |>
   distinct(ID, .keep_all = TRUE)
 ```
 
-
 (Our data has no duplicates, but this is still a good practice to do, especially if we were combining data from multipe sources)
-
 
 ## Task #3:
 
-Select only the relevant columns: demographic columns,  `life_satisfaction`, `work_importance`, `financial_satisfaction`, `religiousity`, `political_scale`, `marital_status`, and `employment`.
+Select only the relevant columns: demographic columns, `life_satisfaction`, `work_importance`, `financial_satisfaction`, `religiousity`, `political_scale`, `marital_status`, and `employment`.
 
 We can achieve this with `select()`!
 
@@ -185,11 +182,9 @@ Preview of the filtered data:
 wvs_data |> glimpse()
 ```
 
-
 ## Task #4:
 
 Filter for respondents aged 18 or older. Optionally, we can then arrange the dataset by age (oldest to youngest)
-
 
 ```{r}
 #| echo: true
@@ -279,7 +274,7 @@ library(tidyverse)
 wvs_cleaned <- read_csv("data-output/wvs_cleaned_v1.csv")
 ```
 
-----
+------------------------------------------------------------------------
 
 **Step 2**: Do the filtering and selecting, and then show result
 
@@ -298,18 +293,16 @@ wvs_cleaned |>
 
 ```
 
-
 ## Scenario: Data wrangling activities with WVS data (continued)
 
 Once we are done with the wrangling part, we can proceed with simple descriptive analysis!
 
 ::: incremental
-
 7.  Before we proceed further, convert the appropriate categorical variables (country, religiousity, sex, marital_status, employment) to **Factor**
 
 8.  Generate summary statistics of life_satisfaction grouped by country
 
-9.  Create a new column called `satisfaction_group` that indicate whether each respondent has higher or lower than average `life_satisfaction` 
+9.  Create a new column called `satisfaction_group` that indicate whether each respondent has higher or lower than average `life_satisfaction`
 
 10. Reshape the data to show average satisfaction scores by country and age group
 :::
@@ -320,7 +313,7 @@ Let's use the `wvs_cleaned` dataframe for this task.
 
 Convert the appropriate categorical variables (country, religiousity, sex, marital_status, employment) to **Factor**.
 
-We can do this with `mutate()` and `as_factor()` from forcats, another sub-package within tidyverse. 
+We can do this with `mutate()` and `as_factor()` from forcats, another sub-package within tidyverse.
 
 ```{r}
 #| echo: true
@@ -339,14 +332,13 @@ wvs_cleaned <- wvs_cleaned |>
 str(wvs_cleaned)
 ```
 
-Rstudio may auto-suggest `as.factor()` from base R. You can use this as well, but `as_factor()` is preferred since we are using tidyverse approach. 
+Rstudio may auto-suggest `as.factor()` from base R. You can use this as well, but `as_factor()` is preferred since we are using tidyverse approach.
 
 ## Task #7 - the shortcut
 
-If we have a lot of columns to convert, that might be troublesome to type! This is where `across()` can come in handy. 
+If we have a lot of columns to convert, that might be troublesome to type! This is where `across()` can come in handy.
 
 Let's first define a character vector that contains the names of columns we plan to convert.
-
 
 ```{r}
 #| echo: true
@@ -371,10 +363,9 @@ str(wvs_cleaned)
 
 `across()` is used for applying the same function to multiple columns in a single `mutate()` or `summarise()` operation.
 
-
 ## Task #8
 
-Generate summary statistics  such as count (n), mean, median, and standard deviation of life_satisfaction grouped by country. 
+Generate summary statistics such as count (n), mean, median, and standard deviation of life_satisfaction grouped by country.
 
 We can achieve this with `group_by()` and `summarise()`
 
@@ -398,7 +389,7 @@ wvs_data |>
 
 ## Task #9
 
-Create a new column called `satisfaction_group` that indicate whether each respondent has higher or lower than average `life_satisfaction` 
+Create a new column called `satisfaction_group` that indicate whether each respondent has higher or lower than average `life_satisfaction`
 
 ```{r}
 #| echo: true
@@ -537,6 +528,21 @@ wvs_data <- wvs_data |>
 wvs_data |> select(country) |> print(n = 3)
 ```
 
+# Recap
+
+-   Import and read data into RStudio: Load external data files (like CSV or Excel) into R using functions such as read_csv() to make the data available for analysis.
+
+-   Data wrangling with dplyr and tidyr (part of the tidyverse package): Use tidyverse functions to tidy and reshape datasets and perform tasks like selecting, filtering, and summarizing data.
+
+-   Remove all rows with missing values (NA) and check for duplicates: Delete rows containing missing data using na.omit() and identify or remove duplicate rows with functions like distinct().
+
+-   Select only the relevant columns: Use select() to keep only the columns needed for the analysis, focusing on important variables.
+
+-   Filter data based on criterion and arrange data: Apply filter() to keep rows meeting specific conditions and use arrange() to sort data by one or more columns.
+
+-   Change factor level values: Modify the categories of a factor using factor() or recode() to rename or reorder levels for clearer analysis.
+
+-   Create new columns: Generate or modify columns using mutate(), often by transforming or combining existing columns.
 
 # End of Session 2!
 

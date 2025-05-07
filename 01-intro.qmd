@@ -715,7 +715,19 @@ Check. Did you...
 
     -   In text indicators : X **+** Y or **\#**taking notes or “name” vs name
 
-## Recap (Quiz)
+## Recap
+
+-   R & RStudio: R is a programming language for statistical computing and graphics, while RStudio is an environment that makes it easier to write, run, and manage R code.
+
+-   Working Directory: A folder on your computer where R reads and saves files.
+
+-   Data Type: Types of value an object can hold, such as numeric, character, and Boolean.
+
+-   Data Structure: Data structures organize and store data in R, such as vectors, factors, and data frames.
+
+-   Functions: Reusable codes that perform specific tasks. Can call functions with arguments.
+
+-   Packages: Collections of functions and data to perform tasks. Need to install and load packages.
 
 # End of Session 1!
 
