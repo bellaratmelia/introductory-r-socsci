@@ -229,7 +229,7 @@ wvs_cleaned |>
 
 -   The `age` variable is a numerical / continuous data. We can't apply `mean()`, `median()` and other central tendency measures to categorical data such as `age_group` or `employment_status`. We can, however, visualize them.
 
--   When dealing with categorical data, first take note on whether you want to visualize the **proportion** or the **frequency distribution**. 
+-   When dealing with categorical data, first take note on whether you want to visualize the **proportion** or the **frequency distribution**.
 
 -   Let's visualize the frequency distribution of survey participants by `country`:
 
@@ -284,7 +284,7 @@ wvs_country_proportion |> ggplot(aes(x = "", y = proportion, fill = country)) +
 Note: if you have lots of categories, pie chart is not always the best option. The code for this pie chart is from [R Graph Gallery](https://r-graph-gallery.com/piechart-ggplot2.html)
 :::
 
-## Learning Check 1A 
+## Learning Check 1A
 
 Using the `wvs_cleaned` dataset:
 
@@ -304,6 +304,7 @@ wvs_cleaned |> ggplot(aes(x = financial_satisfaction)) +
   theme_minimal()
 
 ```
+
 ## Learning Check 1B
 
 Create a barchart that visualizes the frequency of `religiousity`
@@ -355,6 +356,7 @@ table(wvs_cleaned$age_group, wvs_cleaned$country)
 ```
 
 ## Both categorical (cont'd)
+
 We can also create a proportion table just like we did earlier
 
 ```{r}
@@ -417,6 +419,7 @@ Let's first examine the correlation between `financial_satisfaction` and `life_s
 cor(wvs_cleaned$financial_satisfaction, wvs_cleaned$life_satisfaction)
 
 ```
+
 ## Both continuous (cont'd)
 
 Let's visualize the two variables together with a jitter / scatterplot!
@@ -473,7 +476,7 @@ wvs_cleaned |> ggplot(aes(x = country, y = life_satisfaction)) +
 
 ## One continuous, one categorical (cont'd)
 
-We could also layer our boxplots with violin plots to get a better sense of the distribution of each group. 
+We could also layer our boxplots with violin plots to get a better sense of the distribution of each group.
 
 ```{r}
 #| echo: true
@@ -534,6 +537,29 @@ Take a look at this award-winning visualization by [Simon Scarr](http://www.simo
 
 ![](https://images.squarespace-cdn.com/content/v1/54b5070de4b01c9a0176b5fd/1428238676197-BAJMDLGPHID08CCOHVDN/image-asset.png?format=1000w)
 
+# Recap
+
+::: incremental
+
+-   Descriptive Statistics: single variable, and two variables.
+
+-   Basic R functions for descriptive statistics e.g., mean(), median(), sd(), var(), range(): range of values, IQR(), summary(), and Mode().
+
+-   Use ggplot to build charts: ggplot(data, aes(x, y)). Begin a plot that you finish by adding layers.
+
+-   Use a geom function to represent data. Add one geom function per layer.
+
+-   Use position adjustments determine how to arrange geoms that would otherwise occupy the same space.
+
+-   Use labs() to label the elements of your plot.
+
+-   Use facets divide a plot into subplots based on the values of one or more discrete variables e.g., facet_grid().
+
+-   Use ggsave() to save your images.
+
+-   Choose an appropriate visualization to tell the story of the data, e.g., choose graphs to present different numbers of variables, different types of data (continuous and non-continuous).
+
+:::
 
 # End of Session 3!
 

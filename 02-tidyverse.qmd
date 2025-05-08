@@ -530,6 +530,8 @@ wvs_data |> select(country) |> print(n = 3)
 
 # Recap
 
+::: incremental
+
 -   Import and read data into RStudio: Load external data files (like CSV or Excel) into R using functions such as read_csv() to make the data available for analysis.
 
 -   Data wrangling with dplyr and tidyr (part of the tidyverse package): Use tidyverse functions to tidy and reshape datasets and perform tasks like selecting, filtering, and summarizing data.
@@ -543,6 +545,8 @@ wvs_data |> select(country) |> print(n = 3)
 -   Change factor level values: Modify the categories of a factor using factor() or recode() to rename or reorder levels for clearer analysis.
 
 -   Create new columns: Generate or modify columns using mutate(), often by transforming or combining existing columns.
+
+:::
 
 # End of Session 2!
 
