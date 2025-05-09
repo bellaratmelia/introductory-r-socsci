@@ -45,7 +45,7 @@ curve(dbeta(x, 2, 5), add = TRUE, col = "darkred", lwd = 2)
 
 ## Refresher: Research Variables
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 [**Dependent Variable (DV)**]{.underline}
 
@@ -63,7 +63,7 @@ The variables that researchers will manipulate.
 -   Other names for it: Predictor, Covariate, Treatment, Regressor, Input, etc.
 -   Often denoted as $x$
 :::
-:::
+:::::
 
 ## Load our data for today!
 
@@ -125,7 +125,7 @@ chisq.test(table(wvs_data$religiousity, wvs_data$marital_status))
 
 A correlation test evaluates the strength and direction of a linear relationship between two variables. The coefficient is expressed in value between -1 to 1, with 0 being no correlation at all.
 
-::: columns
+:::::: columns
 ::: {.column width="33%"}
 **Pearson's** $r$ (r)
 
@@ -150,7 +150,7 @@ A correlation test evaluates the strength and direction of a linear relationship
 -   less sensitive/more robust to outliers
 -   non-parametric, does not assume normality and/or linearity
 :::
-:::
+::::::
 
 For more info, you can refer to this reading: [Measures of Association - How to Choose? (Harry Khamis, PhD)](https://journals.sagepub.com/doi/pdf/10.1177/8756479308317006){target="_blank"}
 
@@ -217,7 +217,7 @@ A **t-test** is a statistical test used to compare the means of two groups/sampl
 
 ## 3 types of t-test
 
-::: columns
+:::::: columns
 ::: {.column width="30%"}
 **One-sample T-test**
 
@@ -239,7 +239,7 @@ Used to compare the means of two related groups, such as repeated measurements o
 
 Examples: Before workshop vs After workshop.
 :::
-:::
+::::::
 
 ## T-test: One-sample T-Test
 
@@ -313,7 +313,7 @@ satisfaction_by_gender |>
 
 Remember, the hypotheses are:
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 $H_0$: There is no significant difference in the mean age between those who intend to vote "Yes" and those who intend to vote "No".
 :::
@@ -321,7 +321,7 @@ $H_0$: There is no significant difference in the mean age between those who inte
 ::: {.column width="50%"}
 $H_1$: There is a significant difference in the mean age between those who intend to vote "Yes" and those who intend to vote "No".
 :::
-:::
+:::::
 
 ```{r}
 #| echo: true
@@ -331,14 +331,12 @@ t.test(life_satisfaction ~ sex,
        data = satisfaction_by_gender, 
        var.equal = FALSE)
 ```
-::: {.callout-tip appearance="simple"}
 
+::: {.callout-tip appearance="simple"}
 ### Notice that we are using Welch's t-test instead of Students' t-test
 
-Welch's t-test (also known as **unequal variances t-test**, is a more robust alternative to Student's t-test. It is often used when two samples have unequal variances and possibly unequal sample sizes. 
-
+Welch's t-test (also known as **unequal variances t-test**, is a more robust alternative to Student's t-test. It is often used when two samples have unequal variances and possibly unequal sample sizes.
 :::
-
 
 ## T-Test: Paired Sample T-Test
 
@@ -390,7 +388,7 @@ glimpse(sleep_wide)
 
 Remember, the hypotheses are:
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 $H_0$: There is no significant difference in the increase in hours of sleep.
 :::
@@ -398,7 +396,7 @@ $H_0$: There is no significant difference in the increase in hours of sleep.
 ::: {.column width="50%"}
 $H_1$: There is a significant difference in the increase in hours of sleep.
 :::
-:::
+:::::
 
 ```{r}
 #| echo: true
@@ -522,7 +520,7 @@ shapiro.test(wvs_data$age[0:5000])
 
 The p-value from the Shapiro-Wilk test is less than the significance level of 0.05, indicating that the data significantly deviates from normality. Therefore, the assumption of normality is not satisfied.
 
-## Plotting Residuals: Q-Q Plot 
+## Plotting Residuals: Q-Q Plot
 
 We can see this better from when we plot the residuals:
 
@@ -599,6 +597,24 @@ summary(poli_sx_anova)
 TukeyHSD(poli_sx_anova)
 ```
 
+# Recap
+
+-   Data distribution, normal distribution and skewed distribution.
+
+-   Use X2 test of independence, chisq.test(), to evaluate whether there is a statistically significant relationship between two categorical variables.
+
+-   Use a correlation test, cor.test(), to evaluate the strength and direction of a linear relationship between two variables. The coefficient is expressed in value between -1 to 1, with 0 being no correlation at all.
+
+-   Use t-test() to compare the means of two groups of continuous data and determine if the differences are statistically significant.
+
+-   Three types of t-tests i.e., one-sample t-test, independent samples t-test, and paired samples t-test.
+
+-   Use ANOVA (Analysis of Variance) to compare the means of three or more groups or samples and determine if the differences are statistically significant.
+
+-   Report results with apaTables and gtsummary.
+
 # End of Session 4!
 
+```         
 Next session: Linear and Logistic Regressions!
+```
