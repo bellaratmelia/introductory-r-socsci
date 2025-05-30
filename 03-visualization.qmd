@@ -229,7 +229,7 @@ wvs_cleaned |>
 
 -   The `age` variable is a numerical / continuous data. We can't apply `mean()`, `median()` and other central tendency measures to categorical data such as `age_group` or `employment_status`. We can, however, visualize them.
 
--   When dealing with categorical data, first take note on whether you want to visualize the **proportion** or the **frequency distribution**.
+-   When dealing with categorical data, first take note on whether you want to visualize the **proportion** or the **frequency distribution**. 
 
 -   Let's visualize the frequency distribution of survey participants by `country`:
 
@@ -284,7 +284,7 @@ wvs_country_proportion |> ggplot(aes(x = "", y = proportion, fill = country)) +
 Note: if you have lots of categories, pie chart is not always the best option. The code for this pie chart is from [R Graph Gallery](https://r-graph-gallery.com/piechart-ggplot2.html)
 :::
 
-## Learning Check 1A
+## Learning Check 1A 
 
 Using the `wvs_cleaned` dataset:
 
@@ -304,7 +304,6 @@ wvs_cleaned |> ggplot(aes(x = financial_satisfaction)) +
   theme_minimal()
 
 ```
-
 ## Learning Check 1B
 
 Create a barchart that visualizes the frequency of `religiousity`
@@ -356,7 +355,6 @@ table(wvs_cleaned$age_group, wvs_cleaned$country)
 ```
 
 ## Both categorical (cont'd)
-
 We can also create a proportion table just like we did earlier
 
 ```{r}
@@ -419,7 +417,6 @@ Let's first examine the correlation between `financial_satisfaction` and `life_s
 cor(wvs_cleaned$financial_satisfaction, wvs_cleaned$life_satisfaction)
 
 ```
-
 ## Both continuous (cont'd)
 
 Let's visualize the two variables together with a jitter / scatterplot!
@@ -435,6 +432,58 @@ wvs_cleaned |> ggplot(aes(x = financial_satisfaction, y = life_satisfaction)) +
   theme_minimal()
 
 ```
+
+## Correlation Plot
+
+When there are more than two continuous variables to explore, correlation map is sometimes used. We can achieve this with ggplot, but it's much easier to use the `corrplot()` function from the `corrplot` package.
+
+Let's visualize the correlation map for these three variables.
+
+```{R}
+#| echo: true
+#| output-location: slide
+
+library(corrplot)
+
+# select all the columns for correlation calculation, save it to columns_for_corr
+columns_for_corr <- wvs_cleaned |> 
+  select(financial_satisfaction, life_satisfaction, age)
+
+# pass the columns_for_corr to cor() function, and save the result to cor_matrix
+cor_matrix <- cor(columns_for_corr)
+
+# visualize the cor_matrix with corrplot()!
+corrplot(cor_matrix,
+         method = "shade", # show the correlation strength as color shades
+         addCoef.col = "black", tl.col = "black") # label the coefficients
+
+```
+
+:::aside
+if you get an error saying "corrplot function not found" or something along that line, that means you need to install the corrplot package first! Run this line in your RStudio Console (bottom left area): `install.packages("corrplot")`
+
+:::
+
+## Correlation Plot - shorter code
+
+We can shorten the code in the previous slide using the maggritr pipe `|>` like so:
+
+```{r}
+#| echo: true
+#| output-location: slide
+
+wvs_cleaned |> 
+    select(financial_satisfaction, life_satisfaction, age) |> 
+    cor() |> 
+    corrplot(method = "shade", # show the correlation strength as color shades
+         addCoef.col = "black", tl.col = "black")
+    
+
+```
+
+**Refresher:**
+
+Notice that we don't have to pass the column names to `cor()` and `corrplot()` function. This is because the maggritr pipe `|>`, acts as a "conveyor belt" that take output from one step and then immediately feed it to the next step.
 
 ## One continuous, one categorical
 
@@ -476,7 +525,7 @@ wvs_cleaned |> ggplot(aes(x = country, y = life_satisfaction)) +
 
 ## One continuous, one categorical (cont'd)
 
-We could also layer our boxplots with violin plots to get a better sense of the distribution of each group.
+We could also layer our boxplots with violin plots to get a better sense of the distribution of each group. 
 
 ```{r}
 #| echo: true
@@ -489,6 +538,34 @@ wvs_cleaned |> ggplot(aes(x = country, y = life_satisfaction)) +
   theme_minimal()
 
 ```
+
+## How to save your images - ggsave
+
+There are two ways to do this:
+
+1.  Via `ggsave`
+
+2.  The point-and-click way in RStudio
+
+Below is the `ggsave` way:
+
+```r
+# save the chart into an object instead of viewing it like we have been doing
+boxplot_obj <- wvs_cleaned |> 
+    ggplot(aes(x = age)) +
+    geom_boxplot(fill = "lightblue", color = "navy") +
+    labs(title = "Age distribution of respondents",
+         x = "Age") +
+    theme_minimal()
+
+# pass the saved chart into ggsave and give it a filename
+ggsave("fig-output/boxplot_1.jpg", boxplot_obj) 
+
+```
+
+## How to save your images - point-and-click
+
+![](images/howto-save-charts.jpg)
 
 ## Learning Check #2
 
@@ -537,29 +614,6 @@ Take a look at this award-winning visualization by [Simon Scarr](http://www.simo
 
 ![](https://images.squarespace-cdn.com/content/v1/54b5070de4b01c9a0176b5fd/1428238676197-BAJMDLGPHID08CCOHVDN/image-asset.png?format=1000w)
 
-# Recap
-
-::: incremental
-
--   Descriptive Statistics: single variable, and two variables.
-
--   Basic R functions for descriptive statistics e.g., mean(), median(), sd(), var(), range(): range of values, IQR(), summary(), and Mode().
-
--   Use ggplot to build charts: ggplot(data, aes(x, y)). Begin a plot that you finish by adding layers.
-
--   Use a geom function to represent data. Add one geom function per layer.
-
--   Use position adjustments determine how to arrange geoms that would otherwise occupy the same space.
-
--   Use labs() to label the elements of your plot.
-
--   Use facets divide a plot into subplots based on the values of one or more discrete variables e.g., facet_grid().
-
--   Use ggsave() to save your images.
-
--   Choose an appropriate visualization to tell the story of the data, e.g., choose graphs to present different numbers of variables, different types of data (continuous and non-continuous).
-
-:::
 
 # End of Session 3!
 
@@ -573,3 +627,5 @@ Remember the strategy:
 Check out the [R Graph gallery](https://r-graph-gallery.com/) for inspiration and code samples!
 
 Next session: inferential stats in R using WVS data
+
+

@@ -45,7 +45,7 @@ curve(dbeta(x, 2, 5), add = TRUE, col = "darkred", lwd = 2)
 
 ## Refresher: Research Variables
 
-::::: columns
+::: columns
 ::: {.column width="50%"}
 [**Dependent Variable (DV)**]{.underline}
 
@@ -63,11 +63,22 @@ The variables that researchers will manipulate.
 -   Other names for it: Predictor, Covariate, Treatment, Regressor, Input, etc.
 -   Often denoted as $x$
 :::
-:::::
+:::
+
+## Open your project - the (possibly) easier way
+
+1.  Go to the folder where you put your project for this workshop
+
+2.  Find a file with `.Rproj` extension - this is the R project file that holds all the information about your project.
+
+![](images/locate-rproj-file.jpg)
+
+3.  Double click on the file. Rstudio should launch with your project loaded! This should be easier to ensure that you are loading the correct project when opening Rstudio.
+
 
 ## Load our data for today!
 
-Use `read_csv` from `readr` package (part of `tidyverse`) to load our data into a dataframe
+Let's create a new R script called `session-3.R`, and then copy the code below to load our data for today. This code uses `read_csv` from `readr` package (part of `tidyverse`) to load our cleaned CSV (from the first checkpoint)
 
 ```{r}
 #| echo: true
@@ -78,17 +89,19 @@ Use `read_csv` from `readr` package (part of `tidyverse`) to load our data into 
 # import tidyverse library
 library(tidyverse)
 
-# read the WVS data
-wvs_data <- read_csv("data-output/wvs_processed.csv")
+# read the CSV with WVS data
+wvs_cleaned <- read_csv("data-output/wvs_cleaned_v1.csv")
 
 # Convert categorical variables to factors
-wvs_data <- wvs_data |> 
-    mutate(across(c("country", "sex", "marital_status", 
-                    "employment", "religiousity"), as.factor))
+columns_to_convert <- c("country", "religiousity", "sex", "marital_status", "employment")
 
-# peek at the data
-glimpse(wvs_data)
+wvs_cleaned <- wvs_cleaned |> 
+    mutate(across(all_of(columns_to_convert), as_factor))
+
+# peek at the data, pay attention to the data types!
+glimpse(wvs_cleaned)
 ```
+# Both Categorical variables - The $X^2$ test
 
 ## Chi-square test of independence
 
@@ -96,21 +109,38 @@ The $X^2$ test of independence evaluates whether there is a statistically signif
 
 This is done by analyzing the frequency table (i.e., contingency table) formed by two categorical variables.
 
-**Example**: Is there a relationship between `religiousity` and `marital_status` in our WVS data?
+**Example**: Is there a relationship between `religiousity` and `country` in our WVS data?
 
-Typically, we can start with visualizing the data first!
+Typically, we can start with the contigency table first, and then the visualization
 
 ```{r}
-table(wvs_data$religiousity, wvs_data$marital_status)
+#| echo: true
+table(wvs_cleaned$religiousity, wvs_cleaned$country)
+```
+
+
+## Chi-square test of independence - visualizing data
+
+We can use barchart to visualize this (remember from last week!)
+
+```{r}
+#| echo: true
+
+wvs_cleaned |> 
+    ggplot(aes(x = country, fill = religiousity)) +
+    geom_bar(position = "fill") +
+    labs(title = "Proportion of religiousity for each country") +
+    theme_minimal()
+
 ```
 
 ## Chi-Square: Sample problem and results
 
-Is there a relationship between religiosity and marital_status?
+Is there a relationship between religiosity and country?
 
 ```{r}
 #| echo: true
-chisq.test(table(wvs_data$religiousity, wvs_data$marital_status))
+chisq.test(table(wvs_cleaned$religiousity, wvs_cleaned$country))
 ```
 
 ::: {style="font-size: 75%; width: 75%"}
@@ -121,11 +151,13 @@ chisq.test(table(wvs_data$religiousity, wvs_data$marital_status))
 
 *What if there is a hypothesis? How would you write this in the report?*
 
+# Both Continuous variables - Correlation
+
 ## Correlation
 
 A correlation test evaluates the strength and direction of a linear relationship between two variables. The coefficient is expressed in value between -1 to 1, with 0 being no correlation at all.
 
-:::::: columns
+::: columns
 ::: {.column width="33%"}
 **Pearson's** $r$ (r)
 
@@ -150,7 +182,7 @@ A correlation test evaluates the strength and direction of a linear relationship
 -   less sensitive/more robust to outliers
 -   non-parametric, does not assume normality and/or linearity
 :::
-::::::
+:::
 
 For more info, you can refer to this reading: [Measures of Association - How to Choose? (Harry Khamis, PhD)](https://journals.sagepub.com/doi/pdf/10.1177/8756479308317006){target="_blank"}
 
@@ -163,7 +195,10 @@ As both variables are numerical and continuous, we can use pearson correlation.
 Let's start with visualizing the data, which can be used to support the explanation.
 
 ```{r}
-wvs_data |> 
+#| echo: true
+#| output-location: slide
+#| 
+wvs_cleaned |> 
     ggplot(aes(x = financial_satisfaction, y = life_satisfaction)) +
     geom_jitter(color="maroon", alpha=0.5) +
     geom_smooth(method = "lm", se = TRUE) # se shows the confidence interval
@@ -174,8 +209,8 @@ wvs_data |>
 ```{r}
 #| echo: true
 #| output-location: column
-cor.test(wvs_data$life_satisfaction, 
-         wvs_data$financial_satisfaction, 
+cor.test(wvs_cleaned$life_satisfaction, 
+         wvs_cleaned$financial_satisfaction, 
          method = "pearson")
 ```
 
@@ -188,26 +223,36 @@ cor.test(wvs_data$life_satisfaction,
 -   **sample estimates** is the correlation coefficient
 :::
 
-## Let's try this correlation exercise! (5 mins)
+## Learning Check #1
 
--   Calculate the correlation coefficient between life satisfaction and freedom
+Is there a relationship between religiousity and age group? Calculate the chi-square test!
 
-    -   Which method should you use for this?
+optional: Visualize the proportion of age group for each religiousity category.
 
-    -   How strong is the correlation? i.e. would you say it's a strong correlation?
-
-    -   In which direction is the correlation?
-
-    -   Is the correlation coefficient statistically significant?
-
-    -   Visualize the relationship!
 
 ```{r}
-#| echo: false
-#| output: false
-cor.test(wvs_data$life_satisfaction, wvs_data$freedom, method = "pearson")
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show answer"
+chisq.test(table(wvs_cleaned$religiousity, wvs_cleaned$age_group))
 
 ```
+**Visualization:**
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show answer"
+#| output-location: slide
+
+wvs_cleaned |> 
+    ggplot(aes(x = religiousity, fill = age_group)) +
+    geom_bar(position = "fill") +
+    labs(title = "Proportion of age groups for each religiousity") +
+    theme_minimal()
+
+```
+# Comparing Means Between Groups - T-Tests and ANOVA
 
 ## T-Tests
 
@@ -217,7 +262,7 @@ A **t-test** is a statistical test used to compare the means of two groups/sampl
 
 ## 3 types of t-test
 
-:::::: columns
+::: columns
 ::: {.column width="30%"}
 **One-sample T-test**
 
@@ -239,7 +284,7 @@ Used to compare the means of two related groups, such as repeated measurements o
 
 Examples: Before workshop vs After workshop.
 :::
-::::::
+:::
 
 ## T-test: One-sample T-Test
 
@@ -249,17 +294,12 @@ Let's start with visualizing the data
 
 ```{r}
 #| echo: true
-#| output-location: column-fragment
+#| output-location: fragment
 
-wvs_data |> 
-    ggplot(aes(y = life_satisfaction, x = 1)) +
+wvs_cleaned |> 
+    ggplot(aes(y = life_satisfaction)) +
     geom_boxplot(width = 0.2) + 
-    geom_hline(yintercept = 6.5, color="red") +
-    geom_label(label = "global mean", 
-               x = 1, y = 6.6, 
-               label.size = 0.15) +
-    coord_flip() +
-    theme(aspect.ratio = 1/3) 
+    geom_hline(yintercept = 6.5, color="red") 
 ```
 
 ## Conduct the One-sample T-Test
@@ -269,7 +309,7 @@ wvs_data |>
 #| output-location: fragment
 global_mean_satisfaction = 6.5  
 
-t.test(wvs_data$life_satisfaction,          
+t.test(wvs_cleaned$life_satisfaction,          
        alternative = "two.sided", 
        mu = global_mean_satisfaction)
 
@@ -285,12 +325,9 @@ Let's first take only the necessary columns and get some summary statistics, par
 
 ```{r}
 #| echo: true
-#| output-location: column-fragment
+#| output-location: fragment
 
-satisfaction_by_gender <- wvs_data |> 
-    select(life_satisfaction, sex)
-
-satisfaction_by_gender |> 
+wvs_cleaned |> 
     group_by(sex) |> 
     summarise(total = n(), 
               mean = mean(life_satisfaction),
@@ -300,10 +337,13 @@ satisfaction_by_gender |>
 
 ## Visualize the differences between two samples
 
-The variance will be easier to see when we visualize it as well. As we can see, the variance for Y group is wider than the N group. This suggests that the variance might be heterogeneous (heteroskedastic).
+The variance will be easier to see when we visualize it as well. As we can see, the variance for both groups are about the same. This suggests that the variance might be homoegeneous.
 
 ```{r}
-satisfaction_by_gender |> 
+#| echo: true
+#| output-location: fragment
+#| 
+wvs_cleaned |> 
     ggplot(aes(x = sex, y = life_satisfaction)) +
     geom_boxplot() +
     theme_minimal()
@@ -313,30 +353,32 @@ satisfaction_by_gender |>
 
 Remember, the hypotheses are:
 
-::::: columns
+::: columns
 ::: {.column width="50%"}
-$H_0$: There is no significant difference in the mean age between those who intend to vote "Yes" and those who intend to vote "No".
+$H_0$: There is **no** significant difference in the mean life satisfaction between male and female participant.
 :::
 
 ::: {.column width="50%"}
-$H_1$: There is a significant difference in the mean age between those who intend to vote "Yes" and those who intend to vote "No".
+$H_1$: There is a significant difference in the mean life satisfaction between male and female participant.
 :::
-:::::
+:::
 
 ```{r}
 #| echo: true
 #| output-location: column
 
 t.test(life_satisfaction ~ sex, 
-       data = satisfaction_by_gender, 
+       data = wvs_cleaned, 
        var.equal = FALSE)
 ```
-
 ::: {.callout-tip appearance="simple"}
+
 ### Notice that we are using Welch's t-test instead of Students' t-test
 
-Welch's t-test (also known as **unequal variances t-test**, is a more robust alternative to Student's t-test. It is often used when two samples have unequal variances and possibly unequal sample sizes.
+Welch's t-test (also known as **unequal variances t-test**, is a more robust alternative to Student's t-test. It is often used when two samples have unequal variances and possibly unequal sample sizes. 
+
 :::
+
 
 ## T-Test: Paired Sample T-Test
 
@@ -349,20 +391,31 @@ The dataset is already loaded, so you can use it right away!
 -   type `data()` in your console to see what are the available datasets that you can use for practice!
 
 ```{r}
+#| echo: true
+#| output-location: slide
+
 sleep <- as_tibble(sleep)
-glimpse(sleep)
+print(sleep)
 
 ```
 
 ## Visualise the before (group 1) and after (group 2)
 
 ```{r}
+#| echo: true
+
 sleep |> 
     group_by(group) |> 
     summarise(n = n(), mean = mean(extra), sd = sd(extra), variance = var(extra))
 ```
 
+
+Visualization: 
+
 ```{r}
+#| echo: true
+#| output-location: slide
+
 sleep |> 
     ggplot(aes(x = group, y = extra)) +
     geom_boxplot() +
@@ -380,7 +433,7 @@ The data is in long format. let's transform it into wide format so that we can c
 sleep_wide <- sleep |> 
     pivot_wider(names_from = group, values_from = extra, 
                 names_prefix = "group_")
-glimpse(sleep_wide)
+print(sleep_wide)
 
 ```
 
@@ -388,7 +441,7 @@ glimpse(sleep_wide)
 
 Remember, the hypotheses are:
 
-::::: columns
+::: columns
 ::: {.column width="50%"}
 $H_0$: There is no significant difference in the increase in hours of sleep.
 :::
@@ -396,7 +449,7 @@ $H_0$: There is no significant difference in the increase in hours of sleep.
 ::: {.column width="50%"}
 $H_1$: There is a significant difference in the increase in hours of sleep.
 :::
-:::::
+:::
 
 ```{r}
 #| echo: true
@@ -404,6 +457,31 @@ $H_1$: There is a significant difference in the increase in hours of sleep.
 
 t.test(Pair(sleep_wide$group_1, sleep_wide$group_2) ~ 1,
        data = sleep)
+
+```
+## Learning Check #2
+
+Using the pre-loaded dataset called `CO2`, conduct the T-test betwen the two different `Treatment` to compare if there's any difference in the carbon dioxide `uptake` between the two treatments. Type `?CO2` in your Console to retrieve the vignette of this data. 
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show answer"
+
+t.test(uptake ~ Treatment, data = CO2)
+
+```
+Visualize the data:
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show answer"
+#| output-location: slide
+
+CO2 |> ggplot(aes(x = Treatment, y = uptake)) +
+    geom_boxplot(width = 0.2) +
+    theme_minimal()
 
 ```
 
@@ -421,13 +499,16 @@ There are two 'mainstream' ANOVA that will be covered in this workshop:
 
 ## One-Way ANOVA: Sample problem and result
 
-RQ: **Is there a significant difference in life satisfaction between different religiousity?**
+RQ: **Is there a significant difference in life satisfaction between different country?**
 
 Let's visualize the data first!
 
 ```{r}
-wvs_data |> 
-    ggplot(aes(x = religiousity, y = life_satisfaction)) +
+#| echo: true
+#| output-location: slide
+
+wvs_cleaned |> 
+    ggplot(aes(x = country, y = life_satisfaction)) +
     geom_boxplot() +
     theme_minimal() +
     theme(axis.text.x = element_text(angle = 45, hjust = 1))
@@ -437,9 +518,10 @@ wvs_data |>
 
 ```{r}
 #| echo: true
+#| output-location: fragment
 
-satisfaction_religiousity_anova <- aov(life_satisfaction ~ religiousity, data = wvs_data)
-summary(satisfaction_religiousity_anova)
+satisfaction_country_anova <- aov(life_satisfaction ~ country, data = wvs_cleaned)
+summary(satisfaction_country_anova)
 ```
 
 ::: {style="font-size: 75%; width: 75%"}
@@ -459,7 +541,7 @@ Tukey's Honest Significant Difference (HSD) can help us figure that out! Other a
 ```{r}
 #| echo: true
 #| output-location: fragment
-TukeyHSD(satisfaction_religiousity_anova)
+TukeyHSD(satisfaction_country_anova)
 ```
 
 ## ANOVA Assumptions
@@ -489,11 +571,11 @@ TukeyHSD(satisfaction_religiousity_anova)
 #| output-location: column
 
 library(car)
-leveneTest(life_satisfaction ~ religiousity, 
-           data = wvs_data)
+leveneTest(life_satisfaction ~ country, 
+           data = wvs_cleaned)
 ```
 
-The results indicate that the p-value is less than the significance level of 0.05, suggesting a significant difference in variance across the groups. Consequently, the assumption of homogeneity of variances is violated.
+The results indicate that the p-value is more than the significance level of 0.05, suggesting that there is NO significant difference in variance across the groups. Consequently, the assumption of homogeneity of variances is NOT violated.
 
 ## Plotting Residuals: Residual vs Fitted
 
@@ -502,7 +584,10 @@ When we plot the residuals[^1], we can see some outliers as well:
 [^1]: Residual = difference between an observed value and the mean of all values for that group.
 
 ```{r}
-plot(satisfaction_religiousity_anova, 1)
+#| echo: true
+#| output-location: fragment
+
+plot(satisfaction_country_anova, 1)
 
 ```
 
@@ -515,17 +600,21 @@ plot(satisfaction_religiousity_anova, 1)
 #| output-location: column
 
 library(car)
-shapiro.test(wvs_data$age[0:5000])
+set.seed(123) # set seed for reproducibility, make sure it samples the same way everytime.
+shapiro.test(sample(residuals(satisfaction_country_anova), 5000))
 ```
 
-The p-value from the Shapiro-Wilk test is less than the significance level of 0.05, indicating that the data significantly deviates from normality. Therefore, the assumption of normality is not satisfied.
+The p-value from the Shapiro-Wilk test is less than the significance level of 0.05, indicating that the data significantly deviates from normality. Therefore, the assumption of normality is NOT satisfied.
 
-## Plotting Residuals: Q-Q Plot
+## Plotting Residuals: Q-Q Plot 
 
 We can see this better from when we plot the residuals:
 
 ```{r}
-plot(satisfaction_religiousity_anova, 2)
+#| echo: true
+#| output-location: fragment
+
+plot(satisfaction_country_anova, 2)
 
 ```
 
@@ -536,7 +625,7 @@ We can use **Kruskal-Wallis rank sum test** as an non-parametric alternative to 
 ```{r}
 #| echo: true 
 
-kruskal.test(life_satisfaction ~ religiousity, data = wvs_data)
+kruskal.test(life_satisfaction ~ country, data = wvs_cleaned)
 ```
 
 Other alternative: **Welch's ANOVA** for when the homoskedasticity assumption is not met.
@@ -544,7 +633,7 @@ Other alternative: **Welch's ANOVA** for when the homoskedasticity assumption is
 ```{r}
 #| echo: true
 
-oneway.test(life_satisfaction ~ religiousity, data = wvs_data, var.equal = FALSE)
+oneway.test(life_satisfaction ~ country, data = wvs_cleaned, var.equal = FALSE)
 ```
 
 ## Two-Way ANOVA: Sample problem and result
@@ -554,9 +643,11 @@ RQ: **Is there a significant difference in life satisfaction across religiousity
 Let's visualize the data!
 
 ```{r}
+#| echo: true
+#| output-location: slide
 
-wvs_data |> 
-    ggplot(aes(x = employment, y = life_satisfaction)) +
+wvs_cleaned |> 
+    ggplot(aes(x = religiousity, y = life_satisfaction)) +
     geom_boxplot() +
     facet_wrap(~ country) +
     theme_minimal() +
@@ -564,13 +655,13 @@ wvs_data |>
 
 ```
 
-## Conduct the Two-way ANOVA test
+## Conduct the Two-way ANOVA test (Additive model)
 
 ```{r}
 #| echo: true
 #| output-location: fragment
 satisfaction_relig_country_anova <- aov(life_satisfaction ~ religiousity + country, 
-                                    data = wvs_data)
+                                    data = wvs_cleaned)
 summary(satisfaction_relig_country_anova)
 ```
 
@@ -581,42 +672,106 @@ summary(satisfaction_relig_country_anova)
 #| output-location: fragment
 TukeyHSD(satisfaction_relig_country_anova)
 ```
+## Conduct the Two-way ANOVA test (with Interaction)
 
-## Let's try this ANOVA exercise! (5 mins)
+"With interaction" means we are testing whether the effect of one variable (religiosity) on the outcome (life satisfaction) depends on the level of the other variable (country), or vice versa. For the R code, we use `religiousity * country` instead of `religiousity + country`
 
-Is there a significant difference in political leaning between different sex?
+```{r}
+#| echo: true
+#| output-location: fragment
+satisfaction_relig_country_anova <- aov(life_satisfaction ~ religiousity * country, 
+                                    data = wvs_cleaned)
+summary(satisfaction_relig_country_anova)
+```
+## Interaction plot
+
+To better see this effect, let's plot the interaction.
+
+```{r}
+#| echo: true
+#| output-location: slide
+
+wvs_cleaned |> 
+    ggplot(aes(x = religiousity, y = life_satisfaction, 
+                          group = country, color = country)) + # lines will be grouped and colored by country
+    stat_summary(fun = mean, geom = "point") + # Add points to show mean life_satisfaction for each religiosity by country
+    stat_summary(fun = mean, geom = "line") + # Connect the points with lines 
+    theme_minimal()
+    
+```
+
+## Interpreting our interaction plot
+
+Some observations that we can make:
+
+-   New Zealand's pattern is distinctly different from the other two countries; NZ hows highest life satisfaction for "Not a religious person" but drops sharply for "A religious person", while for Canada and Singapore, there is a similar patterns with peaks at "A religious person"
+-   The interaction is most visible in how religious vs non-religious people differ across countries, with the largest difference between countries appears among non-religious people. 
+-   The relationship between religiosity and life satisfaction clearly varies by country. We know this because the lines are not parallel with each other. 
+
+
+## Learning Check #3
+
+Is there a significant difference in political leaning between different age groups?
 
 -   Visualize the data as well
 -   Test for normality and homoskedasticity, and choose the appropriate test
 
+
 ```{r}
-#| echo: false
-#| output: false
-poli_sx_anova <- aov(political_scale ~ sex, data = wvs_data)
-summary(poli_sx_anova)
-TukeyHSD(poli_sx_anova)
+#| code-fold: true
+#| echo: true
+#| code-summary: "Show answer"
+
+poli_age_anova <- aov(political_scale ~ age_group, data = wvs_cleaned)
+summary(poli_age_anova)
+```
+---
+
+TukeyHSD:
+
+```{r}
+#| code-fold: true
+#| echo: true
+#| code-summary: "Show answer"
+
+TukeyHSD(poli_age_anova)
 ```
 
-# Recap
+# Reporting result with apaTables and gtsummary
 
-::: incremental
--   Data distribution, normal distribution and skewed distribution.
+## Reporting with apaTables
 
--   Use X2 test of independence, chisq.test(), to evaluate whether there is a statistically significant relationship between two categorical variables.
+`apaTables` is a package that will generate APA-formatted report table for correlation, ANOVA, and regression. It has limited customisations and few varity of tables. The documentation online is for the "development" version which is not what we will get if we install normally with `install.packages()`, so we need to rely on the vignette more. [**View the documentation here**](https://dstanley4.github.io/apaTables/index.html)
 
--   Use a correlation test, cor.test(), to evaluate the strength and direction of a linear relationship between two variables. The coefficient is expressed in value between -1 to 1, with 0 being no correlation at all.
 
--   Use t-test() to compare the means of two groups of continuous data and determine if the differences are statistically significant.
+Example: get the correlation table for `political_scale`, `life_satisfaction`, and `financial_satisfaction`
 
--   Three types of t-tests i.e., one-sample t-test, independent samples t-test, and paired samples t-test.
+```r
+library(apaTables)
 
--   Use ANOVA (Analysis of Variance) to compare the means of three or more groups or samples and determine if the differences are statistically significant.
+wvs_cleaned |> 
+    select(life_satisfaction, financial_satisfaction, political_scale) |> 
+    apa.cor.table( table.number = 1, filename = "fig-output/table-cor.doc")
+```
 
--   Report results with apaTables and gtsummary.
-:::
+## Reporting with gtsummary
+
+Another popular packages is `gt` (stands for "great tables") and its 'add-on', `gtsummary`. It has lots of customizations (which can get overwhelming!) but fortunately the documentation is pretty good and there are plenty of code samples. [**View the documentation here**](https://www.danieldsjoberg.com/gtsummary/index.html)
+
+Example: get the mean differences table for `political_scale`, `life_satisfaction`, and `financial_satisfaction`, grouped by `sex`
+
+```{r}
+#| echo: true
+#| output-location: slide
+
+library(gtsummary)
+
+wvs_cleaned |> 
+    dplyr::select(life_satisfaction, financial_satisfaction, political_scale, sex) |> 
+    tbl_summary(by = sex) |> 
+    add_difference()
+```
 
 # End of Session 4!
 
-```         
 Next session: Linear and Logistic Regressions!
-```

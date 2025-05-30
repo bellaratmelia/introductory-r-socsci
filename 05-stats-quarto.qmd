@@ -1,14 +1,50 @@
 ---
-title: "Regression and Introduction to Quarto"
-author: "Bella Ratmelia"
+title: 'Regression and Presenting Your Result'
+author: 'Bella Ratmelia'
 format: revealjs
 ---
 
 ## Today's Outline
 
-1.  Simple Linear Regression in R
-2.  Binary Logistic Regression in R
-3.  Create your manuscript with Quarto
+1.  Recap: The various packages for tables
+2.  Simple Linear Regression in R
+3.  Binary Logistic Regression in R
+4.  (if time permits) Coding your analysis and writing your report in one place with Quarto.
+
+## Open your project - the (possibly) easier way
+
+1.  Go to the folder where you put your project for this workshop
+
+2.  Find a file with `.Rproj` extension - this is the R project file that holds all the information about your project.
+
+![](images/locate-rproj-file.jpg)
+
+3.  Double click on the file. Rstudio should launch with your project loaded! This should be easier to ensure that you are loading the correct project when opening Rstudio.
+
+## Install and load extra packages we need today
+
+1. Type the following line in your R console (bottom left section). Type them one by one.
+    -   `install.packages("apaTables")`
+    -   `install.packages("huxtable")`
+    -   `install.packages("gtsummary")`
+    -   `install.packages("car")`
+
+2. Create a new R script called `session-5.R`
+
+3. Paste the following lines into the script:
+
+```{r}
+#| echo: true
+
+# loading the packages
+library(apaTables)
+library(huxtable)
+library(gtsummary)
+library(car)
+library(tidyverse)
+
+```
+
 
 ## Load our data for today!
 
@@ -18,22 +54,61 @@ format: revealjs
 #| message: false
 #| output: false
 
-# import tidyverse library
-library(tidyverse)
-library(gtsummary)
-library(huxtable)
-
-# read the CSV with Chile voting data
-wvs_data <- read_csv("data-output/wvs_processed.csv")
+# read the CSV with WVS data
+wvs_cleaned <- read_csv("data-output/wvs_cleaned_v1.csv")
 
 # Convert categorical variables to factors
-wvs_data <- wvs_data |> 
-    mutate(across(c("country", "sex", "marital_status", 
-                    "employment", "religiousity"), as.factor))
+columns_to_convert <- c("country", "religiousity", "sex", "marital_status", "employment", "age_group")
 
-# peek at the data
-glimpse(wvs_data)
+wvs_cleaned <- wvs_cleaned |> 
+    mutate(across(all_of(columns_to_convert), as_factor))
+
+# peek at the data, pay attention to the data types!
+glimpse(wvs_cleaned)
 ```
+
+# Recap: The various packages for tables
+
+## From last week: apaTables
+
+`apaTables` is a package that will generate APA-formatted report table for correlation, ANOVA, and regression. It has limited customisations and few varity of tables. The documentation online is for the "development" version which is not what we will get if we install normally with `install.packages()`, so we need to rely on the vignette more. [**View the documentation here**](https://dstanley4.github.io/apaTables/index.html)
+
+
+Example: get the correlation table for `political_scale`, `life_satisfaction`, and `financial_satisfaction`
+
+```r
+library(apaTables)
+
+wvs_cleaned |> 
+    select(life_satisfaction, financial_satisfaction, political_scale) |> 
+    apa.cor.table( table.number = 1, filename = "fig-output/table-cor.doc")
+```
+
+This code will create a word document with the tables already formatted in APA style inside.
+
+## From last week: gtsummary
+
+Another popular packages is `gt` (stands for "great tables") and its 'add-on', `gtsummary`. It has lots of customizations (which can get overwhelming!) but fortunately the documentation is pretty good and there are plenty of code samples. [**View the documentation here**](https://www.danieldsjoberg.com/gtsummary/index.html)
+
+Example: get the mean differences table for `political_scale`, `life_satisfaction`, and `financial_satisfaction`, grouped by `sex`
+
+```{r}
+#| echo: true
+#| output-location: slide
+
+library(gtsummary)
+
+wvs_cleaned |> 
+    dplyr::select(life_satisfaction, financial_satisfaction, political_scale, sex) |> 
+    tbl_summary(by = sex) |> 
+    add_difference()
+```
+
+## How to save gtsummary() tables
+
+1.  The tables will be displayed under the "Viewer" tab on the lower right hand side of Rstudio.
+2.  Select the entire tables, and then copy it with Ctrl + C (or Cmd + C on Macbook)
+3.  Paste the table with Ctrl + V (or Cmd + V on Macbook) to your word document or Google doc.
 
 # Simple Linear Regression 
 
@@ -59,29 +134,37 @@ $$
 
 Examples:
 
--   Does a person's **age** affect their **income**?
--   Do a person's **age** and **education level** affect their **income**?
+-   Does a person's **age** affect their **life satisfaction**?
+-   Do a person's **age** and **country** affect their **life satisfaction**?
 
 ## Linear Regression: One continuous predictor
 
-**Research Question:** Does a person's **financial satisfaction** influence their **life satisfaction**?
+**Research Question:** Does a person's **age** influence their **life satisfaction**?
 
 - The outcome/DV ($Y$): `life_satisfaction`
-- The predictor/IV ($X$): `financial_satisfaction`
+- The predictor/IV ($X$): `age`
 
 ```{r}
 #| echo: true
-#| output-location: slide
-life_model1 <- lm(life_satisfaction ~ financial_satisfaction, data = wvs_data)
+#| output-location: fragment
+life_model1 <- lm(life_satisfaction ~ age, data = wvs_cleaned)
 summary(life_model1) #summarize the result
 ```
 
-::: {style="font-size: 75%; width: 75%"}
+--- 
+
+::: {style="font-size: 80%"}
+
 -   **Call**: the formula
--   **Residuals**: overview on the distribution of residuals (expected value minus observed value) -- we can plot this to check for homoscedasticity -
+
+-   **Residuals**: overview on the distribution of residuals (expected value minus observed value) -- we can plot this to check for homoscedasticity
+
 -   **Coefficients**: shows the intercept, the regression coefficients for the predictor variables, and their statistical significance
+
 -   **Residual standard error**: the average difference between observed and expected outcome by the model. Generally the lower, the better.
+
 -   **R-squared & Adjusted R-squared**: indicates the proportion of variation in the outcome that can be explained by the model (i.e. goodness of fit).
+
 -   **F-statistics**: indicates whether the model as a whole is statistically significant and whether it explains more variance than just the baseline (intercept-only) model.
 :::
 
@@ -89,38 +172,45 @@ summary(life_model1) #summarize the result
 
 Here is one possible way to narrate your result:
 
-> A linear regression analysis was conducted to assess the influence of age on support for the incumbent (statusquo) in Chile. The coefficient for age was 0.008 (SE = 0.001), indicating that for each additional year of age, support for the incumbent increased by 0.008 units. This effect was statistically significant at p < 0.001.
+> A linear regression analysis was conducted to assess the influence of age on life satisfaction in Canada, Singapore, and New Zealand. Age is a statistically significant but weak predictor (B = 0.016, SE = 0.001, p < 0.001), indicating that for each additional year of age, the life satisfaction is increased by 0.016 units. 
 
-> The model explained a small portion of the variance in support for the statusquo (R² = 0.013, Adjusted R² = 0.012). The F-statistic was 30.85 (p < 0.001), further suggesting that age is a significant predictor of support for the incumbent. 
+> The model was statistically significant (F(1, 6401) = 147.7, p < 0.001) and explained approximately 2% of the variance in life satisfaction (R² = 0.022, Adjusted R² = 0.0224). 
 
-## Present the regression tables!
+## Present your regression result - huxtable
 
 ```{r}
 #| echo: true
+
 huxreg("life satisfaction" = life_model1)
 
 ```
 
 ## Linear Regression: Multiple continuous predictors
 
-**Research Question:** Do a person's financial satisfaction and perceived freedom influence their life satisfaction?
+**Research Question:** Do a person's age and financial satisfaction their life satisfaction?
 
 - The outcome/DV ($Y$): `life_satisfaction`
-- The predictors/IV ($X$): `financial_satisfaction` and `freedom`
+- The predictors/IV ($X$): `financial_satisfaction` and `age`
 
 ```{r}
 #| echo: true
 #| output-location: slide
 
-life_model2 <- lm(life_satisfaction ~ financial_satisfaction + freedom, 
-                  data = wvs_data)
+life_model2 <- lm(life_satisfaction ~ financial_satisfaction + age, 
+                  data = wvs_cleaned)
 summary(life_model2)
 ```
+## Possible way to explain the result
 
-## Alternative package to present regression result
+> A multiple regression analysis was conducted to examine how financial satisfaction and age predict life satisfaction. Financial satisfaction was a strong predictor (B = 0.529, SE = 0.008, p < 0.001), indicating that for each one-unit increase in financial satisfaction, life satisfaction increased by 0.529 units. Age was also a significant but weaker predictor (B = 0.006, SE = 0.001, p < 0.001), with each additional year of age associated with a 0.006-unit increase in life satisfaction.
+
+> The model was statistically significant (F(2, 6400) = 2268, p < 0.001) and explained 41.5% of the variance in life satisfaction (R² = 0.415, Adjusted R² = 0.415). 
+
+## Present your regression result - tbl_regression() from gtsummary
 
 ```{r}
 #| echo: true
+
 life_model2 |> tbl_regression() |> bold_p()
 ```
 
@@ -139,7 +229,7 @@ More on `tbl_regression()` by `gtsummary`: <https://www.danieldsjoberg.com/gtsum
 ::: {.column width="40%"}
 You might encounter different table formats when reporting regression results, but there are some key elements that should generally be included. 
 
-These are: the number of observations ($N$), the $\beta$ coefficients, standard errors (SE), confidence intervals (95% CI), and p-values. Other metrics to include are the $R^2$ and $F$ statistics. 
+These are: the number of observations ($N$), the coefficients (B = unstandardized, raw coeff in original unit of measurements; $\beta$ = standardized, converted to standard deviation units), standard errors (SE), confidence intervals (95% CI), and p-values. Other metrics to include are the $R^2$ and $F$ statistics. 
 :::
 
 ::::
@@ -154,15 +244,20 @@ These are: the number of observations ($N$), the $\beta$ coefficients, standard 
 
 ## Presenting your models {.scrollable}
 
-Don't forget to install the library by running this line in your terminal: `install.packages("huxtable")`
+If you get an error saying "huxreg not found", you may need to:
+
+1.  Install the library by running this line in your terminal: `install.packages("huxtable")`
+
+2.  And then load them to your script with this line: `library(huxtable)`
 
 For more info about huxreg, go here: <https://cran.r-project.org/web/packages/huxtable/vignettes/huxreg.html>
 
 ```{r}
 #| echo: true
-library(huxtable)
-huxreg("statusquo (model1)" = life_model1, 
-       "statusquo (model2)" = life_model2,
+#| output-location: slide
+
+huxreg("life_satisfaction (model1)" = life_model1, 
+       "life_satisfaction (model2)" = life_model2,
        number_format = 4,
        bold_signif = 0.05,
        statistics = c( "R squared" = "r.squared", "N" = "nobs", "F" = "statistic",
@@ -190,10 +285,10 @@ car::vif(life_model2)
 
 ## Linear Regression: One categorical predictor
 
-**Research Question**: Explore the difference in life satisfaction between employment statuses.
+**Research Question**: Explore the difference in life satisfaction between age groups
 
 - The outcome/DV ($Y$): `life_satisfaction`
-- The predictor/IV ($X$): `sex`
+- The predictor/IV ($X$): `age_group`
 
 ::: callout-note
 Before proceeding with analysis, ensure that all the categorical variables involved are cast as factors!
@@ -202,8 +297,8 @@ Before proceeding with analysis, ensure that all the categorical variables invol
 ```{r}
 #| echo: true
 
-str(wvs_data$life_satisfaction)
-str(wvs_data$sex)
+str(wvs_cleaned$life_satisfaction)
+str(wvs_cleaned$age_group)
 ```
 
 ## Continuing the analysis
@@ -212,31 +307,28 @@ The analysis summary should look like this:
 
 ```{r}
 #| echo: true
-life_model3 <- lm(life_satisfaction ~ sex, data = wvs_data)
+life_model3 <- lm(life_satisfaction ~ age_group, data = wvs_cleaned)
 summary(life_model3)
 ```
 
-When interpreting a categorical predictor in regression, one category is treated as the reference category, which serves as the baseline for comparison. In this case, the reference category corresponds to the intercept.
+-   When interpreting a categorical predictor in regression, one category is treated as the reference category, which serves as the baseline for comparison. In this case, the reference category corresponds to the intercept.
 
-By default, the first category in the data is used as the reference category, unless specified otherwise.
+-   By default, the first category in the data is used as the reference category, unless specified.
 
 ## Narrating the result
 
 Here is one possible way to narrate your result:
 
-> A linear regression analysis was conducted to explore the relationship between `gender` (male vs. female) of voters and support for the status quo in Chile (`statusquo`). The model includes gender as the only predictor. Results revealed that the intercept, representing the mean statusquo score for male voters, was -0.080 (SE = 0.030). This was statistically significant at p < 0.01, indicating that on average, male voters showed a negative inclination towards the status quo.
+> A linear regression analysis was conducted to examine how age groups predict life satisfaction. With the youngest age group (15-28) as the reference group (intercept = 6.66, SE = 0.06), all other age groups showed significantly higher life satisfaction. The 29-44 age group scored 0.37 units higher (SE = 0.07, p < 0.001), the 45-60 age group scored 0.35 units higher (SE = 0.07, p < 0.001), and the 61+ age group showed the largest difference, scoring 0.87 units higher (SE = 0.07, p < 0.001) than the reference group.
 
-> The coefficient for female voters was 0.134 (SE = 0.041), indicating that being female was associated with an increase of 0.134 units in support for the status quo compared to male voters. This effect was statistically significant p < 0.01
-
-> The model explain a small portion of the variance in support for the status quo (R^2 = 0.004, Adjusted R^2 = 0.004). The F-statistic (10.75, p < 0.01) suggests that gender is a significant predictor of support for the status quo.
+> The model was statistically significant (F(3, 6399) = 55.44, p < 0.001) but only explained 2.5% of the variance in life satisfaction (R² = 0.025, Adjusted R² = 0.025).
 
 ## Presenting the regression table {.scrollable}
 
-For more info about huxreg, go here: <https://cran.r-project.org/web/packages/huxtable/vignettes/huxreg.html>
-
 ```{r}
 #| echo: true
-library(huxtable)
+#| output-location: slide
+
 huxreg("life satisfaction (model3)" = life_model3,
        number_format = 4,
        bold_signif = 0.05,
@@ -246,15 +338,15 @@ huxreg("life satisfaction (model3)" = life_model3,
 
 ## Categorical predictor: changing the reference
 
-Let's change the reference category for `sex` variable to "Male".
+Let's change the reference category for `age_group` variable to "61+".
 
 ```{r}
 #| echo: true
 
-wvs_data <- wvs_data |> 
-    mutate(sex = relevel(sex, ref = "Male"))
+wvs_cleaned <- wvs_cleaned |> 
+    mutate(age_group = relevel(age_group, ref = "61+"))
 
-str(wvs_data$sex)
+str(wvs_cleaned$age_group)
 ```
 
 Re-run the analysis with the new reference category
@@ -262,17 +354,19 @@ Re-run the analysis with the new reference category
 ```{r}
 #| echo: true
 #| output-location: slide
-life_model3a<- lm(life_satisfaction ~ sex, data = wvs_data)
+life_model3a<- lm(life_satisfaction ~ age_group, data = wvs_cleaned)
 summary(life_model3a)
 ```
 
 
 ## Changing baseline category for ordered factor
 
+Assuming we have a column with ordered factor in our data called `education` with the level of `Primary`, `Secondary`, and `Tertiary`. This is how we can change the order, if we want to put `Secondary` before `Primary`.
+
 ``` r
-wvs_data <- wvs_data |> 
+wvs_cleaned <- wvs_cleaned |> 
     mutate(education = factor(education, 
-                         levels = c("S", "P", "PS"), 
+                         levels = c("Secondary", "Primary", "Tertiary"), 
                          ordered = TRUE))
 ```
 
@@ -282,14 +376,14 @@ Previously, we could use the `relevel()` function to change the reference catego
 
 ## Let's try this Linear Regression exercise! (5 mins)
 
-Create a regression model called `life_model4` that predicts the `life_satisfaction` score based on `region`. Make sure the reference category is region "M".
+Create a regression model called `life_model4` that predicts the `life_satisfaction` score based on `sex`. The reference category should be 'Male'
 
 ```{r}
 #| echo: true
-#| output: false
+#| output: true
 #| code-fold: true
 
-life_model4 <- lm(life_satisfaction ~ employment, data = wvs_data)
+life_model4 <- lm(life_satisfaction ~ sex, data = wvs_cleaned)
 summary(life_model4)
 ```
 
@@ -315,33 +409,37 @@ $$
 
 ## Binary Logistic Regression Examples
 
--   Does a person’s **age** and **education level** influence whether they will vote Yes or No in a referendum?
+-   Does a person’s **age** and **education level** influence whether they will vote Democrat or Republican in the US election?
 -   Does the number of **hours spent studying** impact a student’s likelihood of passing a module? (pass/fail outcome)
 
 In essence, the goal of binary logistic regression is to estimate the probability of a specific event happening when there are only two possible outcomes (hence the term "binary").
 
 ## Binary Logistic Regression: One Continuous Predictor
 
-**Research Question**: Does **age** affect the likelihood of voting "Yes" in the plebiscite?
+**Research Question**: Does a participant's **political alignment** affect the likelihood of being satisfied with life?
 
--   The outcome/DV ($Y$): `vote` - there are 4 outcomes here, but for the purpose of this workshop practice, let's define the outcome as "Yes" and "not Yes" outcome
--   The predictor/IV ($X$): `age`
+-   The outcome/DV ($Y$): `satisfied` 
+
+    -   Our outcome is a continuous variable, but for the purpose of this workshop practice, let's define the outcome as "Satisfied" if the life_satisfaction score is more than 7 (inclusive), and "not Satisfied" if the score is less than 7. 
+-   The predictor/IV ($X$): `political_scale`
+
+
 
 ## Dummy-coding dependent variable
 
-Before we proceed with the calculations, we need to **dummy code** the dependent variable into 1 and 0, with 1 = Yes and 0 = Not Yes. [More info on dummy coding here](https://stats.oarc.ucla.edu/other/mult-pkg/faq/general/faqwhat-is-dummy-coding/)
+Before we proceed with the calculations, we need to **dummy code** the dependent variable into 1 and 0, with 1 = Satisfied and 0 = Not Satisfied. [More info on dummy coding here](https://stats.oarc.ucla.edu/other/mult-pkg/faq/general/faqwhat-is-dummy-coding/)
 
 ```{r}
 #| echo: true
 # First, we need to create a binary outcome
-wvs_data <- wvs_data |>
-    mutate(satisfied = if_else(life_satisfaction > 6, 1, 0))
+wvs_cleaned <- wvs_cleaned |>
+    mutate(satisfied = if_else(life_satisfaction >= 7, 1, 0))
 # the if_else is from dplyr package (from session 2)
 
 ```
 
 ```{r}
-wvs_data |> select(life_satisfaction, satisfied) |> print(n = 5)
+wvs_cleaned |> select(life_satisfaction, satisfied) |> print(n = 5)
 ```
 
 ## Conduct the analysis
@@ -351,9 +449,9 @@ Let's conduct the analysis!
 ```{r}
 #| echo: true
 
-life_model5 <- glm(satisfied ~ age,
+life_model5 <- glm(satisfied ~ political_scale,
                 family = binomial, 
-                data = wvs_data)
+                data = wvs_cleaned)
 
 summary(life_model5)
 ```
@@ -361,6 +459,14 @@ summary(life_model5)
 ## Exponentiate the coefficients
 
 If you recall the formula, the results are expressed in Logit Probability. As we typically report the result in terms of Odd Ratios (OR), perform exponentiation on the coefficients.
+
+```{r}
+#| echo: true
+
+exp(coef(life_model5))
+
+```
+We can also use `tbl_regression()` to do this for us:
 
 ```{r}
 #| echo: true
@@ -374,22 +480,29 @@ life_model5 |> tbl_regression(exponentiate = TRUE) |>
 More on `tbl_regression()` by `gtsummary`: <https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html>
 :::
 
+## Get the χ² (chi-squared) to report model significance
 
-## Exponentiate the coefficients: interpretation
+χ² (Chi-squared) goodness of fit tests whether your model fits the data significantly better than a null model (model with no predictors). As you can see, it is not in the `glm()` result, but we can calculate this somewhat manually using the Null and Residual deviance and df like so:
 
-**Possible interpretation:**
+*   Null deviance: 7731
+*   Residual deviance: 7690
+*   Difference: 7731 - 7690 = 41 (this is the χ² value)
 
-*(The intercept isn't typically interpreted as an odds ratio, so we'll ignore that for now)* 
+To get the p-value, we need the degree of freedom and the χ²:
 
-The result above indicates that like one unit increase of age will increase the odds of voting "Yes" by a factor of 1.0135. i.e. for each year increase in age, there is a 1.35% increase in the odds of voting "Yes". $((1.0135 - 1) * 100 = 1.35)$ . This positive effect is very small. 
+*   df = difference in degrees of freedom (6402 - 6401 = 1)
+*   χ² = 41
 
-::: aside
-More on interpreting Odds Ratio: <https://stats.oarc.ucla.edu/other/mult-pkg/faq/general/faq-how-do-i-interpret-odds-ratios-in-logistic-regression/>
-:::
+```{r}
+#| echo: true
 
-## For reporting purposes: get the Rsquared
+pchisq(41, df=1, lower.tail=FALSE)  # will give p-value
+```
 
-In the report, the model's Chi square and Rsquared will be reported as well to indicate the model fit. However, since the resulting item does not have this info, we will call upon `DescTools`' `PseudoR2()` function to help!
+
+## Get the χ² (chi-squared) and Pseudo R-squared (for reporting purposes)
+
+In the report, the model's χ² (chi-squared) and R-squared (indicating the proportion of variance that can be explained by the model) should be included. However, since the resulting item does not have this info, we will call upon `DescTools`' `PseudoR2()` function to help!
 
 ```{r}
 #| echo: true
@@ -398,13 +511,19 @@ In the report, the model's Chi square and Rsquared will be reported as well to i
 # by default, McFadden will be used
 DescTools::PseudoR2(life_model5) 
 ```
+
+We can retrieve the R-squared value and the χ² (also known as the G2 value, which stands for Goodness-of-fit) at the same time like so:
+
 ```{r}
 #| echo: true
 #| output-location: column
 
 DescTools::PseudoR2(life_model5, 
-                    which = "CoxSnell")
+                    which = c("G2", "Nagelkerke"))
 ```
+
+
+## In case you need to get other Rsquared methods
 
 ```{r}
 #| echo: true
@@ -412,43 +531,77 @@ DescTools::PseudoR2(life_model5,
 DescTools::PseudoR2(life_model5, 
                     which = "all")
 ```
-## Reporting result: in-text narration
+
+## Possible interpretation of the result
+
+**Possible interpretation:**
+
+*(The intercept isn't typically interpreted as an odds ratio, so we'll ignore that for now)* 
+
+> A logistic regression was performed to ascertain the effects of political scale alignment on the likelihood that individuals will be satisfied with life versus not satisfied. The logistic regression model was statistically significant, χ² (1, N = 6403) = 41.02, p < .001. 
+
+> The model explained 0.9% (Nagelkerke R²) of the variance in life satisfaction. Political scale alignment was associated with an increased likelihood of being satisfied with life (OR = 1.09, 95% CI [1.06, 1.12], p < .001), indicating that for each one-unit increase in political scale alignment (1-10), the odds of being satisfied with life increased by 9%.
+
+::: aside
+More on interpreting Odds Ratio: <https://stats.oarc.ucla.edu/other/mult-pkg/faq/general/faq-how-do-i-interpret-odds-ratios-in-logistic-regression/>
+:::
+
+
+## Recap - why do I need to report these?
+
+* χ² (Chi-squared) goodness of fit tests whether your model fits the data significantly better than a null model (model with no predictors). 
+
+* "Standard" R-squared isn't typically reported for logistic regression because it's not as meaningful as it is in linear regression. But we do still want to see how much of the variance in the data can be explained by the model. 
+
+* Pseudo R-squared tries to mimic traditional R-squared by showing how much of the variation in the outcome your model explains, but it's adjusted to work with binary outcomes. It's sort of answering the question of "How well does my model explain the data?"
+
+* It is possible to have a significant χ² (meaning your model is statistically significant and better than nothing) but a low Pseudo R-squared (showing it still doesn't explain much variation). This isn't contradictory - it just means your model is better than random guessing but there's still a lot of unexplained variation. (Pretty common in social sciences; after all, human behaviours are complex!)
+
+
+## FYI - IRL sample of reporting Logistic Regression
 
 Below is a sample of how you may want to narrate your result. Note the resulting values mentioned in the paragraph below.
 
 ![](images/logreg-reporting.jpg)
 
-In a nutshell, you will most likely have to mention the p-value, the $\beta$ coefficients (for linear regressions), the Odd Ratios (for logistic regression) with the confidence intervals, and the adjusted R-squared. You should also include these information in your regression table. 
+In a nutshell, you will most likely have to mention the p-value, the coefficients (for linear regressions), the Odd Ratios (for logistic regression) with the confidence intervals, the chi-squared (χ²), and the R-squared. You should also include these information in your regression table. 
 
 ::: aside
 The screenshot is retrieved from <https://statistics.laerd.com/spss-tutorials/binomial-logistic-regression-using-spss-statistics.php>
 
 :::
 
-## Reporting result: regression table
+
+## Regression tables
+
+Even with huxtable, you may need to edit the table further to include the missing stats 
 
 ```{r}
 #| echo: true
 
-huxreg("Vote 'Yes'" = life_model5, statistics = c(R2 = "r.squared", "logLik", "AIC"))
+huxreg("life_satisfaction" = life_model5, statistics = c("R2" = "r.squared", "logLik", "AIC"))
 ```
 
 ## Binary Logistic Regression: One Categorical Predictor
 
-**Research Question**: Does **region** affect the likelihood of voting "Yes" in the plebiscite?
+**Research Question**: Does **religiousity** affect the likelihood of being satisfied with life?
 
--   The outcome/DV ($Y$): `vote` - there are 4 outcomes here, but for the purpose of this workshop practice, let's define the outcome as "Yes" and "not Yes" outcome
--   The predictor/IV ($X$): `region`
+-   The outcome/DV ($Y$): `satisfied` 
+-   The predictor/IV ($X$): `religiousity` - let's set "A religious person" as the reference category!
 
 ```{r}
 #| echo: true
 #| output-location: slide
+
+wvs_cleaned <- wvs_cleaned |> 
+    mutate(religiousity = relevel(religiousity, ref = "A religious person"))
+
 life_model6 <- glm(satisfied ~ religiousity,
                       family = "binomial",
-                      data = wvs_data)
+                      data = wvs_cleaned)
 
 summary(life_model6)
-
+exp(coef(life_model6))
 ```
 
 ## Exponentiate the coefficients
@@ -463,43 +616,38 @@ life_model6 |> tbl_regression(exponentiate = TRUE) |>
     bold_p()
 ```
 
+
+## Get the Rsquared
+
+Let's retrieve the R-squared value and the Chi-square χ² value (also known as the G2 value, which stands for Goodness-of-fit)
+
+
+```{r}
+#| echo: true
+DescTools::PseudoR2(life_model6, 
+                    which = c("G2", "Nagelkerke"))
+```
+
+```{r}
+#| echo: true
+# get the other R-squared if you like
+DescTools::PseudoR2(life_model6, 
+                    which = "all")
+```
+
 ## Narrating the results
 
-**Possible interpretation for region C:**
+**Possible interpretation:**
 
 *(The intercept isn't typically interpreted as an odds ratio, so we'll ignore that for now)* 
 
-The result above indicates that the odds for people in region C to vote "Yes" are about 0.56 times the odds of people in region N (the reference category). i.e., There is a 43.54% decrease in odds for region C residents to vote "Yes" compared to region N residents. $((0.5646 - 1) * 100 = -43.54)$
+> A logistic regression was performed to ascertain the effects of religiosity on the likelihood that individuals will be satisfied with life versus not satisfied. The logistic regression model was statistically significant, χ² (3, N = 6403) = 15.65, p < .001. 
+
+> The model explained 0.3% (Nagelkerke R²) of the variance in life satisfaction. Compared to religious persons (reference group), being non-religious was associated with lower odds of life satisfaction (OR = 0.84, 95% CI [0.74, 0.95], p = .004), and being an atheist was also associated with lower odds of life satisfaction (OR = 0.76, 95% CI [0.65, 0.89], p < .001). There was no significant difference in life satisfaction for those who were unsure about their religious beliefs compared to religious persons (OR = 1.24, 95% CI [0.61, 2.52], p = .550).
 
 ::: aside
 More on logistic regression: <https://stats.oarc.ucla.edu/r/dae/logit-regression/>
 :::
-
-## Get the Rsquared
-
-Let's retrieve the Rsquared value:
-
-```{r}
-#| echo: true
-#| output-location: column
-
-# the default is McFadden
-DescTools::PseudoR2(life_model6) 
-```
-```{r}
-#| echo: true
-#| output-location: column
-
-DescTools::PseudoR2(life_model6, 
-                    which = "CoxSnell")
-```
-
-```{r}
-#| echo: true
-
-DescTools::PseudoR2(life_model6, 
-                    which = "all")
-```
 
 ## Present both models in a table {.scrollable}
 
@@ -508,13 +656,13 @@ Note that the R-squared is missing here, so be sure to put that in when you past
 ```{r}
 #| echo: true
 library(huxtable)
-huxreg("vote 'Yes' (model1)" = life_model5, "vote 'Yes' (model2)" = life_model6)
+huxreg(life_model5, life_model6)
 ```
 
 
 ## Let's try this Logistic Regression exercise! (5 mins)
 
-Create a regression model called `vote_model` that predicts the likelihood of voting "Yes" based on `sex`. 
+Create a regression model called `life_model7` that predicts the likelihood of being satisfied with life based on `sex`. 
 
 ```{r}
 #| echo: true
@@ -523,7 +671,7 @@ Create a regression model called `vote_model` that predicts the likelihood of vo
 
 life_model7 <- glm(satisfied ~ sex,
                   family = "binomial", 
-                  data = wvs_data) 
+                  data = wvs_cleaned) 
 
 summary(life_model7)
 exp(coefficients(life_model7))
@@ -579,30 +727,20 @@ exp(coefficients(life_model7))
 -   Great for report and presentation to showcase your research insights/process as it integrates code, narrative text, visualizations, and results.
 
 -   Very handy when you need your report in multiple format, e.g. in Word and PPT.
+
+-   Fun fact: the course website and slides are all made in Quarto
 :::
 :::
 
-## Let's create our first Quarto document!
+## If you are interested to learn more about this...
 
-1.  Go to `File` \> `New File` \> `Quarto Document`
-2.  Put any title you like, and put your name as the author
-3.  Check `HTML` as the end result for now
-4.  Click on `Create`!
-5.  *Optional*: collapse the console and environment tab (bottom left and top right) to make it easier to view the quarto document and the output.
-6.  **Quarto Tour + Hands On!** (Open [this cheatsheet](https://rstudio.github.io/cheatsheets/html/quarto.html) on another tab if you'd like!). We will explore how to:
-    1.  Add narrative text
-    2.  Add code chunks
-    3.  Add math formulas with LaTeX
-    4.  Add citations (you need to have Zotero installed)
+SMU Libraries regularly host Quarto workshops every semester from week 2 to week 6, taught by Prof Kam Tin Seong. 
 
-## Rendering Quarto to HTML, Word, and PDF
+Keep a lookout for these titles:
 
-You can change the final result of rendering in the `YAML` section of your document.
-
-1.  Rendering to HTML is the default option.
-    -   You can also render as presentation (fun fact: my slides is made from Quarto!)
-2.  Rendering to Word: You have to have MS Word installed in your laptop
-3.  Rendering to PDF: If you encounter an error when converting your result to PDF, the faster (and easier) alternative is to render your doc to Word, and save to PDF from there.
+-   R Ep.1: Making Your Research Reproducible with Quarto in RStudio
+-   R Ep.7: Creating Awesome Web Slides in Quarto with Revealjs
+-   R Ep.9: Building Website and Blog with Quarto
 
 # Best Practices + More Resources
 
@@ -620,6 +758,14 @@ You can change the final result of rendering in the `YAML` section of your docum
 
 -   Whenever possible and makes sense for your project, follow the common convention when naming your objects, scripts, and functions. One guide that you can follow is [Hadley Wickham's tidyverse style guide](https://style.tidyverse.org/).
 
+## References for APA Guidelines on Reporting statistics
+
+Do check with your professor on how closely you should follow the guidelines, or if there is any specific format required.
+
+-   [APA Style 7th Edition Numbers and Statistics Guide](https://apastyle.apa.org/instructional-aids/numbers-statistics-guide.pdf)
+-   [University of Washington - Reporting Results of Common Statistical Tests in APA Format](https://psych.uw.edu/storage/writing_center/stats.pdf)
+-   [Illinois State University - A Short Guide to Handling Numbers and Statistics in APA Format (in 6th Edition)](https://about.illinoisstate.edu/mshesso-test2/reporting-statistics-in-apa-style/)
+-   [Statistic Tables in APA recommended format](https://apastyle.apa.org/style-grammar-guidelines/tables-figures/sample-tables#regression)
 
 # Thank you for your participation 😄
 
@@ -642,6 +788,6 @@ Need help with R or Quarto? Please don't hesitate to contact me at [bellar@smu.e
 
 Please scan this QR code or click on the link below to fill in the post-workshop survey. It should not take more than 2-3 minutes.
 
-Survey link: <https://smusg.asia.qualtrics.com/jfe/form/SV_1TYE6ntFBi3lwbQ>
+Survey link: <https://smusg.asia.qualtrics.com/jfe/form/SV_ai0mSfHjwWZWC2y>
 
 ![](images/post-workshop-qrcode.png){width="500"}
