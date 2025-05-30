@@ -902,6 +902,21 @@ $ age        &lt;dbl&gt; 81, 79, 73, 70, 69, 68, 68, 68, 68, 68, 68, 67, 67, 67,
 </div>
 </div>
 </section></section>
+<section id="recap" class="title-slide slide level1 center">
+<h1>Recap</h1>
+<div>
+<ul>
+<li class="fragment"><p>Import and read data into RStudio: Load external data files (like CSV or Excel) into R using functions such as read_csv() to make the data available for analysis.</p></li>
+<li class="fragment"><p>Data wrangling with dplyr and tidyr (part of the tidyverse package): Use tidyverse functions to tidy and reshape datasets and perform tasks like selecting, filtering, and summarizing data.</p></li>
+<li class="fragment"><p>Remove all rows with missing values (NA) and check for duplicates: Delete rows containing missing data using na.omit() and identify or remove duplicate rows with functions like distinct().</p></li>
+<li class="fragment"><p>Select only the relevant columns: Use select() to keep only the columns needed for the analysis, focusing on important variables.</p></li>
+<li class="fragment"><p>Filter data based on criterion and arrange data: Apply filter() to keep rows meeting specific conditions and use arrange() to sort data by one or more columns.</p></li>
+<li class="fragment"><p>Change factor level values: Modify the categories of a factor using factor() or recode() to rename or reorder levels for clearer analysis.</p></li>
+<li class="fragment"><p>Create new columns: Generate or modify columns using mutate(), often by transforming or combining existing columns.</p></li>
+</ul>
+</div>
+</section>
+
 <section id="end-of-session-2" class="title-slide slide level1 center">
 <h1>End of Session 2!</h1>
 <p>Next session: Descriptive statistics and data visualization with <code>ggplot2</code> package - we’ll create visualizations to explore patterns in life satisfaction, values, and demographics across countries!</p>
@@ -1287,7 +1302,7 @@ $ age        &lt;dbl&gt; 81, 79, 73, 70, 69, 68, 68, 68, 68, 68, 68, 67, 67, 67,
       }
         var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
         var mailtoRegex = new RegExp(/^mailto:/);
-          var filterRegex = new RegExp("https:\/\/bellaratmelia\.github\.io\/introductory-r-socsci\/");
+          var filterRegex = new RegExp('/' + window.location.host + '/');
         var isInternal = (href) => {
             return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
         }

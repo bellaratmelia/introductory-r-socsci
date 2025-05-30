@@ -130,6 +130,10 @@ gtag('config', 'G-G5L1RGYC4H', { 'anonymize_ip': true});
     <a class="dropdown-item" href="https://bellaratmelia.github.io/2024-08-Rworkshop/">
  <span class="dropdown-text">AY 24/25 Term 1 (Aug - Sep)</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="https://bellaratmelia.github.io/2025-01-Rworkshop/">
+ <span class="dropdown-text">AY 24/25 Term 2 (Jan - Feb)</span></a>
+  </li>  
     </ul>
   </li>
 </ul>
@@ -168,7 +172,7 @@ gtag('config', 'G-G5L1RGYC4H', { 'anonymize_ip': true});
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Introductory R for Social Sciences</h1>
-<p class="subtitle lead">Academic Year 24/25 Term 2 (Jan - Feb)</p>
+<p class="subtitle lead">Academic Year 25/26 Term 1 (Aug - Sep)</p>
 </div>
 
 
@@ -192,7 +196,6 @@ gtag('config', 'G-G5L1RGYC4H', { 'anonymize_ip': true});
 <section id="instructor" class="level2">
 <h2 class="anchored" data-anchor-id="instructor">Instructor</h2>
 <p><strong>Instructor</strong>: Bella Ratmelia, Senior Librarian, Research &amp; Data Services, SMU Libraries</p>
-<p><strong>Teaching Assistant</strong>: Hector Tan Kheng Wee, SCIS MITB Postgraduate Student</p>
 </section>
 <section id="schedule" class="level2">
 <h2 class="anchored" data-anchor-id="schedule">Schedule</h2>
@@ -218,33 +221,33 @@ gtag('config', 'G-G5L1RGYC4H', { 'anonymize_ip': true});
 </tr>
 <tr class="even">
 <td>1</td>
-<td>Fri, 17 Jan 2025</td>
-<td><a href="01-intro.html"><strong>Introduction to R and RStudio</strong></a> (<em>+ updated on 18/1/25</em>)</td>
+<td>TBD</td>
+<td><strong>Introduction to R and RStudio</strong></td>
 <td>Learn about setting up RStudio, basic data types and structures in R, and importing data files.</td>
 </tr>
 <tr class="odd">
 <td>2</td>
-<td>Fri, 24 Jan 2025</td>
-<td><a href="02-tidyverse.html"><strong>Data wrangling with tidyverse</strong></a></td>
+<td>TBD</td>
+<td><strong>Data wrangling with tidyverse</strong></td>
 <td>Learn about manipulating data with tidyverse, including filtering, selecting, mutating, and grouping data.</td>
 </tr>
 <tr class="even">
 <td>3</td>
-<td>Fri, 31 Jan 2025</td>
-<td><a href="03-visualization.html"><strong>Data visualization and Descriptive Statistics</strong></a> (<em>+ updated on 2/2/25</em>)</td>
+<td>TBD</td>
+<td><strong>Data visualization and Descriptive Statistics</strong></td>
 <td>Learn about creating visualizations with ggplot2 and calculating descriptive statistics like mean, median, etc.</td>
 </tr>
 <tr class="odd">
 <td>4</td>
-<td>Fri, 7 Feb 2025</td>
-<td><a href="04-stats.html"><strong>Basic Inferential Tests</strong></a></td>
+<td>TBD</td>
+<td><strong>Basic Inferential Tests</strong></td>
 <td>Learn about conducting t-tests, chi-square tests, ANOVA, and interpreting statistical results in R.</td>
 </tr>
 <tr class="even">
 <td>5</td>
-<td>Fri, 14 Feb 2025</td>
-<td><a href="05-more-stats.html"><strong>Regression and Presenting Your Result</strong></a></td>
-<td>Learn about correlation, regression, and how you can present your results in tables or narration.</td>
+<td>TBD</td>
+<td><strong>Regression and Introduction to Quarto</strong></td>
+<td>Learn about correlation, regression, and Quarto for creating dynamic, reproducible R documents.</td>
 </tr>
 <tr class="odd">
 <td>~</td>
@@ -327,7 +330,7 @@ Note
 </section>
 <section id="step-4-complete-the-pre-workshop-survey" class="level3">
 <h3 class="anchored" data-anchor-id="step-4-complete-the-pre-workshop-survey">Step 4: Complete the pre-workshop survey</h3>
-<p><a href="https://smusg.asia.qualtrics.com/jfe/form/SV_3jHynB80Kd6vWOG">Please complete the pre-workshop survey here</a> to share your goals and current knowledge. Your input will help to tailor the workshop contents and pace.</p>
+<p>Please complete the pre-workshop survey here to share your goals and current knowledge. Your input will help to tailor the workshop contents and pace.</p>
 
 
 </section>
@@ -424,7 +427,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/bellaratmelia\.github\.io\/introductory-r-socsci\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
