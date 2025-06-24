@@ -508,7 +508,7 @@
     "href": "03-visualization.html#recap-descriptive-statistics",
     "title": "Data Visualization and Descriptive Stats",
     "section": "Recap: Descriptive Statistics",
-    "text": "Recap: Descriptive Statistics\n\n\nUnivariate (i.e. single variable) Descriptive Stats\n\nMeasures of central tendency: mean(), median(), Mode()\nMeasures of Variability: min(), max(), range(), IQR(), sd() (standard deviation), var() (variance)\nDistribution shape: skewness() and kurtosis() from moments library. This is easier to see with histogram\n\nBivariate (i.e. two variables) Descriptive Stats\n\nContingency table / cross tab (for categorical data)\nCovariance - describe how two variables vary together\nCorrelation - describe relationship strength and direction in a sample. (If we want to use this to infer about a population from a sample, it would fall under inferential stats)\nVisualizations e.g. Scatterplots, side-by-side boxplots, stacked bar charts, etc."
+    "text": "Recap: Descriptive Statistics\n\nUnivariate (i.e. single variable) Descriptive Stats\n\nMeasures of central tendency: mean(), median(), Mode()\nMeasures of Variability: min(), max(), range(), IQR(), sd() (standard deviation), var() (variance)\nDistribution shape: skewness() and kurtosis() from moments library. This is easier to see with histogram\n\nBivariate (i.e. two variables) Descriptive Stats\n\nContingency table / cross tab (for categorical data)\nCovariance - describe how two variables vary together\nCorrelation - describe relationship strength and direction in a sample. (If we want to use this to infer about a population from a sample, it would fall under inferential stats)\nVisualizations e.g. Scatterplots, side-by-side boxplots, stacked bar charts, etc."
   },
   {
     "objectID": "03-visualization.html#from-last-week-basic-r-functions-for-descriptive-stats",
@@ -798,6 +798,13 @@
     "text": "Learning Check #2\nCreate a side-by-side boxplots that visualizes political_scale for each sex.\n\n\nShow answer\nwvs_cleaned |&gt; ggplot(aes(x = political_scale, y = sex)) +\n  geom_violin(fill = \"lightblue\", alpha = 0.5) +\n  geom_boxplot(width = 0.1, fill = \"white\") +\n  labs(title = \"Political scale Distribution by Sex\") +\n  theme_minimal()"
   },
   {
+    "objectID": "03-visualization.html#learning-check-2-output",
+    "href": "03-visualization.html#learning-check-2-output",
+    "title": "Data Visualization and Descriptive Stats",
+    "section": "Learning Check #2",
+    "text": "Learning Check #2"
+  },
+  {
     "objectID": "03-visualization.html#using-facets-for-more-complex-visual",
     "href": "03-visualization.html#using-facets-for-more-complex-visual",
     "title": "Data Visualization and Descriptive Stats",
@@ -837,7 +844,7 @@
     "href": "01-intro.html#the-outline-for-introductory-r-for-social-science-series",
     "title": "Introduction to R and RStudio",
     "section": "The outline for Introductory R for Social Science series",
-    "text": "The outline for Introductory R for Social Science series\n\n\nImport data into R, which means take data (stored in a file, via API, etc) and load it into a dataframe in R\nTidy the imported data.\n\nTidy = storing it in a consistent form that matches the semantics of the dataset.\nTidy data = each column is a variable, each row is an observation\n\nOnce a data is tidy, we can transform it. Transformation includes:\n\nnarrowing in on observations of interest (like all people in one city or all data from the last year)\ncreating new variables that are functions of existing variables (like computing speed from distance and time)\ncalculating a set of summary statistics (like counts or means).\n\nOnce we have tidy data with the info we need, we can visualize it and model it.\nCommunicate the result. It doesn’t matter how well your models and visualization have led you to understand the data unless you can also communicate your results to others."
+    "text": "The outline for Introductory R for Social Science series\n\nImport data into R, which means take data (stored in a file, via API, etc) and load it into a dataframe in R\nTidy the imported data.\n\nTidy = storing it in a consistent form that matches the semantics of the dataset.\nTidy data = each column is a variable, each row is an observation\n\nOnce a data is tidy, we can transform it. Transformation includes:\n\nnarrowing in on observations of interest (like all people in one city or all data from the last year)\ncreating new variables that are functions of existing variables (like computing speed from distance and time)\ncalculating a set of summary statistics (like counts or means).\n\nOnce we have tidy data with the info we need, we can visualize it and model it.\nCommunicate the result. It doesn’t matter how well your models and visualization have led you to understand the data unless you can also communicate your results to others."
   },
   {
     "objectID": "01-intro.html#todays-plan",
@@ -952,18 +959,18 @@
     "text": "How do I find out more about a particular function?\nYou can call the help page / vignette in R by prepending ? to the function name.\nE.g. if you want to find out more about the round function, you can run ?round in your R console (bottom left panel)"
   },
   {
-    "objectID": "01-intro.html#packages-in-r",
-    "href": "01-intro.html#packages-in-r",
-    "title": "Introduction to R and RStudio",
-    "section": "Packages in R",
-    "text": "Packages in R\n\nPackages are a collections of R functions, datasets, etc. Packages extend the functionality of R.\n\n(Closest analogy I can think of is that they’re equivalent of browser add-ons, in a way)\n\nPopular packages: tidyverse, caret, shiny, etc.\nInstallation (you only need to do this once): install.packages(\"package name\")\nLoading packages (you need to run this everytime you restart RStudio): library(package name) - let’s try to load tidyverse!\n\nTidyverse is a well-known collection of packages that facilitates data science projects. It includes packages for data manipulation, visualization, importing, and tidying."
-  },
-  {
     "objectID": "01-intro.html#data-structures-in-r",
     "href": "01-intro.html#data-structures-in-r",
     "title": "Introduction to R and RStudio",
     "section": "Data Structures in R",
-    "text": "Data Structures in R\nWe will start with exploring 3 basic types of data structures in R:\n\n\n\nVector - can hold multiple values in a single variable/object.\nFactor - Special data structure in R to handle categorical variables.\nData frame - De facto data structure for tabular data in R, and what we use for data processing, plotting, and statistics."
+    "text": "Data Structures in R\nWe will start with exploring 3 basic types of data structures in R:\n\nVector - can hold multiple values in a single variable/object.\nFactor - Special data structure in R to handle categorical variables.\nData frame - De facto data structure for tabular data in R, and what we use for data processing, plotting, and statistics.\n\nOther types (but we will not be covering these in this workshop):\n\nLists: A type of recursive vector\nMatrices: A collection of elements of the same type in rows and columns"
+  },
+  {
+    "objectID": "01-intro.html#data-structures-in-r---visualized",
+    "href": "01-intro.html#data-structures-in-r---visualized",
+    "title": "Introduction to R and RStudio",
+    "section": "Data Structures in R - visualized",
+    "text": "Data Structures in R - visualized"
   },
   {
     "objectID": "01-intro.html#data-structures-in-r-vectors",
@@ -994,20 +1001,6 @@
     "text": "Vector Manipulations: Retrieve items based on criteria\nLet’s find high satisfaction scores (above 7)!\n\nThe code below will create a boolean vector called criteria that basically keep tracks on whether each items inside satisfaction_scores fulfil our condition.\nThe condition is “value must be &gt; 7”. e.g. if item 1 fulfils our condition, then item 1 is ‘marked’ as TRUE. Otherwise, it will be FALSE\n\n\n# Create boolean vector for our condition\ncriteria &lt;- satisfaction_scores &gt; 7\nprint(criteria)\n\n[1] FALSE FALSE  TRUE FALSE  TRUE\n\n\n\nThis line of code applies the boolean vector criteria to satisfaction_scores, and only retrieve items that fulfils the condition. i.e. only return TRUE value criteria vector\n\n\n# Use the boolean vector to filter satisfaction scores\nsatisfaction_scores[criteria]\n\n[1] 9 8"
   },
   {
-    "objectID": "01-intro.html#vector-manipulations-add-items",
-    "href": "01-intro.html#vector-manipulations-add-items",
-    "title": "Introduction to R and RStudio",
-    "section": "Vector Manipulations: Add items",
-    "text": "Vector Manipulations: Add items\nSeveral ways to add items to a vector\n\n1satisfaction_scores &lt;- c(satisfaction_scores, 7)\n2satisfaction_scores &lt;- c(satisfaction_scores, 8, 9, 10)\n3satisfaction_scores &lt;- c(8, satisfaction_scores)\n4satisfaction_scores &lt;- append(satisfaction_scores, 9, after = 2)\n\n\n1\n\nAdd a single score to the end of the vector using c()\n\n2\n\nAdd multiple scores to the end\n\n3\n\nAdd a score to the beginning\n\n4\n\nInsert a score at a specific position using append(vector_name, elements_to_be_added, from_the_position)"
-  },
-  {
-    "objectID": "01-intro.html#vector-manipulations-remove-items",
-    "href": "01-intro.html#vector-manipulations-remove-items",
-    "title": "Introduction to R and RStudio",
-    "section": "Vector Manipulations: Remove items",
-    "text": "Vector Manipulations: Remove items\n\n1satisfaction_scores &lt;- satisfaction_scores[-c(2, 4)]\n2satisfaction_scores &lt;- satisfaction_scores[satisfaction_scores &lt;= 7]\n3satisfaction_scores &lt;- na.omit(satisfaction_scores)\n\n\n1\n\nRemove elements by index using “negative indexing”\n\n2\n\nRemove elements based on a condition using logical indexing. Remove these items which are FALSE.\n\n3\n\nRemove NA values from the vector"
-  },
-  {
     "objectID": "01-intro.html#vector-manipulations-handle-na-values",
     "href": "01-intro.html#vector-manipulations-handle-na-values",
     "title": "Introduction to R and RStudio",
@@ -1015,39 +1008,32 @@
     "text": "Vector Manipulations: Handle NA values\n\nNA values indicate null values, or the absence of a value (0 is still a value!)\nSummary functions like mean needs you to inlcude argument called na.rm on how you want it to be handled.\n\nSurvey data often contains missing values (NA):\n\nfinancial_satisfaction &lt;- c(8, 7, NA, 6, 9, NA, 7)\n\n# By default, mean() will return NA if there are any NA values\nmean(financial_satisfaction)\n\n[1] NA\n\n# Remove NA values before calculating mean by including na.rm = TRUE\nmean(financial_satisfaction, na.rm = TRUE)\n\n[1] 7.4"
   },
   {
-    "objectID": "01-intro.html#data-structures-in-r-factors",
-    "href": "01-intro.html#data-structures-in-r-factors",
-    "title": "Introduction to R and RStudio",
-    "section": "Data Structures in R: Factors",
-    "text": "Data Structures in R: Factors\n\nSpecial data structure in R to deal with categorical data.\nLook (and often behave) like character vectors but are actually treated as integer vectors.\nCan only contain a predefined set of values, known as levels. R always sorts levels in alphabetical order\nCan be ordered (ordinal) or unordered (nominal).\nMay look like a normal vector at first glance, so use str() to check."
-  },
-  {
     "objectID": "01-intro.html#data-structures-in-r-dataframe",
     "href": "01-intro.html#data-structures-in-r-dataframe",
     "title": "Introduction to R and RStudio",
     "section": "Data Structures in R: Dataframe",
-    "text": "Data Structures in R: Dataframe\n\nDe facto data structure for tabular data in R, and what we use for data processing, plotting, and statistics.\nSimilar to spreadsheets - a rectangular collection of variables (columns) and observations (rows)!\nYou can create it by hand like so:\n\n\nsurvey_data &lt;- data.frame(\n    country = c(\"SGP\", \"CAN\", \"NZL\", \"SGP\", \"CAN\"),\n    life_satisfaction = c(8, 7, 9, 6, 8),\n    employment = c(\"Full time\", \"Student\", \"Part time\", \"Retired\", \"Full time\")\n)\nprint(survey_data)\n\n  country life_satisfaction employment\n1     SGP                 8  Full time\n2     CAN                 7    Student\n3     NZL                 9  Part time\n4     SGP                 6    Retired\n5     CAN                 8  Full time"
-  },
-  {
-    "objectID": "01-intro.html#data-structures-in-r-others",
-    "href": "01-intro.html#data-structures-in-r-others",
-    "title": "Introduction to R and RStudio",
-    "section": "Data Structures in R: Others",
-    "text": "Data Structures in R: Others\n\nLists: A type of recursive vector\nMatrices: A collection of elements of the same type in rows and columns"
+    "text": "Data Structures in R: Dataframe\n\nDe facto data structure for tabular data in R, and what we use for data processing, plotting, and statistics.\nSimilar to spreadsheets - a rectangular collection of variables (columns) and observations (rows)!\nYou can create it by hand like so: (though more commonly you will use this to load data from external source)\n\n\nsurvey_data &lt;- data.frame(\n    country = c(\"SGP\", \"CAN\", \"NZL\", \"SGP\", \"CAN\"),\n    life_satisfaction = c(8, 7, 9, 6, 8),\n    employment = c(\"Full time\", \"Student\", \"Part time\", \"Retired\", \"Full time\")\n)\nprint(survey_data)\n\n  country life_satisfaction employment\n1     SGP                 8  Full time\n2     CAN                 7    Student\n3     NZL                 9  Part time\n4     SGP                 6    Retired\n5     CAN                 8  Full time"
   },
   {
     "objectID": "01-intro.html#downloading-the-world-values-survey-wvs-dataset",
     "href": "01-intro.html#downloading-the-world-values-survey-wvs-dataset",
     "title": "Introduction to R and RStudio",
     "section": "Downloading the World Values Survey (WVS) Dataset",
-    "text": "Downloading the World Values Survey (WVS) Dataset\nFor this workshop, we will try loading a dataset from a file.\nGo to the course website and go to the ‘Dataset’ tab to download the data file and information about this WVS data\nDownload this CSV and save it under your data folder in your R project!"
+    "text": "Downloading the World Values Survey (WVS) Dataset\nFor this workshop, we will try loading a dataset from a file into a dataframe!\nGo to the course website and go to the ‘Dataset’ tab to download the data file and information about this WVS data\nDownload this CSV and save it under your data folder in your R project!"
+  },
+  {
+    "objectID": "01-intro.html#packages-in-r-for-additional-functionatilites",
+    "href": "01-intro.html#packages-in-r-for-additional-functionatilites",
+    "title": "Introduction to R and RStudio",
+    "section": "Packages in R (for additional functionatilites)",
+    "text": "Packages in R (for additional functionatilites)\n\nPackages are a collections of R functions, datasets, etc. Packages extend the functionality of R.\n\n(Closest analogy I can think of is that they’re equivalent of browser add-ons, in a way)\n\nPopular packages: tidyverse, caret, shiny, etc.\nInstallation (you only need to do this once): install.packages(\"package name\")\nLoading packages (you need to run this everytime you restart RStudio): library(package name) - let’s try to load tidyverse as we will use this to load our CSV into a dataframe!\n\nTidyverse is a well-known collection of packages that facilitates data science projects. It includes packages for data manipulation, visualization, importing, and tidying."
   },
   {
     "objectID": "01-intro.html#loading-the-wvs-dataset",
     "href": "01-intro.html#loading-the-wvs-dataset",
     "title": "Introduction to R and RStudio",
     "section": "Loading the WVS Dataset",
-    "text": "Loading the WVS Dataset\nLet’s load our actual World Values Survey dataset using read_csv function.\nBefore use read_csv install and load package tidyverse. Install the package only once and need to load the package in every session before you use it.\n\nlibrary(tidyverse)\n\nwvs_data &lt;- read_csv(\"data/wvs-wave7-sg-ca-nz.csv\")  \nhead(wvs_data)\n\nMake sure to save the CSV file in your data folder! (No auto save)"
+    "text": "Loading the WVS Dataset\nLet’s load our actual World Values Survey dataset using read_csv function.\nBefore use read_csv install and load package tidyverse. Install the package only once and need to load the package in every session before you use it.\n\nlibrary(tidyverse)\n\nwvs_data &lt;- read_csv(\"data/wvs-wave7-sg-ca-nz.csv\")  \nhead(wvs_data)\n\n# A tibble: 6 × 16\n  country        ID family_importance friends_importance leisure_importance\n  &lt;chr&gt;       &lt;dbl&gt;             &lt;dbl&gt;              &lt;dbl&gt;              &lt;dbl&gt;\n1 CAN     124070003                 1                  1                  1\n2 CAN     124070004                 1                  1                  2\n3 CAN     124070005                 2                  2                  2\n4 CAN     124070006                 1                  2                  2\n5 CAN     124070008                 1                  2                  2\n6 CAN     124070009                 1                  2                  2\n# ℹ 11 more variables: work_importance &lt;dbl&gt;, freedom &lt;dbl&gt;,\n#   life_satisfaction &lt;dbl&gt;, financial_satisfaction &lt;dbl&gt;, religiousity &lt;chr&gt;,\n#   political_scale &lt;dbl&gt;, sex &lt;chr&gt;, birthyear &lt;dbl&gt;, age &lt;dbl&gt;,\n#   marital_status &lt;chr&gt;, employment &lt;chr&gt;\n\n\nMake sure to save the CSV file in your data folder! (No auto save)"
   },
   {
     "objectID": "01-intro.html#exploring-the-wvs-dataset",
@@ -1062,6 +1048,27 @@
     "title": "Introduction to R and RStudio",
     "section": "Basic dataframe manipulations: Retrieving values",
     "text": "Basic dataframe manipulations: Retrieving values\nSome basic dataframe functions before we move on to data wrangling next week:\n\n1wvs_data[\"country\"]\n2wvs_data$country\n3wvs_data[3]\n4wvs_data[1, 4]\n5wvs_data[3, ]\n\n\n1\n\nretrieve column by column name (returns as tibble/dataframe)\n\n2\n\nanother way to retrieve column by name (returns as vector)\n\n3\n\nretrieve column by index\n\n4\n\nget a cell at this row, column coord\n\n5\n\nget an entire row"
+  },
+  {
+    "objectID": "01-intro.html#data-structures-in-r-factors",
+    "href": "01-intro.html#data-structures-in-r-factors",
+    "title": "Introduction to R and RStudio",
+    "section": "Data Structures in R: Factors",
+    "text": "Data Structures in R: Factors\n\nSpecial data structure in R to deal with categorical data.\nLook (and often behave) like character vectors but are actually treated as integer vectors.\nCan only contain a predefined set of values, known as levels. R always sorts levels in alphabetical order\nCan be ordered (ordinal) or unordered (nominal).\nMay look like a normal vector at first glance, so use str() to check.\nMost common application: when we want to specify a column in our dataframe as a column of categories"
+  },
+  {
+    "objectID": "01-intro.html#convert-dataframe-columns-to-a-factor---unordered",
+    "href": "01-intro.html#convert-dataframe-columns-to-a-factor---unordered",
+    "title": "Introduction to R and RStudio",
+    "section": "Convert dataframe columns to a Factor - Unordered",
+    "text": "Convert dataframe columns to a Factor - Unordered\nIn our example, country should be a factor!\n\nstr(wvs_data$country)\n\n chr [1:7087] \"CAN\" \"CAN\" \"CAN\" \"CAN\" \"CAN\" \"CAN\" \"CAN\" \"CAN\" \"CAN\" \"CAN\" ...\n\n\nSince there is no inherent order within country names, our categories will be unordered:\n\nwvs_data$country &lt;- factor(wvs_data$country)\n\n# check the category levels\nlevels(wvs_data$country)\n\n[1] \"CAN\" \"NZL\" \"SGP\"\n\n\nIf we check the structure, country column should be a factor instead of characters now:\n\nstr(wvs_data$country)\n\n Factor w/ 3 levels \"CAN\",\"NZL\",\"SGP\": 1 1 1 1 1 1 1 1 1 1 ..."
+  },
+  {
+    "objectID": "01-intro.html#convert-dataframe-columns-to-a-factor---ordered",
+    "href": "01-intro.html#convert-dataframe-columns-to-a-factor---ordered",
+    "title": "Introduction to R and RStudio",
+    "section": "Convert dataframe columns to a Factor - Ordered",
+    "text": "Convert dataframe columns to a Factor - Ordered\nTechnically, in our data set, there is no variables that should be ordered. But for example purposes, let’s say that we want to order the categorical values in religiousity from non-believer to believer.\n\nwvs_data$religiousity &lt;- factor(wvs_data$religiousity,\n                                levels = c(\"An atheist\", \"Not a religious person\", \"A religious person\", \"Don't know\"),\n                                ordered = TRUE)\n\n# check the category levels and structure\nlevels(wvs_data$religiousity)\n\n[1] \"An atheist\"             \"Not a religious person\" \"A religious person\"    \n[4] \"Don't know\"            \n\nstr(wvs_data$religiousity)\n\n Ord.factor w/ 4 levels \"An atheist\"&lt;\"Not a religious person\"&lt;..: 3 3 1 3 2 1 1 3 2 3 ..."
   },
   {
     "objectID": "01-intro.html#trouble-shooting",
@@ -1083,6 +1090,20 @@
     "title": "Introduction to R and RStudio",
     "section": "Recap",
     "text": "Recap\n\nR & RStudio: R is a programming language for statistical computing and graphics, while RStudio is an environment that makes it easier to write, run, and manage R code.\nWorking Directory: A folder on your computer where R reads and saves files.\nData Type: Types of value an object can hold, such as numeric, character, and Boolean.\nData Structure: Data structures organize and store data in R, such as vectors, factors, and data frames.\nFunctions: Reusable codes that perform specific tasks. Can call functions with arguments.\nPackages: Collections of functions and data to perform tasks. Need to install and load packages."
+  },
+  {
+    "objectID": "01-intro.html#appendix-on-vector-manipulations-add-items",
+    "href": "01-intro.html#appendix-on-vector-manipulations-add-items",
+    "title": "Introduction to R and RStudio",
+    "section": "Appendix on Vector Manipulations: Add items",
+    "text": "Appendix on Vector Manipulations: Add items\nSeveral ways to add items to a vector\n\n1satisfaction_scores &lt;- c(satisfaction_scores, 7)\n2satisfaction_scores &lt;- c(satisfaction_scores, 8, 9, 10)\n3satisfaction_scores &lt;- c(8, satisfaction_scores)\n4satisfaction_scores &lt;- append(satisfaction_scores, 9, after = 2)\n\n\n1\n\nAdd a single score to the end of the vector using c()\n\n2\n\nAdd multiple scores to the end\n\n3\n\nAdd a score to the beginning\n\n4\n\nInsert a score at a specific position using append(vector_name, elements_to_be_added, from_the_position)"
+  },
+  {
+    "objectID": "01-intro.html#appendix-on-vector-manipulations-remove-items",
+    "href": "01-intro.html#appendix-on-vector-manipulations-remove-items",
+    "title": "Introduction to R and RStudio",
+    "section": "Appendix on Vector Manipulations: Remove items",
+    "text": "Appendix on Vector Manipulations: Remove items\n\n1satisfaction_scores &lt;- satisfaction_scores[-c(2, 4)]\n2satisfaction_scores &lt;- satisfaction_scores[satisfaction_scores &lt;= 7]\n3satisfaction_scores &lt;- na.omit(satisfaction_scores)\n\n\n1\n\nRemove elements by index using “negative indexing”\n\n2\n\nRemove elements based on a condition using logical indexing. Remove these items which are FALSE.\n\n3\n\nRemove NA values from the vector"
   },
   {
     "objectID": "02-tidyverse.html#todays-outline",
@@ -1110,7 +1131,7 @@
     "href": "02-tidyverse.html#cleaning-data-for-analysis",
     "title": "Data Wrangling with Tidyverse",
     "section": "Cleaning data for analysis",
-    "text": "Cleaning data for analysis\n\n\nWhy do it in R? Because it’s much efficient to do so in R, especially if your data is large (e.g. millions of rows, thousands of columns) and you have repetitive clean up tasks.\nIncorrect or inconsistent data can lead to false conclusions, so it’s important to clean and prep it correctly.\nHaving a clear understanding of the desired data shape is essential as real data often differs from what you imagine! Refer to codebook, actual questionnaire, appendix for guidance.\nData cleaning techniques differ based on the problems, data type, and the research questions you are trying to answer. Various methods are available, each with its own trade-offs."
+    "text": "Cleaning data for analysis\n\nWhy do it in R? Because it’s much efficient to do so in R, especially if your data is large (e.g. millions of rows, thousands of columns) and you have repetitive clean up tasks.\nIncorrect or inconsistent data can lead to false conclusions, so it’s important to clean and prep it correctly.\nHaving a clear understanding of the desired data shape is essential as real data often differs from what you imagine! Refer to codebook, actual questionnaire, appendix for guidance.\nData cleaning techniques differ based on the problems, data type, and the research questions you are trying to answer. Various methods are available, each with its own trade-offs."
   },
   {
     "objectID": "02-tidyverse.html#about-dplyr-and-tidyr",
@@ -1124,7 +1145,7 @@
     "href": "02-tidyverse.html#scenario-data-wrangling-activities-with-wvs-data",
     "title": "Data Wrangling with Tidyverse",
     "section": "Scenario: Data wrangling activities with WVS data",
-    "text": "Scenario: Data wrangling activities with WVS data\nScenario: We are research assistants analyzing patterns in values and satisfaction across different countries and demographic groups.\nOur team has been assigned to explore and get insights on how specific factors (employment, work importance, marital status, political alignment, financial satisfaction, and religiosity) may relate to life satisfaction among different generations (Gen Z, Millennials, Gen X, and Baby Boomer), including how they may differ between the 3 countries.\nTo ensure the analysis quality, we were instructed to discard incomplete data.\nWe can break down the tasks as such:\n\n\nRemove all rows with missing values (NA)\nCheck for duplicates\nSelect only the relevant columns: demographic columns, work_importance, life_satisfaction, financial_satisfaction, religiousity, political_scale, marital_status, and employment.\nFilter for respondents aged 18 or older. Optionally, we can then arrange the dataset by age (oldest to youngest)\nReverse-code importance variables so that higher numbers consistently represent higher levels of the measured construct. In other words, 1 = Not at all important and 4 = Very important.\nCreate age groups for each generation: “18-28”, “29-44”, “45-60”, “61+”\n\n\nOnce we did all of the wrangling above, we can save this “wrangled” version into another CSV"
+    "text": "Scenario: Data wrangling activities with WVS data\nScenario: We are research assistants analyzing patterns in values and satisfaction across different countries and demographic groups.\nOur team has been assigned to explore and get insights on how specific factors (employment, work importance, marital status, political alignment, financial satisfaction, and religiosity) may relate to life satisfaction among different generations (Gen Z, Millennials, Gen X, and Baby Boomer), including how they may differ between the 3 countries.\nTo ensure the analysis quality, we were instructed to discard incomplete data.\nWe can break down the tasks as such:\n\nRemove all rows with missing values (NA)\nCheck for duplicates\nSelect only the relevant columns: demographic columns, work_importance, life_satisfaction, financial_satisfaction, religiousity, political_scale, marital_status, and employment.\nFilter for respondents aged 18 or older. Optionally, we can then arrange the dataset by age (oldest to youngest)\nReverse-code importance variables so that higher numbers consistently represent higher levels of the measured construct. In other words, 1 = Not at all important and 4 = Very important.\nCreate age groups for each generation: “18-28”, “29-44”, “45-60”, “61+”\n\nOnce we did all of the wrangling above, we can save this “wrangled” version into another CSV"
   },
   {
     "objectID": "02-tidyverse.html#task-1",
@@ -1194,7 +1215,7 @@
     "href": "02-tidyverse.html#scenario-data-wrangling-activities-with-wvs-data-continued",
     "title": "Data Wrangling with Tidyverse",
     "section": "Scenario: Data wrangling activities with WVS data (continued)",
-    "text": "Scenario: Data wrangling activities with WVS data (continued)\nOnce we are done with the wrangling part, we can proceed with simple descriptive analysis!\n\n\nBefore we proceed further, convert the appropriate categorical variables (country, religiousity, sex, marital_status, employment) to Factor\nGenerate summary statistics of life_satisfaction grouped by country\nCreate a new column called satisfaction_group that indicate whether each respondent has higher or lower than average life_satisfaction\nReshape the data to show average satisfaction scores by country and age group"
+    "text": "Scenario: Data wrangling activities with WVS data (continued)\nOnce we are done with the wrangling part, we can proceed with simple descriptive analysis!\n\nBefore we proceed further, convert the appropriate categorical variables (country, religiousity, sex, marital_status, employment) to Factor\nGenerate summary statistics of life_satisfaction grouped by country\nCreate a new column called satisfaction_group that indicate whether each respondent has higher or lower than average life_satisfaction\nReshape the data to show average satisfaction scores by country and age group"
   },
   {
     "objectID": "02-tidyverse.html#task-7",
@@ -1271,7 +1292,7 @@
     "href": "02-tidyverse.html#long-vs-wide-data-examples",
     "title": "Data Wrangling with Tidyverse",
     "section": "Long vs Wide Data: Examples",
-    "text": "Long vs Wide Data: Examples\n\n\nLong data:\n\n\n\nObservations (Long)\n\n\ncountry\nage_group\ncount\n\n\n\n\nCAN\n18-28\n712\n\n\nCAN\n29-44\n1232\n\n\nCAN\n45-60\n1061\n\n\nCAN\n61+\n1013\n\n\nNZL\n18-28\n27\n\n\nNZL\n29-44\n119\n\n\nNZL\n45-60\n222\n\n\nNZL\n61+\n292\n\n\nSGP\n18-28\n246\n\n\nSGP\n29-44\n511\n\n\nSGP\n45-60\n550\n\n\nSGP\n61+\n418\n\n\n\n\n\n\n\n\nWide data:\n\n\n\nObservations (Wide)\n\n\ncountry\n18-28\n29-44\n45-60\n61+\n\n\n\n\nCAN\n712\n1232\n1061\n1013\n\n\nNZL\n27\n119\n222\n292\n\n\nSGP\n246\n511\n550\n418"
+    "text": "Long vs Wide Data: Examples\n\n\nLong data:\n\n\n\nObservations (Long)\n\n\ncountry\nage_group\ncount\n\n\n\n\nCAN\n18-28\n712\n\n\nCAN\n29-44\n1232\n\n\nCAN\n45-60\n1061\n\n\nCAN\n61+\n1013\n\n\nNZL\n18-28\n27\n\n\nNZL\n29-44\n119\n\n\nNZL\n45-60\n222\n\n\nNZL\n61+\n292\n\n\nSGP\n18-28\n246\n\n\nSGP\n29-44\n511\n\n\nSGP\n45-60\n550\n\n\nSGP\n61+\n418\n\n\n\n\n\n\nWide data:\n\n\n\nObservations (Wide)\n\n\ncountry\n18-28\n29-44\n45-60\n61+\n\n\n\n\nCAN\n712\n1232\n1061\n1013\n\n\nNZL\n27\n119\n222\n292\n\n\nSGP\n246\n511\n550\n418"
   },
   {
     "objectID": "02-tidyverse.html#group-exercise-2-solo-attempts-ok",
@@ -1509,7 +1530,7 @@
     "href": "04-stats.html#anova-analysis-of-variance",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "ANOVA (Analysis of Variance)",
-    "text": "ANOVA (Analysis of Variance)\nANOVA (Analysis of Variance) is a statistical test used to compare the means of three or more groups or samples and determine if the differences are statistically significant.\nThere are two ‘mainstream’ ANOVA that will be covered in this workshop:\n\n\nOne-Way ANOVA: comparing means across two or more independent groups (levels) of a single independent variable.\nTwo-Way ANOVA: comparing means across two or more independent groups (levels) of two independent variable.\nOther types of ANOVA that you may encounter: Repeated measures ANOVA, Multivariate ANOVA (MANOVA), ANCOVA, etc."
+    "text": "ANOVA (Analysis of Variance)\nANOVA (Analysis of Variance) is a statistical test used to compare the means of three or more groups or samples and determine if the differences are statistically significant.\nThere are two ‘mainstream’ ANOVA that will be covered in this workshop:\n\nOne-Way ANOVA: comparing means across two or more independent groups (levels) of a single independent variable.\nTwo-Way ANOVA: comparing means across two or more independent groups (levels) of two independent variable.\nOther types of ANOVA that you may encounter: Repeated measures ANOVA, Multivariate ANOVA (MANOVA), ANCOVA, etc."
   },
   {
     "objectID": "04-stats.html#one-way-anova-sample-problem-and-result",

@@ -6,8 +6,8 @@
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.6.39">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.7.31">
 
   <meta name="author" content="Bella Ratmelia &amp; Wei XIA">
   <title>Introductory R for Social Sciences – Introduction to R and RStudio</title>
@@ -29,8 +29,9 @@
       vertical-align: middle;
     }
     /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -41,7 +42,7 @@
     }
     @media print {
     pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
     }
     pre.numberSource code
       { counter-reset: source-line 0; }
@@ -94,7 +95,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-3c65e30e28be6599f015f6cc207dd28b.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-7b5d68ee702dfa4292c5505af09f419d.css">
   <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-G5L1RGYC4H"></script>
 
   <script type="text/javascript">
@@ -254,7 +255,6 @@ Bella Ratmelia &amp; Wei XIA
 </div></aside></section>
 <section id="the-outline-for-introductory-r-for-social-science-series" class="slide level2">
 <h2>The outline for Introductory R for Social Science series</h2>
-<div>
 <ol type="1">
 <li class="fragment"><strong>Import</strong> data into R, which means take data (stored in a file, via API, etc) and load it into a dataframe in R</li>
 <li class="fragment"><strong>Tidy</strong> the imported data.
@@ -271,7 +271,6 @@ Bella Ratmelia &amp; Wei XIA
 <li class="fragment">Once we have tidy data with the info we need, we can <strong>visualize</strong> it and <strong>model</strong> it.</li>
 <li class="fragment"><strong>Communicate</strong> the result. It doesn’t matter how well your models and visualization have led you to understand the data unless you can also communicate your results to others.</li>
 </ol>
-</div>
 </section>
 <section id="todays-plan" class="slide level2">
 <h2>Today’s plan</h2>
@@ -279,9 +278,9 @@ Bella Ratmelia &amp; Wei XIA
 <li>R and Rstudio</li>
 <li>Before coding</li>
 <li>R Objects and Values</li>
-<li>Data types</li>
+<li>Data <strong>types</strong></li>
 <li>Functions and packages</li>
-<li>Data structures</li>
+<li>Data <strong>structures</strong></li>
 <li>Exploring datasets</li>
 <li>Trouble shooting tips</li>
 <li>Recap &amp; feedback</li>
@@ -588,41 +587,30 @@ Bella Ratmelia &amp; Wei XIA
 <p>You can call the help page / vignette in R by prepending <code>?</code> to the function name.</p>
 <p>E.g. if you want to find out more about the <code>round</code> function, you can run <code>?round</code> in your R console (bottom left panel)</p>
 </section>
-<section id="packages-in-r" class="slide level2">
-<h2>Packages in R</h2>
-<ul>
-<li><p>Packages are a collections of R functions, datasets, etc. Packages extend the functionality of R.</p>
-<ul>
-<li>(Closest analogy I can think of is that they’re equivalent of browser add-ons, in a way)</li>
-</ul></li>
-<li><p>Popular packages: <code>tidyverse</code>, <code>caret</code>, <code>shiny</code>, etc.</p></li>
-<li><p>Installation (<strong>you only need to do this once</strong>): <code>install.packages("package name")</code></p></li>
-<li><p>Loading packages (<em>you need to run this everytime you restart RStudio</em>): <code>library(package name)</code> - let’s try to load <code>tidyverse</code>!</p>
-<ul>
-<li>Tidyverse is a well-known collection of packages that facilitates data science projects. It includes packages for data manipulation, visualization, importing, and tidying.</li>
-</ul></li>
-</ul>
-</section>
 <section id="data-structures-in-r" class="slide level2">
 <h2>Data Structures in R</h2>
 <p>We will start with exploring 3 basic types of data <strong>structures</strong> in R:</p>
-<div class="columns">
-<div class="column" style="width:40%;">
 <ol type="1">
 <li><p><strong>Vector</strong> - can hold multiple values in a single variable/object.</p></li>
 <li><p><strong>Factor</strong> - Special data structure in R to handle categorical variables.</p></li>
 <li><p><strong>Data frame</strong> - De facto data structure for tabular data in R, and what we use for data processing, plotting, and statistics.</p></li>
 </ol>
-</div><div class="column" style="width:60%;">
-<p><img data-src="images/data-structures.svg"></p>
-</div></div>
+<p>Other types (but we will not be covering these in this workshop):</p>
+<ul>
+<li><p>Lists: A type of recursive vector</p></li>
+<li><p>Matrices: A collection of elements of the same type in rows and columns</p></li>
+</ul>
+</section>
+<section id="data-structures-in-r---visualized" class="slide level2">
+<h2>Data Structures in R - visualized</h2>
+<p><img data-src="images/data-structures.svg" style="width:100.0%;height:100.0%"></p>
 </section>
 <section id="data-structures-in-r-vectors" class="slide level2">
 <h2>Data Structures in R: Vectors</h2>
 <p>Think of vectors as a column in a dataset. It is the most common and basic data structure in R. (pretty much the workhorse of R!)</p>
 <ul>
 <li><p>A vector can only contain 1 data type.</p></li>
-<li><p>Vector can be created with c() function.</p></li>
+<li><p><strong>Vector can be created with c() function</strong>.</p></li>
 <li><p>Can add, remove, or change values in a vector.</p></li>
 <li><p>Inspect vectors: typeof(), str(), length()</p></li>
 </ul>
@@ -695,60 +683,6 @@ Bella Ratmelia &amp; Wei XIA
 </div>
 </div>
 </section>
-<section id="vector-manipulations-add-items" class="slide level2">
-<h2>Vector Manipulations: Add items</h2>
-<p>Several ways to add items to a vector</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="annotated-cell-23"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-23" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-23-1" class="code-annotation-target"><a href="#annotated-cell-23-1"></a>satisfaction_scores <span class="ot">&lt;-</span> <span class="fu">c</span>(satisfaction_scores, <span class="dv">7</span>)</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-23" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-23-2" class="code-annotation-target"><a href="#annotated-cell-23-2"></a>satisfaction_scores <span class="ot">&lt;-</span> <span class="fu">c</span>(satisfaction_scores, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">10</span>)</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-23" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-23-3" class="code-annotation-target"><a href="#annotated-cell-23-3"></a>satisfaction_scores <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">8</span>, satisfaction_scores)</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-23" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-23-4" class="code-annotation-target"><a href="#annotated-cell-23-4"></a>satisfaction_scores <span class="ot">&lt;-</span> <span class="fu">append</span>(satisfaction_scores, <span class="dv">9</span>, <span class="at">after =</span> <span class="dv">2</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-annotation">
-<dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-23" data-target-annotation="1">1</dt>
-<dd>
-<span data-code-cell="annotated-cell-23" data-code-lines="1" data-code-annotation="1">Add a single score to the end of the vector using c()</span>
-</dd>
-<dt data-target-cell="annotated-cell-23" data-target-annotation="2">2</dt>
-<dd>
-<span data-code-cell="annotated-cell-23" data-code-lines="2" data-code-annotation="2">Add multiple scores to the end</span>
-</dd>
-<dt data-target-cell="annotated-cell-23" data-target-annotation="3">3</dt>
-<dd>
-<span data-code-cell="annotated-cell-23" data-code-lines="3" data-code-annotation="3">Add a score to the beginning</span>
-</dd>
-<dt data-target-cell="annotated-cell-23" data-target-annotation="4">4</dt>
-<dd>
-<span data-code-cell="annotated-cell-23" data-code-lines="4" data-code-annotation="4">Insert a score at a specific position using append(vector_name, elements_to_be_added, from_the_position)</span>
-</dd>
-</dl>
-</div>
-</div>
-</section>
-<section id="vector-manipulations-remove-items" class="slide level2">
-<h2>Vector Manipulations: Remove items</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="annotated-cell-24"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-24" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-24-1" class="code-annotation-target"><a href="#annotated-cell-24-1"></a>satisfaction_scores <span class="ot">&lt;-</span> satisfaction_scores[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>)]</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-24" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-24-2" class="code-annotation-target"><a href="#annotated-cell-24-2"></a>satisfaction_scores <span class="ot">&lt;-</span> satisfaction_scores[satisfaction_scores <span class="sc">&lt;=</span> <span class="dv">7</span>]</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-24" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-24-3" class="code-annotation-target"><a href="#annotated-cell-24-3"></a>satisfaction_scores <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(satisfaction_scores)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-annotation">
-<dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-24" data-target-annotation="1">1</dt>
-<dd>
-<span data-code-cell="annotated-cell-24" data-code-lines="1" data-code-annotation="1">Remove elements by index using “negative indexing”</span>
-</dd>
-<dt data-target-cell="annotated-cell-24" data-target-annotation="2">2</dt>
-<dd>
-<span data-code-cell="annotated-cell-24" data-code-lines="2" data-code-annotation="2">Remove elements based on a condition using logical indexing. Remove these items which are FALSE.</span>
-</dd>
-<dt data-target-cell="annotated-cell-24" data-target-annotation="3">3</dt>
-<dd>
-<span data-code-cell="annotated-cell-24" data-code-lines="3" data-code-annotation="3">Remove NA values from the vector</span>
-</dd>
-</dl>
-</div>
-</div>
-</section>
 <section id="vector-manipulations-handle-na-values" class="slide level2">
 <h2>Vector Manipulations: Handle NA values</h2>
 <ul>
@@ -771,53 +705,20 @@ Bella Ratmelia &amp; Wei XIA
 </div>
 </div>
 </section>
-<section id="data-structures-in-r-factors" class="slide level2">
-<h2>Data Structures in R: Factors</h2>
-<ul>
-<li><p>Special data structure in R to deal with categorical data.</p></li>
-<li><p>Look (and often behave) like character vectors but are actually treated as integer vectors.</p></li>
-<li><p>Can only contain a predefined set of values, known as levels. R always sorts levels in alphabetical order</p></li>
-<li><p>Can be ordered (ordinal) or unordered (nominal).</p></li>
-<li><p>May look like a normal vector at first glance, so use <code>str()</code> to check.</p></li>
-</ul>
-</section>
-<section class="slide level2">
-
-<p>Unordered (Nominal):</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a></a>employment_factor <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"Full time"</span>, <span class="st">"Part time"</span>, <span class="st">"Student"</span>, <span class="st">"Retired"</span>, <span class="st">"Student"</span>))</span>
-<span id="cb45-2"><a></a><span class="fu">str</span>(employment_factor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> Factor w/ 4 levels "Full time","Part time",..: 1 2 4 3 4</code></pre>
-</div>
-</div>
-<p>Ordered (Ordinal):</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a></a>importance_factor <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
-<span id="cb47-2"><a></a>    <span class="fu">c</span>(<span class="st">"Very important"</span>, <span class="st">"Important"</span>, <span class="st">"Not very important"</span>, <span class="st">"Not at all important"</span>),</span>
-<span id="cb47-3"><a></a>    <span class="at">ordered =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb47-4"><a></a>    <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Not at all important"</span>, <span class="st">"Not very important"</span>, <span class="st">"Important"</span>, <span class="st">"Very important"</span>)</span>
-<span id="cb47-5"><a></a>)</span>
-<span id="cb47-6"><a></a><span class="fu">str</span>(importance_factor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> Ord.factor w/ 4 levels "Not at all important"&lt;..: 4 3 2 1</code></pre>
-</div>
-</div>
-</section>
 <section id="data-structures-in-r-dataframe" class="slide level2">
 <h2>Data Structures in R: Dataframe</h2>
 <ul>
 <li><p>De facto data structure for tabular data in R, and what we use for data processing, plotting, and statistics.</p></li>
 <li><p>Similar to spreadsheets - a rectangular collection of variables (columns) and observations (rows)!</p></li>
-<li><p>You can create it by hand like so:</p></li>
+<li><p>You can create it by hand like so: (though more commonly you will use this to load data from external source)</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a></a>survey_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb49-2"><a></a>    <span class="at">country =</span> <span class="fu">c</span>(<span class="st">"SGP"</span>, <span class="st">"CAN"</span>, <span class="st">"NZL"</span>, <span class="st">"SGP"</span>, <span class="st">"CAN"</span>),</span>
-<span id="cb49-3"><a></a>    <span class="at">life_satisfaction =</span> <span class="fu">c</span>(<span class="dv">8</span>, <span class="dv">7</span>, <span class="dv">9</span>, <span class="dv">6</span>, <span class="dv">8</span>),</span>
-<span id="cb49-4"><a></a>    <span class="at">employment =</span> <span class="fu">c</span>(<span class="st">"Full time"</span>, <span class="st">"Student"</span>, <span class="st">"Part time"</span>, <span class="st">"Retired"</span>, <span class="st">"Full time"</span>)</span>
-<span id="cb49-5"><a></a>)</span>
-<span id="cb49-6"><a></a><span class="fu">print</span>(survey_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a></a>survey_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb45-2"><a></a>    <span class="at">country =</span> <span class="fu">c</span>(<span class="st">"SGP"</span>, <span class="st">"CAN"</span>, <span class="st">"NZL"</span>, <span class="st">"SGP"</span>, <span class="st">"CAN"</span>),</span>
+<span id="cb45-3"><a></a>    <span class="at">life_satisfaction =</span> <span class="fu">c</span>(<span class="dv">8</span>, <span class="dv">7</span>, <span class="dv">9</span>, <span class="dv">6</span>, <span class="dv">8</span>),</span>
+<span id="cb45-4"><a></a>    <span class="at">employment =</span> <span class="fu">c</span>(<span class="st">"Full time"</span>, <span class="st">"Student"</span>, <span class="st">"Part time"</span>, <span class="st">"Retired"</span>, <span class="st">"Full time"</span>)</span>
+<span id="cb45-5"><a></a>)</span>
+<span id="cb45-6"><a></a><span class="fu">print</span>(survey_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  country life_satisfaction employment
 1     SGP                 8  Full time
@@ -828,65 +729,88 @@ Bella Ratmelia &amp; Wei XIA
 </div>
 </div>
 </section>
-<section id="data-structures-in-r-others" class="slide level2">
-<h2>Data Structures in R: Others</h2>
-<ul>
-<li><p>Lists: A type of recursive vector</p></li>
-<li><p>Matrices: A collection of elements of the same type in rows and columns</p></li>
-</ul>
-</section>
 <section id="downloading-the-world-values-survey-wvs-dataset" class="slide level2">
 <h2>Downloading the World Values Survey (WVS) Dataset</h2>
-<p>For this workshop, we will try loading a dataset from a file.</p>
+<p>For this workshop, we will try loading a dataset from a file into a dataframe!</p>
 <p>Go to the course website and go to the <a href="https://bellaratmelia.github.io/introductory-r-socsci/dataset.html">‘Dataset’</a> tab to download the data file and information about this WVS data</p>
 <p>Download this CSV and save it under your <code>data</code> folder in your R project!</p>
+</section>
+<section id="packages-in-r-for-additional-functionatilites" class="slide level2">
+<h2>Packages in R (for additional functionatilites)</h2>
+<ul>
+<li><p>Packages are a collections of R functions, datasets, etc. Packages extend the functionality of R.</p>
+<ul>
+<li>(Closest analogy I can think of is that they’re equivalent of browser add-ons, in a way)</li>
+</ul></li>
+<li><p>Popular packages: <code>tidyverse</code>, <code>caret</code>, <code>shiny</code>, etc.</p></li>
+<li><p>Installation (<strong>you only need to do this once</strong>): <code>install.packages("package name")</code></p></li>
+<li><p>Loading packages (<em>you need to run this everytime you restart RStudio</em>): <code>library(package name)</code> - let’s try to load <code>tidyverse</code> as we will use this to load our CSV into a dataframe!</p>
+<ul>
+<li>Tidyverse is a well-known collection of packages that facilitates data science projects. It includes packages for data manipulation, visualization, importing, and tidying.</li>
+</ul></li>
+</ul>
 </section>
 <section id="loading-the-wvs-dataset" class="slide level2">
 <h2>Loading the WVS Dataset</h2>
 <p>Let’s load our actual World Values Survey dataset using read_csv function.</p>
 <p>Before use read_csv install and load package tidyverse. Install the package only once and need to load the package in every session before you use it.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb51-2"><a></a></span>
-<span id="cb51-3"><a></a>wvs_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/wvs-wave7-sg-ca-nz.csv"</span>)  </span>
-<span id="cb51-4"><a></a><span class="fu">head</span>(wvs_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb47-2"><a></a></span>
+<span id="cb47-3"><a></a>wvs_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/wvs-wave7-sg-ca-nz.csv"</span>)  </span>
+<span id="cb47-4"><a></a><span class="fu">head</span>(wvs_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 16
+  country        ID family_importance friends_importance leisure_importance
+  &lt;chr&gt;       &lt;dbl&gt;             &lt;dbl&gt;              &lt;dbl&gt;              &lt;dbl&gt;
+1 CAN     124070003                 1                  1                  1
+2 CAN     124070004                 1                  1                  2
+3 CAN     124070005                 2                  2                  2
+4 CAN     124070006                 1                  2                  2
+5 CAN     124070008                 1                  2                  2
+6 CAN     124070009                 1                  2                  2
+# ℹ 11 more variables: work_importance &lt;dbl&gt;, freedom &lt;dbl&gt;,
+#   life_satisfaction &lt;dbl&gt;, financial_satisfaction &lt;dbl&gt;, religiousity &lt;chr&gt;,
+#   political_scale &lt;dbl&gt;, sex &lt;chr&gt;, birthyear &lt;dbl&gt;, age &lt;dbl&gt;,
+#   marital_status &lt;chr&gt;, employment &lt;chr&gt;</code></pre>
+</div>
 </div>
 <p>Make sure to save the CSV file in your data folder! (No auto save)</p>
 </section>
 <section id="exploring-the-wvs-dataset" class="slide level2">
 <h2>Exploring the WVS Dataset</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="annotated-cell-31"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-31" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-31-1" class="code-annotation-target"><a href="#annotated-cell-31-1"></a><span class="fu">dim</span>(wvs_data)</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-31" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-31-2" class="code-annotation-target"><a href="#annotated-cell-31-2"></a><span class="fu">names</span>(wvs_data)</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-31" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-31-3" class="code-annotation-target"><a href="#annotated-cell-31-3"></a><span class="fu">str</span>(wvs_data)</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-31" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-31-4" class="code-annotation-target"><a href="#annotated-cell-31-4"></a><span class="fu">summary</span>(wvs_data)</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-31" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-31-5" class="code-annotation-target"><a href="#annotated-cell-31-5"></a><span class="fu">head</span>(wvs_data, <span class="at">n=</span><span class="dv">5</span>)</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-31" data-target-annotation="6" onclick="event.preventDefault();">6</a><span id="annotated-cell-31-6" class="code-annotation-target"><a href="#annotated-cell-31-6"></a><span class="fu">tail</span>(wvs_data, <span class="at">n=</span><span class="dv">5</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="annotated-cell-27"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-27" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-27-1" class="code-annotation-target"><a href="#annotated-cell-27-1"></a><span class="fu">dim</span>(wvs_data)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-27" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-27-2" class="code-annotation-target"><a href="#annotated-cell-27-2"></a><span class="fu">names</span>(wvs_data)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-27" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-27-3" class="code-annotation-target"><a href="#annotated-cell-27-3"></a><span class="fu">str</span>(wvs_data)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-27" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-27-4" class="code-annotation-target"><a href="#annotated-cell-27-4"></a><span class="fu">summary</span>(wvs_data)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-27" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-27-5" class="code-annotation-target"><a href="#annotated-cell-27-5"></a><span class="fu">head</span>(wvs_data, <span class="at">n=</span><span class="dv">5</span>)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-27" data-target-annotation="6" onclick="event.preventDefault();">6</a><span id="annotated-cell-27-6" class="code-annotation-target"><a href="#annotated-cell-27-6"></a><span class="fu">tail</span>(wvs_data, <span class="at">n=</span><span class="dv">5</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-31" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-27" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-31" data-code-lines="1" data-code-annotation="1">return a vector of number of rows and columns</span>
+<span data-code-cell="annotated-cell-27" data-code-lines="1" data-code-annotation="1">return a vector of number of rows and columns</span>
 </dd>
-<dt data-target-cell="annotated-cell-31" data-target-annotation="2">2</dt>
+<dt data-target-cell="annotated-cell-27" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-31" data-code-lines="2" data-code-annotation="2">inspect columns</span>
+<span data-code-cell="annotated-cell-27" data-code-lines="2" data-code-annotation="2">inspect columns</span>
 </dd>
-<dt data-target-cell="annotated-cell-31" data-target-annotation="3">3</dt>
+<dt data-target-cell="annotated-cell-27" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-cell="annotated-cell-31" data-code-lines="3" data-code-annotation="3">inspect structure</span>
+<span data-code-cell="annotated-cell-27" data-code-lines="3" data-code-annotation="3">inspect structure</span>
 </dd>
-<dt data-target-cell="annotated-cell-31" data-target-annotation="4">4</dt>
+<dt data-target-cell="annotated-cell-27" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-cell="annotated-cell-31" data-code-lines="4" data-code-annotation="4">print the summary stats of the entire dataframe</span>
+<span data-code-cell="annotated-cell-27" data-code-lines="4" data-code-annotation="4">print the summary stats of the entire dataframe</span>
 </dd>
-<dt data-target-cell="annotated-cell-31" data-target-annotation="5">5</dt>
+<dt data-target-cell="annotated-cell-27" data-target-annotation="5">5</dt>
 <dd>
-<span data-code-cell="annotated-cell-31" data-code-lines="5" data-code-annotation="5">view the first 5 rows</span>
+<span data-code-cell="annotated-cell-27" data-code-lines="5" data-code-annotation="5">view the first 5 rows</span>
 </dd>
-<dt data-target-cell="annotated-cell-31" data-target-annotation="6">6</dt>
+<dt data-target-cell="annotated-cell-27" data-target-annotation="6">6</dt>
 <dd>
-<span data-code-cell="annotated-cell-31" data-code-lines="6" data-code-annotation="6">view the last 5 rows</span>
+<span data-code-cell="annotated-cell-27" data-code-lines="6" data-code-annotation="6">view the last 5 rows</span>
 </dd>
 </dl>
 </div>
@@ -896,34 +820,92 @@ Bella Ratmelia &amp; Wei XIA
 <h2>Basic dataframe manipulations: Retrieving values</h2>
 <p>Some basic dataframe functions before we move on to data wrangling next week:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="annotated-cell-32"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-32" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-32-1" class="code-annotation-target"><a href="#annotated-cell-32-1"></a>wvs_data[<span class="st">"country"</span>]</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-32" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-32-2" class="code-annotation-target"><a href="#annotated-cell-32-2"></a>wvs_data<span class="sc">$</span>country</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-32" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-32-3" class="code-annotation-target"><a href="#annotated-cell-32-3"></a>wvs_data[<span class="dv">3</span>]</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-32" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-32-4" class="code-annotation-target"><a href="#annotated-cell-32-4"></a>wvs_data[<span class="dv">1</span>, <span class="dv">4</span>]</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-32" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-32-5" class="code-annotation-target"><a href="#annotated-cell-32-5"></a>wvs_data[<span class="dv">3</span>, ]</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="annotated-cell-28"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-28" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-28-1" class="code-annotation-target"><a href="#annotated-cell-28-1"></a>wvs_data[<span class="st">"country"</span>]</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-28" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-28-2" class="code-annotation-target"><a href="#annotated-cell-28-2"></a>wvs_data<span class="sc">$</span>country</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-28" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-28-3" class="code-annotation-target"><a href="#annotated-cell-28-3"></a>wvs_data[<span class="dv">3</span>]</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-28" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-28-4" class="code-annotation-target"><a href="#annotated-cell-28-4"></a>wvs_data[<span class="dv">1</span>, <span class="dv">4</span>]</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-28" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-28-5" class="code-annotation-target"><a href="#annotated-cell-28-5"></a>wvs_data[<span class="dv">3</span>, ]</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-32" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-28" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-32" data-code-lines="1" data-code-annotation="1">retrieve column by column name (returns as tibble/dataframe)</span>
+<span data-code-cell="annotated-cell-28" data-code-lines="1" data-code-annotation="1">retrieve column by column name (returns as tibble/dataframe)</span>
 </dd>
-<dt data-target-cell="annotated-cell-32" data-target-annotation="2">2</dt>
+<dt data-target-cell="annotated-cell-28" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-32" data-code-lines="2" data-code-annotation="2">another way to retrieve column by name (returns as vector)</span>
+<span data-code-cell="annotated-cell-28" data-code-lines="2" data-code-annotation="2">another way to retrieve column by name (returns as vector)</span>
 </dd>
-<dt data-target-cell="annotated-cell-32" data-target-annotation="3">3</dt>
+<dt data-target-cell="annotated-cell-28" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-cell="annotated-cell-32" data-code-lines="3" data-code-annotation="3">retrieve column by index</span>
+<span data-code-cell="annotated-cell-28" data-code-lines="3" data-code-annotation="3">retrieve column by index</span>
 </dd>
-<dt data-target-cell="annotated-cell-32" data-target-annotation="4">4</dt>
+<dt data-target-cell="annotated-cell-28" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-cell="annotated-cell-32" data-code-lines="4" data-code-annotation="4">get a cell at this row, column coord</span>
+<span data-code-cell="annotated-cell-28" data-code-lines="4" data-code-annotation="4">get a cell at this row, column coord</span>
 </dd>
-<dt data-target-cell="annotated-cell-32" data-target-annotation="5">5</dt>
+<dt data-target-cell="annotated-cell-28" data-target-annotation="5">5</dt>
 <dd>
-<span data-code-cell="annotated-cell-32" data-code-lines="5" data-code-annotation="5">get an entire row</span>
+<span data-code-cell="annotated-cell-28" data-code-lines="5" data-code-annotation="5">get an entire row</span>
 </dd>
 </dl>
+</div>
+</div>
+</section>
+<section id="data-structures-in-r-factors" class="slide level2">
+<h2>Data Structures in R: Factors</h2>
+<ul>
+<li><p>Special data structure in R to deal with categorical data.</p></li>
+<li><p>Look (and often behave) like character vectors but are actually treated as integer vectors.</p></li>
+<li><p>Can only contain a predefined set of values, known as <code>levels</code>. R always sorts levels in alphabetical order</p></li>
+<li><p>Can be ordered (ordinal) or unordered (nominal).</p></li>
+<li><p>May look like a normal vector at first glance, so use <code>str()</code> to check.</p></li>
+<li><p>Most common application: when we want to specify a column in our dataframe as a column of categories</p></li>
+</ul>
+</section>
+<section id="convert-dataframe-columns-to-a-factor---unordered" class="slide level2">
+<h2>Convert dataframe columns to a Factor - Unordered</h2>
+<p>In our example, <code>country</code> should be a factor!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a></a><span class="fu">str</span>(wvs_data<span class="sc">$</span>country)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> chr [1:7087] "CAN" "CAN" "CAN" "CAN" "CAN" "CAN" "CAN" "CAN" "CAN" "CAN" ...</code></pre>
+</div>
+</div>
+<p>Since there is no inherent order within country names, our categories will be unordered:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a></a>wvs_data<span class="sc">$</span>country <span class="ot">&lt;-</span> <span class="fu">factor</span>(wvs_data<span class="sc">$</span>country)</span>
+<span id="cb51-2"><a></a></span>
+<span id="cb51-3"><a></a><span class="co"># check the category levels</span></span>
+<span id="cb51-4"><a></a><span class="fu">levels</span>(wvs_data<span class="sc">$</span>country)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "CAN" "NZL" "SGP"</code></pre>
+</div>
+</div>
+<p>If we check the structure, <code>country</code> column should be a factor instead of characters now:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a></a><span class="fu">str</span>(wvs_data<span class="sc">$</span>country)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Factor w/ 3 levels "CAN","NZL","SGP": 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
+</div>
+</div>
+</section>
+<section id="convert-dataframe-columns-to-a-factor---ordered" class="slide level2">
+<h2>Convert dataframe columns to a Factor - Ordered</h2>
+<p>Technically, in our data set, there is no variables that should be ordered. But for example purposes, let’s say that we want to order the categorical values in <code>religiousity</code> from non-believer to believer.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a></a>wvs_data<span class="sc">$</span>religiousity <span class="ot">&lt;-</span> <span class="fu">factor</span>(wvs_data<span class="sc">$</span>religiousity,</span>
+<span id="cb55-2"><a></a>                                <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"An atheist"</span>, <span class="st">"Not a religious person"</span>, <span class="st">"A religious person"</span>, <span class="st">"Don't know"</span>),</span>
+<span id="cb55-3"><a></a>                                <span class="at">ordered =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb55-4"><a></a></span>
+<span id="cb55-5"><a></a><span class="co"># check the category levels and structure</span></span>
+<span id="cb55-6"><a></a><span class="fu">levels</span>(wvs_data<span class="sc">$</span>religiousity)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "An atheist"             "Not a religious person" "A religious person"    
+[4] "Don't know"            </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a></a><span class="fu">str</span>(wvs_data<span class="sc">$</span>religiousity)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Ord.factor w/ 4 levels "An atheist"&lt;"Not a religious person"&lt;..: 3 3 1 3 2 1 1 3 2 3 ...</code></pre>
 </div>
 </div>
 </section>
@@ -962,6 +944,7 @@ Bella Ratmelia &amp; Wei XIA
 <li><p>Packages: Collections of functions and data to perform tasks. Need to install and load packages.</p></li>
 </ul>
 </section></section>
+<section>
 <section id="end-of-session-1" class="title-slide slide level1 center">
 <h1>End of Session 1!</h1>
 <p>Next Session: Data wrangling with <code>dplyr</code> and <code>tidyr</code> packages - we’ll learn how to:</p>
@@ -972,9 +955,63 @@ Bella Ratmelia &amp; Wei XIA
 <li><p>Handle missing values in survey data</p></li>
 <li><p>And much more!</p></li>
 </ul>
-
-
 </section>
+<section id="appendix-on-vector-manipulations-add-items" class="slide level2">
+<h2>Appendix on Vector Manipulations: Add items</h2>
+<p>Several ways to add items to a vector</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="annotated-cell-34"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-34" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-34-1" class="code-annotation-target"><a href="#annotated-cell-34-1"></a>satisfaction_scores <span class="ot">&lt;-</span> <span class="fu">c</span>(satisfaction_scores, <span class="dv">7</span>)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-34" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-34-2" class="code-annotation-target"><a href="#annotated-cell-34-2"></a>satisfaction_scores <span class="ot">&lt;-</span> <span class="fu">c</span>(satisfaction_scores, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">10</span>)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-34" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-34-3" class="code-annotation-target"><a href="#annotated-cell-34-3"></a>satisfaction_scores <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">8</span>, satisfaction_scores)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-34" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-34-4" class="code-annotation-target"><a href="#annotated-cell-34-4"></a>satisfaction_scores <span class="ot">&lt;-</span> <span class="fu">append</span>(satisfaction_scores, <span class="dv">9</span>, <span class="at">after =</span> <span class="dv">2</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-34" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-34" data-code-lines="1" data-code-annotation="1">Add a single score to the end of the vector using c()</span>
+</dd>
+<dt data-target-cell="annotated-cell-34" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-34" data-code-lines="2" data-code-annotation="2">Add multiple scores to the end</span>
+</dd>
+<dt data-target-cell="annotated-cell-34" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-34" data-code-lines="3" data-code-annotation="3">Add a score to the beginning</span>
+</dd>
+<dt data-target-cell="annotated-cell-34" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-34" data-code-lines="4" data-code-annotation="4">Insert a score at a specific position using append(vector_name, elements_to_be_added, from_the_position)</span>
+</dd>
+</dl>
+</div>
+</div>
+</section>
+<section id="appendix-on-vector-manipulations-remove-items" class="slide level2">
+<h2>Appendix on Vector Manipulations: Remove items</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="annotated-cell-35"><pre class="sourceCode numberSource r code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-35" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-35-1" class="code-annotation-target"><a href="#annotated-cell-35-1"></a>satisfaction_scores <span class="ot">&lt;-</span> satisfaction_scores[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>)]</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-35" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-35-2" class="code-annotation-target"><a href="#annotated-cell-35-2"></a>satisfaction_scores <span class="ot">&lt;-</span> satisfaction_scores[satisfaction_scores <span class="sc">&lt;=</span> <span class="dv">7</span>]</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-35" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-35-3" class="code-annotation-target"><a href="#annotated-cell-35-3"></a>satisfaction_scores <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(satisfaction_scores)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-35" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-35" data-code-lines="1" data-code-annotation="1">Remove elements by index using “negative indexing”</span>
+</dd>
+<dt data-target-cell="annotated-cell-35" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-35" data-code-lines="2" data-code-annotation="2">Remove elements based on a condition using logical indexing. Remove these items which are FALSE.</span>
+</dd>
+<dt data-target-cell="annotated-cell-35" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-35" data-code-lines="3" data-code-annotation="3">Remove NA values from the vector</span>
+</dd>
+</dl>
+</div>
+</div>
+
+
+</section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <p><img src="images/smu logo.png" class="slide-logo"></p>
@@ -1268,190 +1305,172 @@ Bella Ratmelia &amp; Wei XIA
     
 
     <script id="quarto-html-after-body" type="application/javascript">
-    window.document.addEventListener("DOMContentLoaded", function (event) {
-      const toggleBodyColorMode = (bsSheetEl) => {
-        const mode = bsSheetEl.getAttribute("data-mode");
-        const bodyEl = window.document.querySelector("body");
-        if (mode === "dark") {
-          bodyEl.classList.add("quarto-dark");
-          bodyEl.classList.remove("quarto-light");
-        } else {
-          bodyEl.classList.add("quarto-light");
-          bodyEl.classList.remove("quarto-dark");
-        }
-      }
-      const toggleBodyColorPrimary = () => {
-        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-        if (bsSheetEl) {
-          toggleBodyColorMode(bsSheetEl);
-        }
-      }
-      toggleBodyColorPrimary();  
-      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
-      tabsets.forEach(function(tabset) {
-        const tabby = new Tabby('#' + tabset.id);
-      });
-      const isCodeAnnotation = (el) => {
-        for (const clz of el.classList) {
-          if (clz.startsWith('code-annotation-')) {                     
-            return true;
-          }
-        }
-        return false;
-      }
-      const onCopySuccess = function(e) {
-        // button target
-        const button = e.trigger;
-        // don't keep focus
-        button.blur();
-        // flash "checked"
-        button.classList.add('code-copy-button-checked');
-        var currentTitle = button.getAttribute("title");
-        button.setAttribute("title", "Copied!");
-        let tooltip;
-        if (window.bootstrap) {
-          button.setAttribute("data-bs-toggle", "tooltip");
-          button.setAttribute("data-bs-placement", "left");
-          button.setAttribute("data-bs-title", "Copied!");
-          tooltip = new bootstrap.Tooltip(button, 
-            { trigger: "manual", 
-              customClass: "code-copy-button-tooltip",
-              offset: [0, -8]});
-          tooltip.show();    
-        }
-        setTimeout(function() {
-          if (tooltip) {
-            tooltip.hide();
-            button.removeAttribute("data-bs-title");
-            button.removeAttribute("data-bs-toggle");
-            button.removeAttribute("data-bs-placement");
-          }
-          button.setAttribute("title", currentTitle);
-          button.classList.remove('code-copy-button-checked');
-        }, 1000);
-        // clear code selection
-        e.clearSelection();
-      }
-      const getTextToCopy = function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
             }
           }
-          return codeEl.innerText;
-      }
-      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-        text: getTextToCopy
-      });
-      clipboard.on('success', onCopySuccess);
-      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-          text: getTextToCopy,
-          container: window.document.getElementById('quarto-embedded-source-code-modal')
-        });
-        clipboardModal.on('success', onCopySuccess);
-      }
-        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-        var mailtoRegex = new RegExp(/^mailto:/);
-          var filterRegex = new RegExp('/' + window.location.host + '/');
-        var isInternal = (href) => {
-            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          return false;
         }
-        // Inspect non-navigation links and adorn them if external
-     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-        for (var i=0; i<links.length; i++) {
-          const link = links[i];
-          if (!isInternal(link.href)) {
-            // undo the damage that might have been done by quarto-nav.js in the case of
-            // links that we want to consider external
-            if (link.dataset.originalHref !== undefined) {
-              link.href = link.dataset.originalHref;
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
             }
-          }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
         }
-      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-        const config = {
-          allowHTML: true,
-          maxWidth: 500,
-          delay: 100,
-          arrow: false,
-          appendTo: function(el) {
-              return el.closest('section.slide') || el.parentElement;
-          },
-          interactive: true,
-          interactiveBorder: 10,
-          theme: 'light-border',
-          placement: 'bottom-start',
-        };
-        if (contentFn) {
-          config.content = contentFn;
-        }
-        if (onTriggerFn) {
-          config.onTrigger = onTriggerFn;
-        }
-        if (onUntriggerFn) {
-          config.onUntrigger = onUntriggerFn;
-        }
-          config['offset'] = [0,0];
-          config['maxWidth'] = 700;
-        window.tippy(el, config); 
-      }
-      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-      for (var i=0; i<noterefs.length; i++) {
-        const ref = noterefs[i];
-        tippyHover(ref, function() {
-          // use id or data attribute instead here
-          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-          try { href = new URL(href).hash; } catch {}
-          const id = href.replace(/^#\/?/, "");
-          const note = window.document.getElementById(id);
-          if (note) {
-            return note.innerHTML;
-          } else {
-            return "";
-          }
-        });
-      }
-      const findCites = (el) => {
-        const parentEl = el.parentElement;
-        if (parentEl) {
-          const cites = parentEl.dataset.cites;
-          if (cites) {
-            return {
-              el,
-              cites: cites.split(' ')
-            };
-          } else {
-            return findCites(el.parentElement)
-          }
-        } else {
-          return undefined;
-        }
-      };
-      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-      for (var i=0; i<bibliorefs.length; i++) {
-        const ref = bibliorefs[i];
-        const citeInfo = findCites(ref);
-        if (citeInfo) {
-          tippyHover(citeInfo.el, function() {
-            var popup = window.document.createElement('div');
-            citeInfo.cites.forEach(function(cite) {
-              var citeDiv = window.document.createElement('div');
-              citeDiv.classList.add('hanging-indent');
-              citeDiv.classList.add('csl-entry');
-              var biblioDiv = window.document.getElementById('ref-' + cite);
-              if (biblioDiv) {
-                citeDiv.innerHTML = biblioDiv.innerHTML;
+        const getTextToCopy = function(trigger) {
+            const codeEl = trigger.previousElementSibling.cloneNode(true);
+            for (const childEl of codeEl.children) {
+              if (isCodeAnnotation(childEl)) {
+                childEl.remove();
               }
-              popup.appendChild(citeDiv);
-            });
-            return popup.innerHTML;
+            }
+            return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp("https:\/\/bellaratmelia\.github\.io\/introductory-r-socsci\/");
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
           });
         }
-      }
-    });
-    </script>
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
     
 
 </body></html>
