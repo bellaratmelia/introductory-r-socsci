@@ -421,8 +421,15 @@ We will start with exploring 3 basic types of data **structures** in R:
 
 ::: {.column width="60%"}
 ![](images/data-structures.svg)
+
 :::
 :::::
+
+## Data Structures in R: Others
+
+-   Lists: A type of recursive vector
+
+-   Matrices: A collection of elements of the same type in rows and columns
 
 ## Data Structures in R: Vectors
 
@@ -560,6 +567,54 @@ mean(financial_satisfaction)
 mean(financial_satisfaction, na.rm = TRUE)
 ```
 
+
+## Downloading the World Values Survey (WVS) Dataset
+
+For this workshop, we will try loading a dataset from a file.
+
+Go to the course website and go to the ['Dataset'](https://bellaratmelia.github.io/introductory-r-socsci/dataset.html) tab to download the data file and information about this WVS data
+
+Download this CSV and save it under your `data` folder in your R project!
+
+## Loading the WVS Dataset
+
+Let's load our actual World Values Survey dataset using read_csv function.
+
+Before use read_csv install and load package tidyverse. Install the package only once and need to load the package in every session before you use it.
+
+```{r}
+#| echo: true
+#| output: false
+library(tidyverse)
+
+wvs_data <- read_csv("data/wvs-wave7-sg-ca-nz.csv")  
+head(wvs_data)
+```
+
+Make sure to save the CSV file in your data folder! (No auto save)
+
+## Exploring the WVS Dataset
+
+```{r}
+#| echo: true
+#| output: false
+#| eval: false
+
+dim(wvs_data) # <1>
+names(wvs_data) # <2>
+str(wvs_data) # <3>
+summary(wvs_data) # <4> 
+head(wvs_data, n=5) # <5>
+tail(wvs_data, n=5) # <6>
+```
+
+1.  return a vector of number of rows and columns
+2.  inspect columns
+3.  inspect structure
+4.  print the summary stats of the entire dataframe
+5.  view the first 5 rows
+6.  view the last 5 rows
+
 ## Data Structures in R: Factors
 
 -   Special data structure in R to deal with categorical data.
@@ -612,58 +667,6 @@ survey_data <- data.frame(
 print(survey_data)
 ```
 
-## Data Structures in R: Others
-
--   Lists: A type of recursive vector
-
--   Matrices: A collection of elements of the same type in rows and columns
-
-## Downloading the World Values Survey (WVS) Dataset
-
-For this workshop, we will try loading a dataset from a file.
-
-Go to the course website and go to the ['Dataset'](https://bellaratmelia.github.io/introductory-r-socsci/dataset.html) tab to download the data file and information about this WVS data
-
-Download this CSV and save it under your `data` folder in your R project!
-
-## Loading the WVS Dataset
-
-Let's load our actual World Values Survey dataset using read_csv function.
-
-Before use read_csv install and load package tidyverse. Install the package only once and need to load the package in every session before you use it.
-
-```{r}
-#| echo: true
-#| output: false
-library(tidyverse)
-
-wvs_data <- read_csv("data/wvs-wave7-sg-ca-nz.csv")  
-head(wvs_data)
-```
-
-Make sure to save the CSV file in your data folder! (No auto save)
-
-## Exploring the WVS Dataset
-
-```{r}
-#| echo: true
-#| output: false
-#| eval: false
-
-dim(wvs_data) # <1>
-names(wvs_data) # <2>
-str(wvs_data) # <3>
-summary(wvs_data) # <4> 
-head(wvs_data, n=5) # <5>
-tail(wvs_data, n=5) # <6>
-```
-
-1.  return a vector of number of rows and columns
-2.  inspect columns
-3.  inspect structure
-4.  print the summary stats of the entire dataframe
-5.  view the first 5 rows
-6.  view the last 5 rows
 
 ## Basic dataframe manipulations: Retrieving values
 
