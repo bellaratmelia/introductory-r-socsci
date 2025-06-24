@@ -67,9 +67,9 @@ Image is taken from [R for Data Science (2e)](https://r4ds.hadley.nz/intro) by H
 -   R and Rstudio
 -   Before coding
 -   R Objects and Values
--   Data types
+-   Data **types**
 -   Functions and packages
--   Data structures
+-   Data **structures**
 -   Exploring datasets
 -   Trouble shooting tips
 -   Recap & feedback
@@ -392,44 +392,27 @@ You can call the help page / vignette in R by prepending `?` to the function nam
 
 E.g. if you want to find out more about the `round` function, you can run `?round` in your R console (bottom left panel)
 
-## Packages in R
-
--   Packages are a collections of R functions, datasets, etc. Packages extend the functionality of R.
-
-    -   (Closest analogy I can think of is that they're equivalent of browser add-ons, in a way)
-
--   Popular packages: `tidyverse`, `caret`, `shiny`, etc.
-
--   Installation (**you only need to do this once**): `install.packages("package name")`
-
--   Loading packages (*you need to run this everytime you restart RStudio*): `library(package name)` - let's try to load `tidyverse`!
-
-    -   Tidyverse is a well-known collection of packages that facilitates data science projects. It includes packages for data manipulation, visualization, importing, and tidying.
 
 ## Data Structures in R
 
 We will start with exploring 3 basic types of data **structures** in R:
 
-::::: columns
-::: {.column width="40%"}
 1.  **Vector** - can hold multiple values in a single variable/object.
 
 2.  **Factor** - Special data structure in R to handle categorical variables.
 
 3.  **Data frame** - De facto data structure for tabular data in R, and what we use for data processing, plotting, and statistics.
-:::
 
-::: {.column width="60%"}
-![](images/data-structures.svg)
-
-:::
-:::::
-
-## Data Structures in R: Others
+Other types (but we will not be covering these in this workshop):
 
 -   Lists: A type of recursive vector
 
 -   Matrices: A collection of elements of the same type in rows and columns
+
+
+## Data Structures in R - visualized
+
+![](images/data-structures.svg){width=100% height=100%}
 
 ## Data Structures in R: Vectors
 
@@ -437,7 +420,7 @@ Think of vectors as a column in a dataset. It is the most common and basic data 
 
 -   A vector can only contain 1 data type.
 
--   Vector can be created with c() function.
+-   **Vector can be created with c() function**.
 
 -   Can add, remove, or change values in a vector.
 
@@ -511,43 +494,6 @@ print(criteria)
 satisfaction_scores[criteria]
 ```
 
-## Vector Manipulations: Add items
-
-Several ways to add items to a vector
-
-```{r}
-#| echo: true
-#| eval: false
-#| 
-
-satisfaction_scores <- c(satisfaction_scores, 7) # <1>
-satisfaction_scores <- c(satisfaction_scores, 8, 9, 10) # <2>
-satisfaction_scores <- c(8, satisfaction_scores) # <3>
-satisfaction_scores <- append(satisfaction_scores, 9, after = 2) # <4>
-
-```
-
-1.  Add a single score to the end of the vector using c()
-2.  Add multiple scores to the end
-3.  Add a score to the beginning
-4.  Insert a score at a specific position using append(vector_name, elements_to_be_added, from_the_position)
-
-## Vector Manipulations: Remove items
-
-```{r}
-#| echo: true
-#| eval: false
-
-satisfaction_scores <- satisfaction_scores[-c(2, 4)] # <1>
-satisfaction_scores <- satisfaction_scores[satisfaction_scores <= 7] # <2>
-satisfaction_scores <- na.omit(satisfaction_scores) # <3>
-
-```
-
-1.  Remove elements by index using "negative indexing"
-2.  Remove elements based on a condition using logical indexing. Remove these items which are FALSE.
-3.  Remove NA values from the vector
-
 ## Vector Manipulations: Handle NA values
 
 -   NA values indicate null values, or the absence of a value (0 is still a value!)
@@ -567,14 +513,46 @@ mean(financial_satisfaction)
 mean(financial_satisfaction, na.rm = TRUE)
 ```
 
+## Data Structures in R: Dataframe
+
+-   De facto data structure for tabular data in R, and what we use for data processing, plotting, and statistics.
+
+-   Similar to spreadsheets - a rectangular collection of variables (columns) and observations (rows)!
+
+-   You can create it by hand like so: (though more commonly you will use this to load data from external source)
+
+```{r}
+#| echo: true
+survey_data <- data.frame(
+    country = c("SGP", "CAN", "NZL", "SGP", "CAN"),
+    life_satisfaction = c(8, 7, 9, 6, 8),
+    employment = c("Full time", "Student", "Part time", "Retired", "Full time")
+)
+print(survey_data)
+```
+
 
 ## Downloading the World Values Survey (WVS) Dataset
 
-For this workshop, we will try loading a dataset from a file.
+For this workshop, we will try loading a dataset from a file into a dataframe!
 
 Go to the course website and go to the ['Dataset'](https://bellaratmelia.github.io/introductory-r-socsci/dataset.html) tab to download the data file and information about this WVS data
 
 Download this CSV and save it under your `data` folder in your R project!
+
+## Packages in R (for additional functionatilites)
+
+-   Packages are a collections of R functions, datasets, etc. Packages extend the functionality of R.
+
+    -   (Closest analogy I can think of is that they're equivalent of browser add-ons, in a way)
+
+-   Popular packages: `tidyverse`, `caret`, `shiny`, etc.
+
+-   Installation (**you only need to do this once**): `install.packages("package name")`
+
+-   Loading packages (*you need to run this everytime you restart RStudio*): `library(package name)` - let's try to load `tidyverse` as we will use this to load our CSV into a dataframe!
+
+    -   Tidyverse is a well-known collection of packages that facilitates data science projects. It includes packages for data manipulation, visualization, importing, and tidying.
 
 ## Loading the WVS Dataset
 
@@ -584,7 +562,7 @@ Before use read_csv install and load package tidyverse. Install the package only
 
 ```{r}
 #| echo: true
-#| output: false
+#| output: true
 library(tidyverse)
 
 wvs_data <- read_csv("data/wvs-wave7-sg-ca-nz.csv")  
@@ -615,58 +593,6 @@ tail(wvs_data, n=5) # <6>
 5.  view the first 5 rows
 6.  view the last 5 rows
 
-## Data Structures in R: Factors
-
--   Special data structure in R to deal with categorical data.
-
--   Look (and often behave) like character vectors but are actually treated as integer vectors.
-
--   Can only contain a predefined set of values, known as levels. R always sorts levels in alphabetical order
-
--   Can be ordered (ordinal) or unordered (nominal).
-
--   May look like a normal vector at first glance, so use `str()` to check.
-
-------------------------------------------------------------------------
-
-Unordered (Nominal):
-
-```{r}
-#| echo: true 
-employment_factor <- factor(c("Full time", "Part time", "Student", "Retired", "Student"))
-str(employment_factor)
-```
-
-Ordered (Ordinal):
-
-```{r}
-#| echo: true 
-importance_factor <- factor(
-    c("Very important", "Important", "Not very important", "Not at all important"),
-    ordered = TRUE,
-    levels = c("Not at all important", "Not very important", "Important", "Very important")
-)
-str(importance_factor)
-```
-
-## Data Structures in R: Dataframe
-
--   De facto data structure for tabular data in R, and what we use for data processing, plotting, and statistics.
-
--   Similar to spreadsheets - a rectangular collection of variables (columns) and observations (rows)!
-
--   You can create it by hand like so:
-
-```{r}
-#| echo: true
-survey_data <- data.frame(
-    country = c("SGP", "CAN", "NZL", "SGP", "CAN"),
-    life_satisfaction = c(8, 7, 9, 6, 8),
-    employment = c("Full time", "Student", "Part time", "Retired", "Full time")
-)
-print(survey_data)
-```
-
 
 ## Basic dataframe manipulations: Retrieving values
 
@@ -689,6 +615,65 @@ wvs_data[3, ] # <5>
 3.  retrieve column by index
 4.  get a cell at this row, column coord
 5.  get an entire row
+
+## Data Structures in R: Factors
+
+-   Special data structure in R to deal with categorical data.
+
+-   Look (and often behave) like character vectors but are actually treated as integer vectors.
+
+-   Can only contain a predefined set of values, known as `levels`. R always sorts levels in alphabetical order
+
+-   Can be ordered (ordinal) or unordered (nominal).
+
+-   May look like a normal vector at first glance, so use `str()` to check.
+
+-   Most common application: when we want to specify a column in our dataframe as a column of categories
+
+## Convert dataframe columns to a Factor - Unordered
+
+In our example, `country` should be a factor! 
+
+```{r}
+#| echo: true 
+#| output: true
+
+str(wvs_data$country)
+```
+
+Since there is no inherent order within country names, our categories will be unordered:
+
+```{r}
+#| echo: true 
+#| output: true
+wvs_data$country <- factor(wvs_data$country)
+
+# check the category levels
+levels(wvs_data$country)
+```
+
+If we check the structure, `country` column should be a factor instead of characters now:
+```{r}
+#| echo: true 
+#| output: true
+
+str(wvs_data$country)
+```
+## Convert dataframe columns to a Factor - Ordered
+
+Technically, in our data set, there is no variables that should be ordered. But for example purposes, let's say that we want to order the categorical values in `religiousity` from non-believer to believer. 
+
+```{r}
+#| echo: true 
+#| output: true
+wvs_data$religiousity <- factor(wvs_data$religiousity,
+                                levels = c("An atheist", "Not a religious person", "A religious person", "Don't know"),
+                                ordered = TRUE)
+
+# check the category levels and structure
+levels(wvs_data$religiousity)
+str(wvs_data$religiousity)
+```
 
 ## Trouble Shooting
 
@@ -745,3 +730,40 @@ Next Session: Data wrangling with `dplyr` and `tidyr` packages - we'll learn how
 -   Handle missing values in survey data
 
 -   And much more!
+
+## Appendix on Vector Manipulations: Add items
+
+Several ways to add items to a vector
+
+```{r}
+#| echo: true
+#| eval: false
+#| 
+
+satisfaction_scores <- c(satisfaction_scores, 7) # <1>
+satisfaction_scores <- c(satisfaction_scores, 8, 9, 10) # <2>
+satisfaction_scores <- c(8, satisfaction_scores) # <3>
+satisfaction_scores <- append(satisfaction_scores, 9, after = 2) # <4>
+
+```
+
+1.  Add a single score to the end of the vector using c()
+2.  Add multiple scores to the end
+3.  Add a score to the beginning
+4.  Insert a score at a specific position using append(vector_name, elements_to_be_added, from_the_position)
+
+## Appendix on Vector Manipulations: Remove items
+
+```{r}
+#| echo: true
+#| eval: false
+
+satisfaction_scores <- satisfaction_scores[-c(2, 4)] # <1>
+satisfaction_scores <- satisfaction_scores[satisfaction_scores <= 7] # <2>
+satisfaction_scores <- na.omit(satisfaction_scores) # <3>
+
+```
+
+1.  Remove elements by index using "negative indexing"
+2.  Remove elements based on a condition using logical indexing. Remove these items which are FALSE.
+3.  Remove NA values from the vector

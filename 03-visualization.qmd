@@ -573,7 +573,7 @@ Create a side-by-side boxplots that visualizes `political_scale` for each `sex`.
 
 ```{r}
 #| echo: true
-#| output-location: true
+#| output-location: slide
 #| code-fold: true
 #| code-summary: "Show answer"
 
