@@ -26,11 +26,11 @@ This site serves as a repository for the slides and codes developed for the 'Int
 | Session | Date | Topic | Desccription |
 |------------------|------------------|------------------|--------------------|
 | \~ | Before the workshop | Preparation | Complete the [Pre-workshop activities](#pre-workshop-activities) |
-| 1 | TBD | **Introduction to R and RStudio** | Learn about setting up RStudio, basic data types and structures in R, and importing data files. |
-| 2 | TBD | **Data wrangling with tidyverse** | Learn about manipulating data with tidyverse, including filtering, selecting, mutating, and grouping data. |
-| 3 | TBD | **Data visualization and Descriptive Statistics** | Learn about creating visualizations with ggplot2 and calculating descriptive statistics like mean, median, etc. |
-| 4 | TBD | **Basic Inferential Tests** | Learn about conducting t-tests, chi-square tests, ANOVA, and interpreting statistical results in R. |
-| 5 | TBD | **Regression and Introduction to Quarto** | Learn about correlation, regression, and Quarto for creating dynamic, reproducible R documents. |
+| 1 | 22 Aug 2025 | **Introduction to R and RStudio** | Learn about setting up RStudio, basic data types and structures in R, and importing data files. |
+| 2 | 29 Aug 2025 | **Data wrangling with tidyverse** | Learn about manipulating data with tidyverse, including filtering, selecting, mutating, and grouping data. |
+| 3 | 5 Sep 2025 | **Data visualization and Descriptive Statistics** | Learn about creating visualizations with ggplot2 and calculating descriptive statistics like mean, median, etc. |
+| 4 | 12 Sep 2025 | **Basic Inferential Tests** | Learn about conducting t-tests, chi-square tests, ANOVA, and interpreting statistical results in R. |
+| 5 | 19 Sep 2025 | **Regression and Introduction to Quarto** | Learn about correlation, regression, and Quarto for creating dynamic, reproducible R documents. |
 | \~ | After the workshop |  | [Post-workshop exercises](exercises.html) |
 :::
 
@@ -96,4 +96,4 @@ Packages can save us time and leverage expert-created tools without having to wr
 
 ### Step 4: Complete the pre-workshop survey
 
-Please complete the pre-workshop survey here to share your goals and current knowledge. Your input will help to tailor the workshop contents and pace.
+[Please complete the pre-workshop survey here](https://smusg.asia.qualtrics.com/jfe/form/SV_4TqxP3BrvZkf4t8) to share your goals and current knowledge. Your input will help to tailor the workshop contents and pace.
