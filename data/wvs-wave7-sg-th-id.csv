@@ -111,7 +111,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 360070110,IDN,1,2,3,1,8,5,5,9,1957,61,A religious person,Male,Married,Self employed
 360070111,IDN,1,1,2,1,7,6,5,6,1977,41,A religious person,Female,Married,Full time
 360070112,IDN,1,3,1,1,7,10,10,1,1982,36,A religious person,Female,Married,Self employed
-360070113,IDN,1,1,1,1,10,-5,3,-1,1986,32,A religious person,Male,Married,Self employed
+360070113,IDN,1,1,1,1,10,,3,-1,1986,32,A religious person,Male,Married,Self employed
 360070114,IDN,1,3,1,1,8,10,6,6,1995,22,Not a religious person,Male,Single,Self employed
 360070115,IDN,1,1,1,1,10,10,10,5,1979,39,A religious person,Male,Married,Self employed
 360070116,IDN,1,1,1,1,9,10,10,10,1995,23,A religious person,Female,Married,Homemaker
@@ -407,7 +407,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 360070406,IDN,1,1,1,1,10,9,8,8,1958,60,A religious person,Male,Married,Retired/pensioned
 360070407,IDN,1,1,3,1,8,9,8,8,1979,38,A religious person,Male,Married,Full time
 360070408,IDN,1,2,2,1,8,9,4,3,1979,39,A religious person,Female,Married,Homemaker
-360070409,IDN,1,2,2,1,5,7,3,-5,1970,48,A religious person,Female,Married,Self employed
+360070409,IDN,1,2,2,1,5,7,3,,1970,48,A religious person,Female,Married,Self employed
 360070410,IDN,1,1,2,1,10,10,10,9,1966,52,A religious person,Male,Married,Self employed
 360070411,IDN,1,2,3,1,10,3,1,10,1970,48,A religious person,Male,Married,Full time
 360070412,IDN,1,3,3,1,3,3,2,3,1990,28,A religious person,Female,Married,Full time
@@ -535,7 +535,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 360070534,IDN,1,1,2,1,8,7,7,-1,1980,39,A religious person,Female,Married,Self employed
 360070535,IDN,1,2,2,1,5,5,5,-1,1950,68,A religious person,Male,Married,Self employed
 360070536,IDN,1,1,1,1,10,9,8,-1,1968,50,A religious person,Female,Widowed,Self employed
-360070537,IDN,1,2,2,1,8,8,5,6,1983,35,No answer,Male,Married,Self employed
+360070537,IDN,1,2,2,1,8,8,5,6,1983,35,,Male,Married,Self employed
 360070538,IDN,1,2,3,1,8,7,5,-1,1982,35,A religious person,Female,Married,Part time
 360070539,IDN,1,2,1,1,7,9,6,10,1963,55,A religious person,Male,Married,Self employed
 360070540,IDN,1,1,1,1,9,6,4,8,1964,54,A religious person,Female,Married,Self employed
@@ -591,7 +591,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 360070590,IDN,1,1,1,1,7,7,7,2,1963,55,A religious person,Male,Married,Self employed
 360070591,IDN,1,3,1,1,8,7,6,9,1962,55,A religious person,Male,Married,Self employed
 360070592,IDN,1,2,1,1,7,6,8,10,1999,19,A religious person,Female,Married,Part time
-360070593,IDN,1,1,2,1,7,5,9,10,1988,29,No answer,Male,Married,Self employed
+360070593,IDN,1,1,2,1,7,5,9,10,1988,29,,Male,Married,Self employed
 360070594,IDN,1,1,1,1,4,10,5,-1,1978,40,A religious person,Male,Married,Full time
 360070595,IDN,1,1,1,1,3,7,5,10,1956,61,A religious person,Male,Married,Self employed
 360070596,IDN,1,1,3,1,3,5,6,-1,1995,22,A religious person,Female,Married,Homemaker
@@ -608,7 +608,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 360070607,IDN,1,2,1,1,8,8,5,5,1985,32,A religious person,Male,Married,Self employed
 360070608,IDN,1,2,3,1,9,10,8,-1,1974,44,A religious person,Female,Married,Self employed
 360070609,IDN,1,2,1,1,10,10,10,7,1980,38,A religious person,Male,Married,Self employed
-360070610,IDN,1,2,1,1,8,7,7,5,1986,32,No answer,Male,Married,Part time
+360070610,IDN,1,2,1,1,8,7,7,5,1986,32,,Male,Married,Part time
 360070611,IDN,1,2,1,1,10,1,2,10,1962,56,A religious person,Male,Married,Full time
 360070612,IDN,1,1,1,1,10,6,5,-1,1998,20,A religious person,Male,Single,Unemployed
 360070613,IDN,1,-2,1,1,10,9,8,-1,1980,38,A religious person,Male,Married,Self employed
@@ -624,7 +624,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 360070623,IDN,1,2,2,1,5,7,7,6,1982,35,A religious person,Male,Married,Self employed
 360070624,IDN,1,2,1,1,10,10,8,9,1982,36,A religious person,Male,Married,Self employed
 360070625,IDN,1,2,3,1,10,7,9,5,1984,34,A religious person,Male,Married,Full time
-360070626,IDN,1,1,1,1,3,10,1,1,1997,21,No answer,Female,Married,Homemaker
+360070626,IDN,1,1,1,1,3,10,1,1,1997,21,,Female,Married,Homemaker
 360070627,IDN,1,2,2,1,10,5,2,2,1977,41,A religious person,Male,Married,Full time
 360070628,IDN,1,1,2,1,9,10,9,8,1999,19,A religious person,Female,Single,Unemployed
 360070629,IDN,1,1,3,1,10,10,8,10,1973,45,A religious person,Female,Married,Self employed
@@ -643,7 +643,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 360070642,IDN,1,1,1,1,8,3,3,-1,1979,39,A religious person,Female,Married,Self employed
 360070643,IDN,1,-1,1,1,7,7,5,6,1975,43,A religious person,Male,Married,Full time
 360070644,IDN,1,2,1,1,10,10,10,10,1987,30,A religious person,Female,Married,Homemaker
-360070645,IDN,1,-2,1,1,10,9,9,8,1979,39,No answer,Female,Married,Homemaker
+360070645,IDN,1,-2,1,1,10,9,9,8,1979,39,,Female,Married,Homemaker
 360070646,IDN,1,2,1,1,5,7,10,6,1994,24,A religious person,Female,Married,Homemaker
 360070647,IDN,1,1,1,1,8,7,8,6,1981,37,A religious person,Male,Married,Full time
 360070648,IDN,1,2,3,1,9,9,9,10,1972,46,A religious person,Male,Married,Full time
@@ -696,7 +696,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 360070695,IDN,1,2,1,1,8,9,8,-1,2000,18,Not a religious person,Male,Single,Unemployed
 360070696,IDN,1,1,1,1,8,8,7,8,1977,41,A religious person,Male,Married,Full time
 360070697,IDN,1,3,1,1,10,9,9,9,1978,40,A religious person,Male,Married,Self employed
-360070698,IDN,1,1,2,1,10,7,-5,-1,2000,18,A religious person,Male,Single,Unemployed
+360070698,IDN,1,1,2,1,10,7,,-1,2000,18,A religious person,Male,Single,Unemployed
 360070699,IDN,1,1,2,1,9,8,7,-1,1991,27,A religious person,Female,Married,Full time
 360070700,IDN,1,1,2,1,8,7,6,9,1968,50,A religious person,Male,Married,Self employed
 360070701,IDN,1,2,2,1,10,8,5,8,1989,29,A religious person,Male,Married,Self employed
@@ -769,9 +769,9 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 360070768,IDN,1,2,1,1,7,8,6,-1,2000,18,A religious person,Male,Single,Student
 360070769,IDN,1,2,1,1,3,5,5,8,1996,22,A religious person,Female,Single,Part time
 360070770,IDN,1,3,3,1,10,10,10,4,1952,66,A religious person,Female,Widowed,Homemaker
-360070771,IDN,1,3,1,1,10,8,6,6,1982,36,A religious person,Female,Married,Other missing
+360070771,IDN,1,3,1,1,10,8,6,6,1982,36,A religious person,Female,Married,
 360070772,IDN,1,1,2,1,8,8,6,6,1996,22,Not a religious person,Male,Single,Full time
-360070773,IDN,1,2,2,2,6,8,6,-5,1968,49,A religious person,Female,Married,Other missing
+360070773,IDN,1,2,2,2,6,8,6,,1968,49,A religious person,Female,Married,
 360070774,IDN,1,3,1,1,10,5,1,8,1985,33,A religious person,Female,Married,Homemaker
 360070775,IDN,1,1,2,1,8,8,7,7,1992,26,Not a religious person,Female,Single,Full time
 360070776,IDN,1,3,1,1,8,6,5,8,1954,63,A religious person,Female,Widowed,Self employed
@@ -840,13 +840,13 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 360070839,IDN,1,3,2,1,3,2,1,6,1953,65,A religious person,Female,Widowed,Self employed
 360070840,IDN,1,3,2,1,6,8,7,5,1978,40,A religious person,Female,Married,Self employed
 360070841,IDN,1,3,1,1,10,10,7,2,1970,48,A religious person,Female,Widowed,Homemaker
-360070842,IDN,1,2,2,1,5,6,5,5,1992,27,A religious person,Female,Married,Other missing
+360070842,IDN,1,2,2,1,5,6,5,5,1992,27,A religious person,Female,Married,
 360070843,IDN,1,1,1,1,10,10,10,10,1999,19,A religious person,Male,Single,Full time
 360070844,IDN,1,2,3,1,8,7,5,3,1967,51,A religious person,Male,Married,Full time
 360070845,IDN,1,1,1,1,10,10,5,8,1990,28,A religious person,Male,Married,Full time
 360070846,IDN,1,2,1,1,5,10,3,5,1987,30,A religious person,Female,Married,Self employed
 360070847,IDN,1,1,1,1,9,5,3,5,1961,57,A religious person,Male,Married,Part time
-360070848,IDN,1,2,2,1,5,8,4,5,1996,22,Not a religious person,Female,Married,Other missing
+360070848,IDN,1,2,2,1,5,8,4,5,1996,22,Not a religious person,Female,Married,
 360070849,IDN,1,3,3,1,10,10,7,1,1964,54,A religious person,Male,Married,Full time
 360070850,IDN,1,2,3,1,8,6,6,6,1973,45,A religious person,Male,Married,Full time
 360070851,IDN,1,1,1,1,9,8,7,9,1973,44,A religious person,Male,Married,Full time
@@ -854,7 +854,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 360070853,IDN,1,1,1,1,8,8,8,5,1979,39,A religious person,Male,Married,Full time
 360070854,IDN,1,3,1,1,6,10,9,10,1984,34,A religious person,Female,Married,Homemaker
 360070855,IDN,1,2,1,1,5,8,8,9,1976,42,Not a religious person,Male,Married,Full time
-360070856,IDN,1,2,1,1,7,9,7,7,1992,26,A religious person,Female,Married,Other missing
+360070856,IDN,1,2,1,1,7,9,7,7,1992,26,A religious person,Female,Married,
 360070857,IDN,1,2,1,1,10,5,10,5,1973,45,A religious person,Male,Married,Full time
 360070858,IDN,1,2,1,1,8,7,7,6,1985,33,A religious person,Male,Single,Full time
 360070859,IDN,1,1,1,1,10,10,7,6,1976,41,A religious person,Male,Married,Full time
@@ -864,11 +864,11 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 360070863,IDN,1,2,2,1,7,8,8,5,1989,28,A religious person,Female,Married,Homemaker
 360070864,IDN,1,1,1,1,1,10,10,10,1988,30,A religious person,Male,Single,Full time
 360070865,IDN,1,2,3,3,8,4,5,7,2000,18,A religious person,Female,Single,Unemployed
-360070866,IDN,1,3,3,1,8,8,7,7,1975,43,A religious person,Female,Married,Other missing
+360070866,IDN,1,3,3,1,8,8,7,7,1975,43,A religious person,Female,Married,
 360070867,IDN,1,1,3,1,10,1,1,1,1969,48,A religious person,Male,Married,Self employed
 360070868,IDN,1,3,2,1,6,9,8,6,1960,57,A religious person,Female,Married,Homemaker
 360070869,IDN,1,2,3,1,7,7,6,5,1975,43,Not a religious person,Male,Married,Self employed
-360070870,IDN,1,1,2,1,10,8,8,3,1995,23,A religious person,Female,Married,Other missing
+360070870,IDN,1,1,2,1,10,8,8,3,1995,23,A religious person,Female,Married,
 360070871,IDN,1,1,3,1,10,10,10,10,1943,75,A religious person,Female,Widowed,Homemaker
 360070872,IDN,1,3,3,1,10,10,10,10,1957,61,A religious person,Male,Married,Full time
 360070873,IDN,1,2,2,1,10,1,10,8,1991,27,Not a religious person,Male,Single,Part time
@@ -877,7 +877,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 360070876,IDN,1,2,3,1,10,9,4,10,1957,61,A religious person,Female,Married,Self employed
 360070877,IDN,1,1,1,1,10,10,6,5,1980,38,A religious person,Male,Married,Full time
 360070878,IDN,1,1,2,1,8,8,8,4,1972,47,Not a religious person,Male,Single,Self employed
-360070879,IDN,1,3,3,1,7,10,9,6,1975,43,A religious person,Female,Married,Other missing
+360070879,IDN,1,3,3,1,7,10,9,6,1975,43,A religious person,Female,Married,
 360070880,IDN,1,2,3,1,4,10,10,10,1967,51,Not a religious person,Female,Married,Homemaker
 360070881,IDN,2,1,1,1,8,10,1,10,1986,32,A religious person,Male,Married,Self employed
 360070882,IDN,1,3,3,1,6,7,7,2,1987,30,A religious person,Female,Married,Homemaker
@@ -915,7 +915,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 360070914,IDN,1,1,3,1,7,8,5,4,1971,47,A religious person,Female,Married,Full time
 360070915,IDN,1,2,2,1,10,10,10,10,1977,40,A religious person,Male,Married,Full time
 360070916,IDN,1,1,2,1,8,4,6,10,1997,21,A religious person,Female,Single,Full time
-360070917,IDN,1,2,1,1,6,7,5,4,1997,21,Not a religious person,Male,Single,Other missing
+360070917,IDN,1,2,1,1,6,7,5,4,1997,21,Not a religious person,Male,Single,
 360070918,IDN,1,1,1,1,10,5,5,-1,1970,48,A religious person,Female,Married,Part time
 360070919,IDN,1,2,3,1,10,10,10,10,1976,43,A religious person,Male,Married,Self employed
 360070920,IDN,1,3,2,1,2,10,4,2,1945,73,A religious person,Male,Married,Unemployed
@@ -963,7 +963,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 360070962,IDN,1,1,1,2,10,10,8,7,1988,30,A religious person,Female,Married,Self employed
 360070963,IDN,1,2,3,1,10,10,3,9,1956,62,A religious person,Male,Married,Self employed
 360070964,IDN,1,1,1,1,3,7,7,1,1984,34,A religious person,Male,Married,Full time
-360070965,IDN,1,1,3,1,10,8,8,-5,1948,70,A religious person,Female,Widowed,Full time
+360070965,IDN,1,1,3,1,10,8,8,,1948,70,A religious person,Female,Widowed,Full time
 360070966,IDN,1,3,3,1,7,5,6,8,1981,37,A religious person,Female,Married,Homemaker
 360070967,IDN,1,2,2,1,10,10,8,9,1967,51,A religious person,Male,Married,Self employed
 360070968,IDN,1,1,1,1,8,7,6,-1,1979,39,A religious person,Female,Married,Homemaker
@@ -1085,7 +1085,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 360071084,IDN,1,1,3,1,10,10,7,-1,1973,45,A religious person,Female,Married,Part time
 360071085,IDN,1,1,1,1,1,1,1,8,1958,60,A religious person,Female,Widowed,Homemaker
 360071086,IDN,1,2,1,1,8,10,9,9,1983,35,A religious person,Female,Married,Self employed
-360071087,IDN,1,1,2,1,10,10,10,-1,1983,35,No answer,Female,Married,Self employed
+360071087,IDN,1,1,2,1,10,10,10,-1,1983,35,,Female,Married,Self employed
 360071088,IDN,1,2,2,1,10,8,5,6,1986,32,Not a religious person,Male,Married,Full time
 360071089,IDN,1,2,1,1,10,10,5,-1,1967,51,A religious person,Female,Married,Part time
 360071090,IDN,1,1,1,1,10,3,4,8,1958,60,A religious person,Female,Married,Part time
@@ -1123,7 +1123,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 360071122,IDN,1,2,1,1,8,6,3,8,1998,20,A religious person,Male,Single,Full time
 360071123,IDN,1,2,3,1,10,7,6,6,1991,27,A religious person,Male,Married,Full time
 360071124,IDN,1,3,1,1,1,5,5,1,1984,34,A religious person,Male,Married,Self employed
-360071125,IDN,1,2,3,1,10,10,5,-1,1970,48,No answer,Female,Married,Homemaker
+360071125,IDN,1,2,3,1,10,10,5,-1,1970,48,,Female,Married,Homemaker
 360071126,IDN,1,2,1,1,3,7,4,9,1972,45,A religious person,Male,Married,Full time
 360071127,IDN,1,3,1,1,7,7,9,6,1977,41,A religious person,Male,Married,Full time
 360071128,IDN,1,1,3,1,10,9,9,6,2000,18,A religious person,Male,Single,Self employed
@@ -1139,7 +1139,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 360071138,IDN,1,2,2,1,3,6,8,-1,1996,21,A religious person,Male,Married,Self employed
 360071139,IDN,1,2,3,1,5,2,4,8,1958,60,A religious person,Female,Married,Part time
 360071140,IDN,1,1,1,1,10,10,10,-1,1970,48,A religious person,Female,Married,Self employed
-360071141,IDN,1,2,1,1,7,10,10,5,1973,45,No answer,Male,Married,Self employed
+360071141,IDN,1,2,1,1,7,10,10,5,1973,45,,Male,Married,Self employed
 360071142,IDN,1,3,3,2,10,10,8,-1,1985,33,A religious person,Female,Married,Full time
 360071143,IDN,1,2,3,1,6,1,1,5,1997,21,A religious person,Male,Single,Unemployed
 360071144,IDN,1,2,2,1,10,7,6,9,1974,44,A religious person,Male,Divorced,Full time
@@ -1147,7 +1147,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 360071146,IDN,1,2,1,1,8,10,4,8,1987,31,A religious person,Female,Married,Self employed
 360071147,IDN,1,1,1,1,1,10,6,10,1966,52,A religious person,Male,Married,Full time
 360071148,IDN,1,2,1,1,6,7,7,6,1980,38,A religious person,Female,Married,Part time
-360071149,IDN,1,1,1,1,10,10,10,-1,1987,31,No answer,Male,Married,Self employed
+360071149,IDN,1,1,1,1,10,10,10,-1,1987,31,,Male,Married,Self employed
 360071150,IDN,1,1,1,1,10,10,9,9,1997,21,A religious person,Male,Single,Full time
 360071151,IDN,1,1,1,1,10,10,1,-1,1958,60,A religious person,Male,Married,Part time
 360071152,IDN,1,2,2,1,10,10,5,5,1960,58,A religious person,Female,Married,Self employed
@@ -1226,7 +1226,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 360071225,IDN,1,1,3,1,8,10,5,5,1974,44,A religious person,Male,Married,Self employed
 360071226,IDN,1,3,2,1,7,8,9,8,1972,46,A religious person,Female,Married,Homemaker
 360071227,IDN,1,2,1,1,10,10,10,5,1993,25,A religious person,Female,Married,Homemaker
-360071228,IDN,1,3,1,1,7,8,8,5,1981,37,A religious person,Female,Married,Other missing
+360071228,IDN,1,3,1,1,7,8,8,5,1981,37,A religious person,Female,Married,
 360071229,IDN,1,1,3,1,8,10,10,7,1985,33,A religious person,Male,Married,Self employed
 360071230,IDN,1,2,1,1,10,7,7,3,1992,26,A religious person,Female,Married,Full time
 360071231,IDN,1,2,2,1,7,5,4,5,1965,53,A religious person,Female,Widowed,Full time
@@ -1295,7 +1295,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 360071294,IDN,1,1,2,1,9,9,10,5,1974,43,A religious person,Female,Married,Full time
 360071295,IDN,1,1,1,1,8,8,8,-1,1990,28,A religious person,Female,Married,Homemaker
 360071296,IDN,1,1,2,1,7,7,7,-1,1963,54,A religious person,Female,Married,Part time
-360071297,IDN,1,1,3,1,7,9,7,8,1963,55,A religious person,Female,Widowed,Other missing
+360071297,IDN,1,1,3,1,7,9,7,8,1963,55,A religious person,Female,Widowed,
 360071298,IDN,1,1,1,1,8,8,8,-1,1994,24,A religious person,Female,Single,Full time
 360071299,IDN,1,2,1,1,7,7,6,5,1972,46,A religious person,Female,Married,Part time
 360071300,IDN,1,1,1,1,8,10,8,5,1998,19,A religious person,Female,Single,Part time
@@ -1414,13 +1414,13 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 360071413,IDN,1,2,1,1,9,7,8,1,1949,69,A religious person,Male,Married,Self employed
 360071414,IDN,1,2,3,1,6,10,9,3,1980,38,A religious person,Male,Married,Full time
 360071415,IDN,1,1,3,1,8,8,6,9,1988,30,Not a religious person,Male,Single,Unemployed
-360071416,IDN,1,1,3,1,10,5,5,5,1971,47,No answer,Male,Married,Full time
+360071416,IDN,1,1,3,1,10,5,5,5,1971,47,,Male,Married,Full time
 360071417,IDN,1,2,3,1,9,10,1,3,1965,53,A religious person,Female,Married,Homemaker
 360071418,IDN,1,2,2,1,7,7,6,5,1978,40,A religious person,Female,Married,Full time
 360071419,IDN,1,1,2,1,8,8,6,5,1980,38,A religious person,Male,Married,Self employed
 360071420,IDN,1,2,4,1,5,10,6,1,1956,62,A religious person,Female,Married,Full time
 360071421,IDN,1,1,1,1,10,10,9,8,1968,50,A religious person,Male,Married,Part time
-360071422,IDN,1,2,1,1,8,8,4,6,1999,19,A religious person,Male,Single,Other missing
+360071422,IDN,1,2,1,1,8,8,4,6,1999,19,A religious person,Male,Single,
 360071423,IDN,1,1,3,1,1,1,5,-1,1965,53,A religious person,Male,Divorced,Full time
 360071424,IDN,1,2,2,1,10,8,8,8,1990,28,A religious person,Female,Married,Homemaker
 360071425,IDN,1,1,1,1,8,6,6,5,1980,38,A religious person,Male,Married,Self employed
@@ -1570,7 +1570,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 360071569,IDN,1,2,1,1,10,10,10,10,1967,51,A religious person,Female,Married,Part time
 360071570,IDN,1,1,1,1,5,3,3,4,1986,32,A religious person,Female,Married,Part time
 360071571,IDN,1,2,3,1,6,5,5,7,1954,64,A religious person,Male,Married,Self employed
-360071572,IDN,1,3,1,1,5,9,8,8,1996,22,A religious person,Female,Married,Other missing
+360071572,IDN,1,3,1,1,5,9,8,8,1996,22,A religious person,Female,Married,
 360071573,IDN,1,1,1,1,10,1,5,10,1955,63,A religious person,Male,Married,Full time
 360071574,IDN,1,2,2,1,10,10,1,10,1975,42,A religious person,Female,Married,Self employed
 360071575,IDN,1,2,3,1,5,4,5,4,1993,25,A religious person,Female,Married,Homemaker
@@ -1603,7 +1603,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 360071602,IDN,1,2,4,1,10,6,5,6,1955,63,A religious person,Female,Widowed,Part time
 360071603,IDN,1,3,1,1,10,5,5,10,1986,32,A religious person,Female,Married,Homemaker
 360071604,IDN,1,2,1,1,5,4,3,8,1977,41,A religious person,Female,Married,Full time
-360071605,IDN,1,1,2,1,8,8,8,8,1995,22,A religious person,Female,Single,Other missing
+360071605,IDN,1,1,2,1,8,8,8,8,1995,22,A religious person,Female,Single,
 360071606,IDN,1,3,1,1,8,9,7,8,1973,45,A religious person,Female,Married,Full time
 360071607,IDN,1,1,2,1,10,2,1,3,1959,59,A religious person,Female,Widowed,Part time
 360071608,IDN,1,1,1,1,4,8,7,2,1985,33,A religious person,Female,Married,Full time
@@ -1763,7 +1763,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 360071762,IDN,1,2,1,1,9,8,5,1,1980,38,A religious person,Female,Married,Full time
 360071763,IDN,1,1,2,1,7,8,7,6,1982,36,A religious person,Female,Married,Part time
 360071764,IDN,1,1,2,1,5,5,5,5,1969,49,A religious person,Male,Married,Full time
-360071765,IDN,1,2,2,1,8,5,5,7,1999,19,A religious person,Female,Single,Other missing
+360071765,IDN,1,2,2,1,8,5,5,7,1999,19,A religious person,Female,Single,
 360071766,IDN,1,1,1,1,8,7,6,8,1989,29,A religious person,Male,Married,Full time
 360071767,IDN,1,1,3,1,4,6,4,4,1996,21,A religious person,Female,Married,Homemaker
 360071768,IDN,1,2,2,1,5,8,8,4,1996,21,A religious person,Female,Married,Self employed
@@ -1873,7 +1873,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 360071872,IDN,1,1,1,1,9,9,8,1,1956,62,A religious person,Female,Married,Homemaker
 360071873,IDN,1,3,1,1,10,1,1,10,1990,28,Not a religious person,Male,Married,Full time
 360071874,IDN,1,1,1,1,10,1,1,10,1960,58,A religious person,Female,Married,Self employed
-360071875,IDN,1,1,2,1,1,10,10,-1,1980,38,No answer,Male,Married,Self employed
+360071875,IDN,1,1,2,1,1,10,10,-1,1980,38,,Male,Married,Self employed
 360071876,IDN,1,1,1,1,7,5,2,1,1961,56,A religious person,Male,Married,Full time
 360071877,IDN,2,1,4,1,10,10,10,9,1974,44,A religious person,Male,Married,Self employed
 360071878,IDN,1,1,1,1,9,10,1,10,1973,45,A religious person,Female,Married,Self employed
@@ -1955,18 +1955,18 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 360071954,IDN,1,2,1,1,6,4,6,3,1990,27,A religious person,Female,Married,Full time
 360071955,IDN,1,2,2,1,10,10,10,10,1981,37,A religious person,Male,Married,Full time
 360071956,IDN,1,2,2,1,10,10,5,3,1975,43,A religious person,Female,Married,Full time
-360071957,IDN,1,1,3,1,10,10,10,1,1991,27,A religious person,Female,Married,Other missing
+360071957,IDN,1,1,3,1,10,10,10,1,1991,27,A religious person,Female,Married,
 360071958,IDN,1,2,2,2,7,7,7,8,1979,38,A religious person,Female,Married,Full time
 360071959,IDN,1,2,2,1,8,8,7,7,1955,63,A religious person,Male,Widowed,Self employed
-360071960,IDN,1,2,3,1,10,10,10,1,1966,52,A religious person,Female,Married,Other missing
+360071960,IDN,1,2,3,1,10,10,10,1,1966,52,A religious person,Female,Married,
 360071961,IDN,1,1,3,1,10,10,1,10,1967,51,A religious person,Male,Married,Part time
 360071962,IDN,1,1,2,1,7,6,5,7,1992,26,A religious person,Female,Married,Homemaker
 360071963,IDN,1,2,2,1,4,7,5,5,1989,29,A religious person,Male,Married,Full time
 360071964,IDN,1,2,3,1,10,10,1,9,1984,33,A religious person,Female,Married,Full time
 360071965,IDN,1,1,2,1,10,10,2,7,1976,41,A religious person,Male,Married,Full time
 360071966,IDN,1,3,2,1,10,10,10,10,1993,24,A religious person,Male,Married,Full time
-360071967,IDN,1,2,3,1,5,8,7,1,1977,41,A religious person,Female,Married,Other missing
-360071968,IDN,1,3,2,1,5,6,6,1,1983,35,A religious person,Female,Married,Other missing
+360071967,IDN,1,2,3,1,5,8,7,1,1977,41,A religious person,Female,Married,
+360071968,IDN,1,3,2,1,5,6,6,1,1983,35,A religious person,Female,Married,
 360071969,IDN,1,2,3,1,10,7,5,5,1983,35,A religious person,Male,Married,Full time
 360071970,IDN,1,2,3,1,6,10,6,3,1986,32,A religious person,Male,Married,Self employed
 360071971,IDN,1,2,2,2,9,10,10,8,1958,60,A religious person,Male,Married,Self employed
@@ -1975,7 +1975,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 360071974,IDN,1,1,1,1,10,10,1,6,1972,46,A religious person,Male,Married,Full time
 360071975,IDN,1,1,2,1,10,10,6,10,1983,34,A religious person,Female,Married,Homemaker
 360071976,IDN,1,3,1,1,8,6,10,-1,1975,43,A religious person,Female,Married,Part time
-360071977,IDN,1,1,1,1,10,10,10,10,1977,41,No answer,Male,Married,Full time
+360071977,IDN,1,1,1,1,10,10,10,10,1977,41,,Male,Married,Full time
 360071978,IDN,1,3,1,1,10,1,5,10,1971,47,A religious person,Male,Divorced,Self employed
 360071979,IDN,1,2,3,1,1,10,10,10,1966,52,A religious person,Male,Married,Full time
 360071980,IDN,1,2,2,1,10,5,5,6,1977,42,A religious person,Female,Married,Self employed
@@ -2140,14 +2140,14 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 360072139,IDN,1,1,4,1,10,7,7,-1,1955,62,A religious person,Female,Married,Part time
 360072140,IDN,1,2,2,1,6,7,7,-1,1966,52,A religious person,Female,Widowed,Self employed
 360072141,IDN,1,2,3,1,1,10,10,1,1966,52,A religious person,Male,Married,Full time
-360072142,IDN,1,3,1,1,10,10,10,7,1995,23,A religious person,Female,Married,Other missing
+360072142,IDN,1,3,1,1,10,10,10,7,1995,23,A religious person,Female,Married,
 360072143,IDN,1,2,3,1,4,7,5,5,1965,53,A religious person,Male,Married,Self employed
-360072144,IDN,1,2,2,1,9,8,6,7,1991,27,A religious person,Female,Married,Other missing
+360072144,IDN,1,2,2,1,9,8,6,7,1991,27,A religious person,Female,Married,
 360072145,IDN,1,1,2,1,1,10,10,10,1965,52,A religious person,Male,Married,Self employed
-360072146,IDN,1,2,1,2,5,7,7,5,1980,38,A religious person,Female,Married,Other missing
+360072146,IDN,1,2,1,2,5,7,7,5,1980,38,A religious person,Female,Married,
 360072147,IDN,1,2,1,1,7,4,3,8,1985,33,Not a religious person,Male,Married,Part time
 360072148,IDN,1,1,2,1,5,7,4,1,1994,24,Not a religious person,Male,Single,Full time
-360072149,IDN,1,3,2,1,5,5,6,1,2000,18,A religious person,Female,Married,Other missing
+360072149,IDN,1,3,2,1,5,5,6,1,2000,18,A religious person,Female,Married,
 360072150,IDN,1,3,4,1,1,10,10,1,1961,57,A religious person,Female,Married,Self employed
 360072151,IDN,1,1,2,1,10,10,5,8,1978,40,A religious person,Male,Married,Self employed
 360072152,IDN,1,2,3,1,9,6,5,7,1942,76,A religious person,Male,Married,Self employed
@@ -2284,7 +2284,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 360072283,IDN,1,1,1,1,10,10,10,-1,1990,29,Don't know,Female,Married,Homemaker
 360072284,IDN,1,2,3,1,8,9,9,2,1993,25,A religious person,Male,Married,Part time
 360072285,IDN,1,3,3,1,10,4,2,7,1984,33,A religious person,Male,Married,Full time
-360072286,IDN,1,1,2,1,7,8,1,-1,1999,19,Don't know,Male,Single,Other missing
+360072286,IDN,1,1,2,1,7,8,1,-1,1999,19,Don't know,Male,Single,
 360072287,IDN,1,2,2,1,8,9,7,8,1997,20,A religious person,Male,Married,Full time
 360072288,IDN,1,2,2,1,10,9,8,5,1983,35,A religious person,Female,Married,Homemaker
 360072289,IDN,1,2,2,1,8,8,7,-1,1986,32,A religious person,Male,Married,Full time
@@ -2337,7 +2337,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 360072336,IDN,1,1,1,1,5,7,4,8,1975,43,A religious person,Female,Married,Full time
 360072337,IDN,1,3,1,1,8,8,5,1,1958,60,A religious person,Female,Widowed,Self employed
 360072338,IDN,1,2,1,2,7,8,8,5,1997,20,A religious person,Female,Single,Full time
-360072339,IDN,1,1,1,1,7,7,6,7,1974,44,No answer,Male,Married,Self employed
+360072339,IDN,1,1,1,1,7,7,6,7,1974,44,,Male,Married,Self employed
 360072340,IDN,1,1,1,2,10,10,9,5,1986,31,A religious person,Female,Married,Homemaker
 360072341,IDN,1,2,1,1,10,9,7,9,1971,46,Not a religious person,Female,Married,Homemaker
 360072342,IDN,1,1,3,1,8,6,6,7,1956,62,A religious person,Male,Married,Self employed
@@ -2350,7 +2350,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 360072349,IDN,1,1,1,1,7,8,7,5,1996,22,A religious person,Male,Single,Full time
 360072350,IDN,1,2,2,1,5,5,1,-1,1975,43,A religious person,Male,Married,Self employed
 360072351,IDN,1,2,1,1,5,6,4,5,1973,44,Not a religious person,Male,Widowed,Full time
-360072352,IDN,1,2,1,1,6,6,6,-5,1983,35,A religious person,Female,Married,Self employed
+360072352,IDN,1,2,1,1,6,6,6,,1983,35,A religious person,Female,Married,Self employed
 360072353,IDN,1,2,2,1,8,6,5,8,1976,41,A religious person,Female,Married,Homemaker
 360072354,IDN,1,2,2,2,10,4,4,9,1974,44,A religious person,Male,Single,Full time
 360072355,IDN,1,1,2,2,10,10,10,5,1976,42,A religious person,Female,Married,Homemaker
@@ -2705,7 +2705,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 360072704,IDN,1,2,1,1,9,9,9,6,1990,27,A religious person,Female,Married,Homemaker
 360072705,IDN,1,2,4,1,7,9,4,7,1975,43,A religious person,Female,Married,Part time
 360072706,IDN,1,3,1,1,6,6,7,6,1982,36,A religious person,Female,Married,Homemaker
-360072707,IDN,1,2,1,1,7,7,5,-1,1994,24,No answer,Male,Married,Full time
+360072707,IDN,1,2,1,1,7,7,5,-1,1994,24,,Male,Married,Full time
 360072708,IDN,1,3,1,1,10,10,8,7,1988,29,A religious person,Male,Single,Full time
 360072709,IDN,1,2,1,1,10,10,10,7,1982,36,A religious person,Female,Married,Full time
 360072710,IDN,1,1,1,2,9,8,8,8,1979,39,A religious person,Male,Married,Self employed
@@ -3171,7 +3171,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 360073170,IDN,1,1,1,1,10,10,9,8,1994,23,A religious person,Female,Married,Homemaker
 360073171,IDN,1,1,1,1,10,10,10,10,1968,50,A religious person,Male,Married,Full time
 360073172,IDN,1,1,1,1,10,10,10,10,1985,33,A religious person,Female,Single,Full time
-360073173,IDN,1,1,1,1,10,1,1,8,1996,22,A religious person,Female,Single,Other missing
+360073173,IDN,1,1,1,1,10,1,1,8,1996,22,A religious person,Female,Single,
 360073174,IDN,1,2,1,1,5,10,10,5,1986,32,A religious person,Male,Married,Part time
 360073175,IDN,1,1,1,1,10,10,1,1,1999,19,A religious person,Female,Single,Unemployed
 360073176,IDN,1,1,1,1,10,10,10,10,1989,29,A religious person,Male,Married,Full time
@@ -3435,11 +3435,11 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 702070234,SGP,1,3,3,1,7,10,5,10,1963,56,A religious person,Female,Married,Unemployed
 702070235,SGP,1,3,2,2,8,8,8,10,1968,51,A religious person,Male,Married,Unemployed
 702070236,SGP,2,2,3,3,2,4,1,5,1960,60,An atheist,Male,Divorced,Unemployed
-702070237,SGP,1,1,2,1,3,3,1,6,1978,42,No answer,Male,Married,Unemployed
+702070237,SGP,1,1,2,1,3,3,1,6,1978,42,,Male,Married,Unemployed
 702070238,SGP,1,1,1,1,2,5,2,8,1959,61,A religious person,Female,Married,Retired/pensioned
 702070239,SGP,1,2,3,2,9,8,7,-1,1965,55,A religious person,Female,Widowed,Part time
 702070240,SGP,1,3,3,3,10,10,10,7,1951,69,A religious person,Female,Widowed,Retired/pensioned
-702070241,SGP,2,2,1,2,7,7,1,7,1984,36,No answer,Male,Single,Part time
+702070241,SGP,2,2,1,2,7,7,1,7,1984,36,,Male,Single,Part time
 702070242,SGP,1,3,4,3,5,7,10,10,1978,42,Not a religious person,Female,Married,Full time
 702070243,SGP,1,1,1,3,10,9,8,6,1984,35,A religious person,Female,Married,Full time
 702070244,SGP,1,1,1,3,9,5,5,3,1990,30,Not a religious person,Female,Living together as married,Full time
@@ -3485,7 +3485,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 702070284,SGP,1,1,3,2,9,8,8,5,1968,52,Not a religious person,Male,Married,Self employed
 702070285,SGP,1,1,1,4,7,7,7,-1,1978,42,An atheist,Male,Married,Unemployed
 702070286,SGP,1,1,3,3,7,5,2,5,1949,71,Not a religious person,Male,Married,Unemployed
-702070287,SGP,1,1,2,2,4,6,5,3,1988,32,No answer,Male,Single,Full time
+702070287,SGP,1,1,2,2,4,6,5,3,1988,32,,Male,Single,Full time
 702070288,SGP,1,1,1,3,8,8,8,7,1938,82,Not a religious person,Male,Widowed,Retired/pensioned
 702070289,SGP,1,2,4,1,6,3,4,5,1974,45,Not a religious person,Female,Separated,Full time
 702070290,SGP,1,2,2,3,8,8,8,6,1963,57,A religious person,Female,Married,Homemaker
@@ -3518,10 +3518,10 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 702070317,SGP,1,1,1,2,10,8,7,-1,1977,43,An atheist,Female,Separated,Full time
 702070318,SGP,1,2,1,2,9,8,6,1,1974,45,Not a religious person,Female,Married,Part time
 702070319,SGP,1,1,2,4,-2,7,8,7,1940,79,An atheist,Female,Widowed,Retired/pensioned
-702070320,SGP,1,1,2,1,8,7,7,-1,1967,53,No answer,Male,Married,Full time
+702070320,SGP,1,1,2,1,8,7,7,-1,1967,53,,Male,Married,Full time
 702070321,SGP,1,1,2,3,5,7,6,7,1982,38,Not a religious person,Female,Married,Homemaker
 702070322,SGP,1,1,2,2,8,8,7,5,1964,55,Not a religious person,Male,Married,Self employed
-702070323,SGP,1,2,2,1,7,8,7,8,1969,51,No answer,Male,Married,Self employed
+702070323,SGP,1,2,2,1,7,8,7,8,1969,51,,Male,Married,Self employed
 702070324,SGP,1,1,2,2,6,7,7,5,1995,25,Not a religious person,Male,Single,Part time
 702070325,SGP,1,3,1,-2,-2,7,10,6,1928,91,Not a religious person,Female,Widowed,Retired/pensioned
 702070326,SGP,1,3,2,2,6,8,6,4,1972,47,An atheist,Male,Married,Full time
@@ -3529,14 +3529,14 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 702070328,SGP,2,2,2,-2,7,6,7,-1,1957,62,A religious person,Female,Living together as married,Retired/pensioned
 702070329,SGP,1,2,3,2,7,7,7,7,1961,59,Not a religious person,Male,Married,Full time
 702070330,SGP,1,2,2,2,7,7,6,8,1947,73,An atheist,Male,Married,Retired/pensioned
-702070331,SGP,1,2,1,1,6,8,7,8,1946,74,No answer,Female,Married,Retired/pensioned
+702070331,SGP,1,2,1,1,6,8,7,8,1946,74,,Female,Married,Retired/pensioned
 702070332,SGP,1,3,1,1,10,10,10,5,1966,54,Not a religious person,Male,Married,Full time
 702070333,SGP,1,1,1,2,9,9,10,-1,1960,60,Not a religious person,Female,Married,Retired/pensioned
 702070334,SGP,1,1,2,2,6,7,7,7,1951,69,Not a religious person,Female,Widowed,Retired/pensioned
 702070335,SGP,1,1,2,2,6,8,7,-2,1950,70,Not a religious person,Female,Married,Part time
 702070336,SGP,1,3,2,2,4,4,5,6,1960,60,A religious person,Female,Divorced,Full time
 702070337,SGP,2,2,2,3,5,5,6,5,1939,81,Not a religious person,Male,Married,Retired/pensioned
-702070338,SGP,1,2,2,2,5,5,5,5,1970,50,No answer,Female,Married,Self employed
+702070338,SGP,1,2,2,2,5,5,5,5,1970,50,,Female,Married,Self employed
 702070339,SGP,1,2,2,3,7,7,7,7,1964,56,Not a religious person,Male,Married,Part time
 702070340,SGP,1,2,2,2,8,7,5,9,1960,60,A religious person,Male,Married,Part time
 702070341,SGP,2,2,3,1,10,9,8,7,1991,29,A religious person,Male,Single,Full time
@@ -3550,7 +3550,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 702070349,SGP,1,1,1,1,10,7,6,3,1998,22,Not a religious person,Male,Single,Other
 702070350,SGP,1,1,1,2,7,7,7,5,1964,56,A religious person,Male,Married,Full time
 702070351,SGP,1,2,1,2,4,7,8,-1,1998,22,A religious person,Male,Single,Student
-702070352,SGP,1,2,2,1,5,5,5,-1,1975,45,No answer,Female,Divorced,Unemployed
+702070352,SGP,1,2,2,1,5,5,5,-1,1975,45,,Female,Divorced,Unemployed
 702070353,SGP,1,1,3,1,9,9,8,5,1986,34,Not a religious person,Male,Living together as married,Full time
 702070354,SGP,1,2,2,2,6,7,7,5,1947,73,An atheist,Male,Married,Retired/pensioned
 702070355,SGP,1,2,1,2,7,8,5,7,1993,27,A religious person,Male,Single,Full time
@@ -3568,7 +3568,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 702070367,SGP,1,1,1,2,8,8,8,7,1989,30,Not a religious person,Male,Single,Full time
 702070368,SGP,1,1,1,2,7,9,8,5,1980,39,A religious person,Female,Married,Full time
 702070369,SGP,1,2,2,1,10,7,8,5,1942,78,A religious person,Female,Married,Retired/pensioned
-702070370,SGP,1,2,3,1,5,10,7,3,1944,76,No answer,Female,Married,Retired/pensioned
+702070370,SGP,1,2,3,1,5,10,7,3,1944,76,,Female,Married,Retired/pensioned
 702070371,SGP,1,1,2,1,8,8,8,5,1962,58,Not a religious person,Male,Married,Full time
 702070372,SGP,1,1,1,1,10,7,9,-1,1954,66,A religious person,Female,Divorced,Full time
 702070373,SGP,1,1,1,1,7,8,9,4,1969,50,Not a religious person,Female,Married,Unemployed
@@ -3596,7 +3596,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 702070395,SGP,1,2,2,2,7,7,10,5,1958,61,A religious person,Female,Single,Full time
 702070396,SGP,1,2,4,4,2,1,2,9,1937,82,A religious person,Female,Widowed,Homemaker
 702070397,SGP,1,1,1,1,9,8,8,10,1970,49,An atheist,Female,Married,Homemaker
-702070398,SGP,1,2,2,2,8,8,8,9,1968,51,No answer,Female,Divorced,Self employed
+702070398,SGP,1,2,2,2,8,8,8,9,1968,51,,Female,Divorced,Self employed
 702070399,SGP,1,2,2,2,8,7,8,-1,1989,31,Not a religious person,Female,Single,Full time
 702070400,SGP,1,1,2,2,7,7,5,5,1995,24,An atheist,Male,Single,Unemployed
 702070401,SGP,1,1,2,1,7,6,3,4,1996,24,Not a religious person,Female,Single,Full time
@@ -3617,7 +3617,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 702070416,SGP,1,1,1,3,10,10,10,3,1942,78,A religious person,Female,Divorced,Retired/pensioned
 702070417,SGP,1,1,2,2,8,6,6,8,1935,84,A religious person,Female,Widowed,Retired/pensioned
 702070418,SGP,1,1,1,1,8,10,10,3,1958,61,A religious person,Female,Married,Retired/pensioned
-702070419,SGP,1,1,1,2,5,5,6,4,1990,29,No answer,Female,Single,Full time
+702070419,SGP,1,1,1,2,5,5,6,4,1990,29,,Female,Single,Full time
 702070420,SGP,1,2,2,1,7,7,7,2,1957,62,Not a religious person,Female,Single,Full time
 702070421,SGP,1,1,2,1,7,8,8,4,1982,38,A religious person,Female,Married,Full time
 702070422,SGP,1,1,1,1,10,10,10,2,1937,82,An atheist,Female,Widowed,Self employed
@@ -3785,7 +3785,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 702070584,SGP,1,1,2,1,6,5,3,3,1995,24,Not a religious person,Female,Single,Full time
 702070585,SGP,1,1,1,1,10,10,10,-2,1980,39,A religious person,Male,Married,Full time
 702070586,SGP,3,3,2,3,6,6,4,6,1990,29,An atheist,Male,Single,Full time
-702070587,SGP,1,2,2,2,8,9,7,-1,1990,29,No answer,Male,Single,Full time
+702070587,SGP,1,2,2,2,8,9,7,-1,1990,29,,Male,Single,Full time
 702070588,SGP,1,2,1,3,-2,8,10,8,1958,62,A religious person,Female,Widowed,Retired/pensioned
 702070589,SGP,1,2,2,2,6,6,6,-1,1956,64,A religious person,Female,Married,Retired/pensioned
 702070590,SGP,1,1,2,2,8,7,7,3,1996,24,A religious person,Female,Single,Student
@@ -3813,7 +3813,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 702070612,SGP,1,1,2,2,10,10,10,5,1968,52,A religious person,Female,Married,Self employed
 702070613,SGP,1,1,1,2,10,7,4,10,1953,66,A religious person,Female,Single,Full time
 702070614,SGP,1,2,2,1,8,8,8,5,1981,38,A religious person,Male,Married,Full time
-702070615,SGP,1,1,1,2,8,7,9,-1,1982,38,No answer,Female,Single,Full time
+702070615,SGP,1,1,1,2,8,7,9,-1,1982,38,,Female,Single,Full time
 702070616,SGP,1,2,2,2,4,4,5,5,1953,66,A religious person,Male,Married,Retired/pensioned
 702070617,SGP,1,1,1,3,8,8,7,4,1964,55,A religious person,Male,Married,Full time
 702070618,SGP,1,1,1,1,4,5,3,3,1968,51,A religious person,Male,Married,Full time
@@ -3955,7 +3955,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 702070754,SGP,1,1,2,2,7,6,6,3,1964,55,A religious person,Female,Widowed,Part time
 702070755,SGP,1,2,2,2,7,6,5,5,1959,60,Not a religious person,Male,Married,Retired/pensioned
 702070756,SGP,2,1,1,2,7,3,5,3,1995,24,A religious person,Male,Single,Part time
-702070757,SGP,1,3,1,1,7,8,6,5,1974,45,No answer,Female,Married,Full time
+702070757,SGP,1,3,1,1,7,8,6,5,1974,45,,Female,Married,Full time
 702070758,SGP,1,1,1,1,7,7,7,8,1992,27,A religious person,Female,Married,Homemaker
 702070759,SGP,1,1,1,2,8,8,9,9,1984,35,A religious person,Female,Married,Full time
 702070760,SGP,1,3,2,1,5,6,6,3,1993,26,A religious person,Male,Single,Unemployed
@@ -4017,7 +4017,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 702070816,SGP,1,2,2,1,7,7,7,5,1970,49,A religious person,Male,Single,Full time
 702070817,SGP,1,1,2,3,4,4,3,5,1951,68,A religious person,Male,Married,Retired/pensioned
 702070818,SGP,1,1,1,2,8,4,7,7,1993,26,Not a religious person,Male,Single,Student
-702070819,SGP,2,2,2,3,10,10,10,10,1943,76,No answer,Female,Widowed,Retired/pensioned
+702070819,SGP,2,2,2,3,10,10,10,10,1943,76,,Female,Widowed,Retired/pensioned
 702070820,SGP,1,2,2,1,10,10,10,3,1991,28,A religious person,Male,Married,Full time
 702070821,SGP,2,2,2,3,8,8,8,2,1956,63,A religious person,Female,Married,Part time
 702070822,SGP,1,2,2,2,6,7,7,1,1972,47,A religious person,Male,Single,Full time
@@ -4156,7 +4156,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 702070955,SGP,1,1,2,2,6,7,8,5,1968,52,A religious person,Female,Married,Homemaker
 702070956,SGP,1,2,2,2,7,7,6,5,1957,63,Not a religious person,Female,Married,Homemaker
 702070957,SGP,1,1,1,1,7,8,8,3,1983,37,A religious person,Male,Married,Full time
-702070958,SGP,1,1,2,2,9,7,6,8,1973,46,No answer,Male,Married,Full time
+702070958,SGP,1,1,2,2,9,7,6,8,1973,46,,Male,Married,Full time
 702070959,SGP,1,1,4,1,5,8,5,7,1976,44,A religious person,Female,Married,Part time
 702070960,SGP,1,1,2,1,8,9,8,2,1970,50,A religious person,Male,Married,Full time
 702070961,SGP,1,1,1,1,9,9,5,3,1988,32,A religious person,Female,Married,Self employed
@@ -4192,7 +4192,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 702070991,SGP,1,1,1,2,7,7,7,3,1999,21,Not a religious person,Female,Single,Student
 702070992,SGP,1,2,3,2,5,9,8,5,1953,67,An atheist,Male,Married,Part time
 702070993,SGP,1,1,2,1,7,6,5,4,1984,36,Not a religious person,Male,Married,Full time
-702070994,SGP,1,2,2,3,8,8,7,6,1983,37,No answer,Female,Married,Homemaker
+702070994,SGP,1,2,2,3,8,8,7,6,1983,37,,Female,Married,Homemaker
 702070995,SGP,1,2,1,1,5,5,5,5,1990,30,A religious person,Male,Married,Full time
 702070996,SGP,1,1,1,2,5,7,6,5,1966,54,A religious person,Male,Single,Self employed
 702070997,SGP,1,2,2,1,5,7,5,5,1972,48,Not a religious person,Female,Married,Self employed
@@ -4340,7 +4340,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 702071139,SGP,1,1,2,1,4,6,6,6,1996,24,Not a religious person,Female,Married,Part time
 702071140,SGP,2,1,1,2,4,4,4,5,1994,26,Not a religious person,Female,Married,Full time
 702071141,SGP,1,2,3,1,7,8,7,2,1976,43,A religious person,Male,Married,Full time
-702071142,SGP,1,1,1,2,6,7,6,3,1995,24,No answer,Male,Single,Student
+702071142,SGP,1,1,1,2,6,7,6,3,1995,24,,Male,Single,Student
 702071143,SGP,1,2,1,1,8,10,8,3,1996,23,Not a religious person,Male,Single,Student
 702071144,SGP,1,2,2,2,7,7,8,-1,1956,64,A religious person,Female,Married,Homemaker
 702071145,SGP,1,1,1,3,6,7,8,4,1977,43,Not a religious person,Female,Married,Homemaker
@@ -4360,7 +4360,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 702071159,SGP,1,2,1,3,7,7,7,5,1945,75,A religious person,Female,Widowed,Homemaker
 702071160,SGP,1,2,1,1,5,6,6,8,1967,53,A religious person,Male,Married,Unemployed
 702071161,SGP,1,2,2,1,5,5,5,5,1959,61,A religious person,Male,Married,Retired/pensioned
-702071162,SGP,1,1,2,1,5,5,5,-1,1998,22,No answer,Male,Single,Student
+702071162,SGP,1,1,2,1,5,5,5,-1,1998,22,,Male,Single,Student
 702071163,SGP,1,1,1,1,5,5,5,5,1996,24,Not a religious person,Female,Single,Full time
 702071164,SGP,1,1,2,3,8,8,8,7,1958,61,A religious person,Male,Married,Retired/pensioned
 702071165,SGP,1,2,2,2,8,9,10,5,1982,38,An atheist,Male,Married,Full time
@@ -4396,7 +4396,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 702071195,SGP,3,1,1,1,5,4,8,5,1994,25,A religious person,Female,Single,Full time
 702071196,SGP,1,1,2,1,5,5,5,-1,1995,25,A religious person,Male,Single,Full time
 702071197,SGP,1,1,2,3,9,7,8,3,1984,35,A religious person,Female,Married,Full time
-702071198,SGP,1,1,1,1,5,5,5,-1,1985,35,No answer,Female,Married,Full time
+702071198,SGP,1,1,1,1,5,5,5,-1,1985,35,,Female,Married,Full time
 702071199,SGP,2,2,1,2,9,8,7,-1,1992,27,An atheist,Male,Single,Self employed
 702071200,SGP,1,2,2,2,5,5,1,-1,1973,46,A religious person,Female,Married,Part time
 702071201,SGP,1,2,2,1,5,5,3,2,1980,39,Not a religious person,Male,Living together as married,Full time
@@ -4441,7 +4441,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 702071240,SGP,1,2,2,2,10,10,6,4,1963,57,A religious person,Male,Married,Self employed
 702071241,SGP,1,2,1,1,2,6,3,6,1952,68,A religious person,Male,Married,Retired/pensioned
 702071242,SGP,1,2,1,1,7,8,7,1,1971,49,A religious person,Female,Married,Full time
-702071243,SGP,1,1,1,2,8,8,8,6,1955,65,No answer,Female,Married,Retired/pensioned
+702071243,SGP,1,1,1,2,8,8,8,6,1955,65,,Female,Married,Retired/pensioned
 702071244,SGP,1,1,1,1,6,5,5,2,1990,29,An atheist,Male,Single,Full time
 702071245,SGP,1,2,2,1,6,8,8,2,1984,36,A religious person,Male,Married,Full time
 702071246,SGP,1,1,1,3,10,8,7,5,1986,34,An atheist,Female,Single,Full time
@@ -4492,7 +4492,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 702071291,SGP,1,2,1,2,7,8,9,6,1993,27,A religious person,Female,Single,Full time
 702071292,SGP,1,2,2,2,4,5,5,3,1963,57,A religious person,Female,Divorced,Retired/pensioned
 702071293,SGP,1,2,2,3,10,10,10,-1,1949,70,An atheist,Male,Married,Part time
-702071294,SGP,1,2,1,1,6,7,5,8,1975,45,No answer,Female,Married,Full time
+702071294,SGP,1,2,1,1,6,7,5,8,1975,45,,Female,Married,Full time
 702071295,SGP,1,2,2,2,6,7,8,6,1975,44,Not a religious person,Male,Married,Full time
 702071296,SGP,1,2,4,1,7,4,4,5,1973,46,Not a religious person,Male,Married,Unemployed
 702071297,SGP,1,2,2,4,2,4,5,-1,1945,74,An atheist,Female,Married,Retired/pensioned
@@ -4505,9 +4505,9 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 702071304,SGP,1,2,1,1,8,4,4,5,1974,46,An atheist,Male,Married,Full time
 702071305,SGP,1,2,2,4,2,9,8,8,1939,81,A religious person,Male,Married,Retired/pensioned
 702071306,SGP,1,1,1,-2,8,8,8,5,1948,72,A religious person,Male,Married,Retired/pensioned
-702071307,SGP,1,1,2,2,7,8,8,-2,1983,37,No answer,Female,Single,Full time
+702071307,SGP,1,1,2,2,7,8,8,-2,1983,37,,Female,Single,Full time
 702071308,SGP,1,1,2,1,7,9,9,7,1960,60,Not a religious person,Male,Married,Full time
-702071309,SGP,2,3,3,-2,6,6,6,-1,1955,65,No answer,Female,Married,Retired/pensioned
+702071309,SGP,2,3,3,,6,6,6,,1955,65,,Female,Married,Retired/pensioned
 702071310,SGP,1,1,3,1,8,10,8,9,1978,42,A religious person,Male,Married,Full time
 702071311,SGP,1,2,2,4,7,8,8,5,1957,63,Not a religious person,Female,Married,Retired/pensioned
 702071312,SGP,1,2,4,1,8,8,6,7,1996,24,A religious person,Female,Single,Student
@@ -4541,7 +4541,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 702071340,SGP,1,1,2,2,8,7,7,5,1997,23,Not a religious person,Female,Single,Student
 702071341,SGP,1,1,2,2,10,8,8,5,1955,65,A religious person,Female,Married,Full time
 702071342,SGP,1,1,1,2,10,9,5,6,1989,31,Not a religious person,Female,Single,Full time
-702071343,SGP,1,2,1,2,7,7,7,5,1973,47,No answer,Male,Married,Full time
+702071343,SGP,1,2,1,2,7,7,7,5,1973,47,,Male,Married,Full time
 702071344,SGP,1,1,1,1,10,10,6,8,1964,56,A religious person,Male,Married,Self employed
 702071345,SGP,1,2,3,1,10,10,10,3,1962,58,A religious person,Female,Married,Other
 702071346,SGP,1,1,1,1,8,7,5,1,1962,58,A religious person,Male,Married,Full time
@@ -4614,7 +4614,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 702071413,SGP,2,2,2,2,7,5,5,-1,1961,59,A religious person,Male,Single,Student
 702071414,SGP,1,3,2,1,7,6,4,-1,1999,21,Not a religious person,Female,Married,Full time
 702071415,SGP,1,1,2,2,7,7,6,5,1974,45,A religious person,Male,Married,Full time
-702071416,SGP,1,2,2,2,5,5,5,5,1986,34,No answer,Female,Single,Full time
+702071416,SGP,1,2,2,2,5,5,5,5,1986,34,,Female,Single,Full time
 702071417,SGP,1,1,1,1,1,5,3,-1,1985,34,Not a religious person,Female,Widowed,Full time
 702071418,SGP,1,3,1,1,1,2,3,-2,1980,40,An atheist,Female,Single,Homemaker
 702071419,SGP,1,2,3,2,8,8,8,4,1982,37,Not a religious person,Male,Married,Full time
@@ -4638,7 +4638,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 702071437,SGP,2,2,1,1,7,7,7,3,1976,44,Not a religious person,Male,Single,Full time
 702071438,SGP,1,1,1,1,5,10,8,-2,1977,43,A religious person,Male,Married,Full time
 702071439,SGP,1,1,2,1,3,4,2,3,1969,51,Not a religious person,Male,Married,Full time
-702071440,SGP,1,1,3,3,2,6,5,5,1993,27,No answer,Female,Single,Student
+702071440,SGP,1,1,3,3,2,6,5,5,1993,27,,Female,Single,Student
 702071441,SGP,1,2,2,2,5,5,5,4,1988,32,Not a religious person,Male,Single,Full time
 702071442,SGP,1,2,2,2,7,4,3,4,1978,42,Not a religious person,Male,Married,Self employed
 702071443,SGP,1,1,2,2,7,8,7,2,1976,44,Not a religious person,Male,Married,Full time
@@ -4694,7 +4694,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 702071493,SGP,1,1,1,4,5,5,5,1,1948,71,Not a religious person,Female,Widowed,Retired/pensioned
 702071494,SGP,1,2,2,2,7,7,7,-2,1956,64,A religious person,Female,Married,Homemaker
 702071495,SGP,1,2,2,3,9,9,9,7,1954,66,Not a religious person,Male,Married,Retired/pensioned
-702071496,SGP,1,2,3,2,7,5,5,6,1960,60,No answer,Female,Married,Retired/pensioned
+702071496,SGP,1,2,3,2,7,5,5,6,1960,60,,Female,Married,Retired/pensioned
 702071497,SGP,1,1,2,1,5,10,10,5,1948,72,Not a religious person,Male,Married,Retired/pensioned
 702071498,SGP,1,1,2,2,7,9,10,5,1961,58,Not a religious person,Female,Married,Part time
 702071499,SGP,1,1,2,2,8,7,7,5,1997,23,An atheist,Female,Single,Unemployed
@@ -4797,7 +4797,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 702071596,SGP,2,1,1,2,6,6,4,-1,1996,24,Not a religious person,Female,Single,Student
 702071597,SGP,2,1,1,2,6,6,5,5,1996,24,Not a religious person,Male,Single,Other
 702071598,SGP,1,1,1,2,6,7,5,-1,1990,29,Not a religious person,Female,Married,Homemaker
-702071599,SGP,1,2,2,2,5,5,5,-1,1988,31,No answer,Female,Single,Full time
+702071599,SGP,1,2,2,2,5,5,5,-1,1988,31,,Female,Single,Full time
 702071600,SGP,1,1,1,3,6,6,6,6,1952,67,A religious person,Female,Married,Retired/pensioned
 702071601,SGP,1,1,1,2,2,2,2,5,1981,39,Not a religious person,Male,Divorced,Unemployed
 702071602,SGP,1,1,1,2,7,8,7,7,1969,51,Not a religious person,Female,Married,Part time
@@ -4878,16 +4878,16 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 702071677,SGP,1,2,2,3,8,8,6,5,1956,64,An atheist,Female,Single,Retired/pensioned
 702071678,SGP,1,1,2,3,8,7,4,-1,1987,33,Not a religious person,Female,Single,Part time
 702071679,SGP,1,2,3,1,5,6,6,5,1975,45,Not a religious person,Male,Married,Self employed
-702071680,SGP,1,2,2,1,6,5,5,7,1994,26,No answer,Female,Married,Full time
-702071681,SGP,1,2,2,1,8,5,10,7,1960,60,No answer,Female,Married,Unemployed
-702071682,SGP,1,1,1,1,7,7,5,7,1965,55,No answer,Female,Single,Full time
+702071680,SGP,1,2,2,1,6,5,5,7,1994,26,,Female,Married,Full time
+702071681,SGP,1,2,2,1,8,5,10,7,1960,60,,Female,Married,Unemployed
+702071682,SGP,1,1,1,1,7,7,5,7,1965,55,,Female,Single,Full time
 702071683,SGP,1,2,2,3,8,8,8,5,1993,27,A religious person,Female,Single,Full time
 702071684,SGP,1,2,1,2,8,2,5,-1,1998,22,Not a religious person,Female,Single,Student
 702071685,SGP,1,2,2,2,4,4,4,5,1963,57,An atheist,Female,Single,Full time
 702071686,SGP,1,1,3,3,7,5,5,7,1952,68,Not a religious person,Male,Married,Retired/pensioned
 702071687,SGP,1,2,1,1,4,8,7,7,1964,56,A religious person,Female,Married,Full time
 702071688,SGP,1,1,2,1,10,10,10,10,1963,57,Not a religious person,Female,Single,Full time
-702071689,SGP,1,1,2,1,7,9,7,8,1959,61,No answer,Female,Married,Retired/pensioned
+702071689,SGP,1,1,2,1,7,9,7,8,1959,61,,Female,Married,Retired/pensioned
 702071690,SGP,1,1,1,2,7,8,8,5,1953,67,A religious person,Male,Married,Full time
 702071691,SGP,1,1,2,2,8,8,7,6,1998,22,A religious person,Female,Single,Full time
 702071692,SGP,1,2,2,2,5,4,2,6,1978,42,A religious person,Female,Married,Homemaker
@@ -4962,14 +4962,14 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 702071761,SGP,1,2,1,2,10,9,9,5,1975,45,Not a religious person,Female,Married,Full time
 702071762,SGP,1,2,2,2,7,8,8,-1,1990,30,Not a religious person,Female,Married,Full time
 702071763,SGP,1,2,2,2,3,5,3,5,1999,21,Not a religious person,Female,Single,Student
-702071764,SGP,1,2,1,2,4,5,4,-1,1999,21,No answer,Female,Single,Part time
+702071764,SGP,1,2,1,2,4,5,4,-1,1999,21,,Female,Single,Part time
 702071765,SGP,2,2,2,4,7,7,5,8,1950,70,A religious person,Female,Single,Retired/pensioned
 702071766,SGP,1,1,2,1,10,10,10,6,1972,48,A religious person,Female,Divorced,Full time
 702071767,SGP,1,1,1,1,8,8,8,-1,1956,64,A religious person,Male,Married,Self employed
 702071768,SGP,1,2,2,1,5,5,1,-1,1966,54,Not a religious person,Male,Single,Unemployed
 702071769,SGP,1,1,1,1,5,5,5,-1,1959,61,Not a religious person,Female,Married,Homemaker
 702071770,SGP,1,1,2,1,5,5,5,-1,1992,28,Not a religious person,Male,Single,Full time
-702071771,SGP,-2,4,2,1,5,5,5,-1,1969,51,No answer,Male,Single,Self employed
+702071771,SGP,-2,4,2,1,5,5,5,-1,1969,51,,Male,Single,Self employed
 702071772,SGP,1,1,2,1,5,5,5,-1,1990,30,A religious person,Male,Single,Self employed
 702071773,SGP,1,1,1,1,5,5,5,-1,1994,26,Not a religious person,Male,Single,Full time
 702071774,SGP,1,1,1,1,5,5,5,-1,1994,26,Not a religious person,Male,Single,Student
@@ -4983,7 +4983,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 702071782,SGP,1,2,2,1,5,6,6,5,1979,41,A religious person,Female,Married,Full time
 702071783,SGP,1,2,3,1,6,8,7,5,1978,42,A religious person,Female,Married,Homemaker
 702071784,SGP,1,2,3,1,6,5,3,-1,1981,39,A religious person,Female,Married,Part time
-702071785,SGP,1,2,3,2,5,4,5,-1,1980,40,No answer,Female,Married,Homemaker
+702071785,SGP,1,2,3,2,5,4,5,-1,1980,40,,Female,Married,Homemaker
 702071786,SGP,1,2,2,2,5,6,4,5,1997,23,A religious person,Female,Single,Student
 702071787,SGP,1,2,2,2,6,7,7,5,1951,69,A religious person,Female,Married,Homemaker
 702071788,SGP,1,2,2,2,6,6,6,-1,1983,37,Not a religious person,Male,Married,Self employed
@@ -5140,10 +5140,10 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 702071939,SGP,1,1,1,1,6,6,8,-1,1992,28,Not a religious person,Female,Single,Full time
 702071940,SGP,1,2,2,1,10,10,10,6,1952,68,Not a religious person,Male,Married,Full time
 702071941,SGP,1,1,2,3,7,7,7,9,1949,71,Not a religious person,Female,Single,Retired/pensioned
-702071942,SGP,1,1,1,1,6,7,3,9,1970,50,No answer,Female,Single,Full time
+702071942,SGP,1,1,1,1,6,7,3,9,1970,50,,Female,Single,Full time
 702071943,SGP,1,2,2,2,5,7,5,5,1966,54,A religious person,Female,Married,Part time
-702071944,SGP,1,2,2,3,6,6,5,8,1937,83,No answer,Female,Widowed,Retired/pensioned
-702071945,SGP,1,2,2,3,6,-2,-2,9,1949,71,No answer,Female,Married,Retired/pensioned
+702071944,SGP,1,2,2,3,6,6,5,8,1937,83,,Female,Widowed,Retired/pensioned
+702071945,SGP,1,2,2,3,6,-2,-2,9,1949,71,,Female,Married,Retired/pensioned
 702071946,SGP,1,2,2,2,7,7,7,-1,1963,57,Not a religious person,Female,Widowed,Part time
 702071947,SGP,1,2,2,1,8,9,8,3,1989,31,Not a religious person,Female,Married,Full time
 702071948,SGP,1,2,1,2,7,8,10,8,1985,35,Not a religious person,Female,Married,Full time
@@ -5159,7 +5159,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 702071958,SGP,1,1,1,2,10,10,10,9,1971,49,A religious person,Female,Married,Full time
 702071959,SGP,1,2,3,2,7,4,5,7,1975,45,A religious person,Female,Married,Retired/pensioned
 702071960,SGP,1,1,1,1,5,5,5,5,1993,27,Not a religious person,Female,Single,Full time
-702071961,SGP,1,2,1,2,5,5,5,-1,1965,55,No answer,Female,Married,Full time
+702071961,SGP,1,2,1,2,5,5,5,-1,1965,55,,Female,Married,Full time
 702071962,SGP,1,1,1,1,5,5,5,-1,1997,23,Not a religious person,Male,Single,Part time
 702071963,SGP,1,1,1,1,5,5,5,-1,1999,21,A religious person,Female,Single,Part time
 702071964,SGP,1,1,1,1,5,5,5,-1,1992,28,Not a religious person,Male,Single,Self employed
@@ -5234,7 +5234,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 764070021,THA,1,3,4,2,4,5,5,6,1978,39,Not a religious person,Male,Married,Self employed
 764070022,THA,2,3,3,2,-1,8,8,5,1956,61,Not a religious person,Female,Single,Retired/pensioned
 764070023,THA,2,3,3,2,7,6,8,5,1980,37,Not a religious person,Female,Living together as married,Full time
-764070024,THA,-1,-2,3,-5,5,2,9,3,1969,48,A religious person,Female,Single,Self employed
+764070024,THA,-1,-2,3,,5,2,9,3,1969,48,A religious person,Female,Single,Self employed
 764070025,THA,1,3,3,3,4,6,5,6,1969,48,A religious person,Male,Living together as married,Self employed
 764070026,THA,2,2,3,2,6,6,6,6,1958,59,Not a religious person,Male,Living together as married,Full time
 764070027,THA,1,2,2,2,5,8,8,5,1969,48,Not a religious person,Female,Living together as married,Full time
@@ -5264,7 +5264,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 764070051,THA,1,1,2,2,1,2,2,5,1981,36,Not a religious person,Male,Separated,Full time
 764070052,THA,1,1,2,1,6,6,6,5,1966,51,Not a religious person,Male,Married,Full time
 764070053,THA,1,1,2,1,6,6,6,6,1990,27,Not a religious person,Male,Married,Full time
-764070054,THA,1,2,3,2,5,5,5,-5,1958,59,Not a religious person,Female,Living together as married,Self employed
+764070054,THA,1,2,3,2,5,5,5,,1958,59,Not a religious person,Female,Living together as married,Self employed
 764070055,THA,1,2,2,2,8,8,8,5,1975,42,Not a religious person,Male,Living together as married,Full time
 764070056,THA,1,1,2,1,8,8,8,5,1986,31,Not a religious person,Female,Married,Self employed
 764070057,THA,1,2,3,2,5,5,5,5,1960,57,Not a religious person,Female,Married,Self employed
@@ -5280,7 +5280,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 764070067,THA,1,1,2,1,8,8,8,5,1968,49,Not a religious person,Male,Married,Full time
 764070068,THA,1,1,2,1,5,7,8,5,1970,47,Not a religious person,Male,Married,Self employed
 764070069,THA,1,1,3,1,8,5,5,5,1970,47,Not a religious person,Male,Married,Full time
-764070070,THA,1,2,3,4,3,8,8,-5,1954,63,Not a religious person,Female,Married,Retired/pensioned
+764070070,THA,1,2,3,4,3,8,8,,1954,63,Not a religious person,Female,Married,Retired/pensioned
 764070071,THA,1,3,3,3,3,5,5,5,1952,65,Not a religious person,Male,Divorced,Retired/pensioned
 764070072,THA,1,1,2,1,6,6,6,5,1969,48,Not a religious person,Male,Living together as married,Full time
 764070073,THA,1,1,2,1,6,6,6,5,1983,34,Not a religious person,Female,Married,Full time
@@ -5288,17 +5288,17 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 764070075,THA,1,1,2,1,4,5,6,5,1990,27,Not a religious person,Female,Single,Full time
 764070076,THA,1,1,4,1,8,8,8,5,1989,28,Not a religious person,Female,Living together as married,Full time
 764070077,THA,1,2,2,2,2,2,2,5,1968,49,Not a religious person,Female,Widowed,Homemaker
-764070078,THA,1,2,3,1,1,2,2,-5,1954,63,Not a religious person,Female,Married,Retired/pensioned
+764070078,THA,1,2,3,1,1,2,2,,1954,63,Not a religious person,Female,Married,Retired/pensioned
 764070079,THA,1,1,3,2,2,2,2,6,1959,58,Not a religious person,Male,Married,Unemployed
-764070080,THA,1,1,2,1,3,4,4,-5,1992,25,Not a religious person,Male,Married,Part time
+764070080,THA,1,1,2,1,3,4,4,,1992,25,Not a religious person,Male,Married,Part time
 764070081,THA,1,1,2,1,7,7,7,6,1992,25,Not a religious person,Female,Married,Full time
 764070082,THA,1,1,2,1,5,5,5,6,1993,24,Not a religious person,Female,Married,Full time
 764070083,THA,1,2,2,4,8,8,8,5,1957,60,A religious person,Male,Single,Retired/pensioned
 764070084,THA,1,2,3,1,1,6,6,6,1952,65,Not a religious person,Female,Married,Homemaker
 764070085,THA,1,2,3,3,3,5,5,5,1957,60,Not a religious person,Female,Living together as married,Part time
 764070086,THA,1,2,4,4,1,6,6,6,1942,75,Not a religious person,Female,Widowed,Homemaker
-764070087,THA,1,2,3,4,1,5,5,-5,1941,76,Not a religious person,Female,Living together as married,Retired/pensioned
-764070088,THA,1,1,1,3,4,5,3,-5,1959,58,Not a religious person,Female,Married,Homemaker
+764070087,THA,1,2,3,4,1,5,5,,1941,76,Not a religious person,Female,Living together as married,Retired/pensioned
+764070088,THA,1,1,1,3,4,5,3,,1959,58,Not a religious person,Female,Married,Homemaker
 764070089,THA,1,2,3,2,9,10,6,6,1987,30,Not a religious person,Male,Married,Full time
 764070090,THA,1,1,1,4,3,3,3,6,1955,62,Not a religious person,Female,Divorced,Unemployed
 764070091,THA,1,2,2,1,3,3,3,5,1990,27,Not a religious person,Female,Married,Unemployed
@@ -5400,7 +5400,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 764070187,THA,1,1,1,1,5,5,5,5,1985,32,Not a religious person,Female,Married,Unemployed
 764070188,THA,1,1,2,1,10,10,5,10,1981,36,Not a religious person,Female,Married,Self employed
 764070189,THA,1,2,1,1,5,8,7,10,1975,42,Not a religious person,Female,Married,Self employed
-764070190,THA,1,1,1,1,5,7,7,10,1958,59,Other missing,Female,Living together as married,Part time
+764070190,THA,1,1,1,1,5,7,7,10,1958,59,,Female,Living together as married,Part time
 764070191,THA,1,2,1,1,6,7,5,-1,1976,41,Not a religious person,Male,Married,Self employed
 764070192,THA,1,2,4,1,2,1,1,10,1970,47,Not a religious person,Female,Married,Self employed
 764070193,THA,1,3,2,1,10,10,1,10,1956,61,A religious person,Male,Married,Self employed
@@ -5483,7 +5483,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 764070270,THA,1,2,4,1,5,8,7,5,1966,51,A religious person,Female,Married,Self employed
 764070271,THA,1,1,2,1,7,9,6,5,1959,58,A religious person,Male,Married,Self employed
 764070272,THA,2,3,3,3,5,5,6,-1,1949,68,Not a religious person,Male,Married,Unemployed
-764070273,THA,1,1,2,-5,3,10,9,-1,1989,28,A religious person,Female,Married,Self employed
+764070273,THA,1,1,2,,3,10,9,-1,1989,28,A religious person,Female,Married,Self employed
 764070274,THA,1,1,1,1,6,5,6,6,1964,53,Not a religious person,Male,Married,Self employed
 764070275,THA,1,2,1,1,4,3,4,-1,1960,57,Not a religious person,Female,Married,Self employed
 764070276,THA,1,3,2,1,10,5,5,1,1994,23,Not a religious person,Female,Single,Full time
@@ -5519,33 +5519,33 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 764070306,THA,1,1,4,1,5,7,3,-1,1961,56,Not a religious person,Female,Married,Self employed
 764070307,THA,1,2,2,1,5,4,5,-1,1962,55,A religious person,Female,Married,Self employed
 764070308,THA,1,1,1,1,5,6,6,8,1984,33,Not a religious person,Female,Married,Self employed
-764070309,THA,1,1,-5,2,5,4,5,10,1956,61,Not a religious person,Male,Married,Full time
+764070309,THA,1,1,,2,5,4,5,10,1956,61,Not a religious person,Male,Married,Full time
 764070310,THA,1,3,3,2,5,5,5,5,1996,21,A religious person,Female,Living together as married,Self employed
 764070311,THA,1,2,3,1,10,10,5,10,1975,42,A religious person,Female,Married,Self employed
 764070312,THA,1,2,1,1,5,5,10,5,1989,28,A religious person,Female,Married,Self employed
 764070313,THA,2,2,2,2,7,7,6,8,1983,34,Not a religious person,Female,Living together as married,Full time
-764070314,THA,1,1,2,1,7,8,8,-5,1959,58,Not a religious person,Male,Married,Part time
-764070315,THA,1,2,2,1,7,6,1,-5,1969,48,A religious person,Female,Single,Full time
+764070314,THA,1,1,2,1,7,8,8,,1959,58,Not a religious person,Male,Married,Part time
+764070315,THA,1,2,2,1,7,6,1,,1969,48,A religious person,Female,Single,Full time
 764070316,THA,1,1,1,1,7,7,5,5,1973,44,Not a religious person,Male,Separated,Part time
 764070317,THA,1,1,1,2,7,8,5,7,1993,24,Not a religious person,Male,Single,Part time
 764070318,THA,1,2,3,1,7,9,5,-1,1971,46,Not a religious person,Female,Married,Self employed
 764070319,THA,1,1,1,1,5,7,7,-2,1991,26,Not a religious person,Female,Married,Full time
-764070320,THA,1,2,3,1,7,8,8,-5,1961,56,Not a religious person,Female,Widowed,Part time
+764070320,THA,1,2,3,1,7,8,8,,1961,56,Not a religious person,Female,Widowed,Part time
 764070321,THA,1,1,1,2,6,7,6,6,1980,37,A religious person,Male,Married,Full time
 764070322,THA,2,2,3,2,8,8,5,8,1987,30,Not a religious person,Female,Living together as married,Full time
 764070323,THA,2,2,2,2,8,7,7,7,1981,36,Not a religious person,Male,Married,Full time
-764070324,THA,1,2,2,1,7,6,6,-5,1932,85,Not a religious person,Male,Married,Unemployed
+764070324,THA,1,2,2,1,7,6,6,,1932,85,Not a religious person,Male,Married,Unemployed
 764070325,THA,1,1,1,3,6,7,6,7,1994,23,Not a religious person,Female,Single,Unemployed
 764070326,THA,3,3,3,2,5,7,6,5,1964,53,Not a religious person,Female,Married,Full time
-764070327,THA,2,2,2,2,6,7,6,7,1983,34,Other missing,Male,Single,Full time
-764070328,THA,1,3,3,1,5,7,5,-5,1954,63,Not a religious person,Female,Married,Unemployed
+764070327,THA,2,2,2,2,6,7,6,7,1983,34,,Male,Single,Full time
+764070328,THA,1,3,3,1,5,7,5,,1954,63,Not a religious person,Female,Married,Unemployed
 764070329,THA,1,2,1,1,7,6,4,-2,1963,54,A religious person,Male,Married,Self employed
 764070330,THA,1,3,3,3,6,4,3,-2,1955,62,Not a religious person,Female,Widowed,Self employed
 764070331,THA,1,1,1,2,7,7,6,-1,1996,21,Not a religious person,Male,Single,Part time
 764070332,THA,2,3,3,2,5,5,4,-1,1964,53,Not a religious person,Female,Living together as married,Part time
 764070333,THA,1,1,2,1,8,9,8,-1,1974,43,A religious person,Male,Separated,Full time
-764070334,THA,1,1,3,2,7,6,4,-5,1951,66,A religious person,Female,Married,Self employed
-764070335,THA,2,2,3,1,4,7,4,-5,1987,30,Not a religious person,Female,Married,Homemaker
+764070334,THA,1,1,3,2,7,6,4,,1951,66,A religious person,Female,Married,Self employed
+764070335,THA,2,2,3,1,4,7,4,,1987,30,Not a religious person,Female,Married,Homemaker
 764070336,THA,1,2,2,2,2,2,2,5,1957,60,Not a religious person,Female,Married,Self employed
 764070337,THA,1,2,2,1,6,7,3,4,1995,22,Not a religious person,Female,Single,Student
 764070338,THA,2,2,2,1,8,9,9,5,1989,28,Not a religious person,Male,Single,Student
@@ -5553,13 +5553,13 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 764070340,THA,2,2,2,1,4,7,6,6,1963,54,Not a religious person,Female,Married,Full time
 764070341,THA,1,2,2,1,7,8,6,6,1977,40,Not a religious person,Female,Divorced,Homemaker
 764070342,THA,1,2,2,2,8,9,9,-2,1962,55,Not a religious person,Male,Single,Full time
-764070343,THA,1,2,1,1,5,5,5,-5,1966,51,Other missing,Male,Single,Full time
+764070343,THA,1,2,1,1,5,5,5,,1966,51,,Male,Single,Full time
 764070344,THA,1,2,3,1,5,9,5,-1,1951,66,Not a religious person,Male,Married,Retired/pensioned
-764070345,THA,1,2,3,1,5,5,5,-5,1965,52,Not a religious person,Female,Married,Full time
+764070345,THA,1,2,3,1,5,5,5,,1965,52,Not a religious person,Female,Married,Full time
 764070346,THA,2,3,3,2,9,9,9,6,1993,24,A religious person,Male,Single,Full time
 764070347,THA,1,2,2,2,6,8,7,6,1987,30,Not a religious person,Male,Single,Full time
 764070348,THA,1,1,1,1,8,10,8,6,1986,31,Not a religious person,Female,Married,Full time
-764070349,THA,1,2,3,3,8,9,8,-5,1990,27,Not a religious person,Female,Married,Full time
+764070349,THA,1,2,3,3,8,9,8,,1990,27,Not a religious person,Female,Married,Full time
 764070350,THA,1,3,2,1,7,8,8,8,1968,49,Not a religious person,Male,Married,Full time
 764070351,THA,1,3,3,1,7,8,8,-2,1956,61,Not a religious person,Male,Married,Retired/pensioned
 764070352,THA,1,2,2,1,7,9,6,6,1963,54,Not a religious person,Male,Living together as married,Self employed
@@ -5573,7 +5573,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 764070360,THA,1,2,2,1,10,7,4,5,1979,38,A religious person,Male,Married,Self employed
 764070361,THA,1,3,3,2,6,6,5,5,1977,40,A religious person,Male,Married,Part time
 764070362,THA,1,2,2,1,10,10,10,6,1979,38,Not a religious person,Female,Living together as married,Self employed
-764070363,THA,1,3,2,3,6,5,4,6,1976,41,Other missing,Female,Married,Self employed
+764070363,THA,1,3,2,3,6,5,4,6,1976,41,,Female,Married,Self employed
 764070364,THA,1,2,-1,1,10,1,1,10,1955,62,Not a religious person,Male,Living together as married,Self employed
 764070365,THA,1,3,2,2,5,5,5,4,1979,38,A religious person,Male,Single,Student
 764070366,THA,1,2,1,2,10,10,10,10,1981,36,Not a religious person,Male,Married,Self employed
@@ -5591,13 +5591,13 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 764070378,THA,1,2,4,1,7,9,5,5,1978,39,Not a religious person,Male,Married,Part time
 764070379,THA,1,1,1,1,10,7,10,-1,1969,48,Not a religious person,Male,Married,Self employed
 764070380,THA,1,3,1,2,5,5,4,-1,1961,56,A religious person,Male,Married,Part time
-764070381,THA,1,2,-5,1,4,5,5,-1,1971,46,Other missing,Male,Married,Self employed
+764070381,THA,1,2,,1,4,5,5,-1,1971,46,,Male,Married,Self employed
 764070382,THA,1,2,1,1,5,6,5,-1,1980,37,A religious person,Female,Single,Self employed
-764070383,THA,1,2,2,1,5,5,5,-5,1954,63,Not a religious person,Male,Married,Self employed
+764070383,THA,1,2,2,1,5,5,5,,1954,63,Not a religious person,Male,Married,Self employed
 764070384,THA,1,3,3,1,10,10,10,5,1979,38,Not a religious person,Female,Married,Self employed
 764070385,THA,1,2,2,1,10,10,10,5,1951,66,Not a religious person,Male,Married,Self employed
 764070386,THA,1,1,2,1,10,10,8,10,1960,57,Not a religious person,Male,Married,Self employed
-764070387,THA,1,3,-5,1,1,10,8,-1,1952,65,Not a religious person,Female,Married,Self employed
+764070387,THA,1,3,,1,1,10,8,-1,1952,65,Not a religious person,Female,Married,Self employed
 764070388,THA,1,3,2,2,5,7,6,8,1951,66,Not a religious person,Male,Married,Self employed
 764070389,THA,1,4,2,1,5,10,5,-1,1966,51,A religious person,Male,Married,Part time
 764070390,THA,1,3,1,1,5,5,4,-1,1963,54,Not a religious person,Male,Married,Part time
@@ -5611,7 +5611,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 764070398,THA,1,3,3,4,5,5,6,1,1965,52,Not a religious person,Female,Widowed,Self employed
 764070399,THA,2,3,3,2,8,10,10,-1,1956,61,Not a religious person,Female,Married,Self employed
 764070400,THA,1,2,2,1,10,10,6,10,1967,50,An atheist,Female,Married,Self employed
-764070401,THA,1,2,2,1,6,6,6,-5,1983,34,An atheist,Female,Married,Part time
+764070401,THA,1,2,2,1,6,6,6,,1983,34,An atheist,Female,Married,Part time
 764070402,THA,1,2,2,1,7,7,6,7,1969,48,Not a religious person,Male,Married,Part time
 764070403,THA,1,3,2,1,8,10,10,5,1965,52,Not a religious person,Male,Married,Self employed
 764070404,THA,1,2,1,1,10,10,6,5,1972,45,Not a religious person,Female,Married,Full time
@@ -5673,9 +5673,9 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 764070460,THA,1,1,2,2,6,7,8,5,1978,39,A religious person,Male,Married,Part time
 764070461,THA,1,1,2,3,7,8,8,6,1954,63,Not a religious person,Male,Married,Retired/pensioned
 764070462,THA,1,1,2,2,7,8,7,6,1996,21,Not a religious person,Male,Single,Part time
-764070463,THA,1,1,2,2,7,8,7,7,1951,66,Other missing,Female,Widowed,Homemaker
+764070463,THA,1,1,2,2,7,8,7,7,1951,66,,Female,Widowed,Homemaker
 764070464,THA,1,1,2,2,7,9,9,8,1964,53,Not a religious person,Male,Married,Part time
-764070465,THA,1,1,-2,-5,7,7,6,7,1974,43,A religious person,Male,Married,Part time
+764070465,THA,1,1,-2,,7,7,6,7,1974,43,A religious person,Male,Married,Part time
 764070466,THA,1,1,2,1,6,5,8,8,1992,25,Not a religious person,Female,Married,Full time
 764070467,THA,1,2,2,1,7,4,6,5,1970,47,A religious person,Male,Married,Self employed
 764070468,THA,1,1,2,1,4,4,7,8,1957,60,Not a religious person,Female,Married,Self employed
@@ -5732,7 +5732,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 764070519,THA,1,2,1,2,1,4,7,5,1953,64,A religious person,Female,Married,Self employed
 764070520,THA,1,1,1,3,6,3,1,5,1979,38,Not a religious person,Female,Married,Self employed
 764070521,THA,1,1,1,2,5,4,6,6,1976,41,Not a religious person,Female,Married,Self employed
-764070522,THA,1,1,1,1,4,5,7,4,1960,57,Other missing,Female,Married,Self employed
+764070522,THA,1,1,1,1,4,5,7,4,1960,57,,Female,Married,Self employed
 764070523,THA,1,1,2,1,5,5,6,5,1987,30,Not a religious person,Female,Married,Part time
 764070524,THA,1,1,1,1,5,4,6,6,1965,52,Not a religious person,Female,Married,Self employed
 764070525,THA,1,1,1,3,5,3,9,5,1970,47,Not a religious person,Male,Single,Part time
@@ -5780,7 +5780,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 764070567,THA,1,3,2,1,7,8,8,7,1991,26,Not a religious person,Female,Single,Part time
 764070568,THA,1,2,2,1,6,8,5,6,1981,36,Not a religious person,Female,Married,Part time
 764070569,THA,1,1,2,2,5,7,5,5,1993,24,Not a religious person,Male,Married,Part time
-764070570,THA,1,2,1,1,6,4,5,-5,1970,47,A religious person,Female,Married,Full time
+764070570,THA,1,2,1,1,6,4,5,,1970,47,A religious person,Female,Married,Full time
 764070571,THA,1,2,1,1,6,7,8,3,1975,42,Not a religious person,Female,Married,Self employed
 764070572,THA,1,1,2,2,3,3,2,4,1968,49,Not a religious person,Female,Married,Self employed
 764070573,THA,1,2,1,1,4,2,3,2,1978,39,A religious person,Female,Married,Self employed
@@ -5815,7 +5815,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 764070602,THA,1,1,2,3,10,10,1,10,1995,22,An atheist,Female,Married,Part time
 764070603,THA,1,1,1,1,4,3,5,10,1995,22,A religious person,Male,Single,Part time
 764070604,THA,1,1,3,2,7,7,5,8,1951,66,Not a religious person,Female,Married,Self employed
-764070605,THA,1,1,2,-5,10,10,1,10,1979,38,Not a religious person,Female,Married,Self employed
+764070605,THA,1,1,2,,10,10,1,10,1979,38,Not a religious person,Female,Married,Self employed
 764070606,THA,1,2,2,1,5,6,7,5,1969,48,A religious person,Female,Married,Self employed
 764070607,THA,1,2,2,3,5,7,3,6,1968,49,Not a religious person,Male,Married,Self employed
 764070608,THA,1,2,2,2,3,5,7,5,1967,50,A religious person,Male,Married,Self employed
@@ -5865,7 +5865,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 764070652,THA,1,2,3,1,4,5,4,8,1985,32,Not a religious person,Female,Married,Full time
 764070653,THA,1,2,2,1,4,8,5,9,1994,23,Not a religious person,Male,Single,Full time
 764070654,THA,1,1,2,1,8,4,6,9,1986,31,Not a religious person,Male,Married,Full time
-764070655,THA,1,2,3,1,8,4,5,-5,1958,59,Not a religious person,Male,Married,Self employed
+764070655,THA,1,2,3,1,8,4,5,,1958,59,Not a religious person,Male,Married,Self employed
 764070656,THA,1,2,2,1,6,4,6,6,1991,26,Not a religious person,Male,Married,Full time
 764070657,THA,1,2,2,1,8,6,4,6,1952,65,Not a religious person,Female,Married,Self employed
 764070658,THA,1,2,3,1,5,7,5,8,1983,34,Not a religious person,Male,Married,Full time
@@ -5915,11 +5915,11 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 764070702,THA,2,2,1,2,4,5,5,6,1973,44,Not a religious person,Female,Married,Self employed
 764070703,THA,1,2,2,2,6,4,6,7,1996,21,A religious person,Female,Single,Student
 764070704,THA,2,2,2,2,3,4,3,-1,1960,57,A religious person,Male,Married,Self employed
-764070705,THA,2,2,3,3,5,6,5,7,1981,36,Other missing,Female,Married,Homemaker
+764070705,THA,2,2,3,3,5,6,5,7,1981,36,,Female,Married,Homemaker
 764070706,THA,1,2,2,2,3,4,4,4,1955,62,An atheist,Male,Married,Unemployed
 764070707,THA,1,1,2,3,6,6,6,5,1987,30,Not a religious person,Female,Married,Part time
-764070708,THA,1,2,3,-5,1,3,3,10,1962,55,A religious person,Female,Married,Part time
-764070709,THA,3,3,4,-5,4,5,6,8,1970,47,A religious person,Female,Married,Part time
+764070708,THA,1,2,3,,1,3,3,10,1962,55,A religious person,Female,Married,Part time
+764070709,THA,3,3,4,,4,5,6,8,1970,47,A religious person,Female,Married,Part time
 764070710,THA,3,4,3,4,6,5,6,6,1969,48,Not a religious person,Male,Married,Self employed
 764070711,THA,3,3,4,-1,1,1,3,4,1967,50,A religious person,Female,Married,Part time
 764070712,THA,1,2,2,2,1,8,5,3,1969,48,Not a religious person,Male,Married,Part time
@@ -5999,7 +5999,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 764070786,THA,1,1,3,1,3,3,3,1,1968,49,Not a religious person,Male,Married,Self employed
 764070787,THA,1,2,2,1,6,6,9,8,1975,42,An atheist,Male,Married,Self employed
 764070788,THA,1,1,1,1,3,5,5,1,1970,47,Not a religious person,Female,Married,Self employed
-764070789,THA,1,1,-5,2,2,4,9,6,1988,29,Not a religious person,Male,Married,Self employed
+764070789,THA,1,1,,2,2,4,9,6,1988,29,Not a religious person,Male,Married,Self employed
 764070790,THA,1,2,2,2,4,4,4,3,1983,34,Not a religious person,Female,Married,Self employed
 764070791,THA,1,2,2,2,8,7,5,6,1985,32,Not a religious person,Female,Married,Self employed
 764070792,THA,1,1,2,1,5,5,9,7,1979,38,A religious person,Female,Married,Self employed
@@ -6036,11 +6036,11 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 764070823,THA,2,3,3,2,5,6,4,7,1966,51,Not a religious person,Male,Living together as married,Full time
 764070824,THA,1,1,1,1,5,6,4,6,1967,50,Not a religious person,Female,Living together as married,Self employed
 764070825,THA,3,2,2,1,4,3,5,4,1978,39,An atheist,Male,Living together as married,Self employed
-764070826,THA,1,2,2,2,6,4,6,9,1982,35,Other missing,Female,Living together as married,Self employed
+764070826,THA,1,2,2,2,6,4,6,9,1982,35,,Female,Living together as married,Self employed
 764070827,THA,1,3,2,3,5,5,6,7,1957,60,An atheist,Male,Living together as married,Self employed
 764070828,THA,1,4,3,2,6,5,6,6,1960,57,Not a religious person,Male,Living together as married,Self employed
 764070829,THA,1,1,1,1,6,6,7,6,1963,54,A religious person,Female,Living together as married,Self employed
-764070830,THA,2,2,1,1,6,6,6,6,1977,40,Other missing,Female,Married,Self employed
+764070830,THA,2,2,1,1,6,6,6,6,1977,40,,Female,Married,Self employed
 764070831,THA,2,1,1,1,4,4,6,6,1972,45,An atheist,Male,Living together as married,Self employed
 764070832,THA,2,4,3,2,5,3,4,7,1971,46,Not a religious person,Male,Living together as married,Self employed
 764070833,THA,1,3,3,4,5,5,6,6,1968,49,Not a religious person,Female,Living together as married,Self employed
@@ -6066,7 +6066,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 764070853,THA,3,3,4,2,3,5,6,5,1960,57,Not a religious person,Male,Married,Self employed
 764070854,THA,1,2,2,2,5,5,6,6,1972,45,Not a religious person,Male,Married,Part time
 764070855,THA,1,2,2,2,4,3,3,3,1986,31,Not a religious person,Female,Married,Self employed
-764070856,THA,-5,-5,-5,-5,7,6,4,8,1985,32,Not a religious person,Female,Married,Full time
+764070856,THA,,,,,7,6,4,8,1985,32,Not a religious person,Female,Married,Full time
 764070857,THA,4,4,4,4,8,7,6,7,1970,47,Not a religious person,Male,Married,Full time
 764070858,THA,1,1,2,2,6,7,7,6,1982,35,Not a religious person,Male,Married,Full time
 764070859,THA,3,3,3,2,6,5,5,8,1970,47,A religious person,Female,Married,Full time
@@ -6096,7 +6096,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 764070883,THA,1,2,3,2,4,5,4,4,1958,59,Not a religious person,Female,Married,Homemaker
 764070884,THA,2,2,2,1,5,5,6,6,1977,40,Not a religious person,Male,Married,Full time
 764070885,THA,1,2,3,2,6,5,4,7,1946,71,Not a religious person,Female,Married,Self employed
-764070886,THA,1,2,3,-5,8,9,9,2,1959,58,Not a religious person,Male,Married,Self employed
+764070886,THA,1,2,3,,8,9,9,2,1959,58,Not a religious person,Male,Married,Self employed
 764070887,THA,1,2,3,1,7,5,4,9,1960,57,Not a religious person,Male,Married,Self employed
 764070888,THA,1,1,2,1,7,5,3,7,1980,37,A religious person,Male,Married,Self employed
 764070889,THA,1,1,2,1,6,7,8,8,1975,42,Not a religious person,Male,Married,Part time
@@ -6122,10 +6122,10 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 764070909,THA,1,2,1,1,9,5,5,-1,1981,36,Not a religious person,Female,Living together as married,Unemployed
 764070910,THA,1,2,1,1,9,8,8,-1,1992,25,Not a religious person,Female,Living together as married,Self employed
 764070911,THA,1,1,1,1,8,9,8,-1,1977,40,Not a religious person,Female,Married,Self employed
-764070912,THA,1,3,2,1,10,8,8,-5,1972,45,Not a religious person,Female,Living together as married,Self employed
+764070912,THA,1,3,2,1,10,8,8,,1972,45,Not a religious person,Female,Living together as married,Self employed
 764070913,THA,1,3,1,1,9,9,8,5,1983,34,Not a religious person,Female,Married,Self employed
-764070914,THA,1,1,1,1,5,7,5,-5,1962,55,Not a religious person,Male,Living together as married,Self employed
-764070915,THA,1,3,3,1,6,8,6,-5,1977,40,Not a religious person,Female,Married,Self employed
+764070914,THA,1,1,1,1,5,7,5,,1962,55,Not a religious person,Male,Living together as married,Self employed
+764070915,THA,1,3,3,1,6,8,6,,1977,40,Not a religious person,Female,Married,Self employed
 764070916,THA,1,2,1,1,7,5,3,5,1957,60,Not a religious person,Male,Living together as married,Unemployed
 764070917,THA,1,3,2,1,10,6,5,5,1980,37,Not a religious person,Female,Married,Part time
 764070918,THA,1,1,3,1,2,3,1,-1,1970,47,Not a religious person,Male,Divorced,Part time
@@ -6138,16 +6138,16 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 764070925,THA,1,3,2,1,5,5,5,5,1970,47,Not a religious person,Male,Married,Self employed
 764070926,THA,1,4,3,1,5,2,2,5,1982,35,Not a religious person,Male,Married,Full time
 764070927,THA,1,3,3,1,8,6,4,5,1975,42,A religious person,Male,Living together as married,Self employed
-764070928,THA,1,1,3,1,8,7,8,-5,1981,36,Not a religious person,Male,Married,Self employed
+764070928,THA,1,1,3,1,8,7,8,,1981,36,Not a religious person,Male,Married,Self employed
 764070929,THA,1,2,3,2,8,8,10,-1,1975,42,Not a religious person,Male,Married,Self employed
 764070930,THA,1,3,-1,2,8,7,7,-1,1987,30,Not a religious person,Female,Married,Self employed
 764070931,THA,1,3,2,1,4,4,5,8,1979,38,A religious person,Female,Married,Self employed
 764070932,THA,1,2,2,1,10,8,8,7,1997,20,Not a religious person,Male,Single,Part time
 764070933,THA,1,3,2,1,6,7,5,5,1953,64,Not a religious person,Female,Living together as married,Self employed
 764070934,THA,1,1,1,1,8,8,8,8,1977,40,Not a religious person,Female,Married,Self employed
-764070935,THA,1,2,3,2,5,8,5,5,1952,65,Other missing,Female,Married,Self employed
+764070935,THA,1,2,3,2,5,8,5,5,1952,65,,Female,Married,Self employed
 764070936,THA,1,4,2,1,8,9,7,-1,1956,61,Not a religious person,Female,Married,Self employed
-764070937,THA,1,1,1,3,7,8,6,-5,1939,78,A religious person,Male,Married,Retired/pensioned
+764070937,THA,1,1,1,3,7,8,6,,1939,78,A religious person,Male,Married,Retired/pensioned
 764070938,THA,1,2,3,1,8,7,7,5,1967,50,Not a religious person,Male,Single,Full time
 764070939,THA,1,2,2,2,9,10,8,-1,1955,62,Not a religious person,Female,Widowed,Homemaker
 764070940,THA,1,2,2,2,7,8,8,-1,1972,45,Not a religious person,Female,Married,Self employed
@@ -6159,16 +6159,16 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 764070946,THA,1,1,1,1,6,8,7,8,1953,64,Not a religious person,Male,Married,Self employed
 764070947,THA,1,2,2,2,5,8,8,-1,1962,55,Not a religious person,Male,Married,Self employed
 764070948,THA,1,2,2,2,7,8,8,-2,1978,39,Not a religious person,Female,Married,Full time
-764070949,THA,1,1,1,1,8,8,8,-5,1961,56,Not a religious person,Male,Married,Self employed
+764070949,THA,1,1,1,1,8,8,8,,1961,56,Not a religious person,Male,Married,Self employed
 764070950,THA,1,3,2,1,8,7,5,5,1970,47,Not a religious person,Male,Married,Full time
-764070951,THA,2,2,2,3,1,1,1,-5,1976,41,Not a religious person,Male,Married,Self employed
+764070951,THA,2,2,2,3,1,1,1,,1976,41,Not a religious person,Male,Married,Self employed
 764070952,THA,1,3,1,1,6,8,2,5,1967,50,A religious person,Male,Married,Part time
 764070953,THA,1,1,2,1,9,9,7,6,1977,40,Not a religious person,Male,Married,Full time
 764070954,THA,1,2,2,3,8,7,7,5,1959,58,Not a religious person,Female,Married,Retired/pensioned
 764070955,THA,1,3,2,3,7,8,7,5,1964,53,Not a religious person,Male,Divorced,Full time
 764070956,THA,1,3,1,1,8,9,5,5,1952,65,Not a religious person,Male,Living together as married,Self employed
 764070957,THA,1,2,2,1,5,8,4,5,1955,62,Not a religious person,Female,Married,Self employed
-764070958,THA,1,3,2,-5,6,7,9,-5,1978,39,Not a religious person,Female,Married,Homemaker
+764070958,THA,1,3,2,,6,7,9,,1978,39,Not a religious person,Female,Married,Homemaker
 764070959,THA,1,2,3,1,6,8,7,5,1967,50,Not a religious person,Female,Single,Self employed
 764070960,THA,1,1,2,3,7,7,7,5,1963,54,Not a religious person,Female,Married,Homemaker
 764070961,THA,1,2,3,2,9,10,10,-1,1957,60,Not a religious person,Male,Married,Unemployed
@@ -6176,10 +6176,10 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 764070963,THA,1,2,3,2,8,8,8,-1,1963,54,Not a religious person,Female,Married,Full time
 764070964,THA,1,2,2,1,8,10,7,-1,1994,23,Not a religious person,Female,Married,Full time
 764070965,THA,1,1,3,2,10,6,6,-1,1978,39,An atheist,Male,Single,Unemployed
-764070966,THA,1,2,-5,2,5,10,8,-1,1992,25,Not a religious person,Male,Living together as married,Self employed
+764070966,THA,1,2,,2,5,10,8,-1,1992,25,Not a religious person,Male,Living together as married,Self employed
 764070967,THA,1,2,3,1,7,8,9,-1,1992,25,Not a religious person,Others,Living together as married,Homemaker
 764070968,THA,1,2,2,2,8,9,8,-1,1979,38,Not a religious person,Male,Living together as married,Full time
-764070969,THA,1,2,3,3,8,8,6,-5,1963,54,Other missing,Female,Married,Homemaker
+764070969,THA,1,2,3,3,8,8,6,,1963,54,,Female,Married,Homemaker
 764070970,THA,1,2,3,2,6,6,4,-1,1979,38,Not a religious person,Male,Separated,Full time
 764070971,THA,1,2,2,2,5,7,4,-1,1967,50,Not a religious person,Male,Divorced,Full time
 764070972,THA,1,2,2,2,8,9,8,-1,1976,41,Not a religious person,Female,Married,Homemaker
@@ -6191,10 +6191,10 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 764070978,THA,1,1,1,1,8,8,8,-1,1958,59,Not a religious person,Male,Married,Self employed
 764070979,THA,1,1,2,1,10,8,9,7,1965,52,Not a religious person,Female,Married,Self employed
 764070980,THA,1,1,1,1,8,7,5,9,1988,29,Not a religious person,Female,Living together as married,Self employed
-764070981,THA,1,2,1,1,8,6,8,-5,1959,58,Not a religious person,Female,Married,Full time
+764070981,THA,1,2,1,1,8,6,8,,1959,58,Not a religious person,Female,Married,Full time
 764070982,THA,1,3,2,1,8,9,9,8,1977,40,Not a religious person,Male,Living together as married,Full time
 764070983,THA,1,4,3,1,8,10,10,5,1981,36,Not a religious person,Female,Living together as married,Self employed
-764070984,THA,1,1,1,1,8,9,7,-5,1972,45,Not a religious person,Female,Married,Full time
+764070984,THA,1,1,1,1,8,9,7,,1972,45,Not a religious person,Female,Married,Full time
 764070985,THA,1,2,2,1,8,8,8,8,1965,52,Not a religious person,Female,Married,Self employed
 764070986,THA,1,4,2,2,5,5,6,-1,1965,52,Not a religious person,Female,Married,Self employed
 764070987,THA,1,2,2,2,5,7,7,-1,1965,52,Not a religious person,Female,Married,Homemaker
@@ -6210,8 +6210,8 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 764070997,THA,1,1,1,1,8,9,5,-1,1952,65,Not a religious person,Female,Living together as married,Part time
 764070998,THA,1,1,2,1,6,5,7,-1,1963,54,Not a religious person,Female,Married,Self employed
 764070999,THA,1,1,2,1,3,10,8,-1,1964,53,Not a religious person,Male,Married,Self employed
-764071000,THA,1,2,3,2,6,7,7,-5,1987,30,Not a religious person,Female,Married,Self employed
-764071001,THA,1,2,3,-1,4,7,6,-5,1969,48,Not a religious person,Female,Married,Self employed
+764071000,THA,1,2,3,2,6,7,7,,1987,30,Not a religious person,Female,Married,Self employed
+764071001,THA,1,2,3,-1,4,7,6,,1969,48,Not a religious person,Female,Married,Self employed
 764071002,THA,1,2,2,1,6,5,5,-1,1967,50,Not a religious person,Male,Married,Self employed
 764071003,THA,1,3,3,1,7,7,2,9,1980,37,Not a religious person,Female,Married,Part time
 764071004,THA,1,3,2,1,6,7,7,5,1997,20,Not a religious person,Male,Married,Self employed
@@ -6229,22 +6229,22 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 764071016,THA,1,1,2,2,3,4,7,-1,1957,60,Not a religious person,Female,Married,Self employed
 764071017,THA,1,2,2,2,1,10,10,-1,1951,66,Not a religious person,Female,Single,Self employed
 764071018,THA,1,1,3,1,10,10,5,-1,1962,55,Not a religious person,Female,Widowed,Self employed
-764071019,THA,1,2,3,1,10,10,6,-5,1987,30,Not a religious person,Male,Married,Self employed
-764071020,THA,1,2,2,2,8,5,5,-5,1991,26,Not a religious person,Female,Married,Self employed
-764071021,THA,1,1,2,1,4,5,5,-5,1955,62,Other missing,Female,Married,Self employed
+764071019,THA,1,2,3,1,10,10,6,,1987,30,Not a religious person,Male,Married,Self employed
+764071020,THA,1,2,2,2,8,5,5,,1991,26,Not a religious person,Female,Married,Self employed
+764071021,THA,1,1,2,1,4,5,5,,1955,62,,Female,Married,Self employed
 764071022,THA,1,2,1,1,4,3,6,4,1950,67,Not a religious person,Female,Married,Part time
 764071023,THA,1,4,4,1,4,6,6,-1,1967,50,Not a religious person,Female,Married,Self employed
 764071024,THA,1,2,3,3,5,4,5,-1,1961,56,Not a religious person,Female,Married,Full time
 764071025,THA,1,2,1,2,4,5,5,-1,1975,42,Not a religious person,Male,Married,Self employed
 764071026,THA,1,2,1,1,6,5,7,-1,1979,38,Not a religious person,Female,Married,Full time
-764071027,THA,1,1,1,1,4,5,4,-5,1947,70,Not a religious person,Male,Married,Part time
+764071027,THA,1,1,1,1,4,5,4,,1947,70,Not a religious person,Male,Married,Part time
 764071028,THA,1,1,4,1,4,5,5,4,1984,33,A religious person,Female,Married,Full time
 764071029,THA,1,1,3,1,4,7,5,-1,1978,39,Not a religious person,Male,Married,Full time
 764071030,THA,1,-2,1,1,4,6,5,-1,1955,62,Not a religious person,Male,Married,Retired/pensioned
 764071031,THA,1,1,2,1,5,6,6,-1,1977,40,Not a religious person,Male,Married,Full time
 764071032,THA,1,1,1,1,6,5,6,5,1974,43,Not a religious person,Female,Married,Full time
 764071033,THA,1,2,1,1,5,6,5,-1,1948,69,A religious person,Female,Married,Homemaker
-764071034,THA,1,4,4,1,7,4,7,-5,1958,59,Not a religious person,Male,Married,Self employed
+764071034,THA,1,4,4,1,7,4,7,,1958,59,Not a religious person,Male,Married,Self employed
 764071035,THA,1,3,3,1,5,7,7,5,1967,50,Not a religious person,Female,Married,Self employed
 764071036,THA,1,1,2,1,10,9,10,-1,1967,50,Not a religious person,Female,Single,Self employed
 764071037,THA,1,2,3,2,3,7,7,-1,1970,47,Not a religious person,Male,Married,Self employed
@@ -6253,37 +6253,37 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 764071040,THA,1,2,1,1,10,10,10,10,1964,53,Not a religious person,Male,Married,Self employed
 764071041,THA,1,1,2,2,5,3,9,10,1947,70,Not a religious person,Male,Married,Self employed
 764071042,THA,1,1,2,1,7,6,8,5,1943,74,Not a religious person,Male,Married,Self employed
-764071043,THA,1,2,1,1,6,7,7,-5,1962,55,Not a religious person,Female,Divorced,Self employed
-764071044,THA,1,2,2,2,6,8,6,-5,1950,67,Not a religious person,Female,Married,Self employed
-764071045,THA,1,3,3,1,8,8,5,-5,1980,37,Not a religious person,Female,Married,Part time
+764071043,THA,1,2,1,1,6,7,7,,1962,55,Not a religious person,Female,Divorced,Self employed
+764071044,THA,1,2,2,2,6,8,6,,1950,67,Not a religious person,Female,Married,Self employed
+764071045,THA,1,3,3,1,8,8,5,,1980,37,Not a religious person,Female,Married,Part time
 764071046,THA,1,1,1,1,1,6,8,-2,1969,48,Not a religious person,Male,Widowed,Self employed
 764071047,THA,1,2,1,1,5,10,6,-1,1955,62,Not a religious person,Male,Married,Full time
 764071048,THA,1,1,1,1,5,8,7,-1,1972,45,Not a religious person,Male,Separated,Full time
 764071049,THA,1,1,1,1,3,3,3,5,1956,61,A religious person,Female,Married,Retired/pensioned
 764071050,THA,1,2,3,2,5,7,3,5,1958,59,Not a religious person,Female,Separated,Full time
-764071051,THA,1,1,1,1,7,9,9,-5,1963,54,A religious person,Female,Single,Full time
+764071051,THA,1,1,1,1,7,9,9,,1963,54,A religious person,Female,Single,Full time
 764071052,THA,1,2,1,1,7,10,10,-1,1973,44,Not a religious person,Male,Single,Self employed
 764071053,THA,1,2,2,2,10,10,10,-2,1958,59,Not a religious person,Male,Married,Self employed
 764071054,THA,1,3,3,1,10,8,8,5,1993,24,Not a religious person,Male,Living together as married,Full time
 764071055,THA,1,2,2,1,10,10,10,5,1964,53,Not a religious person,Female,Married,Self employed
 764071056,THA,1,1,2,2,6,8,8,8,1942,75,Not a religious person,Male,Married,Part time
-764071057,THA,1,1,1,1,7,8,8,-5,1983,34,Not a religious person,Female,Married,Self employed
+764071057,THA,1,1,1,1,7,8,8,,1983,34,Not a religious person,Female,Married,Self employed
 764071058,THA,1,2,1,2,8,7,1,5,1973,44,Not a religious person,Male,Single,Full time
 764071059,THA,2,2,3,1,2,2,2,5,1975,42,Not a religious person,Male,Single,Part time
 764071060,THA,1,4,-2,-2,10,10,10,10,1971,46,Not a religious person,Female,Living together as married,Self employed
-764071061,THA,-2,-1,-2,-2,10,5,5,-5,1945,72,A religious person,Male,Living together as married,Retired/pensioned
+764071061,THA,-2,-1,-2,-2,10,5,5,,1945,72,A religious person,Male,Living together as married,Retired/pensioned
 764071062,THA,1,2,3,1,8,8,7,7,1981,36,Not a religious person,Female,Living together as married,Unemployed
 764071063,THA,1,1,2,1,10,10,9,5,1958,59,Not a religious person,Male,Married,Retired/pensioned
 764071064,THA,1,2,-2,1,4,8,6,1,1954,63,Not a religious person,Male,Living together as married,Retired/pensioned
-764071065,THA,1,3,-2,-5,8,10,10,8,1951,66,A religious person,Female,Married,Retired/pensioned
+764071065,THA,1,3,-2,,8,10,10,8,1951,66,A religious person,Female,Married,Retired/pensioned
 764071066,THA,1,2,2,1,8,8,8,5,1956,61,A religious person,Male,Married,Retired/pensioned
 764071067,THA,1,2,1,3,7,8,7,5,1947,70,Not a religious person,Male,Married,Retired/pensioned
 764071068,THA,1,3,2,1,5,4,5,5,1981,36,Not a religious person,Female,Divorced,Self employed
 764071069,THA,1,2,1,2,5,7,7,5,1972,45,Not a religious person,Female,Married,Self employed
 764071070,THA,1,2,3,2,-1,-1,-1,-1,1962,55,Not a religious person,Female,Married,Self employed
-764071071,THA,1,3,4,4,1,6,5,-5,1954,63,Not a religious person,Male,Married,Retired/pensioned
+764071071,THA,1,3,4,4,1,6,5,,1954,63,Not a religious person,Male,Married,Retired/pensioned
 764071072,THA,1,1,1,3,8,10,10,5,1950,67,Not a religious person,Male,Living together as married,Retired/pensioned
-764071073,THA,1,2,1,2,7,7,7,-5,1994,23,Not a religious person,Male,Single,Unemployed
+764071073,THA,1,2,1,2,7,7,7,,1994,23,Not a religious person,Male,Single,Unemployed
 764071074,THA,1,1,2,1,7,8,6,-2,1985,32,Not a religious person,Female,Living together as married,Full time
 764071075,THA,1,2,2,1,8,10,9,-1,1958,59,Not a religious person,Male,Married,Full time
 764071076,THA,1,2,3,2,10,10,9,-1,1961,56,Not a religious person,Female,Married,Self employed
@@ -6291,9 +6291,9 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 764071078,THA,1,2,2,1,8,7,7,-1,1981,36,Not a religious person,Female,Divorced,Self employed
 764071079,THA,1,2,3,2,10,10,10,-1,1962,55,Not a religious person,Female,Married,Homemaker
 764071080,THA,1,2,2,3,10,10,7,-1,1959,58,Not a religious person,Female,Married,Homemaker
-764071081,THA,1,2,2,2,8,10,10,-5,1954,63,Not a religious person,Female,Married,Retired/pensioned
+764071081,THA,1,2,2,2,8,10,10,,1954,63,Not a religious person,Female,Married,Retired/pensioned
 764071082,THA,1,2,2,2,10,7,7,-1,1976,41,Not a religious person,Male,Married,Part time
-764071083,THA,1,2,2,1,8,8,8,-5,1973,44,Not a religious person,Female,Married,Homemaker
+764071083,THA,1,2,2,1,8,8,8,,1973,44,Not a religious person,Female,Married,Homemaker
 764071084,THA,1,1,1,1,9,9,8,-2,1962,55,Not a religious person,Male,Married,Part time
 764071085,THA,1,2,1,2,1,6,1,6,1988,29,Not a religious person,Male,Living together as married,Full time
 764071086,THA,2,3,-2,1,2,2,5,-1,1954,63,A religious person,Male,Married,Self employed
@@ -6317,11 +6317,11 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 764071104,THA,1,1,1,1,6,7,5,-1,1949,68,Not a religious person,Female,Living together as married,Homemaker
 764071105,THA,1,2,3,1,7,7,5,-1,1957,60,A religious person,Female,Widowed,Homemaker
 764071106,THA,1,3,2,2,6,8,7,-1,1980,37,An atheist,Female,Divorced,Self employed
-764071107,THA,1,2,3,1,5,5,5,-5,1971,46,Not a religious person,Female,Married,Full time
+764071107,THA,1,2,3,1,5,5,5,,1971,46,Not a religious person,Female,Married,Full time
 764071108,THA,1,3,2,1,9,10,10,5,1969,48,Not a religious person,Male,Married,Self employed
 764071109,THA,1,3,4,1,4,6,6,-1,1961,56,Not a religious person,Male,Living together as married,Full time
-764071110,THA,2,3,2,3,7,7,7,-5,1958,59,Not a religious person,Female,Married,Homemaker
-764071111,THA,1,2,2,1,5,7,5,-5,1956,61,A religious person,Male,Living together as married,Self employed
+764071110,THA,2,3,2,3,7,7,7,,1958,59,Not a religious person,Female,Married,Homemaker
+764071111,THA,1,2,2,1,5,7,5,,1956,61,A religious person,Male,Living together as married,Self employed
 764071112,THA,1,2,2,1,5,8,8,5,1969,48,Not a religious person,Female,Living together as married,Full time
 764071113,THA,1,2,2,2,3,3,4,5,1960,57,A religious person,Male,Married,Self employed
 764071114,THA,2,2,1,1,5,5,4,-1,1963,54,Not a religious person,Male,Married,Full time
@@ -6330,18 +6330,18 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 764071117,THA,1,2,2,1,7,6,5,5,1977,40,A religious person,Female,Married,Full time
 764071118,THA,1,3,2,1,7,8,7,5,1978,39,A religious person,Female,Living together as married,Full time
 764071119,THA,1,2,2,1,5,10,8,9,1950,67,Not a religious person,Male,Married,Retired/pensioned
-764071120,THA,1,1,1,1,8,10,10,-5,1965,52,Not a religious person,Female,Married,Self employed
+764071120,THA,1,1,1,1,8,10,10,,1965,52,Not a religious person,Female,Married,Self employed
 764071121,THA,1,3,-2,1,5,7,7,5,1957,60,A religious person,Female,Divorced,Self employed
-764071122,THA,1,-5,-5,2,5,5,5,-5,1974,43,Not a religious person,Female,Married,Part time
+764071122,THA,1,,,2,5,5,5,,1974,43,Not a religious person,Female,Married,Part time
 764071123,THA,1,1,-2,3,6,7,8,5,1958,59,Not a religious person,Female,Divorced,Retired/pensioned
 764071124,THA,1,2,2,1,8,8,9,-1,1986,31,Not a religious person,Female,Married,Self employed
 764071125,THA,1,2,2,2,5,5,5,-2,1983,34,Not a religious person,Female,Married,Self employed
 764071126,THA,1,1,2,1,5,5,5,-1,1959,58,Not a religious person,Male,Married,Self employed
 764071127,THA,1,2,-2,2,8,4,5,-1,1953,64,Not a religious person,Male,Married,Retired/pensioned
-764071128,THA,2,4,3,2,8,2,2,-5,1963,54,Other missing,Male,Divorced,Part time
+764071128,THA,2,4,3,2,8,2,2,,1963,54,,Male,Divorced,Part time
 764071129,THA,1,2,3,1,5,5,3,-1,1964,53,Not a religious person,Male,Divorced,Part time
 764071130,THA,1,2,3,2,10,8,8,-1,1973,44,Not a religious person,Male,Married,Part time
-764071131,THA,1,1,1,3,8,8,6,-5,1955,62,A religious person,Female,Married,Retired/pensioned
+764071131,THA,1,1,1,3,8,8,6,,1955,62,A religious person,Female,Married,Retired/pensioned
 764071132,THA,1,1,2,1,10,10,10,9,1950,67,A religious person,Male,Married,Retired/pensioned
 764071133,THA,1,2,1,1,8,8,8,8,1951,66,A religious person,Female,Married,Unemployed
 764071134,THA,1,1,1,1,9,8,7,9,1958,59,A religious person,Female,Married,Unemployed
@@ -6355,7 +6355,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 764071142,THA,1,3,2,1,9,9,8,-1,1961,56,Not a religious person,Female,Married,Self employed
 764071143,THA,1,2,3,1,4,5,5,-2,1946,71,Not a religious person,Male,Married,Retired/pensioned
 764071144,THA,1,2,3,1,5,9,2,-2,1985,32,Not a religious person,Female,Married,Self employed
-764071145,THA,1,2,3,3,6,10,10,-5,1953,64,Not a religious person,Female,Married,Retired/pensioned
+764071145,THA,1,2,3,3,6,10,10,,1953,64,Not a religious person,Female,Married,Retired/pensioned
 764071146,THA,1,1,3,2,5,8,8,5,1961,56,Not a religious person,Male,Married,Full time
 764071147,THA,1,1,1,1,6,10,10,-1,1964,53,Not a religious person,Male,Married,Self employed
 764071148,THA,1,2,1,1,10,8,8,-1,1955,62,Not a religious person,Female,Married,Self employed
@@ -6365,7 +6365,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 764071152,THA,1,2,3,3,6,7,5,-1,1955,62,Not a religious person,Female,Married,Self employed
 764071153,THA,1,1,1,1,10,10,8,8,1977,40,Not a religious person,Female,Married,Self employed
 764071154,THA,1,1,1,1,9,8,8,5,1985,32,Not a religious person,Female,Married,Full time
-764071155,THA,1,1,1,1,7,9,8,-5,1964,53,Other missing,Female,Married,Homemaker
+764071155,THA,1,1,1,1,7,9,8,,1964,53,,Female,Married,Homemaker
 764071156,THA,1,2,2,2,6,6,5,5,1980,37,Not a religious person,Female,Married,Self employed
 764071157,THA,1,2,2,2,1,1,-1,-1,1975,42,Not a religious person,Female,Married,Full time
 764071158,THA,1,2,2,2,7,7,7,5,1959,58,Not a religious person,Male,Married,Retired/pensioned
@@ -6384,10 +6384,10 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 764071171,THA,1,1,1,1,5,8,4,-1,1947,70,A religious person,Female,Widowed,Homemaker
 764071172,THA,1,2,2,2,8,10,9,-1,1995,22,Not a religious person,Female,Married,Part time
 764071173,THA,1,1,1,1,10,8,8,5,1967,50,Not a religious person,Female,Living together as married,Full time
-764071174,THA,1,2,2,2,10,8,6,-5,1968,49,Not a religious person,Male,Living together as married,Full time
+764071174,THA,1,2,2,2,10,8,6,,1968,49,Not a religious person,Male,Living together as married,Full time
 764071175,THA,1,1,1,1,10,7,5,-1,1969,48,Not a religious person,Male,Married,Part time
 764071176,THA,1,1,1,2,8,8,7,-1,1990,27,Not a religious person,Female,Married,Self employed
-764071177,THA,1,1,3,1,4,8,7,-5,1981,36,Not a religious person,Male,Married,Self employed
+764071177,THA,1,1,3,1,4,8,7,,1981,36,Not a religious person,Male,Married,Self employed
 764071178,THA,1,2,2,1,8,8,5,5,1960,57,A religious person,Male,Married,Full time
 764071179,THA,1,2,2,1,2,2,1,6,1960,57,A religious person,Male,Married,Self employed
 764071180,THA,1,2,2,1,5,7,8,5,1991,26,Not a religious person,Male,Married,Full time
@@ -6396,18 +6396,18 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 764071183,THA,1,2,2,2,8,8,7,-1,1942,75,A religious person,Female,Married,Unemployed
 764071184,THA,1,2,1,2,9,8,7,5,1960,57,Not a religious person,Female,Living together as married,Self employed
 764071185,THA,1,2,2,2,10,9,7,5,1957,60,Not a religious person,Male,Married,Self employed
-764071186,THA,1,1,1,1,7,8,5,-5,1943,74,Not a religious person,Male,Married,Self employed
+764071186,THA,1,1,1,1,7,8,5,,1943,74,Not a religious person,Male,Married,Self employed
 764071187,THA,1,1,1,1,6,5,7,-1,1955,62,Not a religious person,Male,Married,Self employed
 764071188,THA,1,1,2,1,3,10,6,5,1969,48,Not a religious person,Female,Married,Self employed
 764071189,THA,2,3,3,1,4,5,5,6,1977,40,Not a religious person,Female,Married,Self employed
 764071190,THA,1,1,1,1,4,7,8,6,1970,47,Not a religious person,Female,Married,Self employed
 764071191,THA,1,1,1,1,9,8,6,-1,1958,59,Not a religious person,Female,Living together as married,Self employed
-764071192,THA,1,1,1,1,10,10,8,-5,1973,44,A religious person,Male,Single,Self employed
+764071192,THA,1,1,1,1,10,10,8,,1973,44,A religious person,Male,Single,Self employed
 764071193,THA,1,1,1,1,9,10,5,-1,1967,50,Not a religious person,Female,Living together as married,Self employed
 764071194,THA,1,2,2,2,7,5,5,-1,1972,45,Not a religious person,Female,Married,Unemployed
 764071195,THA,1,1,1,3,8,9,7,-1,1962,55,Not a religious person,Female,Living together as married,Homemaker
 764071196,THA,1,2,1,2,5,8,5,5,1984,33,Not a religious person,Female,Living together as married,Homemaker
-764071197,THA,1,1,1,1,5,7,6,-5,1967,50,Not a religious person,Female,Divorced,Self employed
+764071197,THA,1,1,1,1,5,7,6,,1967,50,Not a religious person,Female,Divorced,Self employed
 764071198,THA,1,3,1,2,9,8,9,5,1973,44,Not a religious person,Female,Married,Self employed
 764071199,THA,1,2,2,1,2,1,1,5,1958,59,A religious person,Others,Widowed,Student
 764071200,THA,1,2,2,1,7,10,5,6,1997,20,Not a religious person,Female,Married,Part time
@@ -6418,32 +6418,32 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 764071205,THA,1,1,1,1,10,10,10,-1,1990,27,Not a religious person,Female,Married,Full time
 764071206,THA,1,1,1,2,8,8,8,-1,1993,24,Not a religious person,Female,Living together as married,Homemaker
 764071207,THA,1,1,1,1,5,5,5,-1,1980,37,Not a religious person,Female,Married,Homemaker
-764071208,THA,1,2,2,-5,5,3,2,-1,1959,58,Not a religious person,Male,Married,Part time
+764071208,THA,1,2,2,,5,3,2,-1,1959,58,Not a religious person,Male,Married,Part time
 764071209,THA,1,1,1,1,8,9,8,5,1952,65,A religious person,Female,Widowed,Homemaker
-764071210,THA,1,2,1,1,8,7,3,-5,1949,68,Not a religious person,Female,Married,Self employed
+764071210,THA,1,2,1,1,8,7,3,,1949,68,Not a religious person,Female,Married,Self employed
 764071211,THA,1,2,3,1,-1,9,9,5,1955,62,Not a religious person,Male,Divorced,Part time
 764071212,THA,1,2,2,1,1,1,1,6,1948,69,Not a religious person,Male,Married,Unemployed
 764071213,THA,1,1,1,1,8,8,6,-1,1963,54,A religious person,Female,Living together as married,Self employed
 764071214,THA,1,1,1,1,8,8,5,5,1979,38,Not a religious person,Female,Married,Self employed
 764071215,THA,1,1,1,1,8,8,6,-1,1965,52,A religious person,Female,Married,Self employed
-764071216,THA,1,1,2,1,4,10,5,-5,1969,48,Not a religious person,Female,Married,Self employed
+764071216,THA,1,1,2,1,4,10,5,,1969,48,Not a religious person,Female,Married,Self employed
 764071217,THA,1,1,1,1,8,10,10,8,1993,24,Not a religious person,Male,Living together as married,Unemployed
 764071218,THA,2,1,1,2,6,8,6,6,1941,76,A religious person,Others,Married,Student
 764071219,THA,1,1,2,1,7,9,9,-1,1950,67,Not a religious person,Female,Married,Homemaker
 764071220,THA,1,3,3,1,5,8,6,-1,1947,70,Not a religious person,Female,Married,Full time
 764071221,THA,1,2,2,2,5,5,7,-1,1957,60,Not a religious person,Female,Married,Unemployed
 764071222,THA,1,2,2,2,5,7,7,-1,1961,56,An atheist,Male,Married,Self employed
-764071223,THA,1,3,1,1,9,8,8,-5,1980,37,Not a religious person,Female,Married,Self employed
+764071223,THA,1,3,1,1,9,8,8,,1980,37,Not a religious person,Female,Married,Self employed
 764071224,THA,1,3,2,2,8,9,5,5,1963,54,Not a religious person,Female,Living together as married,Self employed
 764071225,THA,1,3,1,1,9,10,7,5,1952,65,Not a religious person,Female,Living together as married,Self employed
-764071226,THA,1,1,1,1,8,8,8,-5,1952,65,Not a religious person,Male,Living together as married,Self employed
-764071227,THA,1,1,3,1,6,7,7,-5,1971,46,Not a religious person,Male,Single,Part time
+764071226,THA,1,1,1,1,8,8,8,,1952,65,Not a religious person,Male,Living together as married,Self employed
+764071227,THA,1,1,3,1,6,7,7,,1971,46,Not a religious person,Male,Single,Part time
 764071228,THA,1,2,2,2,5,8,7,-1,1956,61,Not a religious person,Male,Married,Retired/pensioned
 764071229,THA,1,2,2,3,8,10,10,-1,1958,59,Not a religious person,Female,Married,Homemaker
 764071230,THA,1,1,2,2,8,7,10,-1,1997,20,Not a religious person,Female,Single,Student
 764071231,THA,2,4,3,2,5,8,7,-1,1945,72,Not a religious person,Female,Married,Homemaker
-764071232,THA,1,2,3,2,8,6,6,-1,1979,38,Other missing,Female,Married,Self employed
-764071233,THA,2,1,-5,2,6,8,7,-1,1990,27,Not a religious person,Male,Living together as married,Full time
+764071232,THA,1,2,3,2,8,6,6,-1,1979,38,,Female,Married,Self employed
+764071233,THA,2,1,,2,6,8,7,-1,1990,27,Not a religious person,Male,Living together as married,Full time
 764071234,THA,1,2,2,1,8,7,7,-1,1956,61,Not a religious person,Male,Married,Part time
 764071235,THA,1,2,1,1,8,7,6,8,1969,48,Not a religious person,Male,Living together as married,Full time
 764071236,THA,1,2,2,1,8,9,7,10,1951,66,Not a religious person,Female,Single,Unemployed
@@ -6455,84 +6455,84 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 764071242,THA,1,1,2,1,-1,-1,-1,-1,1949,68,Not a religious person,Female,Widowed,Self employed
 764071243,THA,1,1,2,2,5,4,4,-2,1970,47,Not a religious person,Male,Living together as married,Full time
 764071244,THA,1,2,2,2,9,5,5,-1,1977,40,Not a religious person,Female,Living together as married,Self employed
-764071245,THA,1,2,2,1,7,7,7,-5,-5,-5,Other missing,Male,Single,Full time
+764071245,THA,1,2,2,1,7,7,7,,,,,Male,Single,Full time
 764071246,THA,1,2,4,1,8,7,7,-1,1939,78,Not a religious person,Female,Married,Unemployed
 764071247,THA,1,2,2,2,8,10,10,3,1963,54,Not a religious person,Female,Married,Self employed
 764071248,THA,1,2,1,1,5,9,10,-1,1974,43,Not a religious person,Female,Married,Self employed
 764071249,THA,1,2,1,1,8,9,10,-1,1968,49,Not a religious person,Male,Single,Self employed
-764071250,THA,1,2,1,1,7,10,10,-5,1961,56,Not a religious person,Female,Married,Self employed
+764071250,THA,1,2,1,1,7,10,10,,1961,56,Not a religious person,Female,Married,Self employed
 764071251,THA,1,2,1,1,10,8,7,-1,1965,52,Not a religious person,Female,Married,Self employed
 764071252,THA,1,2,2,2,10,10,10,-1,1977,40,Not a religious person,Female,Married,Self employed
-764071253,THA,1,1,1,1,4,7,8,-5,1959,58,Not a religious person,Female,Married,Homemaker
+764071253,THA,1,1,1,1,4,7,8,,1959,58,Not a religious person,Female,Married,Homemaker
 764071254,THA,1,1,1,1,7,9,8,-2,1948,69,Not a religious person,Female,Married,Homemaker
-764071255,THA,1,2,2,1,7,9,5,-5,1972,45,Not a religious person,Female,Married,Self employed
+764071255,THA,1,2,2,1,7,9,5,,1972,45,Not a religious person,Female,Married,Self employed
 764071256,THA,1,2,2,1,6,8,5,-2,1955,62,A religious person,Female,Married,Homemaker
-764071257,THA,1,1,2,2,5,8,5,-5,1952,65,Not a religious person,Female,Married,Unemployed
-764071258,THA,1,3,2,1,8,7,5,-5,1990,27,Not a religious person,Female,Married,Homemaker
-764071259,THA,1,2,1,1,5,7,5,-5,1952,65,Not a religious person,Female,Married,Homemaker
-764071260,THA,1,1,1,1,8,6,5,-5,1993,24,Not a religious person,Female,Single,Full time
-764071261,THA,1,2,2,2,10,10,8,-5,1979,38,Not a religious person,Female,Single,Full time
-764071262,THA,1,3,3,3,10,8,8,-5,1954,63,Not a religious person,Female,Married,Self employed
-764071263,THA,1,1,3,1,10,8,8,-5,1961,56,Not a religious person,Male,Separated,Part time
-764071264,THA,1,2,2,2,10,10,5,-5,1972,45,An atheist,Female,Married,Homemaker
-764071265,THA,1,2,3,1,10,10,8,-5,1972,45,Not a religious person,Female,Married,Homemaker
-764071266,THA,1,2,3,2,10,10,9,-5,1953,64,Not a religious person,Male,Married,Self employed
-764071267,THA,1,2,3,1,8,10,5,-5,1991,26,Not a religious person,Female,Living together as married,Self employed
-764071268,THA,1,1,2,3,4,4,5,-5,1953,64,A religious person,Female,Married,Student
+764071257,THA,1,1,2,2,5,8,5,,1952,65,Not a religious person,Female,Married,Unemployed
+764071258,THA,1,3,2,1,8,7,5,,1990,27,Not a religious person,Female,Married,Homemaker
+764071259,THA,1,2,1,1,5,7,5,,1952,65,Not a religious person,Female,Married,Homemaker
+764071260,THA,1,1,1,1,8,6,5,,1993,24,Not a religious person,Female,Single,Full time
+764071261,THA,1,2,2,2,10,10,8,,1979,38,Not a religious person,Female,Single,Full time
+764071262,THA,1,3,3,3,10,8,8,,1954,63,Not a religious person,Female,Married,Self employed
+764071263,THA,1,1,3,1,10,8,8,,1961,56,Not a religious person,Male,Separated,Part time
+764071264,THA,1,2,2,2,10,10,5,,1972,45,An atheist,Female,Married,Homemaker
+764071265,THA,1,2,3,1,10,10,8,,1972,45,Not a religious person,Female,Married,Homemaker
+764071266,THA,1,2,3,2,10,10,9,,1953,64,Not a religious person,Male,Married,Self employed
+764071267,THA,1,2,3,1,8,10,5,,1991,26,Not a religious person,Female,Living together as married,Self employed
+764071268,THA,1,1,2,3,4,4,5,,1953,64,A religious person,Female,Married,Student
 764071269,THA,1,2,2,2,1,3,2,-1,1978,39,Not a religious person,Male,Married,Unemployed
-764071270,THA,1,3,2,1,7,7,8,-5,1961,56,A religious person,Female,Married,Self employed
-764071271,THA,1,2,2,3,2,5,5,-5,1972,45,A religious person,Female,Married,Self employed
-764071272,THA,1,2,2,1,4,2,2,-5,1957,60,A religious person,Others,Divorced,Unemployed
+764071270,THA,1,3,2,1,7,7,8,,1961,56,A religious person,Female,Married,Self employed
+764071271,THA,1,2,2,3,2,5,5,,1972,45,A religious person,Female,Married,Self employed
+764071272,THA,1,2,2,1,4,2,2,,1957,60,A religious person,Others,Divorced,Unemployed
 764071273,THA,1,2,2,3,1,3,4,-1,1953,64,A religious person,Female,Married,Student
 764071274,THA,1,1,2,1,6,7,7,-1,1991,26,Not a religious person,Female,Married,Self employed
 764071275,THA,1,2,2,1,1,8,10,-1,1953,64,Not a religious person,Female,Married,Self employed
-764071276,THA,1,1,2,1,3,6,5,-5,1960,57,Not a religious person,Female,Married,Homemaker
+764071276,THA,1,1,2,1,3,6,5,,1960,57,Not a religious person,Female,Married,Homemaker
 764071277,THA,1,2,2,2,10,7,8,-2,1982,35,Not a religious person,Male,Single,Full time
-764071278,THA,1,2,1,1,7,8,5,-5,1952,65,Not a religious person,Female,Married,Homemaker
-764071279,THA,1,3,2,1,5,8,6,-5,1961,56,Not a religious person,Female,Married,Self employed
+764071278,THA,1,2,1,1,7,8,5,,1952,65,Not a religious person,Female,Married,Homemaker
+764071279,THA,1,3,2,1,5,8,6,,1961,56,Not a religious person,Female,Married,Self employed
 764071280,THA,1,1,1,1,6,8,5,-1,1980,37,Not a religious person,Female,Married,Self employed
-764071281,THA,1,3,2,2,6,7,5,-5,1948,69,Not a religious person,Female,Married,Self employed
-764071282,THA,1,1,2,1,8,8,3,-5,1972,45,Not a religious person,Female,Widowed,Unemployed
-764071283,THA,1,2,3,2,10,10,10,-5,1953,64,Not a religious person,Female,Married,Part time
-764071284,THA,1,4,2,3,3,1,3,-5,1976,41,Not a religious person,Female,Separated,Unemployed
-764071285,THA,1,2,3,2,8,8,7,-5,1966,51,A religious person,Female,Married,Homemaker
-764071286,THA,1,2,1,1,5,8,7,-5,1975,42,Not a religious person,Male,Married,Full time
-764071287,THA,1,2,2,4,4,4,5,-5,1952,65,A religious person,Female,Widowed,Unemployed
-764071288,THA,1,2,3,2,4,1,1,-5,1974,43,Not a religious person,Female,Married,Self employed
-764071289,THA,1,1,2,2,5,6,6,-5,1995,22,Not a religious person,Male,Single,Unemployed
-764071290,THA,1,1,1,2,8,8,8,-5,1997,20,Not a religious person,Male,Single,Student
+764071281,THA,1,3,2,2,6,7,5,,1948,69,Not a religious person,Female,Married,Self employed
+764071282,THA,1,1,2,1,8,8,3,,1972,45,Not a religious person,Female,Widowed,Unemployed
+764071283,THA,1,2,3,2,10,10,10,,1953,64,Not a religious person,Female,Married,Part time
+764071284,THA,1,4,2,3,3,1,3,,1976,41,Not a religious person,Female,Separated,Unemployed
+764071285,THA,1,2,3,2,8,8,7,,1966,51,A religious person,Female,Married,Homemaker
+764071286,THA,1,2,1,1,5,8,7,,1975,42,Not a religious person,Male,Married,Full time
+764071287,THA,1,2,2,4,4,4,5,,1952,65,A religious person,Female,Widowed,Unemployed
+764071288,THA,1,2,3,2,4,1,1,,1974,43,Not a religious person,Female,Married,Self employed
+764071289,THA,1,1,2,2,5,6,6,,1995,22,Not a religious person,Male,Single,Unemployed
+764071290,THA,1,1,1,2,8,8,8,,1997,20,Not a religious person,Male,Single,Student
 764071291,THA,1,3,2,3,5,5,5,-2,1961,56,A religious person,Male,Married,Self employed
-764071292,THA,1,2,1,2,5,5,5,-5,1970,47,A religious person,Male,Married,Self employed
-764071293,THA,1,3,2,1,8,7,7,-5,1972,45,A religious person,Male,Married,Part time
-764071294,THA,1,2,2,1,8,8,8,-5,1985,32,Not a religious person,Male,Single,Part time
+764071292,THA,1,2,1,2,5,5,5,,1970,47,A religious person,Male,Married,Self employed
+764071293,THA,1,3,2,1,8,7,7,,1972,45,A religious person,Male,Married,Part time
+764071294,THA,1,2,2,1,8,8,8,,1985,32,Not a religious person,Male,Single,Part time
 764071295,THA,1,4,3,1,6,7,7,-2,1975,42,Not a religious person,Male,Married,Self employed
-764071296,THA,1,1,1,2,5,5,5,-5,1963,54,Not a religious person,Female,Widowed,Self employed
-764071297,THA,1,-5,-5,-5,5,7,7,-5,1951,66,A religious person,Female,Married,Self employed
-764071298,THA,1,1,1,1,8,7,7,-5,1984,33,Not a religious person,Female,Single,Self employed
-764071299,THA,1,2,2,1,6,6,7,-5,1970,47,A religious person,Male,Married,Part time
-764071300,THA,1,1,1,1,6,5,6,-5,1971,46,A religious person,Male,Married,Part time
-764071301,THA,1,3,2,2,7,7,7,-5,1973,44,Not a religious person,Female,Married,Self employed
-764071302,THA,1,-2,-2,-2,4,5,5,-5,1951,66,A religious person,Male,Widowed,Self employed
-764071303,THA,2,-5,-5,-5,5,5,5,-5,1952,65,A religious person,Male,Widowed,Self employed
+764071296,THA,1,1,1,2,5,5,5,,1963,54,Not a religious person,Female,Widowed,Self employed
+764071297,THA,1,,,,5,7,7,,1951,66,A religious person,Female,Married,Self employed
+764071298,THA,1,1,1,1,8,7,7,,1984,33,Not a religious person,Female,Single,Self employed
+764071299,THA,1,2,2,1,6,6,7,,1970,47,A religious person,Male,Married,Part time
+764071300,THA,1,1,1,1,6,5,6,,1971,46,A religious person,Male,Married,Part time
+764071301,THA,1,3,2,2,7,7,7,,1973,44,Not a religious person,Female,Married,Self employed
+764071302,THA,1,-2,-2,-2,4,5,5,,1951,66,A religious person,Male,Widowed,Self employed
+764071303,THA,2,,,,5,5,5,,1952,65,A religious person,Male,Widowed,Self employed
 764071304,THA,1,2,3,3,4,2,2,10,1993,24,Not a religious person,Male,Single,Part time
 764071305,THA,1,2,2,1,6,5,3,9,1969,48,Not a religious person,Female,Married,Homemaker
 764071306,THA,1,2,1,1,7,4,4,10,1959,58,A religious person,Female,Married,Self employed
-764071307,THA,1,3,2,2,9,8,2,-5,1945,72,Not a religious person,Female,Married,Unemployed
+764071307,THA,1,3,2,2,9,8,2,,1945,72,Not a religious person,Female,Married,Unemployed
 764071308,THA,1,2,2,1,9,8,2,-2,1964,53,A religious person,Male,Married,Part time
 764071309,THA,1,3,3,1,6,8,6,10,1982,35,A religious person,Male,Single,Self employed
-764071310,THA,1,3,2,3,9,9,9,-5,1970,47,Not a religious person,Female,Married,Self employed
+764071310,THA,1,3,2,3,9,9,9,,1970,47,Not a religious person,Female,Married,Self employed
 764071311,THA,1,3,1,2,6,6,6,-1,1996,21,Not a religious person,Male,Single,Unemployed
-764071312,THA,1,2,3,2,10,1,2,-5,1982,35,Not a religious person,Male,Single,Self employed
-764071313,THA,1,2,3,2,10,1,2,-5,1955,62,A religious person,Male,Married,Retired/pensioned
+764071312,THA,1,2,3,2,10,1,2,,1982,35,Not a religious person,Male,Single,Self employed
+764071313,THA,1,2,3,2,10,1,2,,1955,62,A religious person,Male,Married,Retired/pensioned
 764071314,THA,1,3,4,1,5,3,8,9,1961,56,A religious person,Male,Living together as married,Self employed
-764071315,THA,1,2,3,2,10,1,2,-5,1975,42,Not a religious person,Female,Married,Self employed
+764071315,THA,1,2,3,2,10,1,2,,1975,42,Not a religious person,Female,Married,Self employed
 764071316,THA,1,2,-2,1,1,5,1,4,1970,47,A religious person,Female,Married,Full time
 764071317,THA,1,2,1,1,10,10,5,-2,1973,44,A religious person,Male,Single,Self employed
 764071318,THA,1,1,2,2,10,10,10,-2,1978,39,A religious person,Female,Married,Part time
 764071319,THA,1,2,2,2,8,10,-1,-1,1981,36,A religious person,Female,Married,Self employed
 764071320,THA,1,2,2,2,10,10,10,10,1983,34,A religious person,Female,Married,Self employed
 764071321,THA,1,3,2,1,5,7,5,-2,1997,20,A religious person,Male,Single,Student
-764071322,THA,1,2,1,1,1,5,10,-5,1969,48,A religious person,Male,Married,Self employed
+764071322,THA,1,2,1,1,1,5,10,,1969,48,A religious person,Male,Married,Self employed
 764071323,THA,1,2,3,1,10,8,9,10,1973,44,A religious person,Female,Married,Self employed
 764071324,THA,1,2,2,2,4,6,7,-1,1961,56,An atheist,Female,Single,Unemployed
 764071325,THA,1,1,3,1,5,10,8,-1,1978,39,A religious person,Female,Living together as married,Self employed
@@ -6549,9 +6549,9 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 764071336,THA,2,3,3,2,6,5,7,7,1989,28,An atheist,Male,Married,Self employed
 764071337,THA,2,1,2,2,6,6,5,5,1993,24,Not a religious person,Male,Single,Full time
 764071338,THA,2,2,2,1,9,8,5,6,1992,25,Not a religious person,Male,Married,Unemployed
-764071339,THA,2,1,2,2,8,8,6,-5,1975,42,Not a religious person,Male,Single,Self employed
+764071339,THA,2,1,2,2,8,8,6,,1975,42,Not a religious person,Male,Single,Self employed
 764071340,THA,2,2,2,2,9,8,7,5,1992,25,A religious person,Female,Single,Full time
-764071341,THA,1,2,3,1,8,7,7,-5,1988,29,Not a religious person,Male,Married,Self employed
+764071341,THA,1,2,3,1,8,7,7,,1988,29,Not a religious person,Male,Married,Self employed
 764071342,THA,1,1,1,1,6,7,6,6,1977,40,Not a religious person,Male,Married,Full time
 764071343,THA,1,1,1,1,7,6,5,-2,1978,39,Not a religious person,Female,Married,Self employed
 764071344,THA,3,2,-2,1,7,5,8,5,1997,20,Not a religious person,Male,Single,Unemployed
@@ -6564,22 +6564,22 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 764071351,THA,1,1,1,2,8,7,6,-2,1957,60,Not a religious person,Female,Married,Self employed
 764071352,THA,1,2,2,2,5,7,6,3,1977,40,A religious person,Male,Married,Part time
 764071353,THA,1,2,2,2,5,4,6,4,1971,46,Not a religious person,Male,Married,Part time
-764071354,THA,1,1,2,2,8,5,7,-5,1980,37,A religious person,Female,Single,Part time
+764071354,THA,1,1,2,2,8,5,7,,1980,37,A religious person,Female,Single,Part time
 764071355,THA,1,2,2,1,5,5,4,5,1971,46,Not a religious person,Male,Married,Self employed
 764071356,THA,1,2,2,2,7,6,4,6,1961,56,A religious person,Male,Married,Full time
 764071357,THA,1,2,3,2,4,7,5,5,1961,56,Not a religious person,Male,Married,Part time
 764071358,THA,1,2,3,3,5,5,5,5,1979,38,A religious person,Male,Married,Part time
-764071359,THA,1,2,2,2,5,6,3,-5,1953,64,A religious person,Male,Married,Part time
+764071359,THA,1,2,2,2,5,6,3,,1953,64,A religious person,Male,Married,Part time
 764071360,THA,1,2,2,2,5,5,5,5,1993,24,Not a religious person,Male,Married,Part time
 764071361,THA,1,2,2,1,5,8,3,5,1997,20,A religious person,Female,Married,Unemployed
 764071362,THA,1,2,3,1,3,5,4,6,1979,38,A religious person,Female,Married,Self employed
 764071363,THA,1,2,2,3,10,7,8,6,1972,45,A religious person,Female,Married,Part time
 764071364,THA,1,2,3,2,5,5,5,5,1992,25,Not a religious person,Male,Single,Student
-764071365,THA,1,1,2,1,5,6,7,-5,1987,30,A religious person,Male,Single,Student
+764071365,THA,1,1,2,1,5,6,7,,1987,30,A religious person,Male,Single,Student
 764071366,THA,1,1,1,1,8,6,5,5,1997,20,A religious person,Female,Single,Student
 764071367,THA,1,3,3,3,5,8,8,6,1960,57,A religious person,Male,Married,Self employed
 764071368,THA,1,2,1,1,6,6,6,5,1967,50,Not a religious person,Female,Married,Homemaker
-764071369,THA,2,1,2,3,4,9,8,-5,1949,68,A religious person,Male,Married,Unemployed
+764071369,THA,2,1,2,3,4,9,8,,1949,68,A religious person,Male,Married,Unemployed
 764071370,THA,1,2,2,2,6,4,6,5,1979,38,Not a religious person,Male,Married,Part time
 764071371,THA,1,2,1,1,5,4,5,5,1994,23,Not a religious person,Male,Separated,Part time
 764071372,THA,1,1,2,1,5,5,5,-1,1977,40,Not a religious person,Male,Married,Part time
@@ -6593,12 +6593,12 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 764071380,THA,1,1,2,2,7,7,7,-1,1996,21,Not a religious person,Male,Single,Self employed
 764071381,THA,1,2,1,1,7,6,-1,-1,1989,28,Not a religious person,Male,Single,Full time
 764071382,THA,1,2,1,1,7,7,-1,-1,1988,29,Not a religious person,Male,Married,Part time
-764071383,THA,1,2,2,1,8,7,6,-5,1964,53,Not a religious person,Male,Married,Self employed
+764071383,THA,1,2,2,1,8,7,6,,1964,53,Not a religious person,Male,Married,Self employed
 764071384,THA,1,1,1,1,7,7,5,-1,1963,54,Not a religious person,Male,Single,Part time
 764071385,THA,1,2,1,1,7,5,6,-1,1988,29,Not a religious person,Male,Single,Part time
 764071386,THA,1,2,1,1,5,8,5,-1,1995,22,A religious person,Male,Single,Student
 764071387,THA,1,1,2,1,5,8,4,-1,1982,35,Not a religious person,Female,Married,Self employed
-764071388,THA,1,2,1,1,8,10,8,-5,1981,36,A religious person,Female,Married,Homemaker
+764071388,THA,1,2,1,1,8,10,8,,1981,36,A religious person,Female,Married,Homemaker
 764071389,THA,1,1,2,1,7,8,7,6,1992,25,A religious person,Female,Married,Full time
 764071390,THA,1,2,2,1,7,7,4,-1,1971,46,Not a religious person,Female,Married,Homemaker
 764071391,THA,1,2,3,1,5,5,5,-1,1970,47,A religious person,Male,Married,Self employed
@@ -6612,7 +6612,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 764071399,THA,1,2,2,1,7,9,8,5,1971,46,A religious person,Female,Married,Self employed
 764071400,THA,1,2,2,2,5,9,6,6,1971,46,A religious person,Male,Living together as married,Self employed
 764071401,THA,1,1,2,2,4,4,4,-1,1993,24,A religious person,Female,Married,Full time
-764071402,THA,1,2,1,1,7,9,9,-5,1995,22,Not a religious person,Female,Single,Full time
+764071402,THA,1,2,1,1,7,9,9,,1995,22,Not a religious person,Female,Single,Full time
 764071403,THA,1,1,2,2,6,7,5,-1,1955,62,A religious person,Female,Married,Self employed
 764071404,THA,1,2,2,2,9,8,8,7,1953,64,A religious person,Male,Married,Self employed
 764071405,THA,1,2,3,2,10,5,6,9,1982,35,A religious person,Male,Married,Full time
@@ -6620,7 +6620,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 764071407,THA,1,3,3,1,5,5,5,-2,1995,22,A religious person,Male,Single,Self employed
 764071408,THA,1,1,3,1,5,6,5,5,1984,33,A religious person,Male,Married,Full time
 764071409,THA,2,-2,3,3,7,7,6,-1,1981,36,A religious person,Female,Married,Full time
-764071410,THA,1,2,3,2,6,6,6,-5,1994,23,A religious person,Male,Single,Self employed
+764071410,THA,1,2,3,2,6,6,6,,1994,23,A religious person,Male,Single,Self employed
 764071411,THA,3,3,3,3,5,5,5,6,1977,40,A religious person,Male,Married,Full time
 764071412,THA,1,1,2,1,9,10,9,5,1966,51,Not a religious person,Female,Married,Homemaker
 764071413,THA,1,1,2,1,10,7,6,9,1968,49,Not a religious person,Male,Married,Self employed
@@ -6629,8 +6629,8 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 764071416,THA,1,2,2,1,7,8,7,3,1974,43,Not a religious person,Male,Married,Part time
 764071417,THA,1,3,3,2,5,8,9,-1,1982,35,A religious person,Male,Married,Part time
 764071418,THA,1,2,2,2,4,3,3,3,1968,49,A religious person,Female,Married,Self employed
-764071419,THA,1,2,2,1,5,4,2,-5,1994,23,Not a religious person,Female,Single,Student
-764071420,THA,1,2,2,1,7,10,7,-5,1964,53,A religious person,Female,Widowed,Homemaker
+764071419,THA,1,2,2,1,5,4,2,,1994,23,Not a religious person,Female,Single,Student
+764071420,THA,1,2,2,1,7,10,7,,1964,53,A religious person,Female,Widowed,Homemaker
 764071421,THA,1,2,2,2,5,5,5,7,1980,37,Not a religious person,Male,Married,Full time
 764071422,THA,1,1,2,1,5,4,3,4,1995,22,A religious person,Female,Married,Homemaker
 764071423,THA,1,2,2,2,5,7,7,5,1997,20,Not a religious person,Female,Single,Student
@@ -6644,7 +6644,7 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 764071431,THA,1,2,2,1,8,8,8,5,1961,56,Not a religious person,Female,Married,Part time
 764071432,THA,1,-2,2,2,8,8,8,6,1986,31,Not a religious person,Male,Married,Self employed
 764071433,THA,1,2,2,1,8,8,8,5,1973,44,Not a religious person,Female,Married,Part time
-764071434,THA,1,-5,-5,1,8,8,8,5,1971,46,Not a religious person,Male,Married,Part time
+764071434,THA,1,,,1,8,8,8,5,1971,46,Not a religious person,Male,Married,Part time
 764071435,THA,1,2,2,1,8,8,8,6,1956,61,Not a religious person,Female,Married,Part time
 764071436,THA,1,2,2,1,8,8,8,6,1970,47,Not a religious person,Male,Married,Part time
 764071437,THA,1,2,2,1,8,8,8,5,1978,39,Not a religious person,Female,Married,Self employed
@@ -6659,19 +6659,19 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 764071446,THA,1,1,2,2,8,7,8,-1,1972,45,Not a religious person,Female,Married,Self employed
 764071447,THA,1,2,2,1,6,6,6,5,1984,33,A religious person,Male,Married,Full time
 764071448,THA,1,1,2,2,8,8,5,-1,1992,25,A religious person,Male,Single,Full time
-764071449,THA,-2,3,-5,-5,5,4,3,-2,1978,39,Not a religious person,Female,Married,Self employed
+764071449,THA,-2,3,,,5,4,3,-2,1978,39,Not a religious person,Female,Married,Self employed
 764071450,THA,2,3,2,1,6,5,7,-2,1977,40,Not a religious person,Male,Married,Self employed
 764071451,THA,1,2,2,1,4,5,6,4,1965,52,A religious person,Male,Married,Self employed
 764071452,THA,1,1,2,1,7,7,6,-1,1987,30,Not a religious person,Male,Married,Full time
 764071453,THA,1,3,2,2,4,6,3,-2,1961,56,A religious person,Male,Married,Self employed
-764071454,THA,1,2,1,2,8,5,7,-5,1987,30,Not a religious person,Female,Married,Full time
-764071455,THA,1,1,2,1,4,5,5,5,1992,25,Other missing,Female,Single,Full time
+764071454,THA,1,2,1,2,8,5,7,,1987,30,Not a religious person,Female,Married,Full time
+764071455,THA,1,1,2,1,4,5,5,5,1992,25,,Female,Single,Full time
 764071456,THA,2,3,4,1,5,9,8,-1,1984,33,Not a religious person,Female,Single,Self employed
 764071457,THA,1,2,2,1,7,7,5,5,1982,35,Not a religious person,Male,Married,Part time
 764071458,THA,1,3,3,2,9,4,5,-2,1986,31,Not a religious person,Male,Single,Full time
 764071459,THA,1,1,1,1,9,9,9,6,1982,35,A religious person,Male,Married,Full time
 764071460,THA,1,2,1,1,6,6,6,7,1980,37,A religious person,Male,Married,Full time
-764071461,THA,1,1,1,1,7,7,6,-5,1986,31,A religious person,Female,Single,Self employed
+764071461,THA,1,1,1,1,7,7,6,,1986,31,A religious person,Female,Single,Self employed
 764071462,THA,1,2,3,2,5,5,5,5,1984,33,Not a religious person,Female,Widowed,Self employed
 764071463,THA,1,2,4,2,10,7,7,-1,1986,31,Not a religious person,Male,Single,Part time
 764071464,THA,1,2,-2,1,8,8,8,-2,1995,22,Not a religious person,Female,Single,Full time
@@ -6684,18 +6684,18 @@ ID,country,family_importance,friends_importance,leisure_importance,work_importan
 764071471,THA,1,1,2,1,6,9,10,-2,1975,42,Not a religious person,Female,Widowed,Homemaker
 764071472,THA,1,3,2,1,5,5,5,5,1989,28,A religious person,Female,Married,Part time
 764071473,THA,1,1,3,1,10,10,10,-1,1993,24,A religious person,Female,Married,Self employed
-764071474,THA,1,2,2,1,5,5,5,-1,1981,36,Other missing,Female,Married,Full time
+764071474,THA,1,2,2,1,5,5,5,-1,1981,36,,Female,Married,Full time
 764071475,THA,1,3,3,2,5,6,5,7,1996,21,A religious person,Female,Single,Student
 764071476,THA,1,3,1,2,5,5,5,-1,1991,26,Not a religious person,Male,Single,Self employed
-764071477,THA,1,2,-5,1,9,8,7,5,1968,49,Not a religious person,Female,Married,Self employed
+764071477,THA,1,2,,1,9,8,7,5,1968,49,Not a religious person,Female,Married,Self employed
 764071478,THA,2,2,2,1,5,5,5,6,1970,47,Not a religious person,Male,Married,Full time
-764071479,THA,1,2,1,2,7,7,6,-5,1963,54,Not a religious person,Male,Married,Full time
+764071479,THA,1,2,1,2,7,7,6,,1963,54,Not a religious person,Male,Married,Full time
 764071480,THA,1,2,3,1,5,3,1,7,1981,36,Not a religious person,Female,Married,Full time
 764071481,THA,1,2,2,1,2,5,4,5,1984,33,Not a religious person,Male,Married,Full time
 764071482,THA,1,2,1,1,10,10,10,-2,1981,36,A religious person,Female,Married,Student
-764071483,THA,1,2,2,1,6,10,10,-5,1972,45,A religious person,Male,Married,Full time
+764071483,THA,1,2,2,1,6,10,10,,1972,45,A religious person,Male,Married,Full time
 764071484,THA,1,2,2,1,3,2,4,6,1976,41,Not a religious person,Male,Separated,Self employed
-764071485,THA,1,3,4,1,10,10,10,-5,1963,54,Not a religious person,Female,Married,Full time
+764071485,THA,1,3,4,1,10,10,10,,1963,54,Not a religious person,Female,Married,Full time
 764071486,THA,1,2,3,2,8,9,7,3,1974,43,A religious person,Female,Married,Self employed
 764071487,THA,1,2,2,1,5,8,8,-1,1956,61,A religious person,Male,Married,Full time
 764071488,THA,1,2,3,2,10,8,6,5,1979,38,Not a religious person,Female,Living together as married,Homemaker
