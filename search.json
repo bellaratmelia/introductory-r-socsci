@@ -1117,7 +1117,7 @@
     "href": "02-tidyverse.html#checklist-when-you-start-rstudio",
     "title": "Data Wrangling with Tidyverse",
     "section": "Checklist when you start RStudio",
-    "text": "Checklist when you start RStudio\n\nLoad the project we created last session and open the R script file. Click on File &gt; Recent Projects... &gt; Select the our project from last week.\nMake sure that Environment panel is empty (click on broom icon to clean it up).\nClear the Console and Plots too.\nRe-run the library(tidyverse) and read_csv portion in the previous session (the code is also on the next slide if you missed last week’s session)"
+    "text": "Checklist when you start RStudio\n\nNavigate to where you create your R project folder for this workshop.\nFind a file with .Rproject extension and double-click on it. This will start RStudio and open your project.\nMake sure that Environment panel is empty (click on broom icon to clean it up).\nClear the Console and Plots too.\nRe-run the library(tidyverse) and read_csv portion in the previous session (the code is also on the next slide if you missed last week’s session)"
   },
   {
     "objectID": "02-tidyverse.html#refresher-loading-from-csv-into-a-dataframe",
@@ -1127,18 +1127,39 @@
     "text": "Refresher: Loading from CSV into a dataframe\nUse read_csv from readr package (part of tidyverse) to load our World Values Survey data. More information about the data can be found under the Dataset tab in the course website.\n\n# import tidyverse library\nlibrary(tidyverse)\n\n# read the CSV and save into a dataframe called wvs_data\nwvs_data &lt;- read_csv(\"data/wvs-wave7-sg-ca-nz.csv\")\n\n# \"peek\" at the data, pay attention to the data types!\nglimpse(wvs_data)"
   },
   {
-    "objectID": "02-tidyverse.html#cleaning-data-for-analysis",
-    "href": "02-tidyverse.html#cleaning-data-for-analysis",
+    "objectID": "02-tidyverse.html#why-do-we-need-to-clean-our-data",
+    "href": "02-tidyverse.html#why-do-we-need-to-clean-our-data",
     "title": "Data Wrangling with Tidyverse",
-    "section": "Cleaning data for analysis",
-    "text": "Cleaning data for analysis\n\nWhy do it in R? Because it’s much efficient to do so in R, especially if your data is large (e.g. millions of rows, thousands of columns) and you have repetitive clean up tasks.\nIncorrect or inconsistent data can lead to false conclusions, so it’s important to clean and prep it correctly.\nHaving a clear understanding of the desired data shape is essential as real data often differs from what you imagine! Refer to codebook, actual questionnaire, appendix for guidance.\nData cleaning techniques differ based on the problems, data type, and the research questions you are trying to answer. Various methods are available, each with its own trade-offs."
+    "section": "Why do we need to clean our data?",
+    "text": "Why do we need to clean our data?\n\nResearchers spend 60-80% of their time on data preparation - investing in proper wrangling upfront saves hours of debugging and rework later.\nPoor data quality costs projects or organizations millions annually(!), and even one misclassified data point can skew entire analyses.\nClean data improves the validity of statistical tests and can reveal hidden patterns that aren’t visible in messy datasets\nWell-documented data cleaning makes research transparent and reproducible, benefiting both future-you and collaborators."
   },
   {
-    "objectID": "02-tidyverse.html#about-dplyr-and-tidyr",
-    "href": "02-tidyverse.html#about-dplyr-and-tidyr",
+    "objectID": "02-tidyverse.html#why-do-it-in-r-cant-i-do-this-on-excel",
+    "href": "02-tidyverse.html#why-do-it-in-r-cant-i-do-this-on-excel",
     "title": "Data Wrangling with Tidyverse",
-    "section": "About dplyr and tidyr",
-    "text": "About dplyr and tidyr\n\nPackages from tidyverse. (click here to go to the tidyverse homepage)\nPosit have created cheatsheets here! (you can have this open in another tab for reference for this session!)\n\ndplyr cheatsheet | pdf version (I personally prefer this PDF version since it’s more visual)\ntidyr cheatsheet | pdf version\n\nMost of the time, these are the ones that you will use quite often:\n\ndrop_na() - remove rows with null values\nselect() - to select column(s) from a dataframe\nfilter() - to filter rows based on criteria\nmutate() - to compute new columns or edit existing ones\nif_else() and case_when() - to be used with mutate when we want to compute/edit columns based on multiple criteria\ngroup_by() and summarize() - group data and summarize each group"
+    "section": "Why do it in R? Can’t I do this on excel?",
+    "text": "Why do it in R? Can’t I do this on excel?\n\nR code creates a permanent record of exactly what you did - Excel clicks and manual edits are hard to track and reproduce.\nR handles dates, times, text, and mixed data types much more reliably than Excel.\nExcel can automatically “correct” your data in unwanted ways (like converting your dates from DDMMYY to MMDDYY)\nWrite the cleaning code once, apply it to multiple datasets or when data updates. Whereas Excel requires manual repetition of the same steps each time.\nComplex joins, reshaping, and conditional operations that would take many Excel steps can be done in a few lines of R code.\nR scripts can be easily shared, version controlled, and integrated into reproducible workflows"
+  },
+  {
+    "objectID": "02-tidyverse.html#what-do-i-need-to-know-before-we-begin",
+    "href": "02-tidyverse.html#what-do-i-need-to-know-before-we-begin",
+    "title": "Data Wrangling with Tidyverse",
+    "section": "What do I need to know before we begin?",
+    "text": "What do I need to know before we begin?\n\nAlways examine your data first (head(), summary(), str()) before cleaning.\nNever overwrite your raw data files\nBudget extra time for data cleaning - it almost always takes longer than expected!\nHaving a clear understanding of the desired data shape is essential as real data often differs from what you imagine! Refer to codebook, actual questionnaire, appendix for guidance.\nLook out for outliers!\nRemember: Data cleaning techniques differ based on the problems, data type, and the research questions you are trying to answer. Various methods are available, each with its own trade-offs."
+  },
+  {
+    "objectID": "02-tidyverse.html#the-tools-were-going-to-use-dplyr-and-tidyr",
+    "href": "02-tidyverse.html#the-tools-were-going-to-use-dplyr-and-tidyr",
+    "title": "Data Wrangling with Tidyverse",
+    "section": "The tools we’re going to use: dplyr and tidyr",
+    "text": "The tools we’re going to use: dplyr and tidyr\n\nPackages from tidyverse. (click here to go to the tidyverse homepage)\nPosit have created cheatsheets here! (you can have this open in another tab for reference for this session!)\n\ndplyr cheatsheet | pdf version (I personally prefer this PDF version since it’s more visual)\ntidyr cheatsheet | pdf version\n\nMost of the time, these are the ones that you will use quite often:\n\ndrop_na() - remove rows with null values\nselect() - to select column(s) from a dataframe\nfilter() - to filter rows based on criteria\nmutate() - to compute new columns or edit existing ones\nif_else() and case_when() - to be used with mutate when we want to compute/edit columns based on multiple criteria\ngroup_by() and summarize() - group data and summarize each group"
+  },
+  {
+    "objectID": "02-tidyverse.html#why-are-we-using-tidyverse-is-it-a-must",
+    "href": "02-tidyverse.html#why-are-we-using-tidyverse-is-it-a-must",
+    "title": "Data Wrangling with Tidyverse",
+    "section": "Why are we using tidyverse? Is it a must?",
+    "text": "Why are we using tidyverse? Is it a must?\nIt’s not a must, but it’ll be make our job much easier! Key advantages:\n\nMore ‘English’ looking code and thus more intuitive for beginners\nTidyverse follow consistent syntax patterns - first argument is always the data\nTidyverse gives clearer, more helpful error messages\n\nExample:\n# Base R\nsubset_data &lt;- data[data$age &gt; 18 & data$income &gt; 50000, c(\"name\", \"age\", \"salary\")]\n\n# Tidyverse  \nsubset_data &lt;- data |&gt; \n  filter(age &gt; 18, income &gt; 50000)  |&gt; \n  select(name, age, salary)"
   },
   {
     "objectID": "02-tidyverse.html#scenario-data-wrangling-activities-with-wvs-data",
@@ -1204,88 +1225,81 @@
     "text": "Checkpoint 1 - saving our hard work into a CSV file\nWe have done some cleaning! Let’s save this cleaned data into a separate CSV file called “wvs_cleaned_v1.csv”\n\nwvs_data |&gt; write_csv(\"data-output/wvs_cleaned_v1.csv\")\n\nCheck the data output folder to make sure the CSV is created!"
   },
   {
-    "objectID": "02-tidyverse.html#group-exercise-1-5-minutes",
-    "href": "02-tidyverse.html#group-exercise-1-5-minutes",
+    "objectID": "02-tidyverse.html#simple-descriptive-analysis",
+    "href": "02-tidyverse.html#simple-descriptive-analysis",
     "title": "Data Wrangling with Tidyverse",
-    "section": "Group Exercise 1 (5 minutes)",
-    "text": "Group Exercise 1 (5 minutes)\nNow that we have a new file, load this new wvs_cleaned_v1.csv into a new dataframe called wvs_cleaned. Filter to respondents from Singapore who are currently employed full time. Show only the Respondent ID, country, the employment status, and age. Use glimpse() or print() to check the result! (you can chain these functions at the end)\nStep 1: Load the new file\n\n\nShow answer\nlibrary(tidyverse)\nwvs_cleaned &lt;- read_csv(\"data-output/wvs_cleaned_v1.csv\")"
+    "section": "Simple descriptive analysis",
+    "text": "Simple descriptive analysis\nOnce we are done with the wrangling part, we can proceed with simple descriptive analysis!\n\nPrep: Before we proceed further, convert the appropriate categorical variables (country, religiousity, sex, marital_status, employment) to Factor\nAnalysis 1: Generate summary statistics of life_satisfaction grouped by country\nAnalysis 2: Create a new column called satisfaction_group that indicate whether each respondent has higher or lower than average life_satisfaction\nAnalysis 3: Reshape the data to show average satisfaction scores by country and age group"
   },
   {
-    "objectID": "02-tidyverse.html#scenario-data-wrangling-activities-with-wvs-data-continued",
-    "href": "02-tidyverse.html#scenario-data-wrangling-activities-with-wvs-data-continued",
+    "objectID": "02-tidyverse.html#prep-before-analysis-convert-to-factors",
+    "href": "02-tidyverse.html#prep-before-analysis-convert-to-factors",
     "title": "Data Wrangling with Tidyverse",
-    "section": "Scenario: Data wrangling activities with WVS data (continued)",
-    "text": "Scenario: Data wrangling activities with WVS data (continued)\nOnce we are done with the wrangling part, we can proceed with simple descriptive analysis!\n\nBefore we proceed further, convert the appropriate categorical variables (country, religiousity, sex, marital_status, employment) to Factor\nGenerate summary statistics of life_satisfaction grouped by country\nCreate a new column called satisfaction_group that indicate whether each respondent has higher or lower than average life_satisfaction\nReshape the data to show average satisfaction scores by country and age group"
+    "section": "Prep before analysis: convert to factors",
+    "text": "Prep before analysis: convert to factors\nLet’s use the wvs_cleaned dataframe for this task.\nConvert the appropriate categorical variables (country, religiousity, sex, marital_status, employment) to Factor.\nWe can do this with mutate() and as_factor() from forcats, another sub-package within tidyverse.\n\nwvs_cleaned &lt;- read_csv(\"data-output/wvs_cleaned_v1.csv\")\nwvs_cleaned &lt;- wvs_cleaned |&gt; \n    mutate(\n        country = as_factor(country),\n        religiousity = as_factor(religiousity),\n        sex = as_factor(sex),\n        marital_status = as_factor(marital_status),\n        employment = as_factor(employment)\n    )\n\n# check conversion result\nstr(wvs_cleaned)\n\n\nRstudio may auto-suggest as.factor() from base R. You can use this as well, but as_factor() is preferred since we are using tidyverse approach."
   },
   {
-    "objectID": "02-tidyverse.html#task-7",
-    "href": "02-tidyverse.html#task-7",
+    "objectID": "02-tidyverse.html#prep-before-analysis-convert-to-factors-output",
+    "href": "02-tidyverse.html#prep-before-analysis-convert-to-factors-output",
     "title": "Data Wrangling with Tidyverse",
-    "section": "Task #7",
-    "text": "Task #7\nLet’s use the wvs_cleaned dataframe for this task.\nConvert the appropriate categorical variables (country, religiousity, sex, marital_status, employment) to Factor.\nWe can do this with mutate() and as_factor() from forcats, another sub-package within tidyverse.\n\nwvs_cleaned &lt;- wvs_cleaned |&gt; \n    mutate(\n        country = as_factor(country),\n        religiousity = as_factor(religiousity),\n        sex = as_factor(sex),\n        marital_status = as_factor(marital_status),\n        employment = as_factor(employment)\n    )\n\n# check conversion result\nstr(wvs_cleaned)\n\n\nRstudio may auto-suggest as.factor() from base R. You can use this as well, but as_factor() is preferred since we are using tidyverse approach."
+    "section": "Prep before analysis: convert to factors",
+    "text": "Prep before analysis: convert to factors\n\ntibble [6,403 × 14] (S3: tbl_df/tbl/data.frame)\n $ ID                    : num [1:6403] 1.24e+08 5.54e+08 7.02e+08 1.24e+08 1.24e+08 ...\n $ country               : Factor w/ 3 levels \"CAN\",\"NZL\",\"SGP\": 1 2 3 1 1 1 2 1 1 2 ...\n $ sex                   : Factor w/ 2 levels \"Male\",\"Female\": 1 2 1 2 2 1 2 1 2 1 ...\n $ birthyear             : num [1:6403] 1927 1928 1930 1931 1930 ...\n $ age                   : num [1:6403] 93 91 90 89 89 89 89 88 88 88 ...\n $ life_satisfaction     : num [1:6403] 7 5 8 6 6 8 9 8 8 10 ...\n $ work_importance       : num [1:6403] 1 4 1 3 4 4 2 1 4 2 ...\n $ financial_satisfaction: num [1:6403] 7 5 9 9 8 8 10 10 5 10 ...\n $ religiousity          : Factor w/ 4 levels \"Not a religious person\",..: 1 2 2 1 1 2 2 2 2 2 ...\n $ political_scale       : num [1:6403] 5 3 3 2 5 5 8 10 5 5 ...\n $ marital_status        : Factor w/ 6 levels \"Widowed\",\"Single\",..: 1 1 1 1 2 3 1 1 1 1 ...\n $ employment            : Factor w/ 8 levels \"Part time\",\"Retired/pensioned\",..: 1 2 2 2 2 2 2 2 2 2 ...\n $ work_importance_r     : num [1:6403] 4 1 4 2 1 1 3 4 1 3 ...\n $ age_group             : chr [1:6403] \"61+\" \"61+\" \"61+\" \"61+\" ..."
   },
   {
-    "objectID": "02-tidyverse.html#task-7-output",
-    "href": "02-tidyverse.html#task-7-output",
+    "objectID": "02-tidyverse.html#prep-before-analysis-convert-to-factors-shortcut-ver.",
+    "href": "02-tidyverse.html#prep-before-analysis-convert-to-factors-shortcut-ver.",
     "title": "Data Wrangling with Tidyverse",
-    "section": "Task #7",
-    "text": "Task #7\n\ntibble [6,403 × 14] (S3: tbl_df/tbl/data.frame)\n $ ID                    : num [1:6403] 1.24e+08 5.54e+08 7.02e+08 1.24e+08 1.24e+08 ...\n $ country               : Factor w/ 3 levels \"CAN\",\"NZL\",\"SGP\": 1 2 3 1 1 1 2 1 1 2 ...\n $ sex                   : Factor w/ 2 levels \"Male\",\"Female\": 1 2 1 2 2 1 2 1 2 1 ...\n $ birthyear             : num [1:6403] 1927 1928 1930 1931 1930 ...\n $ age                   : num [1:6403] 93 91 90 89 89 89 89 88 88 88 ...\n $ life_satisfaction     : num [1:6403] 7 5 8 6 6 8 9 8 8 10 ...\n $ work_importance       : num [1:6403] 1 4 1 3 4 4 2 1 4 2 ...\n $ financial_satisfaction: num [1:6403] 7 5 9 9 8 8 10 10 5 10 ...\n $ religiousity          : Factor w/ 4 levels \"Not a religious person\",..: 1 2 2 1 1 2 2 2 2 2 ...\n $ political_scale       : num [1:6403] 5 3 3 2 5 5 8 10 5 5 ...\n $ marital_status        : Factor w/ 6 levels \"Widowed\",\"Single\",..: 1 1 1 1 2 3 1 1 1 1 ...\n $ employment            : Factor w/ 8 levels \"Part time\",\"Retired/pensioned\",..: 1 2 2 2 2 2 2 2 2 2 ...\n $ work_importance_r     : num [1:6403] 4 1 4 2 1 1 3 4 1 3 ...\n $ age_group             : chr [1:6403] \"61+\" \"61+\" \"61+\" \"61+\" ..."
+    "section": "Prep before analysis: convert to factors (shortcut ver.)",
+    "text": "Prep before analysis: convert to factors (shortcut ver.)\nIf we have a lot of columns to convert, that might be troublesome to type! This is where across() can come in handy.\nLet’s first define a character vector that contains the names of columns we plan to convert.\n\ncolumns_to_convert &lt;- c(\"country\", \"religiousity\", \"sex\", \"marital_status\", \"employment\")\n\nWe will use this vector with mutate() and across(). We tell tidyverse to convert all of the columns with the help of all_of()\n\nwvs_cleaned &lt;- wvs_cleaned |&gt; \n    mutate(across(all_of(columns_to_convert), as_factor))\n\n# check conversion result\nstr(wvs_cleaned)\n\n\nacross() is used for applying the same function to multiple columns in a single mutate() or summarise() operation."
   },
   {
-    "objectID": "02-tidyverse.html#task-7---the-shortcut",
-    "href": "02-tidyverse.html#task-7---the-shortcut",
+    "objectID": "02-tidyverse.html#prep-before-analysis-convert-to-factors-shortcut-ver.-output",
+    "href": "02-tidyverse.html#prep-before-analysis-convert-to-factors-shortcut-ver.-output",
     "title": "Data Wrangling with Tidyverse",
-    "section": "Task #7 - the shortcut",
-    "text": "Task #7 - the shortcut\nIf we have a lot of columns to convert, that might be troublesome to type! This is where across() can come in handy.\nLet’s first define a character vector that contains the names of columns we plan to convert.\n\ncolumns_to_convert &lt;- c(\"country\", \"religiousity\", \"sex\", \"marital_status\", \"employment\")\n\nWe will use this vector with mutate() and across(). We tell tidyverse to convert all of the columns with the help of all_of()\n\nwvs_cleaned &lt;- wvs_cleaned |&gt; \n    mutate(across(all_of(columns_to_convert), as_factor))\n\n# check conversion result\nstr(wvs_cleaned)\n\n\nacross() is used for applying the same function to multiple columns in a single mutate() or summarise() operation."
+    "section": "Prep before analysis: convert to factors (shortcut ver.)",
+    "text": "Prep before analysis: convert to factors (shortcut ver.)\n\ntibble [6,403 × 14] (S3: tbl_df/tbl/data.frame)\n $ ID                    : num [1:6403] 1.24e+08 5.54e+08 7.02e+08 1.24e+08 1.24e+08 ...\n $ country               : Factor w/ 3 levels \"CAN\",\"NZL\",\"SGP\": 1 2 3 1 1 1 2 1 1 2 ...\n $ sex                   : Factor w/ 2 levels \"Male\",\"Female\": 1 2 1 2 2 1 2 1 2 1 ...\n $ birthyear             : num [1:6403] 1927 1928 1930 1931 1930 ...\n $ age                   : num [1:6403] 93 91 90 89 89 89 89 88 88 88 ...\n $ life_satisfaction     : num [1:6403] 7 5 8 6 6 8 9 8 8 10 ...\n $ work_importance       : num [1:6403] 1 4 1 3 4 4 2 1 4 2 ...\n $ financial_satisfaction: num [1:6403] 7 5 9 9 8 8 10 10 5 10 ...\n $ religiousity          : Factor w/ 4 levels \"Not a religious person\",..: 1 2 2 1 1 2 2 2 2 2 ...\n $ political_scale       : num [1:6403] 5 3 3 2 5 5 8 10 5 5 ...\n $ marital_status        : Factor w/ 6 levels \"Widowed\",\"Single\",..: 1 1 1 1 2 3 1 1 1 1 ...\n $ employment            : Factor w/ 8 levels \"Part time\",\"Retired/pensioned\",..: 1 2 2 2 2 2 2 2 2 2 ...\n $ work_importance_r     : num [1:6403] 4 1 4 2 1 1 3 4 1 3 ...\n $ age_group             : chr [1:6403] \"61+\" \"61+\" \"61+\" \"61+\" ..."
   },
   {
-    "objectID": "02-tidyverse.html#task-7---the-shortcut-output",
-    "href": "02-tidyverse.html#task-7---the-shortcut-output",
+    "objectID": "02-tidyverse.html#analysis-1---summary-stats-of-life_satisfaction-for-each-country",
+    "href": "02-tidyverse.html#analysis-1---summary-stats-of-life_satisfaction-for-each-country",
     "title": "Data Wrangling with Tidyverse",
-    "section": "Task #7 - the shortcut",
-    "text": "Task #7 - the shortcut\n\ntibble [6,403 × 14] (S3: tbl_df/tbl/data.frame)\n $ ID                    : num [1:6403] 1.24e+08 5.54e+08 7.02e+08 1.24e+08 1.24e+08 ...\n $ country               : Factor w/ 3 levels \"CAN\",\"NZL\",\"SGP\": 1 2 3 1 1 1 2 1 1 2 ...\n $ sex                   : Factor w/ 2 levels \"Male\",\"Female\": 1 2 1 2 2 1 2 1 2 1 ...\n $ birthyear             : num [1:6403] 1927 1928 1930 1931 1930 ...\n $ age                   : num [1:6403] 93 91 90 89 89 89 89 88 88 88 ...\n $ life_satisfaction     : num [1:6403] 7 5 8 6 6 8 9 8 8 10 ...\n $ work_importance       : num [1:6403] 1 4 1 3 4 4 2 1 4 2 ...\n $ financial_satisfaction: num [1:6403] 7 5 9 9 8 8 10 10 5 10 ...\n $ religiousity          : Factor w/ 4 levels \"Not a religious person\",..: 1 2 2 1 1 2 2 2 2 2 ...\n $ political_scale       : num [1:6403] 5 3 3 2 5 5 8 10 5 5 ...\n $ marital_status        : Factor w/ 6 levels \"Widowed\",\"Single\",..: 1 1 1 1 2 3 1 1 1 1 ...\n $ employment            : Factor w/ 8 levels \"Part time\",\"Retired/pensioned\",..: 1 2 2 2 2 2 2 2 2 2 ...\n $ work_importance_r     : num [1:6403] 4 1 4 2 1 1 3 4 1 3 ...\n $ age_group             : chr [1:6403] \"61+\" \"61+\" \"61+\" \"61+\" ..."
+    "section": "Analysis 1 - summary stats of life_satisfaction for each country",
+    "text": "Analysis 1 - summary stats of life_satisfaction for each country\nGenerate summary statistics such as count (n), mean, median, and standard deviation of life_satisfaction grouped by country.\nWe can achieve this with group_by() and summarise()\n\nwvs_data |&gt;\n    group_by(country, age_group) |&gt;\n    summarise(\n        n = n(),\n        mean_satisfaction = mean(life_satisfaction),\n        median_satisfaction = median(life_satisfaction),\n        sd_satisfaction = sd(life_satisfaction)\n    ) |&gt;\n    arrange(country, desc(mean_satisfaction))\n\n\nWhat if we want to save this into a CSV? What if we also want to group by country AND age_group?"
   },
   {
-    "objectID": "02-tidyverse.html#task-8",
-    "href": "02-tidyverse.html#task-8",
+    "objectID": "02-tidyverse.html#analysis-1---summary-stats-of-life_satisfaction-for-each-country-output",
+    "href": "02-tidyverse.html#analysis-1---summary-stats-of-life_satisfaction-for-each-country-output",
     "title": "Data Wrangling with Tidyverse",
-    "section": "Task #8",
-    "text": "Task #8\nGenerate summary statistics such as count (n), mean, median, and standard deviation of life_satisfaction grouped by country.\nWe can achieve this with group_by() and summarise()\n\nwvs_data |&gt;\n    group_by(country, age_group) |&gt;\n    summarise(\n        n = n(),\n        mean_satisfaction = mean(life_satisfaction),\n        median_satisfaction = median(life_satisfaction),\n        sd_satisfaction = sd(life_satisfaction)\n    ) |&gt;\n    arrange(country, desc(mean_satisfaction))\n\n\nWhat if we want to save this into a CSV? What if we also want to group by country AND age_group?"
+    "section": "Analysis 1 - summary stats of life_satisfaction for each country",
+    "text": "Analysis 1 - summary stats of life_satisfaction for each country\n\n# A tibble: 12 × 6\n# Groups:   country [3]\n   country age_group     n mean_satisfaction median_satisfaction sd_satisfaction\n   &lt;chr&gt;   &lt;chr&gt;     &lt;int&gt;             &lt;dbl&gt;               &lt;dbl&gt;           &lt;dbl&gt;\n 1 CAN     61+        1013              7.55                   8            1.59\n 2 CAN     29-44      1232              6.99                   7            1.80\n 3 CAN     45-60      1061              6.92                   7            1.87\n 4 CAN     18-28       712              6.60                   7            1.86\n 5 NZL     61+         292              7.96                   8            1.66\n 6 NZL     45-60       222              7.38                   8            1.90\n 7 NZL     29-44       119              7.32                   8            1.69\n 8 NZL     18-28        27              6.70                   7            1.98\n 9 SGP     61+         418              7.17                   7            1.84\n10 SGP     29-44       511              7.09                   7            1.70\n11 SGP     45-60       550              7.05                   7            1.83\n12 SGP     18-28       246              6.85                   7            1.68"
   },
   {
-    "objectID": "02-tidyverse.html#task-8-output",
-    "href": "02-tidyverse.html#task-8-output",
+    "objectID": "02-tidyverse.html#analysis-2---how-many-has-below-and-average-life_satisfaction",
+    "href": "02-tidyverse.html#analysis-2---how-many-has-below-and-average-life_satisfaction",
     "title": "Data Wrangling with Tidyverse",
-    "section": "Task #8",
-    "text": "Task #8\n\n# A tibble: 12 × 6\n# Groups:   country [3]\n   country age_group     n mean_satisfaction median_satisfaction sd_satisfaction\n   &lt;chr&gt;   &lt;chr&gt;     &lt;int&gt;             &lt;dbl&gt;               &lt;dbl&gt;           &lt;dbl&gt;\n 1 CAN     61+        1013              7.55                   8            1.59\n 2 CAN     29-44      1232              6.99                   7            1.80\n 3 CAN     45-60      1061              6.92                   7            1.87\n 4 CAN     18-28       712              6.60                   7            1.86\n 5 NZL     61+         292              7.96                   8            1.66\n 6 NZL     45-60       222              7.38                   8            1.90\n 7 NZL     29-44       119              7.32                   8            1.69\n 8 NZL     18-28        27              6.70                   7            1.98\n 9 SGP     61+         418              7.17                   7            1.84\n10 SGP     29-44       511              7.09                   7            1.70\n11 SGP     45-60       550              7.05                   7            1.83\n12 SGP     18-28       246              6.85                   7            1.68"
+    "section": "Analysis 2 - How many has below and average life_satisfaction?",
+    "text": "Analysis 2 - How many has below and average life_satisfaction?\nCreate a new column called satisfaction_group that indicate whether each respondent has higher or lower than average life_satisfaction\n\nmean_satisfaction &lt;- mean(wvs_data$life_satisfaction, na.rm = TRUE)\n\nwvs_data |&gt;\n    mutate(satisfaction_group = if_else(\n        life_satisfaction &gt; mean_satisfaction, # the condition to evaluate\n        \"higher\", # if condition is fulfilled, do this\n        \"lower\" # otherwise, do this\n    ))"
   },
   {
-    "objectID": "02-tidyverse.html#task-9",
-    "href": "02-tidyverse.html#task-9",
+    "objectID": "02-tidyverse.html#analysis-2---how-many-has-below-and-average-life_satisfaction-output",
+    "href": "02-tidyverse.html#analysis-2---how-many-has-below-and-average-life_satisfaction-output",
     "title": "Data Wrangling with Tidyverse",
-    "section": "Task #9",
-    "text": "Task #9\nCreate a new column called satisfaction_group that indicate whether each respondent has higher or lower than average life_satisfaction\n\nmean_satisfaction &lt;- mean(wvs_data$life_satisfaction, na.rm = TRUE)\n\nwvs_data |&gt;\n    mutate(satisfaction_group = if_else(\n        life_satisfaction &gt; mean_satisfaction, # the condition to evaluate\n        \"higher\", # if condition is fulfilled, do this\n        \"lower\" # otherwise, do this\n    ))"
+    "section": "Analysis 2 - How many has below and average life_satisfaction?",
+    "text": "Analysis 2 - How many has below and average life_satisfaction?\n\n# A tibble: 6,403 × 15\n          ID country sex    birthyear   age life_satisfaction work_importance\n       &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt;             &lt;dbl&gt;           &lt;dbl&gt;\n 1 124071434 CAN     Male        1927    93                 7               1\n 2 554070524 NZL     Female      1928    91                 5               4\n 3 702070265 SGP     Male        1930    90                 8               1\n 4 124071321 CAN     Female      1931    89                 6               3\n 5 124073566 CAN     Female      1930    89                 6               4\n 6 124074356 CAN     Male        1931    89                 8               4\n 7 554070216 NZL     Female      1930    89                 9               2\n 8 124070295 CAN     Male        1932    88                 8               1\n 9 124072193 CAN     Female      1958    88                 8               4\n10 554070038 NZL     Male        1931    88                10               2\n# ℹ 6,393 more rows\n# ℹ 8 more variables: financial_satisfaction &lt;dbl&gt;, religiousity &lt;chr&gt;,\n#   political_scale &lt;dbl&gt;, marital_status &lt;chr&gt;, employment &lt;chr&gt;,\n#   work_importance_r &lt;dbl&gt;, age_group &lt;chr&gt;, satisfaction_group &lt;chr&gt;"
   },
   {
-    "objectID": "02-tidyverse.html#task-9-output",
-    "href": "02-tidyverse.html#task-9-output",
+    "objectID": "02-tidyverse.html#analysis-3---whats-the-average-satisfaction-scores-for-each-country-and-age-group",
+    "href": "02-tidyverse.html#analysis-3---whats-the-average-satisfaction-scores-for-each-country-and-age-group",
     "title": "Data Wrangling with Tidyverse",
-    "section": "Task #9",
-    "text": "Task #9\n\n# A tibble: 6,403 × 15\n          ID country sex    birthyear   age life_satisfaction work_importance\n       &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt;             &lt;dbl&gt;           &lt;dbl&gt;\n 1 124071434 CAN     Male        1927    93                 7               1\n 2 554070524 NZL     Female      1928    91                 5               4\n 3 702070265 SGP     Male        1930    90                 8               1\n 4 124071321 CAN     Female      1931    89                 6               3\n 5 124073566 CAN     Female      1930    89                 6               4\n 6 124074356 CAN     Male        1931    89                 8               4\n 7 554070216 NZL     Female      1930    89                 9               2\n 8 124070295 CAN     Male        1932    88                 8               1\n 9 124072193 CAN     Female      1958    88                 8               4\n10 554070038 NZL     Male        1931    88                10               2\n# ℹ 6,393 more rows\n# ℹ 8 more variables: financial_satisfaction &lt;dbl&gt;, religiousity &lt;chr&gt;,\n#   political_scale &lt;dbl&gt;, marital_status &lt;chr&gt;, employment &lt;chr&gt;,\n#   work_importance_r &lt;dbl&gt;, age_group &lt;chr&gt;, satisfaction_group &lt;chr&gt;"
-  },
-  {
-    "objectID": "02-tidyverse.html#task-10",
-    "href": "02-tidyverse.html#task-10",
-    "title": "Data Wrangling with Tidyverse",
-    "section": "Task #10",
-    "text": "Task #10\nShow the average satisfaction scores by country and age group in wide data format\n\nwvs_data |&gt;\n    group_by(country, age_group) |&gt;\n    summarise(\n        avg_satisfaction = mean(life_satisfaction, na.rm = TRUE),\n    ) |&gt;\n    pivot_wider(\n        names_from = age_group,\n        values_from = avg_satisfaction\n    ) \n\n# A tibble: 3 × 5\n# Groups:   country [3]\n  country `18-28` `29-44` `45-60` `61+`\n  &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;\n1 CAN        6.60    6.99    6.92  7.55\n2 NZL        6.70    7.32    7.38  7.96\n3 SGP        6.85    7.09    7.05  7.17"
+    "section": "Analysis 3 - What’s the average satisfaction scores for each country and age group?",
+    "text": "Analysis 3 - What’s the average satisfaction scores for each country and age group?\nShow the average satisfaction scores by country and age group in wide data format\n\nwvs_data |&gt;\n    group_by(country, age_group) |&gt;\n    summarise(\n        avg_satisfaction = mean(life_satisfaction, na.rm = TRUE),\n    ) |&gt;\n    pivot_wider(\n        names_from = age_group,\n        values_from = avg_satisfaction\n    ) \n\n# A tibble: 3 × 5\n# Groups:   country [3]\n  country `18-28` `29-44` `45-60` `61+`\n  &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;\n1 CAN        6.60    6.99    6.92  7.55\n2 NZL        6.70    7.32    7.38  7.96\n3 SGP        6.85    7.09    7.05  7.17"
   },
   {
     "objectID": "02-tidyverse.html#long-vs-wide-data",
     "href": "02-tidyverse.html#long-vs-wide-data",
     "title": "Data Wrangling with Tidyverse",
     "section": "Long vs Wide Data",
-    "text": "Long vs Wide Data\n\n\nLong data:\n\nEach row is a unique observation.\nThere is a separate column indicating the variable or type of measurements\nThis format is more “understandable” by R, more suitable for visualizations.\n\n\nWide data:\n\nEach row is a value in variables.\nEach column is a value in variables –&gt; the more values you have, the “wider” is the data\nThe cells represent theThis format is more intuitive for humans!"
+    "text": "Long vs Wide Data\n\n\nLong data:\n\nEach row is a unique observation.\nThere is a separate column indicating the variable or type of measurements\nThis format is more “understandable” by R, more suitable for visualizations.\n\n\nWide data:\n\nEach row is a value in variables.\nEach column is a value in variables –&gt; the more values you have, the “wider” is the data\nThis format is more intuitive for humans!"
   },
   {
     "objectID": "02-tidyverse.html#long-vs-wide-data-examples",
@@ -1293,20 +1307,6 @@
     "title": "Data Wrangling with Tidyverse",
     "section": "Long vs Wide Data: Examples",
     "text": "Long vs Wide Data: Examples\n\n\nLong data:\n\n\n\nObservations (Long)\n\n\ncountry\nage_group\ncount\n\n\n\n\nCAN\n18-28\n712\n\n\nCAN\n29-44\n1232\n\n\nCAN\n45-60\n1061\n\n\nCAN\n61+\n1013\n\n\nNZL\n18-28\n27\n\n\nNZL\n29-44\n119\n\n\nNZL\n45-60\n222\n\n\nNZL\n61+\n292\n\n\nSGP\n18-28\n246\n\n\nSGP\n29-44\n511\n\n\nSGP\n45-60\n550\n\n\nSGP\n61+\n418\n\n\n\n\n\n\nWide data:\n\n\n\nObservations (Wide)\n\n\ncountry\n18-28\n29-44\n45-60\n61+\n\n\n\n\nCAN\n712\n1232\n1061\n1013\n\n\nNZL\n27\n119\n222\n292\n\n\nSGP\n246\n511\n550\n418"
-  },
-  {
-    "objectID": "02-tidyverse.html#group-exercise-2-solo-attempts-ok",
-    "href": "02-tidyverse.html#group-exercise-2-solo-attempts-ok",
-    "title": "Data Wrangling with Tidyverse",
-    "section": "Group exercise 2 (solo attempts ok)",
-    "text": "Group exercise 2 (solo attempts ok)\nTime: 5 minutes\nGenerate a summary stats of age grouped by country and sex. The summary stats should include mean, median, max, min, std, and n (number of observations). It should look something like this:\n\n\nShow answer\nwvs_data |&gt; \n    group_by(country, sex) |&gt; \n    summarise(observation = n(), \n              mean_age = mean(age, na.rm = TRUE),\n              median_age = median(age, na.rm = TRUE), \n              oldest = max(age, na.rm = TRUE),\n              youngest = min(age, na.rm = TRUE),\n              std_dev = sd(age, na.rm = TRUE))"
-  },
-  {
-    "objectID": "02-tidyverse.html#group-exercise-2-solo-attempts-ok-output",
-    "href": "02-tidyverse.html#group-exercise-2-solo-attempts-ok-output",
-    "title": "Data Wrangling with Tidyverse",
-    "section": "Group exercise 2 (solo attempts ok)",
-    "text": "Group exercise 2 (solo attempts ok)\n\n# A tibble: 6 × 8\n# Groups:   country [3]\n  country sex    observation mean_age median_age oldest youngest std_dev\n  &lt;chr&gt;   &lt;chr&gt;        &lt;int&gt;    &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;\n1 CAN     Female        1959     44.2         42     89       18    17.0\n2 CAN     Male          2059     48.8         49     93       18    16.4\n3 NZL     Female         354     56.6         58     91       19    15.5\n4 NZL     Male           306     57.3         59     88       20    15.4\n5 SGP     Female         919     47.7         47     87       21    15.3\n6 SGP     Male           806     47.9         48     90       21    16.2"
   },
   {
     "objectID": "02-tidyverse.html#bonus-deleting-columns-from-dataframe",
@@ -1321,6 +1321,27 @@
     "title": "Data Wrangling with Tidyverse",
     "section": "Remove the wrong column with subset -:",
     "text": "Remove the wrong column with subset -:\n\nwvs_data &lt;- wvs_data |&gt; \n    select(-wrong_column)\n\n\n\n# A tibble: 6,403 × 1\n  country\n  &lt;chr&gt;  \n1 CAN    \n2 NZL    \n3 SGP    \n# ℹ 6,400 more rows"
+  },
+  {
+    "objectID": "02-tidyverse.html#to-try-at-home-exercise-1",
+    "href": "02-tidyverse.html#to-try-at-home-exercise-1",
+    "title": "Data Wrangling with Tidyverse",
+    "section": "To try at home: Exercise 1",
+    "text": "To try at home: Exercise 1\nNow that we have a new file, load this new wvs_cleaned_v1.csv into a new dataframe called wvs_cleaned. Filter to respondents from Singapore who are currently employed full time. Show only the Respondent ID, country, the employment status, and age. Use glimpse() or print() to check the result! (you can chain these functions at the end)\nStep 1: Load the new file\n\n\nShow answer\nlibrary(tidyverse)\nwvs_cleaned &lt;- read_csv(\"data-output/wvs_cleaned_v1.csv\")"
+  },
+  {
+    "objectID": "02-tidyverse.html#to-try-at-home-exercise-2",
+    "href": "02-tidyverse.html#to-try-at-home-exercise-2",
+    "title": "Data Wrangling with Tidyverse",
+    "section": "To try at home: Exercise 2",
+    "text": "To try at home: Exercise 2\nTime: 5 minutes\nGenerate a summary stats of age grouped by country and sex. The summary stats should include mean, median, max, min, std, and n (number of observations). It should look something like this:\n\n\nShow answer\nwvs_data |&gt; \n    group_by(country, sex) |&gt; \n    summarise(observation = n(), \n              mean_age = mean(age, na.rm = TRUE),\n              median_age = median(age, na.rm = TRUE), \n              oldest = max(age, na.rm = TRUE),\n              youngest = min(age, na.rm = TRUE),\n              std_dev = sd(age, na.rm = TRUE))"
+  },
+  {
+    "objectID": "02-tidyverse.html#to-try-at-home-exercise-2-output",
+    "href": "02-tidyverse.html#to-try-at-home-exercise-2-output",
+    "title": "Data Wrangling with Tidyverse",
+    "section": "To try at home: Exercise 2",
+    "text": "To try at home: Exercise 2\n\n# A tibble: 6 × 8\n# Groups:   country [3]\n  country sex    observation mean_age median_age oldest youngest std_dev\n  &lt;chr&gt;   &lt;chr&gt;        &lt;int&gt;    &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;\n1 CAN     Female        1959     44.2         42     89       18    17.0\n2 CAN     Male          2059     48.8         49     93       18    16.4\n3 NZL     Female         354     56.6         58     91       19    15.5\n4 NZL     Male           306     57.3         59     88       20    15.4\n5 SGP     Female         919     47.7         47     87       21    15.3\n6 SGP     Male           806     47.9         48     90       21    16.2"
   },
   {
     "objectID": "04-stats.html#todays-outline",
