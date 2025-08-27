@@ -11,7 +11,8 @@ format: revealjs
 
 ## Checklist when you start RStudio
 
--   Load the project we created last session and open the R script file. Click on `File` \> `Recent Projects...` \> Select the our project from last week.
+-   Navigate to where you create your R project folder for this workshop.
+-   Find a file with `.Rproject` extension and double-click on it. This will start RStudio and open your project. 
 -   Make sure that `Environment` panel is empty (click on broom icon to clean it up).
 -   Clear the `Console` and `Plots` too.
 -   Re-run the `library(tidyverse)` and `read_csv` portion in the previous session (the code is also on the next slide if you missed last week's session)
@@ -35,16 +36,42 @@ wvs_data <- read_csv("data/wvs-wave7-sg-ca-nz.csv")
 glimpse(wvs_data)
 ```
 
-## Cleaning data for analysis
+## Why do we need to clean our data?
 
 ::: incremental
--   **Why do it in R?** Because it's much efficient to do so in R, especially if your data is large (e.g. millions of rows, thousands of columns) and you have repetitive clean up tasks.
--   Incorrect or inconsistent data can lead to false conclusions, so it's important to clean and prep it correctly.
--   Having a clear understanding of the desired data shape is essential as real data often differs from what you imagine! **Refer to codebook, actual questionnaire, appendix for guidance.**
--   Data cleaning techniques differ based on the problems, data type, and the research questions you are trying to answer. Various methods are available, each with its own trade-offs.
+-   Researchers spend 60-80% of their time on data preparation - investing in proper wrangling upfront saves hours of debugging and rework later.
+-   Poor data quality costs projects or organizations millions annually(!), and even one misclassified data point can skew entire analyses.
+-   Clean data improves the validity of statistical tests and can reveal hidden patterns that aren't visible in messy datasets
+-   Well-documented data cleaning makes research transparent and reproducible, benefiting both future-you and collaborators.
+
 :::
 
-## About dplyr and tidyr
+## Why do it in R? Can't I do this on excel?
+
+::: incremental
+-   R code creates a permanent record of exactly what you did - Excel clicks and manual edits are hard to track and reproduce.
+-   R handles dates, times, text, and mixed data types much more reliably than Excel.
+-   Excel can automatically "correct" your data in unwanted ways (like converting your dates from DDMMYY to MMDDYY)
+-   Write the cleaning code once, apply it to multiple datasets or when data updates. Whereas Excel requires manual repetition of the same steps each time.
+-   Complex joins, reshaping, and conditional operations that would take many Excel steps can be done in a few lines of R code.
+-   R scripts can be easily shared, version controlled, and integrated into reproducible workflows
+
+:::
+
+## What do I need to know before we begin?
+
+::: incremental
+-   Always examine your data first (`head()`, `summary()`, `str()`) before cleaning.
+-   **Never overwrite your raw data files** 
+-   Budget extra time for data cleaning - it almost always takes longer than expected!
+-   Having a clear understanding of the desired data shape is essential as real data often differs from what you imagine! **Refer to codebook, actual questionnaire, appendix for guidance.**
+-   Look out for outliers!
+-   Remember: Data cleaning techniques differ based on the problems, data type, and the research questions you are trying to answer. Various methods are available, each with its own trade-offs.
+
+:::
+
+
+## The tools we're going to use: dplyr and tidyr
 
 -   Packages from `tidyverse`. ([click here to go to the tidyverse homepage](https://www.tidyverse.org/))
 
@@ -67,6 +94,27 @@ glimpse(wvs_data)
     -   `if_else()` and `case_when()` - to be used with mutate when we want to compute/edit columns based on multiple criteria
 
     -   `group_by()` and `summarize()` - group data and summarize each group
+
+
+## Why are we using tidyverse? Is it a must?
+
+It's not a must, but it'll be make our job much easier! Key advantages:
+
+-   More 'English' looking code and thus more intuitive for beginners
+-   Tidyverse follow consistent syntax patterns - first argument is always the data
+-   Tidyverse gives clearer, more helpful error messages
+
+Example:
+```r
+# Base R
+subset_data <- data[data$age > 18 & data$income > 50000, c("name", "age", "salary")]
+
+# Tidyverse  
+subset_data <- data |> 
+  filter(age > 18, income > 50000)  |> 
+  select(name, age, salary)
+
+```
 
 ## Scenario: Data wrangling activities with WVS data {.smaller}
 
@@ -258,56 +306,22 @@ wvs_data |> write_csv("data-output/wvs_cleaned_v1.csv")
 
 Check the data output folder to make sure the CSV is created!
 
-## Group Exercise 1 (5 minutes)
 
-Now that we have a new file, load this new `wvs_cleaned_v1.csv` into a new dataframe called `wvs_cleaned`. Filter to respondents from Singapore who are currently employed full time. Show only the Respondent ID, country, the employment status, and age. Use `glimpse()` or `print()` to check the result! (you can chain these functions at the end)
-
-**Step 1**: Load the new file
-
-```{r}
-#| echo: true
-#| code-fold: true
-#| code-summary: "Show answer"
-#| output: false
-
-library(tidyverse)
-wvs_cleaned <- read_csv("data-output/wvs_cleaned_v1.csv")
-```
-
-------------------------------------------------------------------------
-
-**Step 2**: Do the filtering and selecting, and then show result
-
-```{r}
-#| echo: true
-#| code-fold: true
-#| code-summary: "Show answer"
-
-library(tidyverse)
-wvs_cleaned <- read_csv("data-output/wvs_cleaned_v1.csv")
-
-wvs_cleaned |> 
-    filter(country == "SGP" & employment == "Full time") |> 
-    select(ID, country, employment, age) |> 
-    glimpse()
-
-```
-
-## Scenario: Data wrangling activities with WVS data (continued)
+## Simple descriptive analysis
 
 Once we are done with the wrangling part, we can proceed with simple descriptive analysis!
 
 ::: incremental
-7.  Before we proceed further, convert the appropriate categorical variables (country, religiousity, sex, marital_status, employment) to **Factor**
+-   Prep: Before we proceed further, convert the appropriate categorical variables (country, religiousity, sex, marital_status, employment) to **Factor**
 
-8.  Generate summary statistics of life_satisfaction grouped by country
+-   Analysis 1: Generate summary statistics of life_satisfaction grouped by country
 
-9.  Create a new column called `satisfaction_group` that indicate whether each respondent has higher or lower than average `life_satisfaction`
+-   Analysis 2: Create a new column called `satisfaction_group` that indicate whether each respondent has higher or lower than average `life_satisfaction`
 
-10. Reshape the data to show average satisfaction scores by country and age group
+-   Analysis 3: Reshape the data to show average satisfaction scores by country and age group
 :::
 
-## Task #7
+## Prep before analysis: convert to factors
 
 Let's use the `wvs_cleaned` dataframe for this task.
 
@@ -319,6 +333,7 @@ We can do this with `mutate()` and `as_factor()` from forcats, another sub-packa
 #| echo: true
 #| output-location: slide
 
+wvs_cleaned <- read_csv("data-output/wvs_cleaned_v1.csv")
 wvs_cleaned <- wvs_cleaned |> 
     mutate(
         country = as_factor(country),
@@ -334,7 +349,7 @@ str(wvs_cleaned)
 
 Rstudio may auto-suggest `as.factor()` from base R. You can use this as well, but `as_factor()` is preferred since we are using tidyverse approach.
 
-## Task #7 - the shortcut
+## Prep before analysis: convert to factors (shortcut ver.)
 
 If we have a lot of columns to convert, that might be troublesome to type! This is where `across()` can come in handy.
 
@@ -363,7 +378,7 @@ str(wvs_cleaned)
 
 `across()` is used for applying the same function to multiple columns in a single `mutate()` or `summarise()` operation.
 
-## Task #8
+## Analysis 1 - summary stats of life_satisfaction for each country
 
 Generate summary statistics such as count (n), mean, median, and standard deviation of life_satisfaction grouped by country.
 
@@ -387,7 +402,7 @@ wvs_data |>
 
 *What if we want to save this into a CSV? What if we also want to group by country AND age_group?*
 
-## Task #9
+## Analysis 2 - How many has below and average life_satisfaction?
 
 Create a new column called `satisfaction_group` that indicate whether each respondent has higher or lower than average `life_satisfaction`
 
@@ -405,7 +420,7 @@ wvs_data |>
     )) 
 ```
 
-## Task #10
+## Analysis 3 - What's the average satisfaction scores for each country and age group?
 
 Show the average satisfaction scores by country and age group in wide data format
 
@@ -442,7 +457,7 @@ wvs_data |>
 
 -   Each column is a value in variables --\> the more values you have, the "wider" is the data
 
--   The cells represent theThis format is more intuitive for humans!
+-   This format is more intuitive for humans!
 :::
 :::::
 
@@ -483,27 +498,6 @@ long_data |>
 :::
 :::::
 
-## Group exercise 2 (solo attempts ok)
-
-[**Time: 5 minutes**]{.underline}
-
-Generate a summary stats of `age` grouped by `country` and `sex`. The summary stats should include mean, median, max, min, std, and n (number of observations). It should look something like this:
-
-```{r}
-#| echo: true
-#| code-fold: true
-#| output-location: slide
-#| code-summary: "Show answer"
-
-wvs_data |> 
-    group_by(country, sex) |> 
-    summarise(observation = n(), 
-              mean_age = mean(age, na.rm = TRUE),
-              median_age = median(age, na.rm = TRUE), 
-              oldest = max(age, na.rm = TRUE),
-              youngest = min(age, na.rm = TRUE),
-              std_dev = sd(age, na.rm = TRUE))
-```
 
 ## Bonus: Deleting columns from dataframe
 
@@ -532,22 +526,80 @@ wvs_data |> select(country) |> print(n = 3)
 
 ::: incremental
 
--   Import and read data into RStudio: Load external data files (like CSV or Excel) into R using functions such as read_csv() to make the data available for analysis.
+-   Import and read data into RStudio: Load external data files (like CSV or Excel) into R using functions such as `read_csv()` to make the data available for analysis.
 
 -   Data wrangling with dplyr and tidyr (part of the tidyverse package): Use tidyverse functions to tidy and reshape datasets and perform tasks like selecting, filtering, and summarizing data.
 
--   Remove all rows with missing values (NA) and check for duplicates: Delete rows containing missing data using na.omit() and identify or remove duplicate rows with functions like distinct().
+-   Remove all rows with missing values (NA) and check for duplicates: Delete rows containing missing data using `na.omit()` and identify or remove duplicate rows with functions like `distinct()`.
 
--   Select only the relevant columns: Use select() to keep only the columns needed for the analysis, focusing on important variables.
+-   Select only the relevant columns: Use `select()` to keep only the columns needed for the analysis, focusing on important variables.
 
--   Filter data based on criterion and arrange data: Apply filter() to keep rows meeting specific conditions and use arrange() to sort data by one or more columns.
+-   Filter data based on criterion and arrange data: Apply `filter()` to keep rows meeting specific conditions and use `arrange()` to sort data by one or more columns.
 
--   Change factor level values: Modify the categories of a factor using factor() or recode() to rename or reorder levels for clearer analysis.
+-   Change factor level values: Modify the categories of a factor using `factor()` or `recode()` to rename or reorder levels for clearer analysis.
 
--   Create new columns: Generate or modify columns using mutate(), often by transforming or combining existing columns.
+-   Create new columns: Generate or modify columns using `mutate()`, often by transforming or combining existing columns.
 
 :::
 
 # End of Session 2!
 
 Next session: Descriptive statistics and data visualization with `ggplot2` package - we'll create visualizations to explore patterns in life satisfaction, values, and demographics across countries!
+
+## To try at home: Exercise 1
+
+Now that we have a new file, load this new `wvs_cleaned_v1.csv` into a new dataframe called `wvs_cleaned`. Filter to respondents from Singapore who are currently employed full time. Show only the Respondent ID, country, the employment status, and age. Use `glimpse()` or `print()` to check the result! (you can chain these functions at the end)
+
+**Step 1**: Load the new file
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show answer"
+#| output: false
+
+library(tidyverse)
+wvs_cleaned <- read_csv("data-output/wvs_cleaned_v1.csv")
+```
+
+------------------------------------------------------------------------
+
+**Step 2**: Do the filtering and selecting, and then show result
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| code-summary: "Show answer"
+
+library(tidyverse)
+wvs_cleaned <- read_csv("data-output/wvs_cleaned_v1.csv")
+
+wvs_cleaned |> 
+    filter(country == "SGP" & employment == "Full time") |> 
+    select(ID, country, employment, age) |> 
+    glimpse()
+
+```
+
+
+## To try at home: Exercise 2
+
+[**Time: 5 minutes**]{.underline}
+
+Generate a summary stats of `age` grouped by `country` and `sex`. The summary stats should include mean, median, max, min, std, and n (number of observations). It should look something like this:
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| output-location: slide
+#| code-summary: "Show answer"
+
+wvs_data |> 
+    group_by(country, sex) |> 
+    summarise(observation = n(), 
+              mean_age = mean(age, na.rm = TRUE),
+              median_age = median(age, na.rm = TRUE), 
+              oldest = max(age, na.rm = TRUE),
+              youngest = min(age, na.rm = TRUE),
+              std_dev = sd(age, na.rm = TRUE))
+```
