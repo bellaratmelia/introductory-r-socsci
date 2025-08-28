@@ -42,11 +42,11 @@
     "text": "This site serves as a repository for the slides and codes developed for the ‘Introductory R for Social Sciences’ workshop tailored for undergraduate students at SMU. Comprising five sessions, this resource is designed for individuals with fundamental statistics knowledge who are venturing into R programming or coding for the first time."
   },
   {
-    "objectID": "index.html#instructor",
-    "href": "index.html#instructor",
+    "objectID": "index.html#instructors",
+    "href": "index.html#instructors",
     "title": "Introductory R for Social Sciences",
-    "section": "Instructor",
-    "text": "Instructor\nInstructor:\n\nBella Ratmelia, Research & Data Services, SMU Libraries\nWei Xia, Instruction and Learning Services, SMU Libraries\n\nTeaching Assistant: Bryan Bramaskara, MITB"
+    "section": "Instructors",
+    "text": "Instructors\nInstructors:\n\nBella Ratmelia, Research & Data Services, SMU Libraries\nWei Xia, Instruction and Learning Services, SMU Libraries\n\nTeaching Assistant: Bryan Bramaskara, MITB"
   },
   {
     "objectID": "index.html#schedule",
@@ -1159,7 +1159,7 @@
     "href": "02-tidyverse.html#more-advanced-ones-which-is-not-covered-in-the-workshop-see-appendix-for-examples",
     "title": "Data Wrangling with Tidyverse",
     "section": "More advanced ones which is not covered in the workshop (see appendix for examples)",
-    "text": "More advanced ones which is not covered in the workshop (see appendix for examples)\n-   Joining multiple dataframes' columns: `left_join()`, `right_join()`, `inner_join()`, `full_join()`\n\n-   Joining multiple dataframes' rows: `bind_rows()`\n\n-   Splitting or combining cells: `unite()`, `separate_wider_delim()`, `separate_long_delim()`"
+    "text": "More advanced ones which is not covered in the workshop (see appendix for examples)\n\nJoining multiple dataframes’ columns: left_join(), right_join(), inner_join(), full_join()\nJoining multiple dataframes’ rows: bind_rows()\nSplitting or combining cells: unite(), separate_wider_delim(), separate_long_delim()\n\nAdditionally: you may need the forcats cheatsheet here: https://raw.githubusercontent.com/rstudio/cheatsheets/main/factors.pdf\nforcats is also part of tidyverse, specifically used to handle factor data."
   },
   {
     "objectID": "02-tidyverse.html#why-are-we-using-tidyverse-is-it-a-must",
