@@ -989,8 +989,6 @@ $ age        &lt;dbl&gt; 81, 79, 73, 70, 69, 68, 68, 68, 68, 68, 68, 67, 67, 67,
 <p><code>customers</code> dataframe:</p>
 <p>(Notice that the ID is 1, 2, and 3)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a></a>customers <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">name =</span> <span class="fu">c</span>(<span class="st">"Alice"</span>, <span class="st">"Bob"</span>, <span class="st">"Carol"</span>))</span>
-<span id="cb38-2"><a></a><span class="fu">print</span>(customers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  id  name
 1  1 Alice
@@ -1002,8 +1000,6 @@ $ age        &lt;dbl&gt; 81, 79, 73, 70, 69, 68, 68, 68, 68, 68, 68, 67, 67, 67,
 <p><code>orders</code> dataframe</p>
 <p>(Notice that the ID is 1, 2, and 4)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a></a>orders <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">id =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>), <span class="at">amount =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">150</span>))</span>
-<span id="cb40-2"><a></a><span class="fu">print</span>(orders)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  id amount
 1  1    100
@@ -1016,7 +1012,7 @@ $ age        &lt;dbl&gt; 81, 79, 73, 70, 69, 68, 68, 68, 68, 68, 68, 67, 67, 67,
 <section id="left_join-to-keep-all-rows-from-the-left-table-i.e.-customers" class="slide level2">
 <h2>left_join() to keep all rows from the left table i.e.&nbsp;customers</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a></a>customers <span class="sc">|&gt;</span> <span class="fu">left_join</span>(orders, <span class="at">by =</span> <span class="st">"id"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a></a>customers <span class="sc">|&gt;</span> <span class="fu">left_join</span>(orders, <span class="at">by =</span> <span class="st">"id"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  id  name amount
 1  1 Alice    100
@@ -1028,7 +1024,7 @@ $ age        &lt;dbl&gt; 81, 79, 73, 70, 69, 68, 68, 68, 68, 68, 68, 67, 67, 67,
 <section id="right_join-to-keep-all-rows-from-the-right-table-i.e.-orders" class="slide level2">
 <h2>right_join() to keep all rows from the right table i.e.&nbsp;orders</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a></a>customers <span class="sc">|&gt;</span> <span class="fu">right_join</span>(orders, <span class="at">by =</span> <span class="st">"id"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a></a>customers <span class="sc">|&gt;</span> <span class="fu">right_join</span>(orders, <span class="at">by =</span> <span class="st">"id"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  id  name amount
 1  1 Alice    100
@@ -1040,7 +1036,7 @@ $ age        &lt;dbl&gt; 81, 79, 73, 70, 69, 68, 68, 68, 68, 68, 68, 67, 67, 67,
 <section id="inner_join-to-keep-only-matching-rows" class="slide level2">
 <h2>inner_join() to keep only matching rows</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a></a>customers <span class="sc">|&gt;</span> <span class="fu">inner_join</span>(orders, <span class="at">by =</span> <span class="st">"id"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a></a>customers <span class="sc">|&gt;</span> <span class="fu">inner_join</span>(orders, <span class="at">by =</span> <span class="st">"id"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  id  name amount
 1  1 Alice    100
@@ -1051,7 +1047,7 @@ $ age        &lt;dbl&gt; 81, 79, 73, 70, 69, 68, 68, 68, 68, 68, 68, 67, 67, 67,
 <section id="full_join-to-keep-all-rows-from-both-tables" class="slide level2">
 <h2>full_join() to keep all rows from both tables</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a></a>customers <span class="sc">|&gt;</span> <span class="fu">full_join</span>(orders, <span class="at">by =</span> <span class="st">"id"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a></a>customers <span class="sc">|&gt;</span> <span class="fu">full_join</span>(orders, <span class="at">by =</span> <span class="st">"id"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  id  name amount
 1  1 Alice    100
@@ -1065,12 +1061,22 @@ $ age        &lt;dbl&gt; 81, 79, 73, 70, 69, 68, 68, 68, 68, 68, 68, 67, 67, 67,
 <h2>bind_rows() to stack rows from two different dataframes</h2>
 <p>Let’s say we have the following dataframes</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a></a>df1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">name =</span> <span class="st">"Alice"</span>, <span class="at">age =</span> <span class="dv">25</span>)</span>
-<span id="cb50-2"><a></a>df2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">name =</span> <span class="st">"Bob"</span>, <span class="at">age =</span> <span class="dv">30</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a></a><span class="fu">print</span>(df1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   name age
+1 Alice  25</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a></a><span class="fu">print</span>(df2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  name age
+1  Bob  30</code></pre>
+</div>
 </div>
 <p>Stack them together:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a></a>df1 <span class="sc">|&gt;</span> <span class="fu">bind_rows</span>(df2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a></a>df1 <span class="sc">|&gt;</span> <span class="fu">bind_rows</span>(df2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   name age
 1 Alice  25
@@ -1082,13 +1088,6 @@ $ age        &lt;dbl&gt; 81, 79, 73, 70, 69, 68, 68, 68, 68, 68, 68, 67, 67, 67,
 <h2>Splitting and combining cells</h2>
 <p>Let’s say we have the following dataframe</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb53-2"><a></a>  <span class="at">first =</span> <span class="fu">c</span>(<span class="st">"John"</span>, <span class="st">"Jane"</span>),</span>
-<span id="cb53-3"><a></a>  <span class="at">last =</span> <span class="fu">c</span>(<span class="st">"Doe"</span>, <span class="st">"Smith"</span>),</span>
-<span id="cb53-4"><a></a>  <span class="at">full_address =</span> <span class="fu">c</span>(<span class="st">"123 Main St, NYC, NY"</span>, <span class="st">"456 Oak Ave, LA, CA"</span>)</span>
-<span id="cb53-5"><a></a>)</span>
-<span id="cb53-6"><a></a></span>
-<span id="cb53-7"><a></a><span class="fu">print</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  first  last         full_address
 1  John   Doe 123 Main St, NYC, NY
@@ -1099,7 +1098,7 @@ $ age        &lt;dbl&gt; 81, 79, 73, 70, 69, 68, 68, 68, 68, 68, 68, 67, 67, 67,
 <section id="combine-first-and-last-name-columns-into-one" class="slide level2">
 <h2>Combine first and last name columns into one</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a></a>df <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span> <span class="fu">unite</span>(<span class="st">"full_name"</span>, first, last, <span class="at">sep =</span> <span class="st">"_"</span>)</span>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a></a>df <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span> <span class="fu">unite</span>(<span class="st">"full_name"</span>, <span class="st">"first"</span>, <span class="st">"last"</span>, <span class="at">sep =</span> <span class="st">"_"</span>)</span>
 <span id="cb55-2"><a></a><span class="fu">print</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   full_name         full_address
@@ -1111,7 +1110,7 @@ $ age        &lt;dbl&gt; 81, 79, 73, 70, 69, 68, 68, 68, 68, 68, 68, 67, 67, 67,
 <section id="split-the-full-name-column-into-multiple-by-delimiter" class="slide level2">
 <h2>Split the full name column into multiple (by delimiter)</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a></a>df <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span> <span class="fu">separate_wider_delim</span>(full_name, <span class="at">delim =</span> <span class="st">"_"</span>, <span class="at">names =</span> <span class="fu">c</span>(<span class="st">"first"</span>, <span class="st">"last"</span>))</span>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a></a>df <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span> <span class="fu">separate_wider_delim</span>(<span class="st">"full_name"</span>, <span class="at">delim =</span> <span class="st">"_"</span>, <span class="at">names =</span> <span class="fu">c</span>(<span class="st">"first"</span>, <span class="st">"last"</span>))</span>
 <span id="cb57-2"><a></a><span class="fu">print</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 3
@@ -1125,8 +1124,7 @@ $ age        &lt;dbl&gt; 81, 79, 73, 70, 69, 68, 68, 68, 68, 68, 68, 67, 67, 67,
 <section id="split-one-column-into-multiple-rows-long-format" class="slide level2">
 <h2>Split one column into multiple rows (long format)</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a></a>df <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span> <span class="fu">separate_longer_delim</span>(full_address, <span class="at">delim =</span> <span class="st">", "</span>)</span>
-<span id="cb59-2"><a></a><span class="fu">print</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a></a>df <span class="sc">|&gt;</span> <span class="fu">separate_longer_delim</span>(full_address, <span class="at">delim =</span> <span class="st">", "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 3
   first last  full_address
