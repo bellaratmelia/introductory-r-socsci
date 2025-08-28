@@ -8,9 +8,9 @@ format: html
 
 This site serves as a repository for the slides and codes developed for the 'Introductory R for Social Sciences' workshop tailored for undergraduate students at [SMU](https://www.smu.edu.sg/). Comprising five sessions, this resource is designed for individuals with fundamental statistics knowledge who are venturing into R programming or coding for the first time.
 
-## Instructor
+## Instructors
 
-**Instructor**: 
+**Instructors**: 
 
 * Bella Ratmelia, Research & Data Services, SMU Libraries
 * Wei Xia, Instruction and Learning Services, SMU Libraries
