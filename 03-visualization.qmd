@@ -6,8 +6,16 @@ format: revealjs
 
 ## Today's Outline
 
-1.  Descriptive Statistics
-2.  Data Visualization in ggplot using World Values Survey data, including guidelines on how to choose the appropriate visualization.
+1.  Univariate descriptive stats and visualization
+    - for continuous variable
+    - for categorical variable (frequency or proportion)
+2.  Bivariate (two variables) descriptive stats and visualization
+    - both categorical
+    - both continuous (+ correlation plot)
+    - one categorical, one continuous
+3.  Using Facets
+4.  Best practices
+5.  Recap + Quiz!
 
 ## Checklist when you start RStudio
 
