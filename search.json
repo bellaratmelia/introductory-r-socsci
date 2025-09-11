@@ -1460,7 +1460,7 @@
     "href": "04-stats.html#todays-outline",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "Today’s Outline",
-    "text": "Today’s Outline\n\nRefreshers on data distribution and research variables\nStatistical tests: chi-square, t-test, correlations.\nANOVA"
+    "text": "Today’s Outline\n\nRefreshers on data distribution and research variables\nBoth categorical: chi-square\nBoth continuous: correlations\nCategorical X and Continuous Y (comparing means): T-tests and ANOVA"
   },
   {
     "objectID": "04-stats.html#refresher-data-distribution",
@@ -1502,7 +1502,7 @@
     "href": "04-stats.html#chi-square-test-of-independence---visualizing-data",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "Chi-square test of independence - visualizing data",
-    "text": "Chi-square test of independence - visualizing data\nWe can use barchart to visualize this (remember from last week!)\n\nwvs_cleaned |&gt; \n    ggplot(aes(x = country, fill = religiousity)) +\n    geom_bar(position = \"fill\") +\n    labs(title = \"Proportion of religiousity for each country\") +\n    theme_minimal()"
+    "text": "Chi-square test of independence - visualizing data\nWe can use percent-stacked barchart to visualize this (remember from last week!)\n\nwvs_cleaned |&gt; \n    ggplot(aes(x = country, fill = religiousity)) +\n    geom_bar(position = \"fill\") +\n    labs(title = \"Proportion of religiousity for each country\") +\n    theme_minimal()"
   },
   {
     "objectID": "04-stats.html#chi-square-sample-problem-and-results",
