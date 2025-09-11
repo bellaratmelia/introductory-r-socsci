@@ -772,6 +772,26 @@ wvs_cleaned |>
     add_difference()
 ```
 
+# Recap
+
+::: incremental
+
+- Data distribution, normal distribution and skewed distribution. 
+
+- Use X2  test of independence, chisq.test(), to evaluate whether there is a statistically significant relationship between two categorical variables. 
+
+- Use a correlation test, cor.test(), to evaluate the strength and direction of a linear relationship between two variables. The coefficient is expressed in value between -1 to 1, with 0 being no correlation at all. 
+
+- Use t-test() to compare the means of two groups of continuous data and determine if the differences are statistically significant.  
+
+- Three types of t-tests i.e., one-sample t-test, independent samples t-test, and paired samples t-test. 
+
+- Use ANOVA (Analysis of Variance) to compare the means of three or more groups or samples and determine if the differences are statistically significant.  
+
+- Report results with apaTables and gtsummary. 
+
+:::
+
 # End of Session 4!
 
 Next session: Linear and Logistic Regressions!

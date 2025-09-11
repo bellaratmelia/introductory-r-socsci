@@ -742,6 +742,7 @@ Keep a lookout for these titles:
 -   R Ep.7: Creating Awesome Web Slides in Quarto with Revealjs
 -   R Ep.9: Building Website and Blog with Quarto
 
+
 # Best Practices + More Resources
 
 ## R Best Practices
