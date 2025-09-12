@@ -1481,7 +1481,7 @@
     "href": "04-stats.html#open-your-project---the-possibly-easier-way",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "Open your project - the (possibly) easier way",
-    "text": "Open your project - the (possibly) easier way\n\nGo to the folder where you put your project for this workshop\nFind a file with .Rproj extension - this is the R project file that holds all the information about your project.\n\n\n\nDouble click on the file. Rstudio should launch with your project loaded! This should be easier to ensure that you are loading the correct project when opening Rstudio."
+    "text": "Open your project - the (possibly) easier way\n\nGo to the folder where you put your project for this workshop\nFind a file with .Rproj extension - this is the R project file that holds all the information about your project.\nDouble click on the file. Rstudio should launch with your project loaded! This should be easier to ensure that you are loading the correct project when opening Rstudio."
   },
   {
     "objectID": "04-stats.html#load-our-data-for-today",
@@ -1565,21 +1565,7 @@
     "href": "04-stats.html#types-of-t-test",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "3 types of t-test",
-    "text": "3 types of t-test\n\n\nOne-sample T-test\nTest if a specific sample mean (X̄) is statistically different from a known or hypothesized population mean (μ or mu)\n\nTwo-samples / Independent Samples T-test\nUsed to compare the means of two independent groups (such as between-subjects research) to determine if they are significantly different.\nExamples: Men vs Women group, Placebo vs Actual drugs.\n\nPaired Samples T-Test\nUsed to compare the means of two related groups, such as repeated measurements on the same subjects (within-subjects research).\nExamples: Before workshop vs After workshop."
-  },
-  {
-    "objectID": "04-stats.html#t-test-one-sample-t-test",
-    "href": "04-stats.html#t-test-one-sample-t-test",
-    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
-    "section": "T-test: One-sample T-Test",
-    "text": "T-test: One-sample T-Test\nRQ: Is the average life satisfaction in our sample significantly different from the global average of 6.5?\nLet’s start with visualizing the data\n\nwvs_cleaned |&gt; \n    ggplot(aes(y = life_satisfaction)) +\n    geom_boxplot(width = 0.2) + \n    geom_hline(yintercept = 6.5, color=\"red\")"
-  },
-  {
-    "objectID": "04-stats.html#conduct-the-one-sample-t-test",
-    "href": "04-stats.html#conduct-the-one-sample-t-test",
-    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
-    "section": "Conduct the One-sample T-Test",
-    "text": "Conduct the One-sample T-Test\n\nglobal_mean_satisfaction = 6.5  \n\nt.test(wvs_cleaned$life_satisfaction,          \n       alternative = \"two.sided\", \n       mu = global_mean_satisfaction)\n\n\n\n\n    One Sample t-test\n\ndata:  wvs_cleaned$life_satisfaction\nt = 26.776, df = 6402, p-value &lt; 2.2e-16\nalternative hypothesis: true mean is not equal to 6.5\n95 percent confidence interval:\n 7.060083 7.148570\nsample estimates:\nmean of x \n 7.104326 \n\n\nWhat if there is a hypothesis? How would you write this in the report?"
+    "text": "3 types of t-test\n\n\nTwo-samples / Independent Samples T-test\nUsed to compare the means of two independent groups (such as between-subjects research) to determine if they are significantly different.\nExamples: Men vs Women group, Placebo vs Actual drugs.\n\nPaired Samples T-Test\nUsed to compare the means of two related groups, such as repeated measurements on the same subjects (within-subjects research).\nExamples: Before workshop vs After workshop.\n\nOne-sample T-test\nTest if a specific sample mean (X̄) is statistically different from a known or hypothesized population mean (μ or mu)"
   },
   {
     "objectID": "04-stats.html#t-test-independent-samples-t-test",
@@ -1645,6 +1631,20 @@
     "text": "Conduct the paired-sample T-test\nRemember, the hypotheses are:\n\n\n\\(H_0\\): There is no significant difference in the increase in hours of sleep.\n\n\\(H_1\\): There is a significant difference in the increase in hours of sleep.\n\n\nt.test(Pair(sleep_wide$group_1, sleep_wide$group_2) ~ 1,\n       data = sleep)\n\n\n\n\n    Paired t-test\n\ndata:  Pair(sleep_wide$group_1, sleep_wide$group_2)\nt = -4.0621, df = 9, p-value = 0.002833\nalternative hypothesis: true mean difference is not equal to 0\n95 percent confidence interval:\n -2.4598858 -0.7001142\nsample estimates:\nmean difference \n          -1.58"
   },
   {
+    "objectID": "04-stats.html#t-test-one-sample-t-test",
+    "href": "04-stats.html#t-test-one-sample-t-test",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "T-test: One-sample T-Test",
+    "text": "T-test: One-sample T-Test\nRQ: Is the average life satisfaction in our sample significantly different from the global average of 6.5?\nLet’s start with visualizing the data\n\nwvs_cleaned |&gt; \n    ggplot(aes(y = life_satisfaction)) +\n    geom_boxplot(width = 0.2) + \n    geom_hline(yintercept = 6.5, color=\"red\")"
+  },
+  {
+    "objectID": "04-stats.html#conduct-the-one-sample-t-test",
+    "href": "04-stats.html#conduct-the-one-sample-t-test",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "Conduct the One-sample T-Test",
+    "text": "Conduct the One-sample T-Test\n\nglobal_mean_satisfaction = 6.5  \n\nt.test(wvs_cleaned$life_satisfaction,          \n       alternative = \"two.sided\", \n       mu = global_mean_satisfaction)\n\n\n\n\n    One Sample t-test\n\ndata:  wvs_cleaned$life_satisfaction\nt = 26.776, df = 6402, p-value &lt; 2.2e-16\nalternative hypothesis: true mean is not equal to 6.5\n95 percent confidence interval:\n 7.060083 7.148570\nsample estimates:\nmean of x \n 7.104326"
+  },
+  {
     "objectID": "04-stats.html#learning-check-2",
     "href": "04-stats.html#learning-check-2",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
@@ -1663,7 +1663,7 @@
     "href": "04-stats.html#anova-analysis-of-variance",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "ANOVA (Analysis of Variance)",
-    "text": "ANOVA (Analysis of Variance)\nANOVA (Analysis of Variance) is a statistical test used to compare the means of three or more groups or samples and determine if the differences are statistically significant.\nThere are two ‘mainstream’ ANOVA that will be covered in this workshop:\n\n\nOne-Way ANOVA: comparing means across two or more independent groups (levels) of a single independent variable.\nTwo-Way ANOVA: comparing means across two or more independent groups (levels) of two independent variable.\nOther types of ANOVA that you may encounter: Repeated measures ANOVA, Multivariate ANOVA (MANOVA), ANCOVA, etc."
+    "text": "ANOVA (Analysis of Variance)\nANOVA (Analysis of Variance) is a statistical test used to compare the means of three or more groups or samples and determine if the differences are statistically significant.\nThere are two ‘mainstream’ ANOVA:\n\n\nOne-Way ANOVA: comparing means across two or more independent groups (levels) of a single independent variable.\nTwo-Way ANOVA: comparing means across two or more independent groups (levels) of two independent variable. ()\nOther types of ANOVA that you may encounter: Repeated measures ANOVA, Multivariate ANOVA (MANOVA), ANCOVA, etc."
   },
   {
     "objectID": "04-stats.html#one-way-anova-sample-problem-and-result",
@@ -1699,41 +1699,6 @@
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "ANOVA Assumptions",
     "text": "ANOVA Assumptions\n\nThe Dependent variable should be a continuous variable\nThe Independent variable should be a categorical variable\nThe observations for Independent variable should be independent of each other\nThe Dependent Variable distribution should be approximately normal – even more crucial if sample size is small.\n\nYou can verify this by visualizing your data in histogram, or use Shapiro-Wilk Test, among other things\n\nThe variance for each combination of groups should be approximately equal – also referred to as “homogeneity of variances” or homoskedasticity.\n\nOne way to verify this is using Levene’s Test\n\nNo significant outliers"
-  },
-  {
-    "objectID": "04-stats.html#verifying-the-assumption-test-for-homogeneity-of-variance",
-    "href": "04-stats.html#verifying-the-assumption-test-for-homogeneity-of-variance",
-    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
-    "section": "Verifying the assumption: Test for Homogeneity of variance",
-    "text": "Verifying the assumption: Test for Homogeneity of variance\nLevene’s Test to test for homogeneity of variance i.e. homoskedasticity\n\n\nlibrary(car)\nleveneTest(life_satisfaction ~ country, \n           data = wvs_cleaned)\n\n\nLevene's Test for Homogeneity of Variance (center = median)\n        Df F value Pr(&gt;F)\ngroup    2  1.9408 0.1437\n      6400               \n\n\nThe results indicate that the p-value is more than the significance level of 0.05, suggesting that there is NO significant difference in variance across the groups. Consequently, the assumption of homogeneity of variances is NOT violated."
-  },
-  {
-    "objectID": "04-stats.html#plotting-residuals-residual-vs-fitted",
-    "href": "04-stats.html#plotting-residuals-residual-vs-fitted",
-    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
-    "section": "Plotting Residuals: Residual vs Fitted",
-    "text": "Plotting Residuals: Residual vs Fitted\nWhen we plot the residuals1, we can see some outliers as well:\n\nplot(satisfaction_country_anova, 1)\n\n\n\n\n\n\n\n\n\n\nResidual = difference between an observed value and the mean of all values for that group."
-  },
-  {
-    "objectID": "04-stats.html#verifying-the-assumptions-test-for-normality",
-    "href": "04-stats.html#verifying-the-assumptions-test-for-normality",
-    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
-    "section": "Verifying the assumptions: Test for Normality",
-    "text": "Verifying the assumptions: Test for Normality\nShapiro-Wilk Test to test for normality.\n\n\nlibrary(car)\nset.seed(123) # set seed for reproducibility, make sure it samples the same way everytime.\nshapiro.test(sample(residuals(satisfaction_country_anova), 5000))\n\n\n\n    Shapiro-Wilk normality test\n\ndata:  sample(residuals(satisfaction_country_anova), 5000)\nW = 0.92998, p-value &lt; 2.2e-16\n\n\nThe p-value from the Shapiro-Wilk test is less than the significance level of 0.05, indicating that the data significantly deviates from normality. Therefore, the assumption of normality is NOT satisfied."
-  },
-  {
-    "objectID": "04-stats.html#plotting-residuals-q-q-plot",
-    "href": "04-stats.html#plotting-residuals-q-q-plot",
-    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
-    "section": "Plotting Residuals: Q-Q Plot",
-    "text": "Plotting Residuals: Q-Q Plot\nWe can see this better from when we plot the residuals:\n\nplot(satisfaction_country_anova, 2)"
-  },
-  {
-    "objectID": "04-stats.html#when-the-assumptions-are-not-met",
-    "href": "04-stats.html#when-the-assumptions-are-not-met",
-    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
-    "section": "When the assumptions are not met…",
-    "text": "When the assumptions are not met…\nWe can use Kruskal-Wallis rank sum test as an non-parametric alternative to One-Way ANOVA!\n\nkruskal.test(life_satisfaction ~ country, data = wvs_cleaned)\n\n\n    Kruskal-Wallis rank sum test\n\ndata:  life_satisfaction by country\nKruskal-Wallis chi-squared = 80.746, df = 2, p-value &lt; 2.2e-16\n\n\nOther alternative: Welch’s ANOVA for when the homoskedasticity assumption is not met.\n\noneway.test(life_satisfaction ~ country, data = wvs_cleaned, var.equal = FALSE)\n\n\n    One-way analysis of means (not assuming equal variances)\n\ndata:  life_satisfaction and country\nF = 27.783, num df = 2.0, denom df = 1710.5, p-value = 1.336e-12"
   },
   {
     "objectID": "04-stats.html#two-way-anova-sample-problem-and-result",
@@ -1792,13 +1757,6 @@
     "text": "Interpreting our interaction plot\nSome observations that we can make:\n\nNew Zealand’s pattern is distinctly different from the other two countries; NZ hows highest life satisfaction for “Not a religious person” but drops sharply for “A religious person”, while for Canada and Singapore, there is a similar patterns with peaks at “A religious person”\nThe interaction is most visible in how religious vs non-religious people differ across countries, with the largest difference between countries appears among non-religious people.\nThe relationship between religiosity and life satisfaction clearly varies by country. We know this because the lines are not parallel with each other."
   },
   {
-    "objectID": "04-stats.html#learning-check-3",
-    "href": "04-stats.html#learning-check-3",
-    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
-    "section": "Learning Check #3",
-    "text": "Learning Check #3\nIs there a significant difference in political leaning between different age groups?\n\nVisualize the data as well\nTest for normality and homoskedasticity, and choose the appropriate test\n\n\n\nShow answer\npoli_age_anova &lt;- aov(political_scale ~ age_group, data = wvs_cleaned)\nsummary(poli_age_anova)\n\n\n              Df Sum Sq Mean Sq F value   Pr(&gt;F)    \nage_group      3    260   86.62   19.87 8.16e-13 ***\nResiduals   6399  27898    4.36                     \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
-  },
-  {
     "objectID": "04-stats.html#reporting-with-apatables",
     "href": "04-stats.html#reporting-with-apatables",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
@@ -1818,6 +1776,55 @@
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "Reporting with gtsummary",
     "text": "Reporting with gtsummary\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nMale\nN = 3,1711\nFemale\nN = 3,2321\nDifference\n\n\n\n\nlife_satisfaction\n7.00 (6.00, 8.00)\n7.00 (6.00, 8.00)\n\n\n\n\nfinancial_satisfaction\n7.00 (5.00, 8.00)\n7.00 (5.00, 8.00)\n\n\n\n\npolitical_scale\n5.00 (4.00, 7.00)\n5.00 (4.00, 6.00)\n\n\n\n\n\n1 Median (Q1, Q3)"
+  },
+  {
+    "objectID": "04-stats.html#anova-assumptions-1",
+    "href": "04-stats.html#anova-assumptions-1",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "ANOVA Assumptions",
+    "text": "ANOVA Assumptions\n\nThe Dependent variable should be a continuous variable\nThe Independent variable should be a categorical variable\nThe observations for Independent variable should be independent of each other\nThe Dependent Variable distribution should be approximately normal – even more crucial if sample size is small.\n\nYou can verify this by visualizing your data in histogram, or use Shapiro-Wilk Test, among other things\n\nThe variance for each combination of groups should be approximately equal – also referred to as “homogeneity of variances” or homoskedasticity.\n\nOne way to verify this is using Levene’s Test\n\nNo significant outliers"
+  },
+  {
+    "objectID": "04-stats.html#verifying-the-assumption-test-for-homogeneity-of-variance",
+    "href": "04-stats.html#verifying-the-assumption-test-for-homogeneity-of-variance",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "Verifying the assumption: Test for Homogeneity of variance",
+    "text": "Verifying the assumption: Test for Homogeneity of variance\nLevene’s Test to test for homogeneity of variance i.e. homoskedasticity\n\n\nlibrary(car)\nleveneTest(life_satisfaction ~ country, \n           data = wvs_cleaned)\n\n\nLevene's Test for Homogeneity of Variance (center = median)\n        Df F value Pr(&gt;F)\ngroup    2  1.9408 0.1437\n      6400               \n\n\nThe results indicate that the p-value is more than the significance level of 0.05, suggesting that there is NO significant difference in variance across the groups. Consequently, the assumption of homogeneity of variances is satisfied."
+  },
+  {
+    "objectID": "04-stats.html#plotting-residuals-residual-vs-fitted",
+    "href": "04-stats.html#plotting-residuals-residual-vs-fitted",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "Plotting Residuals: Residual vs Fitted",
+    "text": "Plotting Residuals: Residual vs Fitted\nWhen we plot the residuals1, we can see some outliers as well:\n\nplot(satisfaction_country_anova, 1)\n\n\n\n\n\n\n\n\n\n\nResidual = difference between an observed value and the mean of all values for that group."
+  },
+  {
+    "objectID": "04-stats.html#verifying-the-assumptions-test-for-normality",
+    "href": "04-stats.html#verifying-the-assumptions-test-for-normality",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "Verifying the assumptions: Test for Normality",
+    "text": "Verifying the assumptions: Test for Normality\nShapiro-Wilk Test to test for normality.\n\n\nlibrary(car)\nset.seed(123) # set seed for reproducibility, make sure it samples the same way everytime.\nshapiro.test(sample(residuals(satisfaction_country_anova), 5000))\n\n\n\n    Shapiro-Wilk normality test\n\ndata:  sample(residuals(satisfaction_country_anova), 5000)\nW = 0.92998, p-value &lt; 2.2e-16\n\n\nThe p-value from the Shapiro-Wilk test is less than the significance level of 0.05, indicating that the data significantly deviates from normality. Therefore, the assumption of normality is NOT satisfied."
+  },
+  {
+    "objectID": "04-stats.html#plotting-residuals-q-q-plot",
+    "href": "04-stats.html#plotting-residuals-q-q-plot",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "Plotting Residuals: Q-Q Plot",
+    "text": "Plotting Residuals: Q-Q Plot\nWe can see this better from when we plot the residuals:\n\nplot(satisfaction_country_anova, 2)"
+  },
+  {
+    "objectID": "04-stats.html#when-the-assumptions-are-not-met",
+    "href": "04-stats.html#when-the-assumptions-are-not-met",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "When the assumptions are not met…",
+    "text": "When the assumptions are not met…\nWe can use Kruskal-Wallis rank sum test as an non-parametric alternative to One-Way ANOVA!\n\nkruskal.test(life_satisfaction ~ country, data = wvs_cleaned)\n\n\n    Kruskal-Wallis rank sum test\n\ndata:  life_satisfaction by country\nKruskal-Wallis chi-squared = 80.746, df = 2, p-value &lt; 2.2e-16\n\n\nOther alternative: Welch’s ANOVA for when the homoskedasticity assumption is not met.\n\noneway.test(life_satisfaction ~ country, data = wvs_cleaned, var.equal = FALSE)\n\n\n    One-way analysis of means (not assuming equal variances)\n\ndata:  life_satisfaction and country\nF = 27.783, num df = 2.0, denom df = 1710.5, p-value = 1.336e-12"
+  },
+  {
+    "objectID": "04-stats.html#exercise-for-two-way-anova",
+    "href": "04-stats.html#exercise-for-two-way-anova",
+    "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
+    "section": "Exercise for Two-Way ANOVA",
+    "text": "Exercise for Two-Way ANOVA\nIs there a significant difference in political leaning between different age groups?\n\nVisualize the data as well\nTest for normality and homoskedasticity, and choose the appropriate test\n\n\n\nShow answer\npoli_age_anova &lt;- aov(political_scale ~ age_group, data = wvs_cleaned)\nsummary(poli_age_anova)\n\n\n              Df Sum Sq Mean Sq F value   Pr(&gt;F)    \nage_group      3    260   86.62   19.87 8.16e-13 ***\nResiduals   6399  27898    4.36                     \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
   },
   {
     "objectID": "coc.html",
