@@ -6,18 +6,22 @@ format: revealjs
 
 ## Today's Outline
 
-1.  Recap: The various packages for tables
+1.  The various packages for tables
 2.  Simple Linear Regression in R
+    -   Continuous predictor (one and multiple)
+    -   Categorical predictor
 3.  Binary Logistic Regression in R
+    -   Continuous predictor
+    -   Categorical predictor
 4.  (if time permits) Coding your analysis and writing your report in one place with Quarto.
+
+Note: for this session, we'll prioritize *what* the code does and *how to intepret* the output, so there will be less live coding than usual. 
 
 ## Open your project - the (possibly) easier way
 
 1.  Go to the folder where you put your project for this workshop
 
 2.  Find a file with `.Rproj` extension - this is the R project file that holds all the information about your project.
-
-![](images/locate-rproj-file.jpg)
 
 3.  Double click on the file. Rstudio should launch with your project loaded! This should be easier to ensure that you are loading the correct project when opening Rstudio.
 
@@ -67,9 +71,9 @@ wvs_cleaned <- wvs_cleaned |>
 glimpse(wvs_cleaned)
 ```
 
-# Recap: The various packages for tables
+# The various packages for tables
 
-## From last week: apaTables
+## apaTables
 
 `apaTables` is a package that will generate APA-formatted report table for correlation, ANOVA, and regression. It has limited customisations and few varity of tables. The documentation online is for the "development" version which is not what we will get if we install normally with `install.packages()`, so we need to rely on the vignette more. [**View the documentation here**](https://dstanley4.github.io/apaTables/index.html)
 
@@ -86,7 +90,7 @@ wvs_cleaned |>
 
 This code will create a word document with the tables already formatted in APA style inside.
 
-## From last week: gtsummary
+## gtsummary
 
 Another popular packages is `gt` (stands for "great tables") and its 'add-on', `gtsummary`. It has lots of customizations (which can get overwhelming!) but fortunately the documentation is pretty good and there are plenty of code samples. [**View the documentation here**](https://www.danieldsjoberg.com/gtsummary/index.html)
 
@@ -136,6 +140,20 @@ Examples:
 
 -   Does a person's **age** affect their **life satisfaction**?
 -   Do a person's **age** and **country** affect their **life satisfaction**?
+
+Remember, regression allows us to see how one variable changes in response to another.
+
+## Correlation vs Regression
+
+| Features | Correlation | Regression |
+|------|------|------|
+| Purpose    | Describe strength & direction of association i.e. how two variables move together   | Predict, model relationships, explain impact    |
+| Variables    | Two quantitative (symmetrical)    | One dependent (Y), one or more independent (X)    |
+| Causality  | Does NOT imply causation    | Can *suggest* causation (with proper and robust research design)    |
+| Output | correlation coefficient    | Coefficients (slopes), R-squared, predicted values    |
+| Question  | Are X and Y related? How strongly?    | How does X affect Y? Can we predict Y from X?    |
+
+
 
 ## Linear Regression: One continuous predictor
 
@@ -374,18 +392,7 @@ wvs_cleaned <- wvs_cleaned |>
 Previously, we could use the `relevel()` function to change the reference category for ordered factors. However, in recent R versions, this no longer works for ordered factors, so we now use the method shown in the code above. The `relevel()` function still works for unordered factors.
 :::
 
-## Let's try this Linear Regression exercise! (5 mins)
 
-Create a regression model called `life_model4` that predicts the `life_satisfaction` score based on `sex`. The reference category should be 'Male'
-
-```{r}
-#| echo: true
-#| output: true
-#| code-fold: true
-
-life_model4 <- lm(life_satisfaction ~ sex, data = wvs_cleaned)
-summary(life_model4)
-```
 
 # Binary Logistic Regression
 
@@ -547,7 +554,7 @@ More on interpreting Odds Ratio: <https://stats.oarc.ucla.edu/other/mult-pkg/faq
 :::
 
 
-## Recap - why do I need to report these?
+## Why do I need to report these?
 
 * χ² (Chi-squared) goodness of fit tests whether your model fits the data significantly better than a null model (model with no predictors). 
 
@@ -660,23 +667,6 @@ huxreg(life_model5, life_model6)
 ```
 
 
-## Let's try this Logistic Regression exercise! (5 mins)
-
-Create a regression model called `life_model7` that predicts the likelihood of being satisfied with life based on `sex`. 
-
-```{r}
-#| echo: true
-#| output: false
-#| code-fold: true
-
-life_model7 <- glm(satisfied ~ sex,
-                  family = "binomial", 
-                  data = wvs_cleaned) 
-
-summary(life_model7)
-exp(coefficients(life_model7))
-```
-
 # What is Quarto? What is Markdown?
 
 ## **Markdown (Specifically, R Markdown)** {.incremental}
@@ -728,7 +718,7 @@ exp(coefficients(life_model7))
 
 -   Very handy when you need your report in multiple format, e.g. in Word and PPT.
 
--   Fun fact: the course website and slides are all made in Quarto
+-   Fun fact: the course website and slides are all made in Quarto!
 :::
 :::
 
@@ -738,9 +728,9 @@ SMU Libraries regularly host Quarto workshops every semester from week 2 to week
 
 Keep a lookout for these titles:
 
--   R Ep.1: Making Your Research Reproducible with Quarto in RStudio
--   R Ep.7: Creating Awesome Web Slides in Quarto with Revealjs
--   R Ep.9: Building Website and Blog with Quarto
+-   Making Your Research Reproducible with Quarto in RStudio
+-   Creating Awesome Web Slides in Quarto with Revealjs
+-   Building Website and Blog with Quarto
 
 
 # Best Practices + More Resources
@@ -787,8 +777,43 @@ Need help with R or Quarto? Please don't hesitate to contact me at [bellar@smu.e
 
 ## Post-workshop survey
 
-Please scan this QR code or click on the link below to fill in the post-workshop survey. It should not take more than 2-3 minutes.
+Please scan this QR code or click on the link below to fill in the post-workshop survey. It should not take more than 3-4 minutes.
 
-Survey link: <https://smusg.asia.qualtrics.com/jfe/form/SV_ai0mSfHjwWZWC2y>
+Survey link: <https://smusg.asia.qualtrics.com/jfe/form/SV_ernNP3dIB4Kyffo>
 
 ![](images/post-workshop-qrcode.png){width="500"}
+
+
+# Appendix
+
+Extra exercises to try at home
+
+## Let's try this Linear Regression exercise! 
+
+Create a regression model called `life_model4` that predicts the `life_satisfaction` score based on `sex`. The reference category should be 'Male'
+
+```{r}
+#| echo: true
+#| output: true
+#| code-fold: true
+
+life_model4 <- lm(life_satisfaction ~ sex, data = wvs_cleaned)
+summary(life_model4)
+```
+
+## Let's try this Logistic Regression exercise!
+
+Create a regression model called `life_model7` that predicts the likelihood of being satisfied with life based on `sex`. 
+
+```{r}
+#| echo: true
+#| output: false
+#| code-fold: true
+
+life_model7 <- glm(satisfied ~ sex,
+                  family = "binomial", 
+                  data = wvs_cleaned) 
+
+summary(life_model7)
+exp(coefficients(life_model7))
+```
