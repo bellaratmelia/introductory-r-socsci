@@ -807,7 +807,7 @@ Create a regression model called `life_model7` that predicts the likelihood of b
 
 ```{r}
 #| echo: true
-#| output: false
+#| output: true
 #| code-fold: true
 
 life_model7 <- glm(satisfied ~ sex,
