@@ -193,7 +193,7 @@ Notice that we have to create a "temp" dataframes called `wvs_data_clean` in thi
 
 ``` r
 wvs_data <- drop_na(wvs_data)
-wvs_data_clean <- wvs_data_clean(wvs_data, desc(age))
+wvs_data_clean <- arrange(wvs_data, desc(age))
 write_csv(wvs_data_clean, "data-output/wvs-clean.csv")
 ```
 
@@ -264,7 +264,7 @@ head(wvs_data)
 
 Reverse-code `work_importance` variables so that higher numbers consistently represent higher levels of the measured construct. In other words, 1 = Not at all important and 4 = Very important.
 
-We can achieve this with `mutate()`!
+We can achieve this with `mutate()`! (mutate() is to change or add new columns.)
 
 ```{r}
 #| echo: true
@@ -337,7 +337,7 @@ Once we are done with the wrangling part, we can proceed with simple descriptive
 
 Let's use the `wvs_cleaned` dataframe for this task.
 
-Convert the appropriate categorical variables (country, religiousity, sex, marital_status, employment) to **Factor**.
+Identify which columns can be converted to categorial data (factor). Convert the appropriate categorical variables (country, religiousity, sex, marital_status, employment) to **Factor**.
 
 We can do this with `mutate()` and `as_factor()` from forcats, another sub-package within tidyverse.
 
@@ -363,7 +363,8 @@ Rstudio may auto-suggest `as.factor()` from base R. You can use this as well, bu
 
 ## Prep before analysis: convert to factors (shortcut ver.)
 
-If we have a lot of columns to convert, that might be troublesome to type! This is where `across()` can come in handy.
+If we have a lot of columns to convert, that might be troublesome to type! This is where `across()` can come in handy. across(column selection, function) is to apply the same function or a set of functions to multiple columns in a single mutate () or summarize () function.
+
 
 Let's first define a character vector that contains the names of columns we plan to convert.
 
@@ -394,7 +395,7 @@ str(wvs_cleaned)
 
 Generate summary statistics such as count (n), mean, median, and standard deviation of life_satisfaction grouped by country.
 
-We can achieve this with `group_by()` and `summarise()`
+We can achieve this with `group_by()` and `summarise()`. It will contain one column for each grouping variable and one column for each of the summary statistics that you have specified.
 
 ```{r}
 #| echo: true
@@ -455,19 +456,24 @@ wvs_data |>
 ::: {.column width="50%"}
 **Long data:**
 
--   Each row is a unique observation.
+-   Each row is a unique observation --\> for a single observational unit, there might be multiple rows.
 
--   There is a separate column indicating the variable or type of measurements
+-   There is a separate column indicating the variable or type of measurements.
 
--   This format is more "understandable" by R, more suitable for visualizations (which we'll explore more next week!)
+-   This format is more "understandable" by R, more suitable for visualizations, especially those involving grouping, summarizing, or visualizing data over time or across different categories.
+ (which we'll explore more next week!)
+ 
 :::
 
 ::: {.column width="50%"}
 **Wide data:**
 
--   Each row is a value in variables.
+-   Each row contains values from variables.
 
--   Each column is a value in variables --\> the more values you have, the "wider" is the data
+-   Each column is a value in variables --\> the more values you have, the "wider" is the data.
+
+-   Quick comparisons of different variables for a single entity.
+
 
 -   This format is more intuitive for humans!
 :::
