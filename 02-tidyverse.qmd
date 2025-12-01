@@ -1,6 +1,6 @@
 ---
 title: "Data Wrangling with Tidyverse"
-author: "Bella Ratmelia"
+author: "Bella Ratmelia & Wei Xia"
 format: revealjs
 ---
 
@@ -470,7 +470,7 @@ wvs_data |>
 
 -   Each row contains values from variables.
 
--   Each column is a value in variables --\> the more values you have, the "wider" is the data.
+-   Each column is a value in a variable --\> the more values you have, the "wider" is the data.
 
 -   Quick comparisons of different variables for a single entity.
 
@@ -554,7 +554,7 @@ wvs_data |> select(country) |> print(n = 3)
 
 -   Filter data based on criterion and arrange data: Apply `filter()` to keep rows meeting specific conditions and use `arrange()` to sort data by one or more columns.
 
--   Change factor level values: Modify the categories of a factor using `factor()` or `recode()` to rename or reorder levels for clearer analysis.
+-   Convert categorical variables to Factor data: Use `mutate()` and `as_factor`.
 
 -   Create new columns: Generate or modify columns using `mutate()`, often by transforming or combining existing columns.
 
