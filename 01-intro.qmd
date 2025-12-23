@@ -29,7 +29,7 @@ library(tidyverse)
 
     -   Principle Librarian, Instruction and Learning Services, SMU Libraries.
 
-    -   Have been with SMU over 16 years. This is my first R workshop!
+    -   Have been with SMU over 17 years. This is my 2nd run of R workshops!
 
 -   About this workshop:
 

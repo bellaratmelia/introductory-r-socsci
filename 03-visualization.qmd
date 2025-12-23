@@ -1,6 +1,6 @@
 ---
 title: "Data Visualization and Descriptive Stats"
-author: "Bella Ratmelia"
+author: "Bella Ratmelia & Wei Xia"
 format: revealjs
 ---
 
