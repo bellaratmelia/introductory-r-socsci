@@ -1,6 +1,6 @@
 ---
 title: "Introductory R for Social Sciences"
-subtitle: "Academic Year 25/26 Term 1 (Aug - Sep)"
+subtitle: "Academic Year 25/26 Term 2 (Jan - Feb)"
 format: html
 ---
 
@@ -12,29 +12,30 @@ This site serves as a repository for the slides and codes developed for the 'Int
 
 **Instructors**: 
 
-* Bella Ratmelia, Research & Data Services, SMU Libraries
 * Wei Xia, Instruction and Learning Services, SMU Libraries
+* Bella Ratmelia, Research & Data Services, SMU Libraries
+
 
 Teaching Assistant: Bryan Bramaskara, MITB
 
 
 ## Schedule
 
-**Venue** : YPHSL seminar room 3.1
+**Venue** : YPHSL seminar room 3.2
 
 **Time** : 3:30 - 5:30 PM (All sessions)
 
 *Click on the link under "Topic" to access the slides. Slides will be progressively made available throughout the sessions.*
 
 ::: table-schedule
-| Session | Date | Topic | Desccription |
+| Session | Date | Topic | Description |
 |------------------|------------------|------------------|--------------------|
 | \~ | Before the workshop | Preparation | Complete the [Pre-workshop activities](#pre-workshop-activities) |
-| 1 | 22 Aug 2025 |[**Introduction to R and RStudio**](01-intro.html) | Learn about setting up RStudio, basic data types and structures in R, and importing data files. |
-| 2 | 29 Aug 2025 | [**Data wrangling with tidyverse**](02-tidyverse.html) | Learn about manipulating data with tidyverse, including filtering, selecting, mutating, and grouping data. |
-| 3 | 5 Sep 2025 | [**Data visualization and Descriptive Statistics**](03-visualization.html) | Learn about creating visualizations with ggplot2 and calculating descriptive statistics like mean, median, etc. |
-| 4 | 12 Sep 2025 | [**Basic Inferential Tests**](04-stats.html) | Learn about conducting t-tests, chi-square tests, ANOVA, and interpreting statistical results in R. |
-| 5 | 19 Sep 2025 | [**Regression and Presenting Your Result**](05-stats-quarto.html) | Learn about regression and various useful packages to generate your result table. |
+| 1 | 16 Jan 2026 |**Introduction to R and RStudio** | Learn about setting up RStudio, basic data types and structures in R, and importing data files. |
+| 2 | 23 Jan 2026 | **Data wrangling with tidyverse** | Learn about manipulating data with tidyverse, including filtering, selecting, mutating, and grouping data. |
+| 3 | 30 Jan 2026 | **Data visualization and Descriptive Statistics** | Learn about creating visualizations with ggplot2 and calculating descriptive statistics like mean, median, etc. |
+| 4 | 6 Feb 2026 | **Basic Inferential Tests** | Learn about conducting t-tests, chi-square tests, ANOVA, and interpreting statistical results in R. |
+| 5 | 13 Feb 2026 | **Regression and Presenting Your Result** | Learn about regression and various useful packages to generate your result table. |
 | \~ | After the workshop |  | [Post-workshop exercises](exercises.html) |
 :::
 
@@ -100,4 +101,4 @@ Packages can save us time and leverage expert-created tools without having to wr
 
 ### Step 4: Complete the pre-workshop survey
 
-[Please complete the pre-workshop survey here](https://smusg.asia.qualtrics.com/jfe/form/SV_4TqxP3BrvZkf4t8) to share your goals and current knowledge. Your input will help to tailor the workshop contents and pace.
+[Please complete the pre-workshop survey here](https://smusg.asia.qualtrics.com/jfe/form/SV_6opr7O9gABSLwQS) to share your goals and current knowledge. Your input will help to tailor the workshop contents and pace.
