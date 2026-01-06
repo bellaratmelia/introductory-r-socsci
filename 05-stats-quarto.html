@@ -6,8 +6,8 @@
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.6.39">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.25">
 
   <meta name="author" content="Bella Ratmelia">
   <title>Introductory R for Social Sciences – Regression and Presenting Your Result</title>
@@ -29,8 +29,9 @@
       vertical-align: middle;
     }
     /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -41,7 +42,7 @@
     }
     @media print {
     pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
     }
     pre.numberSource code
       { counter-reset: source-line 0; }
@@ -94,7 +95,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-3c65e30e28be6599f015f6cc207dd28b.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-3b880921edf880eae40f6381c5037d0d.css">
   <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-G5L1RGYC4H"></script>
 
   <script type="text/javascript">
@@ -257,18 +258,18 @@ Bella Ratmelia
 <li><p>Paste the following lines into the script:</p></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="co"># loading the packages</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="co"># loading the packages</span></span>
 <span id="cb1-2"><a></a><span class="fu">library</span>(apaTables)</span>
 <span id="cb1-3"><a></a><span class="fu">library</span>(huxtable)</span>
 <span id="cb1-4"><a></a><span class="fu">library</span>(gtsummary)</span>
 <span id="cb1-5"><a></a><span class="fu">library</span>(car)</span>
-<span id="cb1-6"><a></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-6"><a></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="load-our-data-for-today" class="slide level2">
 <h2>Load our data for today!</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="co"># read the CSV with WVS data</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="co"># read the CSV with WVS data</span></span>
 <span id="cb2-2"><a></a>wvs_cleaned <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data-output/wvs_cleaned_v1.csv"</span>)</span>
 <span id="cb2-3"><a></a></span>
 <span id="cb2-4"><a></a><span class="co"># Convert categorical variables to factors</span></span>
@@ -278,7 +279,7 @@ Bella Ratmelia
 <span id="cb2-8"><a></a>    <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">all_of</span>(columns_to_convert), as_factor))</span>
 <span id="cb2-9"><a></a></span>
 <span id="cb2-10"><a></a><span class="co"># peek at the data, pay attention to the data types!</span></span>
-<span id="cb2-11"><a></a><span class="fu">glimpse</span>(wvs_cleaned)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-11"><a></a><span class="fu">glimpse</span>(wvs_cleaned)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section>
@@ -290,11 +291,11 @@ Bella Ratmelia
 <h2>apaTables</h2>
 <p><code>apaTables</code> is a package that will generate APA-formatted report table for correlation, ANOVA, and regression. It has limited customisations and few varity of tables. The documentation online is for the “development” version which is not what we will get if we install normally with <code>install.packages()</code>, so we need to rely on the vignette more. <a href="https://dstanley4.github.io/apaTables/index.html"><strong>View the documentation here</strong></a></p>
 <p>Example: get the correlation table for <code>political_scale</code>, <code>life_satisfaction</code>, and <code>financial_satisfaction</code></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">library</span>(apaTables)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">library</span>(apaTables)</span>
 <span id="cb3-2"><a></a></span>
 <span id="cb3-3"><a></a>wvs_cleaned <span class="sc">|&gt;</span> </span>
 <span id="cb3-4"><a></a>    <span class="fu">select</span>(life_satisfaction, financial_satisfaction, political_scale) <span class="sc">|&gt;</span> </span>
-<span id="cb3-5"><a></a>    <span class="fu">apa.cor.table</span>( <span class="at">table.number =</span> <span class="dv">1</span>, <span class="at">filename =</span> <span class="st">"fig-output/table-cor.doc"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-5"><a></a>    <span class="fu">apa.cor.table</span>( <span class="at">table.number =</span> <span class="dv">1</span>, <span class="at">filename =</span> <span class="st">"fig-output/table-cor.doc"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>This code will create a word document with the tables already formatted in APA style inside.</p>
 </section>
 <section id="gtsummary" class="slide level2">
@@ -302,34 +303,34 @@ Bella Ratmelia
 <p>Another popular packages is <code>gt</code> (stands for “great tables”) and its ‘add-on’, <code>gtsummary</code>. It has lots of customizations (which can get overwhelming!) but fortunately the documentation is pretty good and there are plenty of code samples. <a href="https://www.danieldsjoberg.com/gtsummary/index.html"><strong>View the documentation here</strong></a></p>
 <p>Example: get the mean differences table for <code>political_scale</code>, <code>life_satisfaction</code>, and <code>financial_satisfaction</code>, grouped by <code>sex</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">library</span>(gtsummary)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">library</span>(gtsummary)</span>
 <span id="cb4-2"><a></a></span>
 <span id="cb4-3"><a></a>wvs_cleaned <span class="sc">|&gt;</span> </span>
 <span id="cb4-4"><a></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(life_satisfaction, financial_satisfaction, political_scale, sex) <span class="sc">|&gt;</span> </span>
 <span id="cb4-5"><a></a>    <span class="fu">tbl_summary</span>(<span class="at">by =</span> sex) <span class="sc">|&gt;</span> </span>
-<span id="cb4-6"><a></a>    <span class="fu">add_difference</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-6"><a></a>    <span class="fu">add_difference</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 </section>
 <section id="gtsummary-output" class="slide level2 output-location-slide"><h2>gtsummary</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
-<div id="zfakauowdq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#zfakauowdq table {
+<div id="tlnhcfzhyj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#tlnhcfzhyj table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#zfakauowdq thead, #zfakauowdq tbody, #zfakauowdq tfoot, #zfakauowdq tr, #zfakauowdq td, #zfakauowdq th {
+#tlnhcfzhyj thead, #tlnhcfzhyj tbody, #tlnhcfzhyj tfoot, #tlnhcfzhyj tr, #tlnhcfzhyj td, #tlnhcfzhyj th {
   border-style: none;
 }
 
-#zfakauowdq p {
+#tlnhcfzhyj p {
   margin: 0;
   padding: 0;
 }
 
-#zfakauowdq .gt_table {
+#tlnhcfzhyj .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -355,12 +356,12 @@ Bella Ratmelia
   border-left-color: #D3D3D3;
 }
 
-#zfakauowdq .gt_caption {
+#tlnhcfzhyj .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#zfakauowdq .gt_title {
+#tlnhcfzhyj .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -372,7 +373,7 @@ Bella Ratmelia
   border-bottom-width: 0;
 }
 
-#zfakauowdq .gt_subtitle {
+#tlnhcfzhyj .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -384,7 +385,7 @@ Bella Ratmelia
   border-top-width: 0;
 }
 
-#zfakauowdq .gt_heading {
+#tlnhcfzhyj .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -396,13 +397,13 @@ Bella Ratmelia
   border-right-color: #D3D3D3;
 }
 
-#zfakauowdq .gt_bottom_border {
+#tlnhcfzhyj .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#zfakauowdq .gt_col_headings {
+#tlnhcfzhyj .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -417,7 +418,7 @@ Bella Ratmelia
   border-right-color: #D3D3D3;
 }
 
-#zfakauowdq .gt_col_heading {
+#tlnhcfzhyj .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -437,7 +438,7 @@ Bella Ratmelia
   overflow-x: hidden;
 }
 
-#zfakauowdq .gt_column_spanner_outer {
+#tlnhcfzhyj .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -449,15 +450,15 @@ Bella Ratmelia
   padding-right: 4px;
 }
 
-#zfakauowdq .gt_column_spanner_outer:first-child {
+#tlnhcfzhyj .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#zfakauowdq .gt_column_spanner_outer:last-child {
+#tlnhcfzhyj .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#zfakauowdq .gt_column_spanner {
+#tlnhcfzhyj .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -469,11 +470,11 @@ Bella Ratmelia
   width: 100%;
 }
 
-#zfakauowdq .gt_spanner_row {
+#tlnhcfzhyj .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#zfakauowdq .gt_group_heading {
+#tlnhcfzhyj .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -499,7 +500,7 @@ Bella Ratmelia
   text-align: left;
 }
 
-#zfakauowdq .gt_empty_group_heading {
+#tlnhcfzhyj .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -514,15 +515,15 @@ Bella Ratmelia
   vertical-align: middle;
 }
 
-#zfakauowdq .gt_from_md > :first-child {
+#tlnhcfzhyj .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#zfakauowdq .gt_from_md > :last-child {
+#tlnhcfzhyj .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#zfakauowdq .gt_row {
+#tlnhcfzhyj .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -541,7 +542,7 @@ Bella Ratmelia
   overflow-x: hidden;
 }
 
-#zfakauowdq .gt_stub {
+#tlnhcfzhyj .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -554,7 +555,7 @@ Bella Ratmelia
   padding-right: 5px;
 }
 
-#zfakauowdq .gt_stub_row_group {
+#tlnhcfzhyj .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -568,15 +569,15 @@ Bella Ratmelia
   vertical-align: top;
 }
 
-#zfakauowdq .gt_row_group_first td {
+#tlnhcfzhyj .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#zfakauowdq .gt_row_group_first th {
+#tlnhcfzhyj .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#zfakauowdq .gt_summary_row {
+#tlnhcfzhyj .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -586,16 +587,16 @@ Bella Ratmelia
   padding-right: 5px;
 }
 
-#zfakauowdq .gt_first_summary_row {
+#tlnhcfzhyj .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#zfakauowdq .gt_first_summary_row.thick {
+#tlnhcfzhyj .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#zfakauowdq .gt_last_summary_row {
+#tlnhcfzhyj .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -605,7 +606,7 @@ Bella Ratmelia
   border-bottom-color: #D3D3D3;
 }
 
-#zfakauowdq .gt_grand_summary_row {
+#tlnhcfzhyj .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -615,7 +616,7 @@ Bella Ratmelia
   padding-right: 5px;
 }
 
-#zfakauowdq .gt_first_grand_summary_row {
+#tlnhcfzhyj .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -625,7 +626,7 @@ Bella Ratmelia
   border-top-color: #D3D3D3;
 }
 
-#zfakauowdq .gt_last_grand_summary_row_top {
+#tlnhcfzhyj .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -635,11 +636,11 @@ Bella Ratmelia
   border-bottom-color: #D3D3D3;
 }
 
-#zfakauowdq .gt_striped {
+#tlnhcfzhyj .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#zfakauowdq .gt_table_body {
+#tlnhcfzhyj .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -648,7 +649,7 @@ Bella Ratmelia
   border-bottom-color: #D3D3D3;
 }
 
-#zfakauowdq .gt_footnotes {
+#tlnhcfzhyj .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -662,7 +663,7 @@ Bella Ratmelia
   border-right-color: #D3D3D3;
 }
 
-#zfakauowdq .gt_footnote {
+#tlnhcfzhyj .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -671,7 +672,7 @@ Bella Ratmelia
   padding-right: 5px;
 }
 
-#zfakauowdq .gt_sourcenotes {
+#tlnhcfzhyj .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -685,7 +686,7 @@ Bella Ratmelia
   border-right-color: #D3D3D3;
 }
 
-#zfakauowdq .gt_sourcenote {
+#tlnhcfzhyj .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -693,77 +694,77 @@ Bella Ratmelia
   padding-right: 5px;
 }
 
-#zfakauowdq .gt_left {
+#tlnhcfzhyj .gt_left {
   text-align: left;
 }
 
-#zfakauowdq .gt_center {
+#tlnhcfzhyj .gt_center {
   text-align: center;
 }
 
-#zfakauowdq .gt_right {
+#tlnhcfzhyj .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#zfakauowdq .gt_font_normal {
+#tlnhcfzhyj .gt_font_normal {
   font-weight: normal;
 }
 
-#zfakauowdq .gt_font_bold {
+#tlnhcfzhyj .gt_font_bold {
   font-weight: bold;
 }
 
-#zfakauowdq .gt_font_italic {
+#tlnhcfzhyj .gt_font_italic {
   font-style: italic;
 }
 
-#zfakauowdq .gt_super {
+#tlnhcfzhyj .gt_super {
   font-size: 65%;
 }
 
-#zfakauowdq .gt_footnote_marks {
+#tlnhcfzhyj .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#zfakauowdq .gt_asterisk {
+#tlnhcfzhyj .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#zfakauowdq .gt_indent_1 {
+#tlnhcfzhyj .gt_indent_1 {
   text-indent: 5px;
 }
 
-#zfakauowdq .gt_indent_2 {
+#tlnhcfzhyj .gt_indent_2 {
   text-indent: 10px;
 }
 
-#zfakauowdq .gt_indent_3 {
+#tlnhcfzhyj .gt_indent_3 {
   text-indent: 15px;
 }
 
-#zfakauowdq .gt_indent_4 {
+#tlnhcfzhyj .gt_indent_4 {
   text-indent: 20px;
 }
 
-#zfakauowdq .gt_indent_5 {
+#tlnhcfzhyj .gt_indent_5 {
   text-indent: 25px;
 }
 
-#zfakauowdq .katex-display {
+#tlnhcfzhyj .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#zfakauowdq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#tlnhcfzhyj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
 
-<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top" data-quarto-bootstrap="false">
 <colgroup>
 <col style="width: 25%">
 <col style="width: 25%">
@@ -901,8 +902,8 @@ Y = \beta_0 + \beta_1X + \varepsilon
 <li>The predictor/IV (<span class="math inline">\(X\)</span>): <code>age</code></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>life_model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(life_satisfaction <span class="sc">~</span> age, <span class="at">data =</span> wvs_cleaned)</span>
-<span id="cb5-2"><a></a><span class="fu">summary</span>(life_model1) <span class="co">#summarize the result</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>life_model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(life_satisfaction <span class="sc">~</span> age, <span class="at">data =</span> wvs_cleaned)</span>
+<span id="cb5-2"><a></a><span class="fu">summary</span>(life_model1) <span class="co">#summarize the result</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -953,7 +954,7 @@ F-statistic: 147.7 on 1 and 6401 DF,  p-value: &lt; 2.2e-16</code></pre>
 <section id="present-your-regression-result---huxtable" class="slide level2">
 <h2>Present your regression result - huxtable</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">huxreg</span>(<span class="st">"life satisfaction"</span> <span class="ot">=</span> life_model1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">huxreg</span>(<span class="st">"life satisfaction"</span> <span class="ot">=</span> life_model1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  ">
 <colgroup><col><col></colgroup><tbody><tr>
@@ -977,7 +978,6 @@ F-statistic: 147.7 on 1 and 6401 DF,  p-value: &lt; 2.2e-16</code></pre>
 <tr>
 <th colspan="2" style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05.</th></tr>
 </tbody></table>
-
 </div>
 </div>
 </section>
@@ -989,9 +989,9 @@ F-statistic: 147.7 on 1 and 6401 DF,  p-value: &lt; 2.2e-16</code></pre>
 <li>The predictors/IV (<span class="math inline">\(X\)</span>): <code>financial_satisfaction</code> and <code>age</code></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>life_model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(life_satisfaction <span class="sc">~</span> financial_satisfaction <span class="sc">+</span> age, </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>life_model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(life_satisfaction <span class="sc">~</span> financial_satisfaction <span class="sc">+</span> age, </span>
 <span id="cb8-2"><a></a>                  <span class="at">data =</span> wvs_cleaned)</span>
-<span id="cb8-3"><a></a><span class="fu">summary</span>(life_model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-3"><a></a><span class="fu">summary</span>(life_model2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 </section>
@@ -1030,25 +1030,25 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
 <section id="present-your-regression-result---tbl_regression-from-gtsummary" class="slide level2">
 <h2>Present your regression result - tbl_regression() from gtsummary</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>life_model2 <span class="sc">|&gt;</span> <span class="fu">tbl_regression</span>() <span class="sc">|&gt;</span> <span class="fu">bold_p</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>life_model2 <span class="sc">|&gt;</span> <span class="fu">tbl_regression</span>() <span class="sc">|&gt;</span> <span class="fu">bold_p</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="offpvowxiu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#offpvowxiu table {
+<div id="xzsmqtyrky" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#xzsmqtyrky table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#offpvowxiu thead, #offpvowxiu tbody, #offpvowxiu tfoot, #offpvowxiu tr, #offpvowxiu td, #offpvowxiu th {
+#xzsmqtyrky thead, #xzsmqtyrky tbody, #xzsmqtyrky tfoot, #xzsmqtyrky tr, #xzsmqtyrky td, #xzsmqtyrky th {
   border-style: none;
 }
 
-#offpvowxiu p {
+#xzsmqtyrky p {
   margin: 0;
   padding: 0;
 }
 
-#offpvowxiu .gt_table {
+#xzsmqtyrky .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1074,12 +1074,12 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#offpvowxiu .gt_caption {
+#xzsmqtyrky .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#offpvowxiu .gt_title {
+#xzsmqtyrky .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1091,7 +1091,7 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-width: 0;
 }
 
-#offpvowxiu .gt_subtitle {
+#xzsmqtyrky .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1103,7 +1103,7 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-top-width: 0;
 }
 
-#offpvowxiu .gt_heading {
+#xzsmqtyrky .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1115,13 +1115,13 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#offpvowxiu .gt_bottom_border {
+#xzsmqtyrky .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#offpvowxiu .gt_col_headings {
+#xzsmqtyrky .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1136,7 +1136,7 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#offpvowxiu .gt_col_heading {
+#xzsmqtyrky .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1156,7 +1156,7 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
   overflow-x: hidden;
 }
 
-#offpvowxiu .gt_column_spanner_outer {
+#xzsmqtyrky .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1168,15 +1168,15 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 4px;
 }
 
-#offpvowxiu .gt_column_spanner_outer:first-child {
+#xzsmqtyrky .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#offpvowxiu .gt_column_spanner_outer:last-child {
+#xzsmqtyrky .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#offpvowxiu .gt_column_spanner {
+#xzsmqtyrky .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1188,11 +1188,11 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
   width: 100%;
 }
 
-#offpvowxiu .gt_spanner_row {
+#xzsmqtyrky .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#offpvowxiu .gt_group_heading {
+#xzsmqtyrky .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1218,7 +1218,7 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
   text-align: left;
 }
 
-#offpvowxiu .gt_empty_group_heading {
+#xzsmqtyrky .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1233,15 +1233,15 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
   vertical-align: middle;
 }
 
-#offpvowxiu .gt_from_md > :first-child {
+#xzsmqtyrky .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#offpvowxiu .gt_from_md > :last-child {
+#xzsmqtyrky .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#offpvowxiu .gt_row {
+#xzsmqtyrky .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1260,7 +1260,7 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
   overflow-x: hidden;
 }
 
-#offpvowxiu .gt_stub {
+#xzsmqtyrky .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1273,7 +1273,7 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#offpvowxiu .gt_stub_row_group {
+#xzsmqtyrky .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1287,15 +1287,15 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
   vertical-align: top;
 }
 
-#offpvowxiu .gt_row_group_first td {
+#xzsmqtyrky .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#offpvowxiu .gt_row_group_first th {
+#xzsmqtyrky .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#offpvowxiu .gt_summary_row {
+#xzsmqtyrky .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1305,16 +1305,16 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#offpvowxiu .gt_first_summary_row {
+#xzsmqtyrky .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#offpvowxiu .gt_first_summary_row.thick {
+#xzsmqtyrky .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#offpvowxiu .gt_last_summary_row {
+#xzsmqtyrky .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1324,7 +1324,7 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#offpvowxiu .gt_grand_summary_row {
+#xzsmqtyrky .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1334,7 +1334,7 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#offpvowxiu .gt_first_grand_summary_row {
+#xzsmqtyrky .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1344,7 +1344,7 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#offpvowxiu .gt_last_grand_summary_row_top {
+#xzsmqtyrky .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1354,11 +1354,11 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#offpvowxiu .gt_striped {
+#xzsmqtyrky .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#offpvowxiu .gt_table_body {
+#xzsmqtyrky .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1367,7 +1367,7 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#offpvowxiu .gt_footnotes {
+#xzsmqtyrky .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1381,7 +1381,7 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#offpvowxiu .gt_footnote {
+#xzsmqtyrky .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1390,7 +1390,7 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#offpvowxiu .gt_sourcenotes {
+#xzsmqtyrky .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1404,7 +1404,7 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#offpvowxiu .gt_sourcenote {
+#xzsmqtyrky .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1412,77 +1412,77 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#offpvowxiu .gt_left {
+#xzsmqtyrky .gt_left {
   text-align: left;
 }
 
-#offpvowxiu .gt_center {
+#xzsmqtyrky .gt_center {
   text-align: center;
 }
 
-#offpvowxiu .gt_right {
+#xzsmqtyrky .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#offpvowxiu .gt_font_normal {
+#xzsmqtyrky .gt_font_normal {
   font-weight: normal;
 }
 
-#offpvowxiu .gt_font_bold {
+#xzsmqtyrky .gt_font_bold {
   font-weight: bold;
 }
 
-#offpvowxiu .gt_font_italic {
+#xzsmqtyrky .gt_font_italic {
   font-style: italic;
 }
 
-#offpvowxiu .gt_super {
+#xzsmqtyrky .gt_super {
   font-size: 65%;
 }
 
-#offpvowxiu .gt_footnote_marks {
+#xzsmqtyrky .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#offpvowxiu .gt_asterisk {
+#xzsmqtyrky .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#offpvowxiu .gt_indent_1 {
+#xzsmqtyrky .gt_indent_1 {
   text-indent: 5px;
 }
 
-#offpvowxiu .gt_indent_2 {
+#xzsmqtyrky .gt_indent_2 {
   text-indent: 10px;
 }
 
-#offpvowxiu .gt_indent_3 {
+#xzsmqtyrky .gt_indent_3 {
   text-indent: 15px;
 }
 
-#offpvowxiu .gt_indent_4 {
+#xzsmqtyrky .gt_indent_4 {
   text-indent: 20px;
 }
 
-#offpvowxiu .gt_indent_5 {
+#xzsmqtyrky .gt_indent_5 {
   text-indent: 25px;
 }
 
-#offpvowxiu .katex-display {
+#xzsmqtyrky .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#offpvowxiu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#xzsmqtyrky div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
 
-<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="label" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Characteristic</strong></th>
@@ -1544,12 +1544,12 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
 </ol>
 <p>For more info about huxreg, go here: <a href="https://cran.r-project.org/web/packages/huxtable/vignettes/huxreg.html" class="uri">https://cran.r-project.org/web/packages/huxtable/vignettes/huxreg.html</a></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">huxreg</span>(<span class="st">"life_satisfaction (model1)"</span> <span class="ot">=</span> life_model1, </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">huxreg</span>(<span class="st">"life_satisfaction (model1)"</span> <span class="ot">=</span> life_model1, </span>
 <span id="cb11-2"><a></a>       <span class="st">"life_satisfaction (model2)"</span> <span class="ot">=</span> life_model2,</span>
 <span id="cb11-3"><a></a>       <span class="at">number_format =</span> <span class="dv">4</span>,</span>
 <span id="cb11-4"><a></a>       <span class="at">bold_signif =</span> <span class="fl">0.05</span>,</span>
 <span id="cb11-5"><a></a>       <span class="at">statistics =</span> <span class="fu">c</span>( <span class="st">"R squared"</span> <span class="ot">=</span> <span class="st">"r.squared"</span>, <span class="st">"N"</span> <span class="ot">=</span> <span class="st">"nobs"</span>, <span class="st">"F"</span> <span class="ot">=</span> <span class="st">"statistic"</span>,</span>
-<span id="cb11-6"><a></a>      <span class="st">"P value"</span> <span class="ot">=</span> <span class="st">"p.value"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-6"><a></a>      <span class="st">"P value"</span> <span class="ot">=</span> <span class="st">"p.value"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 </section>
@@ -1581,7 +1581,6 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
 <tr>
 <th colspan="3" style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05.</th></tr>
 </tbody></table>
-
 </div>
 </div></section><section id="fyi-multicollinearity" class="slide level2">
 <h2>FYI: Multicollinearity</h2>
@@ -1593,7 +1592,7 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
 <li><p>If they seem to be highly correlated (&gt; 5 or so), one of the easiest (and somewhat acceptable) way is to simply remove the less significant predictor from your model :D</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>car<span class="sc">::</span><span class="fu">vif</span>(life_model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>car<span class="sc">::</span><span class="fu">vif</span>(life_model2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>financial_satisfaction                    age 
               1.024893               1.024893 </code></pre>
@@ -1621,11 +1620,11 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="fu">str</span>(wvs_cleaned<span class="sc">$</span>life_satisfaction)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="fu">str</span>(wvs_cleaned<span class="sc">$</span>life_satisfaction)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> num [1:6403] 7 5 8 6 6 8 9 8 8 10 ...</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="fu">str</span>(wvs_cleaned<span class="sc">$</span>age_group)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="fu">str</span>(wvs_cleaned<span class="sc">$</span>age_group)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> Factor w/ 4 levels "61+","45-60",..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
 </div>
@@ -1635,8 +1634,8 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
 <h2>Continuing the analysis</h2>
 <p>The analysis summary should look like this:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>life_model3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(life_satisfaction <span class="sc">~</span> age_group, <span class="at">data =</span> wvs_cleaned)</span>
-<span id="cb18-2"><a></a><span class="fu">summary</span>(life_model3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>life_model3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(life_satisfaction <span class="sc">~</span> age_group, <span class="at">data =</span> wvs_cleaned)</span>
+<span id="cb18-2"><a></a><span class="fu">summary</span>(life_model3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1678,11 +1677,11 @@ F-statistic: 55.44 on 3 and 6399 DF,  p-value: &lt; 2.2e-16</code></pre>
 <section id="presenting-the-regression-table" class="slide level2 scrollable">
 <h2>Presenting the regression table</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="fu">huxreg</span>(<span class="st">"life satisfaction (model3)"</span> <span class="ot">=</span> life_model3,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="fu">huxreg</span>(<span class="st">"life satisfaction (model3)"</span> <span class="ot">=</span> life_model3,</span>
 <span id="cb20-2"><a></a>       <span class="at">number_format =</span> <span class="dv">4</span>,</span>
 <span id="cb20-3"><a></a>       <span class="at">bold_signif =</span> <span class="fl">0.05</span>,</span>
 <span id="cb20-4"><a></a>       <span class="at">statistics =</span> <span class="fu">c</span>( <span class="st">"R squared"</span> <span class="ot">=</span> <span class="st">"r.squared"</span>, <span class="st">"N"</span> <span class="ot">=</span> <span class="st">"nobs"</span>, <span class="st">"F"</span> <span class="ot">=</span> <span class="st">"statistic"</span>,</span>
-<span id="cb20-5"><a></a>      <span class="st">"P value"</span> <span class="ot">=</span> <span class="st">"p.value"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb20-5"><a></a>      <span class="st">"P value"</span> <span class="ot">=</span> <span class="st">"p.value"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 </section>
@@ -1718,24 +1717,23 @@ F-statistic: 55.44 on 3 and 6399 DF,  p-value: &lt; 2.2e-16</code></pre>
 <tr>
 <th colspan="2" style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05.</th></tr>
 </tbody></table>
-
 </div>
 </div></section><section id="categorical-predictor-changing-the-reference" class="slide level2">
 <h2>Categorical predictor: changing the reference</h2>
 <p>Let’s change the reference category for <code>age_group</code> variable to “61+”.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a>wvs_cleaned <span class="ot">&lt;-</span> wvs_cleaned <span class="sc">|&gt;</span> </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a>wvs_cleaned <span class="ot">&lt;-</span> wvs_cleaned <span class="sc">|&gt;</span> </span>
 <span id="cb21-2"><a></a>    <span class="fu">mutate</span>(<span class="at">age_group =</span> <span class="fu">relevel</span>(age_group, <span class="at">ref =</span> <span class="st">"61+"</span>))</span>
 <span id="cb21-3"><a></a></span>
-<span id="cb21-4"><a></a><span class="fu">str</span>(wvs_cleaned<span class="sc">$</span>age_group)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb21-4"><a></a><span class="fu">str</span>(wvs_cleaned<span class="sc">$</span>age_group)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> Factor w/ 4 levels "61+","45-60",..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
 </div>
 </div>
 <p>Re-run the analysis with the new reference category</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a>life_model3a<span class="ot">&lt;-</span> <span class="fu">lm</span>(life_satisfaction <span class="sc">~</span> age_group, <span class="at">data =</span> wvs_cleaned)</span>
-<span id="cb23-2"><a></a><span class="fu">summary</span>(life_model3a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a>life_model3a<span class="ot">&lt;-</span> <span class="fu">lm</span>(life_satisfaction <span class="sc">~</span> age_group, <span class="at">data =</span> wvs_cleaned)</span>
+<span id="cb23-2"><a></a><span class="fu">summary</span>(life_model3a)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 </section>
@@ -1765,10 +1763,10 @@ F-statistic: 55.44 on 3 and 6399 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div></section><section id="changing-baseline-category-for-ordered-factor" class="slide level2">
 <h2>Changing baseline category for ordered factor</h2>
 <p>Assuming we have a column with ordered factor in our data called <code>education</code> with the level of <code>Primary</code>, <code>Secondary</code>, and <code>Tertiary</code>. This is how we can change the order, if we want to put <code>Secondary</code> before <code>Primary</code>.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a>wvs_cleaned <span class="ot">&lt;-</span> wvs_cleaned <span class="sc">|&gt;</span> </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a>wvs_cleaned <span class="ot">&lt;-</span> wvs_cleaned <span class="sc">|&gt;</span> </span>
 <span id="cb25-2"><a></a>    <span class="fu">mutate</span>(<span class="at">education =</span> <span class="fu">factor</span>(education, </span>
 <span id="cb25-3"><a></a>                         <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Secondary"</span>, <span class="st">"Primary"</span>, <span class="st">"Tertiary"</span>), </span>
-<span id="cb25-4"><a></a>                         <span class="at">ordered =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb25-4"><a></a>                         <span class="at">ordered =</span> <span class="cn">TRUE</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div title="Releveling ordered factor">
 <div class="callout callout-note callout-titled callout-style-simple">
 <div class="callout-body">
@@ -1826,10 +1824,10 @@ P = \frac{1}{1 + e^{-(\beta_0 + \beta_1X)}}
 <h2>Dummy-coding dependent variable</h2>
 <p>Before we proceed with the calculations, we need to <strong>dummy code</strong> the dependent variable into 1 and 0, with 1 = Satisfied and 0 = Not Satisfied. <a href="https://stats.oarc.ucla.edu/other/mult-pkg/faq/general/faqwhat-is-dummy-coding/">More info on dummy coding here</a></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a><span class="co"># First, we need to create a binary outcome</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a><span class="co"># First, we need to create a binary outcome</span></span>
 <span id="cb26-2"><a></a>wvs_cleaned <span class="ot">&lt;-</span> wvs_cleaned <span class="sc">|&gt;</span></span>
 <span id="cb26-3"><a></a>    <span class="fu">mutate</span>(<span class="at">satisfied =</span> <span class="fu">if_else</span>(life_satisfaction <span class="sc">&gt;=</span> <span class="dv">7</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span>
-<span id="cb26-4"><a></a><span class="co"># the if_else is from dplyr package (from session 2)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb26-4"><a></a><span class="co"># the if_else is from dplyr package (from session 2)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -1849,11 +1847,11 @@ P = \frac{1}{1 + e^{-(\beta_0 + \beta_1X)}}
 <h2>Conduct the analysis</h2>
 <p>Let’s conduct the analysis!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a>life_model5 <span class="ot">&lt;-</span> <span class="fu">glm</span>(satisfied <span class="sc">~</span> political_scale,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a>life_model5 <span class="ot">&lt;-</span> <span class="fu">glm</span>(satisfied <span class="sc">~</span> political_scale,</span>
 <span id="cb28-2"><a></a>                <span class="at">family =</span> binomial, </span>
 <span id="cb28-3"><a></a>                <span class="at">data =</span> wvs_cleaned)</span>
 <span id="cb28-4"><a></a></span>
-<span id="cb28-5"><a></a><span class="fu">summary</span>(life_model5)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb28-5"><a></a><span class="fu">summary</span>(life_model5)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1881,7 +1879,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <h2>Exponentiate the coefficients</h2>
 <p>If you recall the formula, the results are expressed in Logit Probability. As we typically report the result in terms of Odd Ratios (OR), perform exponentiation on the coefficients.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a><span class="fu">exp</span>(<span class="fu">coef</span>(life_model5))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a><span class="fu">exp</span>(<span class="fu">coef</span>(life_model5))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    (Intercept) political_scale 
        1.575194        1.088155 </code></pre>
@@ -1889,27 +1887,27 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </div>
 <p>We can also use <code>tbl_regression()</code> to do this for us:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a><span class="fu">library</span>(gtsummary)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a><span class="fu">library</span>(gtsummary)</span>
 <span id="cb32-2"><a></a>life_model5 <span class="sc">|&gt;</span> <span class="fu">tbl_regression</span>(<span class="at">exponentiate =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb32-3"><a></a>    <span class="fu">bold_p</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb32-3"><a></a>    <span class="fu">bold_p</span>() </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="xwagpcsewn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#xwagpcsewn table {
+<div id="vtngfimwpd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#vtngfimwpd table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#xwagpcsewn thead, #xwagpcsewn tbody, #xwagpcsewn tfoot, #xwagpcsewn tr, #xwagpcsewn td, #xwagpcsewn th {
+#vtngfimwpd thead, #vtngfimwpd tbody, #vtngfimwpd tfoot, #vtngfimwpd tr, #vtngfimwpd td, #vtngfimwpd th {
   border-style: none;
 }
 
-#xwagpcsewn p {
+#vtngfimwpd p {
   margin: 0;
   padding: 0;
 }
 
-#xwagpcsewn .gt_table {
+#vtngfimwpd .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1935,12 +1933,12 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#xwagpcsewn .gt_caption {
+#vtngfimwpd .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#xwagpcsewn .gt_title {
+#vtngfimwpd .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1952,7 +1950,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-bottom-width: 0;
 }
 
-#xwagpcsewn .gt_subtitle {
+#vtngfimwpd .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1964,7 +1962,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-top-width: 0;
 }
 
-#xwagpcsewn .gt_heading {
+#vtngfimwpd .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1976,13 +1974,13 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#xwagpcsewn .gt_bottom_border {
+#vtngfimwpd .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#xwagpcsewn .gt_col_headings {
+#vtngfimwpd .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1997,7 +1995,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#xwagpcsewn .gt_col_heading {
+#vtngfimwpd .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2017,7 +2015,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   overflow-x: hidden;
 }
 
-#xwagpcsewn .gt_column_spanner_outer {
+#vtngfimwpd .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2029,15 +2027,15 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 4px;
 }
 
-#xwagpcsewn .gt_column_spanner_outer:first-child {
+#vtngfimwpd .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#xwagpcsewn .gt_column_spanner_outer:last-child {
+#vtngfimwpd .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#xwagpcsewn .gt_column_spanner {
+#vtngfimwpd .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2049,11 +2047,11 @@ Number of Fisher Scoring iterations: 4</code></pre>
   width: 100%;
 }
 
-#xwagpcsewn .gt_spanner_row {
+#vtngfimwpd .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#xwagpcsewn .gt_group_heading {
+#vtngfimwpd .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2079,7 +2077,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   text-align: left;
 }
 
-#xwagpcsewn .gt_empty_group_heading {
+#vtngfimwpd .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2094,15 +2092,15 @@ Number of Fisher Scoring iterations: 4</code></pre>
   vertical-align: middle;
 }
 
-#xwagpcsewn .gt_from_md > :first-child {
+#vtngfimwpd .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#xwagpcsewn .gt_from_md > :last-child {
+#vtngfimwpd .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#xwagpcsewn .gt_row {
+#vtngfimwpd .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2121,7 +2119,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   overflow-x: hidden;
 }
 
-#xwagpcsewn .gt_stub {
+#vtngfimwpd .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2134,7 +2132,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#xwagpcsewn .gt_stub_row_group {
+#vtngfimwpd .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2148,15 +2146,15 @@ Number of Fisher Scoring iterations: 4</code></pre>
   vertical-align: top;
 }
 
-#xwagpcsewn .gt_row_group_first td {
+#vtngfimwpd .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#xwagpcsewn .gt_row_group_first th {
+#vtngfimwpd .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#xwagpcsewn .gt_summary_row {
+#vtngfimwpd .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2166,16 +2164,16 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#xwagpcsewn .gt_first_summary_row {
+#vtngfimwpd .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#xwagpcsewn .gt_first_summary_row.thick {
+#vtngfimwpd .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#xwagpcsewn .gt_last_summary_row {
+#vtngfimwpd .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2185,7 +2183,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#xwagpcsewn .gt_grand_summary_row {
+#vtngfimwpd .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2195,7 +2193,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#xwagpcsewn .gt_first_grand_summary_row {
+#vtngfimwpd .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2205,7 +2203,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#xwagpcsewn .gt_last_grand_summary_row_top {
+#vtngfimwpd .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2215,11 +2213,11 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#xwagpcsewn .gt_striped {
+#vtngfimwpd .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#xwagpcsewn .gt_table_body {
+#vtngfimwpd .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2228,7 +2226,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#xwagpcsewn .gt_footnotes {
+#vtngfimwpd .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2242,7 +2240,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#xwagpcsewn .gt_footnote {
+#vtngfimwpd .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2251,7 +2249,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#xwagpcsewn .gt_sourcenotes {
+#vtngfimwpd .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2265,7 +2263,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#xwagpcsewn .gt_sourcenote {
+#vtngfimwpd .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2273,77 +2271,77 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#xwagpcsewn .gt_left {
+#vtngfimwpd .gt_left {
   text-align: left;
 }
 
-#xwagpcsewn .gt_center {
+#vtngfimwpd .gt_center {
   text-align: center;
 }
 
-#xwagpcsewn .gt_right {
+#vtngfimwpd .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#xwagpcsewn .gt_font_normal {
+#vtngfimwpd .gt_font_normal {
   font-weight: normal;
 }
 
-#xwagpcsewn .gt_font_bold {
+#vtngfimwpd .gt_font_bold {
   font-weight: bold;
 }
 
-#xwagpcsewn .gt_font_italic {
+#vtngfimwpd .gt_font_italic {
   font-style: italic;
 }
 
-#xwagpcsewn .gt_super {
+#vtngfimwpd .gt_super {
   font-size: 65%;
 }
 
-#xwagpcsewn .gt_footnote_marks {
+#vtngfimwpd .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#xwagpcsewn .gt_asterisk {
+#vtngfimwpd .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#xwagpcsewn .gt_indent_1 {
+#vtngfimwpd .gt_indent_1 {
   text-indent: 5px;
 }
 
-#xwagpcsewn .gt_indent_2 {
+#vtngfimwpd .gt_indent_2 {
   text-indent: 10px;
 }
 
-#xwagpcsewn .gt_indent_3 {
+#vtngfimwpd .gt_indent_3 {
   text-indent: 15px;
 }
 
-#xwagpcsewn .gt_indent_4 {
+#vtngfimwpd .gt_indent_4 {
   text-indent: 20px;
 }
 
-#xwagpcsewn .gt_indent_5 {
+#vtngfimwpd .gt_indent_5 {
   text-indent: 25px;
 }
 
-#xwagpcsewn .katex-display {
+#vtngfimwpd .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#xwagpcsewn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#vtngfimwpd div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
 
-<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_col_headings header">
 <th id="label" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Characteristic</strong></th>
@@ -2388,7 +2386,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <li>χ² = 41</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a></a><span class="fu">pchisq</span>(<span class="dv">41</span>, <span class="at">df=</span><span class="dv">1</span>, <span class="at">lower.tail=</span><span class="cn">FALSE</span>)  <span class="co"># will give p-value</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a></a><span class="fu">pchisq</span>(<span class="dv">41</span>, <span class="at">df=</span><span class="dv">1</span>, <span class="at">lower.tail=</span><span class="cn">FALSE</span>)  <span class="co"># will give p-value</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.522292e-10</code></pre>
 </div>
@@ -2399,8 +2397,8 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <p>In the report, the model’s χ² (chi-squared) and R-squared (indicating the proportion of variance that can be explained by the model) should be included. However, since the resulting item does not have this info, we will call upon <code>DescTools</code>’ <code>PseudoR2()</code> function to help!</p>
 <div class="cell columns column-output-location">
 <div class="column">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a></a><span class="co"># by default, McFadden will be used</span></span>
-<span id="cb35-2"><a></a>DescTools<span class="sc">::</span><span class="fu">PseudoR2</span>(life_model5) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a></a><span class="co"># by default, McFadden will be used</span></span>
+<span id="cb35-2"><a></a>DescTools<span class="sc">::</span><span class="fu">PseudoR2</span>(life_model5) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column">
 <div class="cell-output cell-output-stdout">
 <pre><code>   McFadden 
@@ -2410,8 +2408,8 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <p>We can retrieve the R-squared value and the χ² (also known as the G2 value, which stands for Goodness-of-fit) at the same time like so:</p>
 <div class="cell columns column-output-location">
 <div class="column">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a></a>DescTools<span class="sc">::</span><span class="fu">PseudoR2</span>(life_model5, </span>
-<span id="cb37-2"><a></a>                    <span class="at">which =</span> <span class="fu">c</span>(<span class="st">"G2"</span>, <span class="st">"Nagelkerke"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a></a>DescTools<span class="sc">::</span><span class="fu">PseudoR2</span>(life_model5, </span>
+<span id="cb37-2"><a></a>                    <span class="at">which =</span> <span class="fu">c</span>(<span class="st">"G2"</span>, <span class="st">"Nagelkerke"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column">
 <div class="cell-output cell-output-stdout">
 <pre><code>          G2   Nagelkerke 
@@ -2422,8 +2420,8 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <section id="in-case-you-need-to-get-other-rsquared-methods" class="slide level2">
 <h2>In case you need to get other Rsquared methods</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a></a>DescTools<span class="sc">::</span><span class="fu">PseudoR2</span>(life_model5, </span>
-<span id="cb39-2"><a></a>                    <span class="at">which =</span> <span class="st">"all"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a></a>DescTools<span class="sc">::</span><span class="fu">PseudoR2</span>(life_model5, </span>
+<span id="cb39-2"><a></a>                    <span class="at">which =</span> <span class="st">"all"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       McFadden     McFaddenAdj        CoxSnell      Nagelkerke   AldrichNelson 
    5.306369e-03    4.788971e-03    6.386437e-03    9.110118e-03    6.366131e-03 
@@ -2470,7 +2468,7 @@ VeallZimmermann           Efron McKelveyZavoina            Tjur             AIC
 <h2>Regression tables</h2>
 <p>Even with huxtable, you may need to edit the table further to include the missing stats</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a></a><span class="fu">huxreg</span>(<span class="st">"life_satisfaction"</span> <span class="ot">=</span> life_model5, <span class="at">statistics =</span> <span class="fu">c</span>(<span class="st">"R2"</span> <span class="ot">=</span> <span class="st">"r.squared"</span>, <span class="st">"logLik"</span>, <span class="st">"AIC"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a></a><span class="fu">huxreg</span>(<span class="st">"life_satisfaction"</span> <span class="ot">=</span> life_model5, <span class="at">statistics =</span> <span class="fu">c</span>(<span class="st">"R2"</span> <span class="ot">=</span> <span class="st">"r.squared"</span>, <span class="st">"logLik"</span>, <span class="st">"AIC"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  ">
 <colgroup><col><col></colgroup><tbody><tr>
@@ -2490,7 +2488,6 @@ VeallZimmermann           Efron McKelveyZavoina            Tjur             AIC
 <tr>
 <th colspan="2" style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05.</th></tr>
 </tbody></table>
-
 </div>
 </div>
 </section>
@@ -2502,14 +2499,14 @@ VeallZimmermann           Efron McKelveyZavoina            Tjur             AIC
 <li>The predictor/IV (<span class="math inline">\(X\)</span>): <code>religiousity</code> - let’s set “A religious person” as the reference category!</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a></a>wvs_cleaned <span class="ot">&lt;-</span> wvs_cleaned <span class="sc">|&gt;</span> </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a></a>wvs_cleaned <span class="ot">&lt;-</span> wvs_cleaned <span class="sc">|&gt;</span> </span>
 <span id="cb42-2"><a></a>    <span class="fu">mutate</span>(<span class="at">religiousity =</span> <span class="fu">relevel</span>(religiousity, <span class="at">ref =</span> <span class="st">"A religious person"</span>))</span>
 <span id="cb42-3"><a></a></span>
 <span id="cb42-4"><a></a>life_model6 <span class="ot">&lt;-</span> <span class="fu">glm</span>(satisfied <span class="sc">~</span> religiousity,</span>
 <span id="cb42-5"><a></a>                      <span class="at">family =</span> <span class="st">"binomial"</span>,</span>
 <span id="cb42-6"><a></a>                      <span class="at">data =</span> wvs_cleaned)</span>
 <span id="cb42-7"><a></a></span>
-<span id="cb42-8"><a></a><span class="fu">summary</span>(life_model6)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb42-8"><a></a><span class="fu">summary</span>(life_model6)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 </section>
@@ -2537,7 +2534,7 @@ AIC: 7723.3
 
 Number of Fisher Scoring iterations: 4</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a></a><span class="fu">exp</span>(<span class="fu">coef</span>(life_model6))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a></a><span class="fu">exp</span>(<span class="fu">coef</span>(life_model6))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                       (Intercept) religiousityNot a religious person 
                          2.7374462                          0.8404704 
@@ -2548,27 +2545,27 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <h2>Exponentiate the coefficients</h2>
 <p>If you recall the formula, the results are expressed in Logit Probability. As we typically report the result in terms of Odd Ratios (OR), perform exponentiation on the coefficients.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a></a><span class="fu">library</span>(gtsummary)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a></a><span class="fu">library</span>(gtsummary)</span>
 <span id="cb46-2"><a></a>life_model6 <span class="sc">|&gt;</span> <span class="fu">tbl_regression</span>(<span class="at">exponentiate =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span>  </span>
-<span id="cb46-3"><a></a>    <span class="fu">bold_p</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb46-3"><a></a>    <span class="fu">bold_p</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="xpqsljjlpx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#xpqsljjlpx table {
+<div id="ffjgfgrryk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ffjgfgrryk table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#xpqsljjlpx thead, #xpqsljjlpx tbody, #xpqsljjlpx tfoot, #xpqsljjlpx tr, #xpqsljjlpx td, #xpqsljjlpx th {
+#ffjgfgrryk thead, #ffjgfgrryk tbody, #ffjgfgrryk tfoot, #ffjgfgrryk tr, #ffjgfgrryk td, #ffjgfgrryk th {
   border-style: none;
 }
 
-#xpqsljjlpx p {
+#ffjgfgrryk p {
   margin: 0;
   padding: 0;
 }
 
-#xpqsljjlpx .gt_table {
+#ffjgfgrryk .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2594,12 +2591,12 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#xpqsljjlpx .gt_caption {
+#ffjgfgrryk .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#xpqsljjlpx .gt_title {
+#ffjgfgrryk .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2611,7 +2608,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-bottom-width: 0;
 }
 
-#xpqsljjlpx .gt_subtitle {
+#ffjgfgrryk .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2623,7 +2620,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-top-width: 0;
 }
 
-#xpqsljjlpx .gt_heading {
+#ffjgfgrryk .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2635,13 +2632,13 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#xpqsljjlpx .gt_bottom_border {
+#ffjgfgrryk .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#xpqsljjlpx .gt_col_headings {
+#ffjgfgrryk .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2656,7 +2653,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#xpqsljjlpx .gt_col_heading {
+#ffjgfgrryk .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2676,7 +2673,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   overflow-x: hidden;
 }
 
-#xpqsljjlpx .gt_column_spanner_outer {
+#ffjgfgrryk .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2688,15 +2685,15 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 4px;
 }
 
-#xpqsljjlpx .gt_column_spanner_outer:first-child {
+#ffjgfgrryk .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#xpqsljjlpx .gt_column_spanner_outer:last-child {
+#ffjgfgrryk .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#xpqsljjlpx .gt_column_spanner {
+#ffjgfgrryk .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2708,11 +2705,11 @@ Number of Fisher Scoring iterations: 4</code></pre>
   width: 100%;
 }
 
-#xpqsljjlpx .gt_spanner_row {
+#ffjgfgrryk .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#xpqsljjlpx .gt_group_heading {
+#ffjgfgrryk .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2738,7 +2735,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   text-align: left;
 }
 
-#xpqsljjlpx .gt_empty_group_heading {
+#ffjgfgrryk .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2753,15 +2750,15 @@ Number of Fisher Scoring iterations: 4</code></pre>
   vertical-align: middle;
 }
 
-#xpqsljjlpx .gt_from_md > :first-child {
+#ffjgfgrryk .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#xpqsljjlpx .gt_from_md > :last-child {
+#ffjgfgrryk .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#xpqsljjlpx .gt_row {
+#ffjgfgrryk .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2780,7 +2777,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   overflow-x: hidden;
 }
 
-#xpqsljjlpx .gt_stub {
+#ffjgfgrryk .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2793,7 +2790,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#xpqsljjlpx .gt_stub_row_group {
+#ffjgfgrryk .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2807,15 +2804,15 @@ Number of Fisher Scoring iterations: 4</code></pre>
   vertical-align: top;
 }
 
-#xpqsljjlpx .gt_row_group_first td {
+#ffjgfgrryk .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#xpqsljjlpx .gt_row_group_first th {
+#ffjgfgrryk .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#xpqsljjlpx .gt_summary_row {
+#ffjgfgrryk .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2825,16 +2822,16 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#xpqsljjlpx .gt_first_summary_row {
+#ffjgfgrryk .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#xpqsljjlpx .gt_first_summary_row.thick {
+#ffjgfgrryk .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#xpqsljjlpx .gt_last_summary_row {
+#ffjgfgrryk .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2844,7 +2841,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#xpqsljjlpx .gt_grand_summary_row {
+#ffjgfgrryk .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2854,7 +2851,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#xpqsljjlpx .gt_first_grand_summary_row {
+#ffjgfgrryk .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2864,7 +2861,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#xpqsljjlpx .gt_last_grand_summary_row_top {
+#ffjgfgrryk .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2874,11 +2871,11 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#xpqsljjlpx .gt_striped {
+#ffjgfgrryk .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#xpqsljjlpx .gt_table_body {
+#ffjgfgrryk .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2887,7 +2884,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#xpqsljjlpx .gt_footnotes {
+#ffjgfgrryk .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2901,7 +2898,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#xpqsljjlpx .gt_footnote {
+#ffjgfgrryk .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2910,7 +2907,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#xpqsljjlpx .gt_sourcenotes {
+#ffjgfgrryk .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2924,7 +2921,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#xpqsljjlpx .gt_sourcenote {
+#ffjgfgrryk .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2932,77 +2929,77 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#xpqsljjlpx .gt_left {
+#ffjgfgrryk .gt_left {
   text-align: left;
 }
 
-#xpqsljjlpx .gt_center {
+#ffjgfgrryk .gt_center {
   text-align: center;
 }
 
-#xpqsljjlpx .gt_right {
+#ffjgfgrryk .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#xpqsljjlpx .gt_font_normal {
+#ffjgfgrryk .gt_font_normal {
   font-weight: normal;
 }
 
-#xpqsljjlpx .gt_font_bold {
+#ffjgfgrryk .gt_font_bold {
   font-weight: bold;
 }
 
-#xpqsljjlpx .gt_font_italic {
+#ffjgfgrryk .gt_font_italic {
   font-style: italic;
 }
 
-#xpqsljjlpx .gt_super {
+#ffjgfgrryk .gt_super {
   font-size: 65%;
 }
 
-#xpqsljjlpx .gt_footnote_marks {
+#ffjgfgrryk .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#xpqsljjlpx .gt_asterisk {
+#ffjgfgrryk .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#xpqsljjlpx .gt_indent_1 {
+#ffjgfgrryk .gt_indent_1 {
   text-indent: 5px;
 }
 
-#xpqsljjlpx .gt_indent_2 {
+#ffjgfgrryk .gt_indent_2 {
   text-indent: 10px;
 }
 
-#xpqsljjlpx .gt_indent_3 {
+#ffjgfgrryk .gt_indent_3 {
   text-indent: 15px;
 }
 
-#xpqsljjlpx .gt_indent_4 {
+#ffjgfgrryk .gt_indent_4 {
   text-indent: 20px;
 }
 
-#xpqsljjlpx .gt_indent_5 {
+#ffjgfgrryk .gt_indent_5 {
   text-indent: 25px;
 }
 
-#xpqsljjlpx .katex-display {
+#ffjgfgrryk .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#xpqsljjlpx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ffjgfgrryk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
 
-<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top" data-quarto-bootstrap="false">
 <colgroup>
 <col style="width: 25%">
 <col style="width: 25%">
@@ -3068,17 +3065,17 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <h2>Get the Rsquared</h2>
 <p>Let’s retrieve the R-squared value and the Chi-square χ² value (also known as the G2 value, which stands for Goodness-of-fit)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a></a>DescTools<span class="sc">::</span><span class="fu">PseudoR2</span>(life_model6, </span>
-<span id="cb47-2"><a></a>                    <span class="at">which =</span> <span class="fu">c</span>(<span class="st">"G2"</span>, <span class="st">"Nagelkerke"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a></a>DescTools<span class="sc">::</span><span class="fu">PseudoR2</span>(life_model6, </span>
+<span id="cb47-2"><a></a>                    <span class="at">which =</span> <span class="fu">c</span>(<span class="st">"G2"</span>, <span class="st">"Nagelkerke"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          G2   Nagelkerke 
 15.652088008  0.003482759 </code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a></a><span class="co"># get the other R-squared if you like</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a></a><span class="co"># get the other R-squared if you like</span></span>
 <span id="cb49-2"><a></a>DescTools<span class="sc">::</span><span class="fu">PseudoR2</span>(life_model6, </span>
-<span id="cb49-3"><a></a>                    <span class="at">which =</span> <span class="st">"all"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb49-3"><a></a>                    <span class="at">which =</span> <span class="st">"all"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       McFadden     McFaddenAdj        CoxSnell      Nagelkerke   AldrichNelson 
    2.024590e-03    9.897938e-04    2.441508e-03    3.482759e-03    2.438532e-03 
@@ -3107,8 +3104,8 @@ VeallZimmermann           Efron McKelveyZavoina            Tjur             AIC
 <h2>Present both models in a table</h2>
 <p>Note that the R-squared is missing here, so be sure to put that in when you paste this table to your document.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a></a><span class="fu">library</span>(huxtable)</span>
-<span id="cb51-2"><a></a><span class="fu">huxreg</span>(life_model5, life_model6)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a></a><span class="fu">library</span>(huxtable)</span>
+<span id="cb51-2"><a></a><span class="fu">huxreg</span>(life_model5, life_model6)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  ">
 <colgroup><col><col><col></colgroup><tbody><tr>
@@ -3142,7 +3139,6 @@ VeallZimmermann           Efron McKelveyZavoina            Tjur             AIC
 <tr>
 <th colspan="3" style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05.</th></tr>
 </tbody></table>
-
 </div>
 </div>
 </section></section>
@@ -3211,7 +3207,6 @@ VeallZimmermann           Efron McKelveyZavoina            Tjur             AIC
 <li>Making Your Research Reproducible with Quarto in RStudio</li>
 <li>Creating Awesome Web Slides in Quarto with Revealjs</li>
 <li>Building Website and Blog with Quarto</li>
-<li>Happy Git and Github with RStudio</li>
 </ul>
 </section></section>
 <section>
@@ -3272,8 +3267,8 @@ VeallZimmermann           Efron McKelveyZavoina            Tjur             AIC
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a></a>life_model4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(life_satisfaction <span class="sc">~</span> sex, <span class="at">data =</span> wvs_cleaned)</span>
-<span id="cb52-2"><a></a><span class="fu">summary</span>(life_model4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a></a>life_model4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(life_satisfaction <span class="sc">~</span> sex, <span class="at">data =</span> wvs_cleaned)</span>
+<span id="cb52-2"><a></a><span class="fu">summary</span>(life_model4)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -3303,11 +3298,11 @@ F-statistic: 0.1703 on 1 and 6401 DF,  p-value: 0.6799</code></pre>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a></a>life_model7 <span class="ot">&lt;-</span> <span class="fu">glm</span>(satisfied <span class="sc">~</span> sex,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a></a>life_model7 <span class="ot">&lt;-</span> <span class="fu">glm</span>(satisfied <span class="sc">~</span> sex,</span>
 <span id="cb54-2"><a></a>                  <span class="at">family =</span> <span class="st">"binomial"</span>, </span>
 <span id="cb54-3"><a></a>                  <span class="at">data =</span> wvs_cleaned) </span>
 <span id="cb54-4"><a></a></span>
-<span id="cb54-5"><a></a><span class="fu">summary</span>(life_model7)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb54-5"><a></a><span class="fu">summary</span>(life_model7)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -3331,7 +3326,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </div>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a></a><span class="fu">exp</span>(<span class="fu">coefficients</span>(life_model7))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a></a><span class="fu">exp</span>(<span class="fu">coefficients</span>(life_model7))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>(Intercept)   sexFemale 
@@ -3531,7 +3526,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -3634,190 +3629,173 @@ Number of Fisher Scoring iterations: 4</code></pre>
     
 
     <script id="quarto-html-after-body" type="application/javascript">
-    window.document.addEventListener("DOMContentLoaded", function (event) {
-      const toggleBodyColorMode = (bsSheetEl) => {
-        const mode = bsSheetEl.getAttribute("data-mode");
-        const bodyEl = window.document.querySelector("body");
-        if (mode === "dark") {
-          bodyEl.classList.add("quarto-dark");
-          bodyEl.classList.remove("quarto-light");
-        } else {
-          bodyEl.classList.add("quarto-light");
-          bodyEl.classList.remove("quarto-dark");
-        }
-      }
-      const toggleBodyColorPrimary = () => {
-        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-        if (bsSheetEl) {
-          toggleBodyColorMode(bsSheetEl);
-        }
-      }
-      toggleBodyColorPrimary();  
-      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
-      tabsets.forEach(function(tabset) {
-        const tabby = new Tabby('#' + tabset.id);
-      });
-      const isCodeAnnotation = (el) => {
-        for (const clz of el.classList) {
-          if (clz.startsWith('code-annotation-')) {                     
-            return true;
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
           }
+          return false;
         }
-        return false;
-      }
-      const onCopySuccess = function(e) {
-        // button target
-        const button = e.trigger;
-        // don't keep focus
-        button.blur();
-        // flash "checked"
-        button.classList.add('code-copy-button-checked');
-        var currentTitle = button.getAttribute("title");
-        button.setAttribute("title", "Copied!");
-        let tooltip;
-        if (window.bootstrap) {
-          button.setAttribute("data-bs-toggle", "tooltip");
-          button.setAttribute("data-bs-placement", "left");
-          button.setAttribute("data-bs-title", "Copied!");
-          tooltip = new bootstrap.Tooltip(button, 
-            { trigger: "manual", 
-              customClass: "code-copy-button-tooltip",
-              offset: [0, -8]});
-          tooltip.show();    
-        }
-        setTimeout(function() {
-          if (tooltip) {
-            tooltip.hide();
-            button.removeAttribute("data-bs-title");
-            button.removeAttribute("data-bs-toggle");
-            button.removeAttribute("data-bs-placement");
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
           }
-          button.setAttribute("title", currentTitle);
-          button.classList.remove('code-copy-button-checked');
-        }, 1000);
-        // clear code selection
-        e.clearSelection();
-      }
-      const getTextToCopy = function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
           for (const childEl of codeEl.children) {
             if (isCodeAnnotation(childEl)) {
               childEl.remove();
             }
           }
           return codeEl.innerText;
-      }
-      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-        text: getTextToCopy
-      });
-      clipboard.on('success', onCopySuccess);
-      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-          text: getTextToCopy,
-          container: window.document.getElementById('quarto-embedded-source-code-modal')
-        });
-        clipboardModal.on('success', onCopySuccess);
-      }
-        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-        var mailtoRegex = new RegExp(/^mailto:/);
-          var filterRegex = new RegExp("https:\/\/bellaratmelia\.github\.io\/introductory-r-socsci\/");
-        var isInternal = (href) => {
-            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
         }
-        // Inspect non-navigation links and adorn them if external
-     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-        for (var i=0; i<links.length; i++) {
-          const link = links[i];
-          if (!isInternal(link.href)) {
-            // undo the damage that might have been done by quarto-nav.js in the case of
-            // links that we want to consider external
-            if (link.dataset.originalHref !== undefined) {
-              link.href = link.dataset.originalHref;
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp("https:\/\/bellaratmelia\.github\.io\/introductory-r-socsci\/");
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
             }
           }
-        }
-      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-        const config = {
-          allowHTML: true,
-          maxWidth: 500,
-          delay: 100,
-          arrow: false,
-          appendTo: function(el) {
-              return el.closest('section.slide') || el.parentElement;
-          },
-          interactive: true,
-          interactiveBorder: 10,
-          theme: 'light-border',
-          placement: 'bottom-start',
-        };
-        if (contentFn) {
-          config.content = contentFn;
-        }
-        if (onTriggerFn) {
-          config.onTrigger = onTriggerFn;
-        }
-        if (onUntriggerFn) {
-          config.onUntrigger = onUntriggerFn;
-        }
-          config['offset'] = [0,0];
-          config['maxWidth'] = 700;
-        window.tippy(el, config); 
-      }
-      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-      for (var i=0; i<noterefs.length; i++) {
-        const ref = noterefs[i];
-        tippyHover(ref, function() {
-          // use id or data attribute instead here
-          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-          try { href = new URL(href).hash; } catch {}
-          const id = href.replace(/^#\/?/, "");
-          const note = window.document.getElementById(id);
-          if (note) {
-            return note.innerHTML;
-          } else {
-            return "";
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
           }
-        });
-      }
-      const findCites = (el) => {
-        const parentEl = el.parentElement;
-        if (parentEl) {
-          const cites = parentEl.dataset.cites;
-          if (cites) {
-            return {
-              el,
-              cites: cites.split(' ')
-            };
-          } else {
-            return findCites(el.parentElement)
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
           }
-        } else {
-          return undefined;
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
         }
-      };
-      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-      for (var i=0; i<bibliorefs.length; i++) {
-        const ref = bibliorefs[i];
-        const citeInfo = findCites(ref);
-        if (citeInfo) {
-          tippyHover(citeInfo.el, function() {
-            var popup = window.document.createElement('div');
-            citeInfo.cites.forEach(function(cite) {
-              var citeDiv = window.document.createElement('div');
-              citeDiv.classList.add('hanging-indent');
-              citeDiv.classList.add('csl-entry');
-              var biblioDiv = window.document.getElementById('ref-' + cite);
-              if (biblioDiv) {
-                citeDiv.innerHTML = biblioDiv.innerHTML;
-              }
-              popup.appendChild(citeDiv);
-            });
-            return popup.innerHTML;
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
           });
         }
-      }
-    });
-    </script>
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
     
 
 </body></html>
