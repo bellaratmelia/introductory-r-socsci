@@ -256,24 +256,45 @@ Bella Ratmelia
 <span id="cb1-2"><a></a><span class="fu">library</span>(apaTables)</span>
 <span id="cb1-3"><a></a><span class="fu">library</span>(huxtable)</span>
 <span id="cb1-4"><a></a><span class="fu">library</span>(gtsummary)</span>
-<span id="cb1-5"><a></a><span class="fu">library</span>(car)</span>
-<span id="cb1-6"><a></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-5"><a></a><span class="fu">library</span>(car)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: carData</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.2     ✔ tibble    3.2.1
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+✔ purrr     1.0.4     </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::add_rownames() masks huxtable::add_rownames()
+✖ dplyr::filter()       masks stats::filter()
+✖ dplyr::lag()          masks stats::lag()
+✖ dplyr::recode()       masks car::recode()
+✖ purrr::some()         masks car::some()
+✖ ggplot2::theme_grey() masks huxtable::theme_grey()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
 </div>
 </section>
 <section id="load-our-data-for-today" class="slide level2">
 <h2>Load our data for today!</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="co"># read the CSV with WVS data</span></span>
-<span id="cb2-2"><a></a>wvs_cleaned <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data-output/wvs_cleaned_v1.csv"</span>)</span>
-<span id="cb2-3"><a></a></span>
-<span id="cb2-4"><a></a><span class="co"># Convert categorical variables to factors</span></span>
-<span id="cb2-5"><a></a>columns_to_convert <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"country"</span>, <span class="st">"religiousity"</span>, <span class="st">"sex"</span>, <span class="st">"marital_status"</span>, <span class="st">"employment"</span>, <span class="st">"age_group"</span>)</span>
-<span id="cb2-6"><a></a></span>
-<span id="cb2-7"><a></a>wvs_cleaned <span class="ot">&lt;-</span> wvs_cleaned <span class="sc">|&gt;</span> </span>
-<span id="cb2-8"><a></a>    <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">all_of</span>(columns_to_convert), as_factor))</span>
-<span id="cb2-9"><a></a></span>
-<span id="cb2-10"><a></a><span class="co"># peek at the data, pay attention to the data types!</span></span>
-<span id="cb2-11"><a></a><span class="fu">glimpse</span>(wvs_cleaned)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="co"># read the CSV with WVS data</span></span>
+<span id="cb6-2"><a></a>wvs_cleaned <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data-output/wvs_cleaned_v1.csv"</span>)</span>
+<span id="cb6-3"><a></a></span>
+<span id="cb6-4"><a></a><span class="co"># Convert categorical variables to factors</span></span>
+<span id="cb6-5"><a></a>columns_to_convert <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"country"</span>, <span class="st">"religiousity"</span>, <span class="st">"sex"</span>, <span class="st">"marital_status"</span>, <span class="st">"employment"</span>, <span class="st">"age_group"</span>)</span>
+<span id="cb6-6"><a></a></span>
+<span id="cb6-7"><a></a>wvs_cleaned <span class="ot">&lt;-</span> wvs_cleaned <span class="sc">|&gt;</span> </span>
+<span id="cb6-8"><a></a>    <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">all_of</span>(columns_to_convert), as_factor))</span>
+<span id="cb6-9"><a></a></span>
+<span id="cb6-10"><a></a><span class="co"># peek at the data, pay attention to the data types!</span></span>
+<span id="cb6-11"><a></a><span class="fu">glimpse</span>(wvs_cleaned)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section>
@@ -285,11 +306,11 @@ Bella Ratmelia
 <h2>From last week: apaTables</h2>
 <p><code>apaTables</code> is a package that will generate APA-formatted report table for correlation, ANOVA, and regression. It has limited customisations and few varity of tables. The documentation online is for the “development” version which is not what we will get if we install normally with <code>install.packages()</code>, so we need to rely on the vignette more. <a href="https://dstanley4.github.io/apaTables/index.html"><strong>View the documentation here</strong></a></p>
 <p>Example: get the correlation table for <code>political_scale</code>, <code>life_satisfaction</code>, and <code>financial_satisfaction</code></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">library</span>(apaTables)</span>
-<span id="cb3-2"><a></a></span>
-<span id="cb3-3"><a></a>wvs_cleaned <span class="sc">|&gt;</span> </span>
-<span id="cb3-4"><a></a>    <span class="fu">select</span>(life_satisfaction, financial_satisfaction, political_scale) <span class="sc">|&gt;</span> </span>
-<span id="cb3-5"><a></a>    <span class="fu">apa.cor.table</span>( <span class="at">table.number =</span> <span class="dv">1</span>, <span class="at">filename =</span> <span class="st">"fig-output/table-cor.doc"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">library</span>(apaTables)</span>
+<span id="cb7-2"><a></a></span>
+<span id="cb7-3"><a></a>wvs_cleaned <span class="sc">|&gt;</span> </span>
+<span id="cb7-4"><a></a>    <span class="fu">select</span>(life_satisfaction, financial_satisfaction, political_scale) <span class="sc">|&gt;</span> </span>
+<span id="cb7-5"><a></a>    <span class="fu">apa.cor.table</span>( <span class="at">table.number =</span> <span class="dv">1</span>, <span class="at">filename =</span> <span class="st">"fig-output/table-cor.doc"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>This code will create a word document with the tables already formatted in APA style inside.</p>
 </section>
 <section id="from-last-week-gtsummary" class="slide level2">
@@ -297,34 +318,43 @@ Bella Ratmelia
 <p>Another popular packages is <code>gt</code> (stands for “great tables”) and its ‘add-on’, <code>gtsummary</code>. It has lots of customizations (which can get overwhelming!) but fortunately the documentation is pretty good and there are plenty of code samples. <a href="https://www.danieldsjoberg.com/gtsummary/index.html"><strong>View the documentation here</strong></a></p>
 <p>Example: get the mean differences table for <code>political_scale</code>, <code>life_satisfaction</code>, and <code>financial_satisfaction</code>, grouped by <code>sex</code></p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">library</span>(gtsummary)</span>
-<span id="cb4-2"><a></a></span>
-<span id="cb4-3"><a></a>wvs_cleaned <span class="sc">|&gt;</span> </span>
-<span id="cb4-4"><a></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(life_satisfaction, financial_satisfaction, political_scale, sex) <span class="sc">|&gt;</span> </span>
-<span id="cb4-5"><a></a>    <span class="fu">tbl_summary</span>(<span class="at">by =</span> sex) <span class="sc">|&gt;</span> </span>
-<span id="cb4-6"><a></a>    <span class="fu">add_difference</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">library</span>(gtsummary)</span>
+<span id="cb8-2"><a></a></span>
+<span id="cb8-3"><a></a>wvs_cleaned <span class="sc">|&gt;</span> </span>
+<span id="cb8-4"><a></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(life_satisfaction, financial_satisfaction, political_scale, sex) <span class="sc">|&gt;</span> </span>
+<span id="cb8-5"><a></a>    <span class="fu">tbl_summary</span>(<span class="at">by =</span> sex) <span class="sc">|&gt;</span> </span>
+<span id="cb8-6"><a></a>    <span class="fu">add_difference</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 </section>
 <section id="from-last-week-gtsummary-output" class="slide level2 output-location-slide"><h2>From last week: gtsummary</h2><div class="cell output-location-slide">
+<div class="cell-output cell-output-stderr">
+<pre><code>The following errors were returned during `add_difference()`:
+✖ For variable `financial_satisfaction` (`sex`) and "estimate" statistic: The
+  package "cardx" (&gt;= 0.2.4) is required.
+✖ For variable `life_satisfaction` (`sex`) and "estimate" statistic: The
+  package "cardx" (&gt;= 0.2.4) is required.
+✖ For variable `political_scale` (`sex`) and "estimate" statistic: The package
+  "cardx" (&gt;= 0.2.4) is required.</code></pre>
+</div>
 <div class="cell-output-display">
-<div id="ycidalncij" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ycidalncij table {
+<div id="likkgoddxf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#likkgoddxf table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ycidalncij thead, #ycidalncij tbody, #ycidalncij tfoot, #ycidalncij tr, #ycidalncij td, #ycidalncij th {
+#likkgoddxf thead, #likkgoddxf tbody, #likkgoddxf tfoot, #likkgoddxf tr, #likkgoddxf td, #likkgoddxf th {
   border-style: none;
 }
 
-#ycidalncij p {
+#likkgoddxf p {
   margin: 0;
   padding: 0;
 }
 
-#ycidalncij .gt_table {
+#likkgoddxf .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -350,12 +380,12 @@ Bella Ratmelia
   border-left-color: #D3D3D3;
 }
 
-#ycidalncij .gt_caption {
+#likkgoddxf .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ycidalncij .gt_title {
+#likkgoddxf .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -367,7 +397,7 @@ Bella Ratmelia
   border-bottom-width: 0;
 }
 
-#ycidalncij .gt_subtitle {
+#likkgoddxf .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -379,7 +409,7 @@ Bella Ratmelia
   border-top-width: 0;
 }
 
-#ycidalncij .gt_heading {
+#likkgoddxf .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -391,13 +421,13 @@ Bella Ratmelia
   border-right-color: #D3D3D3;
 }
 
-#ycidalncij .gt_bottom_border {
+#likkgoddxf .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ycidalncij .gt_col_headings {
+#likkgoddxf .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -412,7 +442,7 @@ Bella Ratmelia
   border-right-color: #D3D3D3;
 }
 
-#ycidalncij .gt_col_heading {
+#likkgoddxf .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -432,7 +462,7 @@ Bella Ratmelia
   overflow-x: hidden;
 }
 
-#ycidalncij .gt_column_spanner_outer {
+#likkgoddxf .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -444,15 +474,15 @@ Bella Ratmelia
   padding-right: 4px;
 }
 
-#ycidalncij .gt_column_spanner_outer:first-child {
+#likkgoddxf .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ycidalncij .gt_column_spanner_outer:last-child {
+#likkgoddxf .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ycidalncij .gt_column_spanner {
+#likkgoddxf .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -464,11 +494,11 @@ Bella Ratmelia
   width: 100%;
 }
 
-#ycidalncij .gt_spanner_row {
+#likkgoddxf .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ycidalncij .gt_group_heading {
+#likkgoddxf .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -494,7 +524,7 @@ Bella Ratmelia
   text-align: left;
 }
 
-#ycidalncij .gt_empty_group_heading {
+#likkgoddxf .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -509,15 +539,15 @@ Bella Ratmelia
   vertical-align: middle;
 }
 
-#ycidalncij .gt_from_md > :first-child {
+#likkgoddxf .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ycidalncij .gt_from_md > :last-child {
+#likkgoddxf .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ycidalncij .gt_row {
+#likkgoddxf .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -536,7 +566,7 @@ Bella Ratmelia
   overflow-x: hidden;
 }
 
-#ycidalncij .gt_stub {
+#likkgoddxf .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -549,7 +579,7 @@ Bella Ratmelia
   padding-right: 5px;
 }
 
-#ycidalncij .gt_stub_row_group {
+#likkgoddxf .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -563,15 +593,15 @@ Bella Ratmelia
   vertical-align: top;
 }
 
-#ycidalncij .gt_row_group_first td {
+#likkgoddxf .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ycidalncij .gt_row_group_first th {
+#likkgoddxf .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ycidalncij .gt_summary_row {
+#likkgoddxf .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -581,16 +611,16 @@ Bella Ratmelia
   padding-right: 5px;
 }
 
-#ycidalncij .gt_first_summary_row {
+#likkgoddxf .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ycidalncij .gt_first_summary_row.thick {
+#likkgoddxf .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ycidalncij .gt_last_summary_row {
+#likkgoddxf .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -600,7 +630,7 @@ Bella Ratmelia
   border-bottom-color: #D3D3D3;
 }
 
-#ycidalncij .gt_grand_summary_row {
+#likkgoddxf .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -610,7 +640,7 @@ Bella Ratmelia
   padding-right: 5px;
 }
 
-#ycidalncij .gt_first_grand_summary_row {
+#likkgoddxf .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -620,7 +650,7 @@ Bella Ratmelia
   border-top-color: #D3D3D3;
 }
 
-#ycidalncij .gt_last_grand_summary_row_top {
+#likkgoddxf .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -630,11 +660,11 @@ Bella Ratmelia
   border-bottom-color: #D3D3D3;
 }
 
-#ycidalncij .gt_striped {
+#likkgoddxf .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ycidalncij .gt_table_body {
+#likkgoddxf .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -643,7 +673,7 @@ Bella Ratmelia
   border-bottom-color: #D3D3D3;
 }
 
-#ycidalncij .gt_footnotes {
+#likkgoddxf .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -657,7 +687,7 @@ Bella Ratmelia
   border-right-color: #D3D3D3;
 }
 
-#ycidalncij .gt_footnote {
+#likkgoddxf .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -666,7 +696,7 @@ Bella Ratmelia
   padding-right: 5px;
 }
 
-#ycidalncij .gt_sourcenotes {
+#likkgoddxf .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -680,7 +710,7 @@ Bella Ratmelia
   border-right-color: #D3D3D3;
 }
 
-#ycidalncij .gt_sourcenote {
+#likkgoddxf .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -688,84 +718,82 @@ Bella Ratmelia
   padding-right: 5px;
 }
 
-#ycidalncij .gt_left {
+#likkgoddxf .gt_left {
   text-align: left;
 }
 
-#ycidalncij .gt_center {
+#likkgoddxf .gt_center {
   text-align: center;
 }
 
-#ycidalncij .gt_right {
+#likkgoddxf .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ycidalncij .gt_font_normal {
+#likkgoddxf .gt_font_normal {
   font-weight: normal;
 }
 
-#ycidalncij .gt_font_bold {
+#likkgoddxf .gt_font_bold {
   font-weight: bold;
 }
 
-#ycidalncij .gt_font_italic {
+#likkgoddxf .gt_font_italic {
   font-style: italic;
 }
 
-#ycidalncij .gt_super {
+#likkgoddxf .gt_super {
   font-size: 65%;
 }
 
-#ycidalncij .gt_footnote_marks {
+#likkgoddxf .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ycidalncij .gt_asterisk {
+#likkgoddxf .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ycidalncij .gt_indent_1 {
+#likkgoddxf .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ycidalncij .gt_indent_2 {
+#likkgoddxf .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ycidalncij .gt_indent_3 {
+#likkgoddxf .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ycidalncij .gt_indent_4 {
+#likkgoddxf .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ycidalncij .gt_indent_5 {
+#likkgoddxf .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ycidalncij .katex-display {
+#likkgoddxf .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ycidalncij div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#likkgoddxf div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
 
-<table class="gt_table caption-top" style="width:100%;" data-quarto-bootstrap="false">
+<table class="gt_table caption-top" data-quarto-bootstrap="false">
 <colgroup>
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 16%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
 </colgroup>
 <thead>
 <tr class="gt_col_headings header">
@@ -774,9 +802,7 @@ Bella Ratmelia
 N = 3,171<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
 <th id="stat_2" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>Female</strong><br>
 N = 3,232<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
-<th id="estimate" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>Difference</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>2</sup></span></th>
-<th id="conf.low" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>95% CI</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>2</sup></span></th>
-<th id="p.value" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>p-value</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>2</sup></span></th>
+<th id="estimate" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>Difference</strong></th>
 </tr>
 </thead>
 <tbody class="gt_table_body">
@@ -784,35 +810,26 @@ N = 3,232<span class="gt_footnote_marks" style="white-space:nowrap;font-style:it
 <td class="gt_row gt_left" headers="label">life_satisfaction</td>
 <td class="gt_row gt_center" headers="stat_1">7.00 (6.00, 8.00)</td>
 <td class="gt_row gt_center" headers="stat_2">7.00 (6.00, 8.00)</td>
-<td class="gt_row gt_center" headers="estimate">-0.02</td>
-<td class="gt_row gt_center" headers="conf.low">-0.11, 0.07</td>
-<td class="gt_row gt_center" headers="p.value">0.7</td>
+<td class="gt_row gt_center" headers="estimate"><br>
+</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="label">financial_satisfaction</td>
 <td class="gt_row gt_center" headers="stat_1">7.00 (5.00, 8.00)</td>
 <td class="gt_row gt_center" headers="stat_2">7.00 (5.00, 8.00)</td>
-<td class="gt_row gt_center" headers="estimate">0.07</td>
-<td class="gt_row gt_center" headers="conf.low">-0.04, 0.17</td>
-<td class="gt_row gt_center" headers="p.value">0.2</td>
+<td class="gt_row gt_center" headers="estimate"><br>
+</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="label">political_scale</td>
 <td class="gt_row gt_center" headers="stat_1">5.00 (4.00, 7.00)</td>
 <td class="gt_row gt_center" headers="stat_2">5.00 (4.00, 6.00)</td>
-<td class="gt_row gt_center" headers="estimate">0.44</td>
-<td class="gt_row gt_center" headers="conf.low">0.34, 0.54</td>
-<td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
+<td class="gt_row gt_center" headers="estimate"><br>
+</td>
 </tr>
-</tbody><tfoot>
-<tr class="gt_footnotes odd">
-<td colspan="6" class="gt_footnote"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> Median (Q1, Q3)</td>
-</tr>
-<tr class="gt_footnotes even">
-<td colspan="6" class="gt_footnote"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>2</sup></span> Welch Two Sample t-test</td>
-</tr>
-<tr class="gt_sourcenotes odd">
-<td colspan="6" class="gt_sourcenote">Abbreviation: CI = Confidence Interval</td>
+</tbody><tfoot class="gt_footnotes">
+<tr class="odd">
+<td colspan="4" class="gt_footnote"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> Median (Q1, Q3)</td>
 </tr>
 </tfoot>
 
@@ -864,8 +881,8 @@ Y = \beta_0 + \beta_1X + \varepsilon
 <li>The predictor/IV (<span class="math inline">\(X\)</span>): <code>age</code></li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>life_model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(life_satisfaction <span class="sc">~</span> age, <span class="at">data =</span> wvs_cleaned)</span>
-<span id="cb5-2"><a></a><span class="fu">summary</span>(life_model1) <span class="co">#summarize the result</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>life_model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(life_satisfaction <span class="sc">~</span> age, <span class="at">data =</span> wvs_cleaned)</span>
+<span id="cb10-2"><a></a><span class="fu">summary</span>(life_model1) <span class="co">#summarize the result</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -916,34 +933,30 @@ F-statistic: 147.7 on 1 and 6401 DF,  p-value: &lt; 2.2e-16</code></pre>
 <section id="present-your-regression-result---huxtable" class="slide level2">
 <h2>Present your regression result - huxtable</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">huxreg</span>(<span class="st">"life satisfaction"</span> <span class="ot">=</span> life_model1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="fu">huxreg</span>(<span class="st">"life satisfaction"</span> <span class="ot">=</span> life_model1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<table class="huxtable" data-quarto-disable-processing="true" style="margin-left: auto; margin-right: auto;">
-<colgroup><col><col></colgroup><thead>
+<table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  ">
+<colgroup><col><col></colgroup><tbody><tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">life satisfaction</th></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="text-align: center;  border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;      font-weight: normal;"></th><th class="huxtable-cell huxtable-header" style="text-align: center;  border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;      font-weight: normal;">life satisfaction</th></tr>
-</thead>
-<tbody>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(Intercept)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">6.326 ***</td></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;">(Intercept)</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;">6.326 ***</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.068)&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;"></th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">(0.068)&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">age</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.016 ***</td></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;">age</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">0.016 ***</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.001)&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;"></th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;">(0.001)&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">N</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">6403&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;">N</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;">6403&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">R2</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.023&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;">R2</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">0.023&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">logLik</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-12796.748&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;">logLik</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">-12796.748&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">AIC</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">25599.496&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;      font-weight: normal;">AIC</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;">25599.496&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
-<tr>
-<th class="huxtable-cell huxtable-header" colspan="2" style="border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;      font-weight: normal;">*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05.</th></tr>
-</tbody>
-</table>
+<th colspan="2" style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05.</th></tr>
+</tbody></table>
 </div>
 </div>
 </section>
@@ -955,9 +968,9 @@ F-statistic: 147.7 on 1 and 6401 DF,  p-value: &lt; 2.2e-16</code></pre>
 <li>The predictors/IV (<span class="math inline">\(X\)</span>): <code>financial_satisfaction</code> and <code>age</code></li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>life_model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(life_satisfaction <span class="sc">~</span> financial_satisfaction <span class="sc">+</span> age, </span>
-<span id="cb8-2"><a></a>                  <span class="at">data =</span> wvs_cleaned)</span>
-<span id="cb8-3"><a></a><span class="fu">summary</span>(life_model2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>life_model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(life_satisfaction <span class="sc">~</span> financial_satisfaction <span class="sc">+</span> age, </span>
+<span id="cb13-2"><a></a>                  <span class="at">data =</span> wvs_cleaned)</span>
+<span id="cb13-3"><a></a><span class="fu">summary</span>(life_model2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 </section>
@@ -996,25 +1009,25 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
 <section id="present-your-regression-result---tbl_regression-from-gtsummary" class="slide level2">
 <h2>Present your regression result - tbl_regression() from gtsummary</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>life_model2 <span class="sc">|&gt;</span> <span class="fu">tbl_regression</span>() <span class="sc">|&gt;</span> <span class="fu">bold_p</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>life_model2 <span class="sc">|&gt;</span> <span class="fu">tbl_regression</span>() <span class="sc">|&gt;</span> <span class="fu">bold_p</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="lhyideqkwv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#lhyideqkwv table {
+<div id="sgwvxnolho" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#sgwvxnolho table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#lhyideqkwv thead, #lhyideqkwv tbody, #lhyideqkwv tfoot, #lhyideqkwv tr, #lhyideqkwv td, #lhyideqkwv th {
+#sgwvxnolho thead, #sgwvxnolho tbody, #sgwvxnolho tfoot, #sgwvxnolho tr, #sgwvxnolho td, #sgwvxnolho th {
   border-style: none;
 }
 
-#lhyideqkwv p {
+#sgwvxnolho p {
   margin: 0;
   padding: 0;
 }
 
-#lhyideqkwv .gt_table {
+#sgwvxnolho .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1040,12 +1053,12 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#lhyideqkwv .gt_caption {
+#sgwvxnolho .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#lhyideqkwv .gt_title {
+#sgwvxnolho .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1057,7 +1070,7 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-width: 0;
 }
 
-#lhyideqkwv .gt_subtitle {
+#sgwvxnolho .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1069,7 +1082,7 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-top-width: 0;
 }
 
-#lhyideqkwv .gt_heading {
+#sgwvxnolho .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1081,13 +1094,13 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#lhyideqkwv .gt_bottom_border {
+#sgwvxnolho .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#lhyideqkwv .gt_col_headings {
+#sgwvxnolho .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1102,7 +1115,7 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#lhyideqkwv .gt_col_heading {
+#sgwvxnolho .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1122,7 +1135,7 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
   overflow-x: hidden;
 }
 
-#lhyideqkwv .gt_column_spanner_outer {
+#sgwvxnolho .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1134,15 +1147,15 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 4px;
 }
 
-#lhyideqkwv .gt_column_spanner_outer:first-child {
+#sgwvxnolho .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#lhyideqkwv .gt_column_spanner_outer:last-child {
+#sgwvxnolho .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#lhyideqkwv .gt_column_spanner {
+#sgwvxnolho .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1154,11 +1167,11 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
   width: 100%;
 }
 
-#lhyideqkwv .gt_spanner_row {
+#sgwvxnolho .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#lhyideqkwv .gt_group_heading {
+#sgwvxnolho .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1184,7 +1197,7 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
   text-align: left;
 }
 
-#lhyideqkwv .gt_empty_group_heading {
+#sgwvxnolho .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1199,15 +1212,15 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
   vertical-align: middle;
 }
 
-#lhyideqkwv .gt_from_md > :first-child {
+#sgwvxnolho .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#lhyideqkwv .gt_from_md > :last-child {
+#sgwvxnolho .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#lhyideqkwv .gt_row {
+#sgwvxnolho .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1226,7 +1239,7 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
   overflow-x: hidden;
 }
 
-#lhyideqkwv .gt_stub {
+#sgwvxnolho .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1239,7 +1252,7 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#lhyideqkwv .gt_stub_row_group {
+#sgwvxnolho .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1253,15 +1266,15 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
   vertical-align: top;
 }
 
-#lhyideqkwv .gt_row_group_first td {
+#sgwvxnolho .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#lhyideqkwv .gt_row_group_first th {
+#sgwvxnolho .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#lhyideqkwv .gt_summary_row {
+#sgwvxnolho .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1271,16 +1284,16 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#lhyideqkwv .gt_first_summary_row {
+#sgwvxnolho .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#lhyideqkwv .gt_first_summary_row.thick {
+#sgwvxnolho .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#lhyideqkwv .gt_last_summary_row {
+#sgwvxnolho .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1290,7 +1303,7 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#lhyideqkwv .gt_grand_summary_row {
+#sgwvxnolho .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1300,7 +1313,7 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#lhyideqkwv .gt_first_grand_summary_row {
+#sgwvxnolho .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1310,7 +1323,7 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#lhyideqkwv .gt_last_grand_summary_row_top {
+#sgwvxnolho .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1320,11 +1333,11 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#lhyideqkwv .gt_striped {
+#sgwvxnolho .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#lhyideqkwv .gt_table_body {
+#sgwvxnolho .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1333,7 +1346,7 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#lhyideqkwv .gt_footnotes {
+#sgwvxnolho .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1347,7 +1360,7 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#lhyideqkwv .gt_footnote {
+#sgwvxnolho .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1356,7 +1369,7 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#lhyideqkwv .gt_sourcenotes {
+#sgwvxnolho .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1370,7 +1383,7 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#lhyideqkwv .gt_sourcenote {
+#sgwvxnolho .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1378,72 +1391,72 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#lhyideqkwv .gt_left {
+#sgwvxnolho .gt_left {
   text-align: left;
 }
 
-#lhyideqkwv .gt_center {
+#sgwvxnolho .gt_center {
   text-align: center;
 }
 
-#lhyideqkwv .gt_right {
+#sgwvxnolho .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#lhyideqkwv .gt_font_normal {
+#sgwvxnolho .gt_font_normal {
   font-weight: normal;
 }
 
-#lhyideqkwv .gt_font_bold {
+#sgwvxnolho .gt_font_bold {
   font-weight: bold;
 }
 
-#lhyideqkwv .gt_font_italic {
+#sgwvxnolho .gt_font_italic {
   font-style: italic;
 }
 
-#lhyideqkwv .gt_super {
+#sgwvxnolho .gt_super {
   font-size: 65%;
 }
 
-#lhyideqkwv .gt_footnote_marks {
+#sgwvxnolho .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#lhyideqkwv .gt_asterisk {
+#sgwvxnolho .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#lhyideqkwv .gt_indent_1 {
+#sgwvxnolho .gt_indent_1 {
   text-indent: 5px;
 }
 
-#lhyideqkwv .gt_indent_2 {
+#sgwvxnolho .gt_indent_2 {
   text-indent: 10px;
 }
 
-#lhyideqkwv .gt_indent_3 {
+#sgwvxnolho .gt_indent_3 {
   text-indent: 15px;
 }
 
-#lhyideqkwv .gt_indent_4 {
+#sgwvxnolho .gt_indent_4 {
   text-indent: 20px;
 }
 
-#lhyideqkwv .gt_indent_5 {
+#sgwvxnolho .gt_indent_5 {
   text-indent: 25px;
 }
 
-#lhyideqkwv .katex-display {
+#sgwvxnolho .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#lhyideqkwv div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#sgwvxnolho div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1470,8 +1483,8 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
 <td class="gt_row gt_center" headers="conf.low">0.00, 0.01</td>
 <td class="gt_row gt_center" headers="p.value" style="font-weight: bold">&lt;0.001</td>
 </tr>
-</tbody><tfoot>
-<tr class="gt_sourcenotes odd">
+</tbody><tfoot class="gt_sourcenotes">
+<tr class="odd">
 <td colspan="4" class="gt_sourcenote">Abbreviation: CI = Confidence Interval</td>
 </tr>
 </tfoot>
@@ -1510,47 +1523,43 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
 </ol>
 <p>For more info about huxreg, go here: <a href="https://cran.r-project.org/web/packages/huxtable/vignettes/huxreg.html" class="uri">https://cran.r-project.org/web/packages/huxtable/vignettes/huxreg.html</a></p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">huxreg</span>(<span class="st">"life_satisfaction (model1)"</span> <span class="ot">=</span> life_model1, </span>
-<span id="cb11-2"><a></a>       <span class="st">"life_satisfaction (model2)"</span> <span class="ot">=</span> life_model2,</span>
-<span id="cb11-3"><a></a>       <span class="at">number_format =</span> <span class="dv">4</span>,</span>
-<span id="cb11-4"><a></a>       <span class="at">bold_signif =</span> <span class="fl">0.05</span>,</span>
-<span id="cb11-5"><a></a>       <span class="at">statistics =</span> <span class="fu">c</span>( <span class="st">"R squared"</span> <span class="ot">=</span> <span class="st">"r.squared"</span>, <span class="st">"N"</span> <span class="ot">=</span> <span class="st">"nobs"</span>, <span class="st">"F"</span> <span class="ot">=</span> <span class="st">"statistic"</span>,</span>
-<span id="cb11-6"><a></a>      <span class="st">"P value"</span> <span class="ot">=</span> <span class="st">"p.value"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="fu">huxreg</span>(<span class="st">"life_satisfaction (model1)"</span> <span class="ot">=</span> life_model1, </span>
+<span id="cb16-2"><a></a>       <span class="st">"life_satisfaction (model2)"</span> <span class="ot">=</span> life_model2,</span>
+<span id="cb16-3"><a></a>       <span class="at">number_format =</span> <span class="dv">4</span>,</span>
+<span id="cb16-4"><a></a>       <span class="at">bold_signif =</span> <span class="fl">0.05</span>,</span>
+<span id="cb16-5"><a></a>       <span class="at">statistics =</span> <span class="fu">c</span>( <span class="st">"R squared"</span> <span class="ot">=</span> <span class="st">"r.squared"</span>, <span class="st">"N"</span> <span class="ot">=</span> <span class="st">"nobs"</span>, <span class="st">"F"</span> <span class="ot">=</span> <span class="st">"statistic"</span>,</span>
+<span id="cb16-6"><a></a>      <span class="st">"P value"</span> <span class="ot">=</span> <span class="st">"p.value"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 </section>
 <section id="presenting-your-models-output" class="slide level2 scrollable output-location-slide"><h2>Presenting your models</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
-<table class="huxtable" data-quarto-disable-processing="true" style="margin-left: auto; margin-right: auto;">
-<colgroup><col><col><col></colgroup><thead>
+<table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  ">
+<colgroup><col><col><col></colgroup><tbody><tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">life_satisfaction (model1)</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">life_satisfaction (model2)</th></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="text-align: center;  border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;      font-weight: normal;"></th><th class="huxtable-cell huxtable-header" style="text-align: center;  border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;      font-weight: normal;">life_satisfaction (model1)</th><th class="huxtable-cell huxtable-header" style="text-align: center;  border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;      font-weight: normal;">life_satisfaction (model2)</th></tr>
-</thead>
-<tbody>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(Intercept)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">6.3264 ***</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">3.3466 ***</td></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;">(Intercept)</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;      font-weight: bold;">6.3264 ***</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;      font-weight: bold;">3.3466 ***</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">(0.0678)&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">(0.0694)&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;"></th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: bold;">(0.0678)&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: bold;">(0.0694)&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">age</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.0162 ***</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.0055 ***</td></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;">age</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: bold;">0.0162 ***</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: bold;">0.0055 ***</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">(0.0013)&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">(0.0010)&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;"></th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: bold;">(0.0013)&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: bold;">(0.0010)&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">financial_satisfaction</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">0.5295 ***</td></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;">financial_satisfaction</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: bold;">0.5295 ***</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">(0.0081)&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;"></th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;      font-weight: bold;">(0.0081)&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">R squared</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.0225&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.4148&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;">R squared</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;">0.0225&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;">0.4148&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">N</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">6403&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">6403&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;">N</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">6403&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">6403&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">F</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">147.6646&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2268.0004&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;">F</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">147.6646&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">2268.0004&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">P value</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.0000&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.0000&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;      font-weight: normal;">P value</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;">0.0000&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;">0.0000&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
-<tr>
-<th class="huxtable-cell huxtable-header" colspan="3" style="border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;      font-weight: normal;">*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05.</th></tr>
-</tbody>
-</table>
+<th colspan="3" style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05.</th></tr>
+</tbody></table>
 </div>
 </div></section><section id="fyi-multicollinearity" class="slide level2">
 <h2>FYI: Multicollinearity</h2>
@@ -1562,7 +1571,7 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
 <li><p>If they seem to be highly correlated (&gt; 5 or so), one of the easiest (and somewhat acceptable) way is to simply remove the less significant predictor from your model :D</p></li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>car<span class="sc">::</span><span class="fu">vif</span>(life_model2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a>car<span class="sc">::</span><span class="fu">vif</span>(life_model2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>financial_satisfaction                    age 
               1.024893               1.024893 </code></pre>
@@ -1590,11 +1599,11 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="fu">str</span>(wvs_cleaned<span class="sc">$</span>life_satisfaction)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a><span class="fu">str</span>(wvs_cleaned<span class="sc">$</span>life_satisfaction)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> num [1:6403] 7 5 8 6 6 8 9 8 8 10 ...</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="fu">str</span>(wvs_cleaned<span class="sc">$</span>age_group)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a><span class="fu">str</span>(wvs_cleaned<span class="sc">$</span>age_group)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> Factor w/ 4 levels "61+","45-60",..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
 </div>
@@ -1604,8 +1613,8 @@ F-statistic:  2268 on 2 and 6400 DF,  p-value: &lt; 2.2e-16</code></pre>
 <h2>Continuing the analysis</h2>
 <p>The analysis summary should look like this:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>life_model3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(life_satisfaction <span class="sc">~</span> age_group, <span class="at">data =</span> wvs_cleaned)</span>
-<span id="cb18-2"><a></a><span class="fu">summary</span>(life_model3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a>life_model3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(life_satisfaction <span class="sc">~</span> age_group, <span class="at">data =</span> wvs_cleaned)</span>
+<span id="cb23-2"><a></a><span class="fu">summary</span>(life_model3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1647,67 +1656,63 @@ F-statistic: 55.44 on 3 and 6399 DF,  p-value: &lt; 2.2e-16</code></pre>
 <section id="presenting-the-regression-table" class="slide level2 scrollable">
 <h2>Presenting the regression table</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="fu">huxreg</span>(<span class="st">"life satisfaction (model3)"</span> <span class="ot">=</span> life_model3,</span>
-<span id="cb20-2"><a></a>       <span class="at">number_format =</span> <span class="dv">4</span>,</span>
-<span id="cb20-3"><a></a>       <span class="at">bold_signif =</span> <span class="fl">0.05</span>,</span>
-<span id="cb20-4"><a></a>       <span class="at">statistics =</span> <span class="fu">c</span>( <span class="st">"R squared"</span> <span class="ot">=</span> <span class="st">"r.squared"</span>, <span class="st">"N"</span> <span class="ot">=</span> <span class="st">"nobs"</span>, <span class="st">"F"</span> <span class="ot">=</span> <span class="st">"statistic"</span>,</span>
-<span id="cb20-5"><a></a>      <span class="st">"P value"</span> <span class="ot">=</span> <span class="st">"p.value"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a><span class="fu">huxreg</span>(<span class="st">"life satisfaction (model3)"</span> <span class="ot">=</span> life_model3,</span>
+<span id="cb25-2"><a></a>       <span class="at">number_format =</span> <span class="dv">4</span>,</span>
+<span id="cb25-3"><a></a>       <span class="at">bold_signif =</span> <span class="fl">0.05</span>,</span>
+<span id="cb25-4"><a></a>       <span class="at">statistics =</span> <span class="fu">c</span>( <span class="st">"R squared"</span> <span class="ot">=</span> <span class="st">"r.squared"</span>, <span class="st">"N"</span> <span class="ot">=</span> <span class="st">"nobs"</span>, <span class="st">"F"</span> <span class="ot">=</span> <span class="st">"statistic"</span>,</span>
+<span id="cb25-5"><a></a>      <span class="st">"P value"</span> <span class="ot">=</span> <span class="st">"p.value"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 </section>
 <section id="presenting-the-regression-table-output" class="slide level2 scrollable output-location-slide"><h2>Presenting the regression table</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
-<table class="huxtable" data-quarto-disable-processing="true" style="margin-left: auto; margin-right: auto;">
-<colgroup><col><col></colgroup><thead>
+<table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  ">
+<colgroup><col><col></colgroup><tbody><tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">life satisfaction (model3)</th></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="text-align: center;  border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;      font-weight: normal;"></th><th class="huxtable-cell huxtable-header" style="text-align: center;  border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;      font-weight: normal;">life satisfaction (model3)</th></tr>
-</thead>
-<tbody>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(Intercept)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">7.5293 ***</td></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;">(Intercept)</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;      font-weight: bold;">7.5293 ***</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">(0.0430)&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;"></th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: bold;">(0.0430)&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">age_group45-60</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">-0.5162 ***</td></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;">age_group45-60</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: bold;">-0.5162 ***</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">(0.0598)&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;"></th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: bold;">(0.0598)&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">age_group29-44</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">-0.4939 ***</td></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;">age_group29-44</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: bold;">-0.4939 ***</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">(0.0596)&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;"></th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: bold;">(0.0596)&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">age_group18-28</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">-0.8684 ***</td></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;">age_group18-28</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: bold;">-0.8684 ***</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">(0.0712)&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;"></th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;      font-weight: bold;">(0.0712)&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">R squared</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.0253&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;">R squared</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;">0.0253&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">N</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">6403&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;">N</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">6403&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">F</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">55.4384&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;">F</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">55.4384&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">P value</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.0000&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;      font-weight: normal;">P value</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;">0.0000&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
-<tr>
-<th class="huxtable-cell huxtable-header" colspan="2" style="border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;      font-weight: normal;">*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05.</th></tr>
-</tbody>
-</table>
+<th colspan="2" style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05.</th></tr>
+</tbody></table>
 </div>
 </div></section><section id="categorical-predictor-changing-the-reference" class="slide level2">
 <h2>Categorical predictor: changing the reference</h2>
 <p>Let’s change the reference category for <code>age_group</code> variable to “61+”.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a>wvs_cleaned <span class="ot">&lt;-</span> wvs_cleaned <span class="sc">|&gt;</span> </span>
-<span id="cb21-2"><a></a>    <span class="fu">mutate</span>(<span class="at">age_group =</span> <span class="fu">relevel</span>(age_group, <span class="at">ref =</span> <span class="st">"61+"</span>))</span>
-<span id="cb21-3"><a></a></span>
-<span id="cb21-4"><a></a><span class="fu">str</span>(wvs_cleaned<span class="sc">$</span>age_group)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a>wvs_cleaned <span class="ot">&lt;-</span> wvs_cleaned <span class="sc">|&gt;</span> </span>
+<span id="cb26-2"><a></a>    <span class="fu">mutate</span>(<span class="at">age_group =</span> <span class="fu">relevel</span>(age_group, <span class="at">ref =</span> <span class="st">"61+"</span>))</span>
+<span id="cb26-3"><a></a></span>
+<span id="cb26-4"><a></a><span class="fu">str</span>(wvs_cleaned<span class="sc">$</span>age_group)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> Factor w/ 4 levels "61+","45-60",..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
 </div>
 </div>
 <p>Re-run the analysis with the new reference category</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a>life_model3a<span class="ot">&lt;-</span> <span class="fu">lm</span>(life_satisfaction <span class="sc">~</span> age_group, <span class="at">data =</span> wvs_cleaned)</span>
-<span id="cb23-2"><a></a><span class="fu">summary</span>(life_model3a)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a>life_model3a<span class="ot">&lt;-</span> <span class="fu">lm</span>(life_satisfaction <span class="sc">~</span> age_group, <span class="at">data =</span> wvs_cleaned)</span>
+<span id="cb28-2"><a></a><span class="fu">summary</span>(life_model3a)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 </section>
@@ -1737,10 +1742,10 @@ F-statistic: 55.44 on 3 and 6399 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div></section><section id="changing-baseline-category-for-ordered-factor" class="slide level2">
 <h2>Changing baseline category for ordered factor</h2>
 <p>Assuming we have a column with ordered factor in our data called <code>education</code> with the level of <code>Primary</code>, <code>Secondary</code>, and <code>Tertiary</code>. This is how we can change the order, if we want to put <code>Secondary</code> before <code>Primary</code>.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a>wvs_cleaned <span class="ot">&lt;-</span> wvs_cleaned <span class="sc">|&gt;</span> </span>
-<span id="cb25-2"><a></a>    <span class="fu">mutate</span>(<span class="at">education =</span> <span class="fu">factor</span>(education, </span>
-<span id="cb25-3"><a></a>                         <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Secondary"</span>, <span class="st">"Primary"</span>, <span class="st">"Tertiary"</span>), </span>
-<span id="cb25-4"><a></a>                         <span class="at">ordered =</span> <span class="cn">TRUE</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a>wvs_cleaned <span class="ot">&lt;-</span> wvs_cleaned <span class="sc">|&gt;</span> </span>
+<span id="cb30-2"><a></a>    <span class="fu">mutate</span>(<span class="at">education =</span> <span class="fu">factor</span>(education, </span>
+<span id="cb30-3"><a></a>                         <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Secondary"</span>, <span class="st">"Primary"</span>, <span class="st">"Tertiary"</span>), </span>
+<span id="cb30-4"><a></a>                         <span class="at">ordered =</span> <span class="cn">TRUE</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div title="Releveling ordered factor">
 <div class="callout callout-note callout-titled callout-style-simple">
 <div class="callout-body">
@@ -1763,8 +1768,8 @@ F-statistic: 55.44 on 3 and 6399 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a>life_model4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(life_satisfaction <span class="sc">~</span> sex, <span class="at">data =</span> wvs_cleaned)</span>
-<span id="cb26-2"><a></a><span class="fu">summary</span>(life_model4)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a>life_model4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(life_satisfaction <span class="sc">~</span> sex, <span class="at">data =</span> wvs_cleaned)</span>
+<span id="cb31-2"><a></a><span class="fu">summary</span>(life_model4)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1829,12 +1834,13 @@ P = \frac{1}{1 + e^{-(\beta_0 + \beta_1X)}}
 <h2>Dummy-coding dependent variable</h2>
 <p>Before we proceed with the calculations, we need to <strong>dummy code</strong> the dependent variable into 1 and 0, with 1 = Satisfied and 0 = Not Satisfied. <a href="https://stats.oarc.ucla.edu/other/mult-pkg/faq/general/faqwhat-is-dummy-coding/">More info on dummy coding here</a></p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a><span class="co"># First, we need to create a binary outcome</span></span>
-<span id="cb28-2"><a></a>wvs_cleaned <span class="ot">&lt;-</span> wvs_cleaned <span class="sc">|&gt;</span></span>
-<span id="cb28-3"><a></a>    <span class="fu">mutate</span>(<span class="at">satisfied =</span> <span class="fu">if_else</span>(life_satisfaction <span class="sc">&gt;=</span> <span class="dv">7</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span>
-<span id="cb28-4"><a></a><span class="co"># the if_else is from dplyr package (from session 2)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a></a><span class="co"># First, we need to create a binary outcome</span></span>
+<span id="cb33-2"><a></a>wvs_cleaned <span class="ot">&lt;-</span> wvs_cleaned <span class="sc">|&gt;</span></span>
+<span id="cb33-3"><a></a>    <span class="fu">mutate</span>(<span class="at">satisfied =</span> <span class="fu">if_else</span>(life_satisfaction <span class="sc">&gt;=</span> <span class="dv">7</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span>
+<span id="cb33-4"><a></a><span class="co"># the if_else is from dplyr package (from session 2)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a></a>wvs_cleaned <span class="sc">|&gt;</span> <span class="fu">select</span>(life_satisfaction, satisfied) <span class="sc">|&gt;</span> <span class="fu">print</span>(<span class="at">n =</span> <span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6,403 × 2
   life_satisfaction satisfied
@@ -1852,11 +1858,11 @@ P = \frac{1}{1 + e^{-(\beta_0 + \beta_1X)}}
 <h2>Conduct the analysis</h2>
 <p>Let’s conduct the analysis!</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a>life_model5 <span class="ot">&lt;-</span> <span class="fu">glm</span>(satisfied <span class="sc">~</span> political_scale,</span>
-<span id="cb30-2"><a></a>                <span class="at">family =</span> binomial, </span>
-<span id="cb30-3"><a></a>                <span class="at">data =</span> wvs_cleaned)</span>
-<span id="cb30-4"><a></a></span>
-<span id="cb30-5"><a></a><span class="fu">summary</span>(life_model5)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a></a>life_model5 <span class="ot">&lt;-</span> <span class="fu">glm</span>(satisfied <span class="sc">~</span> political_scale,</span>
+<span id="cb36-2"><a></a>                <span class="at">family =</span> binomial, </span>
+<span id="cb36-3"><a></a>                <span class="at">data =</span> wvs_cleaned)</span>
+<span id="cb36-4"><a></a></span>
+<span id="cb36-5"><a></a><span class="fu">summary</span>(life_model5)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1884,7 +1890,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <h2>Exponentiate the coefficients</h2>
 <p>If you recall the formula, the results are expressed in Logit Probability. As we typically report the result in terms of Odd Ratios (OR), perform exponentiation on the coefficients.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a><span class="fu">exp</span>(<span class="fu">coef</span>(life_model5))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a></a><span class="fu">exp</span>(<span class="fu">coef</span>(life_model5))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    (Intercept) political_scale 
        1.575194        1.088155 </code></pre>
@@ -1892,27 +1898,27 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </div>
 <p>We can also use <code>tbl_regression()</code> to do this for us:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a></a><span class="fu">library</span>(gtsummary)</span>
-<span id="cb34-2"><a></a>life_model5 <span class="sc">|&gt;</span> <span class="fu">tbl_regression</span>(<span class="at">exponentiate =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb34-3"><a></a>    <span class="fu">bold_p</span>() </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a></a><span class="fu">library</span>(gtsummary)</span>
+<span id="cb40-2"><a></a>life_model5 <span class="sc">|&gt;</span> <span class="fu">tbl_regression</span>(<span class="at">exponentiate =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb40-3"><a></a>    <span class="fu">bold_p</span>() </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="kenfoyqefy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#kenfoyqefy table {
+<div id="bjecdozkmf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#bjecdozkmf table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#kenfoyqefy thead, #kenfoyqefy tbody, #kenfoyqefy tfoot, #kenfoyqefy tr, #kenfoyqefy td, #kenfoyqefy th {
+#bjecdozkmf thead, #bjecdozkmf tbody, #bjecdozkmf tfoot, #bjecdozkmf tr, #bjecdozkmf td, #bjecdozkmf th {
   border-style: none;
 }
 
-#kenfoyqefy p {
+#bjecdozkmf p {
   margin: 0;
   padding: 0;
 }
 
-#kenfoyqefy .gt_table {
+#bjecdozkmf .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1938,12 +1944,12 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#kenfoyqefy .gt_caption {
+#bjecdozkmf .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#kenfoyqefy .gt_title {
+#bjecdozkmf .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1955,7 +1961,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-bottom-width: 0;
 }
 
-#kenfoyqefy .gt_subtitle {
+#bjecdozkmf .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1967,7 +1973,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-top-width: 0;
 }
 
-#kenfoyqefy .gt_heading {
+#bjecdozkmf .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1979,13 +1985,13 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#kenfoyqefy .gt_bottom_border {
+#bjecdozkmf .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#kenfoyqefy .gt_col_headings {
+#bjecdozkmf .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2000,7 +2006,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#kenfoyqefy .gt_col_heading {
+#bjecdozkmf .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2020,7 +2026,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   overflow-x: hidden;
 }
 
-#kenfoyqefy .gt_column_spanner_outer {
+#bjecdozkmf .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2032,15 +2038,15 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 4px;
 }
 
-#kenfoyqefy .gt_column_spanner_outer:first-child {
+#bjecdozkmf .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#kenfoyqefy .gt_column_spanner_outer:last-child {
+#bjecdozkmf .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#kenfoyqefy .gt_column_spanner {
+#bjecdozkmf .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2052,11 +2058,11 @@ Number of Fisher Scoring iterations: 4</code></pre>
   width: 100%;
 }
 
-#kenfoyqefy .gt_spanner_row {
+#bjecdozkmf .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#kenfoyqefy .gt_group_heading {
+#bjecdozkmf .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2082,7 +2088,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   text-align: left;
 }
 
-#kenfoyqefy .gt_empty_group_heading {
+#bjecdozkmf .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2097,15 +2103,15 @@ Number of Fisher Scoring iterations: 4</code></pre>
   vertical-align: middle;
 }
 
-#kenfoyqefy .gt_from_md > :first-child {
+#bjecdozkmf .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#kenfoyqefy .gt_from_md > :last-child {
+#bjecdozkmf .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#kenfoyqefy .gt_row {
+#bjecdozkmf .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2124,7 +2130,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   overflow-x: hidden;
 }
 
-#kenfoyqefy .gt_stub {
+#bjecdozkmf .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2137,7 +2143,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#kenfoyqefy .gt_stub_row_group {
+#bjecdozkmf .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2151,15 +2157,15 @@ Number of Fisher Scoring iterations: 4</code></pre>
   vertical-align: top;
 }
 
-#kenfoyqefy .gt_row_group_first td {
+#bjecdozkmf .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#kenfoyqefy .gt_row_group_first th {
+#bjecdozkmf .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#kenfoyqefy .gt_summary_row {
+#bjecdozkmf .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2169,16 +2175,16 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#kenfoyqefy .gt_first_summary_row {
+#bjecdozkmf .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#kenfoyqefy .gt_first_summary_row.thick {
+#bjecdozkmf .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#kenfoyqefy .gt_last_summary_row {
+#bjecdozkmf .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2188,7 +2194,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#kenfoyqefy .gt_grand_summary_row {
+#bjecdozkmf .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2198,7 +2204,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#kenfoyqefy .gt_first_grand_summary_row {
+#bjecdozkmf .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2208,7 +2214,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#kenfoyqefy .gt_last_grand_summary_row_top {
+#bjecdozkmf .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2218,11 +2224,11 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#kenfoyqefy .gt_striped {
+#bjecdozkmf .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#kenfoyqefy .gt_table_body {
+#bjecdozkmf .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2231,7 +2237,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#kenfoyqefy .gt_footnotes {
+#bjecdozkmf .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2245,7 +2251,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#kenfoyqefy .gt_footnote {
+#bjecdozkmf .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2254,7 +2260,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#kenfoyqefy .gt_sourcenotes {
+#bjecdozkmf .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2268,7 +2274,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#kenfoyqefy .gt_sourcenote {
+#bjecdozkmf .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2276,72 +2282,72 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#kenfoyqefy .gt_left {
+#bjecdozkmf .gt_left {
   text-align: left;
 }
 
-#kenfoyqefy .gt_center {
+#bjecdozkmf .gt_center {
   text-align: center;
 }
 
-#kenfoyqefy .gt_right {
+#bjecdozkmf .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#kenfoyqefy .gt_font_normal {
+#bjecdozkmf .gt_font_normal {
   font-weight: normal;
 }
 
-#kenfoyqefy .gt_font_bold {
+#bjecdozkmf .gt_font_bold {
   font-weight: bold;
 }
 
-#kenfoyqefy .gt_font_italic {
+#bjecdozkmf .gt_font_italic {
   font-style: italic;
 }
 
-#kenfoyqefy .gt_super {
+#bjecdozkmf .gt_super {
   font-size: 65%;
 }
 
-#kenfoyqefy .gt_footnote_marks {
+#bjecdozkmf .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#kenfoyqefy .gt_asterisk {
+#bjecdozkmf .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#kenfoyqefy .gt_indent_1 {
+#bjecdozkmf .gt_indent_1 {
   text-indent: 5px;
 }
 
-#kenfoyqefy .gt_indent_2 {
+#bjecdozkmf .gt_indent_2 {
   text-indent: 10px;
 }
 
-#kenfoyqefy .gt_indent_3 {
+#bjecdozkmf .gt_indent_3 {
   text-indent: 15px;
 }
 
-#kenfoyqefy .gt_indent_4 {
+#bjecdozkmf .gt_indent_4 {
   text-indent: 20px;
 }
 
-#kenfoyqefy .gt_indent_5 {
+#bjecdozkmf .gt_indent_5 {
   text-indent: 25px;
 }
 
-#kenfoyqefy .katex-display {
+#bjecdozkmf .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#kenfoyqefy div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#bjecdozkmf div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2362,8 +2368,8 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <td class="gt_row gt_center" headers="conf.low">1.06, 1.12</td>
 <td class="gt_row gt_center" headers="p.value" style="font-weight: bold">&lt;0.001</td>
 </tr>
-</tbody><tfoot>
-<tr class="gt_sourcenotes odd">
+</tbody><tfoot class="gt_sourcenotes">
+<tr class="odd">
 <td colspan="4" class="gt_sourcenote">Abbreviations: CI = Confidence Interval, OR = Odds Ratio</td>
 </tr>
 </tfoot>
@@ -2391,7 +2397,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <li>χ² = 41</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a></a><span class="fu">pchisq</span>(<span class="dv">41</span>, <span class="at">df=</span><span class="dv">1</span>, <span class="at">lower.tail=</span><span class="cn">FALSE</span>)  <span class="co"># will give p-value</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a></a><span class="fu">pchisq</span>(<span class="dv">41</span>, <span class="at">df=</span><span class="dv">1</span>, <span class="at">lower.tail=</span><span class="cn">FALSE</span>)  <span class="co"># will give p-value</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.522292e-10</code></pre>
 </div>
@@ -2402,8 +2408,8 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <p>In the report, the model’s χ² (chi-squared) and R-squared (indicating the proportion of variance that can be explained by the model) should be included. However, since the resulting item does not have this info, we will call upon <code>DescTools</code>’ <code>PseudoR2()</code> function to help!</p>
 <div class="cell columns column-output-location">
 <div class="column">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a></a><span class="co"># by default, McFadden will be used</span></span>
-<span id="cb37-2"><a></a>DescTools<span class="sc">::</span><span class="fu">PseudoR2</span>(life_model5) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a></a><span class="co"># by default, McFadden will be used</span></span>
+<span id="cb43-2"><a></a>DescTools<span class="sc">::</span><span class="fu">PseudoR2</span>(life_model5) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column">
 <div class="cell-output cell-output-stdout">
 <pre><code>   McFadden 
@@ -2413,8 +2419,8 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <p>We can retrieve the R-squared value and the χ² (also known as the G2 value, which stands for Goodness-of-fit) at the same time like so:</p>
 <div class="cell columns column-output-location">
 <div class="column">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a></a>DescTools<span class="sc">::</span><span class="fu">PseudoR2</span>(life_model5, </span>
-<span id="cb39-2"><a></a>                    <span class="at">which =</span> <span class="fu">c</span>(<span class="st">"G2"</span>, <span class="st">"Nagelkerke"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a></a>DescTools<span class="sc">::</span><span class="fu">PseudoR2</span>(life_model5, </span>
+<span id="cb45-2"><a></a>                    <span class="at">which =</span> <span class="fu">c</span>(<span class="st">"G2"</span>, <span class="st">"Nagelkerke"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column">
 <div class="cell-output cell-output-stdout">
 <pre><code>          G2   Nagelkerke 
@@ -2425,8 +2431,8 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <section id="in-case-you-need-to-get-other-rsquared-methods" class="slide level2">
 <h2>In case you need to get other Rsquared methods</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a></a>DescTools<span class="sc">::</span><span class="fu">PseudoR2</span>(life_model5, </span>
-<span id="cb41-2"><a></a>                    <span class="at">which =</span> <span class="st">"all"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a></a>DescTools<span class="sc">::</span><span class="fu">PseudoR2</span>(life_model5, </span>
+<span id="cb47-2"><a></a>                    <span class="at">which =</span> <span class="st">"all"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       McFadden     McFaddenAdj        CoxSnell      Nagelkerke   AldrichNelson 
    5.306369e-03    4.788971e-03    6.386437e-03    9.110118e-03    6.366131e-03 
@@ -2473,30 +2479,30 @@ VeallZimmermann           Efron McKelveyZavoina            Tjur             AIC
 <h2>Regression tables</h2>
 <p>Even with huxtable, you may need to edit the table further to include the missing stats</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a></a><span class="fu">huxreg</span>(<span class="st">"life_satisfaction"</span> <span class="ot">=</span> life_model5, <span class="at">statistics =</span> <span class="fu">c</span>(<span class="st">"R2"</span> <span class="ot">=</span> <span class="st">"r.squared"</span>, <span class="st">"logLik"</span>, <span class="st">"AIC"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a></a><span class="fu">huxreg</span>(<span class="st">"life_satisfaction"</span> <span class="ot">=</span> life_model5, <span class="at">statistics =</span> <span class="fu">c</span>(<span class="st">"R2"</span> <span class="ot">=</span> <span class="st">"r.squared"</span>, <span class="st">"logLik"</span>, <span class="st">"AIC"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in huxreg(life_satisfaction = life_model5, statistics = c(R2 = "r.squared", : Unrecognized statistics: r.squared
+Try setting `statistics` explicitly in the call to `huxreg()`</code></pre>
+</div>
 <div class="cell-output-display">
-<table class="huxtable" data-quarto-disable-processing="true" style="margin-left: auto; margin-right: auto;">
-<colgroup><col><col></colgroup><thead>
+<table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  ">
+<colgroup><col><col></colgroup><tbody><tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">life_satisfaction</th></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="text-align: center;  border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;      font-weight: normal;"></th><th class="huxtable-cell huxtable-header" style="text-align: center;  border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;      font-weight: normal;">life_satisfaction</th></tr>
-</thead>
-<tbody>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(Intercept)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.454 ***</td></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;">(Intercept)</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;">0.454 ***</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.072)&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;"></th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">(0.072)&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">political_scale</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.084 ***</td></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;">political_scale</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">0.084 ***</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.013)&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;"></th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;">(0.013)&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">logLik</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-3844.984&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;">logLik</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;">-3844.984&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">AIC</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">7693.968&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;      font-weight: normal;">AIC</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;">7693.968&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
-<tr>
-<th class="huxtable-cell huxtable-header" colspan="2" style="border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;      font-weight: normal;">*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05.</th></tr>
-</tbody>
-</table>
+<th colspan="2" style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05.</th></tr>
+</tbody></table>
 </div>
 </div>
 </section>
@@ -2508,14 +2514,14 @@ VeallZimmermann           Efron McKelveyZavoina            Tjur             AIC
 <li>The predictor/IV (<span class="math inline">\(X\)</span>): <code>religiousity</code> - let’s set “A religious person” as the reference category!</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a></a>wvs_cleaned <span class="ot">&lt;-</span> wvs_cleaned <span class="sc">|&gt;</span> </span>
-<span id="cb44-2"><a></a>    <span class="fu">mutate</span>(<span class="at">religiousity =</span> <span class="fu">relevel</span>(religiousity, <span class="at">ref =</span> <span class="st">"A religious person"</span>))</span>
-<span id="cb44-3"><a></a></span>
-<span id="cb44-4"><a></a>life_model6 <span class="ot">&lt;-</span> <span class="fu">glm</span>(satisfied <span class="sc">~</span> religiousity,</span>
-<span id="cb44-5"><a></a>                      <span class="at">family =</span> <span class="st">"binomial"</span>,</span>
-<span id="cb44-6"><a></a>                      <span class="at">data =</span> wvs_cleaned)</span>
-<span id="cb44-7"><a></a></span>
-<span id="cb44-8"><a></a><span class="fu">summary</span>(life_model6)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a></a>wvs_cleaned <span class="ot">&lt;-</span> wvs_cleaned <span class="sc">|&gt;</span> </span>
+<span id="cb51-2"><a></a>    <span class="fu">mutate</span>(<span class="at">religiousity =</span> <span class="fu">relevel</span>(religiousity, <span class="at">ref =</span> <span class="st">"A religious person"</span>))</span>
+<span id="cb51-3"><a></a></span>
+<span id="cb51-4"><a></a>life_model6 <span class="ot">&lt;-</span> <span class="fu">glm</span>(satisfied <span class="sc">~</span> religiousity,</span>
+<span id="cb51-5"><a></a>                      <span class="at">family =</span> <span class="st">"binomial"</span>,</span>
+<span id="cb51-6"><a></a>                      <span class="at">data =</span> wvs_cleaned)</span>
+<span id="cb51-7"><a></a></span>
+<span id="cb51-8"><a></a><span class="fu">summary</span>(life_model6)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 </section>
@@ -2543,7 +2549,7 @@ AIC: 7723.3
 
 Number of Fisher Scoring iterations: 4</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a></a><span class="fu">exp</span>(<span class="fu">coef</span>(life_model6))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a></a><span class="fu">exp</span>(<span class="fu">coef</span>(life_model6))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                       (Intercept) religiousityNot a religious person 
                          2.7374462                          0.8404704 
@@ -2554,27 +2560,27 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <h2>Exponentiate the coefficients</h2>
 <p>If you recall the formula, the results are expressed in Logit Probability. As we typically report the result in terms of Odd Ratios (OR), perform exponentiation on the coefficients.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a></a><span class="fu">library</span>(gtsummary)</span>
-<span id="cb48-2"><a></a>life_model6 <span class="sc">|&gt;</span> <span class="fu">tbl_regression</span>(<span class="at">exponentiate =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span>  </span>
-<span id="cb48-3"><a></a>    <span class="fu">bold_p</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a></a><span class="fu">library</span>(gtsummary)</span>
+<span id="cb55-2"><a></a>life_model6 <span class="sc">|&gt;</span> <span class="fu">tbl_regression</span>(<span class="at">exponentiate =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span>  </span>
+<span id="cb55-3"><a></a>    <span class="fu">bold_p</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="qsvlbsenkz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#qsvlbsenkz table {
+<div id="ooyaipmcom" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ooyaipmcom table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#qsvlbsenkz thead, #qsvlbsenkz tbody, #qsvlbsenkz tfoot, #qsvlbsenkz tr, #qsvlbsenkz td, #qsvlbsenkz th {
+#ooyaipmcom thead, #ooyaipmcom tbody, #ooyaipmcom tfoot, #ooyaipmcom tr, #ooyaipmcom td, #ooyaipmcom th {
   border-style: none;
 }
 
-#qsvlbsenkz p {
+#ooyaipmcom p {
   margin: 0;
   padding: 0;
 }
 
-#qsvlbsenkz .gt_table {
+#ooyaipmcom .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2600,12 +2606,12 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#qsvlbsenkz .gt_caption {
+#ooyaipmcom .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#qsvlbsenkz .gt_title {
+#ooyaipmcom .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2617,7 +2623,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-bottom-width: 0;
 }
 
-#qsvlbsenkz .gt_subtitle {
+#ooyaipmcom .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2629,7 +2635,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-top-width: 0;
 }
 
-#qsvlbsenkz .gt_heading {
+#ooyaipmcom .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2641,13 +2647,13 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#qsvlbsenkz .gt_bottom_border {
+#ooyaipmcom .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qsvlbsenkz .gt_col_headings {
+#ooyaipmcom .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2662,7 +2668,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#qsvlbsenkz .gt_col_heading {
+#ooyaipmcom .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2682,7 +2688,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   overflow-x: hidden;
 }
 
-#qsvlbsenkz .gt_column_spanner_outer {
+#ooyaipmcom .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2694,15 +2700,15 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 4px;
 }
 
-#qsvlbsenkz .gt_column_spanner_outer:first-child {
+#ooyaipmcom .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qsvlbsenkz .gt_column_spanner_outer:last-child {
+#ooyaipmcom .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qsvlbsenkz .gt_column_spanner {
+#ooyaipmcom .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2714,11 +2720,11 @@ Number of Fisher Scoring iterations: 4</code></pre>
   width: 100%;
 }
 
-#qsvlbsenkz .gt_spanner_row {
+#ooyaipmcom .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#qsvlbsenkz .gt_group_heading {
+#ooyaipmcom .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2744,7 +2750,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   text-align: left;
 }
 
-#qsvlbsenkz .gt_empty_group_heading {
+#ooyaipmcom .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2759,15 +2765,15 @@ Number of Fisher Scoring iterations: 4</code></pre>
   vertical-align: middle;
 }
 
-#qsvlbsenkz .gt_from_md > :first-child {
+#ooyaipmcom .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qsvlbsenkz .gt_from_md > :last-child {
+#ooyaipmcom .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qsvlbsenkz .gt_row {
+#ooyaipmcom .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2786,7 +2792,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   overflow-x: hidden;
 }
 
-#qsvlbsenkz .gt_stub {
+#ooyaipmcom .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2799,7 +2805,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#qsvlbsenkz .gt_stub_row_group {
+#ooyaipmcom .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2813,15 +2819,15 @@ Number of Fisher Scoring iterations: 4</code></pre>
   vertical-align: top;
 }
 
-#qsvlbsenkz .gt_row_group_first td {
+#ooyaipmcom .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#qsvlbsenkz .gt_row_group_first th {
+#ooyaipmcom .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#qsvlbsenkz .gt_summary_row {
+#ooyaipmcom .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2831,16 +2837,16 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#qsvlbsenkz .gt_first_summary_row {
+#ooyaipmcom .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#qsvlbsenkz .gt_first_summary_row.thick {
+#ooyaipmcom .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#qsvlbsenkz .gt_last_summary_row {
+#ooyaipmcom .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2850,7 +2856,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#qsvlbsenkz .gt_grand_summary_row {
+#ooyaipmcom .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2860,7 +2866,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#qsvlbsenkz .gt_first_grand_summary_row {
+#ooyaipmcom .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2870,7 +2876,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#qsvlbsenkz .gt_last_grand_summary_row_top {
+#ooyaipmcom .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2880,11 +2886,11 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#qsvlbsenkz .gt_striped {
+#ooyaipmcom .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#qsvlbsenkz .gt_table_body {
+#ooyaipmcom .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2893,7 +2899,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#qsvlbsenkz .gt_footnotes {
+#ooyaipmcom .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2907,7 +2913,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#qsvlbsenkz .gt_footnote {
+#ooyaipmcom .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2916,7 +2922,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#qsvlbsenkz .gt_sourcenotes {
+#ooyaipmcom .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2930,7 +2936,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#qsvlbsenkz .gt_sourcenote {
+#ooyaipmcom .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2938,72 +2944,72 @@ Number of Fisher Scoring iterations: 4</code></pre>
   padding-right: 5px;
 }
 
-#qsvlbsenkz .gt_left {
+#ooyaipmcom .gt_left {
   text-align: left;
 }
 
-#qsvlbsenkz .gt_center {
+#ooyaipmcom .gt_center {
   text-align: center;
 }
 
-#qsvlbsenkz .gt_right {
+#ooyaipmcom .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qsvlbsenkz .gt_font_normal {
+#ooyaipmcom .gt_font_normal {
   font-weight: normal;
 }
 
-#qsvlbsenkz .gt_font_bold {
+#ooyaipmcom .gt_font_bold {
   font-weight: bold;
 }
 
-#qsvlbsenkz .gt_font_italic {
+#ooyaipmcom .gt_font_italic {
   font-style: italic;
 }
 
-#qsvlbsenkz .gt_super {
+#ooyaipmcom .gt_super {
   font-size: 65%;
 }
 
-#qsvlbsenkz .gt_footnote_marks {
+#ooyaipmcom .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#qsvlbsenkz .gt_asterisk {
+#ooyaipmcom .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#qsvlbsenkz .gt_indent_1 {
+#ooyaipmcom .gt_indent_1 {
   text-indent: 5px;
 }
 
-#qsvlbsenkz .gt_indent_2 {
+#ooyaipmcom .gt_indent_2 {
   text-indent: 10px;
 }
 
-#qsvlbsenkz .gt_indent_3 {
+#ooyaipmcom .gt_indent_3 {
   text-indent: 15px;
 }
 
-#qsvlbsenkz .gt_indent_4 {
+#ooyaipmcom .gt_indent_4 {
   text-indent: 20px;
 }
 
-#qsvlbsenkz .gt_indent_5 {
+#ooyaipmcom .gt_indent_5 {
   text-indent: 25px;
 }
 
-#qsvlbsenkz .katex-display {
+#ooyaipmcom .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#qsvlbsenkz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ooyaipmcom div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3058,8 +3064,8 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <td class="gt_row gt_center" headers="conf.low">0.63, 2.67</td>
 <td class="gt_row gt_center" headers="p.value">0.5</td>
 </tr>
-</tbody><tfoot>
-<tr class="gt_sourcenotes odd">
+</tbody><tfoot class="gt_sourcenotes">
+<tr class="odd">
 <td colspan="4" class="gt_sourcenote">Abbreviations: CI = Confidence Interval, OR = Odds Ratio</td>
 </tr>
 </tfoot>
@@ -3074,17 +3080,17 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <h2>Get the Rsquared</h2>
 <p>Let’s retrieve the R-squared value and the Chi-square χ² value (also known as the G2 value, which stands for Goodness-of-fit)</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a></a>DescTools<span class="sc">::</span><span class="fu">PseudoR2</span>(life_model6, </span>
-<span id="cb49-2"><a></a>                    <span class="at">which =</span> <span class="fu">c</span>(<span class="st">"G2"</span>, <span class="st">"Nagelkerke"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a></a>DescTools<span class="sc">::</span><span class="fu">PseudoR2</span>(life_model6, </span>
+<span id="cb56-2"><a></a>                    <span class="at">which =</span> <span class="fu">c</span>(<span class="st">"G2"</span>, <span class="st">"Nagelkerke"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          G2   Nagelkerke 
 15.652088008  0.003482759 </code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a></a><span class="co"># get the other R-squared if you like</span></span>
-<span id="cb51-2"><a></a>DescTools<span class="sc">::</span><span class="fu">PseudoR2</span>(life_model6, </span>
-<span id="cb51-3"><a></a>                    <span class="at">which =</span> <span class="st">"all"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a></a><span class="co"># get the other R-squared if you like</span></span>
+<span id="cb58-2"><a></a>DescTools<span class="sc">::</span><span class="fu">PseudoR2</span>(life_model6, </span>
+<span id="cb58-3"><a></a>                    <span class="at">which =</span> <span class="st">"all"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       McFadden     McFaddenAdj        CoxSnell      Nagelkerke   AldrichNelson 
    2.024590e-03    9.897938e-04    2.441508e-03    3.482759e-03    2.438532e-03 
@@ -3113,45 +3119,45 @@ VeallZimmermann           Efron McKelveyZavoina            Tjur             AIC
 <h2>Present both models in a table</h2>
 <p>Note that the R-squared is missing here, so be sure to put that in when you paste this table to your document.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a></a><span class="fu">library</span>(huxtable)</span>
-<span id="cb53-2"><a></a><span class="fu">huxreg</span>(life_model5, life_model6)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a></a><span class="fu">library</span>(huxtable)</span>
+<span id="cb60-2"><a></a><span class="fu">huxreg</span>(life_model5, life_model6)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in huxreg(life_model5, life_model6): Unrecognized statistics: r.squared
+Try setting `statistics` explicitly in the call to `huxreg()`</code></pre>
+</div>
 <div class="cell-output-display">
-<table class="huxtable" data-quarto-disable-processing="true" style="margin-left: auto; margin-right: auto;">
-<colgroup><col><col><col></colgroup><thead>
+<table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  ">
+<colgroup><col><col><col></colgroup><tbody><tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(1)</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(2)</th></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="text-align: center;  border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;      font-weight: normal;"></th><th class="huxtable-cell huxtable-header" style="text-align: center;  border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;      font-weight: normal;">(1)</th><th class="huxtable-cell huxtable-header" style="text-align: center;  border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;      font-weight: normal;">(2)</th></tr>
-</thead>
-<tbody>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(Intercept)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.454 ***</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1.007 ***</td></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;">(Intercept)</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;">0.454 ***</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;">1.007 ***</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.072)&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.044)&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;"></th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">(0.072)&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">(0.044)&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">political_scale</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.084 ***</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;">political_scale</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">0.084 ***</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.013)&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;"></th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">(0.013)&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">religiousityNot a religious person</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-0.174 **&nbsp;</td></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;">religiousityNot a religious person</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">-0.174 **&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.061)&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;"></th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">(0.061)&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">religiousityAn atheist</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-0.275 ***</td></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;">religiousityAn atheist</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">-0.275 ***</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.078)&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;"></th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">(0.078)&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">religiousityDon't know</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.217&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;">religiousityDon't know</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">0.217&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.362)&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;"></th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;">(0.362)&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">N</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">6403&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">6403&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;">N</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;">6403&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;">6403&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">logLik</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-3844.984&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-3857.670&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;      font-weight: normal;">logLik</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">-3844.984&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;">-3857.670&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">AIC</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">7693.968&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">7723.340&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
 <tr>
-<th class="huxtable-cell huxtable-header" style="border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;      font-weight: normal;">AIC</th><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;">7693.968&nbsp;&nbsp;&nbsp;&nbsp;</td><td class="huxtable-cell" style="text-align: right;  border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;">7723.340&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
-<tr>
-<th class="huxtable-cell huxtable-header" colspan="3" style="border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;      font-weight: normal;">*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05.</th></tr>
-</tbody>
-</table>
+<th colspan="3" style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05.</th></tr>
+</tbody></table>
 </div>
 </div>
 </section>
@@ -3161,12 +3167,12 @@ VeallZimmermann           Efron McKelveyZavoina            Tjur             AIC
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a></a>life_model7 <span class="ot">&lt;-</span> <span class="fu">glm</span>(satisfied <span class="sc">~</span> sex,</span>
-<span id="cb54-2"><a></a>                  <span class="at">family =</span> <span class="st">"binomial"</span>, </span>
-<span id="cb54-3"><a></a>                  <span class="at">data =</span> wvs_cleaned) </span>
-<span id="cb54-4"><a></a></span>
-<span id="cb54-5"><a></a><span class="fu">summary</span>(life_model7)</span>
-<span id="cb54-6"><a></a><span class="fu">exp</span>(<span class="fu">coefficients</span>(life_model7))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a></a>life_model7 <span class="ot">&lt;-</span> <span class="fu">glm</span>(satisfied <span class="sc">~</span> sex,</span>
+<span id="cb62-2"><a></a>                  <span class="at">family =</span> <span class="st">"binomial"</span>, </span>
+<span id="cb62-3"><a></a>                  <span class="at">data =</span> wvs_cleaned) </span>
+<span id="cb62-4"><a></a></span>
+<span id="cb62-5"><a></a><span class="fu">summary</span>(life_model7)</span>
+<span id="cb62-6"><a></a><span class="fu">exp</span>(<span class="fu">coefficients</span>(life_model7))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </section></section>
@@ -3502,82 +3508,6 @@ VeallZimmermann           Efron McKelveyZavoina            Tjur             AIC
         ]
       });
     </script>
-    
-
-    <script>
-
-      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
-
-      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
-
-      // slide changes (different for each slide format).
-
-      (function () {
-
-        // dispatch for htmlwidgets
-
-        function fireSlideEnter() {
-
-          const event = window.document.createEvent("Event");
-
-          event.initEvent("slideenter", true, true);
-
-          window.document.dispatchEvent(event);
-
-        }
-
-    
-
-        function fireSlideChanged(previousSlide, currentSlide) {
-
-          fireSlideEnter();
-
-    
-
-          // dispatch for shiny
-
-          if (window.jQuery) {
-
-            if (previousSlide) {
-
-              window.jQuery(previousSlide).trigger("hidden");
-
-            }
-
-            if (currentSlide) {
-
-              window.jQuery(currentSlide).trigger("shown");
-
-            }
-
-          }
-
-        }
-
-    
-
-        // hookup for slidy
-
-        if (window.w3c_slidy) {
-
-          window.w3c_slidy.add_observer(function (slide_num) {
-
-            // slide_num starts at position 1
-
-            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
-
-          });
-
-        }
-
-    
-
-      })();
-
-    </script>
-
-    
-
     <script id="quarto-html-after-body" type="application/javascript">
       window.document.addEventListener("DOMContentLoaded", function (event) {
         const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")

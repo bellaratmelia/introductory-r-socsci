@@ -4,7 +4,7 @@
     "href": "sample-quarto.html",
     "title": "Sample Quarto Document",
     "section": "",
-    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\nlibrary(tidyverse)\n\nWarning: package 'tidyverse' was built under R version 4.5.2\n\n\nWarning: package 'ggplot2' was built under R version 4.5.2\n\n\nWarning: package 'tibble' was built under R version 4.5.2\n\n\nWarning: package 'tidyr' was built under R version 4.5.2\n\n\nWarning: package 'readr' was built under R version 4.5.2\n\n\nWarning: package 'purrr' was built under R version 4.5.2\n\n\nWarning: package 'dplyr' was built under R version 4.5.2\n\n\nWarning: package 'stringr' was built under R version 4.5.2\n\n\nWarning: package 'forcats' was built under R version 4.5.2\n\n\nWarning: package 'lubridate' was built under R version 4.5.2\n\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.6\n✔ forcats   1.0.1     ✔ stringr   1.6.0\n✔ ggplot2   4.0.1     ✔ tibble    3.3.1\n✔ lubridate 1.9.4     ✔ tidyr     1.3.2\n✔ purrr     1.2.1     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\ndiamonds = as_tibble(diamonds)\n\n\n\n\ndiamonds |&gt; print(n = 10)\n\n# A tibble: 53,940 × 10\n   carat cut       color clarity depth table price     x     y     z\n   &lt;dbl&gt; &lt;ord&gt;     &lt;ord&gt; &lt;ord&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n 1  0.23 Ideal     E     SI2      61.5    55   326  3.95  3.98  2.43\n 2  0.21 Premium   E     SI1      59.8    61   326  3.89  3.84  2.31\n 3  0.23 Good      E     VS1      56.9    65   327  4.05  4.07  2.31\n 4  0.29 Premium   I     VS2      62.4    58   334  4.2   4.23  2.63\n 5  0.31 Good      J     SI2      63.3    58   335  4.34  4.35  2.75\n 6  0.24 Very Good J     VVS2     62.8    57   336  3.94  3.96  2.48\n 7  0.24 Very Good I     VVS1     62.3    57   336  3.95  3.98  2.47\n 8  0.26 Very Good H     SI1      61.9    55   337  4.07  4.11  2.53\n 9  0.22 Fair      E     VS2      65.1    61   337  3.87  3.78  2.49\n10  0.23 Very Good H     VS1      59.4    61   338  4     4.05  2.39\n# ℹ 53,930 more rows\n\n\nLet’s create boxplots for carats for each cut quality:\n\ndiamonds |&gt; ggplot(aes(x = cut, y = carat)) +\n    geom_boxplot() +\n    theme_minimal()\n\n\n\n\n\n\n\n\n\n\n\n\\[\nE = mc^2\n\\]\n\n\n\nA lot of people have been saying that R is pretty cool (Wickham, Çetinkaya-Rundel, and Garrett Grolemund 2024)."
+    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.2     ✔ tibble    3.2.1\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.0.4     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\ndiamonds = as_tibble(diamonds)\n\n\n\n\ndiamonds |&gt; print(n = 10)\n\n# A tibble: 53,940 × 10\n   carat cut       color clarity depth table price     x     y     z\n   &lt;dbl&gt; &lt;ord&gt;     &lt;ord&gt; &lt;ord&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n 1  0.23 Ideal     E     SI2      61.5    55   326  3.95  3.98  2.43\n 2  0.21 Premium   E     SI1      59.8    61   326  3.89  3.84  2.31\n 3  0.23 Good      E     VS1      56.9    65   327  4.05  4.07  2.31\n 4  0.29 Premium   I     VS2      62.4    58   334  4.2   4.23  2.63\n 5  0.31 Good      J     SI2      63.3    58   335  4.34  4.35  2.75\n 6  0.24 Very Good J     VVS2     62.8    57   336  3.94  3.96  2.48\n 7  0.24 Very Good I     VVS1     62.3    57   336  3.95  3.98  2.47\n 8  0.26 Very Good H     SI1      61.9    55   337  4.07  4.11  2.53\n 9  0.22 Fair      E     VS2      65.1    61   337  3.87  3.78  2.49\n10  0.23 Very Good H     VS1      59.4    61   338  4     4.05  2.39\n# ℹ 53,930 more rows\n\n\nLet’s create boxplots for carats for each cut quality:\n\ndiamonds |&gt; ggplot(aes(x = cut, y = carat)) +\n    geom_boxplot() +\n    theme_minimal()\n\n\n\n\n\n\n\n\n\n\n\n\\[\nE = mc^2\n\\]\n\n\n\nA lot of people have been saying that R is pretty cool (Wickham, Çetinkaya-Rundel, and Garrett Grolemund 2024)."
   },
   {
     "objectID": "sample-quarto.html#lets-visualize-the-diamonds-data",
@@ -116,7 +116,7 @@
     "href": "05-stats-quarto.html#gtsummary-output",
     "title": "Regression and Presenting Your Result",
     "section": "gtsummary",
-    "text": "gtsummary\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nMale\nN = 3,1711\nFemale\nN = 3,2321\nDifference2\n95% CI2\np-value2\n\n\n\n\nlife_satisfaction\n7.00 (6.00, 8.00)\n7.00 (6.00, 8.00)\n-0.02\n-0.11, 0.07\n0.7\n\n\nfinancial_satisfaction\n7.00 (5.00, 8.00)\n7.00 (5.00, 8.00)\n0.07\n-0.04, 0.17\n0.2\n\n\npolitical_scale\n5.00 (4.00, 7.00)\n5.00 (4.00, 6.00)\n0.44\n0.34, 0.54\n&lt;0.001\n\n\n\n1 Median (Q1, Q3)\n\n\n2 Welch Two Sample t-test\n\n\nAbbreviation: CI = Confidence Interval"
+    "text": "gtsummary\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nMale\nN = 3,1711\nFemale\nN = 3,2321\nDifference\n\n\n\n\nlife_satisfaction\n7.00 (6.00, 8.00)\n7.00 (6.00, 8.00)\n\n\n\n\nfinancial_satisfaction\n7.00 (5.00, 8.00)\n7.00 (5.00, 8.00)\n\n\n\n\npolitical_scale\n5.00 (4.00, 7.00)\n5.00 (4.00, 6.00)\n\n\n\n\n\n1 Median (Q1, Q3)"
   },
   {
     "objectID": "05-stats-quarto.html#how-to-save-gtsummary-tables",
@@ -158,7 +158,7 @@
     "href": "05-stats-quarto.html#present-your-regression-result---huxtable",
     "title": "Regression and Presenting Your Result",
     "section": "Present your regression result - huxtable",
-    "text": "Present your regression result - huxtable\n\nhuxreg(\"life satisfaction\" = life_model1)\n\n\n\n\nlife satisfaction\n\n\n\n(Intercept)6.326 ***\n\n(0.068)   \n\nage0.016 ***\n\n(0.001)   \n\nN6403        \n\nR20.023    \n\nlogLik-12796.748    \n\nAIC25599.496    \n\n*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05."
+    "text": "Present your regression result - huxtable\n\nhuxreg(\"life satisfaction\" = life_model1)\n\n\n\nlife satisfaction\n\n(Intercept)6.326 ***\n\n(0.068)   \n\nage0.016 ***\n\n(0.001)   \n\nN6403        \n\nR20.023    \n\nlogLik-12796.748    \n\nAIC25599.496    \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
   },
   {
     "objectID": "05-stats-quarto.html#linear-regression-multiple-continuous-predictors",
@@ -207,7 +207,7 @@
     "href": "05-stats-quarto.html#presenting-your-models-output",
     "title": "Regression and Presenting Your Result",
     "section": "Presenting your models",
-    "text": "Presenting your models\n\n\n\n\nlife_satisfaction (model1)life_satisfaction (model2)\n\n\n\n(Intercept)6.3264 ***3.3466 ***\n\n(0.0678)   (0.0694)   \n\nage0.0162 ***0.0055 ***\n\n(0.0013)   (0.0010)   \n\nfinancial_satisfaction         0.5295 ***\n\n         (0.0081)   \n\nR squared0.0225    0.4148    \n\nN6403         6403         \n\nF147.6646    2268.0004    \n\nP value0.0000    0.0000    \n\n*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05."
+    "text": "Presenting your models\n\n\n\nlife_satisfaction (model1)life_satisfaction (model2)\n\n(Intercept)6.3264 ***3.3466 ***\n\n(0.0678)   (0.0694)   \n\nage0.0162 ***0.0055 ***\n\n(0.0013)   (0.0010)   \n\nfinancial_satisfaction         0.5295 ***\n\n         (0.0081)   \n\nR squared0.0225    0.4148    \n\nN6403         6403         \n\nF147.6646    2268.0004    \n\nP value0.0000    0.0000    \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
   },
   {
     "objectID": "05-stats-quarto.html#fyi-multicollinearity",
@@ -249,7 +249,7 @@
     "href": "05-stats-quarto.html#presenting-the-regression-table-output",
     "title": "Regression and Presenting Your Result",
     "section": "Presenting the regression table",
-    "text": "Presenting the regression table\n\n\n\n\nlife satisfaction (model3)\n\n\n\n(Intercept)7.5293 ***\n\n(0.0430)   \n\nage_group45-60-0.5162 ***\n\n(0.0598)   \n\nage_group29-44-0.4939 ***\n\n(0.0596)   \n\nage_group18-28-0.8684 ***\n\n(0.0712)   \n\nR squared0.0253    \n\nN6403         \n\nF55.4384    \n\nP value0.0000    \n\n*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05."
+    "text": "Presenting the regression table\n\n\n\nlife satisfaction (model3)\n\n(Intercept)7.5293 ***\n\n(0.0430)   \n\nage_group45-60-0.5162 ***\n\n(0.0598)   \n\nage_group29-44-0.4939 ***\n\n(0.0596)   \n\nage_group18-28-0.8684 ***\n\n(0.0712)   \n\nR squared0.0253    \n\nN6403         \n\nF55.4384    \n\nP value0.0000    \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
   },
   {
     "objectID": "05-stats-quarto.html#categorical-predictor-changing-the-reference",
@@ -361,7 +361,7 @@
     "href": "05-stats-quarto.html#regression-tables",
     "title": "Regression and Presenting Your Result",
     "section": "Regression tables",
-    "text": "Regression tables\nEven with huxtable, you may need to edit the table further to include the missing stats\n\nhuxreg(\"life_satisfaction\" = life_model5, statistics = c(\"R2\" = \"r.squared\", \"logLik\", \"AIC\"))\n\n\n\n\nlife_satisfaction\n\n\n\n(Intercept)0.454 ***\n\n(0.072)   \n\npolitical_scale0.084 ***\n\n(0.013)   \n\nlogLik-3844.984    \n\nAIC7693.968    \n\n*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05."
+    "text": "Regression tables\nEven with huxtable, you may need to edit the table further to include the missing stats\n\nhuxreg(\"life_satisfaction\" = life_model5, statistics = c(\"R2\" = \"r.squared\", \"logLik\", \"AIC\"))\n\n\n\nlife_satisfaction\n\n(Intercept)0.454 ***\n\n(0.072)   \n\npolitical_scale0.084 ***\n\n(0.013)   \n\nlogLik-3844.984    \n\nAIC7693.968    \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
   },
   {
     "objectID": "05-stats-quarto.html#binary-logistic-regression-one-categorical-predictor",
@@ -403,7 +403,7 @@
     "href": "05-stats-quarto.html#present-both-models-in-a-table",
     "title": "Regression and Presenting Your Result",
     "section": "Present both models in a table",
-    "text": "Present both models in a table\nNote that the R-squared is missing here, so be sure to put that in when you paste this table to your document.\n\nlibrary(huxtable)\nhuxreg(life_model5, life_model6)\n\n\n\n\n(1)(2)\n\n\n\n(Intercept)0.454 ***1.007 ***\n\n(0.072)   (0.044)   \n\npolitical_scale0.084 ***        \n\n(0.013)           \n\nreligiousityNot a religious person        -0.174 ** \n\n        (0.061)   \n\nreligiousityAn atheist        -0.275 ***\n\n        (0.078)   \n\nreligiousityDon't know        0.217    \n\n        (0.362)   \n\nN6403        6403        \n\nlogLik-3844.984    -3857.670    \n\nAIC7693.968    7723.340    \n\n*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05."
+    "text": "Present both models in a table\nNote that the R-squared is missing here, so be sure to put that in when you paste this table to your document.\n\nlibrary(huxtable)\nhuxreg(life_model5, life_model6)\n\n\n\n(1)(2)\n\n(Intercept)0.454 ***1.007 ***\n\n(0.072)   (0.044)   \n\npolitical_scale0.084 ***        \n\n(0.013)           \n\nreligiousityNot a religious person        -0.174 ** \n\n        (0.061)   \n\nreligiousityAn atheist        -0.275 ***\n\n        (0.078)   \n\nreligiousityDon't know        0.217    \n\n        (0.362)   \n\nN6403        6403        \n\nlogLik-3844.984    -3857.670    \n\nAIC7693.968    7723.340    \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
   },
   {
     "objectID": "05-stats-quarto.html#markdown-specifically-r-markdown",
@@ -795,7 +795,7 @@
     "href": "04-stats.html#reporting-with-gtsummary-output",
     "title": "Basic Inferential Stats in R: Correlation, T-Tests, and ANOVA",
     "section": "Reporting with gtsummary",
-    "text": "Reporting with gtsummary\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nMale\nN = 3,1711\nFemale\nN = 3,2321\nDifference2\n95% CI2\np-value2\n\n\n\n\nlife_satisfaction\n7.00 (6.00, 8.00)\n7.00 (6.00, 8.00)\n-0.02\n-0.11, 0.07\n0.7\n\n\nfinancial_satisfaction\n7.00 (5.00, 8.00)\n7.00 (5.00, 8.00)\n0.07\n-0.04, 0.17\n0.2\n\n\npolitical_scale\n5.00 (4.00, 7.00)\n5.00 (4.00, 6.00)\n0.44\n0.34, 0.54\n&lt;0.001\n\n\n\n1 Median (Q1, Q3)\n\n\n2 Welch Two Sample t-test\n\n\nAbbreviation: CI = Confidence Interval"
+    "text": "Reporting with gtsummary\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nMale\nN = 3,1711\nFemale\nN = 3,2321\nDifference\n\n\n\n\nlife_satisfaction\n7.00 (6.00, 8.00)\n7.00 (6.00, 8.00)\n\n\n\n\nfinancial_satisfaction\n7.00 (5.00, 8.00)\n7.00 (5.00, 8.00)\n\n\n\n\npolitical_scale\n5.00 (4.00, 7.00)\n5.00 (4.00, 6.00)\n\n\n\n\n\n1 Median (Q1, Q3)"
   },
   {
     "objectID": "04-stats.html#anova-assumptions-1",
@@ -1838,7 +1838,7 @@
     "href": "05-more-stats.html#install-and-load-extra-packages-we-need-today",
     "title": "Regression and Presenting Your Result",
     "section": "Install and load extra packages we need today",
-    "text": "Install and load extra packages we need today\n\nType the following line in your R console (bottom left section). Type them one by one.\n\ninstall.packages(\"apaTables\")\ninstall.packages(\"huxtable\")\ninstall.packages(\"gtsummary\")\ninstall.packages(\"car\")\n\nCreate a new R script called session-5.R\nPaste the following lines into the script:\n\n\n# loading the packages\nlibrary(apaTables)\nlibrary(huxtable)\nlibrary(gtsummary)\nlibrary(car)\nlibrary(tidyverse)"
+    "text": "Install and load extra packages we need today\n\nType the following line in your R console (bottom left section). Type them one by one.\n\ninstall.packages(\"apaTables\")\ninstall.packages(\"huxtable\")\ninstall.packages(\"gtsummary\")\ninstall.packages(\"car\")\n\nCreate a new R script called session-5.R\nPaste the following lines into the script:\n\n\n# loading the packages\nlibrary(apaTables)\nlibrary(huxtable)\nlibrary(gtsummary)\nlibrary(car)\n\nLoading required package: carData\n\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.2     ✔ tibble    3.2.1\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.0.4     \n\n\n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::add_rownames() masks huxtable::add_rownames()\n✖ dplyr::filter()       masks stats::filter()\n✖ dplyr::lag()          masks stats::lag()\n✖ dplyr::recode()       masks car::recode()\n✖ purrr::some()         masks car::some()\n✖ ggplot2::theme_grey() masks huxtable::theme_grey()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors"
   },
   {
     "objectID": "05-more-stats.html#load-our-data-for-today",
@@ -1866,7 +1866,7 @@
     "href": "05-more-stats.html#from-last-week-gtsummary-output",
     "title": "Regression and Presenting Your Result",
     "section": "From last week: gtsummary",
-    "text": "From last week: gtsummary\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nMale\nN = 3,1711\nFemale\nN = 3,2321\nDifference2\n95% CI2\np-value2\n\n\n\n\nlife_satisfaction\n7.00 (6.00, 8.00)\n7.00 (6.00, 8.00)\n-0.02\n-0.11, 0.07\n0.7\n\n\nfinancial_satisfaction\n7.00 (5.00, 8.00)\n7.00 (5.00, 8.00)\n0.07\n-0.04, 0.17\n0.2\n\n\npolitical_scale\n5.00 (4.00, 7.00)\n5.00 (4.00, 6.00)\n0.44\n0.34, 0.54\n&lt;0.001\n\n\n\n1 Median (Q1, Q3)\n\n\n2 Welch Two Sample t-test\n\n\nAbbreviation: CI = Confidence Interval"
+    "text": "From last week: gtsummary\n\nThe following errors were returned during `add_difference()`:\n✖ For variable `financial_satisfaction` (`sex`) and \"estimate\" statistic: The\n  package \"cardx\" (&gt;= 0.2.4) is required.\n✖ For variable `life_satisfaction` (`sex`) and \"estimate\" statistic: The\n  package \"cardx\" (&gt;= 0.2.4) is required.\n✖ For variable `political_scale` (`sex`) and \"estimate\" statistic: The package\n  \"cardx\" (&gt;= 0.2.4) is required.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nMale\nN = 3,1711\nFemale\nN = 3,2321\nDifference\n\n\n\n\nlife_satisfaction\n7.00 (6.00, 8.00)\n7.00 (6.00, 8.00)\n\n\n\n\nfinancial_satisfaction\n7.00 (5.00, 8.00)\n7.00 (5.00, 8.00)\n\n\n\n\npolitical_scale\n5.00 (4.00, 7.00)\n5.00 (4.00, 6.00)\n\n\n\n\n\n1 Median (Q1, Q3)"
   },
   {
     "objectID": "05-more-stats.html#how-to-save-gtsummary-tables",
@@ -1901,7 +1901,7 @@
     "href": "05-more-stats.html#present-your-regression-result---huxtable",
     "title": "Regression and Presenting Your Result",
     "section": "Present your regression result - huxtable",
-    "text": "Present your regression result - huxtable\n\nhuxreg(\"life satisfaction\" = life_model1)\n\n\n\n\nlife satisfaction\n\n\n\n(Intercept)6.326 ***\n\n(0.068)   \n\nage0.016 ***\n\n(0.001)   \n\nN6403        \n\nR20.023    \n\nlogLik-12796.748    \n\nAIC25599.496    \n\n*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05."
+    "text": "Present your regression result - huxtable\n\nhuxreg(\"life satisfaction\" = life_model1)\n\n\n\nlife satisfaction\n\n(Intercept)6.326 ***\n\n(0.068)   \n\nage0.016 ***\n\n(0.001)   \n\nN6403        \n\nR20.023    \n\nlogLik-12796.748    \n\nAIC25599.496    \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
   },
   {
     "objectID": "05-more-stats.html#linear-regression-multiple-continuous-predictors",
@@ -1950,7 +1950,7 @@
     "href": "05-more-stats.html#presenting-your-models-output",
     "title": "Regression and Presenting Your Result",
     "section": "Presenting your models",
-    "text": "Presenting your models\n\n\n\n\nlife_satisfaction (model1)life_satisfaction (model2)\n\n\n\n(Intercept)6.3264 ***3.3466 ***\n\n(0.0678)   (0.0694)   \n\nage0.0162 ***0.0055 ***\n\n(0.0013)   (0.0010)   \n\nfinancial_satisfaction         0.5295 ***\n\n         (0.0081)   \n\nR squared0.0225    0.4148    \n\nN6403         6403         \n\nF147.6646    2268.0004    \n\nP value0.0000    0.0000    \n\n*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05."
+    "text": "Presenting your models\n\n\n\nlife_satisfaction (model1)life_satisfaction (model2)\n\n(Intercept)6.3264 ***3.3466 ***\n\n(0.0678)   (0.0694)   \n\nage0.0162 ***0.0055 ***\n\n(0.0013)   (0.0010)   \n\nfinancial_satisfaction         0.5295 ***\n\n         (0.0081)   \n\nR squared0.0225    0.4148    \n\nN6403         6403         \n\nF147.6646    2268.0004    \n\nP value0.0000    0.0000    \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
   },
   {
     "objectID": "05-more-stats.html#fyi-multicollinearity",
@@ -1992,7 +1992,7 @@
     "href": "05-more-stats.html#presenting-the-regression-table-output",
     "title": "Regression and Presenting Your Result",
     "section": "Presenting the regression table",
-    "text": "Presenting the regression table\n\n\n\n\nlife satisfaction (model3)\n\n\n\n(Intercept)7.5293 ***\n\n(0.0430)   \n\nage_group45-60-0.5162 ***\n\n(0.0598)   \n\nage_group29-44-0.4939 ***\n\n(0.0596)   \n\nage_group18-28-0.8684 ***\n\n(0.0712)   \n\nR squared0.0253    \n\nN6403         \n\nF55.4384    \n\nP value0.0000    \n\n*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05."
+    "text": "Presenting the regression table\n\n\n\nlife satisfaction (model3)\n\n(Intercept)7.5293 ***\n\n(0.0430)   \n\nage_group45-60-0.5162 ***\n\n(0.0598)   \n\nage_group29-44-0.4939 ***\n\n(0.0596)   \n\nage_group18-28-0.8684 ***\n\n(0.0712)   \n\nR squared0.0253    \n\nN6403         \n\nF55.4384    \n\nP value0.0000    \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
   },
   {
     "objectID": "05-more-stats.html#categorical-predictor-changing-the-reference",
@@ -2048,7 +2048,7 @@
     "href": "05-more-stats.html#dummy-coding-dependent-variable",
     "title": "Regression and Presenting Your Result",
     "section": "Dummy-coding dependent variable",
-    "text": "Dummy-coding dependent variable\nBefore we proceed with the calculations, we need to dummy code the dependent variable into 1 and 0, with 1 = Satisfied and 0 = Not Satisfied. More info on dummy coding here\n\n# First, we need to create a binary outcome\nwvs_cleaned &lt;- wvs_cleaned |&gt;\n    mutate(satisfied = if_else(life_satisfaction &gt;= 7, 1, 0))\n# the if_else is from dplyr package (from session 2)\n\n\n\n# A tibble: 6,403 × 2\n  life_satisfaction satisfied\n              &lt;dbl&gt;     &lt;dbl&gt;\n1                 7         1\n2                 5         0\n3                 8         1\n4                 6         0\n5                 6         0\n# ℹ 6,398 more rows"
+    "text": "Dummy-coding dependent variable\nBefore we proceed with the calculations, we need to dummy code the dependent variable into 1 and 0, with 1 = Satisfied and 0 = Not Satisfied. More info on dummy coding here\n\n# First, we need to create a binary outcome\nwvs_cleaned &lt;- wvs_cleaned |&gt;\n    mutate(satisfied = if_else(life_satisfaction &gt;= 7, 1, 0))\n# the if_else is from dplyr package (from session 2)\n\n\nwvs_cleaned |&gt; select(life_satisfaction, satisfied) |&gt; print(n = 5)\n\n# A tibble: 6,403 × 2\n  life_satisfaction satisfied\n              &lt;dbl&gt;     &lt;dbl&gt;\n1                 7         1\n2                 5         0\n3                 8         1\n4                 6         0\n5                 6         0\n# ℹ 6,398 more rows"
   },
   {
     "objectID": "05-more-stats.html#conduct-the-analysis",
@@ -2111,7 +2111,7 @@
     "href": "05-more-stats.html#regression-tables",
     "title": "Regression and Presenting Your Result",
     "section": "Regression tables",
-    "text": "Regression tables\nEven with huxtable, you may need to edit the table further to include the missing stats\n\nhuxreg(\"life_satisfaction\" = life_model5, statistics = c(\"R2\" = \"r.squared\", \"logLik\", \"AIC\"))\n\n\n\n\nlife_satisfaction\n\n\n\n(Intercept)0.454 ***\n\n(0.072)   \n\npolitical_scale0.084 ***\n\n(0.013)   \n\nlogLik-3844.984    \n\nAIC7693.968    \n\n*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05."
+    "text": "Regression tables\nEven with huxtable, you may need to edit the table further to include the missing stats\n\nhuxreg(\"life_satisfaction\" = life_model5, statistics = c(\"R2\" = \"r.squared\", \"logLik\", \"AIC\"))\n\nWarning in huxreg(life_satisfaction = life_model5, statistics = c(R2 = \"r.squared\", : Unrecognized statistics: r.squared\nTry setting `statistics` explicitly in the call to `huxreg()`\n\n\n\n\nlife_satisfaction\n\n(Intercept)0.454 ***\n\n(0.072)   \n\npolitical_scale0.084 ***\n\n(0.013)   \n\nlogLik-3844.984    \n\nAIC7693.968    \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
   },
   {
     "objectID": "05-more-stats.html#binary-logistic-regression-one-categorical-predictor",
@@ -2153,7 +2153,7 @@
     "href": "05-more-stats.html#present-both-models-in-a-table",
     "title": "Regression and Presenting Your Result",
     "section": "Present both models in a table",
-    "text": "Present both models in a table\nNote that the R-squared is missing here, so be sure to put that in when you paste this table to your document.\n\nlibrary(huxtable)\nhuxreg(life_model5, life_model6)\n\n\n\n\n(1)(2)\n\n\n\n(Intercept)0.454 ***1.007 ***\n\n(0.072)   (0.044)   \n\npolitical_scale0.084 ***        \n\n(0.013)           \n\nreligiousityNot a religious person        -0.174 ** \n\n        (0.061)   \n\nreligiousityAn atheist        -0.275 ***\n\n        (0.078)   \n\nreligiousityDon't know        0.217    \n\n        (0.362)   \n\nN6403        6403        \n\nlogLik-3844.984    -3857.670    \n\nAIC7693.968    7723.340    \n\n*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05."
+    "text": "Present both models in a table\nNote that the R-squared is missing here, so be sure to put that in when you paste this table to your document.\n\nlibrary(huxtable)\nhuxreg(life_model5, life_model6)\n\nWarning in huxreg(life_model5, life_model6): Unrecognized statistics: r.squared\nTry setting `statistics` explicitly in the call to `huxreg()`\n\n\n\n\n(1)(2)\n\n(Intercept)0.454 ***1.007 ***\n\n(0.072)   (0.044)   \n\npolitical_scale0.084 ***        \n\n(0.013)           \n\nreligiousityNot a religious person        -0.174 ** \n\n        (0.061)   \n\nreligiousityAn atheist        -0.275 ***\n\n        (0.078)   \n\nreligiousityDon't know        0.217    \n\n        (0.362)   \n\nN6403        6403        \n\nlogLik-3844.984    -3857.670    \n\nAIC7693.968    7723.340    \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
   },
   {
     "objectID": "05-more-stats.html#lets-try-this-logistic-regression-exercise-5-mins",
@@ -2370,7 +2370,7 @@
     "href": "exercises.html#question-17",
     "title": "Post-workshop exercises",
     "section": "Question 17",
-    "text": "Question 17\nUsing duncan dataset, create a regression model that predicts income based on occupational prestige and education scores.\n\nlibrary(huxtable)\n\n\n\nShow Answer\nduncan_model &lt;- lm(income ~ prestige + education, data = duncan)\nhuxreg(\"income\" = duncan_model)\n\n\n\n\n\nincome\n\n\n\n(Intercept)10.426 *  \n\n(4.164)   \n\nprestige0.624 ***\n\n(0.125)   \n\neducation0.032    \n\n(0.132)   \n\nN45        \n\nR20.702    \n\nlogLik-179.902    \n\nAIC367.805    \n\n*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05."
+    "text": "Question 17\nUsing duncan dataset, create a regression model that predicts income based on occupational prestige and education scores.\n\nlibrary(huxtable)\n\n\n\nShow Answer\nduncan_model &lt;- lm(income ~ prestige + education, data = duncan)\nhuxreg(\"income\" = duncan_model)\n\n\n\n\nincome\n\n(Intercept)10.426 *  \n\n(4.164)   \n\nprestige0.624 ***\n\n(0.125)   \n\neducation0.032    \n\n(0.132)   \n\nN45        \n\nR20.702    \n\nlogLik-179.902    \n\nAIC367.805    \n\n *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05."
   },
   {
     "objectID": "exercises.html#question-18",
