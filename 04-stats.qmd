@@ -78,7 +78,7 @@ The variables that researchers will manipulate.
 
 ## Load our data for today!
 
-Let's create a new R script called `session-3.R`, and then copy the code below to load our data for today. This code uses `read_csv` from `readr` package (part of `tidyverse`) to load our cleaned CSV (from the first checkpoint)
+Let's create a new R script called `session-4.R`, and then copy the code below to load our data for today. This code uses `read_csv` from `readr` package (part of `tidyverse`) to load our cleaned CSV (from the first checkpoint)
 
 ```{r}
 #| echo: true
@@ -225,7 +225,7 @@ cor.test(wvs_cleaned$life_satisfaction,
 
 ## Learning Check #1
 
-Is there a relationship between religiousity and age group? WHat do you think based on this result?
+Is there a relationship between religiousity and age group? What do you think based on this result?
 
 
 ```{r}
