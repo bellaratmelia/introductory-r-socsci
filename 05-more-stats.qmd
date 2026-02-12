@@ -6,10 +6,9 @@ format: revealjs
 
 ## Today's Outline
 
-1.  Recap: The various packages for tables
+1.  The various packages for tables
 2.  Simple Linear Regression in R
 3.  Binary Logistic Regression in R
-4.  (if time permits) Coding your analysis and writing your report in one place with Quarto.
 
 ## Open your project - the (possibly) easier way
 
@@ -67,9 +66,9 @@ wvs_cleaned <- wvs_cleaned |>
 glimpse(wvs_cleaned)
 ```
 
-# Recap: The various packages for tables
+# Quick overview - The various packages for tables
 
-## From last week: apaTables
+## apaTables
 
 `apaTables` is a package that will generate APA-formatted report table for correlation, ANOVA, and regression. It has limited customisations and few varity of tables. The documentation online is for the "development" version which is not what we will get if we install normally with `install.packages()`, so we need to rely on the vignette more. [**View the documentation here**](https://dstanley4.github.io/apaTables/index.html)
 
@@ -86,9 +85,9 @@ wvs_cleaned |>
 
 This code will create a word document with the tables already formatted in APA style inside.
 
-## From last week: gtsummary
+## gtsummary
 
-Another popular packages is `gt` (stands for "great tables") and its 'add-on', `gtsummary`. It has lots of customizations (which can get overwhelming!) but fortunately the documentation is pretty good and there are plenty of code samples. [**View the documentation here**](https://www.danieldsjoberg.com/gtsummary/index.html)
+Another popular packages is `gt` (stands for "great tables") and its 'add-on', `gtsummary`. It has lots of customization (which can get overwhelming!) but fortunately the documentation is pretty good and there are plenty of code samples. [**View the documentation here**](https://www.danieldsjoberg.com/gtsummary/index.html)
 
 Example: get the mean differences table for `political_scale`, `life_satisfaction`, and `financial_satisfaction`, grouped by `sex`
 
@@ -776,9 +775,9 @@ Do check with your professor on how closely you should follow the guidelines, or
 :::
 
 ::: {.column width="65%"}
-All the best for your studies and academic journey! *(manifesting excellent grades for everyone who attended the workshop)*
+All the best for your studies and academic journey! *(manifesting excellent grades + internship for everyone who attended the workshop)*
 
-Need help with R or Quarto? Please don't hesitate to contact me at [bellar@smu.edu.sg](mailto:bellar@smu.edu.sg)
+Need help with R or Quarto? Please don't hesitate to contact us at [bellar@smu.edu.sg](mailto:bellar@smu.edu.sg) or [weixia@smu.edu.sg](mailto:weixia@smu.edu.sg)
 :::
 
 ::::
@@ -788,6 +787,6 @@ Need help with R or Quarto? Please don't hesitate to contact me at [bellar@smu.e
 
 Please scan this QR code or click on the link below to fill in the post-workshop survey. It should not take more than 2-3 minutes.
 
-Survey link: <https://smusg.asia.qualtrics.com/jfe/form/SV_ai0mSfHjwWZWC2y>
+Survey link: <https://smusg.asia.qualtrics.com/jfe/form/SV_862Si6NAqkbWbPM>
 
 ![](images/post-workshop-qrcode.png){width="500"}
